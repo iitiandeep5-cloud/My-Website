@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Notes – Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sky:        #87CEEB;
+      --sky-light:  #c9e8f7;
+      --sky-pale:   #e8f5fc;
+      --sky-deep:   #4a9ebe;
+      --sky-dark:   #2a7fa8;
+      --white:      #ffffff;
+      --cream:      #fafcff;
+      --text:       #2d4a5a;
+      --text-soft:  #5a7a8a;
+      --text-muted: #8aaabb;
+      --border:     rgba(135,206,235,0.3);
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 40% at 10% 15%, rgba(135,206,235,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 90% 80%, rgba(135,206,235,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 30% at 50% 50%, rgba(200,232,247,0.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .site-header {
+      background: linear-gradient(135deg, var(--sky-dark) 0%, var(--sky-deep) 50%, var(--sky) 100%);
+      padding: 2.5rem 2rem 3.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .site-header::before {
+      content: '';
+      position: absolute;
+      bottom: -20px; left: 0; right: 0;
+      height: 40px;
+      background: var(--cream);
+      border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    }
+
+    .site-header::after {
+      content: '';
+      position: absolute;
+      top: -30px; right: -30px;
+      width: 180px; height: 180px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+
+    .header-bubble {
+      position: absolute;
+      background: rgba(255,255,255,0.07);
+      border-radius: 50%;
+    }
+
+    .header-tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: white;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .site-header h1 {
+      font-family: 'Lora', serif;
+      font-size: clamp(2rem, 6vw, 3rem);
+      font-weight: 600;
+      color: white;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.4rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .site-header p {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.95rem;
+      font-weight: 500;
+      position: relative;
+      z-index: 1;
+    }
+
+    .grid-section {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 3rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-title {
+      font-family: 'Lora', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--text-soft);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .subject-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 14px;
+    }
+
+    .subj-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 1.6rem 1.4rem 1.4rem;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: all 0.22s ease;
+      position: relative;
+      overflow: hidden;
+      animation: fadeUp 0.4s ease both;
+    }
+
+    .subj-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--accent-c, var(--sky));
+      border-radius: 20px 20px 0 0;
+    }
+
+    .subj-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(135,206,235,0.25);
+      border-color: var(--accent-c, var(--sky));
+    }
+
+    .card-icon  { font-size: 2rem; margin-bottom: 0.8rem; display: block; }
+
+    .card-abbr {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--accent-c, var(--sky-dark));
+      letter-spacing: -0.02em;
+      margin-bottom: 2px;
+    }
+
+    .card-name {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+
+    .card-count {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--accent-c, var(--sky-deep));
+      background: var(--accent-bg, var(--sky-pale));
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .subj-card:nth-child(1) { animation-delay: 0.05s; }
+    .subj-card:nth-child(2) { animation-delay: 0.10s; }
+    .subj-card:nth-child(3) { animation-delay: 0.15s; }
+    .subj-card:nth-child(4) { animation-delay: 0.20s; }
+    .subj-card:nth-child(5) { animation-delay: 0.25s; }
+    .subj-card:nth-child(6) { animation-delay: 0.30s; }
+
+    .site-footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-style: italic;
+      font-family: 'Lora', serif;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 500px) {
+      .site-header { padding: 2rem 1.5rem 3rem; }
+      .grid-section { padding: 2rem 1rem 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-bubble" style="width:120px;height:120px;top:-40px;left:-30px;"></div>
+    <div class="header-bubble" style="width:60px;height:60px;bottom:20px;left:15%;"></div>
+    <div class="header-tag">IIT Study Notes</div>
+    <h1>📖 My Notes</h1>
+    <p>Pick a subject and start reviewing</p>
+  </header>
+
+  <div class="grid-section">
+    <div class="section-title">Choose your subject</div>
+    <div class="subject-grid">
+
+      <a href="mlf.html" class="subj-card" style="--accent-c:#4a9ebe; --accent-bg:#e8f5fc;">
+        <span class="card-icon">🤖</span>
+        <div class="card-abbr">MLF</div>
+        <div class="card-name">Machine Learning Fundamentals</div>
+        <span class="card-count">Short notes</span>
+      </a>
+
+      <a href="mlt.html" class="subj-card" style="--accent-c:#6db88a; --accent-bg:#eaf6ef;">
+        <span class="card-icon">🤖</span>
+        <div class="card-abbr">MLT</div>
+        <div class="card-name">Machine Learning Techniques</div>
+        <span class="card-count">Short notes</span>
+      </a>
+
+      <a href="mad1.html" class="subj-card" style="--accent-c:#e07a8a; --accent-bg:#fdf0f2;">
+        <span class="card-icon">📱</span>
+        <div class="card-abbr">MAD 1</div>
+        <div class="card-name">Modern Application Development 1</div>
+        <span class="card-count">Short notes</span>
+      </a>
+
+      <a href="dbms.html" class="subj-card" style="--accent-c:#9b87c4; --accent-bg:#f3f0fb;">
+        <span class="card-icon">🛢</span>
+        <div class="card-abbr">DBMS</div>
+        <div class="card-name">Database Management Systems</div>
+        <span class="card-count">Short notes</span>
+      </a>
+
+      <!--
+        ADD NEW SUBJECT — copy this block, update href + colors + text,
+        then create the matching .html file.
+
+      <a href="cs.html" class="subj-card" style="--accent-c:#e8956a; --accent-bg:#fdf3ee;">
+        <span class="card-icon">💻</span>
+        <div class="card-abbr">CS</div>
+        <div class="card-name">Computer Science</div>
+        <span class="card-count">0 notes</span>
+      </a>
+      -->
+
+    </div>
+  </div>
+
+  <footer class="site-footer">Stay consistent · Small steps every day ☁️</footer>
+
+</body>
+</html>
