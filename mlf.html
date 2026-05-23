@@ -5,7 +5,8 @@
      crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Machine Learning Foundations</title>
+<title>Machine Learning Foundations - Complete Study Notes</title>
+<meta name="description" content="Free Machine Learning Foundations study notes covering calculus, linear algebra, optimization, probability and more for engineering students.">
 
 <style>
 :root{
@@ -17,11 +18,7 @@
   --shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{ margin:0; padding:0; box-sizing:border-box; }
 
 body{
   font-family:Arial, Helvetica, sans-serif;
@@ -29,7 +26,6 @@ body{
   color:var(--text);
 }
 
-/* HEADER */
 header{
   background:linear-gradient(135deg,#14597a,#2c7da0,#67b7d1);
   color:white;
@@ -37,67 +33,80 @@ header{
   padding:45px 20px;
 }
 
-header h1{
-  font-size:2.2rem;
-  margin-bottom:10px;
+header h1{ font-size:2.2rem; margin-bottom:10px; }
+header p{ opacity:0.95; font-size:1rem; }
+
+nav{
+  background:white;
+  padding:12px 20px;
+  text-align:center;
+  box-shadow:0 2px 8px rgba(0,0,0,0.06);
 }
 
-header p{
-  opacity:0.95;
-  font-size:1rem;
+nav a{
+  color:var(--primary);
+  text-decoration:none;
+  margin:0 12px;
+  font-size:0.95rem;
+  font-weight:bold;
 }
 
-/* MAIN SECTION */
+nav a:hover{ text-decoration:underline; }
+
 .container{
   max-width:850px;
   margin:40px auto;
   padding:0 20px;
 }
 
-.subject-box{
+.intro-box{
   background:white;
   border-radius:20px;
   padding:30px;
-  text-align:center;
   box-shadow:var(--shadow);
   margin-bottom:35px;
+  line-height:1.8;
 }
 
-.subject-box h2{
-  font-size:1.8rem;
-  margin-bottom:10px;
-}
+.intro-box h2{ font-size:1.6rem; margin-bottom:15px; color:var(--primary); }
+.intro-box p{ color:var(--text); font-size:0.95rem; margin-bottom:12px; }
 
-.subject-box p{
-  color:var(--muted);
-  font-size:0.95rem;
-}
-
-/* NOTES */
-.notes{
+.topics-grid{
   display:grid;
-  gap:18px;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:10px;
+  margin-top:15px;
 }
+
+.topic-tag{
+  background:var(--primary-light);
+  color:var(--primary);
+  padding:8px 12px;
+  border-radius:8px;
+  font-size:0.85rem;
+  text-align:center;
+  font-weight:bold;
+}
+
+.notes{ display:grid; gap:18px; }
 
 .note-card{
   background:white;
   border-radius:16px;
   padding:20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
   box-shadow:var(--shadow);
 }
 
-.note-info h3{
-  font-size:1.1rem;
-  margin-bottom:6px;
+.note-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  margin-bottom:10px;
+  gap:15px;
 }
 
-.note-info p{
-  color:var(--muted);
-  font-size:0.9rem;
-}
+.note-info h3{ font-size:1.1rem; margin-bottom:6px; }
+.note-info p{ color:var(--muted); font-size:0.9rem; line-height:1.6; }
 
 .view-btn{
   text-decoration:none;
@@ -107,31 +116,34 @@ header p{
   border-radius:10px;
   font-weight:bold;
   transition:0.3s;
+  white-space:nowrap;
 }
 
-.view-btn:hover{
-  background:#14597a;
+.view-btn:hover{ background:#14597a; }
+
+.why-box{
+  background:white;
+  border-radius:20px;
+  padding:30px;
+  box-shadow:var(--shadow);
+  margin-top:35px;
+  line-height:1.8;
 }
 
-/* FOOTER */
+.why-box h2{ font-size:1.4rem; margin-bottom:15px; color:var(--primary); }
+.why-box p{ color:var(--text); font-size:0.95rem; margin-bottom:10px; }
+
 footer{
   text-align:center;
   padding:25px;
   color:var(--muted);
   font-size:0.9rem;
+  margin-top:40px;
 }
 
 @media(max-width:700px){
-  .note-card{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:15px;
-  }
-
-  .view-btn{
-    width:100%;
-    text-align:center;
-  }
+  .note-header{ flex-direction:column; }
+  .view-btn{ width:100%; text-align:center; }
 }
 </style>
 </head>
@@ -140,125 +152,173 @@ footer{
 
 <header>
   <h1>🤖 Machine Learning Foundations</h1>
-  <p>Complete Short Notes, Units & Study Material</p>
+  <p>Complete Week-wise Notes, Units & Study Material for Engineering Students</p>
 </header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="dbms.html">DBMS</a>
+  <a href="mad1.html">MAD1</a>
+  <a href="mlf.html">MLF</a>
+  <a href="mlt.html">MLT</a>
+  <a href="about.html">About</a>
+</nav>
 
 <div class="container">
 
-  <div class="subject-box">
-    <h2>Machine Learning Foundations</h2>
+  <div class="intro-box">
+    <h2>About This Subject</h2>
+    <p>Machine Learning Foundations (MLF) is a subject that builds the mathematical and statistical foundation required to understand and implement machine learning algorithms. Before you can understand how algorithms like neural networks or support vector machines work, you need a strong grasp of the underlying mathematics.</p>
+    <p>This subject covers three key areas — calculus for understanding gradients and optimization, linear algebra for working with data in matrix form, and probability theory for building probabilistic models. These are not just academic topics — they are the actual tools used by data scientists and machine learning engineers at companies like Google, Meta, and Amazon every day.</p>
+    <p>These week-wise notes are designed for students of IIT Madras BS in Data Science, NPTEL courses, BCA, MCA, and B.Tech programs who want to build a rock-solid mathematical foundation before diving into advanced machine learning techniques.</p>
+
+    <div class="topics-grid">
+      <div class="topic-tag">Calculus</div>
+      <div class="topic-tag">Linear Algebra</div>
+      <div class="topic-tag">Optimization</div>
+      <div class="topic-tag">Probability</div>
+      <div class="topic-tag">Regression</div>
+      <div class="topic-tag">PCA</div>
+      <div class="topic-tag">Eigenvalues</div>
+      <div class="topic-tag">Logistic Regression</div>
+    </div>
   </div>
 
   <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 1 – Introduction to Machine Learning</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 1 – Introduction to Machine Learning</h3>
+          <p>What is Machine Learning and why it matters in today's world. Overview of supervised, unsupervised, and reinforcement learning. Real-world applications of ML in healthcare, finance, e-commerce, and technology. Understanding what makes a good machine learning problem and how data drives predictions.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1Vrkaw-Jn0CNdBJVZFn9li6Ql8higB-L_/view?usp=sharing" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1Vrkaw-Jn0CNdBJVZFn9li6Ql8higB-L_/view?usp=sharing" class="view-btn">View</a>
     </div>
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 2 – Calculus</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 2 – Calculus</h3>
+          <p>Review of essential calculus concepts for machine learning — derivatives, partial derivatives, chain rule, and gradients. Understanding how calculus is used in gradient descent to minimize loss functions. Multivariate calculus and its role in training machine learning models efficiently.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1rKCU5njLv3CGtd78C7QbE7yuOzlaCuyc/view?usp=sharing" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1rKCU5njLv3CGtd78C7QbE7yuOzlaCuyc/view?usp=sharing" class="view-btn">View</a>
     </div>
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 3 – Linear Algebra - Least Squares Regression</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 3 – Linear Algebra - Least Squares Regression</h3>
+          <p>Understanding vectors, matrices, and matrix operations. Introduction to least squares regression — the fundamental technique for fitting a line through data points. How linear algebra helps solve regression problems analytically using the normal equation and matrix decomposition.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/15VtKWiO6DNt7ZVL7Ltc3hBcUnAAACAta/view?usp=sharing" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/15VtKWiO6DNt7ZVL7Ltc3hBcUnAAACAta/view?usp=sharing" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 4 – Linear Algebra - Eigenvalues and eigenvectors</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 4 – Linear Algebra - Eigenvalues and Eigenvectors</h3>
+          <p>Understanding eigenvalues and eigenvectors — one of the most important concepts in linear algebra for machine learning. How they are computed, their geometric interpretation, and their applications in dimensionality reduction, covariance matrices, and principal component analysis (PCA).</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1K2fDy48xeRosxkN15Fmp6p4-TExWwCCs/view?usp=sharing" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1K2fDy48xeRosxkN15Fmp6p4-TExWwCCs/view?usp=sharing" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 5 – Linear Algebra - Symmetric matrices</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 5 – Linear Algebra - Symmetric Matrices</h3>
+          <p>Properties of symmetric matrices and why they appear so frequently in machine learning. Understanding positive definite and positive semi-definite matrices. Spectral decomposition of symmetric matrices and how they relate to covariance matrices used in multivariate statistics and ML algorithms.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/18zxMoSySY0DxHM82NBsy0fxu9trzBWqe/view?usp=sharing" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/18zxMoSySY0DxHM82NBsy0fxu9trzBWqe/view?usp=sharing" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 6 – Linear Algebra - Singular value decomposition, Principal Component Analysis in Image Processing</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 6 – SVD and Principal Component Analysis in Image Processing</h3>
+          <p>Singular Value Decomposition (SVD) — one of the most powerful tools in data science. Understanding how SVD relates to PCA and how both are used for dimensionality reduction. Practical application of PCA in image compression and noise reduction with real examples from image processing.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1jf0YTx0qf7P_-d63VQXxUNNwm_po4VOj/view?usp=sharing" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1jf0YTx0qf7P_-d63VQXxUNNwm_po4VOj/view?usp=sharing" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 7 – Unconstrained Optimisation</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 7 – Unconstrained Optimisation</h3>
+          <p>Understanding optimization as the heart of machine learning training. Gradient descent and its variants — batch, stochastic, and mini-batch gradient descent. How learning rate affects convergence. Second-order optimization methods like Newton's method and their advantages over first-order methods.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1BA0PGhBHeD-nLL47hD-XZZdkslXX-lL3/view?usp=sharing" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1BA0PGhBHeD-nLL47hD-XZZdkslXX-lL3/view?usp=sharing" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 8 – Convex sets, functions, and optimisation problems</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 8 – Convex Sets, Functions, and Optimisation Problems</h3>
+          <p>Understanding convexity and why it matters in optimization. Properties of convex sets and convex functions. How convex optimization guarantees finding the global minimum. Applications of convex optimization in support vector machines, LASSO regression, and other important ML algorithms.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1lEJ1xfJtjwiJV3vVXFvr-liHQispSI1y/view?usp=sharing" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1lEJ1xfJtjwiJV3vVXFvr-liHQispSI1y/view?usp=sharing" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 9 – Constrained Optimisation and Lagrange Multipliers. Logistic regression as an optimization problem</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 9 – Constrained Optimisation and Lagrange Multipliers</h3>
+          <p>How to solve optimization problems with constraints using Lagrange multipliers. Understanding the KKT (Karush-Kuhn-Tucker) conditions. Logistic regression formulated as a constrained optimization problem. How these mathematical tools are used to derive support vector machine classifiers.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1jfEuMXkGAfnHqGeH1lJn2OkAm9bYxcCj/view?usp=sharing" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1jfEuMXkGAfnHqGeH1lJn2OkAm9bYxcCj/view?usp=sharing" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 10 – Examples of probabilistic models in machine learning problems</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 10 – Examples of Probabilistic Models in Machine Learning</h3>
+          <p>Introduction to probability theory for machine learning — random variables, probability distributions, Bayes theorem, and conditional probability. How probabilistic models like Naive Bayes, Gaussian mixture models, and hidden Markov models are used to make predictions under uncertainty.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1mVF5IHAnRaoFSqj6ArmLa_P2g3Hlvtl_/view?usp=sharing" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1mVF5IHAnRaoFSqj6ArmLa_P2g3Hlvtl_/view?usp=sharing" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 11 – Exponential Family of distributions</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 11 – Exponential Family of Distributions</h3>
+          <p>Understanding the exponential family of probability distributions — Gaussian, Bernoulli, Poisson, and Gamma distributions. Why the exponential family is central to generalized linear models. How understanding these distributions helps in choosing the right model for different types of data.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1HsQ7IMYqQy5sxU3oliQvlTk-ln3lDWb4/view?usp=sharing" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1HsQ7IMYqQy5sxU3oliQvlTk-ln3lDWb4/view?usp=sharing" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 12 – Parameter estimation. Expectation Maximization.</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 12 – Parameter Estimation and Expectation Maximization</h3>
+          <p>Maximum likelihood estimation (MLE) and maximum a posteriori (MAP) estimation for fitting probability distributions to data. The Expectation Maximization (EM) algorithm — a powerful iterative method for finding parameters in models with hidden variables. Applications in clustering and mixture models.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1DnBg_NVWTYyzzH0iJfSjFA2IjbcwAbiE/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1DnBg_NVWTYyzzH0iJfSjFA2IjbcwAbiE/view?usp=drive_link" class="view-btn">View</a>
     </div>
 
+  </div>
+
+  <div class="why-box">
+    <h2>Why Study Machine Learning Foundations?</h2>
+    <p>Machine Learning is one of the most exciting and fast-growing fields in technology. But to truly understand how ML algorithms work — and to be able to build, debug, and improve them — you need a strong mathematical foundation. That is exactly what this subject provides.</p>
+    <p>Without understanding calculus, you cannot understand how gradient descent trains a neural network. Without linear algebra, you cannot understand how PCA reduces dimensions or how SVD compresses data. Without probability, you cannot build models that make reliable predictions under uncertainty.</p>
+    <p>These notes are ideal for students of IIT Madras BS in Data Science, NPTEL machine learning courses, and anyone preparing for a career in data science, artificial intelligence, or machine learning engineering at top companies.</p>
   </div>
 
 </div>
 
 <footer>
-Machine Learning Foundations © 2026
+  <p>Machine Learning Foundations Study Notes © 2026 | <a href="privacy-policy.html" style="color:var(--primary);">Privacy Policy</a> | <a href="about.html" style="color:var(--primary);">About</a> | <a href="contact.html" style="color:var(--primary);">Contact</a></p>
 </footer>
 
 </body>

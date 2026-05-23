@@ -5,7 +5,8 @@
      crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Modern Application Development 1</title>
+<title>Modern Application Development 1 - Complete Study Notes</title>
+<meta name="description" content="Free MAD1 study notes covering HTML, CSS, REST APIs, backend systems, application security and deployment for engineering students.">
 
 <style>
 :root{
@@ -17,11 +18,7 @@
   --shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{ margin:0; padding:0; box-sizing:border-box; }
 
 body{
   font-family:Arial, Helvetica, sans-serif;
@@ -29,7 +26,6 @@ body{
   color:var(--text);
 }
 
-/* HEADER */
 header{
   background:linear-gradient(135deg,#14597a,#2c7da0,#67b7d1);
   color:white;
@@ -37,67 +33,80 @@ header{
   padding:45px 20px;
 }
 
-header h1{
-  font-size:2.2rem;
-  margin-bottom:10px;
+header h1{ font-size:2.2rem; margin-bottom:10px; }
+header p{ opacity:0.95; font-size:1rem; }
+
+nav{
+  background:white;
+  padding:12px 20px;
+  text-align:center;
+  box-shadow:0 2px 8px rgba(0,0,0,0.06);
 }
 
-header p{
-  opacity:0.95;
-  font-size:1rem;
+nav a{
+  color:var(--primary);
+  text-decoration:none;
+  margin:0 12px;
+  font-size:0.95rem;
+  font-weight:bold;
 }
 
-/* MAIN SECTION */
+nav a:hover{ text-decoration:underline; }
+
 .container{
   max-width:850px;
   margin:40px auto;
   padding:0 20px;
 }
 
-.subject-box{
+.intro-box{
   background:white;
   border-radius:20px;
   padding:30px;
-  text-align:center;
   box-shadow:var(--shadow);
   margin-bottom:35px;
+  line-height:1.8;
 }
 
-.subject-box h2{
-  font-size:1.8rem;
-  margin-bottom:10px;
-}
+.intro-box h2{ font-size:1.6rem; margin-bottom:15px; color:var(--primary); }
+.intro-box p{ color:var(--text); font-size:0.95rem; margin-bottom:12px; }
 
-.subject-box p{
-  color:var(--muted);
-  font-size:0.95rem;
-}
-
-/* NOTES */
-.notes{
+.topics-grid{
   display:grid;
-  gap:18px;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:10px;
+  margin-top:15px;
 }
+
+.topic-tag{
+  background:var(--primary-light);
+  color:var(--primary);
+  padding:8px 12px;
+  border-radius:8px;
+  font-size:0.85rem;
+  text-align:center;
+  font-weight:bold;
+}
+
+.notes{ display:grid; gap:18px; }
 
 .note-card{
   background:white;
   border-radius:16px;
   padding:20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
   box-shadow:var(--shadow);
 }
 
-.note-info h3{
-  font-size:1.1rem;
-  margin-bottom:6px;
+.note-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  margin-bottom:10px;
+  gap:15px;
 }
 
-.note-info p{
-  color:var(--muted);
-  font-size:0.9rem;
-}
+.note-info h3{ font-size:1.1rem; margin-bottom:6px; }
+.note-info p{ color:var(--muted); font-size:0.9rem; line-height:1.6; }
 
 .view-btn{
   text-decoration:none;
@@ -107,31 +116,34 @@ header p{
   border-radius:10px;
   font-weight:bold;
   transition:0.3s;
+  white-space:nowrap;
 }
 
-.view-btn:hover{
-  background:#14597a;
+.view-btn:hover{ background:#14597a; }
+
+.why-box{
+  background:white;
+  border-radius:20px;
+  padding:30px;
+  box-shadow:var(--shadow);
+  margin-top:35px;
+  line-height:1.8;
 }
 
-/* FOOTER */
+.why-box h2{ font-size:1.4rem; margin-bottom:15px; color:var(--primary); }
+.why-box p{ color:var(--text); font-size:0.95rem; margin-bottom:10px; }
+
 footer{
   text-align:center;
   padding:25px;
   color:var(--muted);
   font-size:0.9rem;
+  margin-top:40px;
 }
 
 @media(max-width:700px){
-  .note-card{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:15px;
-  }
-
-  .view-btn{
-    width:100%;
-    text-align:center;
-  }
+  .note-header{ flex-direction:column; }
+  .view-btn{ width:100%; text-align:center; }
 }
 </style>
 </head>
@@ -140,125 +152,173 @@ footer{
 
 <header>
   <h1>📱 Modern Application Development 1</h1>
-  <p>Complete Short Notes, Units & Study Material</p>
+  <p>Complete Week-wise Notes, Units & Study Material for Engineering Students</p>
 </header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="dbms.html">DBMS</a>
+  <a href="mad1.html">MAD1</a>
+  <a href="mlf.html">MLF</a>
+  <a href="mlt.html">MLT</a>
+  <a href="about.html">About</a>
+</nav>
 
 <div class="container">
 
-  <div class="subject-box">
-    <h2>Modern Application Development-1</h2>
+  <div class="intro-box">
+    <h2>About This Subject</h2>
+    <p>Modern Application Development 1 (MAD1) is a subject that teaches students how to build real-world web applications from scratch. It covers the complete stack of web development — from writing HTML and CSS for the frontend to building backend systems with APIs and databases.</p>
+    <p>This subject is especially important because web development is one of the most in-demand skills in the technology industry today. Whether you want to work as a frontend developer, backend developer, or full-stack engineer, the concepts taught in MAD1 form the foundation of your career.</p>
+    <p>These week-wise notes are designed for students of NPTEL, IIT Madras online degree, BCA, MCA, and B.Tech programs. Each week introduces a new concept that builds on the previous one, giving you a complete understanding of how modern web applications work.</p>
+
+    <div class="topics-grid">
+      <div class="topic-tag">HTML & CSS</div>
+      <div class="topic-tag">REST APIs</div>
+      <div class="topic-tag">MVC Pattern</div>
+      <div class="topic-tag">Backend Systems</div>
+      <div class="topic-tag">App Security</div>
+      <div class="topic-tag">Web Testing</div>
+      <div class="topic-tag">Deployment</div>
+      <div class="topic-tag">Databases</div>
+    </div>
   </div>
 
   <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 1 – Basic terminologies of Web</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 1 – Basic Terminologies of Web</h3>
+          <p>Introduction to how the web works — understanding clients, servers, browsers, HTTP, and URLs. Learn about web standards, how a request travels from your browser to a server and back, and the basic building blocks of every web application.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1hsdYWoouAI6oXjDszoC4a5J3LGNYiBxR/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1hsdYWoouAI6oXjDszoC4a5J3LGNYiBxR/view?usp=drive_link" class="view-btn">View</a>
     </div>
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 2 – Webpages written in HTML and CSS</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 2 – Webpages Written in HTML and CSS</h3>
+          <p>Deep dive into HTML structure — tags, elements, attributes, forms, and tables. Introduction to CSS for styling web pages — selectors, properties, box model, and responsive design. Learn how to build a properly structured and styled webpage from scratch.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/13s_7TXv1VXzlaWOku4YFUW5M3g2FzZ-r/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/13s_7TXv1VXzlaWOku4YFUW5M3g2FzZ-r/view?usp=drive_link" class="view-btn">View</a>
     </div>
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 3 – Presentation layer - View</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 3 – Presentation Layer - View</h3>
+          <p>Understanding the View layer in the MVC (Model-View-Controller) architecture. How templates work in web frameworks, Jinja2 templating, and how dynamic content is rendered in HTML. Learn to separate the presentation logic from business logic in your application.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1ULkM4XBwoTFjYLr7HULAmv-1ejCgAIo5/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1ULkM4XBwoTFjYLr7HULAmv-1ejCgAIo5/view?usp=drive_link" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 4 – Models - Introduction to databases</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 4 – Models - Introduction to Databases</h3>
+          <p>Understanding the Model layer — how web applications store and retrieve data using databases. Introduction to SQLite and SQLAlchemy ORM. Learn how to define database models, create tables, and perform basic CRUD operations from within a web application.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1FID_SmGsux8d68pE9N_BxEJNdx5mOBp7/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1FID_SmGsux8d68pE9N_BxEJNdx5mOBp7/view?usp=drive_link" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 5 – Controllers - Business logic</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 5 – Controllers - Business Logic</h3>
+          <p>Understanding the Controller layer in MVC — how user requests are handled and processed. Writing route handlers in Flask, processing form data, validating user input, and returning appropriate responses. Learn how business logic connects the View and Model layers together.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/11hbyp4VbKmTctFGeju5aPJPriGTkv6V3/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/11hbyp4VbKmTctFGeju5aPJPriGTkv6V3/view?usp=drive_link" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 6 – APIs and REST APIs</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 6 – APIs and REST APIs</h3>
+          <p>What is an API and why it is essential in modern application development. Understanding REST principles — statelessness, HTTP methods (GET, POST, PUT, DELETE), status codes, and JSON responses. How to build and consume RESTful APIs and why they are the backbone of modern web and mobile applications.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1SlgEopam3D3IuctSatMcly3iHvXp1shk/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1SlgEopam3D3IuctSatMcly3iHvXp1shk/view?usp=drive_link" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 7 – Backend Systems</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 7 – Backend Systems</h3>
+          <p>Deep dive into backend architecture — how servers handle thousands of requests, session management, authentication, and authorization. Understanding Flask application structure, blueprints, and how to build a scalable backend system that powers a complete web application.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1dMbq8XZT5NtiZUJdomCF5OHugYSqq9F3/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1dMbq8XZT5NtiZUJdomCF5OHugYSqq9F3/view?usp=drive_link" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 8 – Application Frontend</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 8 – Application Frontend</h3>
+          <p>Building dynamic and interactive frontends using JavaScript, Bootstrap, and Vue.js basics. Understanding how the frontend communicates with the backend via APIs. Learn to create responsive and user-friendly interfaces that work well on both desktop and mobile devices.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1VPe9l-elJTp_gTHtHyuFK6KczQSqbNbW/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1VPe9l-elJTp_gTHtHyuFK6KczQSqbNbW/view?usp=drive_link" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 9 – Application Security</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 9 – Application Security</h3>
+          <p>Understanding common web security threats — SQL injection, XSS (Cross-Site Scripting), CSRF attacks, and how to prevent them. Learn about HTTPS, password hashing, token-based authentication, and security best practices every developer must follow to protect user data.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/10cXn6XBzI1EBy0MiKbRqsvHMSqAhR2mi/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/10cXn6XBzI1EBy0MiKbRqsvHMSqAhR2mi/view?usp=drive_link" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 10 – Testing of Web Applications</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 10 – Testing of Web Applications</h3>
+          <p>Why testing is critical in software development. Understanding unit testing, integration testing, and end-to-end testing. Writing test cases for Flask applications using Python's unittest framework. Learn how to catch bugs early and ensure your application works correctly before deployment.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1quV1Kal1DpmZ0x3Xrde7JwkEUTzy-Nn_/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1quV1Kal1DpmZ0x3Xrde7JwkEUTzy-Nn_/view?usp=drive_link" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 11 – HTML Evolution and Beyond HTML</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 11 – HTML Evolution and Beyond HTML</h3>
+          <p>The history and evolution of HTML from HTML1 to HTML5. New features introduced in HTML5 — semantic elements, audio/video support, canvas, and local storage. Introduction to technologies beyond HTML like Progressive Web Apps (PWAs) and Single Page Applications (SPAs).</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1V1XWnDqdwmv_rRmur9pnR7PQsae8Z7EM/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1V1XWnDqdwmv_rRmur9pnR7PQsae8Z7EM/view?usp=drive_link" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 12 – Application Deployment</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 12 – Application Deployment</h3>
+          <p>How to deploy a web application to the internet. Understanding hosting platforms, cloud services, and deployment pipelines. Learn about environment variables, production configurations, and how to make your application available to real users. Final summary of the complete MAD1 course.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1zxdxT7b3bgd-Zfd3k7IdTFmUQR6GvZn6/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1zxdxT7b3bgd-Zfd3k7IdTFmUQR6GvZn6/view?usp=drive_link" class="view-btn">View</a>
     </div>
 
+  </div>
+
+  <div class="why-box">
+    <h2>Why Study Modern Application Development?</h2>
+    <p>Web development is one of the fastest growing fields in technology. Every business today needs a web presence, and companies are constantly looking for developers who can build reliable, secure, and scalable web applications.</p>
+    <p>MAD1 teaches you the complete picture of how a web application is built — from the HTML page that a user sees, to the backend server that processes data, to the database that stores it. This end-to-end understanding makes you a much more effective developer.</p>
+    <p>These notes are ideal for students of IIT Madras BS in Data Science, NPTEL courses, BCA, MCA, and B.Tech programs who want to build a strong foundation in web application development and prepare for technical interviews at top companies.</p>
   </div>
 
 </div>
 
 <footer>
-Modern Application Development-1 © 2026
+  <p>Modern Application Development 1 Study Notes © 2026 | <a href="privacy-policy.html" style="color:var(--primary);">Privacy Policy</a> | <a href="about.html" style="color:var(--primary);">About</a> | <a href="contact.html" style="color:var(--primary);">Contact</a></p>
 </footer>
 
 </body>

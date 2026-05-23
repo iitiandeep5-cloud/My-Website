@@ -5,7 +5,8 @@
      crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Machine Learning Techniques</title>
+<title>Machine Learning Techniques - Complete Study Notes</title>
+<meta name="description" content="Free Machine Learning Techniques study notes covering PCA, clustering, regression, classification, SVM, neural networks and more for engineering students.">
 
 <style>
 :root{
@@ -17,11 +18,7 @@
   --shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{ margin:0; padding:0; box-sizing:border-box; }
 
 body{
   font-family:Arial, Helvetica, sans-serif;
@@ -29,7 +26,6 @@ body{
   color:var(--text);
 }
 
-/* HEADER */
 header{
   background:linear-gradient(135deg,#14597a,#2c7da0,#67b7d1);
   color:white;
@@ -37,67 +33,80 @@ header{
   padding:45px 20px;
 }
 
-header h1{
-  font-size:2.2rem;
-  margin-bottom:10px;
+header h1{ font-size:2.2rem; margin-bottom:10px; }
+header p{ opacity:0.95; font-size:1rem; }
+
+nav{
+  background:white;
+  padding:12px 20px;
+  text-align:center;
+  box-shadow:0 2px 8px rgba(0,0,0,0.06);
 }
 
-header p{
-  opacity:0.95;
-  font-size:1rem;
+nav a{
+  color:var(--primary);
+  text-decoration:none;
+  margin:0 12px;
+  font-size:0.95rem;
+  font-weight:bold;
 }
 
-/* MAIN SECTION */
+nav a:hover{ text-decoration:underline; }
+
 .container{
   max-width:850px;
   margin:40px auto;
   padding:0 20px;
 }
 
-.subject-box{
+.intro-box{
   background:white;
   border-radius:20px;
   padding:30px;
-  text-align:center;
   box-shadow:var(--shadow);
   margin-bottom:35px;
+  line-height:1.8;
 }
 
-.subject-box h2{
-  font-size:1.8rem;
-  margin-bottom:10px;
-}
+.intro-box h2{ font-size:1.6rem; margin-bottom:15px; color:var(--primary); }
+.intro-box p{ color:var(--text); font-size:0.95rem; margin-bottom:12px; }
 
-.subject-box p{
-  color:var(--muted);
-  font-size:0.95rem;
-}
-
-/* NOTES */
-.notes{
+.topics-grid{
   display:grid;
-  gap:18px;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:10px;
+  margin-top:15px;
 }
+
+.topic-tag{
+  background:var(--primary-light);
+  color:var(--primary);
+  padding:8px 12px;
+  border-radius:8px;
+  font-size:0.85rem;
+  text-align:center;
+  font-weight:bold;
+}
+
+.notes{ display:grid; gap:18px; }
 
 .note-card{
   background:white;
   border-radius:16px;
   padding:20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
   box-shadow:var(--shadow);
 }
 
-.note-info h3{
-  font-size:1.1rem;
-  margin-bottom:6px;
+.note-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  margin-bottom:10px;
+  gap:15px;
 }
 
-.note-info p{
-  color:var(--muted);
-  font-size:0.9rem;
-}
+.note-info h3{ font-size:1.1rem; margin-bottom:6px; }
+.note-info p{ color:var(--muted); font-size:0.9rem; line-height:1.6; }
 
 .view-btn{
   text-decoration:none;
@@ -107,31 +116,34 @@ header p{
   border-radius:10px;
   font-weight:bold;
   transition:0.3s;
+  white-space:nowrap;
 }
 
-.view-btn:hover{
-  background:#14597a;
+.view-btn:hover{ background:#14597a; }
+
+.why-box{
+  background:white;
+  border-radius:20px;
+  padding:30px;
+  box-shadow:var(--shadow);
+  margin-top:35px;
+  line-height:1.8;
 }
 
-/* FOOTER */
+.why-box h2{ font-size:1.4rem; margin-bottom:15px; color:var(--primary); }
+.why-box p{ color:var(--text); font-size:0.95rem; margin-bottom:10px; }
+
 footer{
   text-align:center;
   padding:25px;
   color:var(--muted);
   font-size:0.9rem;
+  margin-top:40px;
 }
 
 @media(max-width:700px){
-  .note-card{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:15px;
-  }
-
-  .view-btn{
-    width:100%;
-    text-align:center;
-  }
+  .note-header{ flex-direction:column; }
+  .view-btn{ width:100%; text-align:center; }
 }
 </style>
 </head>
@@ -140,125 +152,173 @@ footer{
 
 <header>
   <h1>🤖 Machine Learning Techniques</h1>
-  <p>Complete Short Notes, Units & Study Material</p>
+  <p>Complete Week-wise Notes, Units & Study Material for Engineering Students</p>
 </header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="dbms.html">DBMS</a>
+  <a href="mad1.html">MAD1</a>
+  <a href="mlf.html">MLF</a>
+  <a href="mlt.html">MLT</a>
+  <a href="about.html">About</a>
+</nav>
 
 <div class="container">
 
-  <div class="subject-box">
-    <h2>Machine Learning Techniques</h2>
+  <div class="intro-box">
+    <h2>About This Subject</h2>
+    <p>Machine Learning Techniques (MLT) is the applied counterpart to Machine Learning Foundations. While MLF builds the mathematical base, MLT focuses on the actual algorithms and techniques used to solve real-world problems. This subject covers both unsupervised and supervised learning methods in depth.</p>
+    <p>From clustering and dimensionality reduction to regression, classification, support vector machines, and neural networks — this subject equips you with the full toolkit of a modern machine learning engineer. You will learn not just how these algorithms work, but when and why to use each one depending on your data and problem type.</p>
+    <p>These week-wise notes are designed for students of IIT Madras BS in Data Science, NPTEL machine learning courses, BCA, MCA, and B.Tech programs who want to master the practical techniques used in data science and AI roles at top companies.</p>
+
+    <div class="topics-grid">
+      <div class="topic-tag">PCA & Kernel PCA</div>
+      <div class="topic-tag">K-Means Clustering</div>
+      <div class="topic-tag">Regression</div>
+      <div class="topic-tag">Naive Bayes</div>
+      <div class="topic-tag">Decision Trees</div>
+      <div class="topic-tag">SVM</div>
+      <div class="topic-tag">Neural Networks</div>
+      <div class="topic-tag">Ensemble Methods</div>
+    </div>
   </div>
 
   <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 1 – Introduction; Unsupervised Learning - Representation learning - PCA</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 1 – Introduction; Unsupervised Learning - PCA</h3>
+          <p>Introduction to machine learning techniques and overview of the course. Deep dive into Principal Component Analysis (PCA) — how it reduces the number of features while retaining maximum variance. Applications of PCA in data visualization, noise reduction, and speeding up downstream machine learning algorithms.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1CVIvA6gwbvm9vLpGC40jEdxKlZnaYHAF/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1CVIvA6gwbvm9vLpGC40jEdxKlZnaYHAF/view?usp=drive_link" class="view-btn">View</a>
     </div>
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 2 – Unsupervised Learning - Representation learning - Kernel PCA</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 2 – Unsupervised Learning - Kernel PCA</h3>
+          <p>Understanding the limitations of linear PCA and how Kernel PCA extends it to handle non-linear data. The kernel trick — how it maps data into higher dimensional spaces without explicitly computing the transformation. Comparison of different kernel functions and when to use each one.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1kW74cw1c9lyN1MdKpSEsD2IZTRn11ql-/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1kW74cw1c9lyN1MdKpSEsD2IZTRn11ql-/view?usp=drive_link" class="view-btn">View</a>
     </div>
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 3 – Unsupervised Learning - Clustering - K-means/Kernel K-means</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 3 – Unsupervised Learning - Clustering - K-Means and Kernel K-Means</h3>
+          <p>Understanding clustering as an unsupervised technique to group similar data points together. The K-Means algorithm — initialization, assignment, and update steps. Choosing the right number of clusters using the elbow method. Kernel K-Means for handling non-linearly separable clusters with practical examples.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/14qJoov5EScSxW_-vPuOejhKRXI0HuXvR/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/14qJoov5EScSxW_-vPuOejhKRXI0HuXvR/view?usp=drive_link" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 4 – Unsupervised Learning - Estimation - Recap of MLE + Bayesian estimation, Gaussian Mixture Model - EM algorithm.</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 4 – Unsupervised Learning - Gaussian Mixture Models and EM Algorithm</h3>
+          <p>Recap of Maximum Likelihood Estimation and Bayesian estimation. Gaussian Mixture Models (GMM) as a soft clustering approach where each data point can belong to multiple clusters with different probabilities. The Expectation Maximization (EM) algorithm for fitting GMMs and its convergence properties.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/17kUQGT1CWU6cCkWOuMNnLPLN2WkKWBEc/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/17kUQGT1CWU6cCkWOuMNnLPLN2WkKWBEc/view?usp=drive_link" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 5 – Supervised Learning - Regression - Least Squares; Bayesian view</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 5 – Supervised Learning - Regression - Least Squares and Bayesian View</h3>
+          <p>Introduction to supervised learning with regression. Ordinary least squares regression — deriving the closed-form solution and understanding its assumptions. The Bayesian view of regression — treating model parameters as distributions rather than fixed values, leading to more robust predictions and uncertainty estimates.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1DIADDZ0seAn1ZACsxAjxrshy0j3hcQUB/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1DIADDZ0seAn1ZACsxAjxrshy0j3hcQUB/view?usp=drive_link" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 6 – Supervised Learning - Regression - Ridge/LASSO</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 6 – Supervised Learning - Ridge and LASSO Regression</h3>
+          <p>The problem of overfitting in regression and how regularization solves it. Ridge regression (L2 regularization) — shrinking coefficients to prevent overfitting. LASSO regression (L1 regularization) — performing automatic feature selection by driving some coefficients to exactly zero. Choosing between Ridge and LASSO for different problems.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1dP_kaCDZs7wj1S--wTROQTfWD0X5gH4r/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1dP_kaCDZs7wj1S--wTROQTfWD0X5gH4r/view?usp=drive_link" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 7 – Supervised Learning - Classification - K-NN, Decision tree</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 7 – Supervised Learning - Classification - K-NN and Decision Trees</h3>
+          <p>K-Nearest Neighbours (K-NN) — the simplest classification algorithm and how the choice of K affects bias-variance tradeoff. Decision Trees — how they split data using information gain and Gini impurity. Understanding tree depth, pruning, and how decision trees handle both classification and regression tasks.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/18OiketSZ1cWXta0pqktESj1IFZDtC05I/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/18OiketSZ1cWXta0pqktESj1IFZDtC05I/view?usp=drive_link" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 8 – Supervised Learning - Classification - Generative Models - Naive Bayes</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 8 – Supervised Learning - Naive Bayes Classifier</h3>
+          <p>Generative models vs discriminative models. The Naive Bayes classifier — applying Bayes theorem with the naive assumption of feature independence. Gaussian Naive Bayes, Multinomial Naive Bayes, and Bernoulli Naive Bayes. Why Naive Bayes works surprisingly well in text classification and spam detection despite its simplifying assumptions.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/12vGo0srz2KiZQ2rOhsvTWQMJv5SqPy-g/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/12vGo0srz2KiZQ2rOhsvTWQMJv5SqPy-g/view?usp=drive_link" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 9 – Discriminative Models - Perceptron; Logistic Regression</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 9 – Discriminative Models - Perceptron and Logistic Regression</h3>
+          <p>The Perceptron — the oldest neural network unit and how it learns a linear decision boundary. Logistic regression as a probabilistic classifier — using the sigmoid function to output class probabilities. Training logistic regression with gradient descent and understanding the cross-entropy loss function used in modern deep learning.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/197DWTZoqb_xQpb0FRvqpoyn-fqdrR_21/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/197DWTZoqb_xQpb0FRvqpoyn-fqdrR_21/view?usp=drive_link" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 10 – Support Vector Machines</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 10 – Support Vector Machines</h3>
+          <p>Support Vector Machines (SVM) — finding the maximum margin hyperplane that best separates classes. Hard margin vs soft margin SVM for handling non-linearly separable data. The kernel trick applied to SVMs for non-linear classification. Why SVMs are still widely used in industry for text classification, bioinformatics, and image recognition.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1-NwDpDrIiQbvpP0vQNAujL7o-wiBH4pm/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1-NwDpDrIiQbvpP0vQNAujL7o-wiBH4pm/view?usp=drive_link" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 11 – Ensemble methods - Bagging and Boosting (Adaboost)</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 11 – Ensemble Methods - Bagging and Boosting</h3>
+          <p>Ensemble methods — combining multiple weak models to build a stronger one. Bagging (Bootstrap Aggregating) and Random Forests — how training on random subsets of data reduces variance. Boosting and AdaBoost — sequentially training models where each new model focuses on the mistakes of the previous one. Why ensemble methods dominate machine learning competitions.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1-b_bw6PxuLhwKxi_U4H8Jn7sfbnS04z4/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1-b_bw6PxuLhwKxi_U4H8Jn7sfbnS04z4/view?usp=drive_link" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 12 – Artificial Neural networks: Multiclass classification.</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 12 – Artificial Neural Networks and Multiclass Classification</h3>
+          <p>Introduction to artificial neural networks — layers, neurons, activation functions, and forward propagation. Backpropagation algorithm for training neural networks. Multiclass classification using softmax activation and categorical cross-entropy loss. How neural networks form the foundation of modern deep learning and AI systems used in image recognition, natural language processing, and more.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1RSNnyzxYeZRJBuVd3mtwcqmfKR_irjwO/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1RSNnyzxYeZRJBuVd3mtwcqmfKR_irjwO/view?usp=drive_link" class="view-btn">View</a>
     </div>
 
+  </div>
+
+  <div class="why-box">
+    <h2>Why Study Machine Learning Techniques?</h2>
+    <p>Machine learning is transforming every industry — from healthcare and finance to e-commerce and entertainment. Understanding the core techniques of machine learning gives you the ability to build systems that learn from data and make intelligent predictions.</p>
+    <p>The algorithms covered in this subject — regression, classification, clustering, SVMs, and neural networks — are the exact tools used by data scientists and ML engineers at companies like Google, Amazon, Netflix, and thousands of startups worldwide. Mastering these techniques opens doors to some of the highest-paying and most exciting careers in technology.</p>
+    <p>These notes are ideal for students of IIT Madras BS in Data Science, NPTEL machine learning courses, and anyone preparing for data science or machine learning engineer roles. Combined with the MLF course, you will have a complete and deep understanding of modern machine learning.</p>
   </div>
 
 </div>
 
 <footer>
-Machine Learning Techniques © 2026
+  <p>Machine Learning Techniques Study Notes © 2026 | <a href="privacy-policy.html" style="color:var(--primary);">Privacy Policy</a> | <a href="about.html" style="color:var(--primary);">About</a> | <a href="contact.html" style="color:var(--primary);">Contact</a></p>
 </footer>
 
 </body>

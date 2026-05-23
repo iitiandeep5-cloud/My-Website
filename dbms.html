@@ -5,7 +5,8 @@
      crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Database Management Systems</title>
+<title>Database Management Systems - Complete Study Notes</title>
+<meta name="description" content="Free DBMS study notes covering SQL, normalization, indexing, transactions, and more. Week-wise notes for engineering students.">
 
 <style>
 :root{
@@ -29,7 +30,6 @@ body{
   color:var(--text);
 }
 
-/* HEADER */
 header{
   background:linear-gradient(135deg,#14597a,#2c7da0,#67b7d1);
   color:white;
@@ -47,33 +47,50 @@ header p{
   font-size:1rem;
 }
 
-/* MAIN SECTION */
 .container{
   max-width:850px;
   margin:40px auto;
   padding:0 20px;
 }
 
-.subject-box{
+.intro-box{
   background:white;
   border-radius:20px;
   padding:30px;
-  text-align:center;
   box-shadow:var(--shadow);
   margin-bottom:35px;
+  line-height:1.8;
 }
 
-.subject-box h2{
-  font-size:1.8rem;
-  margin-bottom:10px;
+.intro-box h2{
+  font-size:1.6rem;
+  margin-bottom:15px;
+  color:var(--primary);
 }
 
-.subject-box p{
-  color:var(--muted);
+.intro-box p{
+  color:var(--text);
   font-size:0.95rem;
+  margin-bottom:12px;
 }
 
-/* NOTES */
+.topics-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:10px;
+  margin-top:15px;
+}
+
+.topic-tag{
+  background:var(--primary-light);
+  color:var(--primary);
+  padding:8px 12px;
+  border-radius:8px;
+  font-size:0.85rem;
+  text-align:center;
+  font-weight:bold;
+}
+
 .notes{
   display:grid;
   gap:18px;
@@ -83,10 +100,15 @@ header p{
   background:white;
   border-radius:16px;
   padding:20px;
+  box-shadow:var(--shadow);
+}
+
+.note-header{
   display:flex;
   justify-content:space-between;
-  align-items:center;
-  box-shadow:var(--shadow);
+  align-items:flex-start;
+  margin-bottom:10px;
+  gap:15px;
 }
 
 .note-info h3{
@@ -97,6 +119,7 @@ header p{
 .note-info p{
   color:var(--muted);
   font-size:0.9rem;
+  line-height:1.6;
 }
 
 .view-btn{
@@ -107,27 +130,65 @@ header p{
   border-radius:10px;
   font-weight:bold;
   transition:0.3s;
+  white-space:nowrap;
 }
 
 .view-btn:hover{
   background:#14597a;
 }
 
-/* FOOTER */
+.why-box{
+  background:white;
+  border-radius:20px;
+  padding:30px;
+  box-shadow:var(--shadow);
+  margin-top:35px;
+  line-height:1.8;
+}
+
+.why-box h2{
+  font-size:1.4rem;
+  margin-bottom:15px;
+  color:var(--primary);
+}
+
+.why-box p{
+  color:var(--text);
+  font-size:0.95rem;
+  margin-bottom:10px;
+}
+
 footer{
   text-align:center;
   padding:25px;
   color:var(--muted);
   font-size:0.9rem;
+  margin-top:40px;
+}
+
+nav{
+  background:white;
+  padding:12px 20px;
+  text-align:center;
+  box-shadow:0 2px 8px rgba(0,0,0,0.06);
+}
+
+nav a{
+  color:var(--primary);
+  text-decoration:none;
+  margin:0 12px;
+  font-size:0.95rem;
+  font-weight:bold;
+}
+
+nav a:hover{
+  text-decoration:underline;
 }
 
 @media(max-width:700px){
-  .note-card{
+  .note-header{
     flex-direction:column;
-    align-items:flex-start;
-    gap:15px;
   }
-
   .view-btn{
     width:100%;
     text-align:center;
@@ -140,125 +201,173 @@ footer{
 
 <header>
   <h1>🛢 Database Management Systems</h1>
-  <p>Complete Short Notes, Units & Study Material</p>
+  <p>Complete Week-wise Notes, Units & Study Material for Engineering Students</p>
 </header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="dbms.html">DBMS</a>
+  <a href="mad1.html">MAD1</a>
+  <a href="mlf.html">MLF</a>
+  <a href="mlt.html">MLT</a>
+  <a href="about.html">About</a>
+</nav>
 
 <div class="container">
 
-  <div class="subject-box">
-    <h2>Database Management Systems</h2>
+  <div class="intro-box">
+    <h2>About This Subject</h2>
+    <p>Database Management Systems (DBMS) is one of the most important subjects in computer science engineering. It deals with the systematic way of storing, retrieving, and managing data using a database. Almost every application we use today — from banking systems to social media platforms — relies on a database at its core.</p>
+    <p>This subject covers fundamental concepts like the relational model, SQL queries, normalization, indexing, transactions, and query optimization. Understanding DBMS is essential for software development, data engineering, and system design roles in the industry.</p>
+    <p>These week-wise notes cover the complete syllabus and are designed to help students understand each topic clearly and prepare effectively for exams.</p>
+
+    <div class="topics-grid">
+      <div class="topic-tag">SQL Basics</div>
+      <div class="topic-tag">Normalization</div>
+      <div class="topic-tag">Transactions</div>
+      <div class="topic-tag">Indexing</div>
+      <div class="topic-tag">ER Model</div>
+      <div class="topic-tag">Query Optimization</div>
+      <div class="topic-tag">Storage Management</div>
+      <div class="topic-tag">Backup & Recovery</div>
+    </div>
   </div>
 
   <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 1 – Course Overview</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 1 – Course Overview</h3>
+          <p>Introduction to database systems, difference between file systems and DBMS, advantages of using a database, types of databases, and an overview of the complete course structure. This week lays the foundation for understanding why databases are essential in modern computing.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1e7z35cdaANs1yfIeR0zUpyyHCHV0C9Tv/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1e7z35cdaANs1yfIeR0zUpyyHCHV0C9Tv/view?usp=drive_link" class="view-btn">View</a>
     </div>
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 2 – Relational Model and Basic SQL</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 2 – Relational Model and Basic SQL</h3>
+          <p>Understanding the relational model, tables, rows, columns, primary keys, and foreign keys. Introduction to SQL with basic commands like SELECT, INSERT, UPDATE, DELETE. Learn how to write simple queries to retrieve and manipulate data from a database.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1tbwwyGSIPtr608PezmaTUn0cH-RD0U-K/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1tbwwyGSIPtr608PezmaTUn0cH-RD0U-K/view?usp=drive_link" class="view-btn">View</a>
     </div>
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 3 – Intermediate and Advanced SQL</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 3 – Intermediate and Advanced SQL</h3>
+          <p>Advanced SQL concepts including JOIN operations (INNER, LEFT, RIGHT, FULL), subqueries, aggregate functions like COUNT, SUM, AVG, GROUP BY and HAVING clauses. These concepts are heavily tested in interviews and are critical for real-world database work.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1rkiLn_j29SBhyeKkNTNz4ZFvkiI6xsY6/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1rkiLn_j29SBhyeKkNTNz4ZFvkiI6xsY6/view?usp=drive_link" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 4 – Relational Query Languages and Database Design</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 4 – Relational Query Languages and Database Design</h3>
+          <p>Introduction to relational algebra and relational calculus. Understanding Entity-Relationship (ER) diagrams and how to convert them into relational schemas. Database design principles and how to model real-world problems into a proper database structure.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1YAdGPN-a17zulrVsYcaV6kei11XhPurX/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1YAdGPN-a17zulrVsYcaV6kei11XhPurX/view?usp=drive_link" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 5 – Functional Dependency and Normal Forms</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 5 – Functional Dependency and Normal Forms</h3>
+          <p>Understanding functional dependencies, candidate keys, and the concept of normalization. Covers First Normal Form (1NF), Second Normal Form (2NF), and Third Normal Form (3NF) with examples. Normalization helps eliminate data redundancy and ensures data integrity.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1Ew6WXONhxsgsVMzenO9CGwNjGgOz5bli/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1Ew6WXONhxsgsVMzenO9CGwNjGgOz5bli/view?usp=drive_link" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 6 – Functional Dependency and Normal Forms (cont.)</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 6 – Functional Dependency and Normal Forms (cont.)</h3>
+          <p>Continuation of normalization — Boyce-Codd Normal Form (BCNF), Fourth Normal Form (4NF), and decomposition techniques. Understanding lossless join decomposition and dependency preservation. Practical examples of normalizing database schemas.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1yc_krCvEf9nqvNPBlcl6SOLc_VGcGpRH/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1yc_krCvEf9nqvNPBlcl6SOLc_VGcGpRH/view?usp=drive_link" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 7 – Application Development</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 7 – Application Development</h3>
+          <p>Connecting databases to applications using APIs and programming languages. Understanding JDBC, ODBC, and web-based database access. How real-world applications interact with databases, handle user input, and display dynamic data retrieved from the database.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1PTtFVxyz0ZJR-eAEQrpoZuGe9jRlFMAl/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1PTtFVxyz0ZJR-eAEQrpoZuGe9jRlFMAl/view?usp=drive_link" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 8 – Storage Management</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 8 – Storage Management</h3>
+          <p>How databases store data on disk, understanding file organization, heap files, and sequential files. Buffer management and how the database system manages memory. Physical storage structures and how they affect database performance and query speed.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1jGgb0zCTp8uSmuxN7aECFOwQYU_MuijY/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1jGgb0zCTp8uSmuxN7aECFOwQYU_MuijY/view?usp=drive_link" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 9 – Indexing and Hashing</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 9 – Indexing and Hashing</h3>
+          <p>Understanding indexes and why they are critical for database performance. Types of indexes — dense, sparse, clustered, and non-clustered. B-Tree and B+ Tree indexing structures. Hashing techniques for fast data retrieval. How to choose the right indexing strategy for your database.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1UHJxhPd-sLQ6jBmVfrd421iU6e9HRCOH/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1UHJxhPd-sLQ6jBmVfrd421iU6e9HRCOH/view?usp=drive_link" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 10 – Transactions</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 10 – Transactions</h3>
+          <p>Understanding database transactions and ACID properties — Atomicity, Consistency, Isolation, and Durability. Concurrency control techniques, locking protocols, and deadlock handling. How databases ensure data consistency when multiple users access the database simultaneously.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1_Zykr9rFJbabXftvbdilyvDoIoeyRCoZ/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1_Zykr9rFJbabXftvbdilyvDoIoeyRCoZ/view?usp=drive_link" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 11 – Backup and Recovery</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 11 – Backup and Recovery</h3>
+          <p>Database failure types and recovery techniques. Understanding log-based recovery, checkpoints, and shadow paging. How databases protect data against system crashes and hardware failures. RAID storage and its role in database reliability and data protection.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1FJ_xzYs7T4Ik2-WmdmK8qG0HrfzDlhC1/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1FJ_xzYs7T4Ik2-WmdmK8qG0HrfzDlhC1/view?usp=drive_link" class="view-btn">View</a>
     </div>
-
-    <div class="notes">
 
     <div class="note-card">
-      <div class="note-info">
-        <h3>Week 12 – Query Optimization and Conclusion</h3>
+      <div class="note-header">
+        <div class="note-info">
+          <h3>Week 12 – Query Optimization and Conclusion</h3>
+          <p>How database systems optimize SQL queries for better performance. Understanding query execution plans, cost estimation, and join ordering. Tips for writing efficient SQL queries. Final summary of the complete DBMS course and key concepts to remember for exams and interviews.</p>
+        </div>
+        <a href="https://drive.google.com/file/d/1BbAFVNZmFksdhquzMXjIpJPMeNADeJi6/view?usp=drive_link" class="view-btn">View</a>
       </div>
-      <a href="https://drive.google.com/file/d/1BbAFVNZmFksdhquzMXjIpJPMeNADeJi6/view?usp=drive_link" class="view-btn">View</a>
     </div>
 
+  </div>
+
+  <div class="why-box">
+    <h2>Why Study DBMS?</h2>
+    <p>Database Management Systems is a core subject for every computer science and IT student. Almost every software application — whether it is a mobile app, a website, or an enterprise system — uses a database to store and manage data.</p>
+    <p>Learning DBMS helps you understand how data is structured, stored, and retrieved efficiently. SQL is one of the most in-demand skills in the job market today. Companies like Google, Amazon, Microsoft, and thousands of startups require engineers who understand databases deeply.</p>
+    <p>These notes are designed for students of NPTEL, IIT Madras online degree programs, BCA, MCA, B.Tech, and other engineering courses. Each week covers one important topic with clear explanations to help you score well in exams and crack technical interviews.</p>
   </div>
 
 </div>
 
 <footer>
-Database Management Systems © 2026
+  <p>Database Management Systems Study Notes © 2026 | <a href="privacy-policy.html" style="color:var(--primary);">Privacy Policy</a> | <a href="about.html" style="color:var(--primary);">About</a> | <a href="contact.html" style="color:var(--primary);">Contact</a></p>
 </footer>
 
 </body>

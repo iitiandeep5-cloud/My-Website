@@ -1,291 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
      crossorigin="anonymous"></script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Study Notes – Home</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --sky:        #87CEEB;
-      --sky-light:  #c9e8f7;
-      --sky-pale:   #e8f5fc;
-      --sky-deep:   #4a9ebe;
-      --sky-dark:   #2a7fa8;
-      --white:      #ffffff;
-      --cream:      #fafcff;
-      --text:       #2d4a5a;
-      --text-soft:  #5a7a8a;
-      --text-muted: #8aaabb;
-      --border:     rgba(135,206,235,0.3);
-    }
-
-    body {
-      font-family: 'Nunito', sans-serif;
-      background: var(--cream);
-      color: var(--text);
-      min-height: 100vh;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 80% 40% at 10% 15%, rgba(135,206,235,0.18) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 50% at 90% 80%, rgba(135,206,235,0.12) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 30% at 50% 50%, rgba(200,232,247,0.08) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .site-header {
-      background: linear-gradient(135deg, var(--sky-dark) 0%, var(--sky-deep) 50%, var(--sky) 100%);
-      padding: 2.5rem 2rem 3.5rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .site-header::before {
-      content: '';
-      position: absolute;
-      bottom: -20px; left: 0; right: 0;
-      height: 40px;
-      background: var(--cream);
-      border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-    }
-
-    .site-header::after {
-      content: '';
-      position: absolute;
-      top: -30px; right: -30px;
-      width: 180px; height: 180px;
-      background: rgba(255,255,255,0.08);
-      border-radius: 50%;
-    }
-
-    .header-bubble {
-      position: absolute;
-      background: rgba(255,255,255,0.07);
-      border-radius: 50%;
-    }
-
-    .header-tag {
-      display: inline-block;
-      background: rgba(255,255,255,0.18);
-      border: 1px solid rgba(255,255,255,0.3);
-      color: white;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 4px 14px;
-      border-radius: 999px;
-      margin-bottom: 1rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .site-header h1 {
-      font-family: 'Lora', serif;
-      font-size: clamp(2rem, 6vw, 3rem);
-      font-weight: 600;
-      color: white;
-      letter-spacing: -0.01em;
-      margin-bottom: 0.4rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .site-header p {
-      color: rgba(255,255,255,0.8);
-      font-size: 0.95rem;
-      font-weight: 500;
-      position: relative;
-      z-index: 1;
-    }
-
-    .grid-section {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 2.5rem 1.5rem 3rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .section-title {
-      font-family: 'Lora', serif;
-      font-size: 1.1rem;
-      font-style: italic;
-      color: var(--text-soft);
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .section-title::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    .subject-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-      gap: 14px;
-    }
-
-    .subj-card {
-      background: var(--white);
-      border: 1.5px solid var(--border);
-      border-radius: 20px;
-      padding: 1.6rem 1.4rem 1.4rem;
-      text-decoration: none;
-      color: inherit;
-      display: block;
-      transition: all 0.22s ease;
-      position: relative;
-      overflow: hidden;
-      animation: fadeUp 0.4s ease both;
-    }
-
-    .subj-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 4px;
-      background: var(--accent-c, var(--sky));
-      border-radius: 20px 20px 0 0;
-    }
-
-    .subj-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(135,206,235,0.25);
-      border-color: var(--accent-c, var(--sky));
-    }
-
-    .card-icon  { font-size: 2rem; margin-bottom: 0.8rem; display: block; }
-
-    .card-abbr {
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: var(--accent-c, var(--sky-dark));
-      letter-spacing: -0.02em;
-      margin-bottom: 2px;
-    }
-
-    .card-name {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      font-weight: 600;
-      margin-bottom: 1rem;
-      line-height: 1.4;
-    }
-
-    .card-count {
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--accent-c, var(--sky-deep));
-      background: var(--accent-bg, var(--sky-pale));
-      display: inline-block;
-      padding: 3px 10px;
-      border-radius: 999px;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .subj-card:nth-child(1) { animation-delay: 0.05s; }
-    .subj-card:nth-child(2) { animation-delay: 0.10s; }
-    .subj-card:nth-child(3) { animation-delay: 0.15s; }
-    .subj-card:nth-child(4) { animation-delay: 0.20s; }
-    .subj-card:nth-child(5) { animation-delay: 0.25s; }
-    .subj-card:nth-child(6) { animation-delay: 0.30s; }
-
-    .site-footer {
-      text-align: center;
-      padding: 1.5rem;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      font-style: italic;
-      font-family: 'Lora', serif;
-      position: relative;
-      z-index: 1;
-    }
-
-    @media (max-width: 500px) {
-      .site-header { padding: 2rem 1.5rem 3rem; }
-      .grid-section { padding: 2rem 1rem 2.5rem; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BsStudy - Free Engineering Study Notes | DBMS, ML, MAD</title>
+<meta name="description" content="Free week-wise study notes for engineering students. Subjects include DBMS, Machine Learning Foundations, Machine Learning Techniques, and Modern Application Development.">
+<style>
+:root{
+  --primary:#2c7da0;
+  --primary-light:#dff3fa;
+  --text:#1d2a33;
+  --muted:#6c7a86;
+  --shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+*{ margin:0; padding:0; box-sizing:border-box; }
+body{ font-family:Arial, Helvetica, sans-serif; background:#f5f9fc; color:var(--text); }
+header{ background:linear-gradient(135deg,#14597a,#2c7da0,#67b7d1); color:white; text-align:center; padding:60px 20px; }
+header h1{ font-size:2.5rem; margin-bottom:12px; }
+header p{ opacity:0.95; font-size:1.1rem; max-width:600px; margin:0 auto; }
+nav{ background:white; padding:12px 20px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+nav a{ color:var(--primary); text-decoration:none; margin:0 12px; font-size:0.95rem; font-weight:bold; }
+nav a:hover{ text-decoration:underline; }
+.container{ max-width:900px; margin:40px auto; padding:0 20px; }
+.intro{ background:white; border-radius:20px; padding:30px; box-shadow:var(--shadow); margin-bottom:35px; line-height:1.8; }
+.intro h2{ font-size:1.5rem; margin-bottom:15px; color:var(--primary); }
+.intro p{ font-size:0.95rem; margin-bottom:12px; }
+.subjects{ display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; margin-bottom:35px; }
+.subject-card{ background:white; border-radius:20px; padding:25px; box-shadow:var(--shadow); text-align:center; text-decoration:none; color:var(--text); transition:0.3s; display:block; }
+.subject-card:hover{ transform:translateY(-4px); box-shadow:0 15px 35px rgba(0,0,0,0.12); }
+.subject-card .emoji{ font-size:2.5rem; margin-bottom:12px; }
+.subject-card h3{ font-size:1.1rem; margin-bottom:8px; color:var(--primary); }
+.subject-card p{ font-size:0.88rem; color:var(--muted); line-height:1.6; }
+.subject-card .weeks{ display:inline-block; margin-top:12px; background:var(--primary-light); color:var(--primary); padding:4px 12px; border-radius:20px; font-size:0.82rem; font-weight:bold; }
+.why{ background:white; border-radius:20px; padding:30px; box-shadow:var(--shadow); margin-bottom:25px; line-height:1.8; }
+.why h2{ font-size:1.5rem; margin-bottom:15px; color:var(--primary); }
+.why p{ font-size:0.95rem; margin-bottom:12px; }
+footer{ text-align:center; padding:25px; color:var(--muted); font-size:0.9rem; margin-top:20px; }
+</style>
 </head>
 <body>
+<header>
+  <h1>📚 BsStudy</h1>
+  <p>Free Week-wise Study Notes for Engineering & Computer Science Students</p>
+</header>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="dbms.html">DBMS</a>
+  <a href="mad1.html">MAD1</a>
+  <a href="mlf.html">MLF</a>
+  <a href="mlt.html">MLT</a>
+  <a href="about.html">About</a>
+</nav>
+<div class="container">
 
-  <header class="site-header">
-    <div class="header-bubble" style="width:120px;height:120px;top:-40px;left:-30px;"></div>
-    <div class="header-bubble" style="width:60px;height:60px;bottom:20px;left:15%;"></div>
-    <div class="header-tag">IIT Study Notes</div>
-    <h1>📖 My Notes</h1>
-    <p>Pick a subject and start reviewing</p>
-  </header>
-
-  <div class="grid-section">
-    <div class="section-title">Choose your subject</div>
-    <div class="subject-grid">
-
-      <a href="mlf.html" class="subj-card" style="--accent-c:#4a9ebe; --accent-bg:#e8f5fc;">
-        <span class="card-icon">🤖</span>
-        <div class="card-abbr">MLF</div>
-        <div class="card-name">Machine Learning Fundamentals</div>
-        <span class="card-count">Short notes</span>
-      </a>
-
-      <a href="mlt.html" class="subj-card" style="--accent-c:#6db88a; --accent-bg:#eaf6ef;">
-        <span class="card-icon">🤖</span>
-        <div class="card-abbr">MLT</div>
-        <div class="card-name">Machine Learning Techniques</div>
-        <span class="card-count">Short notes</span>
-      </a>
-
-      <a href="mad1.html" class="subj-card" style="--accent-c:#e07a8a; --accent-bg:#fdf0f2;">
-        <span class="card-icon">📱</span>
-        <div class="card-abbr">MAD 1</div>
-        <div class="card-name">Modern Application Development 1</div>
-        <span class="card-count">Short notes</span>
-      </a>
-
-      <a href="dbms.html" class="subj-card" style="--accent-c:#9b87c4; --accent-bg:#f3f0fb;">
-        <span class="card-icon">🛢</span>
-        <div class="card-abbr">DBMS</div>
-        <div class="card-name">Database Management Systems</div>
-        <span class="card-count">Short notes</span>
-      </a>
-
-      <!--
-        ADD NEW SUBJECT — copy this block, update href + colors + text,
-        then create the matching .html file.
-
-      <a href="cs.html" class="subj-card" style="--accent-c:#e8956a; --accent-bg:#fdf3ee;">
-        <span class="card-icon">💻</span>
-        <div class="card-abbr">CS</div>
-        <div class="card-name">Computer Science</div>
-        <span class="card-count">0 notes</span>
-      </a>
-      -->
-
-    </div>
+  <div class="intro">
+    <h2>Welcome to BsStudy</h2>
+    <p>BsStudy is your free online destination for high quality, week-wise study notes for engineering and computer science subjects. Whether you are preparing for university exams, NPTEL assignments, or building your knowledge for technical interviews — we have got you covered.</p>
+    <p>All our notes are carefully organized week by week, following the standard syllabus of major programs including the IIT Madras BS in Data Science, NPTEL online courses, BCA, MCA, and B.Tech programs. Simply choose your subject below and start studying!</p>
   </div>
 
-  <footer class="site-footer">Stay consistent · Small steps every day ☁️</footer>
+  <div class="subjects">
+    <a href="dbms.html" class="subject-card">
+      <div class="emoji">🛢</div>
+      <h3>Database Management Systems</h3>
+      <p>SQL, relational model, normalization, transactions, indexing, and query optimization</p>
+      <span class="weeks">12 Weeks</span>
+    </a>
+    <a href="mad1.html" class="subject-card">
+      <div class="emoji">📱</div>
+      <h3>Modern Application Development 1</h3>
+      <p>HTML, CSS, REST APIs, Flask, MVC pattern, backend systems, and deployment</p>
+      <span class="weeks">12 Weeks</span>
+    </a>
+    <a href="mlf.html" class="subject-card">
+      <div class="emoji">🤖</div>
+      <h3>Machine Learning Foundations</h3>
+      <p>Calculus, linear algebra, optimization, probability, and statistical inference</p>
+      <span class="weeks">12 Weeks</span>
+    </a>
+    <a href="mlt.html" class="subject-card">
+      <div class="emoji">🧠</div>
+      <h3>Machine Learning Techniques</h3>
+      <p>Regression, classification, SVM, clustering, neural networks, and ensemble methods</p>
+      <span class="weeks">12 Weeks</span>
+    </a>
+  </div>
 
+  <div class="why">
+    <h2>Why BsStudy?</h2>
+    <p>Finding good study notes for technical engineering subjects is hard. Textbooks are too long, YouTube videos take too much time, and scattered resources on the internet are hard to organize. BsStudy solves this by giving you everything in one place — organized, clear, and completely free.</p>
+    <p>Our notes are designed for students who want to understand concepts quickly and prepare effectively for exams. Each week's notes cover exactly what you need to know — no more, no less. Whether you are studying DBMS, Machine Learning, or Web Development, BsStudy has the notes you need.</p>
+    <p>Join thousands of engineering students across India who use BsStudy to study smarter and score better. All notes are available as PDF files that you can read online or download for offline study anytime, anywhere.</p>
+  </div>
+
+</div>
+<footer>
+  <p>BsStudy © 2026 | <a href="privacy-policy.html" style="color:var(--primary);">Privacy Policy</a> | <a href="about.html" style="color:var(--primary);">About</a> | <a href="contact.html" style="color:var(--primary);">Contact</a></p>
+</footer>
 </body>
 </html>
