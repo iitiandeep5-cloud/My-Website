@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 1 MLF</title>
+</head>
+<body>
+    
+</body>
+</html>
+<h2 style="text-align: center"><strong>Week_1: Short Notes</strong></h2>
+
+
+<h2><strong>Lecture 1: What is Machine Learning?</strong></h2>
+
+
+<ul>
+
+<li><strong>Definition</strong>: ML is a method where computers learn from data instead of being explicitly programmed.</li>
+
+<li><strong>Basic Idea</strong>:</li> 
+<ul>
+ 
+<li>Programming → Humans write rules</li>
+ 
+<li>ML → Humans provide data + idea, machine learns rules</li> 
+</ul>
+
+<li><strong>When to Use ML</strong>:</li> 
+<ul>
+ 
+<li>Task too large, fast, or costly for humans</li>
+ 
+<li>Rules are complex or unknown</li> 
+</ul>
+
+<li><strong>Requirements</strong>: Large data + basic understanding of problem</li>
+
+<li><strong>Examples</strong>:</li> 
+<ul>
+ 
+<li>Password verification → programming</li>
+ 
+<li>Face detection → ML</li>
+ 
+<li>Weather prediction → ML</li> 
+</ul>
+
+<li><strong>Applications</strong>: Spam detection, recommendations, voice assistants, robotics, games, marketing</li>
+
+<li><strong>Summary</strong>: ML = learning from data, used when rules are unclear or tasks complex.</li>
+</ul>
+<h2><strong>Lecture 2: Data, Models, and ML Task</strong></h2>
+
+
+<ul>
+
+<li><strong>Data</strong>: Collection of vectors (e.g., house → (3, 9, 1.9, 5.0))</li>
+
+<li><strong>Metadata</strong>: Meaning of numbers (rooms, area, distance, price)</li>
+
+<li><strong>Models</strong>: Simplified versions of reality, useful for prediction</li>
+
+<li><strong>Types of Models</strong>:</li> 
+<ul>
+ 
+<li>Predictive → regression (continuous), classification (categories)</li>
+ 
+<li>Probabilistic → likelihood estimation</li> 
+</ul>
+
+<li><strong>Learning Algorithms</strong>: Convert data into models by finding best parameters</li>
+
+<li><strong>Task Flow</strong>: Human gives data + structure → algorithm learns → model predicts.</li>
+</ul>
+<h2><strong>Lecture 3: Supervised Learning – Regression</strong></h2>
+
+
+<ul>
+
+<li><strong>Notation</strong>:</li> 
+<ul>
+ 
+<li>Real numbers R, vectors R<sup>d</sup></li>
+ 
+<li>Indexing:</li>  
+<ul>
+  
+<li>x<sub>i</sub>: i-th data point (vector)</li>
+  
+<li>x<sub>j </sub>:  j-th value inside a vector  </li>
+  
+<li>x<sub>ij</sub>: j-th value of i-th data point</li>  
+</ul></li>  
+</ul>
+
+<li><strong>Regression</strong>: Learn function f(x):R<sup>d</sup>→R</li>
+
+<li><strong>Linear Model</strong>:  f(x) = w<sup>T</sup>x + b  =  w<sub>1</sub>x<sub>1</sub> + w<sub>2</sub>x<sub>2</sub> + ⋯ + w<sub>d</sub>x<sub>d</sub> + b</li>
+
+<li><strong>Loss Function</strong>: Squared loss → (y−f(x))<sup>2</sup></li>
+
+<li><strong>Goal</strong>: Minimize loss, find realistic patterns.</li>
+
+<li><strong>Summary</strong>: Regression predicts numeric values, best model = minimum loss.</li>
+</ul>
+<h2><strong>Lecture 4: Supervised Learning – Classification</strong></h2>
+
+
+<ul>
+
+<li><strong>Definition</strong>: Predict discrete labels (+1, −1)</li>
+
+<li><strong>Model</strong>:  f(x) = sign(w<sup>T</sup>x+b)</li>
+
+<li><strong>Loss</strong>: Misclassification loss = fraction of wrong predictions</li>
+
+<li><strong>Data Splitting</strong>: Training, validation, test sets</li>
+
+<li><strong>Summary</strong>: Classification predicts categories, performance measured by misclassification, best model generalizes well.</li>
+</ul>
+<h2><strong>Lecture 5: Unsupervised Learning – Dimensionality Reduction</strong></h2>
+
+
+<ul>
+
+<li><strong>Definition</strong>: Learning without labels</li>
+
+<li><strong>Goal</strong>: Understand structure, group data, compress data</li>
+
+<li><strong>Encoder/Decoder</strong>:</li> 
+<ul>
+ 
+<li>f:R<sup>D</sup> → R<sup>d′</sup></li>
+ 
+<li>g:R<sup>d′</sup> → R<sup>D</sup></li> 
+</ul>
+
+<li><strong>Loss Function</strong>:  1/n∑∥g(f(xi))−xi∥<sup>2</sup></li>
+
+<li><strong>Applications</strong>: Marketing, data compression</li>
+
+<li><strong>Summary</strong>: Reduce dimensionality, minimize reconstruction error.</li>
+</ul>
+<h2><strong>Lecture 6: Unsupervised Learning – Density Estimation</strong></h2>
+
+
+<ul>
+
+<li><strong>Definition</strong>: Learn probability distribution P(x)</li>
+
+<li><strong>Constraints</strong>:</li> 
+<ul>
+ 
+<li>Discrete: ∑P(x)=1</li>
+ 
+<li>Continuous: ∫P(x)dx=1</li> 
+</ul>
+
+<li><strong>Loss Function</strong>: Negative log likelihood    L = 1/n∑−log⁡P(xi)</li>
+
+<li><strong>Applications</strong>: Tweet generation, Gaussian Mixture Models</li>
+
+<li><strong>Summary</strong>: Density estimation assigns high probability to real data, minimizes loss.</li>
+</ul>
+<a href="https://drive.google.com/file/d/1Vrkaw-Jn0CNdBJVZFn9li6Ql8higB-L_/view?usp=drive_link">Download</a>
