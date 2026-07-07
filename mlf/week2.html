@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Week_2: Short Notes</title>
+<style>
+  body{
+    font-family: Arial, Helvetica, sans-serif;
+    color:#000;
+    background:#fff;
+    max-width:800px;
+    margin:40px auto;
+    padding:0 20px;
+    line-height:1.5;
+    font-size:15px;
+  }
+  h1{ text-align:center; font-size:28px; }
+  h2{ font-size:20px; margin-top:36px; }
+  h3{ font-size:16px; margin-bottom:4px; }
+  ul{ margin-top:4px; }
+  li{ margin:2px 0; }
+  table{ border-collapse:collapse; margin:10px 0; }
+  th, td{ border:1px solid #000; padding:6px 10px; text-align:left; }
+  .formula{ margin:6px 0 6px 20px; font-style:normal; }
+  sup{ font-size:0.75em; }
+  sub{ font-size:0.75em; }
+  hr{ margin:30px 0; }
+</style>
+</head>
+<body>
+
+<h1>Week_2: Short Notes</h1>
+
+<h2>Lecture1: Sets and Functions</h2>
+
+<h3>Basic Sets &amp; Notation</h3>
+<ul>
+  <li><b>Real Numbers</b>: R = all real values</li>
+  <li><b>Non-negative Reals</b>: R⁺ = {x ∈ R | x ≥ 0}</li>
+  <li><b>Integers</b>: Z = {…,−2,−1,0,1,2,…}</li>
+  <li><b>Non-negative Integers</b>: Z⁺ = {x ∈Z | x ≥ 0}</li>
+</ul>
+
+<h3>Intervals</h3>
+<ul>
+  <li><b>Closed Interval</b>: [a,b] = {x ∈ R | a ≤ x ≤ b}</li>
+  <li><b>Open Interval</b>: (a,b) = {x ∈ R | a &lt; x &lt; b}</li>
+</ul>
+
+<h3>Higher Dimensions</h3>
+<ul>
+  <li>R<sup>d</sup>: d-dimensional vectors, e.g. R³ = (x₁, x₂, x₃)</li>
+  <li>[a,b]<sup>d</sup>: each component lies in [a,b]</li>
+</ul>
+
+<h3>Metric Spaces (Distance)</h3>
+<p><b>Euclidean Distance:</b></p>
+<p class="formula">d(x,y) = √( (x₁−y₁)² + ⋯ + (x<sub>d</sub>−y<sub>d</sub>)² )</p>
+
+<h3>Balls</h3>
+<ul>
+  <li><b>Open Ball</b>: B(x,ϵ) = {y | d(x,y) &lt; ϵ}</li>
+  <li><b>Closed Ball</b>: B̄(x,ϵ) = {y | d(x,y) ≤ ϵ}</li>
+  <li>Open = boundary excluded</li>
+  <li>Closed = boundary included</li>
+</ul>
+
+<h3>Set Operations &amp; Logic</h3>
+<p><b>Operations</b></p>
+<ul>
+  <li>Union: A∪B → in A or B</li>
+  <li>Intersection: A∩B → in both</li>
+  <li>Complement: A<sup>c</sup> = V∖A</li>
+</ul>
+<p><b>De Morgan's Laws:</b> (A∪B)<sup>c</sup> = A<sup>c</sup>∩B<sup>c</sup>, (A∩B)<sup>c</sup> = A<sup>c</sup>∪B<sup>c</sup></p>
+
+<p><b>Logic Symbols</b></p>
+<ul>
+  <li>∀ → for all</li>
+  <li>∃ → there exists</li>
+  <li>⇒ → implies</li>
+  <li>⇔ → equivalent</li>
+</ul>
+
+<h3>Sequences &amp; Convergence</h3>
+<p><b>Definition:</b> A sequence x<sub>n</sub>→x* if:</p>
+<p>For every ϵ&gt;0, ∃N such that for all n ≥ N: x<sub>n</sub> ∈ B(x*, ϵ)</p>
+<p><b>Meaning</b>: eventually stays close to the limit.</p>
+
+<p><b>Examples</b></p>
+<ul>
+  <li><b>Converging</b>: x<sub>n</sub> = (1 + 2/n, 3 − 2/n) → (1,3)</li>
+  <li><b>Non-Converging</b>: (cos(2πn), sin(2πn)) → cycles, no limit</li>
+</ul>
+
+<h3>Vector Spaces</h3>
+<p><b>Definition:</b> If u, v ∈ V and scalars α, β ∈ R, then: αu + βv ∈ V. Closed under linear combination.</p>
+<p><b>Dot Product:</b> x·y = Σ<sub>i=1</sub><sup>d</sup> x<sub>i</sub>y<sub>i</sub></p>
+<p><b>Norm (Length):</b> ‖x‖₂ = √(x·x) = √( Σ<sub>i=1</sub><sup>d</sup> x<sub>i</sub>² )</p>
+<p><b>Orthogonality</b></p>
+<p>x·y = 0 ⇒ vectors are perpendicular</p>
+
+<h3>Functions &amp; Visualization</h3>
+<p><b>Function:</b> f:A→B — Maps input → output.</p>
+<p><b>Types</b></p>
+<ul>
+  <li>Real-valued: f:R<sup>d</sup>→R</li>
+  <li>Multivariate: multiple inputs</li>
+</ul>
+<p><b>Graph:</b> G<sub>f</sub> = {(x, f(x))}</p>
+
+<p><b>Visualization</b></p>
+<ul>
+  <li><b>1D Function</b>: f(x) = x² → parabola</li>
+  <li><b>2D Functions</b> (f:R²→R):
+    <ul>
+      <li>Contour Plot: lines of constant value</li>
+      <li>Heat Map: color = value</li>
+    </ul>
+  </li>
+</ul>
+
+<p><b>Examples:</b></p>
+<ol>
+  <li><b>Linear</b>: f(x) = x₁ + x₂ → contours = straight lines</li>
+  <li><b>Multiplicative</b>: f(x) = x₁x₂ → contours = hyperbolas</li>
+  <li><b>Quadratic</b>: f(x) = x₁² + x₂² → contours = circles</li>
+</ol>
+
+<h3>Quick Summary</h3>
+<ul>
+  <li>Distance → Euclidean norm</li>
+  <li>Convergence → "eventually stays close"</li>
+  <li>Vector space → closed under linear combinations</li>
+  <li>Dot product → measures alignment</li>
+  <li>Orthogonal → dot product = 0</li>
+  <li>Contours → constant function values</li>
+</ul>
+
+<hr>
+
+<h2>Lecture2: Univariate Calculus: Continuity and Differentiability</h2>
+
+<h3>Continuity</h3>
+<p><b>Intuitive Definition:</b> A function is continuous at a point x* if:</p>
+<ul>
+  <li>Small changes in input ⇒ small changes in output</li>
+  <li>No jumps, breaks, or holes</li>
+</ul>
+<p><b>Formal Definition:</b> lim<sub>x→x*</sub> f(x) = f(x*)</p>
+<p><b>Equivalent sequence definition</b>: If x<sub>n</sub> → x*, then f(x<sub>n</sub>) → f(x*).</p>
+<p><b>Global Continuity:</b> A function is continuous at every point in its domain.</p>
+
+<p><b>Examples (Continuous Functions)</b></p>
+<ol>
+  <li><b>Polynomial</b>: f(x) = x² — Continuous everywhere. Example: as x → 2, f(x) → 4.</li>
+  <li><b>Piecewise Continuous</b>: f(x) = { 2x+1, x&gt;1 ; 3, x≤1 }<br>
+  At x=1: left = 3, right = 3 → matches → continuous.</li>
+</ol>
+
+<p><b>Examples (Discontinuous Functions)</b></p>
+<ol>
+  <li><b>Sign Function</b>: sgn(x) = { −1, x&lt;0 ; 0, x=0 ; 1, x&gt;0 }<br>
+  At x=0: left → −1, right → +1. Not continuous.</li>
+  <li><b>Reciprocal Function</b>: f(x) = 1/x — At x=0: undefined. Not continuous.</li>
+  <li><b>Oscillating Function</b>: f(x) = cos(1/x) — As x→0: no single limit. Not continuous.</li>
+</ol>
+
+<h3>Differentiability</h3>
+<p><b>Definition:</b> A function is differentiable at x* if the following limit exists:</p>
+<p class="formula">f′(x*) = lim<sub>x→x*</sub> [ f(x)−f(x*) ] / (x−x*)</p>
+<p>This value is called the <b>derivative</b>.</p>
+
+<p><b>Relation with Continuity</b></p>
+<ul>
+  <li>Not continuous ⇒ not differentiable</li>
+  <li>Continuous ⇏ differentiable</li>
+  <li>Differentiability is a stronger condition than continuity</li>
+</ul>
+
+<p><b>Examples (Not Differentiable)</b></p>
+<ol>
+  <li><b>Absolute Value</b>: f(x) = |x| — At x=0: left slope = −1, right slope = +1. Not differentiable.</li>
+  <li><b>Piecewise Function</b>: f(x) = { 4x+2, x≥2 ; 2x+6, x&lt;2 }<br>
+  At x=2: left slope = 2, right slope = 4. Not differentiable.</li>
+</ol>
+
+<h3>Geometric Interpretation of Derivative</h3>
+<p><b>Alternative Formula:</b> f′(x*) = lim<sub>h→0</sub> [ f(x*+h)−f(x*) ] / h</p>
+<p><b>Meaning:</b> The derivative is the slope of the tangent line at x*.</p>
+<p><b>Intuition</b></p>
+<ul>
+  <li>Take two points on the curve.</li>
+  <li>Draw the secant line.</li>
+  <li>Move points closer.</li>
+  <li>As h→0, slope → exact slope at that point.</li>
+</ul>
+<p><b>Linear Approximation:</b> Near x*, the function behaves like: f(x) ≈ f(x*) + f′(x*)(x − x*)</p>
+<p>Locally, the curve is approximated by a straight line.</p>
+
+<h3>Quick Summary</h3>
+<ul>
+  <li><b>Continuity</b>: no jumps, breaks, or holes</li>
+  <li><b>Differentiability</b>: smooth curve, no sharp corners</li>
+  <li>Differentiable ⇒ always continuous</li>
+  <li>Not continuous ⇒ never differentiable</li>
+  <li>Derivative = slope of tangent line</li>
+</ul>
+
+<hr>
+
+<h2>Lecture3: Univariate Calculus: Derivatives and Linear Approximations</h2>
+
+<h3>Core Concepts</h3>
+<p><b>Derivative (Idea)</b></p>
+<ul>
+  <li>Measures the <b>rate of change</b> or slope at a point.</li>
+  <li>Tells how fast a function changes near x*.</li>
+</ul>
+
+<p><b>Linear Approximation (Main Idea)</b></p>
+<ul>
+  <li>Replace a complex function with a straight line near a point.</li>
+  <li>Works locally (near x*).</li>
+  <li>Exact at x = x*, good near x*, inaccurate far away.</li>
+</ul>
+
+<h3>Functional vs Geometric View</h3>
+<p><b>Functional (Algebra View)</b>: Linear approximation is a function of the form: y = mx + c, m = f′(x*)</p>
+<p><b>Geometric View</b>: It is the tangent line to the curve, touching the graph at (x*,f(x*)).</p>
+
+<h3>Key Formulae</h3>
+<p><b>Derivative Definition:</b> f′(x*) = lim<sub>x→x*</sub> [ f(x)−f(x*) ] / (x−x*)</p>
+<p><b>Linear Approximation Formula:</b> f(x) ≈ f(x*) + f′(x*)(x−x*)</p>
+<p><b>Linear Function Notation:</b> L<sub>x*</sub>f(x) = f(x*) + f′(x*)(x−x*)</p>
+
+<h3>Classic Approximations (Near x=0)</h3>
+<table>
+<tr><th>Function</th><th>Approximation</th><th>Reason</th></tr>
+<tr><td>sin x</td><td>x</td><td>f(0) = 0, f′(0) = 1</td></tr>
+<tr><td>e<sup>x</sup></td><td>1 + x</td><td>f(0) = 1, f′(0) = 1</td></tr>
+<tr><td>log(1 + x)</td><td>x</td><td>f(0) = 0, f′(0) = 1</td></tr>
+<tr><td>(1 + x)<sup>r</sup></td><td>1 + rx</td><td>derivative = r(1+x)<sup>r−1</sup></td></tr>
+</table>
+
+<h3>Worked Examples</h3>
+<p><b>Example 1: Approximate f(x) = x² near x* = 1</b></p>
+<ul>
+  <li>f(1) = 1</li>
+  <li>f′(x) = 2x ⇒ f′(1) = 2</li>
+  <li>Linear approximation: L₁f(x) = 1 + 2(x−1) = 2x − 1</li>
+</ul>
+<p><b>Final Answer</b>: 2x−1</p>
+
+<p><b>Example 2: Estimate 0.99⁷</b></p>
+<p>Step 1: Rewrite 0.99⁷ = (1−0.01)⁷</p>
+<p>Step 2: Compare with (1+x)<sup>r</sup>: x=−0.01, r=7</p>
+<p>Step 3: Apply Approximation: (1+x)<sup>r</sup> ≈ 1 + rx<br>
+0.99⁷ ≈ 1+7(−0.01) = 1−0.07 = 0.93</p>
+<p><b>Closest Answer</b>: 0.93</p>
+
+<h3>Importance in Machine Learning</h3>
+<ul>
+  <li>Used in optimization algorithms (e.g., gradient descent).</li>
+  <li>Converts complex functions into linear approximations for easier computation.</li>
+  <li>Helps in finding minima/maxima and training models efficiently.</li>
+</ul>
+
+<h3>Quick Summary</h3>
+<ul>
+  <li>Derivative = slope at a point.</li>
+  <li>Linear approximation = tangent line.</li>
+  <li>Formula: f(x) ≈ f(x*) + f′(x*)(x−x*)</li>
+  <li>Accurate only near the point.</li>
+  <li>Core idea behind optimization in machine learning.</li>
+</ul>
+
+<hr>
+
+<h2>Lecture4: Univariate Calculus: Applications and Advanced Rules</h2>
+
+<h3>Higher-Order Approximations</h3>
+<p><b>Idea</b></p>
+<ul>
+  <li>Linear approximation uses only slope (first derivative).</li>
+  <li>Higher-order approximations use curvature (second derivative, etc.).</li>
+  <li>More accuracy, but more complexity.</li>
+</ul>
+<p><b>Linear Approximation (First Order):</b> f(x) ≈ f(x*) + f′(x*)(x−x*)</p>
+<p><b>Quadratic Approximation (Second Order):</b> f(x) ≈ f(x*) + f′(x*)(x−x*) + 1/2 f″(x*)(x−x*)²</p>
+
+<p><b>Key Insight</b></p>
+<ul>
+  <li>These are truncated Taylor series.</li>
+  <li>Quadratic approximation is more accurate than linear.</li>
+  <li>Exact for quadratic functions.</li>
+</ul>
+
+<p><b>Example: e<sup>x</sup> near x = 0:</b></p>
+<ul>
+  <li>Linear: 1+x</li>
+  <li>Quadratic: 1 + x + x²/2 → better approximation.</li>
+</ul>
+
+<p><b>Example: 1.1⁷</b></p>
+<ul>
+  <li>Linear: 1 + 7(0.1) = 1.7</li>
+  <li>Quadratic: 1 + 0.7 + (0.7)²/2 ≈ 1.91 → much closer to actual value.</li>
+</ul>
+
+<h3>Rules from Linear Approximation</h3>
+<p><b>Product Rule:</b> If f(x) = g(x)·h(x), then: f′(x) = g′(x)h(x) + h′(x)g(x)<br>
+<b>Idea</b>: Approximate both functions, multiply, ignore higher-order terms.</p>
+
+<p><b>Chain Rule:</b> If f(x) = g(h(x)), then: f′(x) = g′(h(x))·h′(x)<br>
+<b>Idea</b>: First approximate inner function, then outer function.</p>
+
+<p><b>Example: Approximate f(x) = e³ˣ/√(1+x) near x=0</b></p>
+<ul>
+  <li>e³ˣ ≈ 1+3x</li>
+  <li>(1+x)<sup>−1/2</sup> ≈ 1−x/2</li>
+  <li>Multiply: (1+3x)(1−x/2) ≈ 1 + 5/2 x</li>
+</ul>
+<p><b>Final Approximation</b>: 1+5/2 x</p>
+
+<p><b>Example: f(x) = e<sup>1+x</sup> near x=1</b> — f(x) ≈ e² + e²(x−1)</p>
+
+<h3>Maxima, Minima, and Saddle Points</h3>
+<p><b>Critical Point:</b> A point x* where: f′(x*)=0</p>
+<ul>
+  <li>Slope = 0</li>
+  <li>Flat region</li>
+</ul>
+<p><b>Linear Approximation at Critical Point:</b> L<sub>x*</sub>(f) = f(x*) — No linear change (constant).</p>
+
+<p><b>Types of Critical Points</b></p>
+<ol>
+  <li><b>Local Minimum</b>: lowest point nearby, shape ∪.</li>
+  <li><b>Local Maximum</b>: highest point nearby, shape ∩.</li>
+  <li><b>Saddle Point</b>: neither max nor min, looks like a horse saddle.
+    <ul><li>Down in one direction, up in another.</li></ul>
+  </li>
+</ol>
+<p><b>Key Insight</b>: Critical point ≠ always min/max; could be a saddle.</p>
+
+<h3>Importance in Machine Learning</h3>
+<ul>
+  <li>ML is an optimization problem.</li>
+  <li>Goal: minimize loss function, find best parameters.</li>
+</ul>
+
+<p><b>Why These Matter</b></p>
+<ul>
+  <li>Linear approximation → gradient descent.</li>
+  <li>Quadratic approximation → faster convergence (Newton methods).</li>
+  <li>Critical points → candidate solutions.</li>
+</ul>
+
+<h3>Quick Summary</h3>
+<ul>
+  <li>Linear = first-order (slope).</li>
+  <li>Quadratic = includes curvature.</li>
+  <li>Taylor series = base idea.</li>
+  <li>Product &amp; chain rules come from approximation.</li>
+  <li>Critical point: f′(x) = 0.</li>
+  <li>Types: minimum, maximum, saddle.</li>
+</ul>
+
+<hr>
+
+<h2>Lecture5: Multivariate Calculus: Lines and Planes in Higher Dimensional Space</h2>
+
+<h3>Introduction</h3>
+<p><b>Idea</b></p>
+<ul>
+  <li>Single variable: f:R→R</li>
+  <li>Multiple variables: f:R<sup>d</sup>→R</li>
+</ul>
+<p>Input = vector, Output = single value.</p>
+<p><b>Example</b>: f(x₁, x₂) = x₁² + x₂²</p>
+<ul>
+  <li>Input: point in 2D</li>
+  <li>Output: real number</li>
+</ul>
+<p><b>Intuition</b>: Think of a landscape or surface; height = function value.</p>
+
+<h3>Geometry in R<sup>d</sup></h3>
+<p><b>A. Lines in R<sup>d</sup></b></p>
+<ul>
+  <li><b>Point + Direction Form</b>: x = u + αv — Start at point u, move along direction v.</li>
+  <li><b>Two-Point Form</b>: x = (1−α)u + αu′ — Line between two points.</li>
+</ul>
+<p><b>Example</b>: Line through (1,1) with direction (1,2): x = (1,1) + α(1,2)</p>
+
+<p><b>B. Hyperplanes</b></p>
+<ul>
+  <li><b>Definition</b>: W<sup>T</sup>x = b</li>
+  <li>Generalization of: Line (2D), Plane (3D)</li>
+  <li><b>Key Idea</b>: W = normal vector (perpendicular), defines orientation.</li>
+</ul>
+<p><b>Example in R³</b>: x₁ + x₂ + x₃ = 1 — Plane with normal vector (1,1,1).</p>
+
+<p><b>C. Points vs Vectors</b></p>
+<table>
+<tr><th>Concept</th><th>Meaning</th></tr>
+<tr><td>Point</td><td>Location</td></tr>
+<tr><td>Vector</td><td>Direction</td></tr>
+</table>
+<p>Same representation, different meaning.</p>
+
+<h3>Partial Derivatives</h3>
+<p><b>Idea:</b> Differentiate with respect to one variable, keeping others constant.</p>
+<p><b>Formula:</b> ∂f/∂x<sub>i</sub> = lim<sub>α→0</sub> [ f(v+αe<sub>i</sub>)−f(v) ] / α</p>
+<p><b>Intuition</b>: Move only along one axis direction.</p>
+<p><b>Example:</b> f(x₁, x₂) = x₁² + x₂² — ∂f/∂x₁ = 2x₁, ∂f/∂x₂ = 2x₂</p>
+
+<h3>Gradient</h3>
+<p><b>Definition:</b> Gradient = vector of all partial derivatives: ∇f(x) = [∂f/∂x₁ , … , ∂f/∂x<sub>d</sub>]</p>
+
+<p><b>Key Meaning</b></p>
+<ul>
+  <li>Gradient gives direction of maximum increase.</li>
+  <li>Measures rate of change in all directions.</li>
+</ul>
+
+<p><b>Example</b></p>
+<p>f(x₁, x₂) = x₁² + x₂² , ∇f = (2x₁, 2x₂)</p>
+<p><b>Linear Function Case:</b> f(x) = x₁ + 2x₂ + 3x₃, ∇f = (1,2,3) — Constant everywhere.</p>
+
+<h3>Quick Summary</h3>
+<ul>
+  <li>Multivariate functions: many inputs, one output.</li>
+  <li>Line: x = u + αv.</li>
+  <li>Hyperplane: W<sup>T</sup>x = b.</li>
+  <li>Partial derivative: change in one direction.</li>
+  <li>Gradient: vector of all derivatives.</li>
+  <li>Gradient = direction of steepest ascent.</li>
+</ul>
+
+<hr>
+
+<h2>Lecture6: Multivariate Calculus: Linear Approximation and Applications</h2>
+
+<h3>Linear Approximation (Multivariate)</h3>
+<p><b>1D Recall:</b> f(x) ≈ f(x*) + f′(x*)(x−x*)</p>
+<p><b>Multivariate Idea:</b> For f:R<sup>d</sup>→R, approximate near point v: Replace function with a plane (linear function).</p>
+<p><b>General Formula:</b> f(x) ≈ f(v) + ∇f(v)<sup>T</sup>(x−v)</p>
+<p><b>Component Form:</b> f(x) ≈ f(v) + Σ<sub>i=1</sub><sup>d</sup> ∂f/∂x<sub>i</sub>(v)(x<sub>i</sub> − v<sub>i</sub>)</p>
+
+<p><b>Key Properties</b></p>
+<ul>
+  <li>Exact at x = v : f(v) = L<sub>v</sub>f(v)</li>
+  <li>Valid only near v</li>
+  <li>Represents best linear fit locally</li>
+</ul>
+
+<h3>Geometric Interpretation of Gradient</h3>
+<p><b>A. Tangent Plane:</b> Linear approximation forms a plane touching the surface at (v, f(v)). This is the tangent plane.</p>
+<p><b>B. Contour (Level Set)</b></p>
+<ul>
+  <li>Level set: f(x) = f(v)</li>
+  <li>Gradient is perpendicular to contour.</li>
+</ul>
+<p><b>Key Insight</b>: Gradient ⊥ level curve, points in direction of maximum increase.</p>
+
+<h3>Directional Derivatives</h3>
+<p><b>Idea:</b> Rate of change in a specific direction u.</p>
+<p><b>Definition:</b> D<sub>u</sub>f(v) = lim<sub>α→0</sub> [ f(v+αu) − f(v) ] / α</p>
+<p><b>Computational Formula:</b> D<sub>u</sub>f(v) = ∇f(v)<sup>T</sup>u</p>
+
+<p><b>Important Cases</b></p>
+<ul>
+  <li><b>Steepest Ascent</b>: direction = ∇f(v), maximum increase.</li>
+  <li><b>Descent Direction</b>: if ∇f(v)<sup>T</sup>u &lt; 0, function decreases.</li>
+</ul>
+<p><b>Cauchy-Schwarz Insight:</b> −‖a‖‖b‖ ≤ a<sup>T</sup>b ≤ ‖a‖‖b‖</p>
+<ul>
+  <li>Maximum when vectors aligned.</li>
+  <li>Minimum when opposite.</li>
+</ul>
+
+<h3>Quadratic Approximation (Advanced)</h3>
+<p><b>Formula:</b> f(x) ≈ f(v) + ∇f(v)<sup>T</sup>(x−v) + 1/2 (x−v)<sup>T</sup>∇²f(v)(x−v)</p>
+
+<p><b>Key Terms</b></p>
+<ul>
+  <li>∇f(v): Gradient</li>
+  <li>∇²f(v): Hessian matrix — Captures curvature.</li>
+</ul>
+
+<h3>Critical Points &amp; Optimality</h3>
+<p><b>Critical Point:</b> ∇f(v) = 0 — Flat region, no slope in any direction.</p>
+<p><b>First-Order Condition:</b> If v is min/max: ∇f(v) = 0.</p>
+<p><b>Important:</b> Every min/max is a critical point, but not every critical point is min/max (could be a saddle).</p>
+
+<h3>Worked Example</h3>
+<p><b>Problem:</b> f(x₁, x₂) = x₁² + x₂², v = (6, 2)</p>
+<p><b>Step 1:</b> Function Value: f(6, 2) = 36 + 4 = 40</p>
+<p><b>Step 2:</b> Gradient: ∇f = (2x₁, 2x₂) — At v: ∇f(6, 2) = (12, 4)</p>
+<p><b>Step 3:</b> Apply Formula: f(x) ≈ 40 + 12(x₁ − 6) + 4(x₂ − 2)</p>
+<p><b>Step 4:</b> Simplify: f(x) ≈ 12x₁ + 4x₂ −40</p>
+<p><b>Final Linear Approximation</b></p>
+
+<h3>Quick Summary</h3>
+<ul>
+  <li>Multivariate approximation = tangent plane.</li>
+  <li>Gradient = direction of steepest increase, perpendicular to contours.</li>
+  <li>Directional derivative = ∇f·u.</li>
+  <li>Quadratic approximation uses Hessian (curvature).</li>
+  <li>Critical point: ∇f = 0.</li>
+</ul>
+
+</body>
+</html>
+<a href="https://drive.google.com/file/d/1rKCU5njLv3CGtd78C7QbE7yuOzlaCuyc/view?usp=sharing"></a>
