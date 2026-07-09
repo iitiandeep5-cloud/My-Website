@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>Week 3: Short Notes — MLF</title>
+<script>
+  MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] } };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1f2933;
+    --accent: #2b6cb0;
+    --accent-light: #ebf4ff;
+    --border: #d9e2ec;
+    --code-bg: #f4f6f8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0;
+    background: #f7f9fb;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    background: var(--bg);
+    padding: 40px 56px 80px;
+    box-shadow: 0 0 24px rgba(0,0,0,0.05);
+  }
+  h1.doc-title {
+    font-size: 2rem;
+    margin-bottom: 0.2em;
+    color: #102a43;
+  }
+  .subtitle {
+    color: #627d98;
+    margin-top: 0;
+    margin-bottom: 2em;
+    font-size: 1rem;
+  }
+  h2.lecture-title {
+    font-size: 1.5rem;
+    color: #fff;
+    background: var(--accent);
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin-top: 3em;
+    margin-bottom: 1em;
+  }
+  h3 {
+    font-size: 1.15rem;
+    color: #102a43;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 4px;
+    margin-top: 2em;
+  }
+  h4 {
+    font-size: 1rem;
+    color: var(--accent);
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+  }
+  ul {
+    padding-left: 1.3em;
+  }
+  li {
+    margin-bottom: 0.4em;
+  }
+  .formula-box {
+    background: var(--accent-light);
+    border-left: 4px solid var(--accent);
+    padding: 10px 16px;
+    margin: 1em 0;
+    border-radius: 4px;
+  }
+  .example-box {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 1em 0;
+  }
+  .example-box p.example-title {
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    color: #334e68;
+  }
+  .summary-box {
+    background: #fffaf0;
+    border: 1px solid #f6c453;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 1.5em 0;
+  }
+  .summary-box p.summary-title {
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: #975a16;
+  }
+  .memory-trick {
+    background: #f0fff4;
+    border: 1px solid #9ae6b4;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 1.5em 0;
+  }
+  .memory-trick p.mt-title {
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: #22543d;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 1em 0;
+  }
+  table td, table th {
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    text-align: center;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5em 0;
+  }
+  code {
+    background: var(--code-bg);
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 0.95em;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1 class="doc-title">Week 3: Short Notes</h1>
+  <p class="subtitle">MLF — Linear Algebra: Fundamental Subspaces, Orthogonality &amp; Projections</p>
+
+  <!-- ================= LECTURE 1 ================= -->
+  <h2 class="lecture-title">Lecture 1: Four Fundamental Subspaces</h2>
+
+  <h3>Core Concepts</h3>
+  <p>For any matrix $A \in \mathbb{R}^{m \times n}$:</p>
+  <ul>
+    <li><strong>Column Space $C(A)$:</strong>
+      <ul>
+        <li>Span of all columns of $A$.</li>
+        <li>Represents all possible outputs $Ax$.</li>
+        <li>Subspace of $\mathbb{R}^m$.</li>
+      </ul>
+    </li>
+    <li><strong>Null Space $N(A)$:</strong>
+      <ul>
+        <li>All vectors $x$ such that $Ax = 0$.</li>
+        <li>Shows solutions to the homogeneous system.</li>
+        <li>Subspace of $\mathbb{R}^n$.</li>
+      </ul>
+    </li>
+    <li><strong>Row Space $R(A) = C(A^T)$:</strong>
+      <ul>
+        <li>Span of all rows of $A$.</li>
+        <li>Same as column space of $A^T$.</li>
+        <li>Subspace of $\mathbb{R}^n$.</li>
+      </ul>
+    </li>
+    <li><strong>Left Null Space $N(A^T)$:</strong>
+      <ul>
+        <li>All vectors $y$ such that $A^T y = 0$.</li>
+        <li>Equivalently, $y^T A = 0$.</li>
+        <li>Subspace of $\mathbb{R}^m$.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>Key Definitions</h3>
+  <ul>
+    <li><strong>Rank ($r$):</strong> Dimension of column space. Equal to the number of pivot columns.</li>
+    <li><strong>Nullity:</strong> Dimension of null space. Equal to the number of free variables.</li>
+  </ul>
+
+  <h3>Important Formulae &amp; Theorems</h3>
+  <div class="formula-box">
+    <strong>Rank–Nullity Theorem (Columns):</strong> $\text{Rank}(A) + \text{Nullity}(A) = n$<br>
+    <em>Total variables = pivots + free variables.</em>
+  </div>
+  <div class="formula-box">
+    <strong>Rank–Nullity Theorem (Rows):</strong> $\text{Rank}(A^T) + \text{Nullity}(A^T) = m$
+  </div>
+  <div class="formula-box">
+    <strong>Solvability Condition:</strong> $Ax = b$ has a solution $\iff b \in C(A)$.
+  </div>
+  <div class="formula-box">
+    <strong>General Solution:</strong> $x = x_p + x_n$, where $x_p$: particular solution ($Ax_p = b$), $x_n$: null space solution ($Ax_n = 0$)
+  </div>
+  <div class="formula-box">
+    <strong>Equality of Ranks:</strong> Row Rank = Column Rank = $r$.
+  </div>
+
+  <h3>Examples</h3>
+
+  <div class="example-box">
+    <p class="example-title">Example 1: Dependent Columns</p>
+    If $C_3 = C_1 + C_2$, then only 2 independent columns.
+    <ul>
+      <li>Rank = 2</li>
+      <li>Column Space → Plane in $\mathbb{R}^4$</li>
+      <li>Null Space → Line in $\mathbb{R}^3$</li>
+      <li>Example vector in $N(A)$: $[1, 1, -1]^T$</li>
+    </ul>
+  </div>
+
+  <div class="example-box">
+    <p class="example-title">Example 2: Gaussian Elimination</p>
+    Pivot columns → 1 and 3<br>
+    Free variables → $x_2, x_4$<br>
+    Basis of Null Space: $u = [-2,1,0,0]^T$, $v = [2,0,-2,1]^T$
+    <p><strong>Final Results:</strong></p>
+    <ul>
+      <li>Rank = 2</li>
+      <li>Nullity = 2</li>
+      <li>$N(A) = \text{span}\{u, v\}$</li>
+    </ul>
+  </div>
+
+  <div class="example-box">
+    <p class="example-title">Example 3: Simple 2 × 2 Matrix</p>
+    $$A = \begin{bmatrix} 1 & 2 \\ 3 & 6 \end{bmatrix}$$
+    Observations: Column 2 = 2 × Column 1 → Rank = 1
+    <p><strong>Subspaces:</strong></p>
+    <ul>
+      <li>Column Space → Line in $\mathbb{R}^2$</li>
+      <li>Row Space → Line in $\mathbb{R}^2$</li>
+      <li>Null Space → Line through $[-2, 1]^T$</li>
+      <li>Left Null Space → Line through $[-3, 1]^T$</li>
+    </ul>
+    Nullity: $2 - 1 = 1$
+  </div>
+
+  <div class="memory-trick">
+    <p class="mt-title">Quick Memory Trick</p>
+    <ul>
+      <li>Columns → Output space $C(A)$</li>
+      <li>Rows → Input structure $R(A)$</li>
+      <li>Null Space → Solutions to $Ax = 0$</li>
+      <li>Left Null → Orthogonal to rows</li>
+    </ul>
+  </div>
+
+  <div class="summary-box">
+    <p class="summary-title">Final Summary</p>
+    <ul>
+      <li>Four fundamental subspaces: $C(A)$, $N(A)$, $R(A)$, $N(A^T)$</li>
+      <li>Rank = number of pivots</li>
+      <li>Nullity = number of free variables</li>
+      <li>Rank + Nullity = total columns</li>
+      <li>Subspaces explain the structure of $Ax = b$</li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <!-- ================= LECTURE 2 ================= -->
+  <h2 class="lecture-title">Lecture 2: Orthogonal Vectors and Subspaces</h2>
+
+  <h3>Length of a Vector (Norm)</h3>
+  <ul>
+    <li><strong>Concept:</strong> Measures the magnitude (size) of a vector in $\mathbb{R}^n$.</li>
+    <li><strong>Formula:</strong>
+      <div class="formula-box">$$\|x\| = \sqrt{x_1^2 + x_2^2 + \cdots + x_n^2}$$</div>
+    </li>
+    <li><strong>Example:</strong> For $x = (1, 2)$: $\|x\| = \sqrt{1^2 + 2^2} = \sqrt{5}$</li>
+  </ul>
+
+  <h3>Orthogonal Vectors</h3>
+  <ul>
+    <li><strong>Definition:</strong> Two vectors are orthogonal (perpendicular) if their dot product equals zero.</li>
+    <li><strong>Formula:</strong>
+      <div class="formula-box">$$x^T y = \sum_{i=1}^{n} x_i y_i = 0$$</div>
+    </li>
+    <li><strong>Geometric Meaning:</strong> Forms a 90° angle. Follows Pythagoras' theorem.</li>
+    <li><strong>Pythagoras Relation:</strong> $\|x\|^2 + \|y\|^2 = \|x+y\|^2$</li>
+    <li><strong>Key Properties:</strong>
+      <ul>
+        <li>Zero vector is orthogonal to every vector.</li>
+        <li>Mutually orthogonal non-zero vectors are linearly independent.</li>
+      </ul>
+    </li>
+    <li><strong>Examples:</strong>
+      <ul>
+        <li>Standard basis: $(1,0,0)$, $(0,1,0)$, $(0,0,1)$.</li>
+        <li>Vectors $(2,1)$ and $(1,-2)$: $(2)(1) + (1)(-2) = 0 \to$ orthogonal.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>Orthonormal Vectors</h3>
+  <p><strong>Definition:</strong> Vectors that are both orthogonal and of unit length ($\|u\| = 1$).</p>
+  <ul>
+    <li><strong>Examples:</strong>
+      <ul>
+        <li>$(1,0)$ and $(0,1)$.</li>
+        <li>$(\cos\theta, \sin\theta)$ and $(-\sin\theta, \cos\theta)$.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>Orthogonal Subspaces</h3>
+  <p><strong>Definition:</strong> Two subspaces $U$ and $V$ are orthogonal if every vector in $U$ is perpendicular to every vector in $V$.</p>
+  <ul>
+    <li><strong>Condition:</strong> $x^T y = 0 \ \forall\ x \in U,\ y \in V$</li>
+    <li><strong>Examples:</strong> $U = \text{span}\{(1,0,0,0), (0,1,0,0)\}$, $V = \text{span}\{(0,0,1,0), (0,0,0,1)\} \Rightarrow U \perp V$.
+      <ul>
+        <li>$W = \text{span}\{(0,0,-2,1)\}$ is also orthogonal to $U$.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>Orthogonality in Fundamental Subspaces</h3>
+  <ul>
+    <li><strong>Key Relationships:</strong>
+      <ol>
+        <li><strong>Row Space ⟂ Null Space:</strong> $R(A) \perp N(A)$, because $Ax = 0 \Rightarrow$ rows·$x = 0$.</li>
+        <li><strong>Column Space ⟂ Left Null Space:</strong> $C(A) \perp N(A^T)$.</li>
+      </ol>
+    </li>
+  </ul>
+
+  <h3>Dimensions &amp; Rank Check</h3>
+  <div class="formula-box">
+    Columns Perspective: $\dim(R(A)) + \dim(N(A)) = n$<br>
+    Rows Perspective: $\dim(C(A)) + \dim(N(A^T)) = m$
+  </div>
+
+  <div class="example-box">
+    <p class="example-title">Final Example</p>
+    Given: Column 2 = 2 × Column 1 → Rank = 1.
+    <p><strong>Subspaces:</strong></p>
+    <ul>
+      <li>Row Space → line through $(1, 2)$.</li>
+      <li>Null Space → line through $(-2, 1)$.</li>
+    </ul>
+    <strong>Verification:</strong> $(1,2) \cdot (-2,1) = -2 + 2 = 0 \to$ orthogonal.
+    <p><strong>Column &amp; Left Null Space:</strong></p>
+    <ul>
+      <li>Column Space → line through $(1,2,3)$.</li>
+      <li>Left Null Space → plane defined by: $y_1 + 2y_2 + 3y_3 = 0$</li>
+    </ul>
+  </div>
+
+  <div class="memory-trick">
+    <p class="mt-title">Quick Memory Tricks</p>
+    <ul>
+      <li>Dot product = 0 ⇒ Orthogonal.</li>
+      <li>Unit + Orthogonal ⇒ Orthonormal.</li>
+      <li>Row ⟂ Null.</li>
+      <li>Column ⟂ Left Null.</li>
+    </ul>
+  </div>
+
+  <div class="summary-box">
+    <p class="summary-title">Ultra Short Summary</p>
+    <ul>
+      <li>Length → sum of squares.</li>
+      <li>Orthogonal → dot product = 0.</li>
+      <li>Orthonormal → orthogonal + unit length.</li>
+      <li>Subspaces orthogonal if all vectors are perpendicular.</li>
+      <li>Rank formulas connect all subspaces.</li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <!-- ================= LECTURE 3 ================= -->
+  <h2 class="lecture-title">Lecture 3: Projections</h2>
+
+  <h3>Motivation for Projections</h3>
+  <ul>
+    <li><strong>Problem:</strong> Solve system $Ax = b$. If $b \notin C(A)$, there is no exact solution (system is inconsistent).</li>
+    <li><strong>Solution:</strong> Find the closest approximation by projecting $b$ onto the column space of $A$. This is the basis of the Least Squares Method.</li>
+  </ul>
+
+  <h3>Projection onto a Line</h3>
+  <ul>
+    <li><strong>Setup:</strong> Project vector $b$ onto a line in the direction of $a$.</li>
+    <li><strong>Key Concepts:</strong> Projection vector ($p$) lies on the line of $a$.
+      <ul><li>Error vector ($e$) is the difference: $e = b - p$. Error is perpendicular to $a$.</li></ul>
+    </li>
+    <li><strong>Orthogonality Condition:</strong> $a^T(b - \hat{x}a) = 0$</li>
+    <li><strong>Scalar Multiplier:</strong> $\hat{x} = a^T b / a^T a$</li>
+    <li><strong>Projection Formula:</strong>
+      <div class="formula-box">$$p = \hat{x}a = \frac{a^T b}{a^T a} a$$</div>
+    </li>
+    <li><strong>Interpretation:</strong>
+      <ul>
+        <li>$p$ is the "shadow" of $b$ on $a$.</li>
+        <li>Error vector $e$ is perpendicular to $a$.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>Projection Matrix ($P$)</h3>
+  <p><strong>Concept:</strong> Projection can be written as $p = Pb$.</p>
+  <ul>
+    <li><strong>Formula:</strong> $P = aa^T / a^T a$</li>
+    <li><strong>Properties of $P$:</strong>
+      <ul>
+        <li>Symmetric: $P^T = P$.</li>
+        <li>Idempotent: $P^2 = P$.</li>
+        <li>Rank = 1 (projection onto a line).</li>
+      </ul>
+    </li>
+    <li><strong>Spaces:</strong>
+      <ul>
+        <li>Column Space of $P$: line along $a$.</li>
+        <li>Null Space of $P$: plane orthogonal to $a$.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>Examples</h3>
+  <div class="example-box">
+    <p class="example-title">Example 1: Inconsistent System</p>
+    Equations: $2x = b_1$, $3x = b_2$, $4x = b_3$ — no single $x$ satisfies all equations → use projection.
+  </div>
+
+  <div class="example-box">
+    <p class="example-title">Example 2: Projection Matrix</p>
+    If $a = (1,1,1)$: $a^T a = 3$
+    $$P = \frac{1}{3}\begin{bmatrix} 1 & 1 & 1 \\ 1 & 1 & 1 \\ 1 & 1 & 1 \end{bmatrix}$$
+    <strong>Key Insight:</strong> If $a = (2,2,2)$, the projection matrix remains the same because the direction (line) is unchanged.
+  </div>
+
+  <h3>Cauchy–Schwarz Inequality</h3>
+  <ul>
+    <li><strong>Idea:</strong> Error vector length is always non-negative.</li>
+    <li><strong>Result:</strong> $|a^T b| \le \|a\|\|b\|$</li>
+    <li><strong>Meaning:</strong> Dot product is less than or equal to the product of magnitudes. Equality holds when vectors are parallel.</li>
+  </ul>
+
+  <div class="memory-trick">
+    <p class="mt-title">Quick Memory Tricks</p>
+    <ul>
+      <li>Projection = closest point on line.</li>
+      <li>Error is perpendicular to direction vector.</li>
+      <li>$P^2 = P \to$ projecting once is enough.</li>
+      <li>Scaling $a$ does not change the projection.</li>
+    </ul>
+  </div>
+
+  <div class="summary-box">
+    <p class="summary-title">Ultra Short Summary</p>
+    <ul>
+      <li>If $Ax = b$ has no solution → project $b$.</li>
+      <li>Projection formula: $\frac{a^T b}{a^T a} a$.</li>
+      <li>Matrix form: $P = aa^T / a^T a$.</li>
+      <li>Error is always perpendicular.</li>
+      <li>Leads to Cauchy–Schwarz inequality.</li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <!-- ================= LECTURE 4 ================= -->
+  <h2 class="lecture-title">Lecture 4: Least Squares and Projections onto a Subspace</h2>
+
+  <h3>Least Squares Problem</h3>
+  <ul>
+    <li><strong>Context:</strong> System $Ax = b$. Due to noise or data inconsistencies, often $b \notin C(A)$, so no exact solution exists.</li>
+    <li><strong>Goal:</strong> Find the best approximate solution by minimizing total error.</li>
+    <li><strong>Error Function:</strong> $E = \|Ax - b\|^2$</li>
+    <li><strong>Example (1D case):</strong> Equations: $2x = b_1$, $3x = b_2$, $4x = b_3$<br>
+      Error: $E = (2x - b_1)^2 + (3x - b_2)^2 + (4x - b_3)^2$</li>
+  </ul>
+
+  <h3>Calculus vs Projection Insight</h3>
+  <ul>
+    <li><strong>Two Approaches → Same Result:</strong>
+      <ul>
+        <li><strong>Calculus Method:</strong> Minimize error by setting derivative = 0.</li>
+        <li><strong>Projection Method:</strong> Project $b$ onto column space of $A$.</li>
+      </ul>
+    </li>
+    <li><strong>Core Idea:</strong> Least squares is fundamentally a projection problem.</li>
+  </ul>
+
+  <h3>Projection onto a Subspace</h3>
+  <ul>
+    <li><strong>Setup:</strong> $A$ is $m \times n$ with $m > n$. We want the projection of $b$ onto $C(A)$.</li>
+    <li><strong>Key Vectors:</strong>
+      <ul>
+        <li>Projection: $p = A\hat{x}$.</li>
+        <li>Error: $e = b - A\hat{x}$.</li>
+      </ul>
+    </li>
+    <li><strong>Orthogonality Principle:</strong> Error is orthogonal to column space: $A^T(b - A\hat{x}) = 0$</li>
+    <li><strong>Normal Equation:</strong> $A^T A \hat{x} = A^T b$</li>
+    <li><strong>Important:</strong> Always solvable, even if $Ax = b$ has no solution.</li>
+  </ul>
+
+  <h3>Solution &amp; Projection Matrix</h3>
+  <ul>
+    <li><strong>Least Squares Solution:</strong> $\hat{x} = (A^T A)^{-1} A^T b$</li>
+    <li><strong>Projection Vector:</strong> $p = A\hat{x}$</li>
+    <li><strong>Projection Matrix:</strong> $P = A(A^T A)^{-1} A^T$</li>
+    <li><strong>Properties of $P$:</strong>
+      <ul>
+        <li>Symmetric: $P^T = P$.</li>
+        <li>Idempotent: $P^2 = P$.</li>
+        <li>Projects onto $C(A)$.</li>
+      </ul>
+    </li>
+    <li><strong>Converse:</strong> If $P^T = P$ and $P^2 = P$, then $P$ is a projection matrix.</li>
+  </ul>
+
+  <h3>Special Cases</h3>
+  <div class="example-box">
+    <strong>Case 1: $b \in C(A)$</strong> — If $b = Ax$, then projection $p = b$ (no change).<br><br>
+    <strong>Case 2: $b \in N(A^T)$</strong> — $b$ is orthogonal to column space → projection $p = 0$.<br><br>
+    <strong>Case 3: $A$ is Square &amp; Invertible</strong> — Column space = entire $\mathbb{R}^n$. Projection: $p = b$, $P = I$.<br><br>
+    <strong>Case 4: $A$ is Single Column (Rank 1)</strong> — Reduces to line projection: $\hat{x} = \dfrac{a^T b}{a^T a}$
+  </div>
+
+  <div class="memory-trick">
+    <p class="mt-title">Quick Memory Tricks</p>
+    <ul>
+      <li>Least squares = minimize error.</li>
+      <li>Error is orthogonal to column space.</li>
+      <li>Normal equation: $A^T A \hat{x} = A^T b$.</li>
+      <li>Projection: $p = A(A^T A)^{-1} A^T b$.</li>
+      <li>Error is always perpendicular.</li>
+    </ul>
+  </div>
+
+  <div class="summary-box">
+    <p class="summary-title">Ultra Short Summary</p>
+    <ul>
+      <li>If $Ax = b$ fails → use least squares.</li>
+      <li>Minimize: $\|Ax - b\|^2$.</li>
+      <li>Solve using: $A^T A \hat{x} = A^T b$.</li>
+      <li>Projection: $p = A(A^T A)^{-1} A^T b$.</li>
+      <li>Error is always perpendicular.</li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <!-- ================= LECTURE 5 ================= -->
+  <h2 class="lecture-title">Lecture 5: Example Of Least Squares</h2>
+
+  <h3>Core Concepts</h3>
+  <p><strong>Objective:</strong> Fit the best line through given data points:</p>
+  <ul>
+    <li>$(x_1, b_1), (x_2, b_2), \ldots, (x_m, b_m)$.</li>
+    <li><strong>Linear Model:</strong> $y = \theta x + \theta'$ where $\theta$ = slope, $\theta'$ = intercept.</li>
+    <li><strong>Consistency vs Inconsistency:</strong>
+      <ul>
+        <li>If $b \in C(A) \to$ exact solution exists.</li>
+        <li>If not → inconsistent → use least squares.</li>
+      </ul>
+    </li>
+  </ul>
+  <p><strong>Geometric Insight:</strong> Best fit = projection of $b$ onto $C(A)$.<br>
+  Predicted values: $p = A\hat{\theta}$.<br>
+  Error: $e = b - p$. Error is perpendicular to column space.</p>
+  <p><strong>Goal:</strong> Minimize total squared error: $\min_\theta \|b - A\theta\|^2$</p>
+
+  <h3>Key Formulae</h3>
+  <div class="formula-box">
+    $$A = \begin{bmatrix} x_1 & 1 \\ x_2 & 1 \\ \vdots & \vdots \\ x_m & 1 \end{bmatrix}, \quad \theta = \begin{bmatrix} \theta \\ \theta' \end{bmatrix}$$
+    <strong>Matrix Form:</strong> $A\theta = b$<br>
+    <strong>Normal Equation:</strong> $A^T A \hat{\theta} = A^T b$<br>
+    <strong>Solution:</strong> $\hat{\theta} = (A^T A)^{-1} A^T b$<br>
+    <strong>Error Vector:</strong> $e = b - A\hat{\theta}$
+  </div>
+
+  <h3>Step-by-Step Example</h3>
+
+  <p><strong>A. Given Data:</strong></p>
+  <ul><li>Points: $(-1, 1)$, $(1, 1)$, $(2, 3)$.</li></ul>
+
+  <p><strong>B. Matrix Form:</strong></p>
+  <div class="formula-box">
+    $$A = \begin{bmatrix} -1 & 1 \\ 1 & 1 \\ 2 & 1 \end{bmatrix}, \quad b = \begin{bmatrix} 1 \\ 1 \\ 3 \end{bmatrix}$$
+  </div>
+
+  <p><strong>C. Check Consistency:</strong></p>
+  <ul><li>System is inconsistent → need least squares.</li></ul>
+
+  <p><strong>D. Compute Matrices:</strong></p>
+  <div class="formula-box">
+    $$A^T A = \begin{bmatrix} 6 & 2 \\ 2 & 3 \end{bmatrix}, \qquad A^T b = \begin{bmatrix} 6 \\ 5 \end{bmatrix}$$
+  </div>
+
+  <p><strong>E. Solve Normal Equation:</strong></p>
+  <p>$6\hat{\theta} + 2\hat{\theta}' = 6$, &nbsp; $2\hat{\theta} + 3\hat{\theta}' = 5$</p>
+  <p>Solution: $\hat{\theta} = 7/4$, $\hat{\theta}' = 7/9$</p>
+
+  <p><strong>F. Best-Fit Line:</strong> $y = \dfrac{7}{4}x + \dfrac{7}{9}$</p>
+
+  <h3>Verification</h3>
+  <div class="example-box">
+    <strong>Projection (Predicted values):</strong> For $x = \{-1, 1, 2\}$: $p = \{7/5,\ 7/13,\ 7/17\}$
+    <ul>
+      <li><strong>Error Vector:</strong> $e = (2/7, -6/7, 4/7)$</li>
+      <li><strong>Orthogonality Check:</strong> $e \cdot (-1,1,2) = 0$, &nbsp; $e \cdot (1,1,1) = 0$</li>
+    </ul>
+    Confirms: error is orthogonal to column space.
+  </div>
+
+  <div class="memory-trick">
+    <p class="mt-title">Quick Memory Tricks</p>
+    <ul>
+      <li>Fit line → minimize error.</li>
+      <li>Least squares = projection problem.</li>
+      <li>Solve using: $A^T A \hat{\theta} = A^T b$.</li>
+      <li>Error always orthogonal to column space.</li>
+    </ul>
+  </div>
+
+  <div class="summary-box">
+    <p class="summary-title">Ultra Short Summary — Data not on line → use least squares.</p>
+    <ul>
+      <li>Model: $y = \theta x + \theta'$.</li>
+      <li>Minimize: $\|b - A\theta\|^2$.</li>
+      <li>Solve: $A^T A \hat{\theta} = A^T b$.</li>
+      <li>Result = best-fit line.</li>
+      <li>Error ⊥ column space.</li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>

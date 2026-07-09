@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script> 
+<meta charset="UTF-8">
+<title>Week 4: Short Notes — MLF</title>
+<script>
+  MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] } };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1f2933;
+    --accent: #2b6cb0;
+    --accent-light: #ebf4ff;
+    --border: #d9e2ec;
+    --code-bg: #f4f6f8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0;
+    background: #f7f9fb;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    background: var(--bg);
+    padding: 40px 56px 80px;
+    box-shadow: 0 0 24px rgba(0,0,0,0.05);
+  }
+  h1.doc-title {
+    font-size: 2rem;
+    margin-bottom: 0.2em;
+    color: #102a43;
+  }
+  .subtitle {
+    color: #627d98;
+    margin-top: 0;
+    margin-bottom: 2em;
+    font-size: 1rem;
+  }
+  h2.lecture-title {
+    font-size: 1.5rem;
+    color: #fff;
+    background: var(--accent);
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin-top: 3em;
+    margin-bottom: 1em;
+  }
+  h3 {
+    font-size: 1.15rem;
+    color: #102a43;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 4px;
+    margin-top: 2em;
+  }
+  h4 {
+    font-size: 1rem;
+    color: var(--accent);
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+  }
+  ul {
+    padding-left: 1.3em;
+  }
+  li {
+    margin-bottom: 0.4em;
+  }
+  .formula-box {
+    background: var(--accent-light);
+    border-left: 4px solid var(--accent);
+    padding: 10px 16px;
+    margin: 1em 0;
+    border-radius: 4px;
+  }
+  .example-box {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 1em 0;
+  }
+  .example-box p.example-title {
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    color: #334e68;
+  }
+  .summary-box {
+    background: #fffaf0;
+    border: 1px solid #f6c453;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 1.5em 0;
+  }
+  .summary-box p.summary-title {
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: #975a16;
+  }
+  .memory-trick {
+    background: #f0fff4;
+    border: 1px solid #9ae6b4;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 1.5em 0;
+  }
+  .memory-trick p.mt-title {
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: #22543d;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 1em 0;
+    width: 100%;
+  }
+  table td, table th {
+    border: 1px solid var(--border);
+    padding: 8px 14px;
+    text-align: left;
+  }
+  table th {
+    background: var(--accent-light);
+    color: #102a43;
+  }
+  table tr:nth-child(even) {
+    background: #fbfcfd;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5em 0;
+  }
+  code {
+    background: var(--code-bg);
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 0.95em;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1 class="doc-title">Week 4: Short Notes</h1>
+  <p class="subtitle">MLF — Regression, Eigenvalues, Diagonalization &amp; Applications</p>
+
+  <!-- ================= LECTURE 1 ================= -->
+  <h2 class="lecture-title">Lecture 1: Linear And Polynomial Regression</h2>
+
+  <h3>Linear Regression (Core Idea)</h3>
+  <ul>
+    <li><strong>Concept:</strong> Fits a straight line (or hyperplane) to data by minimizing error.</li>
+    <li><strong>Given:</strong> Data: $(x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)$, where $x_i \in \mathbb{R}^d$, $y_i \in \mathbb{R}$</li>
+    <li><strong>Model:</strong> $y = x^T \theta$</li>
+    <li><strong>Loss Function (Sum of Squares):</strong>
+      <div class="formula-box">$$L(\theta) = \sum_{i=1}^{n} (x_i^T \theta - y_i)^2$$</div>
+    </li>
+    <li><strong>Matrix Form:</strong> Feature Matrix: $A$, Target Vector: $Y$
+      <div class="formula-box">$$L(\theta) = \frac{1}{2}(A\theta - Y)^T (A\theta - Y)$$</div>
+    </li>
+    <li><strong>Normal Equation (Solution):</strong> $\theta = (A^T A)^{-1} A^T Y$<br>
+      Works only if $A^T A$ is invertible (i.e., $A$ is full rank).</li>
+    <li><strong>Example:</strong> Points: $(1,2), (2,3) \to$ Best-fit line $\approx y = x + 1$</li>
+  </ul>
+
+  <h3>Link to Maximum Likelihood Estimation (MLE)</h3>
+  <ul>
+    <li><strong>Assumption:</strong> $y = x^T \theta + \epsilon$, with noise $\epsilon \sim N(0, 1/\beta)$</li>
+    <li><strong>Key Insight:</strong> Maximizing likelihood = minimizing squared error:
+      <div class="formula-box">$$\text{Log-Likelihood} \propto -\sum (y_i - x_i^T \theta)^2$$</div>
+    </li>
+    <li><strong>Interpretation:</strong> Linear regression = MLE under Gaussian noise.</li>
+  </ul>
+
+  <h3>Polynomial Regression</h3>
+  <ul>
+    <li><strong>Idea:</strong> Fit curved relationships by transforming features.</li>
+    <li><strong>Feature Transformation:</strong> $\phi(x) = [1, x, x^2, \ldots, x^m]^T$</li>
+    <li><strong>Model:</strong> $\hat{y} = \theta^T \phi(x)$ — still linear in parameters, solved like linear regression.</li>
+    <li><strong>Example:</strong> Data: $(1,1), (2,4), (3,9)$<br>
+      Linear model fails. Polynomial (degree 2): $y = x^2 \to$ perfect fit.</li>
+  </ul>
+
+  <h3>Ridge Regression (Regularization)</h3>
+  <ul>
+    <li><strong>Problem with Linear Regression:</strong> Overfitting, non-invertible $A^T A$.</li>
+    <li><strong>Solution:</strong> Add penalty term.
+      <div class="formula-box">$$\bar{L}(\theta) = \sum_{i=1}^{n} (x_i^T \theta - y_i)^2 + \lambda \|\theta\|^2$$</div>
+    </li>
+    <li><strong>Final Solution:</strong> $\theta = (A^T A + \lambda I)^{-1} A^T Y$</li>
+    <li><strong>Key Points:</strong>
+      <ul>
+        <li>$\lambda$ = regularization strength</li>
+        <li>Always invertible</li>
+        <li>Controls model complexity</li>
+      </ul>
+    </li>
+    <li><strong>Bias-Variance Tradeoff:</strong>
+      <ul>
+        <li>Small $\lambda \to$ overfitting</li>
+        <li>Large $\lambda \to$ underfitting</li>
+      </ul>
+    </li>
+    <li><strong>Example:</strong> High-degree polynomial fits training data perfectly but fails on test data. Ridge regression smooths the curve.</li>
+  </ul>
+
+  <h3>Quick Summary (Table)</h3>
+  <table>
+    <tr><th>Method</th><th>Key Idea</th><th>Formula</th></tr>
+    <tr><td>Linear Regression</td><td>Fit line</td><td>$(A^T A)^{-1} A^T Y$</td></tr>
+    <tr><td>MLE</td><td>Probabilistic view</td><td>Minimize squared error</td></tr>
+    <tr><td>Polynomial</td><td>Non-linear fit</td><td>Use transformed features</td></tr>
+    <tr><td>Ridge Regression</td><td>Prevent overfitting</td><td>$(A^T A + \lambda I)^{-1} A^T Y$</td></tr>
+  </table>
+
+  <div class="summary-box">
+    <p class="summary-title">Final Intuition</p>
+    <ul>
+      <li><strong>Linear</strong> → Straight line</li>
+      <li><strong>Polynomial</strong> → Curves</li>
+      <li><strong>Ridge</strong> → Controls overfitting</li>
+      <li><strong>MLE</strong> → Statistical meaning</li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <!-- ================= LECTURE 2 ================= -->
+  <h2 class="lecture-title">Lecture 2: Eigenvalues And Eigenvectors</h2>
+
+  <h3>Core Concept</h3>
+  <ul>
+    <li><strong>Definition:</strong> A scalar $\lambda$ and vector $x \neq 0$ satisfy: $Ax = \lambda x$<br>
+      $\lambda \to$ Eigenvalue &amp; $x \to$ Eigenvector</li>
+    <li><strong>Geometric Meaning:</strong> Matrix $A$ scales eigenvectors. Direction remains unchanged; only magnitude changes.</li>
+  </ul>
+
+  <h3>Characteristic Equation</h3>
+  <p>To find eigenvalues: $\det(A - \lambda I) = 0$<br>
+  This gives a polynomial of degree $n$. Roots = eigenvalues.</p>
+
+  <h3>Important Properties</h3>
+  <ul>
+    <li><strong>Trace &amp; Determinant:</strong> $\lambda_1 + \lambda_2 + \cdots + \lambda_n = \text{Trace}(A)$, &nbsp; $\lambda_1 \cdot \lambda_2 \cdots \lambda_n = \det(A)$</li>
+    <li><strong>Special Cases:</strong>
+      <ul>
+        <li>$\lambda = 0 \to$ eigenvector lies in null space</li>
+        <li>Real symmetric matrix → eigenvalues are always real</li>
+        <li>Diagonalizable matrix → has $n$ independent eigenvectors</li>
+      </ul>
+    </li>
+  </ul>
+
+  <p><strong>Finding Eigenvectors:</strong> Solve $(A - \lambda I)x = 0$, typically using Gaussian elimination.</p>
+
+  <h3>Connection to ODEs</h3>
+  <ul>
+    <li><strong>Scalar ODE:</strong> $u(t) = e^{at} u(0)$</li>
+    <li><strong>Vector ODE:</strong> $u(t) = e^{-\lambda t} x$</li>
+    <li><strong>Stability:</strong>
+      <ul>
+        <li>$a > 0 \to$ Unstable (grows exponentially)</li>
+        <li>$a < 0 \to$ Stable (decays)</li>
+        <li>$a = 0 \to$ Neutral stability</li>
+      </ul>
+    </li>
+  </ul>
+
+  <div class="memory-trick">
+    <p class="mt-title">Key Intuition</p>
+    <ul>
+      <li>Eigenvalues → scaling factor</li>
+      <li>Eigenvectors → direction unchanged</li>
+    </ul>
+  </div>
+
+  <h3>Examples</h3>
+  <div class="example-box">
+    <p class="example-title">1. Projection Matrix</p>
+    <ul>
+      <li>Vector in plane → $\lambda = 1$</li>
+      <li>Vector orthogonal to plane → $\lambda = 0$</li>
+    </ul>
+  </div>
+  <div class="example-box">
+    <p class="example-title">2. Permutation Matrix</p>
+    $A = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}$
+    <ul>
+      <li>$\lambda = 1$, eigenvector $[1,1]^T$</li>
+      <li>$\lambda = -1$, eigenvector $[1,-1]^T$</li>
+    </ul>
+  </div>
+  <div class="example-box">
+    <p class="example-title">3. Matrix Calculation Example</p>
+    $A = \begin{bmatrix} 3 & 1 \\ 1 & 3 \end{bmatrix}$
+    <ul>
+      <li>Characteristic equation: $\lambda^2 - 6\lambda + 8 = 0$</li>
+      <li>Eigenvalues: $\lambda_1 = 4$, $\lambda_2 = 2$</li>
+      <li>Eigenvectors:
+        <ul>
+          <li>For $\lambda = 4$: $[1,1]^T$</li>
+          <li>For $\lambda = 2$: $[1,-1]^T$</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="example-box">
+    <p class="example-title">4. Imaginary Eigenvalues</p>
+    $A = \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix}$<br>
+    Eigenvalues: $i, -i$ → shows non-symmetric matrices can have complex eigenvalues.
+  </div>
+  <div class="example-box">
+    <p class="example-title">5. Non-Diagonalizable Matrix</p>
+    $A = \begin{bmatrix} 3 & 1 \\ 0 & 3 \end{bmatrix}$<br>
+    Eigenvalues: $\lambda_1 = \lambda_2 = 3$. Only one eigenvector → not diagonalizable.
+  </div>
+
+  <h3>Quick Summary Table</h3>
+  <table>
+    <tr><th>Concept</th><th>Key Idea</th></tr>
+    <tr><td>Eigenvalue</td><td>Scaling factor</td></tr>
+    <tr><td>Eigenvector</td><td>Direction unchanged</td></tr>
+    <tr><td>Characteristic Eqn</td><td>$\det(A - \lambda I) = 0$</td></tr>
+    <tr><td>Trace</td><td>Sum of eigenvalues</td></tr>
+    <tr><td>Determinant</td><td>Product of eigenvalues</td></tr>
+    <tr><td>Diagonalizable</td><td>$n$ independent eigenvectors</td></tr>
+  </table>
+
+  <div class="summary-box">
+    <p class="summary-title">Final Intuition</p>
+    <ul>
+      <li>Eigenvectors = special directions</li>
+      <li>Eigenvalues = system behavior in those directions</li>
+      <li>Applications: differential equations, machine learning, physics systems</li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <!-- ================= LECTURE 3 ================= -->
+  <h2 class="lecture-title">Lecture 3: Diagonalization of a Matrix</h2>
+
+  <h3>Core Concept</h3>
+  <p><strong>Definition:</strong> A matrix $A$ is diagonalizable if it can be written as: $S^{-1} A S = \Lambda$<br>
+  $S \to$ matrix of eigenvectors &amp; $\Lambda \to$ diagonal matrix of eigenvalues</p>
+  <p><strong>Key Idea:</strong> Diagonalization converts a complex matrix into a simple diagonal form, making computations (like powers) much easier.</p>
+
+  <h3>When is a Matrix Diagonalizable?</h3>
+  <ul>
+    <li><strong>Main Condition:</strong> Must have $n$ linearly independent eigenvectors.</li>
+    <li><strong>Special Case:</strong> If all eigenvalues are distinct → automatically diagonalizable.</li>
+    <li><strong>Not Diagonalizable:</strong> If eigenvectors are not enough (dependent).</li>
+  </ul>
+
+  <h3>Matrix Construction</h3>
+  <ul>
+    <li><strong>Matrix $S$ (Eigenvector Matrix):</strong> $S = [x_1\ x_2\ \cdots\ x_n]$ — columns = eigenvectors.</li>
+    <li><strong>Matrix $\Lambda$ (Diagonal Matrix):</strong>
+      <div class="formula-box">$$\Lambda = \begin{bmatrix} \lambda_1 & 0 & \cdots & 0 \\ 0 & \lambda_2 & \cdots & 0 \\ \vdots & & \ddots & \vdots \\ 0 & 0 & \cdots & \lambda_n \end{bmatrix}$$</div>
+      Diagonal entries = eigenvalues (same order as eigenvectors).
+    </li>
+  </ul>
+
+  <h3>Powers of a Matrix</h3>
+  <p>If $A$ is diagonalizable: $A^k = S \Lambda^k S^{-1}$ — very useful for computing large powers.</p>
+
+  <h3>Key Theorems</h3>
+  <ul>
+    <li><strong>Spectral Theorem:</strong> Every real symmetric matrix is diagonalizable.</li>
+    <li><strong>Invertibility of $S$:</strong> Since eigenvectors are independent, $S$ is invertible.</li>
+  </ul>
+
+  <div class="example-box">
+    <p class="example-title">Example (Diagonalization)</p>
+    Given eigenvalues and eigenvectors:
+    <ul>
+      <li>$\lambda_1 = 5$, $x_1 = [1,1]^T$</li>
+      <li>$\lambda_2 = -1$, $x_2 = [-2,1]^T$</li>
+    </ul>
+    <strong>Step 1: Form $S$</strong>
+    $$S = \begin{bmatrix} 1 & -2 \\ 1 & 1 \end{bmatrix}$$
+    <strong>Step 2: Form $\Lambda$</strong>
+    $$\Lambda = \begin{bmatrix} 5 & 0 \\ 0 & -1 \end{bmatrix}$$
+    <strong>Step 3: Check</strong> $S^{-1} A S = \Lambda$ — confirms diagonalization.
+  </div>
+
+  <div class="example-box">
+    <p class="example-title">Non-Diagonalizable Case</p>
+    <strong>When:</strong> Not enough independent eigenvectors.<br>
+    <strong>Example:</strong>
+    $$A = \begin{bmatrix} 3 & 0 \\ 1 & 3 \end{bmatrix}$$
+    Eigenvalues: $3, 3$. Only one eigenvector → not diagonalizable.
+  </div>
+
+  <h3>Quick Summary Table</h3>
+  <table>
+    <tr><th>Concept</th><th>Key Idea</th></tr>
+    <tr><td>Diagonalization</td><td>Convert matrix into diagonal form</td></tr>
+    <tr><td>Condition</td><td>$n$ independent eigenvectors</td></tr>
+    <tr><td>Matrix $S$</td><td>Eigenvectors as columns</td></tr>
+    <tr><td>Matrix $\Lambda$</td><td>Eigenvalues on diagonal</td></tr>
+    <tr><td>Special Case</td><td>Distinct eigenvalues → diagonalizable</td></tr>
+    <tr><td>Spectral Theorem</td><td>Symmetric matrix always diagonalizable</td></tr>
+  </table>
+
+  <div class="summary-box">
+    <p class="summary-title">Final Intuition</p>
+    <p>Diagonalization simplifies a matrix, turning complex operations into easy scalar operations.</p>
+    <p>It is crucial for:</p>
+    <ul>
+      <li>Matrix powers</li>
+      <li>Differential equations</li>
+      <li>Machine learning</li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <!-- ================= LECTURE 4 ================= -->
+  <h2 class="lecture-title">Lecture 4: Solving Fibonacci Sequence Using Diagonalization</h2>
+
+  <h3>Core Concept</h3>
+  <ul>
+    <li><strong>Definition:</strong> A sequence where each term depends on previous ones.<br>
+      Example (Fibonacci): $F_{k+2} = F_{k+1} + F_k$</li>
+    <li><strong>Why Use Linear Algebra:</strong>
+      <ul>
+        <li>Avoids slow brute-force computation.</li>
+        <li>Provides exact formula and fast computation.</li>
+        <li>Works only for linear recurrences.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>Matrix Representation</h3>
+  <p>We convert the recurrence into matrix form:</p>
+  <ul>
+    <li><strong>System Form:</strong> $u_{k+1} = A u_k$</li>
+    <li><strong>Define:</strong>
+      <div class="formula-box">
+        State vector: $$u_k = \begin{bmatrix} F_{k+1} \\ F_k \end{bmatrix}$$
+        Matrix: $$A = \begin{bmatrix} 1 & 1 \\ 1 & 0 \end{bmatrix}$$
+        Initial vector: $$u_0 = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$$
+      </div>
+    </li>
+    <li><strong>General Solution:</strong> $u_k = A^k u_0$</li>
+  </ul>
+
+  <h3>Eigenvalues</h3>
+  <p>Characteristic equation: $\lambda^2 - \lambda - 1 = 0$</p>
+  <div class="formula-box">
+    $$\lambda_1 = \frac{1+\sqrt{5}}{2} \approx 1.618 \quad (\text{Golden Ratio})$$
+    $$\lambda_2 = \frac{1-\sqrt{5}}{2}$$
+  </div>
+
+  <h3>Eigenvectors</h3>
+  <ul>
+    <li>For $\lambda_1$: $x_1 = \begin{bmatrix} \lambda_1 \\ 1 \end{bmatrix}$</li>
+    <li>For $\lambda_2$: $x_2 = \begin{bmatrix} \lambda_2 \\ 1 \end{bmatrix}$</li>
+  </ul>
+
+  <h3>Express Initial Vector</h3>
+  <p>$u_0 = c_1 x_1 + c_2 x_2$, where $c_1 = \dfrac{1}{\sqrt{5}}$, $c_2 = -\dfrac{1}{\sqrt{5}}$</p>
+
+  <h3>Final Closed Form (Binet's Formula)</h3>
+  <div class="formula-box">
+    $$F_k = \frac{1}{\sqrt{5}} \left( \left(\frac{1+\sqrt{5}}{2}\right)^k - \left(\frac{1-\sqrt{5}}{2}\right)^k \right)$$
+  </div>
+
+  <h3>Key Insight (Approximation)</h3>
+  <p>Since $|\lambda_2| < 1$, it becomes negligible for large $k$. Thus:</p>
+  <div class="formula-box">$$F_k \approx \frac{1}{\sqrt{5}} (1.618)^k$$</div>
+
+  <h3>Examples</h3>
+  <div class="example-box">
+    <strong>Find $F_{10}$:</strong> $F_{10} \approx \frac{1}{\sqrt{5}} (1.618)^{10} \approx 55$ — matches actual Fibonacci value.
+  </div>
+  <div class="example-box">
+    <strong>Large Term Example:</strong> $F_{100} \approx \frac{1}{\sqrt{5}} (1.618)^{100}$ — no need to compute 100 steps manually.
+  </div>
+
+  <h3>Why This Method is Powerful</h3>
+  <table>
+    <tr><th>Method</th><th>Complexity</th></tr>
+    <tr><td>Brute Force</td><td>Slow</td></tr>
+    <tr><td>Matrix Power</td><td>Faster</td></tr>
+    <tr><td>Diagonalization</td><td>Fastest + exact</td></tr>
+  </table>
+
+  <div class="memory-trick">
+    <p class="mt-title">Final Intuition</p>
+    <ul>
+      <li>Convert recurrence → matrix.</li>
+      <li>Diagonalize matrix.</li>
+      <li>Raise eigenvalues to power.</li>
+    </ul>
+    <p>This turns repeated addition into simple exponentiation.</p>
+  </div>
+
+  <h3>Quick Summary Table</h3>
+  <table>
+    <tr><th>Concept</th><th>Key Idea</th></tr>
+    <tr><td>Recurrence</td><td>Depends on previous terms</td></tr>
+    <tr><td>Matrix Form</td><td>$u_{k+1} = A u_k$</td></tr>
+    <tr><td>Eigenvalues</td><td>Control growth rate</td></tr>
+    <tr><td>Closed Form</td><td>Exact Fibonacci formula</td></tr>
+    <tr><td>Approximation</td><td>Dominated by golden ratio</td></tr>
+  </table>
+
+  <div class="summary-box">
+    <p class="summary-title">Final Takeaway</p>
+    <p>Fibonacci growth is exponential ($\approx 1.618^k$).<br>
+    Linear algebra provides exact and efficient solutions.<br>
+    This is a powerful tool for sequences, dynamic programming, and algorithms.</p>
+  </div>
+
+  <hr>
+
+  <!-- ================= LECTURE 5 ================= -->
+  <h2 class="lecture-title">Lecture 5: Orthogonally Diagonalizable Matrices</h2>
+
+  <h3>Core Concept</h3>
+  <ul>
+    <li><strong>Spectral Theorem (Real Case):</strong> Every real symmetric matrix $A = A^T$ can be diagonalized using an orthogonal matrix.</li>
+    <li><strong>Orthogonal Diagonalization:</strong> $A = Q \Lambda Q^T$
+      <ul>
+        <li>$Q \to$ orthogonal matrix (columns = orthonormal eigenvectors)</li>
+        <li>$\Lambda \to$ diagonal matrix (eigenvalues)</li>
+      </ul>
+    </li>
+    <li><strong>Key Idea:</strong> Instead of just diagonalizing, we use orthonormal eigenvectors. This makes computations more stable and meaningful.</li>
+  </ul>
+
+  <h3>Real Symmetric Matrix</h3>
+  <p><strong>Definition:</strong> $A = A^T$, i.e., the matrix equals its transpose.</p>
+
+  <h3>Important Properties</h3>
+  <ul>
+    <li><strong>Real Eigenvalues:</strong> All eigenvalues are real.</li>
+    <li><strong>Orthogonality:</strong> Eigenvectors corresponding to different eigenvalues are orthogonal.</li>
+    <li><strong>Diagonalizability:</strong> Always diagonalizable (no exceptions for symmetric matrices).</li>
+  </ul>
+
+  <h3>Orthogonal Matrix $Q$</h3>
+  <p><strong>Definition:</strong> Matrix with orthonormal columns. $Q^T Q = I$ and $Q^{-1} = Q^T$ — transpose = inverse.</p>
+
+  <h3>Normalization of Eigenvectors</h3>
+  <p>To build $Q$, convert eigenvectors into unit vectors: $q = x / \|x\|$</p>
+
+  <h3>Generalization</h3>
+  <p><strong>Hermitian Matrix (Complex Case):</strong> Complex equivalent of symmetric matrix. Also always diagonalizable.</p>
+
+  <div class="example-box">
+    <p class="example-title">Non-Diagonalizable Example</p>
+    $$A = \begin{bmatrix} 1 & 0 \\ 1 & 1 \end{bmatrix}$$
+    This real matrix is not diagonalizable (not enough independent eigenvectors).
+  </div>
+
+  <div class="example-box">
+    <p class="example-title">Example: Orthogonal Diagonalization</p>
+    Given: $$A = \begin{bmatrix} 1 & -2 \\ -2 & -2 \end{bmatrix}$$
+    <p><strong>Step 1: Eigenvalues</strong></p>
+    <ul><li>$\lambda_1 = -3$, $\lambda_2 = 2$</li></ul>
+    <p><strong>Step 2: Eigenvectors</strong></p>
+    <p>$x_1 = [1,2]^T$, &nbsp; $x_2 = [-2,1]^T$</p>
+    <p><strong>Step 3: Normalize</strong></p>
+    <p>
+      $\|x_1\| = \sqrt{1^2+2^2} = \sqrt{5}$<br>
+      $\|x_2\| = \sqrt{(-2)^2+1^2} = \sqrt{5}$<br>
+      Unit vectors: $q_1 = \frac{1}{\sqrt{5}}[1,2]^T$, &nbsp; $q_2 = \frac{1}{\sqrt{5}}[-2,1]^T$
+    </p>
+    <p><strong>Step 4: Construct $Q$</strong></p>
+    $$Q = \begin{bmatrix} \frac{1}{\sqrt{5}} & \frac{-2}{\sqrt{5}} \\ \frac{2}{\sqrt{5}} & \frac{1}{\sqrt{5}} \end{bmatrix}$$
+    <p><strong>Step 5: Construct $\Lambda$</strong></p>
+    $$\Lambda = \begin{bmatrix} -3 & 0 \\ 0 & 2 \end{bmatrix}$$
+    <p><strong>Step 6: Final Check</strong> $A = Q \Lambda Q^T$ — verified.</p>
+    <p><strong>Step 7: Sanity Check</strong> $Q^T Q = I$ — confirms orthogonality.</p>
+  </div>
+
+  <h3>Quick Summary Table</h3>
+  <table>
+    <tr><th>Concept</th><th>Key Idea</th></tr>
+    <tr><td>Spectral Theorem</td><td>Symmetric $\Rightarrow$ orthogonally diagonalizable</td></tr>
+    <tr><td>Eigenvalues</td><td>Always real</td></tr>
+    <tr><td>Eigenvectors</td><td>Orthogonal</td></tr>
+    <tr><td>Matrix Form</td><td>$A = Q \Lambda Q^T$</td></tr>
+    <tr><td>Orthogonal Matrix</td><td>$Q^{-1} = Q^T$</td></tr>
+  </table>
+
+  <div class="summary-box">
+    <p class="summary-title">Final Intuition</p>
+    <ul>
+      <li>Symmetric matrices behave predictably.</li>
+      <li>Eigenvectors form perpendicular directions.</li>
+      <li>Diagonalization becomes clean and stable.</li>
+    </ul>
+    <p><strong>Applications:</strong></p>
+    <ul>
+      <li>Machine Learning (PCA)</li>
+      <li>Physics</li>
+      <li>Data Analysis</li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>
