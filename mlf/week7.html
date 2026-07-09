@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>Week 7: Short Notes — MLF</title>
+<script>
+  MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] } };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1f2933;
+    --accent: #2b6cb0;
+    --accent-light: #ebf4ff;
+    --border: #d9e2ec;
+    --code-bg: #f4f6f8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0;
+    background: #f7f9fb;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    background: var(--bg);
+    padding: 40px 56px 80px;
+    box-shadow: 0 0 24px rgba(0,0,0,0.05);
+  }
+  h1.doc-title {
+    font-size: 2rem;
+    margin-bottom: 0.2em;
+    color: #102a43;
+  }
+  .subtitle {
+    color: #627d98;
+    margin-top: 0;
+    margin-bottom: 2em;
+    font-size: 1rem;
+  }
+  h2.lecture-title {
+    font-size: 1.5rem;
+    color: #fff;
+    background: var(--accent);
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin-top: 3em;
+    margin-bottom: 1em;
+  }
+  h3 {
+    font-size: 1.15rem;
+    color: #102a43;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 4px;
+    margin-top: 2em;
+  }
+  h4 {
+    font-size: 1rem;
+    color: var(--accent);
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+  }
+  ul {
+    padding-left: 1.3em;
+  }
+  li {
+    margin-bottom: 0.4em;
+  }
+  .formula-box {
+    background: var(--accent-light);
+    border-left: 4px solid var(--accent);
+    padding: 10px 16px;
+    margin: 1em 0;
+    border-radius: 4px;
+  }
+  .example-box {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 1em 0;
+  }
+  .example-box p.example-title {
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    color: #334e68;
+  }
+  .summary-box {
+    background: #fffaf0;
+    border: 1px solid #f6c453;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 1.5em 0;
+  }
+  .summary-box p.summary-title {
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: #975a16;
+  }
+  .memory-trick {
+    background: #f0fff4;
+    border: 1px solid #9ae6b4;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 1.5em 0;
+  }
+  .memory-trick p.mt-title {
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: #22543d;
+  }
+  .step-box {
+    background: #f5f3ff;
+    border: 1px solid #d6bcfa;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 1em 0;
+  }
+  .step-box p.step-title {
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: #553c9a;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 1em 0;
+    width: 100%;
+  }
+  table td, table th {
+    border: 1px solid var(--border);
+    padding: 8px 14px;
+    text-align: left;
+  }
+  table th {
+    background: var(--accent-light);
+    color: #102a43;
+  }
+  table tr:nth-child(even) {
+    background: #fbfcfd;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5em 0;
+  }
+  code {
+    background: var(--code-bg);
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 0.95em;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1 class="doc-title">Week 7: Short Notes</h1>
+  <p class="subtitle">MLF — Principal Component Analysis (PCA)</p>
+
+  <!-- ================= LECTURE 1 ================= -->
+  <h2 class="lecture-title">Lecture 1: Principal Component Analysis</h2>
+
+  <h3>What is PCA?</h3>
+  <ul>
+    <li>PCA (Principal Component Analysis) is a:
+      <ul>
+        <li>Dimensionality reduction technique.</li>
+        <li>Feature selection/extraction method.</li>
+      </ul>
+    </li>
+    <li>Converts high-dimensional data into lower-dimensional data while preserving important information.</li>
+  </ul>
+
+  <h3>Core Objective</h3>
+  <ul>
+    <li>Reduce dimensions ($d \to m$, where $m < d$).</li>
+    <li>While: keeping maximum information &amp; reducing redundancy and noise.</li>
+  </ul>
+
+  <h3>Two Equivalent Viewpoints</h3>
+  <div class="example-box">
+    <p class="example-title">(A) Minimize Reconstruction Error</p>
+    <ul>
+      <li>Project data so that projected data $\approx$ original data.</li>
+      <li>Goal: minimum information loss.</li>
+    </ul>
+  </div>
+  <div class="example-box">
+    <p class="example-title">(B) Maximize Variance</p>
+    <ul>
+      <li>Choose directions where data spreads the most.</li>
+      <li>Goal: maximum variance retained.</li>
+    </ul>
+  </div>
+
+  <h3>Problem Setup</h3>
+  <ul>
+    <li>Dataset: $D = \{x_1, x_2, \ldots, x_n\}$, $x_i \in \mathbb{R}^d$</li>
+    <li>Input: $m$ = target dimension, $m < d$.</li>
+    <li>Goal: Find best $m$-dimensional subspace.</li>
+  </ul>
+
+  <h3>Basis Representation</h3>
+  <ul>
+    <li>Choose orthonormal basis: $B = \{u_1, u_2, \ldots, u_m\}$</li>
+    <li>Extend to full basis: $B' = \{u_1, \ldots, u_m, u_{m+1}, \ldots, u_d\}$</li>
+  </ul>
+
+  <h3>Representation of Data</h3>
+  <p>Each data point:</p>
+  <div class="formula-box">$$x_i = \sum_{j=1}^{d} (x_i^T u_j) u_j$$</div>
+  <p>Coefficient: $x_i^T u_j$ = projection of $x_i$ on $u_j$</p>
+
+  <h3>Projection (Approximation)</h3>
+  <p>Projected vector:</p>
+  <div class="formula-box">$$\tilde{x}_i = \sum_{j=1}^{m} z_{ij} u_j + \sum_{j=m+1}^{d} \beta_j u_j$$</div>
+  <p>Optimal values: $z_{ij} = x_i^T u_j$, &nbsp; $\beta_j = \bar{x}^T u_j$</p>
+
+  <h3>Data Centering</h3>
+  <p>Mean of data:</p>
+  <div class="formula-box">$$\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i$$</div>
+  <p>If centered ($\bar{x} = 0$):</p>
+  <ul>
+    <li>Simplifies calculations.</li>
+    <li>Second term disappears.</li>
+  </ul>
+
+  <h3>Covariance Matrix</h3>
+  <div class="formula-box">$$C = \frac{1}{n} \sum_{i=1}^{n} (x_i - \bar{x})(x_i - \bar{x})^T$$</div>
+  <p><strong>Meaning:</strong></p>
+  <ul>
+    <li>Measures spread and relationships between features.</li>
+    <li>Core matrix used in PCA.</li>
+  </ul>
+
+  <h3>Optimization Goal</h3>
+  <p>Minimize reconstruction error: $J$ = Average Squared Error</p>
+  <p>Optimal error:</p>
+  <div class="formula-box">$$J^* = \sum_{j=m+1}^{d} u_j^T C u_j$$</div>
+
+  <h3>Geometric Intuition</h3>
+  <ul>
+    <li>Data is projected onto a line/plane.</li>
+    <li>Best direction = maximum spread.</li>
+    <li>First principal component = direction of maximum variance.</li>
+  </ul>
+
+  <div class="memory-trick">
+    <p class="mt-title">Key Insight</p>
+    <p>PCA finds:</p>
+    <ul>
+      <li>Best $m$ directions ($u_1, u_2, \ldots, u_m$).</li>
+      <li>That maximize variance and minimize reconstruction error.</li>
+    </ul>
+  </div>
+
+  <div class="example-box">
+    <p class="example-title">Example (Simple Intuition)</p>
+    <ul>
+      <li>Suppose data has 2 features: Height &amp; Weight.</li>
+      <li>Observations: highly correlated.</li>
+      <li>PCA converts them into:
+        <ul>
+          <li>PC1: main direction of variation.</li>
+          <li>PC2: less important direction.</li>
+        </ul>
+      </li>
+      <li>We can drop PC2 → reduce dimension from 2 → 1.</li>
+    </ul>
+  </div>
+
+  <div class="summary-box">
+    <p class="summary-title">Final Conclusion</p>
+    <ul>
+      <li>PCA = Projection + Optimization.</li>
+      <li>Converts data into new axes (principal components).</li>
+      <li>Keeps: maximum variance, minimum information loss.</li>
+    </ul>
+  </div>
+
+  <div class="summary-box">
+    <p class="summary-title">Quick Revision Summary</p>
+    <ul>
+      <li>PCA reduces dimension ($d \to m$).</li>
+      <li>Two views: minimize error / maximize variance.</li>
+      <li>Key matrix: covariance matrix $C$.</li>
+      <li>Output: new basis vectors (principal components).</li>
+      <li>Works best on centered data.</li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <!-- ================= LECTURE 2 ================= -->
+  <h2 class="lecture-title">Lecture 2: Principal Component Analysis (Contd.)</h2>
+
+  <h3>Core Objective of PCA</h3>
+  <ul>
+    <li><strong>Goal:</strong> Find the best low-dimensional subspace ($m < d$) such that reconstruction error is minimized.</li>
+    <li>PCA reduces dimensions by selecting important eigenvalues and eigenvectors.</li>
+  </ul>
+
+  <h3>PCA as an Optimization Problem</h3>
+  <ul>
+    <li><strong>Problem type:</strong> Constrained Optimization.</li>
+    <li>We want unit vectors ($\|u\| = 1$) that minimize reconstruction error.</li>
+  </ul>
+  <div class="formula-box">
+    <strong>Lagrangian Formulation:</strong> $L(u, \lambda) = u^T C u - \lambda(u^T u - 1)$<br>
+    After solving: $Cu = \lambda u$<br>
+    This is the <strong>Eigenvalue Equation:</strong> $u \to$ eigenvector, $\lambda \to$ eigenvalue
+  </div>
+
+  <h3>Properties of Covariance Matrix ($C$)</h3>
+  <ul>
+    <li>Size: $d \times d$.</li>
+    <li>Type: Real and symmetric.</li>
+  </ul>
+  <p><strong>Important Properties:</strong></p>
+  <ul>
+    <li>All eigenvalues are real.</li>
+    <li>Eigenvectors are orthonormal.</li>
+    <li>Eigenvalues can be ordered: $\lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_d$</li>
+  </ul>
+
+  <h3>Minimizing Reconstruction Error</h3>
+  <p>Error expression:</p>
+  <div class="formula-box">$$J^* = \sum_{j=m+1}^{d} u_j^T C u_j$$</div>
+  <p><strong>Key Idea:</strong></p>
+  <ul>
+    <li>Small eigenvalues → less important directions.</li>
+    <li>Large eigenvalues → important directions.</li>
+  </ul>
+  <p><strong>Selection Rule:</strong></p>
+  <ul>
+    <li>Keep: Top $m$ eigenvectors (largest eigenvalues).</li>
+    <li>Discard: Remaining (small eigenvalues).</li>
+  </ul>
+  <p>This minimizes error.</p>
+
+  <h3>PCA Algorithm (Step-by-Step)</h3>
+  <div class="step-box">
+    <p class="step-title">Steps</p>
+    <strong>Step 1: Compute Mean</strong>
+    $$\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i$$
+    <strong>Step 2: Compute Covariance Matrix</strong>
+    $$C = \frac{1}{n} \sum_{i=1}^{n} (x_i - \bar{x})(x_i - \bar{x})^T$$
+    <strong>Step 3: Eigen Decomposition</strong> — find eigenvalues ($\lambda$) and eigenvectors ($u$).<br><br>
+    <strong>Step 4: Select Top $m$ Components</strong> — choose eigenvectors with largest eigenvalues.<br><br>
+    <strong>Step 5: Project Data</strong> — $\tilde{x}_i = $ Projection onto selected eigenvectors
+  </div>
+
+  <h3>Geometric Intuition</h3>
+  <ul>
+    <li>Data is rotated to new axes.</li>
+    <li>First axis = maximum variance direction.</li>
+    <li>Projection reduces dimension.</li>
+  </ul>
+
+  <div class="example-box">
+    <p class="example-title">Example Insight</p>
+    <ul>
+      <li>Case: Data lies on a line in 2D space.</li>
+      <li>PCA finds that exact line.</li>
+      <li>Reconstruction error = 0.</li>
+      <li>Best 1D subspace: eigenvector with largest eigenvalue.</li>
+    </ul>
+  </div>
+
+  <h3>Alternative Viewpoint</h3>
+  <ul>
+    <li>PCA can also be seen as <strong>Maximizing Variance</strong>.</li>
+    <li>Choose directions where variance is maximum.</li>
+    <li>Equivalent to minimizing reconstruction error.</li>
+  </ul>
+
+  <div class="summary-box">
+    <p class="summary-title">Quick Revision Summary</p>
+    <ul>
+      <li>PCA = Eigenvalue problem.</li>
+      <li>Solve: $Cu = \lambda u$</li>
+      <li>Keep: Top $m$ eigenvectors (largest $\lambda$).</li>
+      <li>Steps: Mean → Covariance → Eigen decomposition → Projection</li>
+      <li>Two views: Minimize error / Maximize variance.</li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <!-- ================= LECTURE 3 ================= -->
+  <h2 class="lecture-title">Lecture 3: PCA As Maximizing Variance</h2>
+
+  <h3>Core Perspective</h3>
+  <ul>
+    <li>PCA can be understood as:
+      <ul>
+        <li>Maximizing variance of projected data.</li>
+        <li>Equivalent to minimizing reconstruction error.</li>
+      </ul>
+    </li>
+    <li><strong>Idea:</strong> Project data onto a direction where it is most spread out.</li>
+  </ul>
+
+  <h3>Data Setup</h3>
+  <p>Dataset: $D = \{x_1, x_2, \ldots, x_n\}$, $x_i \in \mathbb{R}^d$</p>
+  <p>Mean: $$\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i$$</p>
+
+  <h3>Projection of Data</h3>
+  <p>Project point $x_i$ onto direction $u$: $\text{Projection} = (x_i^T u)u$</p>
+  <ul>
+    <li>$u$ is a unit vector.</li>
+    <li>Gives direction of projection.</li>
+  </ul>
+
+  <h3>Variance Objective</h3>
+  <p>We maximize:</p>
+  <div class="formula-box">$$\frac{1}{n} \sum_{i=1}^{n} (x_i^T u - \bar{x}^T u)^2$$</div>
+  <p><strong>Meaning:</strong></p>
+  <ul>
+    <li>Measures spread of projected points.</li>
+    <li>Higher variance → better information retention.</li>
+  </ul>
+
+  <h3>Covariance Matrix</h3>
+  <p>Formula: $$C = \frac{1}{n} \sum_{i=1}^{n} (x_i - \bar{x})(x_i - \bar{x})^T$$</p>
+  <p>Then variance becomes: $u^T C u$</p>
+
+  <h3>Optimization Problem</h3>
+  <div class="formula-box">
+    Maximize: $u^T C u$<br>
+    Subject to: $u^T u = 1$
+  </div>
+
+  <h3>Solution (Eigenvalue Problem)</h3>
+  <p>Using Lagrangian: $Cu = \lambda u$</p>
+  <p><strong>Key Results:</strong> $u$ = eigenvector of $C$. &nbsp; $\lambda$ = eigenvalue.</p>
+
+  <div class="memory-trick">
+    <p class="mt-title">Final Insight</p>
+    <ul>
+      <li>Maximum variance = largest eigenvalue.</li>
+      <li>Best direction = eigenvector of largest eigenvalue.</li>
+    </ul>
+  </div>
+
+  <h3>Extension to $m$ Dimensions</h3>
+  <p>Instead of one direction:</p>
+  <ul>
+    <li>Choose top $m$ eigenvalues and their corresponding eigenvectors.</li>
+  </ul>
+  <p><strong>Terminology:</strong></p>
+  <ul>
+    <li>Principal Directions → eigenvectors.</li>
+    <li>Principal Components → projected values.</li>
+  </ul>
+
+  <h3>Geometric Intuition</h3>
+  <ul>
+    <li>Rotate axes to align with data spread.</li>
+    <li>First axis = maximum variance.</li>
+    <li>Second axis = next highest variance.</li>
+  </ul>
+
+  <div class="example-box">
+    <p class="example-title">Example</p>
+    Data points: $(-1,-1), (0,0), (1,1)$.
+    <p><strong>Results:</strong></p>
+    <ul>
+      <li>Eigenvalues: $\lambda_1 = 4/3$, $\lambda_2 = 0$.</li>
+      <li>Interpretation: Data lies on a line → one direction has all variance.</li>
+      <li>Principal direction: $u_1 = \frac{1}{\sqrt{2}}(1,1)^T$</li>
+      <li>Maximum variance: $= 4/3$</li>
+    </ul>
+  </div>
+
+  <div class="summary-box">
+    <p class="summary-title">Final Conclusion</p>
+    <p>PCA:</p>
+    <ol>
+      <li>Maximizes variance.</li>
+      <li>Minimizes information loss.</li>
+    </ol>
+    <p>Steps:</p>
+    <ol>
+      <li>Compute mean.</li>
+      <li>Compute covariance matrix.</li>
+      <li>Find eigenvalues &amp; eigenvectors.</li>
+      <li>Select top $m$.</li>
+      <li>Project data.</li>
+    </ol>
+  </div>
+
+  <div class="summary-box">
+    <p class="summary-title">Quick Revision Summary</p>
+    <ul>
+      <li>Objective: $\max u^T C u$</li>
+      <li>Constraint: $u^T u = 1$</li>
+      <li>Solution: $Cu = \lambda u$</li>
+      <li>Choose: Largest eigenvalues → best directions.</li>
+      <li>PCA = Variance maximization + dimensionality reduction.</li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <!-- ================= LECTURE 4 ================= -->
+  <h2 class="lecture-title">Lecture 4: PCA In Higher Dimensions</h2>
+
+  <h3>Core Problem (Why Optimization Needed?)</h3>
+  <ul>
+    <li>Standard PCA issue: covariance matrix size $= d \times d$.</li>
+    <li>When $d \gg n$ (features $\gg$ data points), computation becomes very expensive.</li>
+  </ul>
+  <div class="formula-box">
+    <strong>Key Insight:</strong> $\text{Rank}(C) \leq n$. We don't need full computation.
+  </div>
+
+  <h3>Rank Concept</h3>
+  <p>Covariance matrix: $$C = \frac{1}{n} \sum_{i=1}^{n} (x_i - \bar{x})(x_i - \bar{x})^T$$</p>
+  <ul>
+    <li>Each term is rank 1.</li>
+    <li>Sum of $n$ such matrices → $\text{Rank}(C) \leq n$.</li>
+    <li>Result: Only $n$ meaningful eigenvalues.</li>
+    <li>Remaining $(d-n)$ eigenvalues $= 0$.</li>
+    <li>No need to compute all $d$ eigenvectors.</li>
+  </ul>
+
+  <h3>Key Matrices</h3>
+  <p><strong>Mean:</strong> $$\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i$$</p>
+  <p><strong>Covariance Matrix:</strong> $$C = \frac{1}{n} A^T A$$</p>
+  <p><strong>Matrix $A$ (Centered Data):</strong> Size: $A = n \times d$.</p>
+  <div class="formula-box">
+    $$A = \begin{bmatrix} (x_1 - \bar{x})^T \\ (x_2 - \bar{x})^T \\ \vdots \\ (x_n - \bar{x})^T \end{bmatrix}$$
+  </div>
+
+  <h3>The PCA "Trick" (Efficiency Idea)</h3>
+  <p>Instead of: $$C = \frac{1}{n} A^T A \quad (d \times d)$$</p>
+  <p>Use: $$\frac{1}{n} A A^T \quad (n \times n)$$</p>
+  <ul>
+    <li>$n \times n$ matrix is much smaller.</li>
+    <li>Huge computational saving when $d \gg n$.</li>
+  </ul>
+
+  <h3>Eigenvalue Relationship</h3>
+  <p><strong>Key result:</strong> Non-zero eigenvalues of $\frac{1}{n}A^T A$ and $\frac{1}{n}AA^T$ are the same.</p>
+
+  <h3>Eigenvector Transformation</h3>
+  <p>If: $$\frac{1}{n} A A^T v_i = \lambda_i v_i$$</p>
+  <p>Then: $$u_i = A^T v_i$$</p>
+  <ul>
+    <li>$u_i$ gives eigenvector of the original covariance matrix.</li>
+    <li>Final relation: $C u_i = \lambda_i u_i$</li>
+  </ul>
+
+  <h3>Step-by-Step Efficient PCA</h3>
+  <div class="step-box">
+    <p class="step-title">Steps</p>
+    <ol>
+      <li>Compute mean $\bar{x}$.</li>
+      <li>Form matrix $A$.</li>
+      <li>Compute $\frac{1}{n} A A^T$.</li>
+      <li>Find eigenvalues &amp; eigenvectors $v_i$.</li>
+      <li>Convert to high dimension: $u_i = A^T v_i$.</li>
+    </ol>
+  </div>
+
+  <h3>Geometric Intuition</h3>
+  <ul>
+    <li>Instead of working in huge space ($d$-dimensional), work in smaller space ($n$-dimensional).</li>
+    <li>Then map back to original space.</li>
+  </ul>
+
+  <div class="example-box">
+    <p class="example-title">Example (Intuition)</p>
+    <strong>Scenario:</strong>
+    <ul>
+      <li>Data points $n = 100$.</li>
+      <li>Features $d = 10{,}000$.</li>
+      <li>Normal PCA: work with $10{,}000 \times 10{,}000$ matrix.</li>
+      <li>Efficient PCA: work with $100 \times 100$ matrix.</li>
+      <li>Result: Same principal components, much faster computation.</li>
+    </ul>
+  </div>
+
+  <div class="summary-box">
+    <p class="summary-title">Final Conclusion</p>
+    <ul>
+      <li>When $d \gg n$: use $AA^T$ instead of $A^T A$.</li>
+      <li><strong>Benefits:</strong> Faster, memory efficient, same results as standard PCA.</li>
+    </ul>
+  </div>
+
+  <div class="summary-box">
+    <p class="summary-title">Quick Revision Summary</p>
+    <ul>
+      <li>Rank: $\text{Rank}(C) \leq n$.</li>
+      <li>Many eigenvalues $= 0$.</li>
+      <li>Trick: Use $AA^T$ ($n \times n$) instead of $A^T A$ ($d \times d$).</li>
+      <li>Eigenvalues: same for both matrices.</li>
+      <li>Eigenvectors: $u_i = A^T v_i$</li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>

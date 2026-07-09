@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>Week 5: Short Notes — MLF</title>
+<script>
+  MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] } };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1f2933;
+    --accent: #2b6cb0;
+    --accent-light: #ebf4ff;
+    --border: #d9e2ec;
+    --code-bg: #f4f6f8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0;
+    background: #f7f9fb;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    background: var(--bg);
+    padding: 40px 56px 80px;
+    box-shadow: 0 0 24px rgba(0,0,0,0.05);
+  }
+  h1.doc-title {
+    font-size: 2rem;
+    margin-bottom: 0.2em;
+    color: #102a43;
+  }
+  .subtitle {
+    color: #627d98;
+    margin-top: 0;
+    margin-bottom: 2em;
+    font-size: 1rem;
+  }
+  h2.lecture-title {
+    font-size: 1.5rem;
+    color: #fff;
+    background: var(--accent);
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin-top: 3em;
+    margin-bottom: 1em;
+  }
+  h3 {
+    font-size: 1.15rem;
+    color: #102a43;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 4px;
+    margin-top: 2em;
+  }
+  h4 {
+    font-size: 1rem;
+    color: var(--accent);
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+  }
+  ul {
+    padding-left: 1.3em;
+  }
+  li {
+    margin-bottom: 0.4em;
+  }
+  .formula-box {
+    background: var(--accent-light);
+    border-left: 4px solid var(--accent);
+    padding: 10px 16px;
+    margin: 1em 0;
+    border-radius: 4px;
+  }
+  .example-box {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 1em 0;
+  }
+  .example-box p.example-title {
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    color: #334e68;
+  }
+  .summary-box {
+    background: #fffaf0;
+    border: 1px solid #f6c453;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 1.5em 0;
+  }
+  .summary-box p.summary-title {
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: #975a16;
+  }
+  .memory-trick {
+    background: #f0fff4;
+    border: 1px solid #9ae6b4;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 1.5em 0;
+  }
+  .memory-trick p.mt-title {
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: #22543d;
+  }
+  .step-box {
+    background: #f5f3ff;
+    border: 1px solid #d6bcfa;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 1em 0;
+  }
+  .step-box p.step-title {
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: #553c9a;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 1em 0;
+    width: 100%;
+  }
+  table td, table th {
+    border: 1px solid var(--border);
+    padding: 8px 14px;
+    text-align: left;
+  }
+  table th {
+    background: var(--accent-light);
+    color: #102a43;
+  }
+  table tr:nth-child(even) {
+    background: #fbfcfd;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5em 0;
+  }
+  code {
+    background: var(--code-bg);
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 0.95em;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1 class="doc-title">Week 5: Short Notes</h1>
+  <p class="subtitle">MLF — Complex Matrices, Hermitian &amp; Unitary Matrices, Spectral Theorem</p>
+
+  <!-- ================= LECTURE 1 ================= -->
+  <h2 class="lecture-title">Lecture 1: Complex Matrices</h2>
+
+  <h3>Complex Vector Space ($\mathbb{C}^n$)</h3>
+  <p><strong>Definition:</strong> $\mathbb{C}^n$ is like $\mathbb{R}^n$, but each component is a complex number.<br>
+  Vector: $x = [x_1, x_2, \ldots, x_n]$, where $x_i = a + ib$</p>
+
+  <h3>Basic Operations</h3>
+  <ul>
+    <li><strong>Addition:</strong> $(a+ib) + (c+id) = (a+c) + i(b+d)$</li>
+    <li><strong>Multiplication:</strong> $(a+ib)(c+id) = (ac-bd) + i(bc+ad)$</li>
+    <li><strong>Complex Conjugate:</strong> $\overline{(a+ib)} = a - ib$</li>
+    <li><strong>Polar Form:</strong> $z = re^{i\theta}$, &nbsp; $\bar{z} = re^{-i\theta}$</li>
+  </ul>
+  <p><strong>Linear Combination:</strong> Scalars can be complex: $\sum c_i x_i$</p>
+
+  <h3>Inner Product &amp; Length</h3>
+  <p><strong>Problem with Real Dot Product:</strong> $x^T y$ can give wrong results.<br>
+  Example: $x = [1, i]^T \Rightarrow 1^2 + i^2 = 1 - 1 = 0$ ✘</p>
+  <div class="formula-box">
+    <strong>Correct Inner Product:</strong> $\langle x, y \rangle = x^* y = (\bar{x})^T y$
+  </div>
+
+  <h3>Properties</h3>
+  <ul>
+    <li><strong>Conjugate symmetry:</strong> $\langle x, y \rangle = \overline{\langle y, x \rangle}$</li>
+    <li><strong>Scalar rules:</strong>
+      <ul>
+        <li>$\langle x, cy \rangle = c \langle x, y \rangle$</li>
+        <li>$\langle cx, y \rangle = \bar{c} \langle x, y \rangle$</li>
+      </ul>
+    </li>
+  </ul>
+  <p><strong>Length (Norm):</strong> $\|x\| = \sqrt{x^* x}$</p>
+
+  <div class="example-box">
+    <p class="example-title">Example</p>
+    For $x = [1, i]^T$:<br>
+    $\|x\|^2 = (\bar{1})(1) + (\bar{i})(i) = 1 + 1 = 2$
+  </div>
+
+  <h3>Conjugate Transpose ($A^*$)</h3>
+  <p><strong>Definition:</strong> $A^* = (\bar{A})^T$ — take complex conjugate + transpose</p>
+  <div class="example-box">
+    <p class="example-title">Example</p>
+    $$A = \begin{bmatrix} 1+i & 2-4i \\ 3-2i & i \end{bmatrix}$$
+    $$A^* = \begin{bmatrix} 1-i & 2+4i \\ 3+2i & -i \end{bmatrix}$$
+  </div>
+
+  <h3>Properties</h3>
+  <ul>
+    <li>$(A^*)^* = A$</li>
+    <li>$(AB)^* = B^* A^*$</li>
+    <li>For real matrices: $A^* = A^T$</li>
+  </ul>
+
+  <h3>Hermitian Matrices</h3>
+  <p><strong>Definition:</strong> $A^* = A$ — the complex version of a symmetric matrix.</p>
+  <ul>
+    <li><strong>Key Points:</strong>
+      <ul>
+        <li>Diagonal elements are real</li>
+        <li>Important in: Linear Algebra, Machine Learning, Quantum Mechanics</li>
+      </ul>
+    </li>
+  </ul>
+  <p><strong>Why Important?</strong></p>
+  <ul>
+    <li>Hermitian matrices are diagonalizable</li>
+    <li>They have real eigenvalues</li>
+  </ul>
+
+  <div class="summary-box">
+    <p class="summary-title">Quick Summary</p>
+    <ul>
+      <li>$\mathbb{C}^n \to$ vectors with complex numbers</li>
+      <li>Inner product uses conjugate</li>
+      <li>Length → $\sqrt{x^* x}$</li>
+      <li>Conjugate transpose → flip + conjugate</li>
+      <li>Hermitian matrix → $A^* = A$</li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <!-- ================= LECTURE 2 ================= -->
+  <h2 class="lecture-title">Lecture 2: Hermitian Matrices</h2>
+
+  <h3>Definition &amp; Basics</h3>
+  <p>A square matrix $A$ is Hermitian if: $A = A^*$, where $A^*$ = conjugate transpose of $A$</p>
+
+  <h4>Conjugate Transpose</h4>
+  <ul>
+    <li>Take complex conjugate of each element</li>
+    <li>Then transpose the matrix: $A^* = (\bar{A})^T$</li>
+  </ul>
+
+  <h4>Important Points</h4>
+  <ul>
+    <li>Diagonal elements are always real</li>
+    <li>Off-diagonal elements are complex conjugates: $a_{ij} = \bar{a}_{ji}$</li>
+  </ul>
+
+  <h4>Special Case</h4>
+  <ul>
+    <li>Every real symmetric matrix is Hermitian (because conjugate = same number)</li>
+  </ul>
+
+  <h3>Key Properties</h3>
+
+  <div class="example-box">
+    <p class="example-title">Property 1: Real Eigenvalues</p>
+    All eigenvalues of a Hermitian matrix are real.<br>
+    Key idea: $Ax = \lambda x \Rightarrow \lambda = \bar{\lambda} \Rightarrow \lambda$ is real
+  </div>
+
+  <div class="example-box">
+    <p class="example-title">Property 2: Orthogonal Eigenvectors</p>
+    Eigenvectors corresponding to distinct eigenvalues are orthogonal.<br>
+    <strong>Orthogonality condition:</strong> $x^* y = 0$<br>
+    <strong>Result:</strong> $(\lambda_1 - \lambda_2)(x^* y) = 0 \Rightarrow x^* y = 0$ (for $\lambda_1 \neq \lambda_2$)
+  </div>
+
+  <h3>Diagonalization</h3>
+  <ul>
+    <li><strong>Key Idea:</strong> Hermitian matrices are always diagonalizable</li>
+    <li><strong>Formula:</strong> $A = PDP^{-1}$
+      <ul>
+        <li>$P$: matrix of eigenvectors</li>
+        <li>$D$: diagonal matrix of eigenvalues</li>
+      </ul>
+    </li>
+    <li><strong>Important Notes:</strong>
+      <ul>
+        <li>Eigenvectors are orthogonal ⇒ linearly independent</li>
+        <li>Even with repeated eigenvalues, diagonalization is possible</li>
+      </ul>
+    </li>
+  </ul>
+
+  <div class="step-box">
+    <p class="step-title">Standard Example</p>
+    <strong>Given Matrix:</strong>
+    $$A = \begin{bmatrix} 2 & 3+3i \\ 3-3i & 5 \end{bmatrix}$$
+    <strong>Step 1: Check Hermitian</strong> — conjugate transpose gives the same matrix, so $A$ is Hermitian.<br><br>
+    <strong>Step 2: Eigenvalues</strong><br>
+    $\det(A - \lambda I) = 0$<br>
+    $(2-\lambda)(5-\lambda) - (3-3i)(3+3i) = 0$<br>
+    $= (2-\lambda)(5-\lambda) - (9+9)$<br>
+    $= \lambda^2 - 7\lambda - 8 = 0$<br>
+    $\Rightarrow (\lambda-8)(\lambda+1) = 0$<br>
+    Eigenvalues: $\lambda_1 = 8$, $\lambda_2 = -1$<br><br>
+    <strong>Step 3: Eigenvectors</strong><br>
+    For $\lambda_1 = 8$: $x = [1,\ 1+i]$<br>
+    For $\lambda_2 = -1$: $y = [1-i,\ -1]$<br><br>
+    <strong>Step 4: Orthogonality Check</strong><br>
+    $x^* y = 0$ — hence eigenvectors are orthogonal.
+  </div>
+
+  <div class="summary-box">
+    <p class="summary-title">Quick Summary</p>
+    <ul>
+      <li>$A = A^* \to$ Hermitian</li>
+      <li>Diagonal elements → Real</li>
+      <li>Eigenvalues → Always real</li>
+      <li>Eigenvectors → Orthogonal</li>
+      <li>Always → Diagonalizable</li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <!-- ================= LECTURE 3 ================= -->
+  <h2 class="lecture-title">Lecture 3: Unitary Matrices</h2>
+
+  <h3>Definition &amp; Core Concepts</h3>
+  <p>A square matrix $U$ is Unitary if: $U^* U = I$</p>
+  <ul>
+    <li>$U^*$ = conjugate transpose of $U$</li>
+    <li>$I$ = identity matrix</li>
+  </ul>
+
+  <h4>Key Meaning</h4>
+  <ul>
+    <li>Columns (and rows) of $U$ are orthonormal</li>
+    <li>It is the complex version of orthogonal matrices</li>
+  </ul>
+
+  <div class="formula-box">
+    <strong>Important Result:</strong> $U^{-1} = U^*$ — so, inverse = conjugate transpose
+  </div>
+
+  <h3>Examples</h3>
+  <div class="example-box">
+    <p class="example-title">Example 1 (Standard Check)</p>
+    To verify if a matrix is unitary:
+    <ol>
+      <li>Find $U^*$</li>
+      <li>Check: $U^* U = I$</li>
+    </ol>
+  </div>
+
+  <div class="example-box">
+    <p class="example-title">Example 2 (Trigonometric Matrix)</p>
+    $$U = \begin{bmatrix} \cos t & \sin t \\ -\sin t & \cos t \end{bmatrix}$$
+    Compute $U^*$ (transpose here, since real):
+    $$U^T = \begin{bmatrix} \cos t & -\sin t \\ \sin t & \cos t \end{bmatrix}$$
+    $U^T U = I$ — hence, $U$ is unitary (orthogonal in the real case).
+  </div>
+
+  <h3>Key Properties</h3>
+
+  <div class="example-box">
+    <p class="example-title">Property 1: Length Preservation (Isometry)</p>
+    Unitary matrices do not change vector length:<br>
+    $\|Ux\| = \|x\|$<br>
+    Also preserves inner product: $(Ux)^*(Uy) = x^* y$
+  </div>
+
+  <div class="example-box">
+    <p class="example-title">Property 2: Eigenvalues</p>
+    Eigenvalues of a unitary matrix satisfy: $|\lambda| = 1$<br>
+    Meaning: They lie on the unit circle in the complex plane. Not necessarily real.
+  </div>
+
+  <div class="example-box">
+    <p class="example-title">Property 3: Orthogonal Eigenvectors</p>
+    Eigenvectors corresponding to distinct eigenvalues are orthogonal: $x^* y = 0$ (for $\lambda_1 \neq \lambda_2$)
+  </div>
+
+  <h3>Diagonalization &amp; Spectral Theorem</h3>
+  <div class="formula-box">
+    <strong>Spectral Theorem (Important):</strong> For a Hermitian matrix $A$: $A = U \Lambda U^*$
+    <ul>
+      <li>$U$: unitary matrix (eigenvectors)</li>
+      <li>$\Lambda$: diagonal matrix (eigenvalues)</li>
+    </ul>
+    <strong>Real Case (Special Form):</strong> $A = Q \Lambda Q^T$, where $Q$: orthogonal matrix
+  </div>
+
+  <p><strong>Key Insight:</strong> Unitary matrices help in diagonalizing Hermitian matrices. This simplifies many problems in:</p>
+  <ul>
+    <li>Quantum mechanics</li>
+    <li>Linear algebra</li>
+    <li>Signal processing</li>
+  </ul>
+
+  <div class="summary-box">
+    <p class="summary-title">Quick Summary</p>
+    <ul>
+      <li>$U^* U = I \to$ Unitary</li>
+      <li>$U^{-1} = U^*$</li>
+      <li>Length preserved → $\|Ux\| = \|x\|$</li>
+      <li>Eigenvalues → $|\lambda| = 1$</li>
+      <li>Eigenvectors → Orthogonal</li>
+      <li>Used in → Spectral Theorem &amp; Diagonalization</li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <!-- ================= LECTURE 4 ================= -->
+  <h2 class="lecture-title">Lecture 4: Diagonalization of Hermitian Matrices (Part 1)</h2>
+
+  <h3>Fundamental Definitions</h3>
+  <ul>
+    <li><strong>Conjugate Transpose:</strong> $A^* = (\bar{A})^T$ — take complex conjugate + transpose</li>
+    <li><strong>Hermitian Matrix:</strong> $A = A^*$
+      <ul>
+        <li>Diagonal elements → real</li>
+        <li>Special class of matrices</li>
+      </ul>
+    </li>
+    <li><strong>Unitary Matrix:</strong> $U^* U = I$ — important: $U^{-1} = U^*$</li>
+    <li><strong>Unitarily Diagonalizable:</strong> A matrix $A$ is unitarily diagonalizable if $A = U \Lambda U^*$, where $U$: unitary matrix, $\Lambda$: diagonal (eigenvalues)</li>
+    <li><strong>Upper Triangularizable:</strong> $A = UTU^*$, where $T$: upper triangular matrix</li>
+  </ul>
+
+  <h3>Schur's Theorem</h3>
+  <div class="formula-box">
+    <strong>Statement:</strong> Every square complex matrix can be written as: $A = UTU^*$, where $U$: unitary, $T$: upper triangular
+  </div>
+  <p><strong>Key Implications:</strong></p>
+  <ul>
+    <li>$A$ and $T$ have the same eigenvalues</li>
+    <li>Works for all complex matrices</li>
+  </ul>
+  <p><strong>Important Insight:</strong></p>
+  <ul>
+    <li>If $A$ is Hermitian, then $T$ becomes diagonal — hence $A = U \Lambda U^*$</li>
+    <li>This proves Hermitian matrices are unitarily diagonalizable</li>
+  </ul>
+
+  <h3>Procedure (Schur Algorithm)</h3>
+  <div class="step-box">
+    <p class="step-title">Step-by-Step</p>
+    <strong>Step 1: Find Eigenvalue &amp; Eigenvector</strong>
+    <ul>
+      <li>Solve: $\det(A - \lambda I) = 0$</li>
+      <li>Get eigenpair $(\lambda_1, Z_1)$</li>
+    </ul>
+    <strong>Step 2: Normalize</strong> — convert $Z_1$ into a unit vector<br><br>
+    <strong>Step 3: Extend Basis</strong>
+    <ul>
+      <li>Use Gram-Schmidt</li>
+      <li>Form orthonormal basis of $\mathbb{C}^n$</li>
+    </ul>
+    <strong>Step 4: Form Unitary Matrix $U_1$</strong> — columns = orthonormal basis vectors<br><br>
+    <strong>Step 5: Transform Matrix</strong>
+    $$U_1^* A U_1 = \begin{bmatrix} \lambda_1 & * \\ 0 & B \end{bmatrix}$$
+    where $B$: smaller matrix<br><br>
+    <strong>Step 6: Repeat (Recursion)</strong> — apply same process to $B$<br><br>
+    <strong>Step 7: Final Matrix</strong> — $A = UTU^*$
+  </div>
+
+  <div class="example-box">
+    <p class="example-title">Worked Example (3×3 Matrix)</p>
+    <strong>Given:</strong>
+    $$A = \begin{bmatrix} 5 & 8 & 16 \\ 5 & 0 & 9 \\ -3 & -5 & -10 \end{bmatrix}$$
+    <strong>Step 1: Eigenvalues:</strong> $\lambda_1 = 1$, $\lambda_2 = -3$<br><br>
+    <strong>Step 2: Eigenvector for $\lambda_1 = 1$:</strong> $Z_1 = \begin{bmatrix} -2 \\ -1 \\ 1 \end{bmatrix}$<br><br>
+    <strong>Step 3: Normalize:</strong> $\|Z_1\| = \sqrt{6} \Rightarrow \dfrac{1}{\sqrt{6}}\begin{bmatrix} -2 \\ -1 \\ 1 \end{bmatrix}$<br><br>
+    <strong>Step 4: Construct $U_1$:</strong> complete orthonormal basis using Gram-Schmidt<br><br>
+    <strong>Step 5: Transform:</strong>
+    $$U_1^* A U_1 = \begin{bmatrix} 1 & * & * \\ 0 & B & * \\ 0 & 0 & * \end{bmatrix}$$
+    where $B$ is $2 \times 2$<br><br>
+    <strong>Step 6: Process $B$</strong> — eigenvalue: $-3$; find eigenvector → form matrix $P$<br><br>
+    <strong>Final Result:</strong> $A = UTU^*$ — matrix is upper triangularized
+  </div>
+
+  <div class="summary-box">
+    <p class="summary-title">Important Conclusion</p>
+    <ul>
+      <li>Matrix has repeated eigenvalues</li>
+      <li>Not enough independent eigenvectors</li>
+    </ul>
+    <ol>
+      <li>Not diagonalizable</li>
+      <li>But always triangularizable (Schur)</li>
+    </ol>
+  </div>
+
+  <div class="summary-box">
+    <p class="summary-title">Quick Summary</p>
+    <ul>
+      <li>$A = UTU^* \to$ always possible (Schur)</li>
+      <li>$T \to$ upper triangular</li>
+      <li>Eigenvalues → diagonal of $T$</li>
+      <li>Hermitian case → $T = \Lambda$ (diagonal)</li>
+      <li>$\Rightarrow$ Hermitian $\Rightarrow$ unitarily diagonalizable</li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <!-- ================= LECTURE 5 ================= -->
+  <h2 class="lecture-title">Lecture 5: Diagonalization of Hermitian Matrices (Part 2)</h2>
+
+  <h3>Spectral Theorem (Main Idea)</h3>
+  <ul>
+    <li>The Spectral Theorem tells us when a matrix can be diagonalized using a unitary/orthogonal matrix.</li>
+  </ul>
+  <div class="formula-box">
+    <strong>Key Statement:</strong> Every Hermitian matrix is unitarily diagonalizable.<br>
+    <strong>Meaning:</strong> $U^* A U = D$<br>
+    $U$: Unitary matrix, $D$: Diagonal matrix (contains eigenvalues)
+  </div>
+  <p><strong>Important:</strong></p>
+  <ul>
+    <li>Hermitian ⇒ Unitarily diagonalizable ✅</li>
+    <li>Unitarily diagonalizable ⇏ Hermitian ❌ (not always true)</li>
+  </ul>
+
+  <h3>Why It Works (Proof Idea – Intuition)</h3>
+  <ul>
+    <li>By Schur's Theorem: $U^* A U = T$ (upper triangular)</li>
+    <li>If $A = A^*$ (Hermitian), then: $T = T^*$</li>
+    <li>But:
+      <ul>
+        <li>$T$ is upper triangular</li>
+        <li>$T^*$ is lower triangular</li>
+      </ul>
+    </li>
+    <li>Only possible if $T$ is diagonal — hence proved!</li>
+  </ul>
+
+  <h3>Important Definitions &amp; Formulae</h3>
+  <ul>
+    <li><strong>Hermitian Matrix:</strong> $A = A^*$</li>
+    <li><strong>Unitary Matrix:</strong> $U^* = U^{-1}$, $U^* U = I$</li>
+    <li><strong>Unitary Diagonalization:</strong> $U^* A U = D$</li>
+    <li><strong>Real Eigenvalues:</strong> Eigenvalues of Hermitian matrices are always real.</li>
+    <li><strong>Normalization:</strong> To form $U$, eigenvectors must be orthonormal: $\|v\| = 1$</li>
+  </ul>
+
+  <h3>Real Case (Symmetric Matrices)</h3>
+  <div class="formula-box">
+    <strong>Theorem:</strong> If $A = A^T$, then: $Q^T A Q = D$
+    <ul>
+      <li>$Q$: Orthogonal matrix</li>
+      <li>$Q^T Q = I$</li>
+    </ul>
+  </div>
+  <p><strong>Insight:</strong></p>
+  <ul>
+    <li>Eigenvalues are real</li>
+    <li>Eigenvectors can be chosen real + orthonormal</li>
+  </ul>
+
+  <h3>Examples</h3>
+
+  <div class="example-box">
+    <p class="example-title">Example 1: Hermitian Matrix</p>
+    <ul>
+      <li>Eigenvalues: $\lambda_1 = 1$, $\lambda_2 = 4$</li>
+      <li>Eigenvectors: $Z_1 = [-1+i,\ 1]$, $Z_2 = [1-i,\ 2]$</li>
+      <li>After normalization: $U_1 = \frac{1}{\sqrt{3}}[-1+i,\ 1]$, $U_2 = \frac{1}{\sqrt{6}}[1-i,\ 2]$</li>
+      <li>Final result: $U^* A U = \begin{bmatrix} 1 & 0 \\ 0 & 4 \end{bmatrix}$ — diagonal with real eigenvalues</li>
+    </ul>
+  </div>
+
+  <div class="example-box">
+    <p class="example-title">Example 2: Not Hermitian but Diagonalizable</p>
+    Matrix: $A = \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix}$ — not Hermitian: $A^* \neq A$<br>
+    Eigenvalues: $\lambda_1 = i$, $\lambda_2 = -i$<br>
+    Eigenvectors: $Z_1 = [1, -i]$, $Z_2 = [1, i]$<br>
+    Result: $U^* A U = \begin{bmatrix} i & 0 \\ 0 & -i \end{bmatrix}$<br>
+    ✔️ Diagonalizable &nbsp; ❌ Not Hermitian (eigenvalues not real)
+  </div>
+
+  <div class="summary-box">
+    <p class="summary-title">Quick Summary</p>
+    <ul>
+      <li>Hermitian ⇒ Always diagonalizable using unitary matrix</li>
+      <li>Eigenvalues of Hermitian matrices are real</li>
+      <li>Real symmetric matrices ⇒ orthogonal diagonalization</li>
+      <li>Not all diagonalizable matrices are Hermitian</li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>

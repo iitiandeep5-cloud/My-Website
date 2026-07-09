@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>Week 6: Short Notes — MLF</title>
+<script>
+  MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] } };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1f2933;
+    --accent: #2b6cb0;
+    --accent-light: #ebf4ff;
+    --border: #d9e2ec;
+    --code-bg: #f4f6f8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0;
+    background: #f7f9fb;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    background: var(--bg);
+    padding: 40px 56px 80px;
+    box-shadow: 0 0 24px rgba(0,0,0,0.05);
+  }
+  h1.doc-title {
+    font-size: 2rem;
+    margin-bottom: 0.2em;
+    color: #102a43;
+  }
+  .subtitle {
+    color: #627d98;
+    margin-top: 0;
+    margin-bottom: 2em;
+    font-size: 1rem;
+  }
+  h2.lecture-title {
+    font-size: 1.5rem;
+    color: #fff;
+    background: var(--accent);
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin-top: 3em;
+    margin-bottom: 1em;
+  }
+  h3 {
+    font-size: 1.15rem;
+    color: #102a43;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 4px;
+    margin-top: 2em;
+  }
+  h4 {
+    font-size: 1rem;
+    color: var(--accent);
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+  }
+  ul {
+    padding-left: 1.3em;
+  }
+  li {
+    margin-bottom: 0.4em;
+  }
+  .formula-box {
+    background: var(--accent-light);
+    border-left: 4px solid var(--accent);
+    padding: 10px 16px;
+    margin: 1em 0;
+    border-radius: 4px;
+  }
+  .example-box {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 1em 0;
+  }
+  .example-box p.example-title {
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    color: #334e68;
+  }
+  .summary-box {
+    background: #fffaf0;
+    border: 1px solid #f6c453;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 1.5em 0;
+  }
+  .summary-box p.summary-title {
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: #975a16;
+  }
+  .memory-trick {
+    background: #f0fff4;
+    border: 1px solid #9ae6b4;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 1.5em 0;
+  }
+  .memory-trick p.mt-title {
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: #22543d;
+  }
+  .step-box {
+    background: #f5f3ff;
+    border: 1px solid #d6bcfa;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 1em 0;
+  }
+  .step-box p.step-title {
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: #553c9a;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 1em 0;
+    width: 100%;
+  }
+  table td, table th {
+    border: 1px solid var(--border);
+    padding: 8px 14px;
+    text-align: left;
+  }
+  table th {
+    background: var(--accent-light);
+    color: #102a43;
+  }
+  table tr:nth-child(even) {
+    background: #fbfcfd;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5em 0;
+  }
+  code {
+    background: var(--code-bg);
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 0.95em;
+  }
+  .check { color: #2f855a; font-weight: 700; }
+  .cross { color: #c53030; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1 class="doc-title">Week 6: Short Notes</h1>
+  <p class="subtitle">MLF — Singular Value Decomposition &amp; Positive Definiteness</p>
+
+  <!-- ================= LECTURE 1 ================= -->
+  <h2 class="lecture-title">Lecture 1: Singular Value Decomposition</h2>
+
+  <h3>1. Spectral Theorem (Real Symmetric Matrices)</h3>
+  <ul>
+    <li><strong>Definition:</strong> Any real symmetric matrix $A \in \mathbb{R}^{n \times n}$ can be diagonalized as $A = Q \lambda Q^T$.</li>
+    <li><strong>Key Properties:</strong>
+      <ul>
+        <li>Eigenvalues are real.</li>
+        <li>$Q$ is orthogonal ($Q^T Q = I$).</li>
+        <li>Columns of $Q$ are orthonormal eigenvectors.</li>
+        <li>$\lambda$ is diagonal with eigenvalues.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <div class="example-box">
+    <p class="example-title">Example</p>
+    $$A = \begin{bmatrix} 1 & -2 \\ -2 & -2 \end{bmatrix}$$
+    Eigenvalues: $\lambda_1 = -3$, $\lambda_2 = 2$<br>
+    Eigenvectors: $x_1 = [1,2]$, $x_2 = [-2,1]$<br>
+    Normalized: $q_1 = \frac{1}{\sqrt{5}}[1,2]$, &nbsp; $q_2 = \frac{1}{\sqrt{5}}[-2,1]$
+  </div>
+
+  <h3>Singular Value Decomposition (SVD)</h3>
+  <ul>
+    <li><strong>Definition:</strong> For any matrix $A$, $A = Q_1 \Sigma Q_2^T$.</li>
+    <li><strong>Components:</strong>
+      <ul>
+        <li>$Q_1 \in \mathbb{R}^{m \times m}$: orthogonal.</li>
+        <li>$Q_2 \in \mathbb{R}^{n \times n}$: orthogonal.</li>
+        <li>$\Sigma \in \mathbb{R}^{m \times n}$: diagonal with singular values.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>Singular Values</h3>
+  <ul>
+    <li>Compute $A^T A$ (symmetric, positive semi-definite).</li>
+    <li>Eigenvalues: $\lambda_i \geq 0$.</li>
+    <li>Singular values: $\sigma_i = \sqrt{\lambda_i}$, ordered $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_r > 0$.</li>
+  </ul>
+
+  <h3>Constructing SVD Matrices</h3>
+  <ul>
+    <li>$Q_2$: eigenvectors of $A^T A$.</li>
+    <li>$Q_1$: first $r$ columns from $y_i = \dfrac{1}{\sigma_i} A x_i$</li>
+  </ul>
+
+  <h3>Important Relationships</h3>
+  <div class="formula-box">
+    $AA^T = Q_1 (\Sigma \Sigma^T) Q_1^T \to$ columns of $Q_1$ are eigenvectors of $AA^T$.<br>
+    $A^T A = Q_2 (\Sigma^T \Sigma) Q_2^T \to$ columns of $Q_2$ are eigenvectors of $A^T A$.
+  </div>
+
+  <h3>Spectral vs SVD Comparison</h3>
+  <table>
+    <tr><th>Feature</th><th>Spectral Theorem</th><th>SVD</th></tr>
+    <tr><td>Matrix Type</td><td>Symmetric only</td><td>Any matrix</td></tr>
+    <tr><td>Shape</td><td>Square</td><td>Rectangular allowed</td></tr>
+    <tr><td>Decomposition</td><td>$Q\Lambda Q^T$</td><td>$Q_1 \Sigma Q_2^T$</td></tr>
+    <tr><td>Values</td><td>Eigenvalues</td><td>Singular values</td></tr>
+  </table>
+
+  <div class="memory-trick">
+    <p class="mt-title">Intuition</p>
+    <p>SVD = Rotate ($Q_2^T$) → Stretch ($\Sigma$) → Rotate again ($Q_1$).</p>
+  </div>
+
+  <h3>Applications</h3>
+  <ul>
+    <li>Dimensionality reduction (PCA)</li>
+    <li>Image compression</li>
+    <li>Noise reduction</li>
+    <li>Recommender systems</li>
+    <li>Solving least squares problems</li>
+  </ul>
+
+  <hr>
+
+  <!-- ================= LECTURE 2 ================= -->
+  <h2 class="lecture-title">Lecture 2: Example of SVD</h2>
+
+  <h3>Introduction to SVD</h3>
+  <p><strong>Definition:</strong> Singular Value Decomposition (SVD) expresses any matrix $A$ as: $A = Q_1 \Sigma Q_2^T$</p>
+
+  <h4>Components</h4>
+  <ul>
+    <li>$Q_1$: Left orthogonal matrix ($Q_1^T Q_1 = I$)</li>
+    <li>$\Sigma$: Diagonal matrix containing singular values</li>
+    <li>$Q_2$: Right orthogonal matrix ($Q_2^T Q_2 = I$)</li>
+  </ul>
+
+  <h4>Key Idea</h4>
+  <ul>
+    <li>Works for any matrix (square, rectangular, non-diagonalizable)</li>
+    <li>More general than eigen-decomposition</li>
+  </ul>
+
+  <h3>Diagonalizability Check (Before SVD)</h3>
+  <p><strong>Condition:</strong> A matrix is diagonalizable if it has enough linearly independent eigenvectors.</p>
+  <p><strong>Special Case:</strong></p>
+  <ul>
+    <li>If matrix is symmetric → always diagonalizable</li>
+    <li>Then: SVD $\approx$ Eigen-decomposition</li>
+  </ul>
+  <p><strong>Non-diagonalizable Case:</strong></p>
+  <ul>
+    <li>If eigenvectors are insufficient → use SVD</li>
+  </ul>
+
+  <h3>SVD Procedure (Step-by-Step)</h3>
+  <div class="step-box">
+    <p class="step-title">Steps</p>
+    <ol>
+      <li><strong>Compute $A^T A$</strong>
+        <ul>
+          <li>Always symmetric</li>
+          <li>Find eigenvalues $\lambda_i$ and eigenvectors $x_i$</li>
+        </ul>
+      </li>
+      <li><strong>Form $Q_2$ (Right Singular Vectors)</strong>
+        <ul>
+          <li>Normalize eigenvectors</li>
+          <li>Arrange as columns: $Q_2 = [x_1\ x_2\ \ldots]$</li>
+        </ul>
+      </li>
+      <li><strong>Compute Singular Values:</strong> $\sigma_i = \sqrt{\lambda_i}$, $\sigma_1 \geq \sigma_2 \geq \cdots$</li>
+      <li><strong>Form $\Sigma$:</strong> $\Sigma = \begin{bmatrix} \sigma_1 & 0 \\ 0 & \sigma_2 \end{bmatrix}$</li>
+      <li><strong>Find $Q_1$ (Left Singular Vectors):</strong> $y_i = \dfrac{1}{\sigma_i} A x_i$ — unit, orthogonal vectors. Arrange as columns: $Q_1 = [y_1\ y_2]$</li>
+    </ol>
+    <strong>Final Result:</strong> $A = Q_1 \Sigma Q_2^T$
+  </div>
+
+  <div class="example-box">
+    <p class="example-title">Detailed Example (2×2 Matrix)</p>
+    <strong>Given Matrix:</strong> $A = \begin{bmatrix} 2 & 0 \\ 1 & 2 \end{bmatrix}$<br><br>
+    <strong>Step 0: Diagonalizability</strong>
+    <ul>
+      <li>Eigenvalue $\lambda = 2$ (repeated)</li>
+      <li>Only one eigenvector → Not diagonalizable → Use SVD</li>
+    </ul>
+    <strong>Step 1: Compute $A^T A$</strong>
+    $$A^T A = \begin{bmatrix} 5 & 2 \\ 2 & 4 \end{bmatrix}$$
+    <strong>Step 2: Eigenvalues &amp; Eigenvectors</strong>
+    <ul>
+      <li>$\lambda_1 = 4$, $\lambda_2 = 1$</li>
+      <li>$x_1 = [1,2]^T$, $x_2 = [2,-1]^T$</li>
+    </ul>
+    <strong>Step 3: Normalize → $Q_2$</strong><br>
+    $x_1 = \frac{1}{\sqrt{5}}[1,2]^T$, &nbsp; $x_2 = \frac{1}{\sqrt{5}}[2,-1]^T$<br>
+    $Q_2 = [x_1\ x_2]$<br><br>
+    <strong>Step 4: Singular Values:</strong> $\sigma_1 = \sqrt{4} = 2$, &nbsp; $\sigma_2 = \sqrt{1} = 1$<br><br>
+    <strong>Step 5: Form $\Sigma$:</strong> $\Sigma = \begin{bmatrix} 2 & 0 \\ 0 & 1 \end{bmatrix}$<br><br>
+    <strong>Step 6: Compute $Q_1$:</strong> $y_i = \dfrac{1}{\sigma_i} A x_i$ — gives orthonormal vectors → $Q_1 = [y_1\ y_2]$
+  </div>
+
+  <h3>Key Concepts &amp; Interpretations</h3>
+  <p><strong>Orthogonal Matrices:</strong></p>
+  <ul>
+    <li>$Q_1^T Q_1 = I$, $Q_2^T Q_2 = I \to$ rotations/reflections</li>
+    <li><strong>Eigenvector Sources:</strong>
+      <ul>
+        <li>$Q_1$: eigenvectors of $AA^T$</li>
+        <li>$Q_2$: eigenvectors of $A^T A$</li>
+      </ul>
+    </li>
+  </ul>
+  <p><strong>Geometric Meaning:</strong> SVD = Rotation → Scaling → Rotation</p>
+
+  <h3>Why SVD is Important</h3>
+  <ul>
+    <li>Works even when matrix is not diagonalizable or rectangular</li>
+    <li><strong>Applications:</strong>
+      <ul>
+        <li>PCA (Dimensionality reduction)</li>
+        <li>Image compression</li>
+        <li>Noise filtering</li>
+        <li>Data science &amp; ML</li>
+      </ul>
+    </li>
+  </ul>
+
+  <div class="summary-box">
+    <p class="summary-title">Final Quick Summary</p>
+    <p>SVD decomposes any matrix into orthogonal matrices and singular values, providing a structured representation even when eigen-decomposition fails.</p>
+  </div>
+
+  <hr>
+
+  <!-- ================= LECTURE 3 ================= -->
+  <h2 class="lecture-title">Lecture 3: Positive Definiteness</h2>
+
+  <h3>Motivation: Stationary Points</h3>
+  <ul>
+    <li>A point is <strong>stationary</strong> if: $\partial f/\partial x = 0$, $\partial f/\partial y = 0$</li>
+    <li>For quadratic function: $f(x,y) = ax^2 + 2bxy + cy^2$ → always has a stationary point at $(0,0)$.</li>
+  </ul>
+
+  <p><strong>Classification at $(0,0)$:</strong></p>
+  <ul>
+    <li>Minimum</li>
+    <li>Maximum</li>
+    <li>Saddle Point</li>
+  </ul>
+  <p>Determined using <strong>second-order conditions</strong> on $a, b, c$.</p>
+
+  <h3>Positive Definiteness</h3>
+  <ul>
+    <li><strong>Definition:</strong> $f(0,0) = 0$, $f(x,y) > 0\ \forall\ (x,y) \neq (0,0)$</li>
+  </ul>
+  <p><strong>Geometric Meaning:</strong></p>
+  <ul>
+    <li>Graph looks like a <strong>bowl (paraboloid)</strong> → origin is unique global minimum.</li>
+  </ul>
+
+  <h3>Conditions for 2D Quadratic Form</h3>
+  <p>For: $f(x,y) = ax^2 + 2bxy + cy^2$</p>
+  <table>
+    <tr><th>Condition</th><th>Result</th></tr>
+    <tr><td>$a > 0,\ ac > b^2$</td><td><span class="check">✔</span> Positive Definite (Minimum)</td></tr>
+    <tr><td>$a > 0,\ c > 0$</td><td>Necessary but not sufficient</td></tr>
+    <tr><td>$ac = b^2,\ a > 0$</td><td>Positive Semi-definite</td></tr>
+    <tr><td>$ac = b^2,\ a < 0$</td><td>Negative Semi-definite</td></tr>
+    <tr><td>$ac < b^2$</td><td><span class="cross">✘</span> Saddle Point</td></tr>
+  </table>
+
+  <h3>Key Formula: $ac - b^2$</h3>
+  <ul>
+    <li>If $> 0 \to$ definite</li>
+    <li>If $< 0 \to$ saddle</li>
+  </ul>
+
+  <h3>Completing the Square</h3>
+  <div class="formula-box">
+    $$f(x,y) = a\left(x + \frac{b}{a}y\right)^2 + \left(c - \frac{b^2}{a}\right) y^2$$
+    For positivity:
+    $$a > 0, \qquad c - \frac{b^2}{a} > 0$$
+  </div>
+
+  <h3>Linear Algebra Connection</h3>
+  <ul>
+    <li><strong>Matrix Form:</strong> $f(x,y) = v^T A v$, where $v = \begin{bmatrix} x \\ y \end{bmatrix}$, $A = \begin{bmatrix} a & b \\ b & c \end{bmatrix}$</li>
+    <li><strong>General $n$-D Form:</strong>
+      <div class="formula-box">$$f(v) = v^T A v = \sum_{i=1}^{n} \sum_{j=1}^{n} a_{ij} x_i x_j$$</div>
+    </li>
+  </ul>
+  <p><strong>Key Insight:</strong> Positive definiteness of the function $\iff$ matrix $A$ is positive definite.</p>
+
+  <h3>Examples (Important)</h3>
+
+  <div class="example-box">
+    <p class="example-title">Example 1: Saddle Point</p>
+    $f(x,y) = 2x^2 + 4xy + y^2$, &nbsp; $a=2, b=2, c=1$<br>
+    $ac = 2$, $b^2 = 4 \Rightarrow ac < b^2$ → <span class="cross">Saddle Point</span>
+  </div>
+
+  <div class="example-box">
+    <p class="example-title">Example 2: Simple Saddle</p>
+    $f(x,y) = 2xy$, &nbsp; $A = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}$<br>
+    $ac = 0$, $b^2 = 1 \Rightarrow ac < b^2$ → <span class="cross">Saddle Point</span>
+  </div>
+
+  <div class="example-box">
+    <p class="example-title">Example 3: Counterexample</p>
+    $f(x,y) = x^2 - 10xy + y^2$, &nbsp; $a=1, c=1$<br>
+    Test point $(1,1)$: $f(1,1) = -8 < 0$<br>
+    <span class="cross">Not positive definite</span> — shows $a>0, c>0$ is <strong>not sufficient</strong>.
+  </div>
+
+  <div class="example-box">
+    <p class="example-title">Example 4: 3D Minimum</p>
+    $f(x_1,x_2,x_3) = 2x_1^2 - 2x_1x_2 + 2x_2^2 - 2x_2x_3 + 2x_3^2$<br>
+    $$A = \begin{bmatrix} 2 & -1 & 0 \\ -1 & 2 & -1 \\ 0 & -1 & 2 \end{bmatrix}$$
+    <span class="check">Positive definite</span> → Minimum at origin.
+  </div>
+
+  <div class="summary-box">
+    <p class="summary-title">Final Intuition</p>
+    <ul>
+      <li>Positive definite → bowl shape → minimum</li>
+      <li>Negative definite → upside-down bowl → maximum</li>
+      <li>Saddle → curved in opposite directions</li>
+    </ul>
+    <p><strong>One-Line Summary:</strong> A quadratic form is positive definite if it is always positive except at the origin, which happens when $a > 0$, $ac > b^2$.</p>
+  </div>
+
+  <hr>
+
+  <!-- ================= LECTURE 4 ================= -->
+  <h2 class="lecture-title">Lecture 4: Positive Definite Matrices</h2>
+
+  <h3>Core Definition</h3>
+  <p>A real symmetric matrix $A \in \mathbb{R}^{n \times n}$ is positive definite if:</p>
+  <ul>
+    <li><strong>Condition 1 (Quadratic Form):</strong> $v^T A v > 0\ \forall\ v \neq 0$</li>
+    <li><strong>Condition 2 (Eigenvalues):</strong> All eigenvalues $\lambda_i > 0$</li>
+  </ul>
+  <p>Both conditions are equivalent.</p>
+
+  <h3>2×2 Matrix Case (Most Important)</h3>
+  <p>For $A = \begin{bmatrix} a & b \\ b & c \end{bmatrix}$</p>
+  <p><strong>Positive definite conditions:</strong></p>
+  <ul>
+    <li>$a > 0$</li>
+    <li>$ac - b^2 > 0$</li>
+  </ul>
+  <p><strong>Formulae:</strong></p>
+  <ul>
+    <li><strong>Determinant:</strong> $\det(A) = ac - b^2 = \lambda_1 \lambda_2$</li>
+    <li><strong>Trace:</strong> $\text{tr}(A) = a + c = \lambda_1 + \lambda_2$</li>
+  </ul>
+  <div class="formula-box">
+    <strong>Shortcut:</strong> If $a > 0$ and $\det(A) > 0$, then $A$ is positive definite.
+  </div>
+
+  <h3>Proof of Equivalence (Conceptual)</h3>
+  <p><strong>Part 1:</strong> $v^T A v > 0 \implies \lambda > 0$<br>
+  Take eigenvector $x$: $Ax = \lambda x$.<br>
+  Then $x^T A x = \lambda \|x\|^2 > 0 \implies \lambda > 0$.</p>
+  <p><strong>Part 2:</strong> $\lambda > 0 \implies v^T A v > 0$<br>
+  For $x = \sum c_i x_i$: $x^T A x = \sum c_i^2 \lambda_i > 0$</p>
+
+  <h3>Key Properties</h3>
+  <ul>
+    <li><strong>Quadratic Form:</strong> $f(v) = v^T A v \to$ minimum at origin if $A$ is positive definite.</li>
+    <li><strong>Eigenvalue Interpretation:</strong> Positive definite $\iff$ all eigenvalues $> 0$.</li>
+    <li><strong>Useful Tests:</strong> Determinant &amp; trace, leading principal minors.</li>
+  </ul>
+
+  <h3>Examples (Important)</h3>
+
+  <div class="example-box">
+    <p class="example-title">Example 1: Positive Definite</p>
+    $A = \begin{bmatrix} 2 & 1 \\ 1 & 2 \end{bmatrix}$<br>
+    $a = 2 > 0$, $\det = 4-1 = 3 > 0$ → <span class="check">Positive definite</span>
+  </div>
+
+  <div class="example-box">
+    <p class="example-title">Example 2: Not Positive Definite</p>
+    $A = \begin{bmatrix} 1 & 2 \\ 2 & 1 \end{bmatrix}$<br>
+    $a = 1 > 0$, $\det = 1-4 = -3 < 0$ → <span class="cross">Not positive definite (saddle type)</span>
+  </div>
+
+  <div class="example-box">
+    <p class="example-title">Example 3: Diagonal Matrix</p>
+    $A = \begin{bmatrix} 3 & 0 \\ 0 & 5 \end{bmatrix}$<br>
+    Eigenvalues $= 3, 5 > 0$ → <span class="check">Positive definite</span>
+  </div>
+
+  <div class="summary-box">
+    <p class="summary-title">Final Intuition 💡</p>
+    <p>Positive definite matrix → always gives positive output.<br>
+    Think of it as: "Energy is always positive" / "Bowl-shaped surface"</p>
+    <p><strong>One-Line Summary:</strong> A symmetric matrix is positive definite if all eigenvalues are positive, or equivalently if $v^T A v > 0$ for every non-zero vector.</p>
+  </div>
+
+</div>
+</body>
+</html>
