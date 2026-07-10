@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>Week 10: Short Notes - Machine Learning Foundations</title>
+<style>
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    line-height: 1.6;
+    color: #222;
+    background: #fdfdfd;
+  }
+  h1 {
+    text-align: center;
+    border-bottom: 3px solid #333;
+    padding-bottom: 10px;
+  }
+  h2 {
+    margin-top: 50px;
+    color: #1a3b6d;
+    border-bottom: 2px solid #1a3b6d;
+    padding-bottom: 5px;
+  }
+  h3 {
+    color: #333;
+    margin-top: 30px;
+  }
+  h4 {
+    margin-bottom: 5px;
+    color: #444;
+  }
+  ul, ol {
+    margin-top: 5px;
+  }
+  .formula {
+    background: #f2f4f8;
+    border-left: 4px solid #1a3b6d;
+    padding: 10px 15px;
+    margin: 10px 0;
+    font-family: 'Cambria Math', Cambria, serif;
+    font-size: 1.05em;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 15px 0;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    text-align: left;
+  }
+  th {
+    background: #1a3b6d;
+    color: white;
+  }
+  tr:nth-child(even) {
+    background: #f6f8fb;
+  }
+  .summary-box {
+    background: #eef7ee;
+    border: 1px solid #a8d0a8;
+    border-radius: 6px;
+    padding: 12px 18px;
+    margin: 15px 0;
+    font-style: italic;
+  }
+  .example-box {
+    background: #fff8e6;
+    border: 1px solid #e0c88a;
+    border-radius: 6px;
+    padding: 12px 18px;
+    margin: 15px 0;
+  }
+  .proof-box {
+    background: #eef2fb;
+    border: 1px solid #a8bfe0;
+    border-radius: 6px;
+    padding: 12px 18px;
+    margin: 15px 0;
+  }
+  .memory-trick {
+    background: #fbeef2;
+    border: 1px solid #e0a8bf;
+    border-radius: 6px;
+    padding: 10px 16px;
+    margin: 15px 0;
+    font-weight: bold;
+  }
+  hr {
+    margin: 40px 0;
+    border: none;
+    border-top: 1px dashed #999;
+  }
+  code {
+    background: #eee;
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Week 10: Short Notes — Machine Learning Foundations</h1>
+
+<!-- LECTURE 1 -->
+<h2>Lecture 1: Properties of Convex Functions</h2>
+
+<h3>Core Concepts</h3>
+<h4>Local vs Global Minima</h4>
+<p>For a convex function: Every local minimum = global minimum. This is the key property: no "bad" local minima.</p>
+
+<h4>Non-uniqueness of Minima</h4>
+<ul>
+  <li>A convex function can have multiple global minima.</li>
+  <li>All such minima form a convex set.</li>
+  <li>In 1D (R → R): minima form an interval [a,b].</li>
+</ul>
+<div class="example-box">
+  <strong>Example:</strong> A flat-bottom function between a and b. Every point in [a,b] is optimal.
+</div>
+
+<h4>Concave Functions</h4>
+<p>A function g(x) is concave if: f(x) = −g(x) is convex.</p>
+<p><strong>Example:</strong> g(x) = −x&sup2; ⟹ concave.</p>
+
+<h3>First-Order Optimality Condition</h3>
+<p><strong>Theorem:</strong> For convex, differentiable f: R<sup>d</sup> → R:</p>
+<div class="formula">x* is global minimum ⟺ &nabla;f(x*) = 0</div>
+
+<h4>Necessity (⇒)</h4>
+<p>If x* is minimum:</p>
+<ul>
+  <li>Gradient must be zero: &nabla;f(x*) = 0.</li>
+  <li>Reason: If gradient &ne; 0, moving in direction −&nabla;f(x*) decreases function value → contradiction.</li>
+</ul>
+
+<h4>Sufficiency (⇐)</h4>
+<ul>
+  <li>If &nabla;f(x*) = 0, then using convexity: f(y) ≥ f(x) + &nabla;f(x)<sup>T</sup>(y−x)</li>
+  <li>At x = x*: f(y) ≥ f(x*)</li>
+  <li>So, x* is global minimum.</li>
+</ul>
+<p><strong>Algorithm Insight:</strong> In convex problems, gradient descent reaching &nabla;f = 0 ⇒ global optimum found.</p>
+
+<h3>Properties of Convex Functions</h3>
+<h4>Property 1: Sum Rule</h4>
+<p>If f and g are convex: h(x) = f(x) + g(x) is convex.</p>
+
+<h4>Property 2: Composition Rule</h4>
+<p>If:</p>
+<ul>
+  <li>g(x) is convex</li>
+  <li>f(x) is convex and non-decreasing</li>
+</ul>
+<p>Then: h(x) = f(g(x)) is convex</p>
+<p><strong>Non-decreasing condition:</strong> x ≥ y ⟹ f(x) ≥ f(y)</p>
+
+<h4>Property 3: Convex + Linear</h4>
+<p>If:</p>
+<ul>
+  <li>f is convex</li>
+  <li>g is linear</li>
+</ul>
+<p>Then: h(x) = f(g(x)) is convex (no need for non-decreasing condition here)</p>
+
+<h3>Examples &amp; Counterexamples</h3>
+<div class="example-box">
+  <strong>Non-convex Composition:</strong> Even if both functions are convex:
+  <ul>
+    <li>g(x) = x&sup2; (convex)</li>
+    <li>f(x) = e<sup>−x</sup> (convex)</li>
+  </ul>
+  Then: h(x) = f(g(x)) = e<sup>−x&sup2;</sup> — This is <strong>not convex</strong> (Gaussian curve).
+</div>
+
+<div class="example-box">
+  <strong>Multiple Minima Example</strong><br>
+  Function constant in interval [a,b], increases outside. All points in [a,b] are global minima.
+</div>
+
+<div class="summary-box">
+  <strong>Final Quick Summary</strong>
+  <ul>
+    <li>Convex ⇒ local min = global min</li>
+    <li>Multiple minima ⇒ form convex set (interval in 1D)</li>
+    <li>Optimality condition: &nabla;f(x*) = 0</li>
+    <li>Key rules:
+      <ul>
+        <li>Sum of convex → convex</li>
+        <li>Convex &#8728; convex (with non-decreasing) → convex</li>
+        <li>Convex &#8728; linear → convex</li>
+      </ul>
+    </li>
+    <li>Be careful: Convex &#8728; convex &ne; always convex</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- LECTURE 2 -->
+<h2>Lecture 2: Applications of Optimization in Machine Learning</h2>
+
+<h3>Problem Setup</h3>
+<p><strong>Goal:</strong> Predict a real-valued output using input features. Learn a function: h: R<sup>d</sup> → R</p>
+<p><strong>Data Representation:</strong> Training data: (x<sub>i</sub>, y<sub>i</sub>), i = 1,2,...,n</p>
+<ul>
+  <li>Features: x<sub>i</sub> &isin; R<sup>d</sup></li>
+  <li>Output: y<sub>i</sub> &isin; R</li>
+</ul>
+<p><strong>Linear Model:</strong> Assume linear relationship: h(x) = w<sup>T</sup>x, w &isin; R<sup>d</sup></p>
+<p><strong>Example:</strong> Features = (height, weight, BMI). Model predicts salary/score using weighted sum.</p>
+
+<h3>Performance Measure (SSE)</h3>
+<p><strong>Sum of Squared Errors:</strong> Measures prediction error:</p>
+<div class="formula">
+  f(w) = &sum;<sub>i=1</sub><sup>n</sup> (w<sup>T</sup>x<sub>i</sub> − y<sub>i</sub>)&sup2; <br><br>
+  Standard Optimization Form: min<sub>w&isin;R<sup>d</sup></sub> (1/2) &sum;<sub>i=1</sub><sup>n</sup> (w<sup>T</sup>x<sub>i</sub> − y<sub>i</sub>)&sup2;
+</div>
+<p><strong>Reason for ½:</strong> Simplifies derivative (cancels factor of 2).</p>
+
+<h3>Convexity of SSE</h3>
+<p><strong>Key Idea:</strong> Convex ⇒ global minimum guaranteed.</p>
+<h4>Step-by-step Reasoning</h4>
+<p>Each term: h<sub>i</sub>(w) = (w<sup>T</sup>x<sub>i</sub> − y<sub>i</sub>)&sup2; is convex because:</p>
+<ul>
+  <li>z&sup2; is convex</li>
+  <li>w<sup>T</sup>x<sub>i</sub> − y<sub>i</sub> is linear</li>
+  <li>Convex &#8728; Linear = Convex</li>
+</ul>
+<p>Sum of convex functions: f(w) = &sum; h<sub>i</sub>(w) is also convex.</p>
+<p><strong>Conclusion:</strong> SSE is convex → no local minima problem.</p>
+
+<h3>Matrix Formulation</h3>
+<h4>Definitions</h4>
+<ul>
+  <li>X &isin; R<sup>n&times;d</sup>: data matrix</li>
+  <li>y &isin; R<sup>n</sup>: output vector</li>
+</ul>
+<div class="formula">
+  Compact Form: f(w) = (1/2)‖Xw − y‖&sub2;&sup2; &nbsp; or &nbsp; f(w) = (1/2)(Xw − y)<sup>T</sup>(Xw − y)
+</div>
+
+<h3>Gradient &amp; Closed-Form Solution</h3>
+<div class="formula">Gradient: &nabla;f(w) = X<sup>T</sup>Xw − X<sup>T</sup>y</div>
+<h4>Optimal Solution (Normal Equation)</h4>
+<p>Set gradient = 0:</p>
+<div class="formula">
+  X<sup>T</sup>Xw* = X<sup>T</sup>y <br>
+  w* = (X<sup>T</sup>X)<sup>−1</sup>X<sup>T</sup>y
+</div>
+<p><strong>Special Case:</strong> If X<sup>T</sup>X is not invertible → use pseudo-inverse. Example: redundant features → singular matrix.</p>
+
+<h3>Computational Issues</h3>
+<p><strong>Problem with Closed Form:</strong> Matrix inverse cost: O(d&sup3;)</p>
+<p><strong>Example:</strong> Image with 1 million features → infeasible computation.</p>
+
+<h3>Gradient Descent (GD)</h3>
+<p><strong>Idea:</strong> Iteratively update weights instead of solving directly.</p>
+<div class="formula">
+  Update Rule: w<sub>t+1</sub> = w<sub>t</sub> − &eta;<sub>t</sub>(X<sup>T</sup>Xw<sub>t</sub> − X<sup>T</sup>y) &nbsp; where &eta;<sub>t</sub> = learning rate.
+</div>
+<h4>Advantages</h4>
+<ul>
+  <li>Avoids matrix inversion</li>
+  <li>Works for large datasets</li>
+</ul>
+
+<h3>Stochastic Gradient Descent (SGD)</h3>
+<p><strong>Problem with GD:</strong> Uses full dataset → slow for large n.</p>
+<p><strong>SGD Idea:</strong> Use random sample instead of full data.</p>
+<div class="formula">Update (conceptual): w &larr; w − &eta; &middot; gradient from few samples</div>
+
+<h3>Key Insight</h3>
+<p>Each step is noisy, but over time:</p>
+<ul>
+  <li>Errors cancel out</li>
+  <li>Converges to optimal w*</li>
+</ul>
+<p><strong>Example:</strong> Dataset = billions of points. SGD uses mini-batches (e.g., 32, 64 samples).</p>
+
+<div class="summary-box">
+  <strong>Final Quick Summary</strong><br>
+  Model: h(x) = w<sup>T</sup>x | Loss: ½ &sum;(w<sup>T</sup>x<sub>i</sub> − y<sub>i</sub>)&sup2;<br>
+  Convexity: Global optimum guaranteed. Solution: w* = (X<sup>T</sup>X)<sup>−1</sup>X<sup>T</sup>y<br>
+  Issues: Inversion expensive (O(d&sup3;)).<br>
+  Alternatives: Gradient Descent → iterative, Stochastic Gradient Descent → scalable
+</div>
+
+<hr>
+
+<!-- LECTURE 3 -->
+<h2>Lecture 3: Revisiting Constrained Optimization</h2>
+
+<h3>Review: Unconstrained Optimization</h3>
+<p><strong>Key Idea (Convex Case):</strong></p>
+<ul>
+  <li>If f is convex: local minimum = global minimum.</li>
+  <li><strong>First-Order Optimality Condition:</strong> &nabla;f(x*) = 0 ⇒ x* is global optimum</li>
+</ul>
+<p><strong>Algorithm:</strong> Use Gradient Descent: iteratively move towards &nabla;f(x) = 0.</p>
+
+<h3>Constrained Optimization Problem</h3>
+<ul>
+  <li><strong>Standard Form:</strong> min<sub>x&isin;R<sup>n</sup></sub> f(x) subject to h(x) ≤ 0</li>
+  <li><strong>Goal:</strong> Find optimal x that minimizes f(x) while satisfying h(x) ≤ 0.</li>
+  <li><strong>Example:</strong> Minimize cost subject to budget ≤ limit, resource usage ≤ capacity.</li>
+</ul>
+
+<h3>Lagrangian Function</h3>
+<ul>
+  <li><strong>Definition:</strong> L(x,&lambda;) = f(x) + &lambda;h(x)</li>
+  <li><strong>Components:</strong> x: decision variable &amp; &lambda; ≥ 0: Lagrange multiplier</li>
+</ul>
+<p><strong>Intuition:</strong> Converts constrained problem into unconstrained form.</p>
+
+<h4>Case 1 (Constraint satisfied)</h4>
+<p>h(x) ≤ 0 ⟹ &lambda;h(x) ≤ 0. Maximum occurs at &lambda; = 0.</p>
+<div class="formula">max<sub>&lambda;≥0</sub> L(x,&lambda;) = f(x)</div>
+
+<h4>Case 2 (Constraint violated)</h4>
+<p>h(x) &gt; 0 ⟹ &lambda;h(x) &gt; 0.</p>
+<div class="formula">As &lambda; → &infin;, max<sub>&lambda;≥0</sub> L(x,&lambda;) = &infin;</div>
+<p><strong>Insight:</strong> Invalid points get infinite penalty; valid points retain original value.</p>
+
+<h3>Primal Problem</h3>
+<ul>
+  <li><strong>Reformulation:</strong> min<sub>x</sub> max<sub>&lambda;≥0</sub> L(x,&lambda;)</li>
+  <li><strong>Logic:</strong> If constraint violated → value = &infin;. Minimization automatically selects feasible points.</li>
+  <li><strong>Output:</strong> Optimal solution: x*. Optimal value: f(x*).</li>
+</ul>
+
+<h3>Dual Problem</h3>
+<ul>
+  <li><strong>Definition (swap order):</strong> max<sub>&lambda;≥0</sub> min<sub>x</sub> L(x,&lambda;)</li>
+  <li><strong>Dual Function:</strong> g(&lambda;) = min<sub>x</sub>[f(x) + &lambda;h(x)]</li>
+  <li><strong>Interpretation:</strong> For each &lambda;, solve an unconstrained minimization.</li>
+</ul>
+
+<h3>Properties of Dual Problem</h3>
+<p><strong>Easier Optimization:</strong> Inner problem min<sub>x</sub>L(x,&lambda;) is unconstrained → easier to solve.</p>
+<p><strong>Concavity:</strong> g(&lambda;) is always concave, even if f is not convex.</p>
+<div class="formula">Dual Problem: max<sub>&lambda;≥0</sub> g(&lambda;)</div>
+<p>Concave maximization → well-behaved.</p>
+
+<h3>Primal vs Dual Relationship</h3>
+<p><strong>Important Concept: Duality Gap</strong></p>
+<div class="formula">min<sub>x</sub> max<sub>&lambda;</sub> L(x,&lambda;) &ne; max<sub>&lambda;</sub> min<sub>x</sub> L(x,&lambda;)</div>
+<p><strong>Duality Gap:</strong> Difference between primal optimal value and dual optimal value.</p>
+<p><strong>Key Insight:</strong> Gap = 0 → strong duality, Gap &ne; 0 → weak duality</p>
+
+<h3>Intuition Summary</h3>
+<ul>
+  <li><strong>Lagrangian:</strong> Adds penalty for constraint violation.</li>
+  <li><strong>Primal:</strong> Focuses on feasible solutions.</li>
+  <li><strong>Dual:</strong> Converts problem into easier unconstrained form.</li>
+  <li><strong>Dual provides:</strong> Lower bound on primal solution.</li>
+</ul>
+
+<div class="summary-box">
+  <strong>Final Quick Summary</strong><br>
+  Problem: min f(x) s.t. h(x) ≤ 0 | Lagrangian: L(x,&lambda;) = f(x) + &lambda;h(x)<br>
+  Primal: min<sub>x</sub> max<sub>&lambda;</sub> L(x,&lambda;) | Dual: max<sub>&lambda;</sub> min<sub>x</sub> L(x,&lambda;)<br>
+  Dual Function: g(&lambda;) = min<sub>x</sub>L(x,&lambda;)
+</div>
+<div class="memory-trick">Memory Trick: "Primal = min then max, Dual = max then min."</div>
+
+<hr>
+
+<!-- LECTURE 4 -->
+<h2>Lecture 4: Relation between Primal and Dual Problem, KKT Conditions</h2>
+
+<h3>Primal vs Dual Problem</h3>
+<ul>
+  <li><strong>Lagrangian Function:</strong> L(x,&lambda;) = f(x) + &lambda;h(x), &lambda; ≥ 0</li>
+  <li><strong>Primal Problem:</strong> min<sub>x</sub> max<sub>&lambda;≥0</sub> L(x,&lambda;) — Focus: feasible solutions (h(x) ≤ 0).</li>
+  <li><strong>Dual Problem:</strong> max<sub>&lambda;≥0</sub> min<sub>x</sub> L(x,&lambda;) — Focus: optimize over multipliers &lambda;.</li>
+</ul>
+
+<h3>Auxiliary Function J(x)</h3>
+<div class="formula">
+  J(x) = f(x) if h(x) ≤ 0; &nbsp; J(x) = &infin; if h(x) &gt; 0
+</div>
+<p><strong>Key Insight:</strong> Converts constrained → unconstrained problem. Penalizes infeasible points with &infin;.</p>
+<p><strong>Important Relation:</strong> L(x,&lambda;) ≤ J(x), &forall; x, &lambda; ≥ 0 — Lagrangian provides a lower bound.</p>
+
+<h3>Duality Theorems</h3>
+<ul>
+  <li><strong>Weak Duality (Always True):</strong> g(&lambda;*) ≤ f(x*) — Dual optimum ≤ Primal optimum. Meaning: dual gives a lower bound.</li>
+  <li><strong>Strong Duality:</strong> g(&lambda;*) = f(x*) — Holds if f(x) is convex, h(x) is convex, and regularity conditions are satisfied.</li>
+</ul>
+<p><strong>Importance:</strong> solve dual instead of primal, same optimal value but often easier.</p>
+
+<h3>KKT Conditions</h3>
+<h4>A. Single Inequality Constraint</h4>
+<p>Problem: min f(x) s.t. h(x) ≤ 0</p>
+<p><strong>KKT Conditions:</strong></p>
+<ol>
+  <li><strong>Stationarity:</strong> &nabla;f(x*) + &lambda;*&nabla;h(x*) = 0</li>
+  <li><strong>Complementary Slackness:</strong> &lambda;*h(x*) = 0 — Meaning: either constraint active (h(x*) = 0) or multiplier zero (&lambda;* = 0).</li>
+  <li><strong>Primal Feasibility:</strong> h(x*) ≤ 0</li>
+  <li><strong>Dual Feasibility:</strong> &lambda;* ≥ 0</li>
+</ol>
+
+<h4>B. Multiple Constraints (General Case)</h4>
+<ul>
+  <li><strong>Problem:</strong> Inequality: h<sub>i</sub>(x) ≤ 0, Equality: l<sub>j</sub>(x) = 0</li>
+  <li><strong>Lagrangian:</strong> L(x,u,v) = f(x) + &sum;<sub>i=1</sub><sup>m</sup> u<sub>i</sub>h<sub>i</sub>(x) + &sum;<sub>j=1</sub><sup>n</sup> v<sub>j</sub>l<sub>j</sub>(x)</li>
+</ul>
+<p><strong>General KKT Conditions:</strong></p>
+<ol>
+  <li><strong>Stationarity:</strong> &nabla;f(x*) + &sum;u<sub>i</sub>*&nabla;h<sub>i</sub>(x*) + &sum;v<sub>j</sub>*&nabla;l<sub>j</sub>(x*) = 0</li>
+  <li><strong>Complementary Slackness:</strong> u<sub>i</sub>*h<sub>i</sub>(x*) = 0, &forall; i</li>
+  <li><strong>Primal Feasibility:</strong> h<sub>i</sub>(x*) ≤ 0, l<sub>j</sub>(x*) = 0</li>
+  <li><strong>Dual Feasibility:</strong> u<sub>i</sub>* ≥ 0</li>
+</ol>
+
+<h3>Key Results</h3>
+<ul>
+  <li><strong>Necessity:</strong> If optimal → must satisfy KKT (under conditions).</li>
+  <li><strong>Sufficiency:</strong>
+    <ul>
+      <li>Convex case → global optimum.</li>
+      <li>General case → local optimum.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Intuition</h3>
+<ul>
+  <li>Multipliers &lambda;: measure importance of constraints.</li>
+  <li>Complementary slackness: either constraint is active or ignored.</li>
+  <li>KKT = balance condition: gradient of objective + constraints = 0.</li>
+</ul>
+
+<div class="summary-box">
+  <strong>Final Quick Summary</strong><br>
+  Primal: min<sub>x</sub> max<sub>&lambda;</sub> L(x,&lambda;) | Dual: max<sub>&lambda;</sub> min<sub>x</sub> L(x,&lambda;)<br>
+  Weak Duality: g(&lambda;*) ≤ f(x*) | Strong Duality: g(&lambda;*) = f(x*)<br>
+  KKT Conditions: Stationarity, Complementary Slackness, Primal Feasibility, Dual Feasibility
+</div>
+<div class="memory-trick">Memory Trick: "Stationary + Feasible + Slackness = Optimal (KKT)."</div>
+
+<hr>
+
+<!-- LECTURE 5 -->
+<h2>Lecture 5: KKT Conditions Continued</h2>
+
+<h3>Core Concepts</h3>
+<p><strong>Constrained Optimization in ML:</strong> Many ML problems are formulated as:</p>
+<div class="formula">min f(x) subject to constraints</div>
+<p><strong>Example:</strong> classification with margin constraints, resource or boundary restrictions in models.</p>
+
+<p><strong>Convexity:</strong> In ML, most objective functions are convex. Property: convex ⇒ local optimum = global optimum.</p>
+
+<p><strong>Strong Duality:</strong> If the objective function and constraints are convex: min max = max min</p>
+<p><strong>Importance:</strong> allows solving the dual instead of the primal, often easier and more efficient.</p>
+
+<p><strong>Dual Problem – Benefits:</strong> Easier to solve, enables non-linear models, kernel methods, and works well in high dimensions.</p>
+
+<p><strong>KKT Conditions:</strong> Provide optimality conditions. For convex problems: necessary and sufficient.</p>
+
+<h3>Key Formulae (SVM Focus)</h3>
+<p><strong>Objective Function (Quadratic):</strong> min<sub>w</sub> (1/2)‖w‖&sup2;</p>
+<p>Minimizes magnitude of weight vector → leads to maximum margin.</p>
+<div class="formula">Expanded Form: ‖w‖&sup2; = &sum;<sub>i=1</sub><sup>d</sup> w<sub>i</sub>&sup2;</div>
+<p><strong>Linear Constraints:</strong> y<sub>i</sub>(w<sup>T</sup>x<sub>i</sub>) ≥ 1, &forall; i</p>
+<p><strong>Interpretation:</strong></p>
+<ul>
+  <li>If y<sub>i</sub> = +1: w<sup>T</sup>x<sub>i</sub> ≥ 1</li>
+  <li>If y<sub>i</sub> = −1: w<sup>T</sup>x<sub>i</sub> ≤ −1</li>
+</ul>
+<p>Ensures correct classification with margin.</p>
+
+<h3>Key ML Examples</h3>
+<div class="example-box">
+  <strong>Support Vector Machine (SVM):</strong>
+  <ul>
+    <li>Type: constrained optimization problem</li>
+    <li>Structure: objective quadratic (convex), constraints linear</li>
+    <li>Key idea: find hyperplane maximizing margin between classes</li>
+    <li>Example: classify emails (Spam +1 vs Not Spam −1)</li>
+  </ul>
+  <strong>Linear Regression:</strong>
+  <ul>
+    <li>Type: unconstrained optimization</li>
+    <li>Objective: min &sum;(w<sup>T</sup>x<sub>i</sub> − y<sub>i</sub>)&sup2;</li>
+    <li>No constraints involved.</li>
+  </ul>
+</div>
+
+<h3>Optimization Flow (Big Picture)</h3>
+<p><strong>Directional Movement:</strong> Move in direction of −&nabla;f(x) → gradient descent.</p>
+<p><strong>Lagrangian Formulation:</strong> Add constraints using: L(x,&lambda;) = f(x) + &lambda;h(x)</p>
+<p><strong>Primal → Dual:</strong> Use duality theory and KKT conditions to transform problem into easier form.</p>
+
+<h3>Intuition Summary</h3>
+<ul>
+  <li>Convexity → no local traps.</li>
+  <li>Dual problem → easier computation.</li>
+  <li>KKT → bridge between primal and dual.</li>
+  <li>SVM → practical example of all concepts.</li>
+</ul>
+
+<div class="summary-box">
+  <strong>Final Quick Summary</strong><br>
+  ML problems → often constrained optimization.<br>
+  Convex ⇒ global optimum guaranteed.<br>
+  Strong Duality: min max = max min<br><br>
+  <strong>SVM:</strong> Objective: minimize ‖w‖&sup2; | Constraint: y<sub>i</sub>w<sup>T</sup>x<sub>i</sub> ≥ 1<br>
+  Tools: Gradient Descent, Lagrangian, KKT conditions.
+</div>
+<div class="memory-trick">Memory Trick: "Convex + KKT + Duality = Solve ML Optimization Easily."</div>
+
+</body>
+</html>

@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>Week 8: Short Notes - Machine Learning Foundations</title>
+<style>
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    line-height: 1.6;
+    color: #222;
+    background: #fdfdfd;
+  }
+  h1 {
+    text-align: center;
+    border-bottom: 3px solid #333;
+    padding-bottom: 10px;
+  }
+  h2 {
+    margin-top: 50px;
+    color: #1a3b6d;
+    border-bottom: 2px solid #1a3b6d;
+    padding-bottom: 5px;
+  }
+  h3 {
+    color: #333;
+    margin-top: 30px;
+  }
+  h4 {
+    margin-bottom: 5px;
+    color: #444;
+  }
+  ul {
+    margin-top: 5px;
+  }
+  .formula {
+    background: #f2f4f8;
+    border-left: 4px solid #1a3b6d;
+    padding: 10px 15px;
+    margin: 10px 0;
+    font-family: 'Cambria Math', Cambria, serif;
+    font-size: 1.05em;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 15px 0;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    text-align: left;
+  }
+  th {
+    background: #1a3b6d;
+    color: white;
+  }
+  tr:nth-child(even) {
+    background: #f6f8fb;
+  }
+  .summary-box {
+    background: #eef7ee;
+    border: 1px solid #a8d0a8;
+    border-radius: 6px;
+    padding: 12px 18px;
+    margin: 15px 0;
+    font-style: italic;
+  }
+  .example-box {
+    background: #fff8e6;
+    border: 1px solid #e0c88a;
+    border-radius: 6px;
+    padding: 12px 18px;
+    margin: 15px 0;
+  }
+  hr {
+    margin: 40px 0;
+    border: none;
+    border-top: 1px dashed #999;
+  }
+  code {
+    background: #eee;
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Week 8: Short Notes — Machine Learning Foundations</h1>
+
+<!-- LECTURE 1 -->
+<h2>Lecture 1: Pillars of Machine Learning</h2>
+
+<h3>Foundational Pillars of Machine Learning</h3>
+<p>Machine Learning is built on 3 core mathematical pillars:</p>
+<div class="formula">Linear Algebra + Probability + Optimization</div>
+<p>These work together to:</p>
+<ul>
+  <li>Understand data</li>
+  <li>Handle uncertainty</li>
+  <li>Make best decisions</li>
+</ul>
+
+<h3>Linear Algebra – Understanding Data Structure</h3>
+<p><strong>Purpose:</strong> Helps us understand relationships between variables (features).</p>
+<h4>Key Ideas</h4>
+<ul>
+  <li>Data representation:
+    <ul>
+      <li>Vectors → single data point</li>
+      <li>Matrices → dataset</li>
+    </ul>
+  </li>
+  <li>Linear Relationship: one variable changes proportionally with another
+    <ul><li>Example: height ↑ → weight ↑</li></ul>
+  </li>
+</ul>
+<div class="formula">
+  y = mx + c <br>
+  In ML form: y = w<sup>T</sup>x + b <br>
+  Where: x = input features, w = weights, b = bias
+</div>
+<h4>Why Important?</h4>
+<p>Forms the base of models like:</p>
+<ul>
+  <li>Linear Regression</li>
+  <li>Neural Networks</li>
+</ul>
+
+<h3>Probability – Handling Uncertainty</h3>
+<p><strong>Purpose:</strong> Models uncertainty (noise) in real-world data.</p>
+<h4>Why Noise Exists</h4>
+<ul>
+  <li>Measurement errors</li>
+  <li>Missing values</li>
+  <li>Natural variations</li>
+</ul>
+<h4>Key Concepts</h4>
+<ul>
+  <li>Random Variables</li>
+  <li>Probability Distribution</li>
+  <li>Expectation (Mean)</li>
+</ul>
+<div class="formula">
+  Probability: P(A) = favorable outcomes / total outcomes <br><br>
+  Gaussian (Normal Distribution): f(x) = (1 / &radic;(2&pi;&sigma;&sup2;)) &middot; e<sup>−(x−&mu;)&sup2; / (2&sigma;&sup2;)</sup> <br>
+  Where: &mu; = mean, &sigma; = standard deviation
+</div>
+<h4>Why Important?</h4>
+<p>Helps models:</p>
+<ul>
+  <li>Handle imperfect data</li>
+  <li>Predict realistically</li>
+  <li>Avoid overconfidence</li>
+</ul>
+
+<h3>Optimization – Finding the Best Model</h3>
+<p><strong>Purpose:</strong> Finds the best possible model from many choices.</p>
+<p><strong>Problem:</strong> There are infinite possible models (lines/curves). Which one is best? → Optimization solves this.</p>
+<h4>Key Concepts</h4>
+<ul>
+  <li>Loss Function (Error measure)</li>
+  <li>Gradient Descent (learning method)</li>
+</ul>
+<div class="formula">
+  Mean Squared Error (MSE): J(w) = (1/n) &sum; (y<sub>i</sub> − &ycirc;<sub>i</sub>)&sup2; <br><br>
+  Gradient Descent Update: w = w − &alpha; &middot; &part;J/&part;w <br>
+  Where: J(w) = loss, &alpha; = learning rate
+</div>
+<h4>Why Important?</h4>
+<ul>
+  <li>Chooses best parameters</li>
+  <li>Improves model accuracy</li>
+  <li>Core of training ML models</li>
+</ul>
+
+<h3>Putting It All Together (Example)</h3>
+<p><strong>Height → Weight Prediction</strong></p>
+<p><strong>Step 1: Linear Algebra</strong> — Model relationship: Weight = w·Height + b</p>
+<p><strong>Step 2: Probability</strong> — Accounts for: same height → different weights; noise in real data</p>
+<p><strong>Step 3: Optimization</strong> — Finds best w and b; minimizes prediction error</p>
+
+<h4>Quick Revision Table</h4>
+<table>
+  <tr><th>Pillar</th><th>Role</th><th>Key Formula</th></tr>
+  <tr><td>Linear Algebra</td><td>Structure</td><td>y = w<sup>T</sup>x + b</td></tr>
+  <tr><td>Probability</td><td>Uncertainty</td><td>Gaussian Distribution</td></tr>
+  <tr><td>Optimization</td><td>Best Model</td><td>Gradient Descent</td></tr>
+</table>
+
+<div class="summary-box">
+  <strong>Final Summary:</strong> Think of ML like this:<br>
+  Linear Algebra → "What is the pattern?"<br>
+  Probability → "Why isn't it perfect?"<br>
+  Optimization → "What is the best answer?"
+</div>
+
+<hr>
+
+<!-- LECTURE 2 -->
+<h2>Lecture 2: Introduction to Optimization</h2>
+
+<p>Optimization is the <strong>heart of Machine Learning</strong>. It helps convert <strong>data → decisions</strong>.</p>
+
+<h3>What is Optimization?</h3>
+<p><strong>Definition:</strong> Optimization is the process of finding the best possible solution from many choices.</p>
+<p><strong>In Machine Learning:</strong></p>
+<ul>
+  <li>Find best model</li>
+  <li>Find best parameters (weights)</li>
+  <li>Find best predictions</li>
+</ul>
+<p>"Best" means: Minimize loss (error) OR Maximize reward (accuracy, profit, etc.)</p>
+
+<h3>Why Optimization is Important?</h3>
+<ul>
+  <li>Every ML algorithm depends on it</li>
+  <li>Works for different tasks: Classification, Regression, Clustering</li>
+  <li>Provides a common mathematical framework</li>
+</ul>
+
+<div class="example-box">
+  <strong>Cow and Grass Example (Intuition)</strong><br>
+  Setup: Cow position: (20, 30), Grass position: (40, 40)<br>
+  Goal: Find position (x1, x2) where cow gets closest to grass.<br><br>
+  Objective Function (Distance): f(x) = (x1−40)&sup2; + (x2−40)&sup2; — Minimize this distance.<br><br>
+  Constraints:<br>
+  1. Rope Constraint (Circle Region): (x1−20)&sup2; + (x2−30)&sup2; ≤ 100<br>
+  2. Fence Constraint (Boundary Line): x1 ≤ 25<br>
+  Cow must stay inside allowed region.
+</div>
+
+<h3>General Optimization Framework</h3>
+<p>Every optimization problem has 3 main components:</p>
+<ol>
+  <li><strong>Objective Function</strong> — Function to optimize (minimize/maximize). Examples: Distance, Loss function (MSE, Cross-Entropy)</li>
+  <li><strong>Variables (Parameters)</strong> — Values we are trying to find: x &isin; R<sup>D</sup>, x = (x1, x2, ..., xD)</li>
+  <li><strong>Constraints</strong> — Restrictions on values of x
+    <ul>
+      <li>Inequality Constraints: g<sub>i</sub>(x) ≤ 0 — Example: (x1−20)&sup2; + (x2−30)&sup2; − 100 ≤ 0</li>
+      <li>Equality Constraints: h<sub>j</sub>(x) = 0 — Example: Budget fixed, exact resource usage</li>
+    </ul>
+  </li>
+</ol>
+
+<h3>Standard Form</h3>
+<div class="formula">
+  General Optimization Problem: Minimize f(x) <br>
+  Subject to: g<sub>i</sub>(x) ≤ 0 (i = 1,2,...,k), h<sub>j</sub>(x) = 0 (j = 1,2,...,L)
+</div>
+
+<h3>Important Conversions</h3>
+<ol>
+  <li>Maximization → Minimization: Maximize f(x) = Minimize −f(x)</li>
+  <li>Constraint Conversion: Any constraint can be written as g(x) ≤ 0, h(x) = 0</li>
+</ol>
+
+<h3>In Machine Learning Context — Example: Linear Regression</h3>
+<ul>
+  <li><strong>Objective:</strong> min &sum;(y − &ycirc;)&sup2;</li>
+  <li><strong>Variables:</strong> Weights w, bias b</li>
+  <li><strong>Optimization finds:</strong> Best w, b that minimize error</li>
+</ul>
+
+<h4>Quick Revision Table</h4>
+<table>
+  <tr><th>Component</th><th>Meaning</th><th>Example</th></tr>
+  <tr><td>Objective Function</td><td>What to optimize</td><td>Distance, Loss</td></tr>
+  <tr><td>Variables</td><td>Unknowns</td><td>x, w, b</td></tr>
+  <tr><td>Constraints</td><td>Restrictions</td><td>Rope, Fence</td></tr>
+</table>
+
+<div class="summary-box">
+  <strong>Final Summary:</strong> Optimization is like:<br>
+  Target → Objective function | Rules → Constraints | Search → Finding best solution<br><br>
+  <strong>One-Line Summary:</strong> Optimization = Finding the best solution under given conditions
+</div>
+
+<hr>
+
+<!-- LECTURE 3 -->
+<h2>Lecture 3: Solving an Unconstrained Optimization Problem (Part 1)</h2>
+
+<h3>What is an Optimization Problem?</h3>
+<p>It consists of:</p>
+<ul>
+  <li>Objective Function → what to minimize/maximize</li>
+  <li>Constraints → restrictions (optional)</li>
+</ul>
+
+<h3>Unconstrained Optimization</h3>
+<ul>
+  <li>No restrictions on variables</li>
+  <li>Only focus: minimize or maximize f(x)</li>
+</ul>
+
+<h3>Traditional Method (School Calculus)</h3>
+<p>Steps:</p>
+<ol>
+  <li>Find derivative</li>
+  <li>Set it to zero</li>
+  <li>Solve for x: f′(x) = 0</li>
+</ol>
+<p>Works well for simple functions. <strong>Limitations:</strong> Hard for complex equations, not scalable for ML problems.</p>
+
+<h3>Why Iterative Methods?</h3>
+<ul>
+  <li>Computers cannot "think" like humans</li>
+  <li>They follow step-by-step updates</li>
+</ul>
+<p><strong>Iterative Optimization Idea:</strong> Start with an initial guess, improve it step-by-step, move toward minimum.</p>
+
+<h3>Direction Concept</h3>
+<p><strong>What is Direction d?</strong> Tells which way to move — Left (negative), Right (positive)</p>
+<p><strong>Best Direction:</strong> d = −f′(x) — Points toward minimum</p>
+
+<h3>Update Rules (Important Formulae)</h3>
+<div class="formula">
+  General Update Rule: x<sub>t+1</sub> = x<sub>t</sub> + d <br>
+  Derivative-Based Rule: x<sub>t+1</sub> = x<sub>t</sub> − f′(x<sub>t</sub>)
+</div>
+
+<h3>Derivatives (Examples)</h3>
+<ul>
+  <li>Example 1: f(x) = (x−5)&sup2;, f′(x) = 2(x−5)</li>
+  <li>Example 2: f(x) = 3x&#8310; + 2x&#8309; + 3x&sup3; + 5x&sup2; + 2, f′(x) = 18x&#8309; + 10x&#8308; + 9x&sup2; + 10x</li>
+</ul>
+
+<div class="example-box">
+  <strong>Example 1: Simple Analytical Solution</strong> — f(x) = (x−5)&sup2;<br>
+  Minimum = 0 at x = 5. Calculus: 2(x−5) = 0 ⇒ x = 5<br><br>
+  <strong>Example 2: Complex Polynomial</strong> — f(x) = 3x&#8310; + 2x&#8309; + 3x&sup3; + 5x&sup2; + 2<br>
+  Derivative equation: 18x&#8309; + 10x&#8308; + 9x&sup2; + 10x = 0 — Very hard to solve manually → Need iterative methods<br><br>
+  <strong>Example 3: Iterative Failure (Oscillation)</strong> — f(x) = (x−5)&sup2;, x0 = 10<br>
+  Iteration 1: f′(10) = 10 ⇒ x1 = 0<br>
+  Iteration 2: f′(0) = −10 ⇒ x2 = 10<br>
+  Keeps jumping: 10 → 0 → 10 → 0. Problem: Step size too large
+</div>
+
+<h3>Key Problem</h3>
+<ul>
+  <li>Direction is correct</li>
+  <li>Step size too large</li>
+</ul>
+
+<h4>Quick Revision Table</h4>
+<table>
+  <tr><th>Concept</th><th>Key Idea</th></tr>
+  <tr><td>Unconstrained</td><td>No restrictions</td></tr>
+  <tr><td>Direction</td><td>d = −f′(x)</td></tr>
+  <tr><td>Update Rule</td><td>x<sub>t+1</sub> = x<sub>t</sub> − f′(x<sub>t</sub>)</td></tr>
+  <tr><td>Problem</td><td>Overshooting</td></tr>
+  <tr><td>Solution</td><td>Control step size</td></tr>
+</table>
+
+<div class="summary-box">
+  <strong>Final Conclusion:</strong> Optimization depends on correct direction (− derivative) and proper step size.<br>
+  <strong>One-Line Summary:</strong> Wrong step size can break optimization even if direction is correct.
+</div>
+
+<hr>
+
+<!-- LECTURE 4 -->
+<h2>Lecture 4: Solving an Unconstrained Optimization Problem (Part 2)</h2>
+
+<h3>Optimization Step Size (η)</h3>
+<p>In optimization:</p>
+<ul>
+  <li>Direction −f′(x<sub>t</sub>) → tells where to go</li>
+  <li>Step size &eta;<sub>t</sub> → tells how far to go</li>
+</ul>
+<p>Both are equally important!</p>
+
+<h3>Why Step Size Matters?</h3>
+<h4>1. Overshooting (Oscillation Problem)</h4>
+<p>If step size is too large: algorithm jumps over minimum, keeps oscillating.</p>
+<h4>2. Too Small Step Size (Slow / Never Reach)</h4>
+<p>If step size decreases too fast: moves very slowly, may never reach minimum.</p>
+
+<h3>Goal of Step Size</h3>
+<p>A good step size must:</p>
+<ul>
+  <li>Decrease over time (avoid oscillation)</li>
+  <li>Not decrease too fast (ensure reachability)</li>
+</ul>
+
+<h3>Main Formula</h3>
+<div class="formula">
+  General Update Rule: x<sub>t+1</sub> = x<sub>t</sub> − &eta;<sub>t</sub> f′(x<sub>t</sub>) <br>
+  Where: &eta;<sub>t</sub> = step size (learning rate), f′(x<sub>t</sub>) = derivative
+</div>
+
+<h3>Step Size Strategies</h3>
+<h4>1. Geometric Step Size (Failure Case)</h4>
+<div class="formula">
+  &eta;<sub>t</sub> = 1/2<sup>t</sup> &nbsp; Sequence: 1, 1/2, 1/4, 1/8,... <br>
+  Property: &sum;&eta;<sub>t</sub> = 2 (Total movement is limited / finite)
+</div>
+<div class="example-box">
+  Start: x0 = 2, Target: x* = 5, Direction: +1<br>
+  Steps: 2 → 3 → 3.5 → 3.75 ... Final result → approaches 4 only. Cannot reach 5.
+</div>
+
+<h4>2. Harmonic Step Size (Successful Case)</h4>
+<div class="formula">
+  &eta;<sub>t</sub> = 1/(t+1) &nbsp; Sequence: 1, 1/2, 1/3, 1/4,... <br>
+  Property: &sum;&eta;<sub>t</sub> = &infin; (Total movement is unlimited)
+</div>
+<p>Result: Step sizes decrease slowly. Algorithm can reach minimum and avoid oscillation.</p>
+
+<h3>Key Concept: Cumulative Step Sum</h3>
+<table>
+  <tr><th>Step Type</th><th>Sum</th><th>Result</th></tr>
+  <tr><td>Geometric</td><td>Finite</td><td>✗ Cannot reach minimum</td></tr>
+  <tr><td>Harmonic</td><td>Infinite</td><td>✓ Can reach minimum</td></tr>
+</table>
+
+<h3>Conflicting Objectives</h3>
+<table>
+  <tr><th>Goal</th><th>Reason</th></tr>
+  <tr><td>Decrease over time</td><td>Avoid oscillation</td></tr>
+  <tr><td>Not too fast decrease</td><td>Ensure reachability</td></tr>
+</table>
+
+<div class="summary-box">
+  <strong>Final Intuition:</strong> Think of optimization like walking to a destination:<br>
+  Big steps → overshoot | Tiny steps → never reach | Balanced steps → reach smoothly<br><br>
+  <strong>One-Line Summary:</strong> Good step size = small enough to stabilize, big enough to reach
+</div>
+
+<h4>Quick Revision Table</h4>
+<table>
+  <tr><th>Concept</th><th>Key Idea</th></tr>
+  <tr><td>Step Size (&eta;)</td><td>Controls movement</td></tr>
+  <tr><td>Large Step</td><td>Oscillation</td></tr>
+  <tr><td>Small Step</td><td>Slow / stuck</td></tr>
+  <tr><td>Geometric</td><td>Finite distance ✗</td></tr>
+  <tr><td>Harmonic</td><td>Infinite distance ✓</td></tr>
+</table>
+
+<hr>
+
+<!-- LECTURE 5 -->
+<h2>Lecture 5: Basic Algorithm for Unconstrained Optimization — Gradient Descent</h2>
+
+<p><strong>Definition:</strong> Gradient Descent is a first-order iterative optimization algorithm used to minimize a function.</p>
+<ul>
+  <li>First-order → uses only derivative (slope)</li>
+  <li>Works step-by-step to reach minimum value</li>
+</ul>
+<p><strong>Intuition:</strong> You are on a hill. You move in the steepest downward direction. Eventually reach a valley (minimum).</p>
+
+<h3>How It Works</h3>
+<div class="formula">
+  Update Rule (Most Important): x<sub>t+1</sub> = x<sub>t</sub> − &eta;<sub>t</sub> f′(x<sub>t</sub>) <br>
+  Where: x<sub>t</sub> → current value, f′(x<sub>t</sub>) → slope (derivative), &eta;<sub>t</sub> → step size (learning rate)
+</div>
+
+<h3>Step Size (Learning Rate)</h3>
+<p>Recommended: &eta;<sub>t</sub> = 1/(t+1) — Prevents oscillation, ensures convergence.</p>
+
+<h3>Multidimensional Case</h3>
+<p>For higher dimensions: Derivative → Gradient (&nabla;f)</p>
+<div class="formula">
+  Update Rule: x<sub>t+1</sub> = x<sub>t</sub> − &eta;<sub>t</sub> &nabla;f(x<sub>t</sub>) <br>
+  Gradient = vector of partial derivatives
+</div>
+
+<h3>Convergence</h3>
+<p>As iterations increase: algorithm moves closer to minimum; step size decreases → stabilizes.</p>
+
+<h3>Local vs Global Minimum</h3>
+<ul>
+  <li><strong>Global Minimum:</strong> f(x*) ≤ f(x) &forall; x — Absolute best solution</li>
+  <li><strong>Local Minimum:</strong> f(x̂) ≤ f(x) for nearby points — Best only in a small region</li>
+</ul>
+<p><strong>Formal Definition:</strong> There exists &epsilon; &gt; 0 such that f(x̂) ≤ f(x), &forall; x &isin; (x̂ − &epsilon;, x̂ + &epsilon;)</p>
+
+<h3>Key Limitation</h3>
+<p>Gradient Descent usually finds local minimum — not guaranteed global minimum.</p>
+
+<h3>Special Case: Convex Functions</h3>
+<p><strong>Definition:</strong> A function with only one minimum. Local = Global. Result: Gradient Descent guaranteed to find best solution.</p>
+
+<div class="example-box">
+  <strong>Example 1: Simple Quadratic Function</strong> f(x) = (x−5)&sup2; — Convex function. Result: Minimum at x = 5. Gradient Descent always finds it.<br><br>
+  <strong>Example 2: Wiggly Function</strong> — Multiple peaks &amp; valleys. Different starting points → different results. May get stuck in local minimum.<br><br>
+  <strong>Hill Analogy:</strong> Sliding down a hill → stop in a valley. But a deeper valley may exist far away → local minimum problem.
+</div>
+
+<h3>Important Insight</h3>
+<p>Finding global minimum is very hard for general functions. In ML: local minimum is usually good enough.</p>
+
+<h4>Quick Revision Table</h4>
+<table>
+  <tr><th>Concept</th><th>Key Idea</th></tr>
+  <tr><td>Gradient Descent</td><td>Iterative minimization</td></tr>
+  <tr><td>Update Rule</td><td>x<sub>t+1</sub> = x<sub>t</sub> − &eta;<sub>t</sub> f′(x<sub>t</sub>)</td></tr>
+  <tr><td>Gradient</td><td>Multi-dimensional derivative</td></tr>
+  <tr><td>Step Size</td><td>Controls movement</td></tr>
+  <tr><td>Local Min</td><td>Nearby best</td></tr>
+  <tr><td>Global Min</td><td>Absolute best</td></tr>
+  <tr><td>Convex Function</td><td>Guarantees global min</td></tr>
+</table>
+
+<div class="summary-box">
+  <strong>Final Intuition:</strong> Gradient Descent = "Take small steps in the steepest downward direction until you can't go lower."
+</div>
+
+<hr>
+
+<!-- LECTURE 6 -->
+<h2>Lecture 6: Gradient Descent and Taylor Series</h2>
+
+<h3>Optimization (Unconstrained)</h3>
+<p><strong>Goal:</strong> Minimize a function: min f(x) — No constraints on x, only focus: find lowest value.</p>
+
+<h3>Gradient Descent Algorithm</h3>
+<p><strong>Idea:</strong> Move step-by-step in a direction that reduces function value.</p>
+<div class="formula">
+  Update Rule (Most Important): x<sub>t+1</sub> = x<sub>t</sub> + &eta;<sub>t</sub>(−f′(x<sub>t</sub>)) = x<sub>t</sub> − &eta;<sub>t</sub> f′(x<sub>t</sub>) <br>
+  Where: x<sub>t</sub> → current point, &eta;<sub>t</sub> → step size, −f′(x<sub>t</sub>) → descent direction
+</div>
+
+<h3>Step Size (η)</h3>
+<p>Small positive value (e.g., 0.1, 0.01)</p>
+<p><strong>Role:</strong> Controls how far to move. Must be not too large (oscillation), not too small (slow).</p>
+
+<h3>Descent Direction</h3>
+<p><strong>Definition:</strong> A direction d is descent if: f(x + &eta;d) &lt; f(x) — means function value decreases.</p>
+
+<h3>Taylor Series (Core Concept)</h3>
+<p><strong>Definition:</strong> Expands function near a point:</p>
+<div class="formula">
+  f(x + &eta;d) = f(x) + &eta;d f′(x) + (&eta;&sup2;d&sup2;/2) f″(x) + ... <br><br>
+  First-Order Approximation (for small &eta;): f(x+&eta;d) &asymp; f(x) + &eta;d f′(x) <br>
+  Change in Function Value: f(x+&eta;d) − f(x) &asymp; &eta;d f′(x) <br>
+  Condition for Descent: f(x+&eta;d) − f(x) &lt; 0 ⇒ &eta;d f′(x) &lt; 0 <br>
+  Since &eta; &gt; 0: d &middot; f′(x) &lt; 0
+</div>
+
+<h3>Why Choose Negative Derivative?</h3>
+<ul>
+  <li>f′(x) can be positive or negative</li>
+  <li>Fixed direction won't work</li>
+</ul>
+<div class="formula">
+  Solution: d = −f′(x) <br>
+  Proof: d &middot; f′(x) = (−f′(x)) &middot; f′(x) = −(f′(x))&sup2; ≤ 0 <br>
+  Always negative or zero
+</div>
+<p>Guarantees: function decreases, correct direction always chosen.</p>
+
+<div class="example-box">
+  <strong>Example:</strong> f(x) = (x−5)&sup2;, Derivative: f′(x) = 2(x−5)<br>
+  One Step Update: Suppose x = 8, &eta; = 0.1: x<sub>new</sub> = 8 − 0.1&middot;2(8−5) = 8 − 0.6 = 7.4 — Moved closer to 5
+</div>
+
+<h3>Key Intuition</h3>
+<p>Gradient Descent works because Taylor series tells us how function behaves locally, and negative derivative gives best decreasing direction.</p>
+
+<h4>Quick Revision Table</h4>
+<table>
+  <tr><th>Concept</th><th>Key Idea</th></tr>
+  <tr><td>Objective</td><td>Minimize f(x)</td></tr>
+  <tr><td>Update Rule</td><td>x<sub>t+1</sub> = x<sub>t</sub> − &eta;f′(x<sub>t</sub>)</td></tr>
+  <tr><td>Step Size</td><td>Controls movement</td></tr>
+  <tr><td>Descent Condition</td><td>d &middot; f′(x) &lt; 0</td></tr>
+  <tr><td>Best Direction</td><td>d = −f′(x)</td></tr>
+  <tr><td>Taylor Series</td><td>Local → global behavior</td></tr>
+</table>
+
+<div class="summary-box">
+  <strong>Final One-Line Summary:</strong> Gradient Descent works because the negative derivative always guarantees a decrease in function value (for small step size).
+</div>
+
+<hr>
+
+<!-- LECTURE 7 -->
+<h2>Lecture 7: Gradient Descent for Multivariate Functions</h2>
+
+<h3>Generalization to Higher Dimensions</h3>
+<ul>
+  <li>Earlier: Functions of a single variable f(x)</li>
+  <li>Now: Functions of multiple variables f(x1, x2, ..., xn)</li>
+  <li>In higher dimensions: Derivative → replaced by Gradient (&nabla;f). We move in multi-dimensional space instead of a line.</li>
+</ul>
+
+<h3>Gradient (∇f)</h3>
+<p>The gradient is a vector of partial derivatives:</p>
+<div class="formula">
+  &nabla;f = (&part;f/&part;x1, &part;f/&part;x2, ..., &part;f/&part;xn)
+</div>
+<h4>Key Points</h4>
+<ul>
+  <li>Shows rate of change in all directions</li>
+  <li>Direction → steepest increase</li>
+  <li>Magnitude → how fast the function changes</li>
+  <li>For minimization, we use the negative gradient</li>
+</ul>
+
+<h3>Partial Derivatives</h3>
+<ul>
+  <li>Derivative with respect to one variable at a time</li>
+  <li>Treat other variables as constants</li>
+</ul>
+<div class="example-box">
+  For f(x1, x2) at point (a,b):<br>
+  &part;f/&part;x1: derivative w.r.t. x1 (keep x2 constant)<br>
+  &part;f/&part;x2: derivative w.r.t. x2 (keep x1 constant)<br><br>
+  Gradient at (a,b): &nabla;f(a,b) = (&part;f/&part;x1, &part;f/&part;x2)
+</div>
+
+<h3>Gradient Descent Update Rule</h3>
+<div class="formula">
+  x<sub>t+1</sub> = x<sub>t</sub> − &eta;&nabla;f(x<sub>t</sub>)
+</div>
+<h4>Components</h4>
+<ul>
+  <li>x<sub>t</sub>: current position (vector)</li>
+  <li>x<sub>t+1</sub>: next position</li>
+  <li>&eta;: learning rate (step size)</li>
+  <li>&nabla;f(x<sub>t</sub>): gradient at current point</li>
+</ul>
+<p>We move in the direction of −&nabla;f(x<sub>t</sub>) (steepest decrease).</p>
+
+<h3>Algorithm Behavior & Convergence</h3>
+<ul>
+  <li>Always move downhill</li>
+  <li>Eventually reaches a local minimum</li>
+  <li>Works for unconstrained optimization problems</li>
+</ul>
+<p><strong>Important:</strong> May not find global minimum. Depends on starting point and learning rate (&eta;).</p>
+
+<div class="example-box">
+  <strong>Illustrative Example (Cow &amp; Grass)</strong><br>
+  Function: d(x1, x2) = (x1−40)&sup2; + (x2−40)&sup2;<br>
+  Minimum occurs at (40, 40). Gradient: &nabla;d = (2(x1−40), 2(x2−40))<br><br>
+  <strong>Algorithm Steps:</strong>
+  <ol>
+    <li>Start from any point</li>
+    <li>Compute gradient</li>
+    <li>Move in −&nabla;d direction</li>
+    <li>Repeat until reaching (40, 40)</li>
+  </ol>
+</div>
+
+<div class="summary-box">
+  <strong>Quick Revision Summary:</strong><br>
+  Gradient = multi-variable derivative | Direction of &nabla;f = steepest increase | Use −&nabla;f for minimization<br>
+  Update rule: x<sub>t+1</sub> = x<sub>t</sub> − &eta;&nabla;f(x<sub>t</sub>) | Converges to a local minimum
+</div>
+
+<hr>
+
+<!-- LECTURE 8 -->
+<h2>Lecture 8: Taylor Series in Higher Dimensions</h2>
+
+<h3>Idea (Connection with 1D)</h3>
+<ul>
+  <li>In 1D, Taylor expansion uses the derivative f′(x)</li>
+  <li>In higher dimensions, variables become vectors</li>
+</ul>
+<p><strong>Replacement:</strong> x → vector x, d → direction vector, f′(x) → &nabla;f(x)</p>
+
+<h3>Taylor Series Approximation (First Order)</h3>
+<div class="formula">
+  f(x + &eta;d) &asymp; f(x) + &eta;(d<sup>T</sup>&nabla;f(x))
+</div>
+<p><strong>Meaning:</strong> Predicts value of function at a nearby point using current value f(x), direction d, and step size &eta;.</p>
+
+<h3>Key Components</h3>
+<ul>
+  <li>x, d: vectors in n-dimensional space</li>
+  <li>&nabla;f(x): gradient (vector of partial derivatives)</li>
+  <li>d<sup>T</sup>&nabla;f(x): directional derivative (scalar)</li>
+</ul>
+<p><strong>Interpretation:</strong> Tells how fast the function changes in direction d.</p>
+
+<h3>Directional Derivative</h3>
+<div class="formula">d<sup>T</sup>&nabla;f(x)</div>
+<p><strong>Interpretation:</strong> &gt;0: function increases | &lt;0: function decreases | =0: no change</p>
+
+<h3>Choosing a Descent Direction</h3>
+<p><strong>Goal:</strong> Minimize function. <strong>Condition:</strong> d<sup>T</sup>&nabla;f(x) &lt; 0 — Ensures f(x+&eta;d) &lt; f(x)</p>
+
+<h3>Gradient Descent Choice</h3>
+<div class="formula">
+  Choice: d = −&nabla;f(x) <br>
+  Result: d<sup>T</sup>&nabla;f(x) = −‖&nabla;f(x)‖&sup2;
+</div>
+<p><strong>Key Insight:</strong> Norm squared is always positive. Result is always negative. Guaranteed decrease in function value (for small &eta;).</p>
+
+<h3>Geometry of Directions</h3>
+<ul>
+  <li>Gradient divides space into two halves:
+    <ul>
+      <li>d<sup>T</sup>&nabla;f(x) &gt; 0 → increase</li>
+      <li>d<sup>T</sup>&nabla;f(x) &lt; 0 → decrease</li>
+    </ul>
+  </li>
+  <li>Infinite directions exist where function decreases (the "green region")</li>
+</ul>
+
+<h3>Steepest Descent</h3>
+<p>Among all possible directions, the best choice is: d = −&nabla;f(x) — gives maximum decrease per step. Hence called the <strong>Steepest Descent Algorithm</strong>.</p>
+
+<h3>Unconstrained vs Constrained Optimization</h3>
+<p><strong>Unconstrained Optimization:</strong> No restrictions on x. Best direction = −&nabla;f(x).</p>
+<p><strong>Constrained Optimization:</strong> Must satisfy constraint g(x) ≤ 0.</p>
+<div class="example-box">
+  <strong>Example (Cow with Rope):</strong> Cow can only move within a fixed radius. Even if −&nabla;f(x) is best, it may break the constraint or move outside the allowed region. Need alternative directions → constraint-aware optimization methods.
+</div>
+
+<div class="summary-box">
+  <strong>Quick Revision Summary:</strong><br>
+  Taylor expansion in higher dimensions uses gradient instead of derivative.<br>
+  Key formula: f(x+&eta;d) &asymp; f(x) + &eta;(d<sup>T</sup>&nabla;f(x))<br>
+  For minimization: choose direction where dot product &lt; 0.<br>
+  Best direction: −&nabla;f(x) (steepest descent).<br>
+  Constraints may require different strategies.
+</div>
+
+</body>
+</html>

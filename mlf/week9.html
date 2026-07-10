@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>Week 9: Short Notes - Machine Learning Foundations</title>
+<style>
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    line-height: 1.6;
+    color: #222;
+    background: #fdfdfd;
+  }
+  h1 {
+    text-align: center;
+    border-bottom: 3px solid #333;
+    padding-bottom: 10px;
+  }
+  h2 {
+    margin-top: 50px;
+    color: #1a3b6d;
+    border-bottom: 2px solid #1a3b6d;
+    padding-bottom: 5px;
+  }
+  h3 {
+    color: #333;
+    margin-top: 30px;
+  }
+  h4 {
+    margin-bottom: 5px;
+    color: #444;
+  }
+  ul, ol {
+    margin-top: 5px;
+  }
+  .formula {
+    background: #f2f4f8;
+    border-left: 4px solid #1a3b6d;
+    padding: 10px 15px;
+    margin: 10px 0;
+    font-family: 'Cambria Math', Cambria, serif;
+    font-size: 1.05em;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 15px 0;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    text-align: left;
+  }
+  th {
+    background: #1a3b6d;
+    color: white;
+  }
+  tr:nth-child(even) {
+    background: #f6f8fb;
+  }
+  .summary-box {
+    background: #eef7ee;
+    border: 1px solid #a8d0a8;
+    border-radius: 6px;
+    padding: 12px 18px;
+    margin: 15px 0;
+    font-style: italic;
+  }
+  .example-box {
+    background: #fff8e6;
+    border: 1px solid #e0c88a;
+    border-radius: 6px;
+    padding: 12px 18px;
+    margin: 15px 0;
+  }
+  .proof-box {
+    background: #eef2fb;
+    border: 1px solid #a8bfe0;
+    border-radius: 6px;
+    padding: 12px 18px;
+    margin: 15px 0;
+  }
+  hr {
+    margin: 40px 0;
+    border: none;
+    border-top: 1px dashed #999;
+  }
+  code {
+    background: #eee;
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Week 9: Short Notes — Machine Learning Foundations</h1>
+
+<!-- LECTURE 1 -->
+<h2>Lecture 1: Constrained Optimization (Part 1)</h2>
+
+<h3>Single Inequality Constrained Optimization</h3>
+<p><strong>Problem Definition:</strong> We want to minimize a function: f(x)</p>
+<p>subject to a constraint: g(x) ≤ 0</p>
+<p>This is called a <strong>single inequality constrained optimization problem</strong>. It is very important in machine learning (e.g., regularization, SVM).</p>
+
+<h3>Why Not Simple Gradient Descent?</h3>
+<ul>
+  <li>Gradient descent works for unconstrained problems.</li>
+  <li>Here, we must also respect the boundary g(x) ≤ 0.</li>
+  <li>Therefore, we need special optimality conditions.</li>
+</ul>
+
+<h3>Verifying if a Point is Optimal</h3>
+<p>Given a candidate solution x*:</p>
+<h4>1. Feasibility Check</h4>
+<div class="formula">g(x*) ≤ 0</div>
+<p>If g(x*) &gt; 0, the point is not feasible → not optimal.</p>
+<h4>2. Necessary Condition for Optimality</h4>
+<p>At the optimal point, there should be no direction that both:</p>
+<ul>
+  <li>reduces the function, and</li>
+  <li>satisfies the constraint.</li>
+</ul>
+
+<h3>Core Concepts: Directions</h3>
+<p><strong>(A) Descent Direction:</strong> A direction d that reduces the objective function:</p>
+<div class="formula">d<sup>T</sup>&nabla;f(x*) &lt; 0</div>
+<p>Meaning: moving along d decreases f(x).</p>
+<p><strong>(B) Feasible Direction:</strong> A direction d that keeps us inside the constraint:</p>
+<div class="formula">d<sup>T</sup>&nabla;g(x*) &lt; 0</div>
+<p>Meaning: moving along d keeps g(x) ≤ 0.</p>
+
+<h3>Key Idea</h3>
+<p>If a direction satisfies both: d<sup>T</sup>&nabla;f(x*) &lt; 0 and d<sup>T</sup>&nabla;g(x*) &lt; 0, then:</p>
+<ul>
+  <li>We can reduce f(x)</li>
+  <li>And still satisfy the constraint</li>
+</ul>
+<p>Thus, x* is not optimal.</p>
+
+<h3>Geometric Intuition</h3>
+<ul>
+  <li>Descent directions form a half-space.</li>
+  <li>Feasible directions form another half-space.</li>
+  <li>Their intersection forms a cone of directions that are both feasible and descent.</li>
+  <li>If such a cone exists → x* is not optimal.</li>
+  <li>If no intersection exists → x* can be optimal.</li>
+</ul>
+
+<h3>Gradient Relation Insight</h3>
+<p>At the optimal point, &nabla;f(x*) and &nabla;g(x*) must be arranged such that no common direction reduces both. This leads to the <strong>Karush-Kuhn-Tucker (KKT) conditions</strong>.</p>
+
+<div class="example-box">
+  <strong>Example</strong><br>
+  Problem: Minimize f(x) = x&sup2;, Subject to x ≥ 1 (or g(x) = 1−x ≤ 0)<br><br>
+  <strong>Step 1: Feasible Region</strong> — Allowed values: x ≥ 1.<br>
+  <strong>Step 2: Check Minimum</strong> — Without constraint → minimum at x = 0 (not feasible). With constraint → smallest allowed value is x* = 1.<br>
+  <strong>Step 3: Check Directions</strong> — Moving left decreases f(x) but violates constraint. No direction exists that satisfies both.<br><br>
+  Thus, x* = 1 is optimal.
+</div>
+
+<div class="summary-box">
+  <strong>Final Summary</strong><br>
+  To check optimality:
+  <ol>
+    <li>Feasibility: g(x*) ≤ 0</li>
+    <li>No common descent + feasible direction.</li>
+  </ol>
+  <strong>Key formulas:</strong> Descent: d<sup>T</sup>&nabla;f(x*) &lt; 0 | Feasible: d<sup>T</sup>&nabla;g(x*) &lt; 0<br>
+  If both are satisfied → not optimal. If impossible → optimal.
+</div>
+
+<hr>
+
+<!-- LECTURE 2 -->
+<h2>Lecture 2: Constrained Optimization (Part 2)</h2>
+
+<h3>Core Objective</h3>
+<p><strong>Goal:</strong> Find optimal point x* that:</p>
+<ul>
+  <li>Minimizes f(x)</li>
+  <li>Satisfies constraint g(x)</li>
+</ul>
+<p><strong>Optimal point definition:</strong> No direction exists that is both a descent direction, and a feasible direction.</p>
+
+<h3>Inequality Constraints (g(x) ≤ 0)</h3>
+<p><strong>Gradient Relationship:</strong> Optimality depends on relation between:</p>
+<ul>
+  <li>&nabla;f(x*): objective gradient</li>
+  <li>&nabla;g(x*): constraint gradient</li>
+</ul>
+
+<h4>(A) Suboptimal Case (Parallel Gradients)</h4>
+<p>If &nabla;f(x*) and &nabla;g(x*) point in the same direction:</p>
+<ul>
+  <li>Every descent direction is also feasible</li>
+  <li>Many directions reduce f(x)</li>
+  <li>Not optimal</li>
+</ul>
+
+<h4>(B) Optimal Case (Anti-parallel Gradients)</h4>
+<p>If &nabla;f(x*) and &nabla;g(x*) point in opposite directions:</p>
+<ul>
+  <li>Any descent direction violates constraint</li>
+  <li>No feasible descent direction exists</li>
+</ul>
+<div class="formula">
+  Mathematical Condition: &nabla;f(x*) = −&lambda;&nabla;g(x*), &lambda; &gt; 0
+</div>
+<p>Here, &lambda; is the Lagrange multiplier and must be positive.</p>
+
+<h3>Equality Constraints (g(x) = 0)</h3>
+<p><strong>Feasibility Condition:</strong> To stay on constraint surface:</p>
+<div class="formula">&nabla;g(x*)<sup>T</sup>d = 0</div>
+<p>Direction d must be perpendicular to gradient of constraint.</p>
+
+<h3>Optimality Idea</h3>
+<ul>
+  <li>Movement restricted to a surface/line</li>
+  <li>Along that surface: no descent possible</li>
+</ul>
+<div class="formula">Mathematical Condition: &nabla;f(x*) = −&lambda;&nabla;g(x*)</div>
+<p>Here, &lambda; can be positive or negative, but must be non-zero.</p>
+
+<h3>Lagrange Multipliers</h3>
+<ul>
+  <li><strong>Definition:</strong> &lambda; is called a Lagrange Multiplier (named after Joseph-Louis Lagrange).</li>
+  <li><strong>Purpose:</strong> Converts constrained problems into equations: &nabla;f(x*) = −&lambda;&nabla;g(x*)</li>
+  <li>Used to find candidate optimal points.</li>
+</ul>
+
+<h3>Key Differences: Inequality vs Equality</h3>
+<table>
+  <tr><th>Feature</th><th>Inequality (g(x) ≤ 0)</th><th>Equality (g(x) = 0)</th></tr>
+  <tr><td>Feasible directions</td><td>Inside region</td><td>Along surface only</td></tr>
+  <tr><td>Gradient relation</td><td>Anti-parallel</td><td>Parallel or anti-parallel</td></tr>
+  <tr><td>Lagrange multiplier</td><td>&lambda; &gt; 0</td><td>Any non-zero</td></tr>
+  <tr><td>Movement freedom</td><td>Restricted by boundary</td><td>Restricted to surface</td></tr>
+</table>
+
+<h3>Simple Examples</h3>
+<div class="example-box">
+  <strong>Example 1 (Inequality)</strong><br>
+  Minimize: f(x) = x&sup2; — Subject to: x ≥ 1 ⇒ g(x) = 1−x ≤ 0<br>
+  <ul>
+    <li>Unconstrained minimum: x = 0 (not feasible).</li>
+    <li>With constraint: smallest allowed value is x* = 1.</li>
+    <li>At x*, gradients are opposite → satisfies condition.</li>
+    <li><strong>Optimal point = 1</strong></li>
+  </ul>
+</div>
+
+<div class="example-box">
+  <strong>Example 2 (Equality)</strong><br>
+  Minimize: f(x,y) = x&sup2; + y&sup2; — Subject to: x + y = 1<br><br>
+  <strong>Step 1: Constraint</strong> — g(x,y) = x + y − 1 = 0<br>
+  <strong>Step 2: Apply condition</strong> — &nabla;f = (2x,2y), &nabla;g = (1,1); &nabla;f = −&lambda;&nabla;g ⇒ 2x = −&lambda;, 2y = −&lambda; ⇒ x = y<br>
+  <strong>Step 3: Use constraint</strong> — x + y = 1 ⇒ 2x = 1 ⇒ x = y = 1/2<br><br>
+  <strong>Final Answer:</strong> (x*, y*) = (½, ½)
+</div>
+
+<div class="summary-box">
+  <strong>Final Summary</strong><br>
+  Optimal point: No feasible descent direction.<br>
+  Inequality: Gradients anti-parallel, &lambda; &gt; 0.<br>
+  Equality: Gradients parallel/anti-parallel, &lambda; &ne; 0.<br><br>
+  <strong>Master Formula:</strong> &nabla;f(x*) = −&lambda;&nabla;g(x*)
+</div>
+
+<hr>
+
+<!-- LECTURE 3 -->
+<h2>Lecture 3: Method of Lagrange Multiplier, Projected Gradient Descent</h2>
+
+<h3>Method of Lagrange Multipliers</h3>
+<p><strong>Problem Type:</strong> Used for equality constrained optimization: min f(x) subject to g(x) = 0</p>
+
+<h3>Necessary Conditions for Optimality</h3>
+<h4>1. Feasibility Condition</h4>
+<div class="formula">g(x*) = 0</div>
+<p>Solution must satisfy the constraint.</p>
+<h4>2. Gradient Alignment Condition</h4>
+<p>Gradients must be parallel or anti-parallel:</p>
+<div class="formula">&nabla;f(x*) = −&lambda;&nabla;g(x*)</div>
+<p>where &lambda; = Lagrange Multiplier (can be positive or negative).</p>
+
+<h3>Step-by-Step Solving Method</h3>
+<ol>
+  <li>Find gradients: &nabla;f(x), &nabla;g(x)</li>
+  <li>Apply condition: &nabla;f = −&lambda;&nabla;g</li>
+  <li>Add constraint: g(x) = 0</li>
+  <li>Solve system of equations</li>
+  <li>Check candidate points:
+    <ul>
+      <li>Minimum → smallest f(x)</li>
+      <li>Maximum → largest f(x)</li>
+      <li>Others → saddle points</li>
+    </ul>
+  </li>
+</ol>
+
+<div class="example-box">
+  <strong>Example</strong><br>
+  Problem: f(x,y) = x&sup2; + y&sup2;, subject to x + y = 1<br><br>
+  <strong>Step 1: Constraint</strong> — g(x,y) = x + y − 1 = 0<br>
+  <strong>Step 2: Gradients</strong> — &nabla;f = (2x, 2y), &nabla;g = (1,1)<br>
+  <strong>Step 3: Apply condition</strong> — (2x, 2y) = −&lambda;(1,1) ⇒ x = y<br>
+  <strong>Step 4: Use constraint</strong> — x + y = 1 ⇒ x = y = ½<br><br>
+  <strong>Final Answer:</strong> (x*, y*) = (½, ½)<br><br>
+  <strong>Limitation:</strong> Hard to solve complex/nonlinear equations analytically.
+</div>
+
+<h3>Projected Gradient Descent (PGD)</h3>
+<p><strong>Idea:</strong> Used when analytical solution is difficult. Combines:</p>
+<ul>
+  <li>Gradient Descent (optimization)</li>
+  <li>Projection (constraint satisfaction)</li>
+</ul>
+
+<h3>Algorithm Steps</h3>
+<ol>
+  <li><strong>Initialization:</strong> Start with x0.</li>
+  <li><strong>Gradient Step:</strong> x'<sub>t+1</sub> = x<sub>t</sub> − &eta;&nabla;f(x<sub>t</sub>)</li>
+  <li><strong>Projection Step:</strong> x<sub>t+1</sub> = &Pi;<sub>S</sub>(x'<sub>t+1</sub>)</li>
+</ol>
+<p>Ensures constraint satisfaction.</p>
+
+<h3>Projection Operator</h3>
+<p>Finds closest feasible point:</p>
+<div class="formula">&Pi;<sub>S</sub>(x) = arg min<sub>y&isin;S</sub> ‖x − y‖&sup2;</div>
+
+<div class="example-box">
+  <strong>Example:</strong><br>
+  Constraint: x ≥ 0.<br>
+  After gradient step: x′ = −3.<br>
+  Projection: closest feasible point = 0.<br>
+  So, x = 0.
+</div>
+
+<h3>Key Requirement</h3>
+<p>Projection must be:</p>
+<ul>
+  <li>Fast</li>
+  <li>Ideally polynomial time</li>
+</ul>
+
+<h3>Convexity &amp; Performance</h3>
+<ul>
+  <li><strong>Convex Set:</strong> If constraint set S is convex → PGD guaranteed to converge.</li>
+  <li><strong>Convex Function:</strong> If f(x) is convex → faster convergence, better performance.</li>
+</ul>
+<p><strong>Importance in Machine Learning:</strong> Many ML problems have convex functions and convex constraints → PGD works efficiently.</p>
+
+<h4>Quick Comparison</h4>
+<table>
+  <tr><th>Method</th><th>Use Case</th><th>Type</th></tr>
+  <tr><td>Lagrange Multipliers</td><td>Exact solution</td><td>Analytical</td></tr>
+  <tr><td>PGD</td><td>Large/complex problems</td><td>Iterative</td></tr>
+</table>
+
+<div class="summary-box">
+  <strong>Final Summary</strong><br>
+  <strong>Lagrange Method:</strong> Solve &nabla;f = −&lambda;&nabla;g. Works for equality constraints.<br>
+  <strong>PGD:</strong> Step → Project → Repeat. Works for complex constraints.<br>
+  <strong>Convexity:</strong> Guarantees correctness and speed.
+</div>
+
+<hr>
+
+<!-- LECTURE 4 -->
+<h2>Lecture 4: Introduction to Convexity</h2>
+
+<h3>Motivation for Studying Convexity</h3>
+<ul>
+  <li>Convexity is crucial in machine learning because optimization is everywhere.</li>
+  <li>We aim to minimize loss/error.</li>
+  <li><strong>Key Idea:</strong>
+    <ul>
+      <li>General functions → may have many local minima.</li>
+      <li>Convex functions → have only one global minimum.</li>
+    </ul>
+  </li>
+</ul>
+<p><strong>Conclusion:</strong> Convexity guarantees we can find the best possible solution.</p>
+
+<h3>Definition of a Convex Set</h3>
+<p>A set S &sube; R<sup>d</sup> is convex if: for any two points in the set, the entire line segment between them also lies in the set.</p>
+<div class="formula">
+  Mathematical Condition: &lambda;x1 + (1−&lambda;)x2 &isin; S, &forall; x1, x2 &isin; S, &lambda; &isin; [0,1]
+</div>
+
+<h3>Understanding λ</h3>
+<ul>
+  <li>&lambda; = 1 → point = x1</li>
+  <li>&lambda; = 0 → point = x2</li>
+  <li>&lambda; = 0.5 → midpoint</li>
+</ul>
+<p>Think of &lambda; as a slider moving between two points.</p>
+
+<h3>Visual Intuition</h3>
+<ul>
+  <li><strong>Convex Sets:</strong> Any line drawn between two points stays inside.</li>
+  <li><strong>Non-Convex Sets:</strong> Line may go outside the set.</li>
+</ul>
+
+<h3>Examples of Convex Sets</h3>
+<p><strong>(A) Intervals (1D):</strong> Example: [a,b] → always convex. Union like [1,2]&cup;[4,5] → not convex.</p>
+<p><strong>(B) Geometric Shapes:</strong> Circle, ellipse (filled), solid polygon → convex.</p>
+<p><strong>(C) Hyperplanes:</strong> Defined as: w<sup>T</sup>x = b — Flat surface (line/plane) → always convex.</p>
+<p><strong>(D) Half-Spaces:</strong> Defined as: w<sup>T</sup>x ≤ b — One side of a plane → convex. Very important in ML (e.g., classifiers).</p>
+
+<h3>Non-Convex Sets</h3>
+<p>Examples: Disjoint sets (with gaps), dented or hollow shapes.</p>
+<p>Reason: Line between two points goes outside the set.</p>
+
+<div class="proof-box">
+  <strong>Proof Sketch: Hyperplane is Convex</strong><br>
+  Given: S = {x ∣ w<sup>T</sup>x = b}<br>
+  <strong>Step 1:</strong> Take two points: w<sup>T</sup>x1 = b, w<sup>T</sup>x2 = b<br>
+  <strong>Step 2:</strong> Check line segment: w<sup>T</sup>(&lambda;x1 + (1−&lambda;)x2)<br>
+  <strong>Step 3:</strong> Expand: &lambda;w<sup>T</sup>x1 + (1−&lambda;)w<sup>T</sup>x2<br>
+  <strong>Step 4:</strong> Substitute: &lambda;b + (1−&lambda;)b = b<br>
+  <strong>Conclusion:</strong> New point also satisfies equation → set is convex.
+</div>
+
+<h3>Why Convexity Matters</h3>
+<ul>
+  <li>Guarantees global optimum.</li>
+  <li>Makes optimization easy and reliable.</li>
+  <li>Used in: Linear Regression, SVM, Logistic Regression</li>
+</ul>
+
+<div class="summary-box">
+  <strong>Final Summary</strong><br>
+  Convex set: Line between any two points lies inside.<br>
+  Key formula: &lambda;x1 + (1−&lambda;)x2 &isin; S<br>
+  Convex = no dents, no gaps.<br>
+  Important convex sets: intervals, circles, hyperplanes, half-spaces.
+</div>
+
+<hr>
+
+<!-- LECTURE 5 -->
+<h2>Lecture 5: Properties of Convex Sets</h2>
+
+<h3>Intersection of Convex Sets</h3>
+<p><strong>Key Property:</strong> The intersection of convex sets is always convex.</p>
+<p><strong>Mathematical Idea:</strong> If S1 and S2 are convex, then: S = S1 &cap; S2 is also convex.</p>
+<h4>Intuition</h4>
+<ul>
+  <li>Take any two points in the intersection.</li>
+  <li>They belong to both sets.</li>
+  <li>The line between them stays in both sets.</li>
+  <li>Therefore, it stays in the intersection.</li>
+</ul>
+<div class="example-box">
+  <strong>Example: Linear System</strong> Ax = b<br>
+  Each equation corresponds to a hyperplane (convex). Solution set = intersection of hyperplanes → convex.
+</div>
+
+<h3>Convex Combinations</h3>
+<p><strong>Definition:</strong> A point formed by weighted average of points.</p>
+<div class="formula">
+  z = &sum;<sub>i=1</sub><sup>n</sup> &lambda;<sub>i</sub>x<sub>i</sub>, &nbsp; &lambda;<sub>i</sub> ≥ 0, &nbsp; &sum;<sub>i=1</sub><sup>n</sup> &lambda;<sub>i</sub> = 1
+</div>
+<h4>Key Conditions</h4>
+<ul>
+  <li>Weights &lambda;<sub>i</sub> ≥ 0</li>
+  <li>Sum of weights = 1</li>
+</ul>
+<div class="example-box">
+  <strong>Example:</strong> z = 0.1x1 + 0.3x2 + 0.5x3 + 0.1x4 — Valid convex combination. Some weights can be zero.
+</div>
+<p><strong>Intuition:</strong> Mixing points like a weighted average.</p>
+
+<h3>Convex Hull</h3>
+<p><strong>Definition 1 (Combination View):</strong> Set of all convex combinations:</p>
+<div class="formula">Conv(S) = {&sum;&lambda;<sub>i</sub>x<sub>i</sub>}</div>
+<p><strong>Definition 2 (Intersection View):</strong> Smallest convex set containing all points. Equivalent to intersection of all convex sets containing the points.</p>
+<h4>Key Properties</h4>
+<ul>
+  <li>Convex hull is always convex.</li>
+  <li>Both definitions are equivalent.</li>
+</ul>
+<p><strong>Visual Intuition:</strong> Stretch a rubber band around points → shape formed = convex hull.</p>
+<p><strong>Example:</strong> Points in plane → convex hull = smallest polygon enclosing them.</p>
+
+<h3>Euclidean Balls</h3>
+<p><strong>Definition:</strong> Set of all points within a radius.</p>
+<div class="formula">
+  Formula: ‖x‖ ≤ &theta; <br>
+  Norm Definition: ‖x‖ = &radic;(&sum;<sub>i=1</sub><sup>d</sup> x<sub>i</sub>&sup2;)
+</div>
+<p><strong>Intuition:</strong> All points inside a circle (2D) or sphere (3D). Always convex.</p>
+
+<h3>Why These Concepts Matter in ML</h3>
+<ul>
+  <li><strong>Convex hull:</strong> used in clustering, geometry.</li>
+  <li><strong>Intersection:</strong> used in constraints.</li>
+  <li><strong>Euclidean balls:</strong> used in regularization (L2 norm).</li>
+  <li><strong>Convex combinations:</strong> used in mixtures, probability.</li>
+</ul>
+
+<h3>Practice Questions</h3>
+<div class="proof-box">
+  <strong>Q1: Convex Hull is Convex</strong><br>
+  Take two convex combinations. Combine again → still convex combination. Hence convex.<br><br>
+  <strong>Q2: Two Definitions Equivalent</strong><br>
+  Convex combinations &sube; smallest convex set. Smallest convex set &sube; convex combinations. Hence equal.<br><br>
+  <strong>Q3: Euclidean Ball is Convex</strong><br>
+  Use: ‖&lambda;x1 + (1−&lambda;)x2‖ ≤ &theta;. Triangle inequality ensures convexity.
+</div>
+
+<div class="summary-box">
+  <strong>Final Summary</strong><br>
+  Intersection of convex sets → convex.<br>
+  Convex combination → weighted average.<br>
+  Convex hull → smallest convex set.<br>
+  Euclidean ball → all points within radius.
+</div>
+
+<hr>
+
+<!-- LECTURE 6 -->
+<h2>Lecture 6: Convex Functions</h2>
+
+<h3>Introduction &amp; Importance</h3>
+<ul>
+  <li>Convex functions are very important in machine learning.</li>
+  <li>Loss/error functions are often convex, making optimization easy and reliable.</li>
+  <li><strong>Key Advantage:</strong> Convex function ⇒ only one global minimum.</li>
+  <li>No risk of getting stuck in local minima.</li>
+</ul>
+<p><strong>Important Condition:</strong> A function is convex only if its domain is a convex set. Example: R<sup>d</sup> is convex → valid domain.</p>
+
+<h3>Definition 1: Epigraph (Geometric View)</h3>
+<p><strong>Definition:</strong> A function is convex if its epigraph is convex.</p>
+<div class="formula">epi(f) = {(x, z) ∣ z ≥ f(x)}</div>
+<p><strong>Intuition:</strong> All points on or above the graph. If this region is convex → function is convex.</p>
+
+<h3>Definition 2: Linear Interpolation (Most Important)</h3>
+<div class="formula">f(&lambda;x1 + (1−&lambda;)x2) ≤ &lambda;f(x1) + (1−&lambda;)f(x2)</div>
+<p><strong>Meaning:</strong> Value at midpoint ≤ line joining endpoints.</p>
+<p><strong>Intuition:</strong> Convex → graph lies below the line. Non-convex → graph goes above the line.</p>
+
+<h3>Definition 3: First-Order Condition (Gradient)</h3>
+<div class="formula">f(y) ≥ f(x) + (y−x)<sup>T</sup>&nabla;f(x)</div>
+<p><strong>Meaning:</strong> Tangent line (linear approximation) is always below the function.</p>
+<p><strong>Interpretation:</strong> Gradient gives a supporting hyperplane. Function never dips below it.</p>
+
+<h3>Definition 4: Second-Order Condition (Hessian)</h3>
+<p><strong>Formula:</strong> A function is convex if its Hessian matrix H is Positive Semi-Definite (PSD).</p>
+<div class="formula">
+  Hessian Definition: H<sub>ij</sub> = &part;&sup2;f / &part;x<sub>i</sub>&part;x<sub>j</sub>
+</div>
+<p><strong>PSD Condition:</strong> All eigenvalues ≥ 0.</p>
+<p><strong>Intuition:</strong> Positive curvature → convex shape. No downward bending.</p>
+
+<div class="example-box">
+  <strong>Convex Example:</strong> f(x) = x&sup2;<br>
+  First derivative: f′(x) = 2x. Second derivative: f″(x) = 2. Since 2 &gt; 0, function is convex.<br><br>
+  <strong>Non-Convex Example:</strong> f(x) = −x&sup2;<br>
+  Second derivative = −2 &lt; 0. Curve bends downward → not convex.
+</div>
+
+<h3>Summary of All Definitions</h3>
+<table>
+  <tr><th>Definition</th><th>Idea</th></tr>
+  <tr><td>Epigraph</td><td>Region above graph is convex</td></tr>
+  <tr><td>Interpolation</td><td>Line above graph</td></tr>
+  <tr><td>First-order</td><td>Tangent below function</td></tr>
+  <tr><td>Second-order</td><td>Hessian ≥ 0</td></tr>
+</table>
+
+<div class="summary-box">
+  <strong>Final Summary</strong><br>
+  Convex function ⇒ global minimum guaranteed.<br>
+  Must satisfy any one definition.<br>
+  Most used: Interpolation (basic), Hessian (advanced).<br><br>
+  <strong>Key Formula:</strong> f(&lambda;x1 + (1−&lambda;)x2) ≤ &lambda;f(x1) + (1−&lambda;)f(x2)
+</div>
+
+<hr>
+
+<!-- LECTURE 7 -->
+<h2>Lecture 7: Properties of Convex Functions</h2>
+
+<p><strong>Central Theorem:</strong> If a function f is convex: Every local minimum is also a global minimum. This is the most powerful property of convex functions.</p>
+
+<h3>Definitions of Minima</h3>
+<p><strong>(A) Local Minimum:</strong> A point x* is a local minimum if:</p>
+<ul>
+  <li>There exists a small neighborhood (ball of radius &delta;)</li>
+  <li>Such that: f(x*) ≤ f(z), &forall; z near x*</li>
+</ul>
+<p><strong>Intuition:</strong> Small movements increase function value.</p>
+
+<p><strong>(B) Global Minimum:</strong> A point x* is a global minimum if: f(x*) ≤ f(x), &forall; x in domain</p>
+<p><strong>Intuition:</strong> Best value in entire space.</p>
+
+<h3>Key Difference</h3>
+<table>
+  <tr><th>Type</th><th>Region</th></tr>
+  <tr><td>Local Minimum</td><td>Small neighborhood</td></tr>
+  <tr><td>Global Minimum</td><td>Entire domain</td></tr>
+</table>
+
+<div class="proof-box">
+  <strong>Proof Idea (By Contradiction)</strong><br>
+  <strong>Step 1: Assume Opposite</strong> — Suppose x* is a local minimum but not global. Then there exists z such that: f(z) &lt; f(x*)<br>
+  <strong>Step 2: Use Local Property</strong> — Around x*, small ball exists: f(x*) ≤ f(y)<br>
+  <strong>Step 3: Construct Point</strong> — Take point on line: y = &lambda;x* + (1−&lambda;)z. Choose &lambda; small → y close to x*.<br>
+  <strong>Step 4: Apply Convexity</strong> — f(y) ≤ &lambda;f(x*) + (1−&lambda;)f(z)<br>
+  <strong>Step 5: Use Assumption</strong> — Since f(z) &lt; f(x*), we get: f(y) &lt; f(x*)<br><br>
+  <strong>Contradiction:</strong> Local minimum requires f(x*) ≤ f(y). Thus assumption is wrong.<br>
+  <strong>Conclusion:</strong> Local minimum = Global minimum.
+</div>
+
+<h3>Visual Intuition</h3>
+<ul>
+  <li><strong>Convex Function:</strong> Only one minimum → global.</li>
+  <li><strong>Non-Convex Function:</strong> Many local minima → confusing.</li>
+</ul>
+
+<div class="example-box">
+  <strong>Convex Function:</strong> f(x) = x&sup2; — Only one minimum at x = 0. Local = Global.<br><br>
+  <strong>Non-Convex Function:</strong> f(x) = x&#8308; − x&sup2; — Multiple local minima, only one global.
+</div>
+
+<h3>Practical Importance in ML</h3>
+<ul>
+  <li><strong>Optimization Made Easy:</strong> For convex functions, finding any local minimum is enough → automatically global optimum.</li>
+  <li><strong>Gradient Descent:</strong> Finds local minima. For convex functions, gradient descent ⇒ global minimum.</li>
+  <li><strong>Why ML Loves Convexity:</strong> Guarantees correctness, easier optimization, faster convergence.</li>
+</ul>
+
+<div class="summary-box">
+  <strong>Final Summary</strong><br>
+  Convex function ⇒ no bad local minima.<br>
+  Key theorem: Local minimum = Global minimum.<br>
+  Proof idea: Assume contradiction → use convexity inequality → reach impossible condition.<br><br>
+  <strong>Golden takeaway:</strong> In convex optimization, you can trust your solution.
+</div>
+
+</body>
+</html>
