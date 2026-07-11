@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>Week 12: Short Notes - Machine Learning Foundations</title>
+<style>
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    line-height: 1.6;
+    color: #222;
+    background: #fdfdfd;
+  }
+  h1 {
+    text-align: center;
+    border-bottom: 3px solid #333;
+    padding-bottom: 10px;
+  }
+  h2 {
+    margin-top: 50px;
+    color: #1a3b6d;
+    border-bottom: 2px solid #1a3b6d;
+    padding-bottom: 5px;
+  }
+  h3 {
+    color: #333;
+    margin-top: 30px;
+  }
+  h4 {
+    margin-bottom: 5px;
+    color: #444;
+  }
+  ul, ol {
+    margin-top: 5px;
+  }
+  .formula {
+    background: #f2f4f8;
+    border-left: 4px solid #1a3b6d;
+    padding: 10px 15px;
+    margin: 10px 0;
+    font-family: 'Cambria Math', Cambria, serif;
+    font-size: 1.05em;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 15px 0;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    text-align: left;
+  }
+  th {
+    background: #1a3b6d;
+    color: white;
+  }
+  tr:nth-child(even) {
+    background: #f6f8fb;
+  }
+  .summary-box {
+    background: #eef7ee;
+    border: 1px solid #a8d0a8;
+    border-radius: 6px;
+    padding: 12px 18px;
+    margin: 15px 0;
+    font-style: italic;
+  }
+  .example-box {
+    background: #fff8e6;
+    border: 1px solid #e0c88a;
+    border-radius: 6px;
+    padding: 12px 18px;
+    margin: 15px 0;
+  }
+  .proof-box {
+    background: #eef2fb;
+    border: 1px solid #a8bfe0;
+    border-radius: 6px;
+    padding: 12px 18px;
+    margin: 15px 0;
+  }
+  .tips-box {
+    background: #fdf0e8;
+    border: 1px solid #e0b48a;
+    border-radius: 6px;
+    padding: 12px 18px;
+    margin: 15px 0;
+  }
+  hr {
+    margin: 40px 0;
+    border: none;
+    border-top: 1px dashed #999;
+  }
+  code {
+    background: #eee;
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Week 12: Short Notes — Machine Learning Foundations</h1>
+
+<!-- LECTURE 1 -->
+<h2>Lecture 1: Bivariate and Multivariate Normal</h2>
+
+<h3>Standard Normal Vector</h3>
+<p>A <strong>standard normal vector</strong> is a d-dimensional vector:</p>
+<p>z = (z1, z2, ..., zd) where each component z<sub>i</sub> ~ N(0, 1) (independent).</p>
+<p><strong>Key Idea:</strong> All components are independent and follow the standard normal distribution.</p>
+<div class="formula">
+  Joint Density: f(z) = 1/(2&pi;)<sup>d/2</sup> exp(−½‖z‖&sup2;) <br>
+  Where ‖z‖&sup2; = z1&sup2; + z2&sup2; + ... + zd&sup2;.
+</div>
+
+<h3>Bivariate Normal Distribution (2D Case)</h3>
+<p>Describes two random variables x1, x2.</p>
+<p><strong>Construction (from standard normals):</strong></p>
+<div class="formula">x1 = z1, &nbsp; x2 = &rho;z1 + &radic;(1−&rho;&sup2;) z2</div>
+<p><strong>Intuition:</strong> &rho; controls correlation.</p>
+<ul>
+  <li>If &rho; = 0: independent</li>
+  <li>If &rho; = 1: perfectly linear</li>
+</ul>
+<div class="formula">
+  Matrix Form: X = AZ &nbsp; ⇒ &nbsp; (x1, x2)<sup>T</sup> = [1 &nbsp; 0 ; &rho; &nbsp; &radic;(1−&rho;&sup2;)] (z1, z2)<sup>T</sup>
+</div>
+<h4>Properties</h4>
+<ul>
+  <li>Mean: E[x1] = 0, E[x2] = 0</li>
+  <li>Variance: Var(x1) = 1, Var(x2) = 1</li>
+  <li>Covariance: Cov(x1, x2) = &rho;</li>
+</ul>
+<div class="formula">
+  Covariance Matrix: &Sigma; = [1 &nbsp; &rho; ; &rho; &nbsp; 1]
+</div>
+<h4>Marginal &amp; Conditional</h4>
+<ul>
+  <li>Marginal: x1 ~ N(0,1)</li>
+  <li>Conditional: x2 | x1 ~ N(&rho;x1, 1−&rho;&sup2;)</li>
+</ul>
+<p><strong>Interpretation:</strong> If x1 is fixed, the best estimate of x2 is &rho;x1.</p>
+
+<h3>General Multivariate Normal (MVN)</h3>
+<p><strong>Definition:</strong> X = AZ + &mu;, where A is a transformation matrix, &mu; is a mean vector, and &Sigma; = AA<sup>T</sup> is the covariance matrix.</p>
+<div class="formula">
+  Density Function: f<sub>X</sub>(x) = 1/((2&pi;)<sup>d/2</sup>|&Sigma;|<sup>1/2</sup>) exp(−½(x−&mu;)<sup>T</sup>&Sigma;<sup>−1</sup>(x−&mu;))
+</div>
+<p><strong>Notation:</strong> X ~ N(&mu;, &Sigma;)</p>
+
+<h3>Conditions on Covariance Matrix Σ</h3>
+<ul>
+  <li>Symmetric: &Sigma; = &Sigma;<sup>T</sup></li>
+  <li>Positive definite</li>
+  <li>Variances &gt; 0</li>
+  <li>Covariance bounded: |Cov(x1,x2)| ≤ &sigma;1&sigma;2</li>
+</ul>
+
+<h3>Important Properties</h3>
+<h4>Linear Transformations</h4>
+<ul>
+  <li>Scalar: Y = a<sup>T</sup>X ~ N(a<sup>T</sup>&mu;, a<sup>T</sup>&Sigma;a)</li>
+  <li>Vector: Y = BX ~ N(B&mu;, B&Sigma;B<sup>T</sup>)</li>
+</ul>
+<h4>Independence vs Correlation</h4>
+<ul>
+  <li>In general: zero covariance &#8655; independence</li>
+  <li>In MVN: zero covariance ⇒ independence</li>
+</ul>
+
+<div class="example-box">
+  <strong>Example: Standardization</strong><br>
+  Given covariance: &Sigma; = [a&sup2; &nbsp; &rho;ab ; &rho;ab &nbsp; b&sup2;]<br>
+  Scaling matrix: B = [1/a &nbsp; 0 ; 0 &nbsp; 1/b]<br><br>
+  This transforms data to unit variance while preserving correlation &rho;.
+</div>
+
+<h3>Visualization</h3>
+<p><strong>Shape of Distribution:</strong> Contour plots are ellipses centered at mean &mu;. Data points cluster along: x2 = &rho;x1. Stronger &rho; → tighter ellipse.</p>
+
+<div class="summary-box">
+  <strong>Final Summary</strong><br>
+  Standard Normal: independent N(0,1) components<br>
+  Bivariate Normal: correlation controlled by &rho;<br>
+  MVN: X ~ N(&mu;, &Sigma;)<br>
+  Covariance matrix: symmetric + positive definite<br>
+  Linear transforms preserve normality<br>
+  In MVN: zero covariance ⇒ independence<br>
+  Shape: elliptical contours
+</div>
+
+<hr>
+
+<!-- LECTURE 2 -->
+<h2>Lecture 2: Estimation of Parameters Using ML</h2>
+
+<h3>Introduction to Parameter Estimation</h3>
+<p><strong>Setting:</strong> We assume a family of distributions: P = {p<sub>&theta;</sub>: &theta; &isin; &Theta;} where &theta; is the unknown parameter and &Theta; is the parameter space.</p>
+<p><strong>Data:</strong> Observations: x1, x2, ..., xn with the assumption: x<sub>i</sub> ~ p<sub>&theta;</sub> i.i.d.</p>
+<p><strong>Goal:</strong> Estimate the true parameter &theta; that generated the data. Exact value is uncertain → find the most likely parameter.</p>
+
+<h3>Maximum Likelihood Estimation (MLE)</h3>
+<p><strong>Likelihood Function:</strong> Measures how likely data is for a given &theta;: L(&theta;) = P(x1,...,xn | &theta;)</p>
+<div class="formula">
+  For i.i.d. data: L(&theta;) = &prod;<sub>i=1</sub><sup>n</sup> p<sub>&theta;</sub>(x<sub>i</sub>) <br><br>
+  Log-Likelihood: log L(&theta;) = &sum;<sub>i=1</sub><sup>n</sup> log p<sub>&theta;</sub>(x<sub>i</sub>) <br><br>
+  Negative Log-Likelihood (NLL): r(&theta;) = −&sum;<sub>i=1</sub><sup>n</sup> log p<sub>&theta;</sub>(x<sub>i</sub>)
+</div>
+<p><strong>Key Idea:</strong> Maximize likelihood ⇔ Maximize log-likelihood ⇔ Minimize NLL</p>
+
+<h3>MLE Examples</h3>
+<div class="example-box">
+  <strong>A. Bernoulli Distribution (Coin Toss)</strong><br>
+  Setup: x<sub>i</sub> &isin; {0,1}, &theta; = P(head)<br>
+  PMF: p<sub>&theta;</sub>(x) = &theta;<sup>x</sup>(1−&theta;)<sup>1−x</sup><br><br>
+  NLL Function: r(&theta;) = a log(1/&theta;) + (n−a) log(1/(1−&theta;)) where a = &sum;x<sub>i</sub> (number of heads)<br>
+  MLE Result: &theta;&#770;<sub>ML</sub> = a/n<br>
+  Interpretation: fraction of heads.
+</div>
+
+<div class="example-box">
+  <strong>B. Uniform Distribution</strong><br>
+  Setup: Data lies in interval [a, b], parameter &theta; = (a,b)<br>
+  Density: p<sub>&theta;</sub>(x) = 1/(b−a)<br>
+  Logic: Make interval as tight as possible to include all data points.<br><br>
+  MLE Result: â = min(x<sub>i</sub>), b&#770; = max(x<sub>i</sub>)
+</div>
+
+<div class="example-box">
+  <strong>C. Normal Distribution (&sigma;&sup2; = 1, &mu; unknown)</strong><br>
+  Density: f(x) = (1/&radic;(2&pi;)) e<sup>−½(x−&mu;)&sup2;</sup><br>
+  NLL (simplified): r(&mu;) = &sum;<sub>i=1</sub><sup>n</sup> ½(x<sub>i</sub>−&mu;)&sup2;<br><br>
+  MLE Result: &mu;&#770; = (1/n) &sum; x<sub>i</sub><br>
+  Interpretation: sample mean.
+</div>
+
+<div class="example-box">
+  <strong>D. Normal Distribution (&mu; and &sigma;&sup2; unknown)</strong><br>
+  Density: p(x) = (1/&radic;(2&pi;&sigma;&sup2;)) e<sup>−(x−&mu;)&sup2;/(2&sigma;&sup2;)</sup><br>
+  NLL: r(&mu;,&sigma;&sup2;) = (n/2) log(&sigma;&sup2;) + ½ &sum;<sub>i=1</sub><sup>n</sup> (x<sub>i</sub>−&mu;)&sup2;/&sigma;&sup2;<br><br>
+  MLE Results: &mu;&#770; = (1/n) &sum; x<sub>i</sub> &nbsp; &nbsp; &sigma;&#770;&sup2; = (1/n) &sum;(x<sub>i</sub>−&mu;)&sup2;<br><br>
+  <strong>Note:</strong> This variance uses 1/n (MLE), not 1/(n−1).
+</div>
+
+<h3>Key Takeaways</h3>
+<h4>Core Ideas</h4>
+<ul>
+  <li>MLE finds parameter that best explains observed data.</li>
+  <li>Works by maximizing likelihood (or minimizing NLL).</li>
+  <li>Foundation of many machine learning algorithms.</li>
+</ul>
+<h4>Important Insights</h4>
+<ul>
+  <li>Log simplifies calculations.</li>
+  <li>i.i.d. assumption is crucial.</li>
+  <li>Solutions often give intuitive results:
+    <ul>
+      <li>Bernoulli → fraction</li>
+      <li>Normal → mean &amp; variance</li>
+    </ul>
+  </li>
+</ul>
+<p><strong>Big Picture:</strong> Used in regression, classification, Gaussian Mixture Models (GMM). Backbone of modern machine learning.</p>
+
+<div class="summary-box">
+  <strong>Revision</strong><br>
+  Likelihood: product of probabilities | Log-likelihood: sum of logs | NLL: minimize for optimization<br>
+  Bernoulli: &theta;&#770; = a/n | Uniform: min &amp; max of data<br>
+  Normal: mean = average, variance = average squared deviation<br>
+  MLE = "parameter that best fits data"
+</div>
+
+<hr>
+
+<!-- LECTURE 3 -->
+<h2>Lecture 3: Gaussian Mixture Models and Expectation Maximisation</h2>
+
+<h3>Core Concepts</h3>
+<p><strong>Definition:</strong> A Gaussian Mixture Model (GMM) is a combination of K Gaussian distributions, used when data has multiple clusters (multi-modal). Instead of modeling a single peak, GMM models multiple peaks.</p>
+<h4>Motivation</h4>
+<ul>
+  <li>Single distributions (Normal, Exponential) → only one peak.</li>
+  <li>Real data often has multiple groups.</li>
+</ul>
+<div class="example-box">
+  <strong>Example: Exam scores</strong><br>
+  Weak students → low scores | Average students → mid scores | Strong students → high scores<br>
+  Result: multiple peaks.
+</div>
+
+<p><strong>Latent Variable (Hidden Variable):</strong> Introduce z = cluster ID. We observe x (data), but not z (which cluster generated x). Hence, GMM is a latent variable model.</p>
+<p><strong>Unidentifiability:</strong> Swapping labels of clusters does not change the distribution. Example: Cluster 1 &harr; Cluster 2 → same distribution. Labels are arbitrary.</p>
+
+<h3>Mathematical Formulation</h3>
+<div class="formula">GMM Density Function: f<sub>X</sub>(x) = &sum;<sub>k=1</sub><sup>K</sup> &pi;<sub>k</sub> N(x; &mu;<sub>k</sub>, &Sigma;<sub>k</sub>)</div>
+<h4>Parameters</h4>
+<ul>
+  <li>K: number of clusters</li>
+  <li>&pi;<sub>k</sub>: mixture weights, with &sum;&pi;<sub>k</sub> = 1</li>
+  <li>&mu;<sub>k</sub>: mean of cluster k</li>
+  <li>&Sigma;<sub>k</sub>: covariance matrix</li>
+</ul>
+<div class="formula">
+  Multivariate Gaussian: N(x;&mu;<sub>k</sub>,&Sigma;<sub>k</sub>) = 1/((2&pi;)<sup>d/2</sup>|&Sigma;<sub>k</sub>|<sup>1/2</sup>) exp(−½(x−&mu;<sub>k</sub>)<sup>T</sup>&Sigma;<sub>k</sub><sup>−1</sup>(x−&mu;<sub>k</sub>)) <br><br>
+  Negative Log-Likelihood (NLL): &sum;<sub>n=1</sub><sup>N</sup> −log(&sum;<sub>k=1</sub><sup>K</sup> &pi;<sub>k</sub>N(x<sub>n</sub>;&mu;<sub>k</sub>,&Sigma;<sub>k</sub>))
+</div>
+<p><strong>Challenge:</strong> Hard to optimize because of the log-of-sum structure.</p>
+
+<h3>Expectation-Maximization (EM) Algorithm</h3>
+<p><strong>Problem:</strong> To find parameters → need cluster labels. To find labels → need parameters. This is the "chicken-and-egg" problem.</p>
+<p><strong>Step 0: Initialization:</strong> Start with random &pi;<sub>k</sub>, &mu;<sub>k</sub>, &Sigma;<sub>k</sub>.</p>
+<p><strong>E-Step (Expectation):</strong> Compute responsibility &gamma;<sub>nk</sub>:</p>
+<div class="formula">
+  &gamma;<sub>nk</sub> = &pi;<sub>k</sub>N(x<sub>n</sub>;&mu;<sub>k</sub>,&Sigma;<sub>k</sub>) / &sum;<sub>j=1</sub><sup>K</sup> &pi;<sub>j</sub>N(x<sub>n</sub>;&mu;<sub>j</sub>,&Sigma;<sub>j</sub>)
+</div>
+<p><strong>Interpretation:</strong> Probability that point x<sub>n</sub> belongs to cluster k.</p>
+<p><strong>M-Step (Maximization):</strong></p>
+<div class="formula">
+  Effective cluster size: N<sub>k</sub> = &sum;<sub>n=1</sub><sup>N</sup> &gamma;<sub>nk</sub> <br>
+  Updated Mean: &mu;<sub>k</sub> = (1/N<sub>k</sub>) &sum;<sub>n=1</sub><sup>N</sup> &gamma;<sub>nk</sub>x<sub>n</sub> <br>
+  Updated Covariance: &Sigma;<sub>k</sub> = (1/N<sub>k</sub>) &sum;<sub>n=1</sub><sup>N</sup> &gamma;<sub>nk</sub>(x<sub>n</sub>−&mu;<sub>k</sub>)(x<sub>n</sub>−&mu;<sub>k</sub>)<sup>T</sup> <br>
+  Updated Weights: &pi;<sub>k</sub> = N<sub>k</sub> / N
+</div>
+<p><strong>Iteration:</strong> Repeat E-step → M-step until convergence.</p>
+
+<h3>Examples</h3>
+<h4>1. Exam Scores Example</h4>
+<table>
+  <tr><th>Student Type</th><th>Mean</th><th>Variance</th><th>Weight</th></tr>
+  <tr><td>Unprepared</td><td>−4</td><td>0.5</td><td>0.4</td></tr>
+  <tr><td>Random</td><td>0</td><td>1</td><td>0.3</td></tr>
+  <tr><td>Prepared</td><td>5</td><td>1</td><td>0.3</td></tr>
+</table>
+<p>Observed: Histogram shows 3 peaks, but cluster membership is unknown. GMM learns all 3 clusters automatically.</p>
+
+<h4>2. 2D Clustering</h4>
+<ul>
+  <li>Data forms two clouds (clusters).</li>
+  <li>Start: random circles.</li>
+  <li>After EM: means shift, covariances stretch to fit data.</li>
+  <li>Final result: clusters match actual structure.</li>
+</ul>
+
+<h3>Applications</h3>
+<ol>
+  <li><strong>Clustering:</strong> Groups data into multiple clusters. More flexible than K-means (can model elliptical clusters).</li>
+  <li><strong>High-Dimensional Data:</strong> Works in 10D, 100D. Visualization impossible, but EM handles it mathematically.</li>
+</ol>
+
+<div class="summary-box">
+  <strong>Final Summary</strong><br>
+  GMM = mixture of K Gaussians. Models multi-modal data. Uses latent variable z.<br>
+  Density = weighted sum of Gaussians. MLE is hard → solved using EM algorithm.<br><br>
+  <strong>EM Algorithm:</strong> E-step → find probabilities (&gamma;). M-step → update parameters. Repeat until convergence.<br><br>
+  <strong>Key Insights:</strong> Soft clustering (probabilities, not hard labels). Handles complex data shapes. Foundation for many ML models.
+</div>
+
+<hr>
+
+<!-- LECTURE 4 -->
+<h2>Lecture 4: Laws of Large Numbers — Markov, Chebyshev, Hoeffding, Central Limit</h2>
+
+<h3>Tail Bounds (Deviation from the Mean)</h3>
+<p>Tail bounds estimate the probability that a random variable deviates significantly from its mean.</p>
+
+<h4>1. Markov Inequality (Basic &amp; General)</h4>
+<p><strong>Condition:</strong> Works only for non-negative random variables X ≥ 0.</p>
+<div class="formula">P(X ≥ t) ≤ E[X] / t</div>
+<p><strong>Key Idea:</strong> Uses only the mean. Very general but often loose.</p>
+<div class="example-box">
+  <strong>Example:</strong> If E[X] = 10, then P(X ≥ 50) ≤ 10/50 = 0.2 — at most 20%.<br><br>
+  <strong>Tightness Example:</strong> If P(X=50) = 1/5, P(X=0) = 4/5, then E[X] = 10. Bound = actual probability → tight.
+</div>
+
+<h4>2. Chebyshev Inequality (Uses Variance)</h4>
+<p><strong>Condition:</strong> Works for any random variable, requires mean and variance.</p>
+<div class="formula">P(|X−&mu;| ≥ t) ≤ &sigma;&sup2;/t&sup2;</div>
+<p><strong>Key Idea:</strong> Measures deviation from mean. Probability decreases as ~1/t&sup2;.</p>
+<div class="example-box">
+  <strong>Example:</strong> If &sigma;&sup2; = 4, t = 4: P(|X−&mu;| ≥ 4) ≤ 4/16 = 0.25
+</div>
+
+<h4>3. Hoeffding's Inequality (Very Strong)</h4>
+<p><strong>Conditions:</strong> X1, ..., Xn are i.i.d. and bounded: a ≤ X<sub>i</sub> ≤ b.</p>
+<div class="formula">
+  Formula (for sample mean): P(|X&#772;<sub>n</sub> − &mu;| ≥ &epsilon;) ≤ 2 exp(−2n&epsilon;&sup2; / (b−a)&sup2;)
+</div>
+<p><strong>Key Insight:</strong> Probability decreases exponentially (~e<sup>−n</sup>). Much tighter than Chebyshev (~1/n).</p>
+
+<h3>Notions of Convergence</h3>
+<h4>1. Convergence in Probability</h4>
+<div class="formula">Definition: lim<sub>n→&infin;</sub> P(|X<sub>n</sub> − X| ≥ &epsilon;) = 0</div>
+<p><strong>Meaning:</strong> Probability of large deviation goes to 0. Eventually, values stay close to the limit.</p>
+
+<h4>2. Convergence in Distribution</h4>
+<p><strong>Idea:</strong> The distribution (CDF) of X<sub>n</sub> approaches that of X.</p>
+<p><strong>Key Insight:</strong> Weaker than convergence in probability. Focuses on distributional shape, not exact values.</p>
+
+<h3>Limit Laws</h3>
+<h4>1. Weak Law of Large Numbers (WLLN)</h4>
+<div class="formula">
+  Statement: X&#772;<sub>n</sub> = (1/n) &sum;X<sub>i</sub> &nbsp; X&#772;<sub>n</sub> &#8594;<sup>P</sup> &mu;
+</div>
+<p><strong>Meaning:</strong> Sample mean converges to true mean (in probability).</p>
+<p><strong>Example:</strong> Coin tosses → fraction of heads converges to true probability.</p>
+
+<h4>2. Central Limit Theorem (CLT)</h4>
+<p><strong>Setup:</strong> X<sub>i</sub>: i.i.d. with mean &mu;, variance &sigma;&sup2;.</p>
+<div class="formula">
+  Standardized Sum: Y<sub>n</sub> = (1/&radic;n) &sum;<sub>i=1</sub><sup>n</sup> (X<sub>i</sub> − &mu;) <br>
+  Result: Y<sub>n</sub> &#8594;<sup>d</sup> N(0, &sigma;&sup2;)
+</div>
+<p><strong>Meaning:</strong> Sum (or average) becomes normally distributed.</p>
+<p><strong>Importance:</strong> Explains why the normal distribution appears universally.</p>
+<p><strong>Real-Life Example:</strong> Noise in electrical current = sum of many small independent effects → Gaussian.</p>
+<p><strong>Practical Insight:</strong> Even for n &asymp; 10–20, distribution already looks bell-shaped.</p>
+
+<div class="summary-box">
+  <strong>Final Summary</strong><br>
+  <strong>Tail Bounds:</strong> Markov → uses mean. Chebyshev → uses variance. Hoeffding → exponential decay (strongest).<br><br>
+  <strong>Convergence:</strong> In probability → values stabilize. In distribution → shape stabilizes.<br><br>
+  <strong>Limit Laws:</strong> WLLN → sample mean → true mean. CLT → sum → normal distribution.<br><br>
+  <strong>Key Insight:</strong> More data ⇒ less uncertainty. Randomness averages out → predictable patterns emerge.
+</div>
+
+</body>
+</html>

@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>Week 11: Short Notes - Machine Learning Foundations</title>
+<style>
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    line-height: 1.6;
+    color: #222;
+    background: #fdfdfd;
+  }
+  h1 {
+    text-align: center;
+    border-bottom: 3px solid #333;
+    padding-bottom: 10px;
+  }
+  h2 {
+    margin-top: 50px;
+    color: #1a3b6d;
+    border-bottom: 2px solid #1a3b6d;
+    padding-bottom: 5px;
+  }
+  h3 {
+    color: #333;
+    margin-top: 30px;
+  }
+  h4 {
+    margin-bottom: 5px;
+    color: #444;
+  }
+  ul, ol {
+    margin-top: 5px;
+  }
+  .formula {
+    background: #f2f4f8;
+    border-left: 4px solid #1a3b6d;
+    padding: 10px 15px;
+    margin: 10px 0;
+    font-family: 'Cambria Math', Cambria, serif;
+    font-size: 1.05em;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 15px 0;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    text-align: left;
+  }
+  th {
+    background: #1a3b6d;
+    color: white;
+  }
+  tr:nth-child(even) {
+    background: #f6f8fb;
+  }
+  .summary-box {
+    background: #eef7ee;
+    border: 1px solid #a8d0a8;
+    border-radius: 6px;
+    padding: 12px 18px;
+    margin: 15px 0;
+    font-style: italic;
+  }
+  .example-box {
+    background: #fff8e6;
+    border: 1px solid #e0c88a;
+    border-radius: 6px;
+    padding: 12px 18px;
+    margin: 15px 0;
+  }
+  .proof-box {
+    background: #eef2fb;
+    border: 1px solid #a8bfe0;
+    border-radius: 6px;
+    padding: 12px 18px;
+    margin: 15px 0;
+  }
+  .tips-box {
+    background: #fdf0e8;
+    border: 1px solid #e0b48a;
+    border-radius: 6px;
+    padding: 12px 18px;
+    margin: 15px 0;
+  }
+  hr {
+    margin: 40px 0;
+    border: none;
+    border-top: 1px dashed #999;
+  }
+  code {
+    background: #eee;
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Week 11: Short Notes — Machine Learning Foundations</h1>
+
+<!-- LECTURE 1 -->
+<h2>Lecture 1: Continuous Random Variables</h2>
+
+<h3>Fundamental Concepts</h3>
+<h4>Sample Space (Ω)</h4>
+<ul>
+  <li>For <strong>continuous variables</strong> → uncountably infinite (e.g., all real numbers &#8477;).</li>
+  <li>Unlike discrete → not countable.</li>
+</ul>
+
+<h4>Events (F) — Sigma Algebra</h4>
+<p>A valid event set must satisfy:</p>
+<ul>
+  <li>&Omega; is included.</li>
+  <li>If A is an event → A<sup>c</sup> is also an event.</li>
+  <li>Countable union: A1, A2,... ⇒ &cup; A<sub>i</sub> is also an event.</li>
+</ul>
+
+<h4>Random Variable (X)</h4>
+<ul>
+  <li>A function: X : &Omega; → R</li>
+  <li>Continuous if it takes infinitely many values in an interval.</li>
+</ul>
+
+<h4>Source of Randomness</h4>
+<ul>
+  <li>Complex systems (e.g., stock prices).</li>
+  <li>Uncertainty (e.g., waiting time, weather).</li>
+</ul>
+
+<h3>Probability Density Function (PDF)</h3>
+<p><strong>Definition:</strong> Continuous version of PMF. Represents density, not direct probability.</p>
+<p><strong>Important Idea:</strong> P(X = x) = 0 — Exact value probability is always zero.</p>
+<h4>Key Properties</h4>
+<ul>
+  <li><strong>Non-negativity:</strong> f<sub>X</sub>(x) ≥ 0</li>
+  <li><strong>Normalization:</strong> &int;<sub>−&infin;</sub><sup>&infin;</sup> f<sub>X</sub>(x) dx = 1</li>
+</ul>
+<h4>Important Notes</h4>
+<ul>
+  <li>PDF can be greater than 1.</li>
+  <li>Units exist (e.g., per minute, per meter).</li>
+</ul>
+
+<h3>Cumulative Distribution Function (CDF)</h3>
+<p><strong>Definition:</strong> Probability that X ≤ x: F<sub>X</sub>(x) = P(X ≤ x)</p>
+<div class="formula">F<sub>X</sub>(x) = &int;<sub>−&infin;</sub><sup>x</sup> f<sub>X</sub>(t) dt</div>
+<h4>Properties</h4>
+<ul>
+  <li>F<sub>X</sub>(−&infin;) = 0.</li>
+  <li>F<sub>X</sub>(+&infin;) = 1.</li>
+  <li>Monotonically increasing.</li>
+</ul>
+
+<h3>Examples</h3>
+<div class="example-box">
+  <strong>Example A: Bus Waiting Time (Uniform Distribution)</strong><br>
+  Scenario: Bus every 15 minutes, arrival time is random.<br>
+  Random Variable: X = waiting time &isin; [0, 15]<br><br>
+  PDF: f<sub>X</sub>(x) = 1/15 for 0 ≤ x ≤ 15, else 0<br>
+  CDF: F<sub>X</sub>(x) = 0 for x &lt; 0; x/15 for 0 ≤ x ≤ 15; 1 for x &gt; 15<br><br>
+  <strong>Key Insight:</strong> Uniform distribution → CDF is linear.
+</div>
+
+<div class="example-box">
+  <strong>Example B: Linear PDF</strong><br>
+  Given: f<sub>X</sub>(x) = x/2 for 0 ≤ x ≤ 2, else 0<br>
+  Validation: Area = triangle = ½ &times; base &times; height = 1<br><br>
+  CDF Calculation: F<sub>X</sub>(x) = &int;<sub>0</sub><sup>x</sup> (t/2) dt = x&sup2;/4<br>
+  Final CDF: 0 for x &lt; 0; x&sup2;/4 for 0 ≤ x ≤ 2; 1 for x &gt; 2<br><br>
+  <strong>Key Insight:</strong> Linear PDF → Quadratic CDF.
+</div>
+
+<div class="summary-box">
+  <strong>Quick Revision</strong><br>
+  Continuous ⇒ P(X = x) = 0. | PDF area = 1. | CDF = integral of PDF.<br>
+  Uniform PDF ⇒ linear CDF. | Linear PDF ⇒ quadratic CDF.
+</div>
+
+<hr>
+
+<!-- LECTURE 2 -->
+<h2>Lecture 2: Conditional PDF</h2>
+
+<h3>Conditional Probability Density Function (PDF)</h3>
+<h4>Idea</h4>
+<ul>
+  <li>Describes distribution of X after knowing event A occurred.</li>
+  <li>Reduces uncertainty using given information.</li>
+</ul>
+<p><strong>Definition:</strong> Conditional density of X given A:</p>
+<div class="formula">
+  f<sub>X|A</sub>(x) = P(X &isin; [x, x+dx] ∣ A) / dx <br>
+  Key Formula: f<sub>X|A</sub>(x) = f<sub>X</sub>(x) / P(A), &nbsp; x &isin; A
+</div>
+<h4>Key Properties</h4>
+<ul>
+  <li>f<sub>X|A</sub>(x) ≥ 0.</li>
+  <li>Total area = 1.</li>
+  <li>Outside event A → density = 0.</li>
+  <li>Inside A → scaled up by 1/P(A).</li>
+</ul>
+<h4>Intuition</h4>
+<ul>
+  <li>Cut off invalid region.</li>
+  <li>Stretch remaining density to make total area = 1.</li>
+</ul>
+
+<div class="example-box">
+  <strong>Example: Conditional PDF</strong><br>
+  Given: f<sub>X</sub>(x) = x/2 for 0 ≤ x ≤ 2, else 0. Event: A = {X &gt; 1}.<br><br>
+  <strong>Step 1: Find P(A):</strong> P(A) = &int;<sub>1</sub><sup>2</sup> (x/2) dx = 3/4<br>
+  <strong>Step 2: Conditional PDF:</strong> For 1 ≤ x ≤ 2: f<sub>X|A</sub>(x) = (x/2)/(3/4) = 2x/3<br>
+  <strong>Final Answer:</strong> f<sub>X|A</sub>(x) = 2x/3 for 1 ≤ x ≤ 2, else 0<br><br>
+  <strong>Insight:</strong> Density increases (scaled up). Values outside A vanish.
+</div>
+
+<h3>Functions of Random Variables</h3>
+<p><strong>Idea:</strong> If Y = g(X), then Y is also a random variable.</p>
+<p><strong>Goal:</strong> Find PDF of Y, denoted f<sub>Y</sub>(y).</p>
+<p><strong>General Principle:</strong> Probability is preserved: P(y ≤ Y ≤ y + dy). Transformation changes: range, and density (must still integrate to 1).</p>
+
+<div class="example-box">
+  <strong>Example 1: Linear Transformation (Y = X/2)</strong><br>
+  Given: X ~ Uniform[−1,1]. f<sub>X</sub>(x) = ½, −1 ≤ x ≤ 1<br><br>
+  <strong>Step 1: Range:</strong> Y &isin; [−1/2, 1/2]<br>
+  <strong>Step 2: PDF:</strong> f<sub>Y</sub>(y) = f<sub>X</sub>(2y)&middot;2 = (1/2)&middot;2 = 1<br>
+  <strong>Final Answer:</strong> f<sub>Y</sub>(y) = 1 for −1/2 ≤ y ≤ 1/2, else 0<br><br>
+  <strong>Insight:</strong> Uniform stays uniform, density adjusts to new interval size.
+</div>
+
+<div class="example-box">
+  <strong>Example 2: Absolute Value Transformation (Y = |X|)</strong><br>
+  Given: X ~ Uniform[−1,1]. f<sub>X</sub>(x) = 1/2, −1 ≤ x ≤ 1<br><br>
+  <strong>Step 1: Range:</strong> Y &isin; [0,1]<br>
+  <strong>Step 2: Key Idea:</strong> Two values map to one: x and −x → same y.<br>
+  <strong>Result:</strong> f<sub>Y</sub>(y) = 2&middot;f<sub>X</sub>(y) = 2&middot;1/2 = 1<br>
+  <strong>Final Answer:</strong> f<sub>Y</sub>(y) = 1 for 0 ≤ y ≤ 1, else 0<br><br>
+  <strong>Insight:</strong> Folding effect (negative side overlaps positive). Density doubles.
+</div>
+
+<div class="summary-box">
+  <strong>Quick Revision</strong><br>
+  Conditional PDF: Cut + scale: f<sub>X|A</sub>(x) = f<sub>X</sub>(x)/P(A)<br>
+  Transformations: Linear → scale density by derivative. Many-to-one (like |X|) → add densities.<br>
+  Key Tricks: Always adjust range first. Ensure total area = 1. Think: "Where did probability mass go?"
+</div>
+
+<hr>
+
+<!-- LECTURE 3 -->
+<h2>Lecture 3: Expectation</h2>
+
+<h3>Expectation (Mean) of Continuous Random Variable</h3>
+<p><strong>Definition:</strong> Continuous version of average. Replace summation with integration:</p>
+<div class="formula">E[X] = &int;<sub>−&infin;</sub><sup>&infin;</sup> x f<sub>X</sub>(x) dx</div>
+<p><strong>Intuition:</strong> Acts like a balance point (center of mass) where the probability "weight" balances.</p>
+
+<div class="example-box">
+  <strong>Example 1: Uniform Distribution X ~ U(a,b)</strong><br>
+  PDF: f<sub>X</sub>(x) = 1/(b−a), a ≤ x ≤ b<br>
+  Result: E[X] = (a+b)/2<br>
+  Insight: Mean = midpoint of interval.<br><br>
+  <strong>Example 2: Triangular Density</strong><br>
+  Given: f<sub>X</sub>(x) = x/2, 0 ≤ x ≤ 2<br>
+  Result: E[X] = ¾<br>
+  Insight: Skewed right → mean shifts right.
+</div>
+
+<h3>Properties of Expectation</h3>
+<ul>
+  <li><strong>Linearity:</strong> E[X+Y] = E[X] + E[Y] — Works always (no independence needed).</li>
+  <li><strong>Expectation of Function:</strong> E[g(X)] = &int;<sub>−&infin;</sub><sup>&infin;</sup> g(x)f<sub>X</sub>(x) dx — No need to find PDF of Y = g(X).</li>
+</ul>
+
+<h3>Variance</h3>
+<p><strong>Definition:</strong> Measures spread around mean.</p>
+<div class="formula">
+  Standard Formula: Var(X) = E[(X − E[X])&sup2;] <br>
+  Shortcut Formula: Var(X) = E[X&sup2;] − (E[X])&sup2; <br>
+  Standard Deviation: &sigma; = &radic;Var(X)
+</div>
+<h4>Properties of Variance</h4>
+<ul>
+  <li>Var(X) ≥ 0.</li>
+  <li>Var(constant) = 0.</li>
+  <li>Scaling: Var(aX) = a&sup2;Var(X)</li>
+  <li>Not linear: Var(X+Y) &ne; Var(X) + Var(Y) (in general)</li>
+</ul>
+
+<div class="example-box">
+  <strong>Example: Uniform Distribution X ~ U(a, b)</strong><br>
+  Result: Var(X) = (b−a)&sup2;/12<br>
+  Insight: Larger interval → larger spread.
+</div>
+
+<h3>Conditional Expectation</h3>
+<p><strong>Definition:</strong> Expected value after knowing event A occurred:</p>
+<div class="formula">E[X|A] = &int;<sub>−&infin;</sub><sup>&infin;</sup> x f<sub>X|A</sub>(x) dx</div>
+<p><strong>Law of Total Expectation:</strong> E[X] = E[X|A]P(A) + E[X|A<sup>c</sup>]P(A<sup>c</sup>)</p>
+<p><strong>Idea:</strong> Break problem into cases, take weighted average.</p>
+
+<div class="example-box">
+  <strong>Example: Bus Waiting Time</strong><br>
+  Scenario: Arrive between 7:10–7:30. Bus at 7:15 and 7:30.<br><br>
+  <strong>Case 1: A (before 7:15)</strong> — P(A) = ¼. Waiting time: Uniform [0,5]. E[X|A] = 2.5.<br>
+  <strong>Case 2: A<sup>c</sup> (after 7:15)</strong> — P(A<sup>c</sup>) = ¾. Waiting time: Uniform [0,15]. E[X|A<sup>c</sup>] = 7.5.<br><br>
+  <strong>Final Answer:</strong> E[X] = (2.5)(¼) + (7.5)(¾) = 6.25<br>
+  <strong>Insight:</strong> Split into simple cases, combine using probabilities.
+</div>
+
+<div class="summary-box">
+  <strong>Quick Revision Cheatsheet</strong><br>
+  Expectation: Mean = balance point. Uniform → midpoint.<br>
+  Variance: Spread = "how far from mean." Shortcut: E[X&sup2;] − (E[X])&sup2;<br>
+  Conditional Expectation: Use conditional PDF or split cases: E[X] = &sum;E[X|case]&middot;P(case)<br>
+  Key Tricks: Always check range first. Use symmetry when possible. Break problems into simpler parts.
+</div>
+
+<hr>
+
+<!-- LECTURE 4 -->
+<h2>Lecture 4: Multiple Random Variables</h2>
+
+<h3>Joint Density &amp; Joint CDF</h3>
+<p><strong>Joint PDF:</strong> Describes probability of X and Y together. Probability over a small rectangle:</p>
+<div class="formula">
+  f<sub>XY</sub>(x,y) = P(x ≤ X ≤ x+dx, y ≤ Y ≤ y+dy) / (dx&middot;dy)
+</div>
+<p><strong>Intuition:</strong> Think of a 3D surface — height = density, area = probability.</p>
+<p><strong>Joint CDF:</strong> F<sub>XY</sub>(x,y) = P(X ≤ x, Y ≤ y)</p>
+<h4>Key Properties</h4>
+<ul>
+  <li>Non-negative: f<sub>XY</sub>(x, y) ≥ 0.</li>
+  <li>Total probability = 1: &int;&int; f<sub>XY</sub>(x,y) dx dy = 1</li>
+  <li>Limits: F(−&infin;,−&infin;) = 0, F(&infin;,&infin;) = 1.</li>
+  <li>Monotonic: Increasing in both x and y.</li>
+</ul>
+
+<h3>Marginal Densities</h3>
+<p><strong>Idea:</strong> Get distribution of one variable by removing the other.</p>
+<div class="formula">
+  f<sub>X</sub>(x) = &int;<sub>−&infin;</sub><sup>&infin;</sup> f<sub>XY</sub>(x,y) dy <br>
+  f<sub>Y</sub>(y) = &int;<sub>−&infin;</sub><sup>&infin;</sup> f<sub>XY</sub>(x,y) dx
+</div>
+<p><strong>Trick:</strong> Integrate out the other variable.</p>
+
+<h3>Conditional Densities</h3>
+<p><strong>Definition:</strong> Distribution of one variable given the other.</p>
+<div class="formula">
+  For X given Y: f<sub>X|Y</sub>(x|y) = f<sub>XY</sub>(x,y) / f<sub>Y</sub>(y) <br>
+  For Y given X: f<sub>Y|X</sub>(y|x) = f<sub>XY</sub>(x,y) / f<sub>X</sub>(x)
+</div>
+<p><strong>Interpretation:</strong> Fix one variable → study the other. Example: Given height → distribution of weight.</p>
+
+<h3>Independence</h3>
+<p><strong>Definition:</strong> f<sub>XY</sub>(x, y) = f<sub>X</sub>(x)&middot;f<sub>Y</sub>(y)</p>
+<p><strong>Equivalent (Expectation Form):</strong> E[g(X)h(Y)] = E[g(X)]&middot;E[h(Y)]</p>
+<p><strong>Intuition:</strong> Knowing X gives no information about Y.</p>
+<p><strong>Important:</strong> If joint &ne; product → dependent.</p>
+
+<div class="example-box">
+  <strong>Example: Height (X) &amp; Weight (Y)</strong><br>
+  Given: Height: 1 &lt; x &lt; 2. Weight: 50x − 20 ≤ y ≤ 50x + 20. Joint PDF = constant C.<br><br>
+  <strong>Step 1: Find C:</strong> Region is a parallelogram. Area = 40. C&middot;40 = 1 ⇒ C = 1/40<br>
+  <strong>Step 2: Marginal of X:</strong> f<sub>X</sub>(x) = &int;<sub>50x−20</sub><sup>50x+20</sup> (1/40) dy = 1 ⇒ Uniform distribution<br>
+  <strong>Step 3: Are X and Y Independent?</strong> No (Dependent).<br><br>
+  <strong>Reason:</strong> Some combinations impossible (e.g., tall height + very low weight). But marginals may still be non-zero.<br><br>
+  <strong>Key Insight:</strong> Independence requires: all combinations possible, and joint = product of marginals.
+</div>
+
+<div class="summary-box">
+  <strong>Quick Revision</strong><br>
+  Joint PDF: 2D density → integrates to 1.<br>
+  Marginals: Integrate out one variable.<br>
+  Conditional Density: f<sub>X|Y</sub>(x|y) = f<sub>XY</sub>(x,y)/f<sub>Y</sub>(y)<br>
+  Independence: Joint = product of marginals.<br><br>
+  <strong>Key Tricks:</strong> Always visualize region. Check valid combinations. Use integration carefully.
+</div>
+
+<hr>
+
+<!-- LECTURE 5 -->
+<h2>Lecture 5: Independent Random Variables</h2>
+
+<h3>Sum of Independent Random Variables</h3>
+<p><strong>Idea:</strong> If Z = X+Y, its PDF is obtained using convolution.</p>
+<div class="formula">f<sub>Z</sub>(z) = &int;<sub>−&infin;</sub><sup>&infin;</sup> f<sub>X</sub>(x)f<sub>Y</sub>(z−x) dx</div>
+<p><strong>Intuition:</strong> Slide one PDF over another and compute overlap.</p>
+
+<div class="example-box">
+  <strong>Example: X,Y ~ Uniform(0,1)</strong><br>
+  Result (Triangular Distribution): f<sub>Z</sub>(z) = z for 0 ≤ z ≤ 1; 2−z for 1 &lt; z ≤ 2; 0 otherwise<br>
+  Insight: Shape = triangle, peak at z = 1.
+</div>
+
+<h3>Maximum of Independent Variables</h3>
+<p><strong>Idea:</strong> If Z = max(X,Y), both must be ≤ z.</p>
+<div class="formula">
+  CDF Formula: F<sub>Z</sub>(z) = F<sub>X</sub>(z)&middot;F<sub>Y</sub>(z) <br>
+  PDF: f<sub>Z</sub>(z) = d/dz F<sub>Z</sub>(z)
+</div>
+<div class="example-box">
+  <strong>Example: X,Y ~ Uniform(0,1):</strong> F<sub>Z</sub>(z) = z&sup2;, f<sub>Z</sub>(z) = 2z, 0 ≤ z ≤ 1<br>
+  Insight: More density near 1 → larger values more likely.
+</div>
+
+<h3>Minimum of Independent Variables</h3>
+<p><strong>Idea:</strong> If Z = min(X,Y), at least one must be ≤ z.</p>
+<div class="formula">CDF Formula: F<sub>Z</sub>(z) = 1 − (1 − F<sub>X</sub>(z))(1 − F<sub>Y</sub>(z))</div>
+<p><strong>Insight:</strong> Opposite of maximum → more density near 0.</p>
+
+<h3>Covariance &amp; Correlation</h3>
+<div class="formula">Covariance: Cov(X,Y) = E[XY] − E[X]E[Y]</div>
+<p><strong>Meaning:</strong> Measures linear relationship.</p>
+<ul>
+  <li>Positive → move together.</li>
+  <li>Negative → opposite direction.</li>
+</ul>
+<div class="formula">Correlation Coefficient: &rho;(X,Y) = Cov(X,Y) / &radic;(Var(X)&middot;Var(Y))</div>
+<p><strong>Range:</strong> −1 ≤ &rho; ≤ 1.</p>
+<h4>Key Concepts</h4>
+<ul>
+  <li>Independence ⇒ Cov(X,Y) = 0.</li>
+  <li>But Cov(X,Y) = 0 does <strong>not</strong> imply independence.</li>
+</ul>
+
+<div class="example-box">
+  <strong>Example: Uncorrelated but Dependent</strong><br>
+  X ~ U(−1, 1). Y = X&sup2;. Result: Cov(X,Y) = 0. But Y depends on X → dependent.<br><br>
+  <strong>Insight:</strong> Covariance captures only linear relation.
+</div>
+
+<h3>Random Vectors &amp; Covariance Matrix</h3>
+<p><strong>Random Vector:</strong> (X1, X2, ..., Xn)</p>
+<div class="formula">
+  Covariance Matrix: &Sigma; = <br>
+  [ Var(X1) &nbsp; Cov(X1,X2) &nbsp; ... ] <br>
+  [ Cov(X2,X1) &nbsp; Var(X2) &nbsp; ... ] <br>
+  [ ... &nbsp; ... &nbsp; &#8945; ]
+</div>
+<h4>Properties</h4>
+<ul>
+  <li>Diagonal = variances.</li>
+  <li>Off-diagonal = covariances.</li>
+  <li>Symmetric: Cov(X,Y) = Cov(Y,X).</li>
+</ul>
+<p><strong>Insight:</strong> Captures relationships between all variables together.</p>
+
+<div class="summary-box">
+  <strong>Quick Revision</strong><br>
+  Sum: Use convolution. Uniform + Uniform → triangle.<br>
+  Max: F<sub>Z</sub> = F<sub>X</sub>&middot;F<sub>Y</sub> | Min: F<sub>Z</sub> = 1 − (1−F<sub>X</sub>)(1−F<sub>Y</sub>)<br>
+  Covariance: Measures linear relation. Independence ⇒ zero covariance.<br>
+  Correlation: Normalized covariance (−1 to 1).<br>
+  Matrix: Diagonal → variance, symmetric structure.
+</div>
+
+<div class="tips-box">
+  <strong>Final Tips</strong><br>
+  Always check independence first. For sums → think convolution. For max/min → use CDF approach. Don't confuse: uncorrelated &ne; independent.
+</div>
+
+<hr>
+
+<!-- LECTURE 6 -->
+<h2>Lecture 6: Transformed Random Variables</h2>
+
+<h3>Core Concept</h3>
+<ul>
+  <li><strong>Idea:</strong> Start with two variables W, X with known joint PDF.</li>
+  <li>Define new variables: Y = G(W, X), Z = H(W, X)</li>
+  <li><strong>Goal:</strong> Find joint PDF of (Y, Z).</li>
+</ul>
+
+<h3>Requirement: Invertibility</h3>
+<p>Why needed? Must recover original variables from new ones. Condition: there exist inverse functions:</p>
+<div class="formula">W = q(y,z), X = r(y,z)</div>
+<p><strong>Important:</strong> If not invertible → information lost.</p>
+<p><strong>Example (Not invertible):</strong> Y = W, Z = W ⇒ cannot recover X</p>
+
+<h3>Change of Variables Rule</h3>
+<h4>Intuition</h4>
+<ul>
+  <li>Small rectangle in (Y, Z) &harr; parallelogram in (W, X).</li>
+  <li>Probability remains same, only area changes.</li>
+</ul>
+
+<h3>Key Formula</h3>
+<div class="formula">
+  Joint Density Transformation: f<sub>YZ</sub>(y, z) = f<sub>WX</sub>(q(y,z), r(y,z))&middot;|det(J)| <br><br>
+  Jacobian Matrix: J = [ &part;W/&part;y &nbsp; &part;W/&part;z ; &part;X/&part;y &nbsp; &part;X/&part;z ] <br>
+  Determinant: det(J) = (&part;W/&part;y)(&part;X/&part;z) − (&part;W/&part;z)(&part;X/&part;y)
+</div>
+<p><strong>Absolute Value:</strong> Use |det(J)| because area cannot be negative.</p>
+
+<h3>Step-by-Step Method</h3>
+<ol>
+  <li>Define transformation Y, Z.</li>
+  <li>Check invertibility.</li>
+  <li>Find inverse functions W, X.</li>
+  <li>Compute Jacobian.</li>
+  <li>Substitute into formula.</li>
+  <li>Determine valid region.</li>
+</ol>
+
+<div class="example-box">
+  <strong>Example: Y = W + X, Z = W − X</strong><br>
+  Given: W, X ~ Uniform(0,1), independent. f<sub>WX</sub>(w,x) = 1<br><br>
+  <strong>Step 1: Inverse Transformation</strong> — W = (y+z)/2, X = (y−z)/2<br>
+  <strong>Step 2: Jacobian</strong> — J = [½ &nbsp; ½ ; ½ &nbsp; −½], det(J) = (½&middot;−½) − (½&middot;½) = −½, |det(J)| = ½<br>
+  <strong>Step 3: Joint PDF</strong> — f<sub>YZ</sub>(y,z) = f<sub>WX</sub>((y+z)/2,(y−z)/2)&middot;½ = ½ (since f<sub>WX</sub> = 1)<br>
+  <strong>Step 4: Region (Support)</strong> — From 0 ≤ (y+z)/2 ≤ 1 and 0 ≤ (y−z)/2 ≤ 1: forms a diamond-shaped region.<br><br>
+  <strong>Final Result:</strong> f<sub>YZ</sub>(y,z) = ½ inside region, 0 outside<br>
+  <strong>Are Y and Z Independent?</strong> No. Reason: Restricted region (not rectangular). Some (y,z) pairs impossible.
+</div>
+
+<div class="summary-box">
+  <strong>Quick Revision</strong><br>
+  Transformation Formula: f<sub>YZ</sub> = f<sub>WX</sub>&middot;|det(J)|<br>
+  Steps: Find inverse → Compute Jacobian → Apply formula → Define region.<br>
+  Key Insights: Jacobian = area scaling factor. Invertibility is essential. Region determines dependence.<br>
+  Common Mistakes: Forgetting absolute value. Ignoring region constraints. Assuming independence.
+</div>
+
+<div class="tips-box">
+  <strong>Exam Tips</strong><br>
+  Always check invertibility. Write inverse clearly. Draw region (very helpful). Shortcut: If region not rectangular → dependent.
+</div>
+
+<hr>
+
+<!-- LECTURE 7 -->
+<h2>Lecture 7: Uniform, Exponential, Normal</h2>
+
+<h3>Uniform Distribution</h3>
+<p><strong>Notation:</strong> X ~ Uniform(a, b)</p>
+<div class="formula">PDF: f<sub>X</sub>(x) = 1/(b−a), a ≤ x ≤ b</div>
+<p><strong>Idea:</strong> All values in [a, b] are equally likely.</p>
+<p><strong>Mean:</strong> E[X] = (a+b)/2 &nbsp; <strong>Variance:</strong> Var(X) = (b−a)&sup2;/12</p>
+<p><strong>Example:</strong> Waiting time uniformly between 0–10 minutes → Mean = 5 minutes.</p>
+
+<h3>Exponential Distribution</h3>
+<p><strong>Notation:</strong> X ~ Exponential(&lambda;)</p>
+<div class="formula">
+  PDF: f<sub>X</sub>(x) = &lambda;e<sup>−&lambda;x</sup>, x ≥ 0 <br>
+  CDF: F<sub>X</sub>(x) = 1 − e<sup>−&lambda;x</sup>
+</div>
+<p><strong>Mean:</strong> E[X] = 1/&lambda;</p>
+<p><strong>Key Idea:</strong> Models waiting time until an event occurs.</p>
+<p><strong>Memoryless Property:</strong> P(X ≥ a | X ≥ b) = P(X ≥ a−b)</p>
+<p><strong>Meaning:</strong> Past does not affect future.</p>
+<p><strong>Minimum of Exponentials:</strong> If X ~ Exp(&lambda;), Y ~ Exp(&tau;): min(X,Y) ~ Exp(&lambda;+&tau;)</p>
+<h4>Applications</h4>
+<ul>
+  <li>System failure (multiple components).</li>
+  <li>Time to next event.</li>
+</ul>
+<p><strong>Examples:</strong> Bulb lifetime, laptop fails if CPU or RAM fails.</p>
+
+<h3>Normal (Gaussian) Distribution</h3>
+<p><strong>Standard Normal:</strong> Z ~ N(0, 1)</p>
+<div class="formula">PDF: f<sub>Z</sub>(z) = (1/&radic;(2&pi;)) e<sup>−z&sup2;/2</sup></div>
+<h4>Properties</h4>
+<ul>
+  <li>Mean = 0.</li>
+  <li>Variance = 1.</li>
+  <li>Symmetric about 0.</li>
+</ul>
+<p><strong>General Normal:</strong> X ~ N(&mu;, &sigma;&sup2;)</p>
+<p><strong>Transformation:</strong> X = &sigma;Z + &mu;</p>
+<div class="formula">PDF: f<sub>X</sub>(x) = (1/(&sigma;&radic;(2&pi;))) e<sup>−½((x−&mu;)/&sigma;)&sup2;</sup></div>
+<h4>Parameters</h4>
+<ul>
+  <li>Mean: E[X] = &mu;.</li>
+  <li>Variance: Var(X) = &sigma;&sup2;.</li>
+</ul>
+<h4>Key Concepts</h4>
+<ul>
+  <li><strong>Central Limit Theorem (CLT):</strong> Sum of many random variables → Normal distribution.</li>
+  <li><strong>Real-Life Examples:</strong> Measurement noise, heights, marks, errors.</li>
+  <li><strong>Symmetry:</strong> Bell-shaped curve, equal spread on both sides.</li>
+</ul>
+
+<div class="summary-box">
+  <strong>Quick Revision Cheatsheet</strong><br>
+  Uniform: Flat distribution, mean = midpoint.<br>
+  Exponential: Waiting time, memoryless property.<br>
+  Normal: Bell curve, most natural phenomena.
+</div>
+
+<div class="tips-box">
+  <strong>Final Tips</strong><br>
+  Uniform → simplest distribution. Exponential → only memoryless distribution. Normal → appears everywhere (CLT).<br><br>
+  <strong>Common Mistakes:</strong> Forgetting domain (especially exponential: x ≥ 0). Mixing up mean/variance formulas. Ignoring symmetry in normal distribution.
+</div>
+
+</body>
+</html>

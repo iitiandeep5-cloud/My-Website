@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>Week 1: Short Notes - Machine Learning</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 0 20px;
+    line-height: 1.6;
+    color: #222;
+    background: #fdfdfd;
+  }
+  h1 {
+    text-align: center;
+    color: #1a1a2e;
+    border-bottom: 3px solid #1a73e8;
+    padding-bottom: 10px;
+  }
+  h2 {
+    color: #1a73e8;
+    margin-top: 40px;
+    border-left: 5px solid #1a73e8;
+    padding-left: 10px;
+  }
+  h3 {
+    color: #0d47a1;
+    margin-top: 25px;
+  }
+  h4 {
+    color: #333;
+    margin-bottom: 5px;
+  }
+  ul {
+    margin-top: 5px;
+  }
+  li {
+    margin-bottom: 4px;
+  }
+  .summary {
+    background: #eef4ff;
+    border-left: 4px solid #1a73e8;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-top: 15px;
+  }
+  .formula {
+    background: #f5f5f5;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    display: inline-block;
+    margin: 4px 0;
+  }
+  .lecture {
+    margin-top: 60px;
+    padding-top: 10px;
+    border-top: 2px dashed #ccc;
+  }
+  code {
+    background: #f0f0f0;
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Week 1: Short Notes</h1>
+
+<div class="lecture">
+<h2>Lecture 1: Introduction to Machine Learning</h2>
+
+<h3>What is Machine Learning?</h3>
+<ul>
+  <li><strong>Definition:</strong> Study of algorithms that learn from data and make predictions.</li>
+  <li><strong>Key Idea:</strong> Instead of explicitly programming rules, ML allows computers to learn patterns from data.</li>
+  <li><strong>Foundation:</strong> Driven by mathematics (linear algebra, probability, optimization).</li>
+</ul>
+
+<h3>ML vs Artificial Intelligence (AI)</h3>
+<ul>
+  <li><strong>Artificial Intelligence (AI):</strong> Broad concept of making machines behave like humans.</li>
+  <li><strong>Machine Learning (ML):</strong> Subset of AI; machines learn from data.</li>
+  <li><strong>Deep Learning:</strong> Subset of ML; uses neural networks.</li>
+</ul>
+<p class="formula">Hierarchy: AI ⊃ ML ⊃ Deep Learning</p>
+
+<h3>What Machine Learning is NOT</h3>
+<h4>Not Procedural Programming:</h4>
+<ul>
+  <li>Traditional programs follow fixed rules.</li>
+  <li>ML systems learn rules automatically from data.</li>
+  <li>Example: Tax calculator = fixed rules; Spam filter = learned patterns.</li>
+</ul>
+<h4>Not Memorization:</h4>
+<ul>
+  <li>Memorizing training data ≠ learning.</li>
+  <li>A good model must generalize to unseen data.</li>
+  <li>Example: Memorizing 2000 tree images ≠ understanding "tree".</li>
+</ul>
+
+<h3>Key Concept: Generalization</h3>
+<ul>
+  <li><strong>Definition:</strong> Ability to perform well on unseen data.</li>
+  <li><strong>Goal of ML:</strong> Build models that generalize beyond training data.</li>
+  <li><strong>Good ML Model:</strong>
+    <ul>
+      <li>Works well on training data.</li>
+      <li>Works well on new, unseen data.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4>Learning by Experience</h4>
+<p>ML models improve by:</p>
+<ul>
+  <li>Making predictions.</li>
+  <li>Receiving feedback.</li>
+  <li>Adjusting behavior.</li>
+</ul>
+<p><em>Example: A robot hits a wall → learns to avoid it next time.</em></p>
+
+<h3>Mathematical Foundation</h3>
+<ul>
+  <li>Linear Algebra</li>
+  <li>Probability</li>
+  <li>Optimization</li>
+</ul>
+
+<h3>Real-Life Applications of ML</h3>
+<h4>Human-Like Abilities</h4>
+<ul>
+  <li>Computer Vision → Object recognition (faces, trees).</li>
+  <li>Speech &amp; Text Processing → Language, accents, handwriting.</li>
+</ul>
+<h4>Everyday Digital Use</h4>
+<ul>
+  <li>E-commerce → Product recommendations.</li>
+  <li>OTT Platforms → Personalized movie suggestions.</li>
+  <li>Spam Filters → Detect spam emails/SMS.</li>
+  <li>Social Media → "People you may know."</li>
+</ul>
+<h4>Prediction &amp; Forecasting</h4>
+<ul>
+  <li>Weather Prediction → Rainfall forecasts.</li>
+  <li>Stock Market → Price movement prediction.</li>
+  <li>Sports Analytics → Match winner prediction.</li>
+</ul>
+<h4>Technical &amp; Scientific Use</h4>
+<ul>
+  <li>Signal Processing → Separate vocals from music.</li>
+  <li>Photo Organization → Group images by faces.</li>
+  <li>Robotics → Navigation through trial &amp; error.</li>
+  <li>Scientific Research → Analyze experimental data.</li>
+</ul>
+
+<div class="summary">
+<strong>Final Summary:</strong>
+<ul>
+  <li>ML = Learning from data, not hardcoded rules.</li>
+  <li>Goal = Generalization (work on unseen data).</li>
+  <li>Not memorization, not fixed programming.</li>
+  <li>Improves through experience &amp; feedback.</li>
+  <li>Applications span digital platforms, finance, science, and robotics.</li>
+</ul>
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 2: Paradigms of Machine Learning</h2>
+
+<h3>Supervised Learning (Learning with Labels)</h3>
+<ul>
+  <li><strong>Definition:</strong> Data has inputs (features) and outputs (labels). Goal is to learn mapping input → output.</li>
+  <li><strong>Types:</strong>
+    <ul>
+      <li>Classification (Discrete Output):
+        <ul>
+          <li>Binary (2 classes) → e.g., Spam vs Not Spam</li>
+          <li>Multi-class (&gt;2 classes) → e.g., Digit recognition (0–9)</li>
+        </ul>
+      </li>
+      <li>Regression (Continuous Output): Predict real values (e.g., rainfall, house price).</li>
+      <li>Ranking / Ordinal Learning: Ordered outputs (e.g., movie recommendations).</li>
+      <li>Structured Learning: Outputs with structure (trees, graphs, sentence parsing).</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Unsupervised Learning (No Labels)</h3>
+<ul>
+  <li><strong>Definition:</strong> Only data given, no correct answers. Goal is to discover hidden patterns.</li>
+  <li><strong>Types:</strong>
+    <ul>
+      <li>Clustering: Group similar data points (e.g., photos → humans, animals, objects).</li>
+      <li>Representation Learning: Learn better features automatically (e.g., raw pixels → edges, shapes).</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Sequential Learning (Learning Over Time)</h3>
+<ul>
+  <li><strong>Definition:</strong> Learning step-by-step, updating continuously with feedback.</li>
+  <li><strong>Types:</strong>
+    <ul>
+      <li>Online Learning (Full Feedback): Feedback for chosen and all other actions (e.g., stock prediction with expert advice).</li>
+      <li>Multi-Armed Bandits (Partial Feedback): Feedback only for chosen action (e.g., medical treatment outcome).</li>
+      <li>Reinforcement Learning (RL):
+        <ul>
+          <li><strong>Definition:</strong> Agent interacts with environment, learns via trial &amp; error with rewards.</li>
+          <li><strong>Key Idea:</strong> Policy = mapping from state → action.</li>
+          <li><strong>Examples:</strong> Robot navigation, game playing (chess, RL agents).</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Key Concepts</h3>
+<ul>
+  <li><strong>Best Model:</strong> Find model that minimizes error or maximizes accuracy.</li>
+  <li><strong>Linear Relationship:</strong> Fit line <code>h = wx + b</code> to represent data (choose best fit).</li>
+  <li><strong>Uncertainty / Noise:</strong> Real-world data imperfect → handle with probability.</li>
+  <li><strong>Policy (RL):</strong> Decision rule mapping state → action.</li>
+</ul>
+
+<h3>Real-Life Applications</h3>
+<ul>
+  <li><strong>Supervised Learning:</strong> Spam detection, rainfall prediction, friend suggestions.</li>
+  <li><strong>Unsupervised Learning:</strong> Voice separation, photo clustering.</li>
+  <li><strong>Sequential Learning:</strong> Stock market prediction, medical treatment selection.</li>
+  <li><strong>Reinforcement Learning:</strong> Robotics, game playing.</li>
+</ul>
+
+<h3>Mathematical Foundations</h3>
+<ul>
+  <li>Linear Algebra: Vectors, matrices, data representation.</li>
+  <li>Probability &amp; Statistics: Handle uncertainty and randomness.</li>
+  <li>Calculus &amp; Optimization: Find best parameters (min/max problems).</li>
+</ul>
+
+<h3>Recommended Books</h3>
+<ul>
+  <li>Linear Algebra and Applications – Gilbert Strang</li>
+  <li>A First Course in Probability – Sheldon Ross</li>
+  <li>Pattern Recognition and Machine Learning – Christopher M. Bishop</li>
+  <li>Mathematics for Machine Learning</li>
+</ul>
+
+<div class="summary">
+<strong>Final Summary:</strong>
+<ul>
+  <li>Supervised → labeled data (classification, regression).</li>
+  <li>Unsupervised → no labels (clustering, representation).</li>
+  <li>Sequential → learning over time (online, bandits).</li>
+  <li>Reinforcement → trial &amp; error with rewards.</li>
+  <li>Goal = best model under uncertainty.</li>
+  <li>Core math = Linear Algebra + Probability + Optimization.</li>
+</ul>
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 3: Representation Learning: Part 1</h2>
+
+<h3>Definition</h3>
+<ul>
+  <li><strong>Representation Learning:</strong> A subfield of Unsupervised Learning.</li>
+  <li><strong>Goal:</strong> Learn useful structures or features from data without labels.</li>
+  <li><strong>Idea:</strong> Instead of working with raw data, learn a better representation.</li>
+</ul>
+
+<h3>Data Representation</h3>
+<ul>
+  <li>Each data point can be represented as a vector in d-dimensions.</li>
+  <li>Example: Person data (height, weight, age) → point in R³.</li>
+</ul>
+
+<h3>Core Idea: Compression = Learning</h3>
+<ul>
+  <li><strong>Principle:</strong> "Comprehension is compression."</li>
+  <li><strong>Meaning:</strong> If you can compress data, you have understood it.</li>
+  <li><strong>Why:</strong> Compression retains important information, removes redundancy, and reveals structure.</li>
+</ul>
+
+<h3>Case 1: Exact Reconstruction (Perfect Structure)</h3>
+<ul>
+  <li><strong>Situation:</strong> Data lies exactly on a line.</li>
+  <li>Example: Points follow relation y = 2x.</li>
+  <li>Naive Storage: For n points in d dimensions → store d×n values.</li>
+  <li>Compressed Representation:
+    <ul>
+      <li>Store one representative vector <code>w</code>.</li>
+      <li>Store one scalar per point <code>cᵢ</code>.</li>
+    </ul>
+  </li>
+</ul>
+<p class="formula">Reconstruction Formula: xᵢ = cᵢ · w</p>
+<p><em>Example: If w=[1,2], c=2.5 → x=[2.5,5].</em></p>
+<p><strong>Storage Reduction:</strong> Before: d×n. After: d+n.</p>
+<p><em>Note: Representative vector w is not unique; any vector along the same line works.</em></p>
+
+<h3>Case 2: Approximate Reconstruction (Real Data)</h3>
+<ul>
+  <li><strong>Problem:</strong> Real-world data is not perfectly on a line.</li>
+  <li><strong>Solution:</strong> Use approximation via projection.</li>
+</ul>
+<p><strong>Projection Idea:</strong> Replace point x with its closest point on the line.</p>
+<p class="formula">Optimization Goal: c* = argmin<sub>c</sub> ‖x − cw‖²</p>
+<p class="formula">Optimal Solution: c* = xᵀw / ‖w‖²</p>
+<p>Where: xᵀw = dot product, ‖w‖² = squared length of vector.</p>
+<p class="formula">Special Case (Unit Vector): If ‖w‖ = 1, then c* = xᵀw</p>
+<p class="formula">Final Projection Formula: x̂ = (xᵀw)w</p>
+
+<h3>Intuition</h3>
+<ul>
+  <li>Original point = x.</li>
+  <li>Line direction = w.</li>
+  <li>Projection = shadow of x on line.</li>
+  <li>Error = distance between x and projected point.</li>
+</ul>
+
+<h3>Real-Life Interpretation</h3>
+<ul>
+  <li>Image compression → reduce pixels but preserve features.</li>
+  <li>PCA (Principal Component Analysis) → find best directions.</li>
+  <li>Noise removal → keep signal, remove randomness.</li>
+</ul>
+
+<div class="summary">
+<strong>Final Summary:</strong>
+<ul>
+  <li>Representation Learning = learn useful structure without labels.</li>
+  <li>Key idea = Compression = Understanding.</li>
+  <li>If data lies on a line: xᵢ = cᵢw</li>
+  <li>If not: Use projection.</li>
+  <li>Best coefficient: c* = xᵀw / ‖w‖²</li>
+  <li>With unit vector: c* = xᵀw</li>
+  <li>Projection formula: x̂ = (xᵀw)w</li>
+</ul>
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 4: Representation Learning: Part 2</h2>
+
+<h3>Core Problem</h3>
+<ul>
+  <li><strong>Reality Check:</strong> Real-world data is messy; points do not lie perfectly on a line.</li>
+  <li>Example: Height vs Weight → shows a trend, not an exact line.</li>
+  <li><strong>Goal:</strong> Find a proxy line that compresses data (2D → 1D) while preserving maximum information.</li>
+  <li><strong>Best Line Criteria:</strong> Among all possible lines, choose the one with minimum reconstruction error.</li>
+</ul>
+
+<h3>Mathematical Setup</h3>
+<ul>
+  <li>Dataset: x₁, x₂, …, x<sub>N</sub> ∈ R<sup>d</sup></li>
+  <li>Line Representation: Line defined by vector w.</li>
+  <li>Constraint: unit vector wᵀw = 1</li>
+</ul>
+<p class="formula">Projection (Proxy Point): x̂ᵢ = (xᵢᵀw)w</p>
+
+<h3>Objective Function (Minimize Error)</h3>
+<ul>
+  <li><strong>Error:</strong> Distance between actual point and projected point.</li>
+</ul>
+<p class="formula">Average Reconstruction Error: f(w) = (1/N) Σᵢ ‖xᵢ − (xᵢᵀw)w‖²</p>
+
+<h3>Key Simplification</h3>
+<p class="formula">After simplification: (1/N) Σᵢ (‖xᵢ‖² − (xᵢᵀw)²)</p>
+<ul>
+  <li><strong>Insight:</strong> ‖xᵢ‖² is constant (independent of w).</li>
+</ul>
+<p class="formula">Equivalent Problem: max<sub>‖w‖=1</sub> (1/N) Σᵢ (xᵢᵀw)²</p>
+<ul>
+  <li><strong>Interpretation:</strong> Maximize variance along direction w.</li>
+</ul>
+
+<h3>Covariance Matrix</h3>
+<p class="formula">Definition: C = (1/N) Σᵢ xᵢxᵢᵀ</p>
+<p class="formula">Final Objective: max<sub>‖w‖=1</sub> wᵀCw</p>
+
+<h3>Final Solution</h3>
+<ul>
+  <li><strong>Best Direction w:</strong> Eigenvector of C corresponding to the largest eigenvalue.</li>
+  <li><strong>Reasoning:</strong>
+    <ul>
+      <li>Eigenvector → direction of maximum variance.</li>
+      <li>Eigenvalue → amount of variance.</li>
+      <li>Largest eigenvalue → most important direction.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Real-Life Example (Height &amp; Weight)</h3>
+<ul>
+  <li><strong>Scenario:</strong> 100 people with features: height and weight.</li>
+  <li><strong>Problem:</strong> Points do not lie on an exact line.</li>
+  <li><strong>PCA Solution:</strong> Finds best line such that:
+    <ul>
+      <li>Distance from all points to line is minimized.</li>
+      <li>Maximum trend captured.</li>
+    </ul>
+  </li>
+  <li><strong>Result:</strong> Convert (height, weight) → single number representing position along best line.</li>
+</ul>
+
+<div class="summary">
+<strong>Final Summary:</strong>
+<ul>
+  <li>Real data ≠ perfect line.</li>
+  <li>Goal: Find best proxy line.</li>
+  <li>Objective: Minimize reconstruction error ⇔ Maximize variance.</li>
+  <li>Key Formulas: Projection: x̂ = (xᵀw)w</li>
+  <li>Covariance Matrix: C = (1/N) Σ xᵢxᵢᵀ</li>
+  <li>Final Problem: max wᵀCw, subject to ‖w‖=1</li>
+  <li>Final Answer: Best direction = Eigenvector of C with largest eigenvalue.</li>
+</ul>
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 5: Representation Learning: Part 3</h2>
+
+<h3>Core Problem: Why One Line is Not Enough</h3>
+<ul>
+  <li><strong>Limitation:</strong> A single line captures only one dimension.</li>
+  <li><strong>Reality:</strong> Real data may lie in higher dimensions.</li>
+  <li>Example: Data in 3D forming a plane (2D structure). One line captures only part of it; remaining information is lost as error.</li>
+  <li><strong>Goal:</strong> Capture more structure using multiple directions (lines).</li>
+</ul>
+
+<h3>Key Idea: Residue (Error) = Information</h3>
+<p class="formula">Residue Definition: r = x − (xᵀw)w</p>
+<ul>
+  <li><strong>Insight:</strong> Residue is not just noise. If residues align, hidden structure exists.</li>
+  <li>Example:
+    <ul>
+      <li>First line captures main trend.</li>
+      <li>Residues align along second direction → another line.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Important Formulae</h3>
+<ul>
+  <li>Projection (Proxy): x̂ = (xᵀw)w</li>
+  <li>Mean (Center of Data): μ = (1/n) Σᵢ xᵢ</li>
+  <li>Centered Data: x<sub>centered</sub> = xᵢ − μ</li>
+  <li>Optimization Goal: max<sub>‖w‖=1</sub> wᵀCw, where C = covariance matrix. Solution = eigenvector of C.</li>
+</ul>
+
+<h3>Iterative Algorithm (Multi-Dimensional Learning)</h3>
+<ul>
+  <li><strong>Step 1:</strong> Find first direction w₁ → captures maximum variance.</li>
+  <li><strong>Step 2:</strong> Compute residues → remaining information.</li>
+  <li><strong>Step 3:</strong> Create new dataset = residues.</li>
+  <li><strong>Step 4:</strong> Find second direction w₂ → captures next most variance.</li>
+  <li><strong>Step 5:</strong> Repeat for more dimensions.</li>
+</ul>
+<p><strong>Result:</strong> Instead of one line, obtain multiple lines forming a basis of data structure. This is essentially <strong>Principal Component Analysis (PCA)</strong>.</p>
+
+<h3>Importance of Data Centering</h3>
+<ul>
+  <li><strong>Problem:</strong> If data is not centered, algorithm may focus on location instead of direction.</li>
+  <li><strong>Solution:</strong> Shift data so center = origin.</li>
+</ul>
+<p class="formula">Formula: x<sub>centered</sub> = x − μ</p>
+<p><em>Intuition: Centering ensures we capture spread (variance), not just position.</em></p>
+
+<h3>Example: 3D Plane Data</h3>
+<ul>
+  <li><strong>Scenario:</strong> Points lie on a plane in 3D.</li>
+  <li><strong>Single Line:</strong> Captures only one direction, loses rest of plane.</li>
+  <li><strong>Multi-Line Approach:</strong>
+    <ul>
+      <li>Line 1 → main direction.</li>
+      <li>Residue → second direction.</li>
+      <li>Together → represent plane.</li>
+    </ul>
+  </li>
+</ul>
+<p><strong>Final Representation:</strong> Each point = combination of coefficient along w₁ and coefficient along w₂. Thus, data is reduced from 3D → 2D (compressed).</p>
+
+<h3>Big Picture Intuition</h3>
+<ul>
+  <li>Data = combination of important directions.</li>
+  <li>Each new direction explains remaining variance.</li>
+  <li>Residue = what is still unexplained.</li>
+</ul>
+
+<h3>Open Questions</h3>
+<ul>
+  <li>How to compute eigenvectors?</li>
+  <li>How many components to keep?</li>
+  <li>Where exactly is compression happening?</li>
+  <li>What features are being learned?</li>
+</ul>
+<p><em>These lead to the full PCA theory.</em></p>
+
+<div class="summary">
+<strong>Final Summary:</strong>
+<ul>
+  <li>One line is not enough for real data.</li>
+  <li>Use residue to find more structure.</li>
+  <li>Iteratively find w₁, w₂, w₃, …</li>
+  <li>Key Ideas: Projection (xᵀw)w, Residue x−(xᵀw)w, Centering x−μ, Objective: maximize variance.</li>
+  <li><strong>Final Insight:</strong> PCA = find multiple orthogonal directions capturing maximum variance step-by-step.</li>
+</ul>
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 6: Principal Component Analysis: Part 1</h2>
+
+<h3>Core Objective</h3>
+<ul>
+  <li><strong>Goal:</strong> Find directions (lines) that minimize reconstruction error ⇔ maximize variance.</li>
+  <li><strong>Intuition:</strong> The best line captures maximum information.</li>
+</ul>
+
+<h3>Iterative PCA Algorithm</h3>
+<ul>
+  <li><strong>Step 1: Find First Direction (w₁)</strong>
+    <ul>
+      <li>Given centered data x₁, x₂, …, x<sub>n</sub> ∈ R<sup>d</sup>:</li>
+      <li>w₁ = argmax<sub>‖w‖=1</sub> wᵀCw, where C = (1/n) Σᵢ xᵢxᵢᵀ</li>
+    </ul>
+  </li>
+  <li><strong>Step 2: Compute Residues</strong> xᵢ′ = xᵢ − (xᵢᵀw₁)w₁ — Removes information captured by w₁.</li>
+  <li><strong>Step 3: Find Next Direction (w₂)</strong> using residue dataset: w₂ = argmax<sub>‖w‖=1</sub> wᵀC′w</li>
+  <li><strong>Repeat for k steps:</strong> Obtain directions w₁, w₂, …, w<sub>k</sub>.</li>
+</ul>
+
+<h3>Key Concepts</h3>
+<ul>
+  <li><strong>Orthogonality:</strong> Residues are perpendicular to previous direction. w₁⊥w₂⊥w₃…</li>
+  <li><strong>Orthonormality:</strong> wᵢᵀwⱼ = 0 (i ≠ j), ‖w<sub>k</sub>‖ = 1. Meaning: All directions are perpendicular and unit length, forming an orthonormal basis.</li>
+</ul>
+
+<h3>Change of Basis</h3>
+<ul>
+  <li>Instead of standard axes, use new axes w₁, w₂, …, w<sub>d</sub>.</li>
+</ul>
+<p class="formula">Reconstruction Formula: xᵢ = Σⱼ (xᵢᵀwⱼ)wⱼ</p>
+<p><strong>Interpretation:</strong> Each point is a combination of principal directions.</p>
+
+<h3>Data Compression</h3>
+<ul>
+  <li><strong>When Compression Happens:</strong> Data lies in a low-dimensional subspace.</li>
+  <li><strong>Storage Comparison:</strong>
+    <ul>
+      <li>Original: d×n.</li>
+      <li>PCA: (k×d) + (k×n).</li>
+    </ul>
+  </li>
+</ul>
+<p><strong>Example:</strong> n=100, d=100, k=3. Before: 100×100 = 10,000 values. After: (3×100)+(3×100) = 600 values. <strong>Result:</strong> Massive compression.</p>
+
+<h3>When to Stop?</h3>
+<ul>
+  <li><strong>Problem:</strong> Residue rarely becomes exactly zero.</li>
+</ul>
+<p class="formula">Pythagoras Relation: ‖xᵢ‖² = ‖xᵢ − (xᵢᵀw)w‖² + (xᵢᵀw)²</p>
+<p><em>Meaning: Total variance = error (residue) + captured variance.</em></p>
+<ul>
+  <li><strong>Stopping Rules:</strong>
+    <ol>
+      <li><strong>Elbow Method:</strong> Plot variance vs number of components; stop where curve flattens.</li>
+      <li><strong>Information Threshold:</strong> Choose k such that ~95% variance is captured.</li>
+    </ol>
+  </li>
+</ul>
+
+<h3>Intuition Summary</h3>
+<ul>
+  <li>Each step captures the most important direction.</li>
+  <li>Removes it, then focuses on remaining information.</li>
+</ul>
+
+<div class="summary">
+<strong>Final Summary:</strong>
+<ul>
+  <li>PCA finds orthogonal directions of maximum variance.</li>
+  <li>Uses projection, residue, and iteration.</li>
+  <li>Key Results: Best direction = eigenvector of covariance matrix. Directions are orthonormal. Data = combination of these directions.</li>
+  <li><strong>Final Insight:</strong> PCA rotates the coordinate system to align with maximum variance directions.</li>
+</ul>
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 7: Principal Component Analysis: Part 2</h2>
+
+<h3>Core Concepts</h3>
+<p class="formula">Covariance Matrix (C): C = (1/n) Σᵢ xᵢxᵢᵀ — captures relationships between features, defined for centered data.</p>
+<ul>
+  <li><strong>Principal Components:</strong> Directions w₁, w₂, …, w<sub>k</sub>.
+    <ul>
+      <li>Properties: Orthonormal (perpendicular + unit length).</li>
+      <li>Capture maximum variance step-by-step.</li>
+    </ul>
+  </li>
+  <li><strong>De-correlation:</strong> PCA transforms data into new features that are independent/uncorrelated. Each new direction adds new information.</li>
+  <li><strong>Dimensionality Reduction:</strong> Converts high-dimensional data to low-dimensional form. R<sup>d</sup> → R<sup>k</sup>, k ≪ d</li>
+</ul>
+
+<h3>Linear Algebra &amp; Formulae</h3>
+<p class="formula">Eigenvalue Equation: Cw<sub>k</sub> = λ<sub>k</sub>w<sub>k</sub></p>
+<ul>
+  <li>w<sub>k</sub> = eigenvector (direction).</li>
+  <li>λ<sub>k</sub> = eigenvalue (importance).</li>
+</ul>
+<p><strong>First Principal Component:</strong> w₁ = eigenvector with largest eigenvalue → Most important direction.</p>
+<p class="formula">Variance Interpretation: λ<sub>k</sub> = w<sub>k</sub>ᵀCw<sub>k</sub> = (1/n) Σᵢ (xᵢᵀw<sub>k</sub>)²</p>
+<ul>
+  <li>Eigenvalue = variance captured.</li>
+  <li>Always ≥ 0 → covariance matrix is positive semi-definite.</li>
+</ul>
+
+<h3>Key Principles</h3>
+<ul>
+  <li><strong>Error vs Variance:</strong> Minimizing reconstruction error ⇔ maximizing variance.</li>
+  <li><strong>Distinguishing Capability:</strong>
+    <ul>
+      <li>Good projection: points are spread out.</li>
+      <li>Bad projection: points collapse together → loss of information.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Choosing Number of Components (k)</h3>
+<p class="formula">Rule of Thumb: (Σᵢ₌₁ᵏ λᵢ) / (Σᵢ₌₁ᵈ λᵢ) ≥ 0.95</p>
+<p><strong>Meaning:</strong> Keep enough components to retain ≥ 95% variance.</p>
+
+<h3>Examples</h3>
+<ul>
+  <li><strong>Geometric Insight:</strong>
+    <ul>
+      <li>Good line → spreads data.</li>
+      <li>Bad line → compresses data, loses information.</li>
+    </ul>
+  </li>
+  <li><strong>Height &amp; Weight Example:</strong>
+    <ul>
+      <li>Original features: height, weight (correlated).</li>
+      <li>PCA transformation: (height+weight)/2, (weight−height)/2</li>
+    </ul>
+  </li>
+  <li>Result: new features are uncorrelated → easier for ML models to learn.</li>
+</ul>
+
+<h3>Eigenfaces (Real Application)</h3>
+<p>PCA used in face recognition → learns important face patterns, called eigenfaces.</p>
+
+<div class="summary">
+<strong>Final Summary:</strong>
+<ul>
+  <li>PCA = Dimensionality Reduction technique.</li>
+  <li>Uses covariance matrix, eigenvectors, and eigenvalues.</li>
+  <li>Key Ideas: Eigenvector → direction. Eigenvalue → variance (importance). Keep top k components.</li>
+  <li><strong>Final Insight:</strong> PCA finds new axes where data is most spread out and independent.</li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>
