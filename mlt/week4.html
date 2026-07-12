@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>Week 4: Short Notes - Machine Learning</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 0 20px;
+    line-height: 1.6;
+    color: #222;
+    background: #fdfdfd;
+  }
+  h1 {
+    text-align: center;
+    color: #1a1a2e;
+    border-bottom: 3px solid #1a73e8;
+    padding-bottom: 10px;
+  }
+  h2 {
+    color: #1a73e8;
+    margin-top: 40px;
+    border-left: 5px solid #1a73e8;
+    padding-left: 10px;
+  }
+  h3 {
+    color: #0d47a1;
+    margin-top: 25px;
+  }
+  h4 {
+    color: #333;
+    margin-bottom: 5px;
+  }
+  ul {
+    margin-top: 5px;
+  }
+  li {
+    margin-bottom: 4px;
+  }
+  .summary {
+    background: #eef4ff;
+    border-left: 4px solid #1a73e8;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-top: 15px;
+  }
+  .formula {
+    background: #f5f5f5;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    display: inline-block;
+    margin: 4px 0;
+  }
+  .lecture {
+    margin-top: 60px;
+    padding-top: 10px;
+    border-top: 2px dashed #ccc;
+  }
+  code {
+    background: #f0f0f0;
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 12px 0;
+    width: 100%;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px 14px;
+    text-align: left;
+  }
+  th {
+    background: #eef4ff;
+    color: #1a73e8;
+  }
+  .example-box {
+    background: #fff8e6;
+    border-left: 4px solid #e6a817;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin: 10px 0;
+  }
+</style>
+</head>
+<body>
+
+<h1>Week 4: Short Notes</h1>
+
+<div class="lecture">
+<h2>Lecture 1: Introduction to Estimation</h2>
+
+<h3>Shift in Learning Paradigm</h3>
+<h4>Earlier Focus:</h4>
+<ul>
+  <li><strong>Unsupervised learning</strong>
+    <ul>
+      <li>Techniques: PCA, Kernel PCA, K-means</li>
+      <li>Nature: Deterministic (no assumption about how data is generated)</li>
+    </ul>
+  </li>
+  <li><strong>Now (Estimation):</strong>
+    <ul>
+      <li>Based on probability</li>
+      <li>Assumes data is generated from a model (distribution)</li>
+    </ul>
+  </li>
+</ul>
+<p><strong>Key Idea:</strong> We move from <em>finding structure</em> → to <em>estimating how data is generated</em>.</p>
+
+<h3>Core Concepts of Estimation</h3>
+<ul>
+  <li><strong>Probabilistic Model:</strong> Assume data comes from a specific distribution. Example: Coin toss → Bernoulli distribution</li>
+  <li><strong>Unknown Parameter (θ or p):</strong> Defines the model but is unknown. Example: Bias of a coin (p = probability of heads)</li>
+  <li><strong>Parameter as Compression:</strong> Instead of storing all data, store just the parameter. Example: 1000 coin tosses → summarized by a single value p</li>
+  <li><strong>Goal of Estimation:</strong> Use observed data to estimate the unknown parameter. Once estimated → can generate infinite new data.</li>
+</ul>
+
+<h3>IID Assumption (Independent &amp; Identically Distributed)</h3>
+<p>Given data: x₁, x₂, …, x<sub>n</sub></p>
+<ul>
+  <li><strong>Independent:</strong> Each observation does not affect others. Example: Coin tosses are independent</li>
+  <li><strong>Identically Distributed:</strong> All observations come from the same distribution. Same probability p for all trials</li>
+  <li><strong>Together called:</strong> IID (Independent &amp; Identically Distributed)</li>
+</ul>
+
+<h3>Key Formulas (Bernoulli / Coin Toss)</h3>
+<p class="formula">P(x=1) = p, &nbsp; P(x=0) = 1−p</p>
+<ul>
+  <li>P(x=1): Probability of success (Head)</li>
+  <li>P(x=0): Probability of failure (Tail)</li>
+</ul>
+<p><strong>Estimator of p:</strong></p>
+<p class="formula">p̂ = Number of 1s / Total observations</p>
+<p>Simply: Fraction of successes (heads).</p>
+
+<div class="example-box">
+<strong>Example: Black Box Coin</strong><br>
+<strong>Scenario:</strong> Unknown coin inside a box<br>
+<strong>Output:</strong> 1 → Head, 0 → Tail<br>
+<strong>Observed Data:</strong> 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1<br><br>
+<strong>Calculation:</strong>
+<ul>
+  <li>Total observations = 12</li>
+  <li>Number of 1s (Heads) = 9</li>
+  <li>Number of 0s (Tails) = 3</li>
+</ul>
+p̂ = 9/12 = ¾ = 0.75<br>
+Estimated probability of heads = <strong>0.75</strong>
+</div>
+
+<h3>Important Insight (Uncertainty)</h3>
+<ul>
+  <li>Estimation gives a <strong>best guess</strong>, not exact truth</li>
+  <li>Other values of p are still possible (e.g., p = 2/3, p = 0.6)</li>
+  <li>Some values are impossible:
+    <ul>
+      <li>If both 0s and 1s exist → p = 0 or p = 1 cannot be true</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="summary">
+<strong>Final Intuition:</strong>
+<ul>
+  <li><strong>Data</strong> = output of a hidden process</li>
+  <li><strong>Estimation</strong> = reverse engineering that process</li>
+  <li><strong>Parameter (p)</strong> = key to understanding &amp; generating data</li>
+</ul>
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 2: Maximum Likelihood Estimation</h2>
+
+<h3>Core Concept: Likelihood Function</h3>
+<p><strong>Definition:</strong> A method to estimate unknown parameters from data. Instead of asking: <em>"What is the probability of data given parameter?"</em></p>
+<ul>
+  <li>We ask: <em>"Which parameter value most likely generated this data?"</em></li>
+</ul>
+<p><strong>Fisher's Principle (MLE):</strong> Proposed by R.A. Fisher. Best estimate = parameter that maximizes likelihood. This is called <strong>Maximum Likelihood Estimation (MLE)</strong>.</p>
+<ul>
+  <li><strong>Why MLE?</strong>
+    <ul>
+      <li>Works for any probabilistic model.</li>
+      <li>Once a distribution is assumed → MLE provides the estimator.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Discrete Case: Bernoulli (Coin Toss)</h3>
+<p><strong>Example:</strong> Data = {1,0,1,1}</p>
+<ul>
+  <li>Goal → estimate p = P(1)</li>
+</ul>
+<p><strong>Likelihood Function:</strong></p>
+<p class="formula">L(p) = Πᵢ pˣⁱ(1−p)¹⁻ˣⁱ</p>
+<p><strong>Log-Likelihood (simplification):</strong></p>
+<p class="formula">log L(p) = Σᵢ [xᵢ log p + (1−xᵢ) log(1−p)]</p>
+<p><strong>Final Result (MLE Estimator):</strong></p>
+<p class="formula">p̂<sub>ML</sub> = (1/n) Σᵢ xᵢ</p>
+<p>Interpretation: Fraction of 1s (sample mean).</p>
+
+<div class="example-box">
+<strong>Example Calculation:</strong> Data = {1,0,1,1}<br>
+Total = 4, Number of 1s = 3<br>
+p̂ = ¾ = 0.75
+</div>
+
+<h3>Continuous Case: Gaussian (Normal Distribution)</h3>
+<p><strong>Problem:</strong> For continuous data, P(x=exact value) = 0.</p>
+<p><strong>Solution:</strong> Use Probability Density Function (PDF).</p>
+<p><strong>Assumption:</strong> Data follows Gaussian distribution. Unknown mean μ, known variance σ².</p>
+<p><strong>Likelihood Function:</strong></p>
+<p class="formula">L(μ) = Πᵢ (1/√(2πσ²)) · e<sup>−(xᵢ−μ)²/2σ²</sup></p>
+<p><strong>Steps to Maximize:</strong></p>
+<ol>
+  <li>Take log-likelihood</li>
+  <li>Remove constants</li>
+  <li>Differentiate w.r.t. μ</li>
+  <li>Set derivative = 0</li>
+</ol>
+<p><strong>Final Result (MLE):</strong></p>
+<p class="formula">μ̂<sub>ML</sub> = (1/n) Σᵢ xᵢ</p>
+<p>Interpretation: Mean = sample average.</p>
+
+<h3>Key Insights</h3>
+<table>
+  <tr><th>Model</th><th>MLE Result</th></tr>
+  <tr><td>Gaussian</td><td>Mean</td></tr>
+  <tr><td>Laplace</td><td>Median</td></tr>
+</table>
+<p><strong>Model Dependence:</strong> Estimator depends on assumed model.</p>
+<ul>
+  <li><strong>Robustness:</strong> MLE is widely used because it is mathematically strong and works well in many cases.</li>
+  <li><strong>IID Assumption:</strong> Data must be independent and identically distributed.</li>
+</ul>
+
+<h3>Steps to Solve Any MLE Problem</h3>
+<ol>
+  <li><strong>Choose Model</strong> (Bernoulli, Gaussian, etc.)</li>
+  <li><strong>Write Likelihood</strong> (product of probabilities)</li>
+  <li><strong>Take Log</strong> (convert product → sum)</li>
+  <li><strong>Differentiate &amp; Solve</strong> (find parameter that maximizes likelihood)</li>
+</ol>
+
+<div class="summary">
+<strong>Final Intuition:</strong>
+<ul>
+  <li><strong>Likelihood</strong> = "How well does this parameter explain data?"</li>
+  <li><strong>MLE</strong> = Pick the best explanation.</li>
+  <li>Result often equals the <strong>sample average (mean)</strong>.</li>
+</ul>
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 3: Bayesian Estimation</h2>
+
+<h3>Core Concepts</h3>
+<ul>
+  <li><strong>Parameters as Random Variables:</strong> Unlike MLE, Bayesian approach treats parameters (θ,μ,p) as random variables. They have a probability distribution, not just a single value.</li>
+  <li><strong>Prior Distribution p(θ):</strong> Represents initial belief (before seeing data). Example: "Coin is likely fair" → prior centered around 0.5.</li>
+  <li><strong>Likelihood p(data ∣ θ):</strong> Probability of observing data given parameter θ. Same as used in MLE.</li>
+  <li><strong>Evidence p(data):</strong> Total probability of observing data. Acts as a normalizing constant, independent of θ.</li>
+  <li><strong>Posterior p(θ ∣ data):</strong> Updated belief after observing data. Combines prior + data.</li>
+</ul>
+<p><strong>Key Idea:</strong> Prior → updated using data → Posterior.</p>
+
+<h3>Bayes' Theorem</h3>
+<p class="formula">p(θ∣data) = [p(data∣θ) · p(θ)] / p(data)</p>
+<p><strong>Simplified Form:</strong> Posterior ∝ Likelihood × Prior. Denominator often ignored during calculations (constant).</p>
+
+<h3>Example: Coin Toss (Bernoulli + Beta Prior)</h3>
+<p><strong>Likelihood (Bernoulli):</strong></p>
+<p class="formula">P(data∣p) = Πᵢ pˣⁱ(1−p)¹⁻ˣⁱ</p>
+<p><strong>Beta Prior:</strong></p>
+<p class="formula">p(p) ∝ p<sup>α−1</sup>(1−p)<sup>β−1</sup></p>
+<p>Parameters: α → prior heads, β → prior tails. Example: α = 2, β = 5 → belief: coin biased towards tails.</p>
+<p><strong>Posterior (Beta Distribution):</strong></p>
+<p class="formula">α<sub>post</sub> = α + n<sub>h</sub>, &nbsp; β<sub>post</sub> = β + n<sub>t</sub></p>
+<p>Where: n<sub>h</sub> = number of heads, n<sub>t</sub> = number of tails</p>
+<p><strong>Interpretation:</strong> Prior acts like "ghost data." α → imaginary heads, β → imaginary tails.</p>
+
+<div class="example-box">
+<strong>Example Calculation:</strong> Prior: α = 2, β = 2<br>
+Data: 6 heads, 4 tails<br>
+α<sub>post</sub> = 2 + 6 = 8, &nbsp; β<sub>post</sub> = 2 + 4 = 6
+</div>
+
+<h3>Bayesian Point Estimates</h3>
+<ul>
+  <li><strong>Posterior Mean (Expected Value):</strong></li>
+</ul>
+<p class="formula">E[p∣data] = (α+n<sub>h</sub>) / (α+n<sub>h</sub>+β+n<sub>t</sub>)</p>
+<p>Gives average estimate of p.</p>
+<ul>
+  <li><strong>MAP Estimator (Mode):</strong> Value of θ that maximizes posterior. Similar to MLE but includes prior.</li>
+</ul>
+<p><strong>Comparison:</strong></p>
+<ul>
+  <li>MLE → only data</li>
+  <li>MAP → data + prior</li>
+</ul>
+
+<h3>MLE vs Bayesian Estimation</h3>
+<table>
+  <tr><th>Feature</th><th>MLE</th><th>Bayesian</th></tr>
+  <tr><td>Basis</td><td>Only data</td><td>Prior + Data</td></tr>
+  <tr><td>Output</td><td>Single value</td><td>Full distribution</td></tr>
+  <tr><td>Idea</td><td>Maximize likelihood</td><td>Use Bayes theorem</td></tr>
+  <tr><td>Flexibility</td><td>Less</td><td>More (can include prior knowledge)</td></tr>
+</table>
+
+<div class="summary">
+<strong>Final Intuition:</strong>
+<ul>
+  <li><strong>MLE:</strong> "Best fit from data only"</li>
+  <li><strong>Bayesian:</strong> "Update your belief using data"</li>
+</ul>
+<p>Bayesian = Learning + Updating belief.</p>
+<p><strong>One-Line Summary:</strong> Bayesian estimation = Prior belief + Evidence from data → Updated belief (Posterior).</p>
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 4: Gaussian Mixture Models</h2>
+
+<h3>Motivation for GMM</h3>
+<ul>
+  <li><strong>Problem with Single Gaussian:</strong> A single Gaussian assumes one cluster (one peak). Works poorly for multimodal data (multiple clusters).</li>
+</ul>
+<p>Example: Data has 3 clusters. Single Gaussian → places mean in the middle.</p>
+<p><strong>Issue:</strong> High-density regions (actual clusters) get low probability. Low-density region (middle) gets high probability.</p>
+<ul>
+  <li><strong>Solution: Gaussian Mixture Model (GMM):</strong> Uses multiple Gaussians. Each Gaussian represents one cluster. Final model = combination (mixture) of Gaussians.</li>
+</ul>
+
+<h3>Generative Story (How GMM Creates Data)</h3>
+<p>Each data point is generated in two steps:</p>
+<ul>
+  <li><strong>Step 1: Choose a Cluster</strong> P(z<sub>i</sub> = l) = π<sub>l</sub></li>
+</ul>
+<p>Where: z<sub>i</sub>: cluster (mixture) index, π<sub>l</sub>: probability of choosing cluster l</p>
+<p><strong>Constraints on Mixing Probabilities:</strong></p>
+<p class="formula">Σ<sub>l=1</sub><sup>K</sup> π<sub>l</sub> = 1, &nbsp; 0 ≤ π<sub>l</sub> ≤ 1</p>
+<p>Think: rolling a K-faced dice.</p>
+<ul>
+  <li><strong>Step 2: Generate Data from Gaussian</strong> x<sub>i</sub> ∼ N(μ<sub>zi</sub>, σ<sub>zi</sub>²)</li>
+</ul>
+<p>Each cluster has its own mean μ and variance σ². Data is sampled from the chosen Gaussian.</p>
+
+<h3>Latent Variables (Hidden Concept)</h3>
+<ul>
+  <li><strong>Observed Data:</strong> x₁, x₂, …, x<sub>n</sub> → what we see.</li>
+  <li><strong>Latent Variables:</strong> z₁, z₂, …, z<sub>n</sub> → hidden cluster labels.</li>
+</ul>
+<p>Not observed, but control how data is generated.</p>
+<p><strong>Key Idea:</strong> GMM is a <strong>Latent Variable Model</strong>. Observed data depends on hidden variables.</p>
+
+<h3>Parameters to Estimate</h3>
+<p>For K mixtures:</p>
+<ul>
+  <li><strong>Mixing Probabilities:</strong> π₁, π₂, …, π<sub>K</sub> (K−1 independent parameters)</li>
+  <li><strong>Means:</strong> μ₁, μ₂, …, μ<sub>K</sub></li>
+  <li><strong>Variances:</strong> σ₁², σ₂², …, σ<sub>K</sub>²</li>
+  <li><strong>Total Parameters:</strong> Approximately 3K (exact: 3K−1).</li>
+</ul>
+
+<h3>Estimation Method</h3>
+<ul>
+  <li>Use <strong>Maximum Likelihood Estimation (MLE)</strong>.</li>
+  <li>Find parameters that maximize likelihood of data.</li>
+  <li>Since clusters are hidden → estimation is not straightforward.</li>
+  <li>Handled using algorithms like <strong>Expectation-Maximization (EM)</strong>.</li>
+</ul>
+
+<div class="example-box">
+<strong>Example: 3-Component GMM</strong><br>
+<strong>Scenario:</strong> Data has 3 clusters.<br>
+<strong>Step 1: Choose Cluster</strong><br>
+Example probabilities: π₁ = 0.5, π₂ = 0.25, π₃ = 0.25.<br>
+<strong>Step 2: Generate Data</strong>
+<ul>
+  <li>If cluster 1 chosen → x∼N(μ₁, σ₁²)</li>
+  <li>If cluster 2 chosen → x∼N(μ₂, σ₂²)</li>
+  <li>If cluster 3 chosen → x∼N(μ₃, σ₃²)</li>
+</ul>
+</div>
+
+<p><strong>Key Advantage:</strong> Each Gaussian fits one cluster. Overall model captures multiple peaks.</p>
+
+<div class="summary">
+<strong>Final Intuition:</strong>
+<ul>
+  <li>Data may come from multiple sources (clusters).</li>
+  <li>GMM assumes: <em>Each data point comes from one of many Gaussians.</em></li>
+</ul>
+<p><strong>One-Line Summary:</strong> GMM = Weighted combination of multiple Gaussians to model clustered data.</p>
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 5: Likelihood of GMM</h2>
+
+<h3>Introduction to GMM Likelihood</h3>
+<p><strong>Goal (MLE):</strong> Estimate parameters θ by maximizing likelihood.</p>
+<ul>
+  <li>Find parameters that best explain the data.</li>
+  <li><strong>Model Parameters (θ):</strong>
+    <ul>
+      <li>Means: μ₁, μ₂, …, μ<sub>K</sub></li>
+      <li>Variances: σ₁², σ₂², …, σ<sub>K</sub>²</li>
+      <li>Mixing Proportions: π₁, π₂, …, π<sub>K</sub></li>
+    </ul>
+  </li>
+</ul>
+<p><strong>IID Assumption:</strong> Data points x₁, x₂, …, x<sub>n</sub> are independent and identically distributed. All points follow the same GMM process.</p>
+
+<h3>Data Generation Process (Recap)</h3>
+<p>Each data point is generated in two steps:</p>
+<ul>
+  <li><strong>Step 1: Choose Cluster:</strong> P(z<sub>i</sub> = k) = π<sub>k</sub></li>
+  <li><strong>Step 2: Generate Data:</strong> x<sub>i</sub> ∼ N(μ<sub>k</sub>, σ<sub>k</sub>²)</li>
+  <li><strong>Latent Variable:</strong> z<sub>i</sub> = cluster index (hidden). We observe only x<sub>i</sub>, not z<sub>i</sub>.</li>
+</ul>
+
+<p><strong>Mixture Density:</strong> Since cluster is unknown, consider all possibilities:</p>
+<p class="formula">p(x<sub>i</sub>) = Σ<sub>k=1</sub><sup>K</sup> π<sub>k</sub> · 𝒩(x<sub>i</sub>|μ<sub>k</sub>, σ<sub>k</sub>²)</p>
+<p><strong>Intuition:</strong> A point's cluster depends on distance from mean μ<sub>k</sub> and mixing weight π<sub>k</sub>. Even if close to a cluster, low π<sub>k</sub> → low probability.</p>
+
+<h3>Full Likelihood Function</h3>
+<p>For all data points:</p>
+<p class="formula">L(θ) = Πᵢ Σ<sub>k=1</sub><sup>K</sup> π<sub>k</sub> · 𝒩(x<sub>i</sub>|μ<sub>k</sub>, σ<sub>k</sub>²)</p>
+
+<h3>Log-Likelihood Bottleneck</h3>
+<p>Normally, log simplifies products into sums. But in GMM:</p>
+<p class="formula">log L(θ) = Σᵢ log( Σ<sub>k=1</sub><sup>K</sup> π<sub>k</sub> · 𝒩(x<sub>i</sub>|μ<sub>k</sub>, σ<sub>k</sub>²) )</p>
+<p><strong>Problem:</strong></p>
+<ul>
+  <li>Log of sum ≠ simple expression.</li>
+  <li>Cannot simplify easily.</li>
+  <li>Makes optimization hard.</li>
+</ul>
+
+<h3>Challenges in Optimization</h3>
+<ul>
+  <li><strong>No Closed-Form Solution:</strong> Unlike simple Gaussian, mean ≠ direct formula. Cannot solve analytically.</li>
+  <li><strong>Constraints:</strong> Mixing proportions must satisfy Σ<sub>k=1</sub><sup>K</sup> π<sub>k</sub> = 1 → Constrained optimization problem.</li>
+  <li><strong>Optimization Approaches:</strong>
+    <ul>
+      <li>General method: Gradient ascent (complex).</li>
+      <li>Better approach: Use structure of GMM → <strong>Expectation-Maximization (EM) Algorithm</strong>.</li>
+    </ul>
+  </li>
+</ul>
+<p><strong>Key Insight:</strong> Difficulty arises because: Cluster labels are hidden (latent); Likelihood contains sum inside log.</p>
+
+<div class="summary">
+<strong>Final Intuition:</strong>
+<ul>
+  <li>GMM likelihood = mixture of probabilities.</li>
+  <li>Hard part = unknown cluster assignments.</li>
+  <li>Solution = use smarter methods (EM algorithm).</li>
+</ul>
+<p><strong>One-Line Summary:</strong> GMM likelihood is hard to optimize because of log(sum) structure and hidden variables.</p>
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 6: Convex Functions and Jensen's Inequality</h2>
+
+<h3>Core Concepts</h3>
+<p><strong>Convex Function:</strong> A function is convex if the line between any two points lies above or on the curve. <em>Intuition:</em> Shape like a cup (∪).</p>
+<p><strong>Concave Function:</strong> A function is concave if the line between any two points lies below or on the curve. <em>Intuition:</em> Shape like a cap (∩).</p>
+<p><strong>Linear Function:</strong> A function that is both convex and concave. Straight line → exact equality.</p>
+<p><strong>Neither Convex nor Concave:</strong> Curve changes shape (both ∪ and ∩ parts).</p>
+
+<h3>Mathematical Definitions</h3>
+<p><strong>Two-Point Definition:</strong></p>
+<p class="formula">Convex: f((a+b)/2) ≤ [f(a)+f(b)]/2</p>
+<p class="formula">Concave: f((a+b)/2) ≥ [f(a)+f(b)]/2</p>
+<p><strong>General Definition (Using λ):</strong></p>
+<p class="formula">Convex: f(λa + (1−λ)b) ≤ λf(a) + (1−λ)f(b)</p>
+<p class="formula">Concave: f(λa + (1−λ)b) ≥ λf(a) + (1−λ)f(b)</p>
+<p>Where 0 ≤ λ ≤ 1. This moves between points a and b.</p>
+
+<h3>Jensen's Inequality</h3>
+<ul>
+  <li><strong>For Concave Functions:</strong></li>
+</ul>
+<p class="formula">f(Σ<sub>k=1</sub><sup>K</sup> λ<sub>k</sub>a<sub>k</sub>) ≥ Σ<sub>k=1</sub><sup>K</sup> λ<sub>k</sub>f(a<sub>k</sub>)</p>
+<ul>
+  <li><strong>For Convex Functions:</strong></li>
+</ul>
+<p class="formula">f(Σ<sub>k=1</sub><sup>K</sup> λ<sub>k</sub>a<sub>k</sub>) ≤ Σ<sub>k=1</sub><sup>K</sup> λ<sub>k</sub>f(a<sub>k</sub>)</p>
+<p><strong>Conditions:</strong> λ₁ + λ₂ + … + λ<sub>K</sub> = 1, and all λ<sub>k</sub> ≥ 0</p>
+
+<h3>Geometric Intuition</h3>
+<ul>
+  <li><strong>Convex Combination:</strong> Expression: Σλ<sub>k</sub>a<sub>k</sub>. Represents points inside the convex hull. Convex hull = region formed by joining given points.</li>
+  <li><strong>Important Example: Log Function:</strong> log(x) is concave. Therefore: log(weighted sum) ≥ weighted sum of logs</li>
+  <li><strong>Visual Analogy:</strong>
+    <ul>
+      <li>Convex → like bowl.</li>
+      <li>Concave → like dome. Similar to mirrors in physics.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Application in Machine Learning</h3>
+<p><strong>Problem (in GMM):</strong> Log-likelihood contains log(Σ terms) — Difficult to optimize.</p>
+<p><strong>Solution (Jensen's Inequality):</strong> Helps convert log(Σ) → Σ(log) (approx via inequality).</p>
+<p><strong>Why Useful?</strong> Makes complex expressions easier to optimize. Leads to <strong>Expectation-Maximization (EM) Algorithm</strong>.</p>
+
+<div class="summary">
+<strong>Final Intuition:</strong>
+<ul>
+  <li>Convex → "curve below line"</li>
+  <li>Concave → "curve above line"</li>
+  <li>Jensen's inequality → bridge between averages &amp; function values</li>
+</ul>
+<p><strong>One-Line Summary:</strong> Jensen's inequality helps simplify difficult expressions like log of sums, which is crucial in GMM optimization.</p>
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 7: Estimating the Parameters</h2>
+
+<h3>The Problem: Complex Log-Likelihood</h3>
+<p>Original GMM log-likelihood:</p>
+<p class="formula">log L(θ) = Σᵢ log( Σ<sub>k=1</sub><sup>K</sup> π<sub>k</sub> · 𝒩(x<sub>i</sub>|μ<sub>k</sub>, σ<sub>k</sub>²) )</p>
+<p><strong>Issue:</strong></p>
+<ul>
+  <li>Contains log(Σ) → hard to optimize.</li>
+  <li>No direct (closed-form) solution.</li>
+</ul>
+
+<h3>Solution: Jensen's Inequality Trick</h3>
+<ul>
+  <li><strong>Idea:</strong> Introduce new variables λ<sub>ik</sub>.</li>
+  <li><strong>Constraints:</strong></li>
+</ul>
+<p class="formula">0 ≤ λ<sub>ik</sub> ≤ 1, &nbsp; Σ<sub>k=1</sub><sup>K</sup> λ<sub>ik</sub> = 1</p>
+<p>Acts like a probability distribution over clusters.</p>
+<ul>
+  <li><strong>Trick:</strong> Multiply &amp; divide by λ inside log, then apply Jensen's Inequality.</li>
+  <li>Converts hard problem → easier one.</li>
+</ul>
+
+<h3>Modified Log-Likelihood (Lower Bound)</h3>
+<p class="formula">L̃(θ,λ) = Σᵢ Σ<sub>k</sub> λ<sub>ik</sub> log( [π<sub>k</sub>·𝒩(x<sub>i</sub>|μ<sub>k</sub>,σ<sub>k</sub>²)] / λ<sub>ik</sub> )</p>
+<p><strong>Key Idea:</strong> This is a <strong>lower bound</strong> of the original log-likelihood. Easier to optimize.</p>
+
+<h3>Core Idea: Iterative Optimization (EM)</h3>
+<p>Instead of solving directly, alternate between:</p>
+<ul>
+  <li><strong>Step 1: Fix λ</strong> → Optimize θ (M-step)</li>
+  <li><strong>Step 2: Fix θ</strong> → Optimize λ (E-step)</li>
+</ul>
+<p>Repeat until convergence.</p>
+
+<h3>Parameter Updates</h3>
+<h4>A. Fix λ → Update θ (M-Step)</h4>
+<ul>
+  <li><strong>Mean (μ<sub>k</sub>):</strong></li>
+</ul>
+<p class="formula">μ̂<sub>k</sub> = Σᵢ λ<sub>ik</sub>x<sub>i</sub> / Σᵢ λ<sub>ik</sub></p>
+<ul>
+  <li><strong>Variance (σ<sub>k</sub>²):</strong></li>
+</ul>
+<p class="formula">σ̂<sub>k</sub>² = Σᵢ λ<sub>ik</sub>(x<sub>i</sub>−μ̂<sub>k</sub>)² / Σᵢ λ<sub>ik</sub></p>
+<ul>
+  <li><strong>Mixing Proportion (π<sub>k</sub>):</strong></li>
+</ul>
+<p class="formula">π̂<sub>k</sub> = (1/n) Σᵢ λ<sub>ik</sub></p>
+
+<h4>B. Fix θ → Update λ (E-Step)</h4>
+<ul>
+  <li><strong>Responsibility (λ<sub>ik</sub>):</strong></li>
+</ul>
+<p class="formula">λ̂<sub>ik</sub> = [π<sub>k</sub>·𝒩(x<sub>i</sub>|μ<sub>k</sub>,σ<sub>k</sub>²)] / Σ<sub>l=1</sub><sup>K</sup> π<sub>l</sub>·𝒩(x<sub>i</sub>|μ<sub>l</sub>,σ<sub>l</sub>²)</p>
+<p>Interpretation: Probability that point i belongs to cluster k.</p>
+
+<h3>Intuition &amp; Examples</h3>
+<p><strong>Soft vs Hard Clustering:</strong></p>
+<table>
+  <tr><th>Type</th><th>Description</th></tr>
+  <tr><td>Hard</td><td>λ = 0 or 1 (strict assignment)</td></tr>
+  <tr><td>Soft</td><td>λ ∈ [0, 1] (probabilistic assignment)</td></tr>
+</table>
+<p><strong>Intuition of λ<sub>ik</sub>:</strong> "How much does point i belong to cluster k?" Acts like weight / responsibility.</p>
+<p><strong>Example:</strong></p>
+<ul>
+  <li>If λ<sub>i1</sub> = 0.8 → strongly belongs to cluster 1.</li>
+  <li>If λ<sub>i2</sub> = 0.2 → weakly belongs to cluster 2.</li>
+</ul>
+
+<h3>Overall Algorithm Flow</h3>
+<ol>
+  <li>Initialize parameters (μ, σ², π).</li>
+  <li><strong>E-step:</strong> Compute λ (cluster probabilities).</li>
+  <li><strong>M-step:</strong> Update parameters using λ.</li>
+  <li>Repeat until convergence.</li>
+</ol>
+
+<div class="summary">
+<strong>Final Intuition:</strong>
+<ul>
+  <li>Original problem = too complex.</li>
+  <li>Trick = convert into easy sub-problems.</li>
+  <li>EM = guess → improve → repeat.</li>
+</ul>
+<p><strong>One-Line Summary:</strong> EM algorithm solves GMM by alternating between estimating cluster probabilities (E-step) and updating parameters (M-step).</p>
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 8: EM Algorithm</h2>
+
+<h3>Core Concept</h3>
+<ul>
+  <li><strong>Definition:</strong> An iterative method to estimate parameters in latent variable models. Used when log-likelihood is difficult to maximize directly.</li>
+  <li><strong>Key Idea:</strong> Replace complex log-likelihood with a simpler lower bound. Optimize step by step.</li>
+  <li><strong>Two Main Steps:</strong>
+    <ul>
+      <li><strong>E-Step (Expectation):</strong> Fix parameters θ<sup>t</sup>, compute λ (soft cluster assignments). Find probability of each point belonging to each cluster.</li>
+      <li><strong>M-Step (Maximization):</strong> Fix λ, update parameters θ<sup>t+1</sup>. Update model using current assignments.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Mathematical Framework</h3>
+<p><strong>Initialization:</strong> Start with initial parameters:</p>
+<ul>
+  <li>Means: μ₁, …, μ<sub>K</sub></li>
+  <li>Variances: σ₁², …, σ<sub>K</sub>²</li>
+  <li>Weights: π₁, …, π<sub>K</sub></li>
+</ul>
+<p><strong>Iterative Steps:</strong></p>
+<p class="formula">E-Step: λ<sup>t+1</sup> = argmax<sub>λ</sub> L̃(θ<sup>t</sup>, λ)</p>
+<p class="formula">M-Step: θ<sup>t+1</sup> = argmax<sub>θ</sub> L̃(θ, λ<sup>t+1</sup>)</p>
+<p><strong>Convergence Condition:</strong></p>
+<ul>
+  <li>Stop when: |θ<sup>t+1</sup> − θ<sup>t</sup>| &lt; ϵ. Example: ϵ = 10⁻³.</li>
+</ul>
+<p><strong>Key Tool:</strong> Jensen's Inequality → converts difficult problem into manageable form.</p>
+
+<h3>Soft vs Hard Clustering</h3>
+<table>
+  <tr><th>Feature</th><th>EM (Soft)</th><th>K-Means (Hard)</th></tr>
+  <tr><td>Assignment</td><td>Probabilistic (λ<sub>ik</sub>)</td><td>Fixed cluster</td></tr>
+  <tr><td>Flexibility</td><td>High</td><td>Low</td></tr>
+  <tr><td>Overlap handling</td><td>Yes</td><td>No</td></tr>
+</table>
+<ul>
+  <li><strong>Soft Clustering:</strong> Each point belongs to multiple clusters with probabilities.</li>
+  <li><strong>Convert to Hard Clustering:</strong> Assign point to cluster with maximum λ<sub>ik</sub>.</li>
+</ul>
+
+<h3>Convergence &amp; Local Maxima</h3>
+<ul>
+  <li><strong>Property:</strong> EM always converges.</li>
+  <li><strong>Limitation:</strong> May reach local maximum, not global.</li>
+  <li><strong>Reason:</strong> Log-likelihood surface is complex.</li>
+</ul>
+<p>EM improves solution step-by-step: Better guess → Better guess → …</p>
+
+<h3>Initialization</h3>
+<ul>
+  <li><strong>Why Important?</strong> Different initial values → different results.</li>
+  <li><strong>Common Practice:</strong> Use K-Means (Lloyd's Algorithm) first.</li>
+  <li><strong>How to Initialize θ₀:</strong>
+    <ul>
+      <li>Mean = cluster average</li>
+      <li>Variance = cluster variance</li>
+      <li>π = fraction of points in cluster</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Applications &amp; Examples</h3>
+<ul>
+  <li><strong>Gaussian Mixture Models (GMM):</strong> Estimate means (μ), variances (σ²), mixing weights (π).</li>
+  <li><strong>Latent Variable Models:</strong> EM works for any model with hidden variables.</li>
+  <li><strong>Geometry Insight:</strong> EM clusters are not restricted to straight boundaries. Can model elliptical shapes → unlike K-means (Voronoi regions).</li>
+</ul>
+
+<div class="summary">
+<strong>Final Intuition:</strong>
+<ul>
+  <li>EM = <em>Guess → Improve → Repeat</em>.</li>
+  <li>Handles hidden variables smartly.</li>
+  <li>Balances data fitting and cluster uncertainty.</li>
+</ul>
+<p><strong>One-Line Summary:</strong> EM algorithm iteratively improves parameters by alternating between estimating hidden variables (E-step) and optimizing parameters (M-step).</p>
+</div>
+</div>
+
+</body>
+</html>

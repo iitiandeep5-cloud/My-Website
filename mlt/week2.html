@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>Week 2: Short Notes - Machine Learning</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 0 20px;
+    line-height: 1.6;
+    color: #222;
+    background: #fdfdfd;
+  }
+  h1 {
+    text-align: center;
+    color: #1a1a2e;
+    border-bottom: 3px solid #1a73e8;
+    padding-bottom: 10px;
+  }
+  h2 {
+    color: #1a73e8;
+    margin-top: 40px;
+    border-left: 5px solid #1a73e8;
+    padding-left: 10px;
+  }
+  h3 {
+    color: #0d47a1;
+    margin-top: 25px;
+  }
+  h4 {
+    color: #333;
+    margin-bottom: 5px;
+  }
+  ul {
+    margin-top: 5px;
+  }
+  li {
+    margin-bottom: 4px;
+  }
+  .summary {
+    background: #eef4ff;
+    border-left: 4px solid #1a73e8;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-top: 15px;
+  }
+  .formula {
+    background: #f5f5f5;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    display: inline-block;
+    margin: 4px 0;
+  }
+  .lecture {
+    margin-top: 60px;
+    padding-top: 10px;
+    border-top: 2px dashed #ccc;
+  }
+  code {
+    background: #f0f0f0;
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Week 2: Short Notes</h1>
+
+<div class="lecture">
+<h2>Lecture 1: Issues With PCA</h2>
+
+<h3>Real-World Application: Eigenfaces</h3>
+<ul>
+  <li><strong>Dataset Example:</strong> Yale Face Dataset (~20,000 grayscale images, same size, front-facing).</li>
+  <li><strong>Feature Engineering:</strong>
+    <ul>
+      <li>Image of size m × n.</li>
+      <li>Vectorization: reshape into (mn × 1).</li>
+      <li>Example: 32,000 pixels → 32,000-dimensional vector.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Principal Components (Eigenfaces)</h3>
+<ul>
+  <li>Each eigenvector: 32,000-dimensional.</li>
+  <li>Reshape back → image (Eigenface).</li>
+  <li><strong>Key Insights:</strong>
+    <ul>
+      <li><strong>PC1 (First Principal Component):</strong> captures maximum variance, represents "average face" or faceness.</li>
+      <li><strong>Other PCs:</strong> capture finer details (nose shape, mouth variations, lighting differences).</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Image Reconstruction &amp; Compression</h3>
+<ul>
+  <li><strong>Process:</strong>
+    <ul>
+      <li>Take test image vector x.</li>
+      <li>Project onto top k principal components.</li>
+      <li>Reconstruct using linear combination.</li>
+    </ul>
+  </li>
+  <li><strong>Compression Power:</strong>
+    <ul>
+      <li>Original: 32,000 pixels.</li>
+      <li>Reduced: 200–400 components.</li>
+      <li>Approx. 100× compression.</li>
+    </ul>
+  </li>
+  <li><strong>Reconstruction Quality:</strong>
+    <ul>
+      <li>200–400 PCs → good for recognition.</li>
+      <li>~1600 PCs → near-perfect reconstruction.</li>
+    </ul>
+  </li>
+  <li><strong>Important Insight:</strong>
+    <ul>
+      <li>PCA is <strong>data-specific</strong>.</li>
+      <li>Example: Human face PCs cannot reconstruct dog faces well.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Major Issues with PCA</h3>
+<h4>Issue 1: High Time Complexity</h4>
+<ul>
+  <li>Formula: O(d³), where d = number of features.</li>
+  <li>Comes from eigen decomposition of covariance matrix.</li>
+  <li>For large d (e.g., 32,000), computation is slow/impractical.</li>
+</ul>
+<h4>Issue 2: Cannot Handle Non-Linear Data</h4>
+<ul>
+  <li>PCA assumes data lies in a linear subspace.</li>
+  <li>→ non-linear relationship.</li>
+</ul>
+
+<h3>Manifold Problem</h3>
+<ul>
+  <li>Real-world data often lies on curved surfaces (manifolds).</li>
+  <li>PCA fits a flat plane → high reconstruction error.</li>
+</ul>
+
+<h3>Key Concepts &amp; Formulae</h3>
+<ul>
+  <li><strong>Vectorization:</strong> Image (m × n) → (mn × 1).</li>
+  <li><strong>Covariance Matrix:</strong> C ∈ R<sup>d×d</sup>.</li>
+  <li><strong>Time Complexity:</strong> O(d³).</li>
+  <li><strong>PCA Assumption:</strong> Data lies in a low-dimensional linear subspace.</li>
+  <li><strong>Pre-processing Use:</strong>
+    <ul>
+      <li>PCA applied before classification/regression.</li>
+      <li>Reduces noise and dimensionality.</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="summary">
+<strong>Final Summary:</strong> PCA finds the most important directions of variation and uses them to compress, reconstruct, and understand data — but only if the structure is linear.
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 2: Time Complexity Issue With PCA</h2>
+
+<h3>Core Concepts &amp; Definitions</h3>
+<ul>
+  <li><strong>Data Representation</strong>
+    <ul>
+      <li>Data points: x₁, x₂, …, x<sub>n</sub> ∈ R<sup>d</sup></li>
+      <li>Data matrix: X = [x₁ x₂ … x<sub>n</sub>] ∈ R<sup>d×n</sup></li>
+    </ul>
+  </li>
+</ul>
+<p class="formula">Covariance Matrix: C = (1/n) Σᵢ xᵢxᵢᵀ = (1/n) XXᵀ &nbsp; (Size: d×d)</p>
+<p class="formula">Eigen-Decomposition: Cw<sub>k</sub> = λ<sub>k</sub>w<sub>k</sub></p>
+<p>w<sub>k</sub>: eigenvector (principal direction), λ<sub>k</sub>: eigenvalue (variance captured)</p>
+<ul>
+  <li><strong>Complexity Issue:</strong> Eigen-decomposition requires O(d³), expensive when d is large.</li>
+</ul>
+
+<h3>Key Insight: Eigenvectors as Linear Combination</h3>
+<ul>
+  <li>Each principal component is a linear combination of data points:</li>
+</ul>
+<p class="formula">w<sub>k</sub> = Xα<sub>k</sub> = Σᵢ α<sub>ki</sub>xᵢ, where α<sub>k</sub> ∈ Rⁿ are weights.</p>
+<ul>
+  <li>Instead of solving in d-dimensional space, solve in n-dimensional space.</li>
+</ul>
+
+<h3>Efficient Reformulation (Smaller Matrix)</h3>
+<ul>
+  <li>Define Gram Matrix: K = XᵀX ∈ R<sup>n×n</sup></li>
+  <li>Derived Eigen Equation: Kα<sub>k</sub> = (nλ<sub>k</sub>)α<sub>k</sub></li>
+  <li><strong>Key Fact:</strong> Non-zero eigenvalues of XXᵀ and XᵀX are the same. Maximum non-zero eigenvalues: min(d,n).</li>
+</ul>
+
+<h3>Normalization &amp; Constraints</h3>
+<ul>
+  <li>Unit Length Constraint: w<sub>k</sub>ᵀw<sub>k</sub> = 1</li>
+  <li>Constraint on Coefficients: α<sub>k</sub>ᵀKα<sub>k</sub> = 1</li>
+  <li>Relation with Eigenvector of K: If β<sub>k</sub>ᵀβ<sub>k</sub> = 1, then α<sub>k</sub> = 1/√(nλ<sub>k</sub>) β<sub>k</sub></li>
+</ul>
+
+<h3>Efficient PCA Algorithm (When d ≫ n)</h3>
+<ol>
+  <li>Compute Gram Matrix: K = XᵀX, K<sub>ij</sub> = xᵢᵀxⱼ</li>
+  <li>Eigen-decomposition of K: Kβ<sub>k</sub> = (nλ<sub>k</sub>)β<sub>k</sub> — Complexity: O(n³).</li>
+  <li>Compute Coefficients: α<sub>k</sub> = 1/√(nλ<sub>k</sub>) β<sub>k</sub></li>
+  <li>Recover Principal Components: w<sub>k</sub> = Xα<sub>k</sub></li>
+</ol>
+
+<h3>Example</h3>
+<ul>
+  <li>Features: d = 10,000</li>
+  <li>Data points: n = 100</li>
+  <li>Standard PCA: Solve 10,000 × 10,000 matrix → very slow.</li>
+  <li>Efficient PCA: Solve 100 × 100 matrix → huge speedup.</li>
+</ul>
+
+<h3>Key Insight: Pairwise Similarities</h3>
+<ul>
+  <li>PCA can be solved using only dot products: xᵢᵀxⱼ</li>
+  <li>No need to explicitly use full feature vectors.</li>
+  <li>Enables advanced methods like Kernel PCA for non-linear data.</li>
+</ul>
+
+<div class="summary">
+<strong>Final Summary:</strong> When features are huge, PCA can be made efficient by working in the data space (n) instead of the feature space (d), using pairwise similarities.
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 3: Feature Transformation</h2>
+
+<h3>Overview of PCA Issues</h3>
+<h4>High-Dimensional Features</h4>
+<ul>
+  <li>Covariance matrix size: d × d.</li>
+  <li>Eigen-decomposition cost: O(d³).</li>
+  <li>Problem: Too slow when d ≫ n.</li>
+  <li>Solution: Use smaller matrix XᵀX ∈ R<sup>n×n</sup> and convert results back.</li>
+</ul>
+<h4>Nonlinear Relationships</h4>
+<ul>
+  <li>PCA assumes data lies in a linear subspace.</li>
+  <li>Fails when data follows curved/nonlinear patterns.</li>
+</ul>
+
+<h3>Failure Example: Data on a Circle</h3>
+<ul>
+  <li><strong>Setup:</strong> Data lies on a circle centered at (a,b): (f₁−a)² + (f₂−b)² = r²</li>
+  <li><strong>What PCA Does:</strong>
+    <ul>
+      <li>Centers data at (0,0).</li>
+      <li>Finds directions of maximum variance.</li>
+    </ul>
+  </li>
+  <li><strong>Problem:</strong>
+    <ul>
+      <li>Data uniformly spread.</li>
+      <li>No dominant direction.</li>
+      <li>w₁ captures ~50% variance, w₂ captures ~50% variance.</li>
+      <li>PCA cannot reduce dimension.</li>
+      <li>Wrong conclusion: Data is 2D, but actually lies on 1D circle.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Solution: Feature Mapping</h3>
+<ul>
+  <li><strong>Idea:</strong> Convert nonlinear data → linear in higher dimension.</li>
+</ul>
+<p class="formula">Original Nonlinear Equation: f₁² + f₂² − 2af₁ − 2bf₂ + (a² + b² − r²) = 0</p>
+<p class="formula">Feature Mapping Example (2D → 6D): φ(f₁, f₂) = [1, f₁², f₂², f₁f₂, f₁, f₂]ᵀ</p>
+<p class="formula">Linear Representation in High-D Space: u = [a² + b² − r², 1, 1, 0, −2a, −2b]ᵀ, φ(x)ᵀu = 0</p>
+<ul>
+  <li><strong>Meaning:</strong> Data lies in a linear subspace in 6D → PCA can work.</li>
+</ul>
+
+<h3>Method: Feature Mapping + PCA</h3>
+<ol>
+  <li>Map data x ∈ R<sup>d</sup> → φ(x) ∈ R<sup>D</sup>.</li>
+  <li>Apply PCA in higher dimension.</li>
+  <li>Handle large D using similarity trick: φ(xᵢ)ᵀφ(xⱼ) instead of explicit computation.</li>
+</ol>
+
+<h3>Computational Challenge (Curse of Dimensionality)</h3>
+<ul>
+  <li><strong>Feature Explosion:</strong> If original features = d, degree = p, Total dimensions = Σᵢ₌₀ᵖ (d choose i) ≈ O(dᵖ)</li>
+  <li><strong>Examples:</strong> Cubic case (p = 3, d = 4):
+    <ul>
+      <li>Constant: 1, Linear: 4, Quadratic: 6, Cubic: 4 → Total = 15.</li>
+      <li>Extreme case (d = 10, p = 15): 10¹⁵ features → impossible to compute.</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="summary">
+<strong>Final Summary:</strong>
+<ul>
+  <li>PCA fails for nonlinear data because it only finds straight-line structure.</li>
+  <li>By mapping data to higher dimensions: nonlinear → linear, PCA becomes effective.</li>
+  <li>But high dimension leads to computation explosion.</li>
+</ul>
+<p><strong>One-Line Summary:</strong> <em>Make data linear by going high-dimensional, but avoid explicit computation using similarity tricks.</em></p>
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 4: Kernel Functions</h2>
+
+<h3>Core Problem: Computational Hurdle</h3>
+<ul>
+  <li><strong>Issue:</strong> In nonlinear PCA, we map x ∈ R<sup>d</sup> → φ(x) ∈ R<sup>D</sup>. But D can be very large or infinite.</li>
+  <li><strong>Key Observation:</strong> PCA does not need φ(x) directly, only φ(X)ᵀφ(X), i.e., pairwise dot products: φ(xᵢ)ᵀφ(xⱼ)</li>
+  <li><strong>Main Question:</strong> Can we compute this without explicitly computing φ(x)?</li>
+</ul>
+
+<h3>Kernel Function (Core Idea)</h3>
+<ul>
+  <li><strong>Definition:</strong> A kernel function computes dot product in high-dimensional space directly:</li>
+</ul>
+<p class="formula">k(x, x′) = φ(x)ᵀφ(x′)</p>
+<ul>
+  <li>Input: low-dimensional vectors. Output: equivalent dot product in high dimension.</li>
+  <li><strong>Intuition:</strong> Kernel = shortcut to avoid explicit feature mapping.</li>
+</ul>
+
+<h3>Important Kernel Examples</h3>
+<h4>(A) Polynomial Kernel</h4>
+<p class="formula">Formula: k(x, x′) = (xᵀx′ + 1)<sup>p</sup>, p ≥ 1</p>
+<ul>
+  <li><strong>Example (p = 2):</strong>
+    <ul>
+      <li>Input: x = [f₁, f₂], x′ = [g₁, g₂]</li>
+      <li>Kernel: (xᵀx′ + 1)²</li>
+    </ul>
+  </li>
+  <li><strong>Equivalent Mapping (Hidden):</strong> φ(x) = [f₁², f₂², 1, 2f₁f₂, 2f₁, 2f₂]ᵀ — Maps 2D → 6D.</li>
+  <li><strong>Key Insight:</strong> Compute 6D dot product using only 2D inputs.</li>
+</ul>
+
+<h4>(B) RBF / Gaussian Kernel</h4>
+<p class="formula">Formula: k(x, x′) = exp( −‖x − x′‖² / 2σ² )</p>
+<ul>
+  <li><strong>Key Properties:</strong>
+    <ul>
+      <li>Maps to infinite-dimensional space.</li>
+      <li>Very powerful for nonlinear data.</li>
+    </ul>
+  </li>
+  <li><strong>Intuition:</strong> Acts like similarity measure:
+    <ul>
+      <li>Close points → high value.</li>
+      <li>Far points → near zero.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Valid Kernel Condition (Mercer's Theorem)</h3>
+<ul>
+  <li><strong>Condition 1: Symmetry:</strong> k(x,x′) = k(x′,x) — Because dot product is symmetric.</li>
+  <li><strong>Condition 2: Positive Semi-Definite (PSD):</strong> For matrix K<sub>ij</sub> = k(xᵢ, xⱼ), must satisfy: all eigenvalues ≥ 0.</li>
+  <li><strong>Reason:</strong>
+    <ul>
+      <li>K behaves like covariance matrix.</li>
+      <li>Eigenvalues = variance.</li>
+      <li>Variance is always non-negative.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Big Picture: Kernel Trick</h3>
+<ul>
+  <li><strong>Idea:</strong> Instead of explicit mapping φ(x), use kernel function: k(x, x′) = φ(x)ᵀφ(x′)</li>
+  <li><strong>Benefit:</strong>
+    <ul>
+      <li>Avoid high/infinite dimensional computation.</li>
+      <li>Handle nonlinear data efficiently.</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="summary">
+<strong>Final Summary:</strong>
+<ul>
+  <li><strong>Kernel Trick</strong> = "Compute in high dimension without going there."</li>
+</ul>
+<p><strong>One-Line Summary:</strong> Kernels allow PCA (and ML models) to handle nonlinear data efficiently by replacing dot products with smart functions.</p>
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 5: Kernel PCA</h2>
+
+<h3>Objective &amp; Overview</h3>
+<ul>
+  <li><strong>Goal:</strong> Apply PCA on nonlinear data.</li>
+  <li><strong>Standard PCA:</strong> Works only for linear relationships.</li>
+  <li><strong>Kernel PCA:</strong> Uses kernel trick, maps data into high-dimensional space, finds linear structure there.</li>
+</ul>
+<p><strong>Core Idea:</strong> Nonlinear in original space ⇒ Linear in feature space.</p>
+
+<h3>Key Inputs</h3>
+<ul>
+  <li><strong>Dataset:</strong> {x₁, x₂, …, x<sub>n</sub>}, x<sub>i</sub> ∈ R<sup>d</sup></li>
+  <li><strong>Kernel Function:</strong> K(xᵢ, xⱼ) = φ(xᵢ)ᵀφ(xⱼ) — Computes dot product in high dimension. Must satisfy: symmetry and positive semi-definiteness.</li>
+</ul>
+
+<h3>Kernel PCA Algorithm</h3>
+<ul>
+  <li><strong>Step 1: Compute Kernel Matrix:</strong> K<sub>ij</sub> = K(xᵢ, xⱼ) — Size: n × n. Contains pairwise similarities.</li>
+  <li><strong>Step 2: Eigen Decomposition:</strong> Kβ<sub>k</sub> = (nλ<sub>k</sub>)β<sub>k</sub>
+    <ul>
+      <li>β<sub>k</sub>: eigenvectors, λ<sub>k</sub>: eigenvalues</li>
+    </ul>
+  </li>
+</ul>
+<p class="formula">Normalization: α<sub>k</sub> = 1/√(nλ<sub>k</sub>) β<sub>k</sub></p>
+<ul>
+  <li><strong>Step 3: Projection (Dimensionality Reduction):</strong> For data point x<sub>i</sub>, k-th component:</li>
+</ul>
+<p class="formula">Projection = Σⱼ α<sub>kj</sub> K(xᵢ, xⱼ)</p>
+<p><strong>Result:</strong> x<sub>i</sub> ∈ R<sup>d</sup> → R<sup>l</sup>, where l = number of principal components.</p>
+
+<h3>Centering the Kernel</h3>
+<ul>
+  <li><strong>Why Needed:</strong> PCA requires mean = 0.</li>
+  <li><strong>Problem:</strong> Cannot compute φ(x) directly.</li>
+  <li><strong>Solution:</strong> Center kernel matrix instead. K<sub>c</sub> = centered version of K</li>
+</ul>
+<p>Idea: Adjust row means, column means, and overall mean to mimic (φ(xᵢ) − μ)ᵀ(φ(xⱼ) − μ)</p>
+
+<h3>Important Concepts</h3>
+<ul>
+  <li><strong>Kernel Trick:</strong> Replace xᵢᵀxⱼ → K(xᵢ, xⱼ). Avoid explicit mapping.</li>
+  <li><strong>Dimensionality Insight:</strong> Can increase dimension first, then reduce.
+    <ul>
+      <li>Examples: 2D → 100D → 10D</li>
+      <li>100D → 5D</li>
+    </ul>
+  </li>
+  <li><strong>Use in Practice:</strong> Feature preprocessing before classification or regression.</li>
+</ul>
+
+<h3>Examples</h3>
+<p><strong>Example 1 (Reduction):</strong> Input: 100D data → Output: Top 5 nonlinear components. Captures most important patterns.</p>
+<p><strong>Example 2 (Nonlinear Data):</strong> Input: 2D data with nonlinear structure. Map → 100D feature space → Reduce → 10D. Structure becomes linear and separable.</p>
+
+<div class="summary">
+<strong>Final Summary:</strong> Kernel PCA = "Apply PCA in a hidden high-dimensional space using kernels."
+<p><strong>One-Line Summary:</strong> Kernel PCA uses kernels to capture nonlinear patterns by performing PCA in an implicit high-dimensional space without computing it directly.</p>
+</div>
+</div>
+
+</body>
+</html>

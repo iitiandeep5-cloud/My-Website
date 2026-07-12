@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>Week 3: Short Notes - Machine Learning</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 0 20px;
+    line-height: 1.6;
+    color: #222;
+    background: #fdfdfd;
+  }
+  h1 {
+    text-align: center;
+    color: #1a1a2e;
+    border-bottom: 3px solid #1a73e8;
+    padding-bottom: 10px;
+  }
+  h2 {
+    color: #1a73e8;
+    margin-top: 40px;
+    border-left: 5px solid #1a73e8;
+    padding-left: 10px;
+  }
+  h3 {
+    color: #0d47a1;
+    margin-top: 25px;
+  }
+  h4 {
+    color: #333;
+    margin-bottom: 5px;
+  }
+  ul {
+    margin-top: 5px;
+  }
+  li {
+    margin-bottom: 4px;
+  }
+  .summary {
+    background: #eef4ff;
+    border-left: 4px solid #1a73e8;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-top: 15px;
+  }
+  .formula {
+    background: #f5f5f5;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    display: inline-block;
+    margin: 4px 0;
+  }
+  .lecture {
+    margin-top: 60px;
+    padding-top: 10px;
+    border-top: 2px dashed #ccc;
+  }
+  code {
+    background: #f0f0f0;
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 12px 0;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px 16px;
+    text-align: center;
+  }
+  th {
+    background: #eef4ff;
+    color: #1a73e8;
+  }
+  .example-box {
+    background: #fff8e6;
+    border-left: 4px solid #e6a817;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin: 10px 0;
+  }
+</style>
+</head>
+<body>
+
+<h1>Week 3: Short Notes</h1>
+
+<div class="lecture">
+<h2>Lecture 1: Introduction to Clustering</h2>
+
+<h3>What is Clustering?</h3>
+<ul>
+  <li>Clustering is an <strong>unsupervised learning technique</strong>.</li>
+  <li>It groups data points into K clusters based on similarity.</li>
+  <li>Unlike PCA (which reduces dimensions), clustering finds <strong>natural groupings</strong> in data.</li>
+</ul>
+<p><strong>Key idea:</strong> Even if data lies in a linear space, it may still form distinct groups (clusters).</p>
+
+<h3>Core Concepts</h3>
+<p><strong>Dataset:</strong> Given points: x₁, x₂, …, x<sub>n</sub> ∈ R<sup>D</sup></p>
+<h4>Cluster Assignment (Indicator Variable)</h4>
+<p>Each point is assigned a cluster: z<sub>i</sub> ∈ {1, 2, …, K}</p>
+<p>Meaning: z<sub>i</sub> = k ⟹ x<sub>i</sub> belongs to cluster k</p>
+
+<h4>Homogeneity (Goal)</h4>
+<p>Points in the same cluster should be:</p>
+<ul>
+  <li>Similar</li>
+  <li>Close to each other</li>
+</ul>
+<p>Measured using distance from cluster center.</p>
+
+<h3>Key Formulae</h3>
+<h4>1. Cluster Mean (Centroid)</h4>
+<p>The center of cluster k:</p>
+<p class="formula">μ<sub>k</sub> = Σᵢ xᵢ·I(z<sub>i</sub>=k) / Σᵢ I(z<sub>i</sub>=k)</p>
+<p>Where I(z<sub>i</sub> = k) = 1 if point belongs to cluster k, else 0. Denominator = number of points in cluster k.</p>
+<p><strong>Simply:</strong> Mean of all points in that cluster.</p>
+
+<h4>2. Objective Function (Clustering Cost)</h4>
+<p>Measure of clustering quality:</p>
+<p class="formula">Σᵢ ‖xᵢ − μ<sub>zᵢ</sub>‖²</p>
+<p><strong>Goal:</strong> Minimize total squared distance between each point and its cluster center. Lower value = better clustering.</p>
+
+<h3>Computational Complexity</h3>
+<p><strong>Why Clustering is Hard?</strong> Total possible assignments: K<sup>n</sup></p>
+<p><strong>Example:</strong> For K = 2, n = 1000: 2<sup>1000</sup> (extremely large!)</p>
+<p><strong>Conclusion:</strong> Finding exact best clustering = NP-HARD. So we use heuristic algorithms (like K-means).</p>
+
+<h3>Examples</h3>
+<div class="example-box">
+<strong>Example 1: Number of Partitions</strong><br>
+Points: x₁, x₂, x₃, x₄, x₅<br>
+Clusters: K=3<br>
+Total ways: 3⁵ = 243<br><br>
+<strong>Sample grouping:</strong>
+<ul>
+  <li>Cluster 1: x₁, x₂, x₅</li>
+  <li>Cluster 2: x₃</li>
+  <li>Cluster 3: x₄</li>
+</ul>
+</div>
+
+<div class="example-box">
+<strong>Example 2: Mean &amp; Cost Calculation</strong><br>
+Given:
+<ul>
+  <li>Cluster 1: x₁, x₃, x₄</li>
+  <li>Cluster 2: x₂, x₅</li>
+</ul>
+Means: μ₁ = (x₁+x₃+x₄)/3, &nbsp; μ₂ = (x₂+x₅)/2<br>
+Cost: ‖x₁−μ₁‖² + ‖x₂−μ₂‖² + ‖x₃−μ₁‖² + ‖x₄−μ₁‖² + ‖x₅−μ₂‖²
+</div>
+
+<div class="summary">
+<strong>Quick Summary:</strong>
+<ul>
+  <li>Clustering = grouping similar data points</li>
+  <li>Each point assigned using z<sub>i</sub></li>
+  <li>Cluster center = mean of assigned points</li>
+  <li>Objective = minimize squared distance</li>
+  <li>Problem is NP-HARD → use approximations</li>
+</ul>
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 2: K-means Clustering (Lloyd's Algorithm)</h2>
+
+<h3>Core Concepts</h3>
+<h4>K-Means Problem vs Algorithm</h4>
+<ul>
+  <li><strong>K-Means Problem:</strong> Find the best way to divide data into K clusters.</li>
+  <li><strong>Lloyd's Algorithm:</strong> A heuristic method used to solve the problem (not guaranteed optimal).</li>
+</ul>
+<p><em>Important: Often called the K-means algorithm, but technically it is Lloyd's Algorithm.</em></p>
+
+<h3>Complexity</h3>
+<ul>
+  <li>Finding the optimal clustering = <strong>NP-HARD</strong></li>
+  <li>Lloyd's Algorithm:
+    <ul>
+      <li>Simple</li>
+      <li>Fast in practice</li>
+      <li>May give local optimum (not always best solution)</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Iterative Nature:</strong> The algorithm runs repeatedly until convergence.</p>
+<h4>Convergence condition:</h4>
+<ul>
+  <li>No point changes its cluster</li>
+  <li>Every point is closest to its current cluster center</li>
+</ul>
+
+<h3>Algorithm Steps</h3>
+<p><strong>Step 0: Initialization:</strong> Assign each point a random cluster label: z<sub>i</sub><sup>(0)</sup> ∈ {1, 2, …, K}</p>
+<p><strong>Step 1: Compute Cluster Means:</strong> For each cluster k, compute its centroid:</p>
+<p class="formula">μ<sub>k</sub><sup>(t)</sup> = Σᵢ xᵢ·I(z<sub>i</sub><sup>(t)</sup>=k) / Σᵢ I(z<sub>i</sub><sup>(t)</sup>=k)</p>
+<p>Meaning: Take average of all points in cluster k.</p>
+<p><strong>Step 2: Reassignment Step:</strong> Reassign each point to the nearest cluster center:</p>
+<p class="formula">z<sub>i</sub><sup>(t+1)</sup> = argmin<sub>k</sub> ‖xᵢ − μ<sub>k</sub><sup>(t)</sup>‖²</p>
+<p>Meaning: Choose cluster with minimum squared distance.</p>
+
+<h3>Tie-Breaking Rule</h3>
+<p>If distances are equal:</p>
+<ul>
+  <li>Do <strong>not</strong> move the point</li>
+  <li>Stay in current cluster</li>
+</ul>
+<p>Movement only happens if another cluster is strictly closer.</p>
+
+<h3>Key Properties</h3>
+<h4>Convergence</h4>
+<ul>
+  <li>Algorithm is guaranteed to converge.</li>
+  <li>Reason: Cost (distance) always decreases or stays the same.</li>
+  <li>Finite number of partitions.</li>
+</ul>
+
+<h4>Initialization Matters</h4>
+<ul>
+  <li>Different starting points → different results.</li>
+  <li>Can affect: Speed, Final clusters</li>
+  <li>Common issue: <strong>local minima</strong>.</li>
+</ul>
+
+<h4>Choosing K</h4>
+<ul>
+  <li>Number of clusters K is <strong>not given</strong> in unsupervised learning.</li>
+  <li>Must be chosen using:
+    <ul>
+      <li>Domain knowledge</li>
+      <li>Methods like the Elbow method (conceptually).</li>
+    </ul>
+  </li>
+</ul>
+
+<h4>Nature of Clusters</h4>
+<p>Works best when clusters are: Spherical, Well-separated.<br>
+Struggles with: Irregular shapes, Different densities.</p>
+
+<div class="example-box">
+<strong>Example (Movement of Points)</strong><br>
+Given: A point currently in Cluster A
+<ul>
+  <li><strong>Case 1:</strong> Distance to A = 5, Distance to B = 6 → Stays in Cluster A</li>
+  <li><strong>Case 2:</strong> Distance to A = 5, Distance to B = 5 → Stays in Cluster A (tie-breaking rule)</li>
+  <li><strong>Case 3:</strong> Distance to A = 5, Distance to B = 3 → Moves to Cluster B</li>
+</ul>
+</div>
+
+<div class="summary">
+<strong>Quick Summary:</strong>
+<ul>
+  <li>K-Means = partition data into K clusters</li>
+  <li>Uses Lloyd's Algorithm (iterative)</li>
+  <li>Steps: Initialize clusters → Compute means → Reassign points</li>
+  <li>Objective: minimize distance to cluster centers</li>
+  <li>Guaranteed to converge, but: Not always optimal; Sensitive to initialization and choice of K</li>
+</ul>
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 3: Convergence of K-means Algorithm</h2>
+
+<h3>Overview</h3>
+<p><strong>What is K-Means?</strong> An unsupervised learning algorithm used to divide data into K clusters.</p>
+
+<h4>How it Works</h4>
+<ol>
+  <li>Start with an initial random partition</li>
+  <li>Repeat: Compute cluster means → Reassign points to nearest cluster</li>
+  <li>Stop when no point changes cluster</li>
+</ol>
+<p><strong>Movement Rule:</strong> A point shifts cluster only if distance to another cluster mean is strictly smaller. Uses squared Euclidean distance.</p>
+
+<h3>Termination Condition</h3>
+<p>Algorithm stops when:</p>
+<ul>
+  <li>No reassignment occurs</li>
+  <li>All points are "happy" with their cluster</li>
+</ul>
+
+<h3>Key Mathematical Concept (Fact 1)</h3>
+<p><strong>Problem:</strong> Given points: x₁, x₂, …, x<sub>l</sub> ∈ R<sup>d</sup></p>
+<p>Find vector v minimizing:</p>
+<p class="formula">min<sub>v</sub> Σᵢ ‖xᵢ − v‖²</p>
+<p><strong>Result:</strong> The optimal v* is:</p>
+<p class="formula">v* = (1/l) Σᵢ xᵢ</p>
+<p><strong>Intuition:</strong> The mean is the best representative point. It minimizes total squared distance.</p>
+
+<h3>Why K-Means Converges</h3>
+<p><strong>Objective Function:</strong> Total clustering cost:</p>
+<p class="formula">F = Σᵢ ‖xᵢ − μ<sub>zᵢ</sub>‖²</p>
+<p><strong>Goal:</strong> Minimize F.</p>
+
+<h4>A. Two-Step Reduction</h4>
+<ol>
+  <li><strong>Reassignment Decreases Cost:</strong> When a point moves, the distance to the new (closer) cluster is smaller than to the old one.</li>
+  <li><strong>Mean Update Further Reduces Cost:</strong> After recomputing means, cost decreases further (from Fact 1: mean minimizes distance).</li>
+</ol>
+<p><strong>Final Insight:</strong> Each iteration: Cost strictly decreases OR stays same. Never increases.</p>
+
+<h4>B. Finiteness Argument</h4>
+<p>Total possible partitions: K<sup>n</sup> (finite)</p>
+<p>Since:</p>
+<ul>
+  <li>Cost decreases every time</li>
+  <li>Same partition never repeats</li>
+</ul>
+<p><strong>Algorithm must stop (converge).</strong></p>
+
+<h3>Key Concepts &amp; Caveats</h3>
+<p><strong>Local Minima:</strong> Algorithm may stop at a local optimum, not the global best. Reason: No single point wants to move.</p>
+<p><strong>Speed:</strong> Usually very fast in practice. Worst-case: can take many iterations (rare).</p>
+
+<h4>Choosing K: Two Cases</h4>
+<ul>
+  <li><strong>Predefined K:</strong> Example – grading system</li>
+  <li><strong>Unknown K:</strong> Need to discover patterns, use heuristics (e.g., elbow idea)</li>
+</ul>
+
+<h3>Examples</h3>
+<div class="example-box">
+<strong>Example 1: Educational Grading</strong><br>
+Teacher groups students into: S, A, B, C, D<br>
+Here: K = 5. Algorithm clusters students based on marks.
+</div>
+<div class="example-box">
+<strong>Example 2: Pattern Discovery</strong><br>
+Given only data points, no predefined K.<br>
+Goal: Find natural grouping structure. Try different K values to see patterns.
+</div>
+
+<div class="summary">
+<strong>Quick Summary:</strong>
+<ul>
+  <li>K-Means = iterative clustering algorithm</li>
+  <li>Uses: Mean as cluster center; Squared distance</li>
+  <li>Convergence reason: Cost decreases every step; Finite number of partitions</li>
+  <li>Guarantees: Converges; Not always optimal</li>
+</ul>
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 4: Nature of Clusters Produced by K-means</h2>
+
+<h3>Core Concept</h3>
+<p><strong>Key Idea:</strong> K-means forms clusters as Voronoi regions. Each cluster contains points that are closest to its mean (centroid).</p>
+<p><strong>Important Property:</strong> Cluster boundaries are:</p>
+<ul>
+  <li>Linear (straight lines / hyperplanes)</li>
+  <li>Formed by intersection of half-spaces</li>
+</ul>
+<p>Thus, K-means creates: Convex regions; Linearly separable clusters</p>
+
+<h3>Mathematical Foundation (Case: K=2)</h3>
+<p><strong>Assignment Rule:</strong> A point x belongs to cluster 1 if:</p>
+<p class="formula">‖x−μ₁‖² ≤ ‖x−μ₂‖²</p>
+<p><strong>Linear Form (After Expansion):</strong></p>
+<p class="formula">xᵀ(μ₂−μ₁) ≤ ½(‖μ₂‖² − ‖μ₁‖²)</p>
+<p><strong>Insight:</strong> This is a linear inequality → boundary is a straight line (hyperplane).</p>
+
+<h3>Geometric Interpretation</h3>
+<ul>
+  <li>Boundary = Perpendicular bisector</li>
+  <li>Divides space into two equal parts</li>
+  <li>Points on boundary are equidistant from both means</li>
+</ul>
+<p><strong>Midpoint Property:</strong> The midpoint ½(μ₁ + μ₂) always lies on the boundary.</p>
+
+<h3>General Case (K Clusters)</h3>
+<p><strong>Region Formation:</strong> Each cluster is defined as points closer to its mean than all others.</p>
+<p><strong>Mathematical Idea:</strong> Region = intersection of K−1 half-spaces.</p>
+<p><strong>Voronoi Region:</strong> Each cluster forms a Voronoi cell, defined by boundaries between pairs of means.</p>
+
+<div class="example-box">
+<strong>Example (K=3)</strong><br>
+Means: μ₁, μ₂, μ₃<br>
+Boundaries:
+<ul>
+  <li>Between μ₁ &amp; μ₂</li>
+  <li>Between μ₁ &amp; μ₃</li>
+  <li>Between μ₂ &amp; μ₃</li>
+</ul>
+Final cluster region = intersection of relevant boundaries.
+</div>
+
+<h3>Limitations of K-Means</h3>
+<p><strong>Key Limitation:</strong> K-means can only create: Linear boundaries; Convex clusters</p>
+<p><strong>Example: Concentric Circles</strong><br>
+Data: inner circle + outer circle. What K-Means Does: Draws a straight line, splitting circles into halves. Why It Fails: True clusters are non-linear and non-convex. K-means cannot detect such shapes.</p>
+
+<h3>Advanced Concept: Kernel K-Means</h3>
+<p><strong>Idea:</strong> Use the kernel trick to handle non-linear data.</p>
+<h4>How it Works</h4>
+<ul>
+  <li>Map data to higher-dimensional space</li>
+  <li>Apply K-means there</li>
+</ul>
+<p><strong>Key Insight:</strong> Data may become linearly separable in higher dimensions.</p>
+<p><strong>Result:</strong> Can capture non-linear cluster structures.</p>
+<p><strong>Related Algorithm:</strong> Spectral Clustering – uses eigenvectors of the kernel matrix.</p>
+
+<div class="summary">
+<strong>Quick Summary:</strong>
+<ul>
+  <li>K-means forms Voronoi regions</li>
+  <li>Boundaries are linear, perpendicular bisectors</li>
+  <li>Each cluster = intersection of half-spaces</li>
+  <li>Works well for convex, spherical clusters</li>
+  <li>Fails for non-linear shapes (e.g., circles)</li>
+  <li>Solution: Kernel K-means</li>
+</ul>
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 5: Initialization of Centroids, K-means++</h2>
+
+<h3>Core Concepts</h3>
+<h4>Importance of Initialization</h4>
+<ul>
+  <li>K-means always converges, but the final result depends heavily on the starting point.</li>
+  <li>Poor initialization ⇒ bad clusters (local minima).</li>
+</ul>
+
+<h4>Local Minima Problem</h4>
+<ul>
+  <li>Algorithm may stop at suboptimal clustering.</li>
+  <li>Reason: No point wants to move, but a better global arrangement exists.</li>
+</ul>
+
+<h4>Initialize Means vs Partitions</h4>
+<ul>
+  <li>Better approach: initialize centroids (means) directly.</li>
+  <li>Then assign each point to nearest mean.</li>
+  <li>More stable than random cluster assignment.</li>
+</ul>
+
+<h3>Initialization Strategies</h3>
+<h4>Strategy A: Uniform Random Initialization</h4>
+<p><strong>Process:</strong> Randomly pick K data points as initial centroids.</p>
+<p><strong>Improvement Trick:</strong> Run K-means multiple times, choose solution with lowest cost.</p>
+<p><strong>Pros &amp; Cons:</strong></p>
+<ul>
+  <li>Fast and simple</li>
+  <li>Works well for large datasets</li>
+  <li>Can be unlucky</li>
+  <li>May lead to poor clustering</li>
+</ul>
+
+<h4>Strategy B: K-means++</h4>
+<p><strong>Idea:</strong> Choose centroids that are far apart from each other.</p>
+<p><strong>Key Feature:</strong></p>
+<ul>
+  <li>Means selected one by one (iteratively)</li>
+  <li>Uses probability-based selection</li>
+</ul>
+<p><strong>Advantage:</strong></p>
+<ul>
+  <li>Better initialization ⇒ better clustering</li>
+  <li>Avoids poor starting points</li>
+</ul>
+
+<h3>K-means++ Algorithm</h3>
+<p><strong>Step 1: First Mean:</strong> Pick randomly from dataset.</p>
+<p><strong>Step 2: Scoring Points:</strong> Score of a point = distance to nearest existing mean:</p>
+<p class="formula">score(x) = min<sub>j∈{1,…,l−1}</sub> ‖x − μⱼ‖²</p>
+<p>Points far from current means get high score.</p>
+<p><strong>Step 3: Probability Selection:</strong> Select next mean with probability:</p>
+<p class="formula">P(x) = score(x) / Σ all scores</p>
+<p>Far points ⇒ higher probability.</p>
+
+<h3>Examples</h3>
+<div class="example-box">
+<strong>Example 1: Random Initialization</strong><br>
+Dataset: 1000 points, K=5.<br>
+Randomly pick: x₅, x₇₂, x₈₉, x₂₀₀, x₂₂.<br>
+These act as initial centroids.
+</div>
+<div class="example-box">
+<strong>Example 2: Probability Calculation</strong><br>
+Scores: 10, 20, 30 → Total = 60.<br>
+Probabilities:
+<ul>
+  <li>Point 1: 10/60 = 1/6</li>
+  <li>Point 2: 20/60 = 1/3</li>
+  <li>Point 3: 30/60 = 1/2</li>
+</ul>
+<strong>Insight:</strong> Highest score ⇒ highest chance. But randomness allows exploration and avoids bad cases.
+</div>
+
+<h3>Performance &amp; Guarantees</h3>
+<p><strong>Objective Function:</strong> Minimize clustering cost:</p>
+<p class="formula">Σᵢ ‖xᵢ − μ<sub>zᵢ</sub>‖²</p>
+<p><strong>Theoretical Guarantee (K-means++):</strong> Produces solution within a constant factor of optimal. Much better than random initialization.</p>
+
+<h3>Computational Cost</h3>
+<ul>
+  <li><strong>K-means++:</strong> Slower than random; Needs multiple passes over data</li>
+  <li><strong>Random:</strong> Faster; Less reliable</li>
+</ul>
+
+<div class="summary">
+<strong>Quick Summary:</strong>
+<ul>
+  <li>Initialization is crucial in K-means.</li>
+  <li>Bad start ⇒ bad clustering.</li>
+  <li>Methods: Random → fast but risky; K-means++ → smarter and reliable</li>
+  <li>K-means++ idea: pick points far from existing centroids, probability proportional to distance squared.</li>
+</ul>
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 6: Choice of K</h2>
+
+<h3>The Problem of Choosing K</h3>
+<h4>Key Issue</h4>
+<ul>
+  <li>In real-world datasets, the number of clusters K is <strong>unknown</strong>.</li>
+  <li>Simply minimizing clustering error is not sufficient.</li>
+  <li>Lower cost ≠ better clustering always.</li>
+</ul>
+
+<h3>Objective Function</h3>
+<p><strong>Standard Cost Function:</strong></p>
+<p class="formula">F = Σᵢ ‖xᵢ − μ<sub>zᵢ</sub>‖²</p>
+<p>Measures: total squared distance of points from their cluster means.</p>
+
+<h3>The K=n Trap</h3>
+<p>If K = n:</p>
+<ul>
+  <li>Each point = its own cluster</li>
+  <li>Distance = 0</li>
+  <li>So F = 0 (minimum possible)</li>
+</ul>
+<p><strong>Why This is Useless:</strong></p>
+<ul>
+  <li>No grouping</li>
+  <li>No pattern discovery</li>
+  <li>No data compression</li>
+  <li>Clustering becomes meaningless</li>
+</ul>
+
+<h3>Solution: Objective + Penalty</h3>
+<p><strong>Key Idea:</strong> Balance between: Fit (low error) and Simplicity (fewer clusters)</p>
+<p class="formula">Total Cost = Objective Value + Penalty(K)</p>
+<p><strong>Trade-off:</strong> Increasing K: Decreases objective value; Increases penalty</p>
+<p><strong>Decision Rule:</strong> Add a new cluster only if reduction in error &gt; penalty increase.</p>
+
+<h3>Curve Insight</h3>
+<ul>
+  <li>Objective ↓ with K</li>
+  <li>Penalty ↑ with K</li>
+  <li>Combined curve: first decreases, then increases</li>
+  <li>Best K = minimum point of curve</li>
+</ul>
+
+<h3>Common Methods to Choose K</h3>
+<h4>A. Akaike Information Criterion (AIC)</h4>
+<p class="formula">AIC = 2K − 2log(likelihood)</p>
+<p>Penalty grows linearly with K.</p>
+
+<h4>B. Bayesian Information Criterion (BIC)</h4>
+<p class="formula">BIC = K log(n) − 2log(likelihood)</p>
+<p>Penalty depends on: Number of clusters K; Number of points n</p>
+
+<h4>C. Elbow Method</h4>
+<p><strong>Idea:</strong> Plot K vs objective value. Look for "elbow point" (sharp bend).</p>
+<p><strong>Interpretation:</strong></p>
+<ul>
+  <li>Before elbow → big improvement</li>
+  <li>After elbow → small improvement</li>
+  <li>Choose K at elbow.</li>
+</ul>
+
+<h3>Summary of Lloyd's Algorithm Concepts</h3>
+<ul>
+  <li><strong>Convergence:</strong> Always converges, may reach local minimum.</li>
+  <li><strong>Cluster Shape:</strong> Forms Voronoi regions, linear boundaries.</li>
+  <li><strong>Initialization:</strong> Important for good results.
+    <ul>
+      <li>Random (fast)</li>
+      <li>K-means++ (better)</li>
+    </ul>
+  </li>
+  <li><strong>Practical Strategy:</strong>
+    <ul>
+      <li>Try different K values</li>
+      <li>Use multiple initializations</li>
+      <li>Compute cost for each</li>
+      <li>Apply Elbow / AIC / BIC</li>
+      <li>Choose best clustering</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Example: Choosing K</h3>
+<table>
+  <tr><th>K</th><th>Objective Value</th></tr>
+  <tr><td>2</td><td>500</td></tr>
+  <tr><td>3</td><td>300</td></tr>
+  <tr><td>4</td><td>200</td></tr>
+  <tr><td>5</td><td>180</td></tr>
+  <tr><td>6</td><td>170</td></tr>
+</table>
+<p><strong>Observation:</strong></p>
+<ul>
+  <li>Big drop until K = 4</li>
+  <li>Small improvement after</li>
+</ul>
+<p><strong>Elbow at K=4. Best choice: K=4.</strong></p>
+
+<div class="summary">
+<strong>Quick Summary:</strong>
+<ul>
+  <li>K is usually unknown.</li>
+  <li>K=n gives zero cost but useless result.</li>
+  <li>Solution: add penalty for large K.</li>
+  <li>Methods: AIC, BIC, Elbow method.</li>
+  <li>Best K: balance between accuracy &amp; simplicity.</li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>
