@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>Week 6: Short Notes - Machine Learning</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 0 20px;
+    line-height: 1.6;
+    color: #222;
+    background: #fdfdfd;
+  }
+  h1 {
+    text-align: center;
+    color: #1a1a2e;
+    border-bottom: 3px solid #1a73e8;
+    padding-bottom: 10px;
+  }
+  h2 {
+    color: #1a73e8;
+    margin-top: 40px;
+    border-left: 5px solid #1a73e8;
+    padding-left: 10px;
+  }
+  h3 {
+    color: #0d47a1;
+    margin-top: 25px;
+  }
+  h4 {
+    color: #333;
+    margin-bottom: 5px;
+  }
+  ul {
+    margin-top: 5px;
+  }
+  li {
+    margin-bottom: 4px;
+  }
+  .summary {
+    background: #eef4ff;
+    border-left: 4px solid #1a73e8;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-top: 15px;
+  }
+  .formula {
+    background: #f5f5f5;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    display: inline-block;
+    margin: 4px 0;
+  }
+  .lecture {
+    margin-top: 60px;
+    padding-top: 10px;
+    border-top: 2px dashed #ccc;
+  }
+  code {
+    background: #f0f0f0;
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 12px 0;
+    width: 100%;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px 14px;
+    text-align: left;
+  }
+  th {
+    background: #eef4ff;
+    color: #1a73e8;
+  }
+  .example-box {
+    background: #fff8e6;
+    border-left: 4px solid #e6a817;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin: 10px 0;
+  }
+</style>
+</head>
+<body>
+
+<h1>Week 6: Short Notes</h1>
+
+<div class="lecture">
+<h2>Lecture 1: Goodness of Maximum Likelihood Estimator for Linear Regression</h2>
+
+<p><strong>Core Concept:</strong> Linear Regression can be viewed as Maximum Likelihood Estimation (MLE).</p>
+<p><strong>Model:</strong> y = wᵀx + ϵ</p>
+<ul>
+  <li>w: true (unknown) parameter</li>
+  <li>ϵ: noise</li>
+</ul>
+<p><strong>Noise Assumption:</strong> ϵ ∼ N(0, σ²)</p>
+<p><strong>Conditional Distribution:</strong> y ∣ x ∼ N(wᵀx, σ²)</p>
+
+<h3>Important Insight</h3>
+<ul>
+  <li>Since y is random → the estimator ŵ<sub>ML</sub> is also random.</li>
+  <li>Meaning:
+    <ul>
+      <li>Different datasets → different estimates</li>
+      <li>Depends on noise in data</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Measuring "Goodness" of Estimator</h3>
+<ul>
+  <li><strong>Goal:</strong> Measure how close ŵ<sub>ML</sub> is to true w.</li>
+  <li><strong>Measure Used:</strong> E[‖ŵ<sub>ML</sub> − w‖²] called <strong>Mean Squared Error (MSE)</strong> of estimator</li>
+</ul>
+<p><strong>Intuition:</strong> Imagine repeating experiment many times → take average error between estimated and true w.</p>
+
+<h3>Key Formulae</h3>
+<ul>
+  <li><strong>MLE Solution:</strong> ŵ<sub>ML</sub> = (XXᵀ)⁻¹Xy (Use pseudo-inverse if needed)</li>
+  <li><strong>Goodness Formula:</strong> E[‖ŵ<sub>ML</sub>−w‖²] = σ² · trace((XXᵀ)⁻¹)</li>
+</ul>
+
+<h3>Understanding the Formula</h3>
+<p>Error depends on two factors:</p>
+<ol>
+  <li><strong>Noise Variance (σ²):</strong>
+    <ul>
+      <li>Represents randomness in data</li>
+      <li>Higher noise → worse estimation</li>
+      <li>Cannot control this</li>
+    </ul>
+  </li>
+  <li><strong>Feature Structure (trace((XXᵀ)⁻¹)):</strong>
+    <ul>
+      <li>Depends on feature quality &amp; correlation</li>
+      <li>Good features → smaller trace → better estimator</li>
+      <li>Poor features → larger error</li>
+    </ul>
+  </li>
+</ol>
+
+<div class="example-box">
+<strong>Example: House Price Prediction</strong>
+<ul>
+  <li><strong>Case 1: Low Noise</strong> — Data points close to line, ŵ ≈ w, Small error</li>
+  <li><strong>Case 2: High Noise</strong> — Data scattered randomly, Poor estimation, Large error</li>
+</ul>
+</div>
+
+<h3>"Unlucky Dataset" Idea</h3>
+<ul>
+  <li>Sometimes noise is unusually high → data becomes misleading.</li>
+  <li>Result: Bad estimate for that dataset.</li>
+  <li><strong>Solution:</strong> Evaluate performance on average (expectation), not on one dataset.</li>
+</ul>
+
+<h3>Key Insights</h3>
+<p>What You Cannot Control → Noise variance (σ²)<br>
+What You Can Improve → Feature selection, independence, and data quality</p>
+
+<h3>Quick Revision</h3>
+<table>
+  <tr><th>Concept</th><th>Formula</th></tr>
+  <tr><td>Model</td><td>y = wᵀx + ϵ</td></tr>
+  <tr><td>Noise</td><td>ϵ ∼ N(0, σ²)</td></tr>
+  <tr><td>MLE Solution</td><td>(XXᵀ)⁻¹Xy</td></tr>
+  <tr><td>Goodness Measure</td><td>E[‖ŵ − w‖²]</td></tr>
+  <tr><td>Final Error</td><td>σ² · trace((XXᵀ)⁻¹)</td></tr>
+</table>
+
+<div class="summary">
+<strong>One-Line Summary:</strong> The goodness of MLE depends on noise in data and quality of features, measured by expected squared error between estimated and true parameters.
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 2: Cross-Validation for Minimizing MSE</h2>
+
+<h3>Matrix Properties (Essential Basics)</h3>
+<p><strong>Trace of a Matrix:</strong> trace(A) = Σ diagonal elements</p>
+<p>Example: A=[[2,1], [0,3]], trace(A) = 2+3 = 5</p>
+<p><strong>Trace &amp; Eigenvalues Relation:</strong> trace(A) = Σᵢ λᵢ — Sum of eigenvalues = trace</p>
+<p><strong>Eigenvalues of Inverse:</strong> If eigenvalues of A are λ₁,λ₂,...,λ<sub>d</sub>, then eigenvalues of A⁻¹ are: 1/λ₁, 1/λ₂, …, 1/λ<sub>d</sub></p>
+<p><strong>Eigenvalues of A+λI:</strong> λᵢ → (λᵢ+λ) — Adding λI shifts eigenvalues upward</p>
+
+<h3>MSE of Maximum Likelihood Estimator</h3>
+<ul>
+  <li><strong>Definition:</strong> MSE = E[‖Ŵ − W‖²]</li>
+  <li><strong>MLE Case:</strong></li>
+</ul>
+<p class="formula">E[‖Ŵ<sub>ML</sub> − W‖²] = σ² Σᵢ₌₁ᵈ 1/λᵢ</p>
+<p>Where: λᵢ: eigenvalues of XXᵀ, σ²: noise variance</p>
+<p><strong>Problem:</strong> Small eigenvalues → very large 1/λᵢ → huge MSE. Weak/correlated features → unstable model</p>
+
+<h3>New Estimator (Regularization Idea)</h3>
+<p><strong>Formula (Ridge Regression):</strong></p>
+<p class="formula">Ŵ<sub>new</sub> = (XXᵀ + λI)⁻¹XY</p>
+<p><strong>Why It Works:</strong></p>
+<ul>
+  <li>Eigenvalues become: λᵢ+λ</li>
+  <li>So: 1/(λᵢ+λ) &lt; 1/λᵢ</li>
+</ul>
+<p>MSE reduces</p>
+<ul>
+  <li><strong>Key Insight:</strong>
+    <ul>
+      <li>Adding λ prevents very small eigenvalues</li>
+      <li>Stabilizes inversion</li>
+      <li>Reduces overfitting</li>
+    </ul>
+  </li>
+</ul>
+<p><strong>Theoretical Result:</strong> There exists some λ such that: MSE<sub>new</sub> &lt; MSE<sub>ML</sub></p>
+
+<h3>Example (Intuition)</h3>
+<ul>
+  <li><strong>Without Regularization:</strong> Model overfits; Very sensitive to noise</li>
+  <li><strong>With Regularization:</strong> Smoother model; Better generalization</li>
+</ul>
+
+<h3>Choosing λ (Practical Part)</h3>
+<ul>
+  <li><strong>Problem:</strong> Best λ is unknown</li>
+  <li><strong>Solution:</strong> Cross-Validation</li>
+</ul>
+
+<h4>Train–Validation Split</h4>
+<p><strong>Idea:</strong> Split data → 80% train, 20% validation</p>
+<p><strong>Process:</strong> Train model for different λ values, evaluate error, choose best λ</p>
+<p><strong>Example:</strong> Total data = 10,000, Train = 8,000, Validate = 2,000</p>
+
+<h4>K-Fold Cross-Validation</h4>
+<p><strong>Idea:</strong> Split data into K equal folds</p>
+<p><strong>Process:</strong></p>
+<ul>
+  <li>Train on K−1 folds</li>
+  <li>Validate on 1 fold</li>
+  <li>Repeat K times</li>
+  <li>Average errors → choose best λ</li>
+</ul>
+<div class="example-box">
+<strong>Example (3-Fold):</strong>
+<ul>
+  <li>Train on (F1, F2) → test on F3</li>
+  <li>Train on (F1, F3) → test on F2</li>
+  <li>Train on (F2, F3) → test on F1</li>
+</ul>
+</div>
+
+<h4>Leave-One-Out Cross-Validation (LOOCV)</h4>
+<ul>
+  <li><strong>Idea:</strong> K=n (number of data points)</li>
+  <li><strong>Process:</strong> Train on n−1 points, test on 1 point</li>
+  <li><strong>Drawback:</strong> Very slow for large datasets</li>
+</ul>
+
+<h3>Final Intuition (Big Picture)</h3>
+<ul>
+  <li><strong>Problem:</strong> Small eigenvalues → high MSE</li>
+  <li><strong>Solution:</strong> Add λI → stabilize matrix</li>
+  <li><strong>Tradeoff:</strong>
+    <ul>
+      <li>Too small λ → overfitting</li>
+      <li>Too large λ → underfitting</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Quick Revision Table</h3>
+<table>
+  <tr><th>Concept</th><th>Formula</th></tr>
+  <tr><td>Trace</td><td>Σλᵢ</td></tr>
+  <tr><td>MLE MSE</td><td>σ² Σ 1/λᵢ</td></tr>
+  <tr><td>New Estimator</td><td>(XXᵀ + λI)⁻¹XY</td></tr>
+  <tr><td>Eigenvalue Shift</td><td>λᵢ + λ</td></tr>
+</table>
+
+<div class="summary">
+<strong>One-Line Summary:</strong> Regularization improves MLE by increasing eigenvalues, reducing instability, and lowering MSE — with the best λ chosen via cross-validation.
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 3: Bayesian Modeling for Linear Regression</h2>
+
+<h3>Core Idea: Bayesian Approach</h3>
+<ul>
+  <li>In Bayesian learning, parameters w are <strong>random variables</strong>, not fixed.</li>
+  <li>We describe them using probability distributions.</li>
+</ul>
+
+<h3>Three Main Components</h3>
+<ul>
+  <li><strong>Prior (Before seeing data):</strong> P(w) — Represents initial belief about w.</li>
+  <li><strong>Likelihood (Data model):</strong> P(y ∣X,w) — Probability of data given w.</li>
+  <li><strong>Posterior (After seeing data):</strong> P(w∣D) ∝ P(y∣X,w)·P(w) — Updated belief after observing data.</li>
+</ul>
+
+<h3>Key Distributions (Linear Regression)</h3>
+<ul>
+  <li><strong>Likelihood (Gaussian):</strong> y∣x,w ∼ N(wᵀx,σ²) — Often assume σ²=1 for simplicity.</li>
+  <li><strong>Prior (Gaussian):</strong> w ∼ N(0,γ²I)
+    <ul>
+      <li>Each wᵢ independent</li>
+      <li>Mean = 0</li>
+      <li>Variance = γ²</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Conjugate Priors</h3>
+<ul>
+  <li><strong>Definition:</strong> A prior is conjugate if posterior has the same form.</li>
+  <li><strong>Examples:</strong>
+    <ul>
+      <li>Bernoulli + Beta → Beta</li>
+      <li>Gaussian + Gaussian → Gaussian</li>
+    </ul>
+  </li>
+</ul>
+<p>In Linear Regression: Likelihood → Gaussian; Prior → Gaussian; Posterior → Gaussian (easy to compute)</p>
+
+<h3>Posterior Formula (Conceptual Form)</h3>
+<p class="formula">P(w∣data) ∝ Πᵢ e<sup>−½(yᵢ−wᵀxᵢ)²</sup> × e<sup>−(1/2γ²)‖w‖²</sup></p>
+<p><strong>Interpretation:</strong></p>
+<ul>
+  <li>First term → data fitting (likelihood)</li>
+  <li>Second term → regularization (prior)</li>
+</ul>
+
+<h3>MAP Estimation (Most Important)</h3>
+<ul>
+  <li><strong>Definition:</strong> ŵ<sub>MAP</sub> = argmax P(w | D)</li>
+</ul>
+<p><strong>Equivalent Optimization:</strong></p>
+<p class="formula">min<sub>w</sub> [ ½ Σᵢ(yᵢ−wᵀxᵢ)² + (1/2γ²)‖w‖² ]</p>
+<p>Compared to MLE:</p>
+<ul>
+  <li>MLE → only error term</li>
+  <li>MAP → error + penalty term</li>
+</ul>
+
+<h3>MAP Solution (Closed Form)</h3>
+<p class="formula">ŵ<sub>MAP</sub> = (XXᵀ + (1/γ²)I)⁻¹XY</p>
+<ul>
+  <li><strong>Components:</strong>
+    <ul>
+      <li>XXᵀ: data structure</li>
+      <li>I: identity matrix</li>
+      <li>1/γ²: regularization strength</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Connection to Ridge Regression</h3>
+<p><strong>Key Result:</strong> λ = 1/γ² &nbsp; → &nbsp; MAP = Ridge Regression</p>
+<ul>
+  <li><strong>Meaning:</strong>
+    <ul>
+      <li>Bayesian prior ⇒ regularization</li>
+      <li>Smaller γ² ⇒ stronger penalty</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Intuition</h3>
+<ul>
+  <li><strong>Without Prior (MLE):</strong> Can overfit; Large weights possible</li>
+  <li><strong>With Prior (MAP):</strong> Penalizes large weights; Produces smoother model</li>
+</ul>
+
+<div class="example-box">
+<strong>Example: House Price Prediction</strong>
+<ul>
+  <li>Features: Size, Location, Rooms</li>
+  <li>MLE: Fits training data very closely → may overfit</li>
+  <li>MAP: Adds penalty on weights → better generalization</li>
+</ul>
+</div>
+
+<h3>Choosing γ² (or λ)</h3>
+<ul>
+  <li><strong>Problem:</strong> Best γ² not known beforehand</li>
+  <li><strong>Solution:</strong> Cross-Validation — Try different values, pick best based on validation error</li>
+</ul>
+
+<h3>Final Intuition (Big Picture)</h3>
+<ul>
+  <li><strong>Bayesian View:</strong> Prior = belief; Likelihood = data; Posterior = updated belief</li>
+  <li><strong>Why MAP Works Better:</strong> Controls model complexity; Avoids overfitting; Stabilizes solution</li>
+</ul>
+
+<h3>Quick Revision Table</h3>
+<table>
+  <tr><th>Concept</th><th>Formula</th></tr>
+  <tr><td>Likelihood</td><td>y ∼ N(wᵀx, σ²)</td></tr>
+  <tr><td>Prior</td><td>w ∼ N(0, γ²I)</td></tr>
+  <tr><td>Posterior</td><td>P(w|D) ∝ P(y|x,w)·P(w)</td></tr>
+  <tr><td>MAP Objective</td><td>Error + (1/2γ²)‖w‖²</td></tr>
+  <tr><td>MAP Solution</td><td>(XXᵀ + (1/γ²)I)⁻¹XY</td></tr>
+  <tr><td>Ridge Link</td><td>λ = 1/γ²</td></tr>
+</table>
+
+<div class="summary">
+<strong>One-Line Summary:</strong> MAP estimation = MLE + prior knowledge, which naturally leads to ridge regression and gives better, more stable models.
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 4: Ridge Regression</h2>
+
+<h3>Basic Idea</h3>
+<h4>Linear Regression (ML Estimator)</h4>
+<ul>
+  <li><strong>Goal:</strong> Find weights W that minimize prediction error.</li>
+  <li>Focuses only on fitting the data well.</li>
+  <li><strong>Problem:</strong> Can overfit when features are many or redundant.</li>
+</ul>
+
+<h4>Ridge Regression (Regularized / MAP Estimator)</h4>
+<ul>
+  <li>Adds a penalty term to control model complexity.</li>
+  <li>Also called <strong>L2 Regularization</strong>.</li>
+  <li>Prevents overfitting by shrinking weights.</li>
+</ul>
+<p class="formula">Ŵ<sub>R</sub> = argmin<sub>W</sub> [ Σᵢ(Wᵀxᵢ−yᵢ)² + λ‖W‖² ]</p>
+
+<h3>Role of Regularization</h3>
+<p><strong>Key Idea:</strong> Penalize large weights.</p>
+<ul>
+  <li>Ridge adds penalty: λ‖W‖²</li>
+  <li>Forces weights to be small and stable.</li>
+</ul>
+<p><strong>Balancing Two Goals:</strong></p>
+<ol>
+  <li>Minimize error (fit data well).</li>
+  <li>Keep weights small (avoid overfitting).</li>
+</ol>
+<p><strong>Preference for Simplicity:</strong> If multiple solutions give same error → choose smaller weights &amp; simpler model.</p>
+
+<h3>Bayesian Perspective</h3>
+<p><strong>Prior Assumption:</strong> W ∼ N(0, γ²)</p>
+<p><strong>Hyperparameter Relation:</strong> λ ≈ 1/γ²</p>
+<h4>Effect of λ</h4>
+<table>
+  <tr><th>λ Value</th><th>Meaning</th><th>Effect</th></tr>
+  <tr><td>Small λ</td><td>Weak penalty</td><td>Model behaves like Linear Regression</td></tr>
+  <tr><td>Large λ</td><td>Strong penalty</td><td>Weights shrink toward zero</td></tr>
+</table>
+<p>λ is chosen using <strong>cross-validation</strong>.</p>
+
+<h3>Handling Redundant Features</h3>
+<p><strong>Problem:</strong> In high-dimensional data, many features may be duplicate or correlated → unstable weights.</p>
+<p><strong>Ridge Solution:</strong> Pushes unnecessary feature weights towards zero. Avoids assigning importance to redundant features.</p>
+
+<div class="example-box">
+<strong>Illustrative Example</strong><br>
+Features: f₁ = Height, f₂ = Weight, f₃ = 2·Height + 3·Weight<br>
+Target: y = 3·Height + 4·Weight<br><br>
+<strong>Possible Solutions:</strong><br>
+<strong>Option A:</strong> Weights = (1, 1, 1) → f₁ + f₂ + f₃ = 3·Height + 4·Weight<br>
+<strong>Option B:</strong> Weights = (3, 4, 0) → 3f₁ + 4f₂ = 3·Height + 4·Weight<br><br>
+<strong>Which One Does Ridge Choose?</strong><br>
+Option A → Larger total weight norm. Option B → Smaller norm.<br>
+Ridge selects (3, 4, 0) → simpler, avoids redundancy.
+</div>
+
+<h3>Key Takeaways</h3>
+<p><strong>Linear Regression:</strong> Minimizes only error; Can overfit.</p>
+<p><strong>Ridge Regression:</strong> Adds penalty term; Controls overfitting; Handles multicollinearity.</p>
+<p><strong>λ (Lambda):</strong> Controls strength of regularization. Higher λ → simpler model.</p>
+<p><strong>Ridge prefers:</strong> Small weights; Non-redundant features.</p>
+
+<div class="summary">
+<strong>One-Line Summary:</strong> Ridge Regression = Linear Regression + L2 penalty. It balances fit vs simplicity, avoids overfitting, and handles redundant features.
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 5: Relation Between Solution of Linear Regression and Ridge Regression</h2>
+
+<h3>Core Concepts &amp; Formulations</h3>
+<h4>Standard Linear Regression</h4>
+<p><strong>Objective:</strong> Minimize squared prediction error</p>
+<p class="formula">min<sub>w</sub> Σ(wᵀxᵢ − yᵢ)²</p>
+<p><strong>Maximum Likelihood (ML) View:</strong></p>
+<ul>
+  <li>Linear regression = Maximum Likelihood Estimation</li>
+  <li>Assumption: Noise in data follows Gaussian distribution</li>
+</ul>
+
+<h4>Ridge Regression (Regularized Version)</h4>
+<p><strong>Adds penalty term to avoid overfitting:</strong></p>
+<p class="formula">min<sub>w</sub> Σ(wᵀxᵢ − yᵢ)² + λ‖w‖²</p>
+<p><strong>Regularization Term:</strong> λ‖w‖² = λ Σᵢ₌₁ᵈ wᵢ²</p>
+<p><strong>Purpose:</strong> Shrinks weights toward zero; Reduces impact of redundant features</p>
+
+<h3>Constrained Optimization View</h3>
+<p><strong>Equivalent Formulation:</strong></p>
+<p class="formula">min<sub>w</sub> Σ(wᵀxᵢ − yᵢ)² &nbsp; subject to ‖w‖² ≤ θ</p>
+<p><strong>Key Idea:</strong> For every λ, there exists a corresponding θ. Both forms give the same solution.</p>
+<p><strong>Geometric Meaning:</strong> Constraint ‖w‖² ≤ θ forms a circle (2D) centered at origin.</p>
+
+<h3>Geometry of Loss (Contours)</h3>
+<p><strong>ML Solution:</strong> ŵ<sub>ML</sub> → gives minimum loss.</p>
+<p><strong>Constant Loss Sets:</strong> Points with same loss form contours.</p>
+<p><strong>Contour Equation:</strong></p>
+<p class="formula">(w − ŵ<sub>ML</sub>)ᵀ XᵀX (w − ŵ<sub>ML</sub>) = C′</p>
+<p><strong>Shape of Contours:</strong></p>
+<ul>
+  <li>If XᵀX = I → Circle</li>
+  <li>General case → Ellipse</li>
+</ul>
+<p>Loss surface is usually <strong>elliptical</strong>.</p>
+
+<h3>How Ridge Finds the Solution</h3>
+<p><strong>Key Idea:</strong> Combine elliptical loss contours with circular constraint region.</p>
+<p><strong>Process:</strong></p>
+<ol>
+  <li>ML solution lies outside constraint circle.</li>
+  <li>Move to smaller weights (inside circle).</li>
+  <li>Find first point of intersection.</li>
+</ol>
+<p><strong>Final Answer:</strong> Ridge solution = Point where smallest ellipse touches the circle.</p>
+<p><strong>Result:</strong> ŵ<sub>Ridge</sub> has: Smaller magnitude; Less overfitting. Called <strong>shrinkage of weights</strong>.</p>
+
+<div class="example-box">
+<strong>Example (Intuition)</strong><br>
+Suppose:
+<ul>
+  <li>Features: Height, Weight, Redundant Feature</li>
+  <li>ML gives large weights (overfitting).</li>
+</ul>
+<strong>Ridge Effect:</strong> Shrinks all weights. Redundant feature weight becomes very small, but usually <strong>not exactly zero</strong>.
+</div>
+
+<h3>Key Insights</h3>
+<p><strong>Shrinkage vs Sparsity:</strong></p>
+<ul>
+  <li>Ridge shrinks weights.</li>
+  <li>Does NOT make them exactly zero.</li>
+</ul>
+<p><strong>Feature Selection Issue:</strong> Since weights ≠ 0 → Hard to remove useless features.</p>
+<p><strong>Why Explore Other Methods?</strong> Shape of constraint matters:</p>
+<table>
+  <tr><th>Regularizer</th><th>Shape</th><th>Effect</th></tr>
+  <tr><td>Ridge (L2)</td><td>Circle</td><td>Smooth shrinkage</td></tr>
+  <tr><td>Lasso (L1)</td><td>Diamond</td><td>Can force zeros</td></tr>
+</table>
+<p>Leads to <strong>Lasso Regression</strong> for feature selection.</p>
+
+<h3>Final Quick Revision Points</h3>
+<p><strong>Linear Regression:</strong> Minimizes only error &amp; Sensitive to overfitting</p>
+<p><strong>Ridge Regression:</strong> Adds L2 penalty; Controls overfitting; Handles redundancy</p>
+<p><strong>Geometry:</strong> Loss → Ellipses; Constraint → Circle; Solution → Intersection point</p>
+<p><strong>Limitation:</strong> No exact feature selection</p>
+
+<div class="summary">
+<strong>One-Line Summary:</strong> Ridge Regression = Linear Regression + L2 penalty. It finds the intersection of elliptical loss contours and a circular constraint, producing smaller, more stable weights.
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 6: Relation Between Solution of Linear Regression and Lasso Regression</h2>
+
+<h3>Key Concepts</h3>
+<p><strong>What is LASSO?</strong> LASSO = <em>Least Absolute Shrinkage and Selection Operator</em></p>
+<ul>
+  <li>A regression technique that: Minimizes error; Shrinks weights; Performs feature selection</li>
+</ul>
+<p><strong>Meaning of the Name:</strong></p>
+<ul>
+  <li><em>Least</em> → Minimize loss</li>
+  <li><em>Absolute</em> → Uses absolute values (L1 norm)</li>
+  <li><em>Shrinkage</em> → Reduces weight values</li>
+  <li><em>Selection</em> → Sets some weights exactly to zero</li>
+</ul>
+
+<h3>Sparsity (Most Important Idea)</h3>
+<ul>
+  <li>LASSO produces a <strong>sparse solution</strong> → many weights become: wᵢ = 0</li>
+</ul>
+<p>Helps identify: Important features ✅; Redundant features ❌</p>
+
+<h3>Mathematical Formulation</h3>
+<p><strong>L1 Norm Definition:</strong> ‖w‖₁ = Σᵢ₌₁ᵈ |wᵢ|</p>
+<p><strong>LASSO Objective Function:</strong></p>
+<p class="formula">min<sub>w</sub> Σᵢ(wᵀxᵢ−yᵢ)² + λ‖w‖₁</p>
+<p>Two parts: Error term → Fit data; L1 penalty → Force sparsity</p>
+<p><strong>Constrained Form:</strong></p>
+<p class="formula">min<sub>w</sub> Σᵢ(wᵀxᵢ−yᵢ)² &nbsp; subject to ‖w‖₁ ≤ θ</p>
+
+<h3>Geometric Intuition (Very Important)</h3>
+<p><strong>Constraint Regions:</strong></p>
+<ul>
+  <li><strong>Ridge (L2 Regularization):</strong> Shape: Circle (2D); Smooth boundary; Rarely produces zero weights</li>
+  <li><strong>LASSO (L1 Regularization):</strong> Shape: Diamond; Sharp corners on axes</li>
+</ul>
+
+<h3>Why LASSO Gives Sparsity?</h3>
+<p><strong>Key Idea:</strong> Loss function forms elliptical contours expanding from ML solution.</p>
+<p><strong>What Happens:</strong></p>
+<ul>
+  <li>Ellipses grow outward.</li>
+  <li>First intersection with constraint region occurs.</li>
+</ul>
+<p>In LASSO: Diamond corners lie on axes. Intersection often happens at corners.</p>
+<p><strong>Result:</strong> Some weights become wᵢ = 0. This is <strong>automatic feature selection</strong>.</p>
+
+<div class="example-box">
+<strong>Example (Easy Understanding)</strong><br>
+Suppose: Features: f₁ = Height, f₂ = Weight, f₃ = Redundant feature<br><br>
+<strong>LASSO Behavior:</strong>
+<ul>
+  <li>Keeps important features: w₁, w₂ ≠ 0</li>
+  <li>Removes useless feature: w₃ = 0</li>
+</ul>
+Model becomes <strong>simpler + interpretable</strong>.
+</div>
+
+<h3>High-Dimensional Advantage</h3>
+<p>When features are very large (1000+): Many features are redundant. LASSO removes unnecessary ones, keeps only useful signals.</p>
+
+<h3>Compared to Ridge</h3>
+<table>
+  <tr><th>Feature</th><th>Ridge (L2)</th><th>LASSO (L1)</th></tr>
+  <tr><td>Weight shrinkage</td><td>Yes</td><td>Yes</td></tr>
+  <tr><td>Exact zero weights</td><td>❌ No</td><td>✅ Yes</td></tr>
+  <tr><td>Feature selection</td><td>❌ No</td><td>✅ Yes</td></tr>
+  <tr><td>Geometry</td><td>Circle</td><td>Diamond</td></tr>
+</table>
+
+<h3>Final Quick Revision Points</h3>
+<p>LASSO uses L1 regularization; Produces sparse solutions; Performs automatic feature selection; Works well for high-dimensional data</p>
+<p><strong>Key idea:</strong> Diamond shape → corner intersection → zero weights</p>
+
+<div class="summary">
+<strong>One-Line Summary:</strong> LASSO Regression = Linear Regression + L1 penalty. It produces sparse solutions by setting some weights exactly to zero, enabling automatic feature selection.
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 7: Characteristics of Lasso Regression</h2>
+
+<h3>Ridge vs LASSO – Core Comparison</h3>
+<table>
+  <tr><th>Feature</th><th>Ridge Regression (L2)</th><th>LASSO Regression (L1)</th></tr>
+  <tr><td>Regularization</td><td>λ‖w‖²</td><td>λ‖w‖₁</td></tr>
+  <tr><td>Closed-form solution</td><td>✅ Yes</td><td>❌ No</td></tr>
+  <tr><td>Sparsity</td><td>❌ No (weights ≠ 0)</td><td>✅ Yes (some weights = 0)</td></tr>
+  <tr><td>Feature Selection</td><td>❌ No</td><td>✅ Yes</td></tr>
+  <tr><td>Differentiability</td><td>Smooth</td><td>Not differentiable at 0</td></tr>
+  <tr><td>Computation</td><td>Direct solution</td><td>Iterative methods</td></tr>
+</table>
+
+<h3>Closed-Form Solution</h3>
+<p><strong>Ridge Regression Solution:</strong> w = (XᵀX + λI)⁻¹Xᵀy — Fast and direct (for small datasets).</p>
+<p><strong>LASSO Limitation:</strong></p>
+<ul>
+  <li>No closed-form solution.</li>
+  <li>L1 norm has sharp corner at 0 → not differentiable.</li>
+</ul>
+
+<h3>LASSO Optimization Problem</h3>
+<p class="formula">min<sub>w</sub> Σ(wᵀxᵢ − yᵢ)² + λ‖w‖₁</p>
+<p><strong>Convexity:</strong></p>
+<ul>
+  <li>Squared loss → convex</li>
+  <li>L1 norm → convex
+    <ul>
+      <li>Sum of convex functions → convex problem</li>
+      <li>Guarantees <strong>global minimum</strong>.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Optimization Methods for LASSO</h3>
+<h4>1. Subgradient Descent</h4>
+<ul>
+  <li>Works even when function is not differentiable.</li>
+  <li>General-purpose method.</li>
+</ul>
+<h4>2. IRLS (Iterative Reweighted Least Squares)</h4>
+<ul>
+  <li>Special method for regression problems.</li>
+  <li>Uses repeated weighted least squares.</li>
+</ul>
+
+<h3>Concept of Subgradients</h3>
+<p><strong>Definition:</strong> A vector g is a subgradient if: f(z) ≥ f(x) + gᵀ(z−x)</p>
+<p><strong>Intuition:</strong> Subgradient = generalization of gradient. Works even when function has sharp corners.</p>
+<p><strong>Key Idea:</strong> Gradient = single direction. Subgradient = multiple possible directions.</p>
+
+<h3>Important Example (Absolute Value)</h3>
+<p>Function: f(x) = |x|</p>
+<p>At x=0: Not differentiable. Subgradient can be: g ∈ [−1,1] — Infinite possible directions!</p>
+<p><strong>In Optimization:</strong> Pick any subgradient. Move in negative direction. Eventually reach minimum.</p>
+
+<h3>Why LASSO Works (Revisited)</h3>
+<ul>
+  <li>L1 penalty has sharp corners.</li>
+  <li>Optimization often hits axes → weights become zero.
+    <ul>
+      <li>Leads to feature selection.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Other Regularization Methods</h3>
+<p><strong>Elastic Net:</strong> Combination of L1 + L2: λ₁‖w‖₁ + λ₂‖w‖₂</p>
+<p><strong>Benefits:</strong> Sparsity (L1); Stability (L2).</p>
+<p><strong>Domain-Specific Regularizers:</strong> Custom penalties based on feature groups or domain knowledge. Example: Group features selected together.</p>
+
+<h3>Evolution of Regression Models</h3>
+<p><strong>Step-by-Step Progression:</strong></p>
+<ol>
+  <li><strong>Least Squares</strong> → Minimize squared error, closed-form solution.</li>
+  <li><strong>Maximum Likelihood (ML)</strong> → Probabilistic view, assumes Gaussian noise.</li>
+  <li><strong>Ridge Regression (L2)</strong> → Adds Gaussian prior, shrinks weights.</li>
+  <li><strong>LASSO (L1)</strong> → Introduces sparsity, performs feature selection.</li>
+</ol>
+
+<h3>Final Quick Revision Points 🚀</h3>
+<p><strong>Ridge:</strong> Closed-form solution; No feature selection.</p>
+<p><strong>LASSO:</strong> No closed-form; Uses subgradients; Produces sparse model.</p>
+<p><strong>Subgradient:</strong> Works for non-differentiable functions; Key to solving LASSO.</p>
+<p><strong>Convexity:</strong> Ensures global optimum.</p>
+
+<div class="summary">
+<strong>One-Line Summary:</strong> Ridge shrinks weights smoothly (no zeros), while LASSO forces sparsity by setting some weights exactly to zero, enabling automatic feature selection.
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>Week 5: Short Notes - Machine Learning</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 0 20px;
+    line-height: 1.6;
+    color: #222;
+    background: #fdfdfd;
+  }
+  h1 {
+    text-align: center;
+    color: #1a1a2e;
+    border-bottom: 3px solid #1a73e8;
+    padding-bottom: 10px;
+  }
+  h2 {
+    color: #1a73e8;
+    margin-top: 40px;
+    border-left: 5px solid #1a73e8;
+    padding-left: 10px;
+  }
+  h3 {
+    color: #0d47a1;
+    margin-top: 25px;
+  }
+  h4 {
+    color: #333;
+    margin-bottom: 5px;
+  }
+  ul {
+    margin-top: 5px;
+  }
+  li {
+    margin-bottom: 4px;
+  }
+  .summary {
+    background: #eef4ff;
+    border-left: 4px solid #1a73e8;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-top: 15px;
+  }
+  .formula {
+    background: #f5f5f5;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    display: inline-block;
+    margin: 4px 0;
+  }
+  .lecture {
+    margin-top: 60px;
+    padding-top: 10px;
+    border-top: 2px dashed #ccc;
+  }
+  code {
+    background: #f0f0f0;
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 12px 0;
+    width: 100%;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px 14px;
+    text-align: left;
+  }
+  th {
+    background: #eef4ff;
+    color: #1a73e8;
+  }
+  .example-box {
+    background: #fff8e6;
+    border-left: 4px solid #e6a817;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin: 10px 0;
+  }
+</style>
+</head>
+<body>
+
+<h1>Week 5: Short Notes</h1>
+
+<div class="lecture">
+<h2>Lecture 1: Supervised Learning</h2>
+
+<h3>Core Concept</h3>
+<ul>
+  <li><strong>Definition:</strong> Supervised Learning is a type of Machine Learning where the model learns from labeled data (input + correct output).</li>
+  <li><strong>Analogy:</strong> Like a teacher giving questions (inputs) along with answers (labels), and the student learns patterns.</li>
+</ul>
+
+<h3>Dataset Structure</h3>
+<p><strong>Data Points (Inputs):</strong> x₁, x₂, …, x<sub>n</sub> where each x ∈ R<sup>d</sup> (Each point lies in a d-dimensional space)</p>
+<p><strong>Features:</strong> Characteristics of data points (attributes, predictors, variables)</p>
+<ul>
+  <li>Examples: Email → words, length, sender; Image → pixels</li>
+</ul>
+<p><strong>Labels (Outputs):</strong> y₁, y₂, …, y<sub>n</sub> — Correct answers for each input</p>
+
+<h3>Goal of Supervised Learning</h3>
+<ul>
+  <li>Learn a function: f(x) → y</li>
+  <li>Purpose: Predict labels for new unseen data</li>
+</ul>
+
+<h3>Classification</h3>
+<h4>🔹 Binary Classification</h4>
+<ul>
+  <li><strong>Definition:</strong> Output has only two possible classes</li>
+  <li><strong>Label Representation:</strong> {0,1} or {+1,−1}</li>
+  <li><strong>Example:</strong> Spam Detection
+    <ul>
+      <li>Input: Email features</li>
+      <li>Output: 0 → Not Spam, 1 → Spam</li>
+    </ul>
+  </li>
+</ul>
+
+<h4>🔹 Multi-class Classification</h4>
+<ul>
+  <li><strong>Definition:</strong> Output has more than two classes</li>
+  <li><strong>Label Representation:</strong> {0,1,2,...,k}</li>
+  <li><strong>Example:</strong> Digit Recognition (0–9)
+    <ul>
+      <li>Input: Image of a digit</li>
+      <li>Output: One of {0,1,2,...,9}</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="summary">
+<strong>Quick Summary:</strong>
+<ul>
+  <li>Supervised Learning: Learning from labeled data</li>
+  <li>Dataset: Features + Labels</li>
+  <li>Goal: Predict output for new data</li>
+  <li>Function Learned: f(x) = y</li>
+  <li>Types of Classification: Binary → 2 classes (Spam / Not Spam); Multi-class → More than 2 classes (Digits 0–9)</li>
+</ul>
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 2: Linear Regression</h2>
+
+<h3>Fundamental Concepts</h3>
+<ul>
+  <li><strong>Definition:</strong> Regression is a type of supervised learning where the output is a continuous value (real number).</li>
+  <li><strong>Analogy:</strong> Predicting "how much" or "how many" instead of categories.</li>
+</ul>
+
+<h3>Training Data</h3>
+<p><strong>Dataset:</strong> {(x₁,y₁), (x₂,y₂), …, (x<sub>n</sub>,y<sub>n</sub>)}</p>
+<p><strong>Input (Features):</strong> x<sub>i</sub> ∈ R<sup>d</sup> → d-dimensional feature vector</p>
+<p><strong>Output (Label):</strong> y<sub>i</sub> ∈ R → Real value (e.g., price, temperature)</p>
+
+<h3>Goal</h3>
+<ul>
+  <li>Learn a function: h: R<sup>d</sup> → R</li>
+  <li>Purpose: Predict output for new unseen inputs.</li>
+</ul>
+
+<div class="example-box">
+<strong>Example: House Price Prediction</strong>
+<ul>
+  <li>Input: Size, location, rooms</li>
+  <li>Output: Price (continuous value)</li>
+</ul>
+</div>
+
+<h3>Measuring Error (Error Functions)</h3>
+<p><strong>Squared Error (Single Data Point):</strong></p>
+<p class="formula">(h(xᵢ)−yᵢ)²</p>
+<p><strong>Total Squared Error (Training Error):</strong></p>
+<p class="formula">Σᵢ (h(xᵢ)−yᵢ)²</p>
+
+<h3>Why Squared Error?</h3>
+<ul>
+  <li>Always non-negative</li>
+  <li>Penalizes large mistakes more</li>
+  <li>Minimum value = 0 (perfect prediction)</li>
+</ul>
+
+<h3>Overfitting vs Generalization</h3>
+<ul>
+  <li><strong>Memorization:</strong> Model simply remembers training data.</li>
+  <li><strong>Overfitting:</strong>
+    <ul>
+      <li>✅ Performs very well on training data</li>
+      <li>❌ Performs poorly on new (test) data</li>
+      <li>Happens when model learns noise instead of pattern</li>
+    </ul>
+  </li>
+  <li><strong>Example:</strong> Rainfall Prediction
+    <ul>
+      <li>Model memorizes last 3 years perfectly</li>
+      <li>Fails to predict tomorrow</li>
+    </ul>
+  </li>
+  <li><strong>Solution (Generalization):</strong>
+    <ul>
+      <li>Restrict model complexity</li>
+      <li>Use simpler, structured functions</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Linear Regression</h3>
+<h4>Concept</h4>
+<ul>
+  <li>Assumes relationship between input and output is <strong>linear</strong>.</li>
+</ul>
+
+<h4>Linear Hypothesis Function</h4>
+<ul>
+  <li>Without Bias: h<sub>w</sub>(x) = wᵀx</li>
+  <li>With Bias (Intercept): h<sub>w</sub>(x) = wᵀx + b</li>
+  <li>Analogy: y = mx + c</li>
+</ul>
+
+<h4>Objective (Goal of Linear Regression)</h4>
+<p><strong>Minimize total squared error:</strong></p>
+<p class="formula">min<sub>w∈R<sup>d</sup></sub> Σᵢ (wᵀxᵢ − yᵢ)²</p>
+
+<h4>Important Insight</h4>
+<ul>
+  <li>If error = 0 → Perfect linear relationship</li>
+  <li>Not necessarily overfitting</li>
+  <li>Overfitting occurs only when model is too complex for actual data</li>
+</ul>
+
+<h3>Final Quick Revision Table</h3>
+<table>
+  <tr><th>Concept</th><th>Formula</th></tr>
+  <tr><td>Squared Error</td><td>(h(xᵢ) − yᵢ)²</td></tr>
+  <tr><td>Total Error</td><td>Σ(h(xᵢ) − yᵢ)²</td></tr>
+  <tr><td>Linear Model</td><td>h<sub>w</sub>(x) = wᵀx</td></tr>
+  <tr><td>With Bias</td><td>h<sub>w</sub>(x) = wᵀx + b</td></tr>
+  <tr><td>Objective</td><td>min Σ(wᵀxᵢ − yᵢ)²</td></tr>
+</table>
+
+<div class="summary">
+<strong>One-Line Summary:</strong> Regression = Predicting continuous values by minimizing error, often using a linear model while avoiding overfitting.
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 3: Optimizing the Error Function</h2>
+
+<h3>Matrix Representation</h3>
+<h4>Components</h4>
+<ul>
+  <li><strong>Data Matrix (X):</strong> X ∈ R<sup>D×n</sup>, Each column = one data point</li>
+  <li><strong>Transpose (Xᵀ):</strong> Xᵀ ∈ R<sup>n×D</sup>, Each row = one data point</li>
+  <li><strong>Label Vector (y):</strong> y ∈ R<sup>n×1</sup>, Contains all output values</li>
+  <li><strong>Weight Vector (w):</strong> w ∈ R<sup>D×1</sup>, Parameters we want to learn</li>
+</ul>
+
+<h4>Idea</h4>
+<ul>
+  <li>Prediction for all data points at once: Xᵀw</li>
+</ul>
+
+<h3>Objective Function (Error Minimization)</h3>
+<ul>
+  <li><strong>Error Vector:</strong> Xᵀw − y</li>
+  <li><strong>Loss Function (Squared Error):</strong> min<sub>w∈R<sup>D</sup></sub> ‖Xᵀw−y‖²</li>
+  <li><strong>Equivalent Vector Form:</strong> (Xᵀw−y)ᵀ(Xᵀw−y)</li>
+</ul>
+
+<h3>Key Properties</h3>
+<ul>
+  <li>✅ Unconstrained → w can take any value</li>
+  <li>✅ Quadratic → contains squared terms</li>
+  <li>✅ Unique minimum (if conditions satisfied)</li>
+</ul>
+
+<div class="example-box">
+<strong>Example: Predicting Student Marks</strong>
+<ul>
+  <li>Features: Study hours, attendance</li>
+  <li>Output: Marks</li>
+  <li>Matrix X stores all student's data</li>
+</ul>
+</div>
+
+<h3>Solving Using Gradient</h3>
+<ul>
+  <li><strong>Gradient (Derivative w.r.t w):</strong> ∇w = 2XXᵀw − 2Xy</li>
+  <li><strong>Optimal Condition (Normal Equation):</strong> XXᵀw = Xy</li>
+</ul>
+
+<h3>Closed-Form Solution</h3>
+<h4>Case 1: Invertible Matrix</h4>
+<ul>
+  <li>If XXᵀ is invertible: w* = (XXᵀ)⁻¹Xy</li>
+</ul>
+<h4>Case 2: Non-Invertible (Pseudo-Inverse)</h4>
+<p class="formula">w* = (XXᵀ)†Xy &nbsp; where † = Pseudo-inverse</p>
+<p><strong>Intuition:</strong> When multiple solutions exist, pseudo-inverse picks the simplest (minimum length) solution.</p>
+
+<h3>Key Observations</h3>
+<p><strong>Covariance Connection:</strong></p>
+<ul>
+  <li>XXᵀ acts like a covariance matrix (captures feature relationships).</li>
+</ul>
+<h4>Linear Regression vs PCA</h4>
+<table>
+  <tr><th>Feature</th><th>Linear Regression</th><th>PCA</th></tr>
+  <tr><td>Type</td><td>Supervised</td><td>Unsupervised</td></tr>
+  <tr><td>Uses labels (y)?</td><td>✅ Yes</td><td>❌ No</td></tr>
+  <tr><td>Goal</td><td>Predict output</td><td>Reduce dimensions</td></tr>
+</table>
+
+<h3>Important Insights</h3>
+<ul>
+  <li><strong>Geometric View:</strong> Solution = best-fit projection (line/plane closest to all points).</li>
+  <li><strong>Computational Cost:</strong> Matrix inverse is expensive for large data → use Gradient Descent (iterative).</li>
+  <li><strong>Non-linear Relationships:</strong> Use feature transformations (x², x³, etc.) but still apply linear regression.</li>
+  <li><strong>Probabilistic View:</strong> Assumes noise in data, often modeled as Gaussian distribution.</li>
+</ul>
+
+<h3>Quick Revision</h3>
+<table>
+  <tr><th>Concept</th><th>Formula</th></tr>
+  <tr><td>Prediction</td><td>Xᵀw</td></tr>
+  <tr><td>Error Vector</td><td>Xᵀw − y</td></tr>
+  <tr><td>Loss Function</td><td>‖Xᵀw − y‖²</td></tr>
+  <tr><td>Gradient</td><td>2XXᵀw − 2Xy</td></tr>
+  <tr><td>Normal Equation</td><td>XXᵀw = Xy</td></tr>
+  <tr><td>Solution</td><td>w* = (XXᵀ)⁻¹Xy</td></tr>
+  <tr><td>Pseudo-Inverse</td><td>w* = (XXᵀ)†Xy</td></tr>
+</table>
+
+<div class="summary">
+<strong>One-Line Summary:</strong> Linear Regression (matrix form) finds the best weight vector by minimizing squared error using matrix operations and optimization.
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 4: Geometric Interpretation of Linear Regression</h2>
+
+<h3>Core Concept</h3>
+<p><strong>Key Idea:</strong> Xᵀw* represents the <strong>projection of the label vector (y)</strong> onto the subspace formed by features.</p>
+<p><strong>Intuition:</strong> We are trying to find the closest possible point to y using only combinations of features.</p>
+
+<h3>Example Setup (Easy Visualization)</h3>
+<ul>
+  <li><strong>Number of features:</strong> d=2 (e.g., height, weight)</li>
+  <li><strong>Number of data points:</strong> n=3</li>
+</ul>
+
+<h4>Feature Vectors</h4>
+<ul>
+  <li>F₁: Heights → vector in R³</li>
+  <li>F₂: Weights → vector in R³</li>
+</ul>
+<h4>Label Vector</h4>
+<ul>
+  <li>y ∈ R³ (e.g., income or health score)</li>
+</ul>
+
+<h3>Subspace (Plane Concept)</h3>
+<p><strong>Spanned Subspace:</strong> All linear combinations: aF₁+bF₂. This forms a plane (2D surface) inside 3D space.</p>
+<p>Meaning: Every point on this plane = a possible prediction. We can only choose solutions on this plane.</p>
+
+<h3>Main Mechanism: Projection</h3>
+<ul>
+  <li><strong>Problem:</strong> Label vector y is usually not on the plane.</li>
+  <li><strong>Solution:</strong> Find the closest point on the plane → projection.</li>
+</ul>
+<p><strong>Projection Idea:</strong> Drop a perpendicular from y to the plane. The point where it hits = best prediction.</p>
+<p><strong>Orthogonality Condition:</strong> Error vector: y−Xᵀw* is perpendicular (90°) to the plane.</p>
+
+<h3>Important Formulae</h3>
+<ul>
+  <li><strong>Optimal Solution:</strong> w* = (XXᵀ)†Xy</li>
+  <li><strong>Predicted Point (Projection):</strong> Xᵀw*</li>
+  <li><strong>General Point on Plane:</strong> Xᵀα</li>
+  <li><strong>Orthogonality Condition:</strong> (y−Xᵀα)ᵀ(Xᵀα) = 0</li>
+</ul>
+
+<h3>Key Cases</h3>
+<ul>
+  <li><strong>Case 1: Normal Case (Most Common):</strong> y is outside plane. Prediction = projection onto plane, Error ≠ 0</li>
+  <li><strong>Case 2: Perfect Fit (Zero Error):</strong> y lies exactly on plane. Xᵀw* = y, No error at all</li>
+</ul>
+
+<div class="example-box">
+<strong>Real-Life Example: Predicting Salary</strong>
+<ul>
+  <li>Features: Experience, Education</li>
+  <li>Labels: Salary</li>
+</ul>
+Model finds: Best combination of features, Closest approximation to actual salaries
+</div>
+
+<h3>Final Intuition (Very Important)</h3>
+<p><strong>Linear Regression</strong> = Treat features as axes forming a space (plane/subspace); Express labels as combination of features; If exact match not possible → choose closest point (projection)</p>
+
+<h3>Quick Revision</h3>
+<table>
+  <tr><th>Concept</th><th>Meaning</th></tr>
+  <tr><td>Subspace</td><td>All combinations of features</td></tr>
+  <tr><td>Plane</td><td>Feature space (for d=2)</td></tr>
+  <tr><td>Projection</td><td>Closest point to y</td></tr>
+  <tr><td>Error Vector</td><td>y − Xᵀw*</td></tr>
+  <tr><td>Orthogonality</td><td>Error ⊥ plane</td></tr>
+  <tr><td>Best Prediction</td><td>Xᵀw*</td></tr>
+</table>
+
+<div class="summary">
+<strong>One-Line Summary:</strong> Linear regression geometrically finds the projection of labels onto the feature space, giving the closest possible prediction.
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 5: Gradient Descent</h2>
+
+<h3>Computational Challenges</h3>
+<ul>
+  <li><strong>Closed-form solution:</strong> w* = (XXᵀ)⁻¹Xy</li>
+</ul>
+
+<h4>Problem 1: Large Number of Features (d)</h4>
+<ul>
+  <li>Need to invert a d×d matrix</li>
+  <li>Complexity: O(d³)</li>
+  <li>Example: If d=10⁹ → impossible to compute</li>
+</ul>
+
+<h4>Problem 2: Large Number of Data Points (n)</h4>
+<ul>
+  <li>Need to compute XXᵀ</li>
+  <li>Requires multiplying D×n and n×D matrices</li>
+  <li>If n is huge → computation becomes very slow</li>
+</ul>
+
+<h3>Conclusion</h3>
+<p>Closed-form solution is: Not scalable, Not practical for big data</p>
+
+<h3>Gradient Descent (GD)</h3>
+<p>Iterative optimization method</p>
+<p><strong>Objective Function:</strong></p>
+<p class="formula">F(w) = Σᵢ (wᵀxᵢ − yᵢ)²</p>
+<p><strong>Goal:</strong> Minimize total squared error</p>
+<p><strong>Gradient Formula:</strong></p>
+<p class="formula">∇F(w) = 2XXᵀw − 2Xy</p>
+<p><strong>Update Rule:</strong></p>
+<p class="formula">w<sub>t+1</sub> = w<sub>t</sub> − η<sub>t</sub>∇F(w<sub>t</sub>)</p>
+<ul>
+  <li>w<sub>t</sub>: Current weights</li>
+  <li>η<sub>t</sub>: Learning rate (step size)</li>
+</ul>
+
+<h3>Intuition</h3>
+<ul>
+  <li>Move in opposite direction of gradient</li>
+  <li>Gradually reach minimum error</li>
+</ul>
+
+<h3>Convexity Advantage</h3>
+<ul>
+  <li>Squared error = convex function</li>
+  <li>Only one minimum</li>
+  <li>GD always finds global optimum</li>
+</ul>
+
+<h3>Stochastic Gradient Descent (SGD)</h3>
+<p>Used when n (data points) is very large</p>
+<p><strong>Idea:</strong> Instead of using all data → use a small random sample (batch)</p>
+<p><strong>Example:</strong> Total data: 1 billion points, Batch size: k=100</p>
+<ul>
+  <li>Much faster computation per step</li>
+</ul>
+
+<h4>Noisy Gradient</h4>
+<ul>
+  <li>Gradient based on sample ≠ exact</li>
+  <li>Slightly inaccurate but works well over time</li>
+</ul>
+<p><strong>SGD Gradient (Sample-Based):</strong></p>
+<p class="formula">∇F<sub>sample</sub>(w) = 2X̄X̄ᵀw − 2X̄ỹ</p>
+
+<p><strong>Output (Averaging Trick):</strong></p>
+<p class="formula">w<sub>output</sub> = (1/T) Σ<sub>t=1</sub><sup>T</sup> w<sub>t</sub></p>
+<p>Average of all iterations → more stable result</p>
+
+<h3>Batch Size Concept</h3>
+<ul>
+  <li>Small k: Faster per step, More noisy</li>
+  <li>Large k: More accurate, Slower</li>
+</ul>
+
+<h3>Guarantee</h3>
+<ul>
+  <li>SGD converges to optimal solution with high probability</li>
+  <li>Faster for large datasets</li>
+</ul>
+
+<h3>GD vs SGD (Quick Comparison)</h3>
+<table>
+  <tr><th>Feature</th><th>Gradient Descent</th><th>Stochastic Gradient Descent</th></tr>
+  <tr><td>Data used</td><td>All data</td><td>Small batch</td></tr>
+  <tr><td>Speed</td><td>Slow</td><td>Fast</td></tr>
+  <tr><td>Accuracy per step</td><td>High</td><td>Noisy</td></tr>
+  <tr><td>Best for</td><td>Small datasets</td><td>Large datasets</td></tr>
+</table>
+
+<h3>Formula Summary</h3>
+<table>
+  <tr><th>Concept</th><th>Formula</th></tr>
+  <tr><td>Closed-form</td><td>w* = (XXᵀ)⁻¹Xy</td></tr>
+  <tr><td>Objective</td><td>F(w) = Σ(wᵀxᵢ − yᵢ)²</td></tr>
+  <tr><td>Gradient</td><td>∇F(w) = 2XXᵀw − 2Xy</td></tr>
+  <tr><td>GD Update</td><td>w<sub>t+1</sub> = w<sub>t</sub> − η<sub>t</sub>∇F(w<sub>t</sub>)</td></tr>
+  <tr><td>SGD Gradient</td><td>2X̄X̄ᵀw − 2X̄ỹ</td></tr>
+  <tr><td>SGD Output</td><td>Average of all w<sub>t</sub></td></tr>
+</table>
+
+<div class="summary">
+<strong>One-Line Summary:</strong> For large datasets, we replace expensive matrix inversion with Gradient Descent (GD) and Stochastic Gradient Descent (SGD) to efficiently learn optimal weights.
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 6: Kernel Regression</h2>
+
+<h3>Motivation (Why Kernel Regression?)</h3>
+<p><strong>Problem with Linear Regression:</strong> Assumes h(x) = wᵀx. Only captures linear relationships</p>
+<ul>
+  <li><strong>Limitations:</strong>
+    <ul>
+      <li>Cannot handle quadratic terms (x²)</li>
+      <li>Cannot handle interaction terms (x₁·x₂)</li>
+    </ul>
+  </li>
+</ul>
+<p><strong>Example:</strong> Non-linear data → linear model gives poor fit, high error</p>
+<p><strong>Solution:</strong> Map data to higher-dimensional space where it becomes linear</p>
+
+<h3>The Kernel Trick</h3>
+<p><strong>Idea:</strong> Instead of explicitly mapping x → φ(x), use kernel function: K(xᵢ,xⱼ) = φ(xᵢ)ᵀφ(xⱼ)</p>
+<ul>
+  <li><strong>Kernel Matrix:</strong> K = XᵀX &nbsp; Size: n×n &amp; Stores similarity between all pairs of points</li>
+  <li><strong>Key Advantage:</strong>
+    <ul>
+      <li>Avoids computing high-dimensional features directly</li>
+      <li>Saves time + memory</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Key Insight: Span of Data</h3>
+<ul>
+  <li><strong>Result:</strong> w* = Xα* — Optimal weights lie in span of training data</li>
+</ul>
+<p><strong>Intuition:</strong> Any component of w outside data space has no effect on predictions. Only need combinations of training points.</p>
+
+<h3>Solving for α*</h3>
+<p class="formula">α* = K⁻¹y</p>
+<p>Uses kernel matrix instead of feature matrix</p>
+<p><strong>Note:</strong> Depends on labels (y) → supervised (unlike PCA which is unsupervised)</p>
+
+<h3>Prediction Formula</h3>
+<p>For a new point x<sub>test</sub>:</p>
+<p class="formula">Prediction = Σᵢ αᵢ* K(xᵢ, x<sub>test</sub>)</p>
+<p><strong>Intuition:</strong> K(xᵢ,x<sub>test</sub>): similarity; αᵢ*: importance of point. Final prediction = weighted similarity sum</p>
+
+<h3>Types of Kernels</h3>
+<ul>
+  <li><strong>Linear Kernel:</strong> K(xᵢ,xⱼ) = xᵢᵀxⱼ</li>
+  <li><strong>Polynomial Kernel:</strong> K(xᵢ,xⱼ) = (xᵢᵀxⱼ+c)<sup>d</sup></li>
+  <li><strong>Gaussian (RBF) Kernel:</strong> K(xᵢ,xⱼ) = exp(−γ‖xᵢ−xⱼ‖²)</li>
+</ul>
+
+<h3>Key Advantages</h3>
+<ul>
+  <li>Captures non-linear relationships</li>
+  <li>No explicit feature transformation needed</li>
+  <li>Works efficiently in high-dimensional spaces</li>
+</ul>
+
+<h3>Final Intuition</h3>
+<p><strong>Kernel Regression</strong> =</p>
+<ul>
+  <li>Convert non-linear problem → linear (in hidden space)</li>
+  <li>Use similarity instead of explicit features</li>
+  <li>Predict using weighted similarity of training points</li>
+</ul>
+
+<h3>Quick Revision</h3>
+<table>
+  <tr><th>Concept</th><th>Formula</th></tr>
+  <tr><td>Linear Limitation</td><td>wᵀx</td></tr>
+  <tr><td>Kernel Function</td><td>K(xᵢ, xⱼ)</td></tr>
+  <tr><td>Kernel Matrix</td><td>K = XᵀX</td></tr>
+  <tr><td>Weight Form</td><td>w* = Xα*</td></tr>
+  <tr><td>Alpha Solution</td><td>α* = K⁻¹y</td></tr>
+  <tr><td>Prediction</td><td>Σ αᵢ*K(xᵢ, x<sub>test</sub>)</td></tr>
+</table>
+
+<div class="summary">
+<strong>One-Line Summary:</strong> Kernel regression solves non-linear problems by using similarity (kernels) instead of explicit features.
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 7: Probabilistic View of Linear Regression</h2>
+
+<h3>Core Concept</h3>
+<ul>
+  <li>Linear Regression can be seen as a <strong>probabilistic estimation problem</strong>.</li>
+  <li>Instead of just fitting a line, we assume data is generated by a process with randomness (noise).</li>
+</ul>
+<p><strong>Key Idea:</strong> y = wᵀx + ϵ</p>
+<ul>
+  <li>wᵀx → true relationship (signal)</li>
+  <li>ϵ → random noise</li>
+</ul>
+
+<h3>Data Generation Model</h3>
+<ul>
+  <li><strong>Dataset:</strong> Features: x<sub>i</sub> ∈ R<sup>d</sup>, Labels: y<sub>i</sub> ∈ R</li>
+  <li><strong>Generative Equation:</strong> y = wᵀx + ϵ</li>
+  <li><strong>Interpretation:</strong> Structural part → wᵀx, Noise part → ϵ</li>
+</ul>
+<p><strong>Example:</strong> House Price Prediction → Prices affected by random factors (market, demand, etc.)</p>
+
+<h3>Assumptions on Noise</h3>
+<ul>
+  <li><strong>Gaussian Noise:</strong> ϵ ∼ N(0, σ²)</li>
+  <li>Mean = 0</li>
+  <li>Variance = σ²</li>
+  <li><strong>Distribution of y:</strong> y<sub>i</sub> ∼ N(wᵀx<sub>i</sub>, σ²)</li>
+</ul>
+<p>Output is Gaussian, centered around prediction</p>
+<p><strong>i.i.d Assumption:</strong> Data points are independent and identically distributed</p>
+
+<h3>Maximum Likelihood Estimation (MLE)</h3>
+<ul>
+  <li><strong>Goal:</strong> Find w that makes observed data most probable</li>
+</ul>
+<p><strong>Likelihood Function:</strong></p>
+<p class="formula">L(w) = Πᵢ (1/√(2πσ²)) exp( −(yᵢ−wᵀxᵢ)²/2σ² )</p>
+<p><strong>Log-Likelihood:</strong></p>
+<p class="formula">log L(w) = Σᵢ ( −(yᵢ−wᵀxᵢ)²/2σ² − log(√(2πσ²)) )</p>
+<p><strong>Key Result:</strong></p>
+<ul>
+  <li>Maximizing log-likelihood ≡ minimizing: Σ(yᵢ−wᵀxᵢ)²</li>
+</ul>
+<p>Same as least squares error</p>
+
+<h3>Final Estimator</h3>
+<p class="formula">ŵ<sub>ML</sub> = (XXᵀ)†Xy</p>
+<p>Same as standard linear regression solution</p>
+
+<h3>Key Insight: Loss Function = Noise Assumption</h3>
+<ul>
+  <li>Choosing a loss function = assuming a noise distribution</li>
+  <li><strong>Gaussian Noise → Squared Error:</strong> (y−wᵀx)²</li>
+  <li><strong>Laplace Noise → Absolute Error:</strong> |y−wᵀx|</li>
+</ul>
+<p><strong>Intuition:</strong></p>
+<ul>
+  <li>Gaussian → penalizes large errors more</li>
+  <li>Laplace → more robust to outliers</li>
+</ul>
+
+<h3>Why This View is Important</h3>
+<ul>
+  <li>Provides theoretical justification for squared error</li>
+  <li>Connects ML with statistics &amp; probability</li>
+  <li>Helps design better models (choose noise wisely)</li>
+</ul>
+
+<h3>Final Intuition</h3>
+<p><strong>Linear Regression</strong> =</p>
+<ul>
+  <li>Assume data = signal + noise</li>
+  <li>Use probability to estimate best w</li>
+  <li>Minimizing squared error = most likely explanation of data</li>
+</ul>
+
+<h3>Quick Revision</h3>
+<table>
+  <tr><th>Concept</th><th>Formula</th></tr>
+  <tr><td>Generative Model</td><td>y = wᵀx + ϵ</td></tr>
+  <tr><td>Noise</td><td>ϵ ∼ N(0, σ²)</td></tr>
+  <tr><td>Output Distribution</td><td>y<sub>i</sub> ∼ N(wᵀx<sub>i</sub>, σ²)</td></tr>
+  <tr><td>Likelihood</td><td>Product of Gaussian terms</td></tr>
+  <tr><td>Objective</td><td>Minimize squared error</td></tr>
+  <tr><td>Final Solution</td><td>(XXᵀ)†Xy</td></tr>
+  <tr><td>Laplace Case</td><td>Absolute error loss</td></tr>
+</table>
+
+<div class="summary">
+<strong>One-Line Summary:</strong> Linear regression = Maximum Likelihood Estimation under Gaussian noise, which naturally leads to minimizing squared error.
+</div>
+</div>
+
+</body>
+</html>
