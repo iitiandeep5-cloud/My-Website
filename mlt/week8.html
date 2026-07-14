@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>Week 8: Short Notes - Machine Learning</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 0 20px;
+    line-height: 1.6;
+    color: #222;
+    background: #fdfdfd;
+  }
+  h1 {
+    text-align: center;
+    color: #1a1a2e;
+    border-bottom: 3px solid #1a73e8;
+    padding-bottom: 10px;
+  }
+  h2 {
+    color: #1a73e8;
+    margin-top: 40px;
+    border-left: 5px solid #1a73e8;
+    padding-left: 10px;
+  }
+  h3 {
+    color: #0d47a1;
+    margin-top: 25px;
+  }
+  h4 {
+    color: #333;
+    margin-bottom: 5px;
+  }
+  ul {
+    margin-top: 5px;
+  }
+  li {
+    margin-bottom: 4px;
+  }
+  .summary {
+    background: #eef4ff;
+    border-left: 4px solid #1a73e8;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-top: 15px;
+  }
+  .formula {
+    background: #f5f5f5;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    display: inline-block;
+    margin: 4px 0;
+  }
+  .lecture {
+    margin-top: 60px;
+    padding-top: 10px;
+    border-top: 2px dashed #ccc;
+  }
+  code {
+    background: #f0f0f0;
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 12px 0;
+    width: 100%;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px 14px;
+    text-align: left;
+  }
+  th {
+    background: #eef4ff;
+    color: #1a73e8;
+  }
+  .example-box {
+    background: #fff8e6;
+    border-left: 4px solid #e6a817;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin: 10px 0;
+  }
+</style>
+</head>
+<body>
+
+<h1>Week 8: Short Notes</h1>
+
+<div class="lecture">
+<h2>Lecture 1: Generative Model-Based Algorithm</h2>
+
+<h3>Generative Models (Core Idea)</h3>
+<h4>What is a Generative Model?</h4>
+<p>A generative model learns how data is generated: P(X,Y). It models features X and labels Y together (jointly).</p>
+
+<h4>Generative vs Discriminative</h4>
+<table>
+  <tr><th>Type</th><th>What it learns</th></tr>
+  <tr><td>Discriminative</td><td>P(Y | X)</td></tr>
+  <tr><td>Generative</td><td>P(X,Y)</td></tr>
+</table>
+
+<h4>Joint Distribution Decomposition</h4>
+<p class="formula">P(X,Y) = P(Y)·P(X|Y)</p>
+<p>This is the key idea used in generative models.</p>
+<p><strong>Goal:</strong></p>
+<ul>
+  <li>Learn P(Y) → probability of label (Spam/Not Spam)</li>
+  <li>Learn P(X|Y) → probability of features given label</li>
+</ul>
+
+<h3>Feature Representation (Binary Encoding)</h3>
+<ul>
+  <li><strong>Problem:</strong> Emails are text → need numeric format.</li>
+  <li><strong>Solution:</strong> Binary Vector
+    <ul>
+      <li>Dictionary size = D</li>
+      <li>Email → vector of size D</li>
+    </ul>
+  </li>
+</ul>
+<p><strong>Encoding Rule:</strong></p>
+<p class="formula">xᵢ = 1 if word present; 0 if word absent</p>
+
+<div class="example-box">
+<strong>Example</strong><br>
+Email: "hello how are you"<br>
+Dictionary: [about, are, hello, how, you, zebra]
+<table>
+  <tr><th>Word</th><th>Value</th></tr>
+  <tr><td>about</td><td>0</td></tr>
+  <tr><td>are</td><td>1</td></tr>
+  <tr><td>hello</td><td>1</td></tr>
+  <tr><td>how</td><td>1</td></tr>
+  <tr><td>you</td><td>1</td></tr>
+  <tr><td>zebra</td><td>0</td></tr>
+</table>
+</div>
+
+<h3>Generative Story (Model Intuition)</h3>
+<h4>Step 1: Choose Label</h4>
+<ul>
+  <li>Toss a biased coin: P(Y=1) = p(Spam), P(Y=0) = 1−p(Not Spam)</li>
+</ul>
+<h4>Step 2: Generate Email</h4>
+<ul>
+  <li>Sample from P(X|Y)</li>
+  <li>If Spam → use spam distribution</li>
+  <li>If Not Spam → use normal distribution</li>
+</ul>
+
+<h3>Dice Analogy</h3>
+<p>Imagine two rooms:</p>
+<ul>
+  <li>Spam Room</li>
+  <li>Non-Spam Room</li>
+</ul>
+<p>Inside each room: a 2D-faced die. Each face = one possible email pattern.</p>
+<div class="example-box">
+<strong>Example (D = 3)</strong><br>
+Possible emails: 000, 001, 010, 011, 100, 101, 110, 111<br>
+Total = 2³ = 8 patterns<br><br>
+Spam room → higher probability for words like "money", "lottery"<br>
+Non-spam room → lower probability for same
+</div>
+
+<h3>Model Parameters</h3>
+<p>To learn the model, we need probabilities:</p>
+<ol>
+  <li><strong>Label Probability</strong> P(Y) → only 1 parameter</li>
+  <li><strong>Feature Probabilities</strong> for each label → 2<sup>D</sup>−1 parameters</li>
+</ol>
+<p><strong>Total Parameters:</strong> 1+(2<sup>D</sup>−1) + (2<sup>D</sup>−1) = 2<sup>D+1</sup>−1</p>
+
+<h3>Big Problem: Parameter Explosion</h3>
+<p><strong>Example:</strong> If D=10,000: Total parameters ≈ 2<sup>10000</sup></p>
+<ul>
+  <li>Extremely huge number</li>
+  <li>Impossible to store</li>
+  <li>Impossible to compute</li>
+  <li>Cannot train even with powerful GPUs</li>
+</ul>
+
+<h3>Conclusion</h3>
+<ul>
+  <li>The model is theoretically correct</li>
+  <li>Practically impossible due to parameter explosion</li>
+</ul>
+<p><strong>Final Insight:</strong> We need simpler assumptions and fewer parameters → leads to models like Naive Bayes.</p>
+
+<h3>Quick Revision Table</h3>
+<table>
+  <tr><th>Concept</th><th>Key Idea</th></tr>
+  <tr><td>Generative Model</td><td>Models P(X,Y)</td></tr>
+  <tr><td>Key Formula</td><td>P(X,Y) = P(Y)P(X|Y)</td></tr>
+  <tr><td>Encoding</td><td>Binary vector</td></tr>
+  <tr><td>Dice Model</td><td>2<sup>D</sup> possible emails</td></tr>
+  <tr><td>Parameters</td><td>2<sup>D+1</sup>−1</td></tr>
+  <tr><td>Problem</td><td>Parameter explosion</td></tr>
+</table>
+
+<div class="summary">
+<strong>One-Line Summary:</strong> Generative models learn how data is created, but naive modeling leads to exponential parameter explosion.
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 2: Alternate Generative Model-Based Algorithm</h2>
+<h3>Optimization of Generative Models: Naive Bayes</h3>
+
+<h4>Core Problem: Parameter Explosion</h4>
+<p><strong>Issue in Basic Generative Model:</strong></p>
+<ul>
+  <li>For D binary features (words):
+    <ul>
+      <li>Total possible emails: 2<sup>D</sup></li>
+      <li>Need to learn 2<sup>D</sup> probabilities</li>
+    </ul>
+  </li>
+</ul>
+<p><strong>Problem:</strong> If D=10,000: 2<sup>10000</sup> (impossible)</p>
+<p>Cannot: Store, Compute, Train</p>
+<p><strong>Goal:</strong> Reduce parameters while still modeling data.</p>
+
+<h3>Key Idea: Class Conditional Independence</h3>
+<p><strong>Assumption:</strong> Given class Y, all features are independent.</p>
+<p class="formula">P(X|Y) = P(f₁, f₂,...,f_D | Y)</p>
+<p>Becomes:</p>
+<p class="formula">P(X|Y) = Π P(fᵢ | Y), for i = 1 to D</p>
+<p><strong>Analogy:</strong></p>
+<ul>
+  <li>Instead of one big dice → use D independent coins</li>
+  <li>Each word has its own probability</li>
+  <li>Words don't affect each other</li>
+</ul>
+
+<h3>Model Parameters</h3>
+<p><strong>Total Parameters:</strong> 2D + 1</p>
+<p><strong>Breakdown:</strong></p>
+<ol>
+  <li><strong>Label Probability</strong> P(Y=1) = p, P(Y=0) = 1−p → 1 parameter</li>
+  <li><strong>Feature Probabilities</strong>
+    <ul>
+      <li>For Spam (Y=1): P₁ᵢ = P(fᵢ=1 | Y=1)</li>
+      <li>For Non-Spam (Y=0): P₀ᵢ = P(fᵢ=1 | Y=0)</li>
+    </ul>
+  </li>
+</ol>
+<p>Total = D + D = 2D</p>
+
+<h3>Key Formulae</h3>
+<p><strong>Step 1: Class Probability</strong> P(Y=1) = p, P(Y=0) = 1−p</p>
+<p><strong>Step 2: Class Conditional Probability</strong></p>
+<p class="formula">P(X|Y=y) = Π Pyᵢ^fᵢ (1−Pyᵢ)^(1−fᵢ), for i = 1 to D</p>
+<p>Where: fᵢ = 1 → word present, fᵢ = 0 → word absent</p>
+<p><strong>Step 3: Joint Probability</strong> P(X,Y) = P(X|Y)·P(Y)</p>
+
+<h3>Examples</h3>
+<div class="example-box">
+<strong>Example A: Word Behavior</strong>
+<ul>
+  <li>Word: "Lottery"
+    <ul>
+      <li>Spam: P11=0.8</li>
+      <li>Non-Spam: P01=0.1</li>
+      <li>→ Highly indicative of spam</li>
+    </ul>
+  </li>
+</ul>
+</div>
+<div class="example-box">
+<strong>Example B: Email Probability</strong><br>
+D=3, Email = (0,1,1), Class = Spam (Y=1)
+<p><strong>Step-by-Step:</strong></p>
+<ul>
+  <li>Word 1 absent: (1−P11)</li>
+  <li>Word 2 present: P12</li>
+  <li>Word 3 present: P13</li>
+</ul>
+<strong>Final Probability:</strong> P(X|Y=1) = (1−P11)·P12·P13
+</div>
+
+<h3>Parameter Comparison</h3>
+<table>
+  <tr><th>Model</th><th>Parameters</th></tr>
+  <tr><td>Original</td><td>2<sup>D</sup> ✗</td></tr>
+  <tr><td>Naive Bayes</td><td>2D+1 ✓</td></tr>
+</table>
+<p>Huge reduction in complexity.</p>
+
+<h3>Parameter Estimation</h3>
+<p><strong>Method Used:</strong> Maximum Likelihood Estimation (MLE)</p>
+<p><strong>Idea:</strong> Estimate probabilities from data based on frequency.</p>
+<p class="formula">P1ᵢ = (# spam emails with word i) / (total spam emails)</p>
+
+<h3>Final Intuition</h3>
+<ul>
+  <li>Instead of modeling full email patterns → model each word independently</li>
+  <li>Combine probabilities to approximate joint distribution</li>
+</ul>
+
+<h3>Quick Revision Table</h3>
+<table>
+  <tr><th>Concept</th><th>Key Idea</th></tr>
+  <tr><td>Problem</td><td>2<sup>D</sup> parameters ✗</td></tr>
+  <tr><td>Solution</td><td>Independence assumption</td></tr>
+  <tr><td>Model</td><td>Naive Bayes</td></tr>
+  <tr><td>Parameters</td><td>2D+1 ✓</td></tr>
+  <tr><td>Formula</td><td>Product of probabilities</td></tr>
+  <tr><td>Estimation</td><td>MLE</td></tr>
+</table>
+
+<div class="summary">
+<strong>One-Line Summary:</strong> Naive Bayes solves parameter explosion by assuming feature independence, reducing complexity from exponential to linear.
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 3: Naive Bayes Algorithm</h2>
+<h3>Naive Bayes Algorithm (Binary Classification)</h3>
+
+<h4>Key Concepts &amp; Assumptions</h4>
+<p><strong>Generative Model</strong></p>
+<ul>
+  <li>Assumes data is generated as follows:
+    <ul>
+      <li>Choose label Y (Spam / Not Spam)</li>
+      <li>Generate features X based on Y</li>
+    </ul>
+  </li>
+</ul>
+<p><strong>Class Conditional Independence</strong></p>
+<p class="formula">P(f₁,f₂,...,f_D | Y) = Π P(fⱼ | Y), for j = 1 to D</p>
+<ul>
+  <li>Each feature is independent given the class.</li>
+  <li>Reduces complexity from exponential (2<sup>D</sup>) to linear (2D+1).</li>
+</ul>
+<p><strong>Reality Check:</strong></p>
+<ul>
+  <li>Words like "Lottery" and "Money" may be related.</li>
+  <li>Despite this, the model works well in practice.</li>
+</ul>
+
+<h3>Parameters to Estimate</h3>
+<p><strong>Total Parameters:</strong> 2D+1</p>
+<p><strong>Types:</strong></p>
+<ol>
+  <li><strong>Prior Probability</strong> P(Y=1) = p — Probability of spam.</li>
+  <li><strong>Feature Probabilities</strong> Py,j = P(fⱼ = 1 | Y = y)
+    <ul>
+      <li>For Spam (y=1): P1,1,...,P1,D</li>
+      <li>For Non-Spam (y=0): P0,1,...,P0,D</li>
+    </ul>
+  </li>
+</ol>
+
+<h3>Parameter Estimation (MLE)</h3>
+<p><strong>Method:</strong> Maximum Likelihood Estimation (MLE)</p>
+<p><strong>(A) Estimate Prior:</strong></p>
+<p class="formula">P̂ = (1/n) Σ yᵢ, for i = 1 to n</p>
+<p>Fraction of spam emails.</p>
+<p><strong>(B) Estimate Feature Probability:</strong></p>
+<p class="formula">P̂y,j = (# samples where fᵢ,ⱼ=1 and yᵢ=y) / (# samples where yᵢ=y)</p>
+<ul>
+  <li>Numerator → times word appears in class y</li>
+  <li>Denominator → total samples of class y</li>
+</ul>
+
+<h3>Prediction Formula</h3>
+<p><strong>Goal:</strong> Predict label for new data x<sub>test</sub>.</p>
+<p><strong>Decision Rule:</strong></p>
+<p class="formula">ŷ = 1 if P(Y=1|Xtest) &gt; P(Y=0|Xtest); else 0</p>
+<p><strong>Using Bayes Rule:</strong> Compare numerators only.</p>
+<p>For y=1 (Spam): [ Π P̂1,ⱼ^fⱼ (1−P̂1,ⱼ)^(1−fⱼ) ] × P̂</p>
+<p>For y=0 (Not Spam): [ Π P̂0,ⱼ^fⱼ (1−P̂0,ⱼ)^(1−fⱼ) ] × (1−P̂)</p>
+<p>Choose the larger value.</p>
+
+<h3>Illustrative Example (Spam Detection)</h3>
+<div class="example-box">
+<strong>Data Representation</strong><br>
+Email → binary vector. Example: "Lottery win now" → [1,0,1,0,...]
+<p><strong>Estimation Example:</strong></p>
+<ul>
+  <li>Total emails = 1000, Spam = 600</li>
+</ul>
+<p>P̂ = 0.6</p>
+<p>Word "Lottery" in spam:</p>
+<p class="formula">P̂1,j = (# spam emails with "Lottery") / 600</p>
+<p><strong>Prediction Example:</strong></p>
+<ul>
+  <li>For a new email:
+    <ul>
+      <li>Compute probability for Spam</li>
+      <li>Compute probability for Not Spam</li>
+      <li>Compare both</li>
+    </ul>
+  </li>
+  <li>If P(Spam) &gt; P(Not Spam) → Predict Spam</li>
+</ul>
+</div>
+
+<h3>Quick Summary Table</h3>
+<table>
+  <tr><th>Concept</th><th>Idea</th></tr>
+  <tr><td>Model Type</td><td>Generative</td></tr>
+  <tr><td>Key Assumption</td><td>Independence</td></tr>
+  <tr><td>Parameters</td><td>2D + 1</td></tr>
+  <tr><td>Estimation</td><td>MLE (counting)</td></tr>
+  <tr><td>Prediction</td><td>Bayes Rule</td></tr>
+  <tr><td>Use Case</td><td>Spam filtering</td></tr>
+</table>
+
+<div class="summary">
+<strong>One-Line Intuition:</strong> Naive Bayes predicts by multiplying independent feature probabilities and choosing the most likely class.
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 4: Pitfalls of Naive Bayes Algorithm</h2>
+
+<h3>Zero Frequency Problem</h3>
+<ul>
+  <li><strong>Definition:</strong> Occurs when a word in test data was never seen in training.</li>
+  <li><strong>Reason:</strong> Using MLE: P̂1ⱼ = 0, P̂0ⱼ = 0, because the word never appeared in training data.</li>
+</ul>
+<p><strong>Impact:</strong> Naive Bayes uses multiplication of probabilities:</p>
+<p class="formula">P(Y|X) ∝ Π (P̂yᵢ)^fᵢ (1−P̂yᵢ)^(1−fᵢ), for i = 1 to D</p>
+<p>If any one term = 0 → whole product = 0.</p>
+<p><strong>Result:</strong></p>
+<ul>
+  <li>Both Spam &amp; Non-Spam probabilities = 0</li>
+  <li>Cannot compare → model fails</li>
+</ul>
+
+<h3>Mathematical View</h3>
+<p><strong>Spam Probability:</strong></p>
+<p class="formula">P(Y=1|X) ∝ [ Π (P̂1ᵢ)^fᵢ (1−P̂1ᵢ)^(1−fᵢ) ] × P̂</p>
+<p><strong>Problem Case:</strong> If fᵢ = 1 (word present) and P̂1ᵢ = 0: (P̂1ᵢ)^fᵢ = 0¹ = 0</p>
+<p>Final result: P(Y=1|X) = 0</p>
+
+<div class="example-box">
+<strong>Example: "Zebra" Case</strong>
+<ul>
+  <li><strong>Situation:</strong> Word "zebra" not in training data → P̂1,zebra = 0.</li>
+  <li><strong>Test Email:</strong> Contains "Lottery", "Money", "Zebra".</li>
+  <li><strong>Outcome:</strong> Even if strong spam words exist, P(Spam)=0</li>
+</ul>
+Model ignores useful information → wrong decision.
+</div>
+
+<h3>Solution: Laplace Smoothing</h3>
+<ul>
+  <li><strong>Idea:</strong> Never allow probability = 0.</li>
+  <li><strong>Trick:</strong> Add +1 to every count.</li>
+</ul>
+<p><strong>Formula:</strong></p>
+<p class="formula">P̂y,j = (count of word j in class y + 1) / (total words in class y + 2)</p>
+<p><strong>Intuition:</strong> Pretend every word appeared at least once.</p>
+<p><strong>Effect:</strong></p>
+<ul>
+  <li>No zero probabilities</li>
+  <li>Small but non-zero values</li>
+</ul>
+
+<h3>Before vs After Smoothing</h3>
+<table>
+  <tr><th>Case</th><th>Without Smoothing</th><th>With Smoothing</th></tr>
+  <tr><td>New word</td><td>0 ✗</td><td>Small value ✓</td></tr>
+  <tr><td>Prediction</td><td>Breaks ✗</td><td>Works ✓</td></tr>
+</table>
+
+<h3>Numerical Stability (Log Trick)</h3>
+<p><strong>Problem:</strong> Multiplying many small probabilities → underflow.</p>
+<p>0.001 × 0.002 × 0.0001 ≈ 0</p>
+<p><strong>Solution:</strong> Take logarithm. log(ab) = log a + log b</p>
+<p><strong>New Formula:</strong></p>
+<p class="formula">log P(Y|X) = Σ log[(P̂yᵢ)^fᵢ (1−P̂yᵢ)^(1−fᵢ)] + log P(Y), for i = 1 to D</p>
+<p><strong>Benefit:</strong></p>
+<ul>
+  <li>Avoids very small numbers</li>
+  <li>Faster computation</li>
+</ul>
+<p><strong>Important:</strong> Log does not fix zero problem (log(0) undefined). → Always apply Laplace smoothing first, then use log.</p>
+
+<h3>Quick Summary Table</h3>
+<table>
+  <tr><th>Concept</th><th>Key Idea</th></tr>
+  <tr><td>Problem</td><td>Zero probability</td></tr>
+  <tr><td>Cause</td><td>Word not in training</td></tr>
+  <tr><td>Effect</td><td>Entire product becomes 0</td></tr>
+  <tr><td>Solution</td><td>Laplace Smoothing</td></tr>
+  <tr><td>Trick</td><td>Add +1 to counts</td></tr>
+  <tr><td>Extra Fix</td><td>Use logs for stability</td></tr>
+</table>
+
+<div class="summary">
+<strong>One-Line Intuition:</strong> One unseen word can destroy Naive Bayes prediction — Laplace smoothing prevents this by ensuring no probability is ever zero.
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 5: Decision Function of Naive Bayes</h2>
+
+<h3>Key Concepts</h3>
+<ul>
+  <li><strong>Decision Function:</strong> The rule used to classify a new data point x<sub>test</sub> as class 0 or 1.</li>
+  <li><strong>Generative vs Discriminative:</strong>
+    <ul>
+      <li>KNN &amp; Decision Trees → discriminative</li>
+      <li>Naive Bayes → generative</li>
+    </ul>
+  </li>
+  <li><strong>Linearity:</strong> The decision function of Naive Bayes is linear; the boundary is a hyperplane in feature space.</li>
+  <li><strong>Binary Features:</strong> Assumes features f₁,f₂,...,f_d are 0/1 (common in text classification).</li>
+  <li><strong>Log-Likelihood Ratio:</strong> Converting product of probabilities into sums makes math easier and reveals the linear structure.</li>
+  <li><strong>Bias (b):</strong> Shifts the decision boundary from the origin; depends on priors and feature-independent terms.</li>
+</ul>
+
+<h3>Mathematical Formulae</h3>
+<p><strong>Decision Rule:</strong></p>
+<p>Predict class 1 if: P(y<sub>test</sub>=1 | X<sub>test</sub>) ≥ P(y<sub>test</sub>=0 | X<sub>test</sub>)</p>
+<p>Equivalently, using log-ratio:</p>
+<p class="formula">log [ P(ytest=0|Xtest) / P(ytest=1|Xtest) ] ≥ 0</p>
+<p><strong>Using Bayes' Rule:</strong></p>
+<p class="formula">log [ P(Xtest|y=0)P(y=0) / P(Xtest|y=1)P(y=1) ] ≥ 0</p>
+<p><strong>Linear Form:</strong> wᵀXtest + b ≥ 0</p>
+<p>Where:</p>
+<p class="formula">wᵢ = log [ P̂0,ᵢ(1−P̂1,ᵢ) / P̂1,ᵢ(1−P̂0,ᵢ) ]</p>
+<p class="formula">b = Σ log[(1−P̂0,ᵢ)/(1−P̂1,ᵢ)] + log[(1−P̂)/P̂], for i = 1 to d</p>
+<ul>
+  <li>wᵢ → weight for feature i</li>
+  <li>b → bias (from priors and feature-independent terms)</li>
+  <li>P̂1,ᵢ → probability of feature i=1 given class 1</li>
+  <li>P̂ → prior probability of class 1</li>
+</ul>
+
+<h3>Examples</h3>
+<div class="example-box">
+<strong>Spam Classification</strong>
+<ul>
+  <li>Features: Binary (word present/absent)</li>
+  <li>Decision function: wᵀXtest + b ≥ 0 ⇒ Spam. Otherwise → Not Spam</li>
+</ul>
+<strong>Tie-Breaking:</strong> If decision = 0 → default to Spam (common in spam filters).
+</div>
+
+<h3>Comparison of Boundaries</h3>
+<table>
+  <tr><th>Model</th><th>Boundary Type</th></tr>
+  <tr><td>KNN (small K)</td><td>Irregular, many holes</td></tr>
+  <tr><td>KNN (large K)</td><td>Smoothed but nonlinear</td></tr>
+  <tr><td>Decision Tree</td><td>Axis-aligned steps</td></tr>
+  <tr><td>Naive Bayes</td><td>Single linear hyperplane</td></tr>
+</table>
+
+<h3>Related Concepts</h3>
+<ul>
+  <li><strong>Laplace Smoothing:</strong> Handles zero probabilities.</li>
+  <li><strong>Non-Binary Features:</strong> Can generalize to continuous features using Gaussian Naive Bayes.</li>
+</ul>
+
+<div class="summary">
+<strong>Key Intuition:</strong> Naive Bayes produces a straight-line decision boundary in feature space (linear) due to the log transformation of probabilities, even though it is a generative model.
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 6: Gaussian Naive Bayes</h2>
+
+<h3>Core Concepts</h3>
+<ul>
+  <li><strong>Transition to Real Features:</strong> Unlike binary Naive Bayes, GNB works with real-valued features X ∈ ℝ<sup>d</sup>.</li>
+  <li><strong>Generative Modeling:</strong>
+    <ul>
+      <li>Model label probabilities P(Y)</li>
+      <li>Model feature distributions given labels P(X|Y)</li>
+    </ul>
+  </li>
+  <li><strong>Gaussian Assumption:</strong> For each class y, features follow a Normal (Gaussian) distribution.</li>
+  <li><strong>Covariance Assumption:</strong> Often assume shared covariance matrix Σ for both classes; means μ₀ and μ₁ may differ.</li>
+  <li><strong>Decision Boundary:</strong>
+    <ul>
+      <li>Linear → if covariances are the same.</li>
+      <li>Quadratic → if covariances differ.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Key Parameters &amp; Formulae</h3>
+<p><strong>Parameters to Estimate (via MLE):</strong></p>
+<table>
+  <tr><th>Parameter</th><th>Description</th></tr>
+  <tr><td>p̂</td><td>Probability of label 1</td></tr>
+  <tr><td>μ̂₁</td><td>Mean vector of class 1</td></tr>
+  <tr><td>μ̂₀</td><td>Mean vector of class 0</td></tr>
+  <tr><td>Σ̂</td><td>Shared covariance matrix</td></tr>
+</table>
+
+<p><strong>Maximum Likelihood Estimates (MLE):</strong></p>
+<p>Class Probability:</p>
+<p class="formula">p̂ = (# of points with y=1) / (total points)</p>
+<p>Class Means:</p>
+<p class="formula">μ̂y = (1/ny) Σ xᵢ, for i where yᵢ = y</p>
+<p>Shared Covariance Matrix:</p>
+<p class="formula">Σ̂ = (1/n) Σ (xᵢ−μ̂yᵢ)(xᵢ−μ̂yᵢ)ᵀ, for i = 1 to n</p>
+
+<p><strong>Prediction / Decision Function (Linear Decision Rule, shared covariance):</strong></p>
+<p>Predict class 1 if: wᵀXtest + b ≥ 0</p>
+<p>Weight Vector:</p>
+<p class="formula">wᵀ = (μ̂₁−μ̂₀)ᵀ Σ̂⁻¹</p>
+<p>Bias Term:</p>
+<p class="formula">b = −½(μ̂₁ᵀΣ̂⁻¹μ̂₁ − μ̂₀ᵀΣ̂⁻¹μ̂₀) + log[p̂/(1−p̂)]</p>
+
+<h3>Examples &amp; Geometric Interpretation</h3>
+<ul>
+  <li><strong>Density Contours:</strong> Gaussian distributions form ellipses (or circles if covariance is identity) around class means.</li>
+  <li><strong>Identity Covariance:</strong>
+    <ul>
+      <li>Contours are circular.</li>
+      <li>Decision boundary → perpendicular bisector of μ₀ and μ₁, shifted by prior p̂.</li>
+    </ul>
+  </li>
+  <li><strong>Effect of Prior p̂:</strong>
+    <ul>
+      <li>Higher p̂ → decision boundary shifts toward class 0, enlarging region predicting class 1.</li>
+    </ul>
+  </li>
+  <li><strong>Different Covariances:</strong>
+    <ul>
+      <li>If classes have different shapes (elliptical vs circular), linear boundary fails → need quadratic boundary.</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="summary">
+<strong>Key Intuition:</strong> Gaussian Naive Bayes extends the simple Naive Bayes to real-valued features, using Gaussian distributions.
+<ul>
+  <li>Shared covariance → linear boundary.</li>
+  <li>Different covariance → quadratic boundary.</li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

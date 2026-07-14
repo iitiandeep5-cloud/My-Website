@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>Week 7: Short Notes - Machine Learning</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 0 20px;
+    line-height: 1.6;
+    color: #222;
+    background: #fdfdfd;
+  }
+  h1 {
+    text-align: center;
+    color: #1a1a2e;
+    border-bottom: 3px solid #1a73e8;
+    padding-bottom: 10px;
+  }
+  h2 {
+    color: #1a73e8;
+    margin-top: 40px;
+    border-left: 5px solid #1a73e8;
+    padding-left: 10px;
+  }
+  h3 {
+    color: #0d47a1;
+    margin-top: 25px;
+  }
+  h4 {
+    color: #333;
+    margin-bottom: 5px;
+  }
+  ul {
+    margin-top: 5px;
+  }
+  li {
+    margin-bottom: 4px;
+  }
+  .summary {
+    background: #eef4ff;
+    border-left: 4px solid #1a73e8;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-top: 15px;
+  }
+  .formula {
+    background: #f5f5f5;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    display: inline-block;
+    margin: 4px 0;
+  }
+  .lecture {
+    margin-top: 60px;
+    padding-top: 10px;
+    border-top: 2px dashed #ccc;
+  }
+  code {
+    background: #f0f0f0;
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 12px 0;
+    width: 100%;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px 14px;
+    text-align: left;
+  }
+  th {
+    background: #eef4ff;
+    color: #1a73e8;
+  }
+  .example-box {
+    background: #fff8e6;
+    border-left: 4px solid #e6a817;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin: 10px 0;
+  }
+</style>
+</head>
+<body>
+
+<h1>Week 7: Short Notes</h1>
+
+<div class="lecture">
+<h2>Lecture 1: Introduction to Binary Classification</h2>
+
+<h3>Core Concepts</h3>
+<h4>Supervised Learning</h4>
+<ul>
+  <li><strong>Input:</strong> Features (x)</li>
+  <li><strong>Output:</strong> Label (y)</li>
+  <li><strong>Goal:</strong> Learn a function h(x) that maps input features to one of two classes.</li>
+  <li><strong>Labels:</strong> Common formats: {0,1} or {−1,1} (choice is for convenience).</li>
+</ul>
+
+<h4>Linear Classifier</h4>
+<ul>
+  <li>Uses a <strong>weight vector</strong> (w).</li>
+  <li><strong>Decision rule:</strong> Based on wᵀx.</li>
+  <li><strong>Decision boundary:</strong> wᵀx = 0</li>
+</ul>
+<p>Splits space into two regions: one side → Class 1, other side → Class 0 / -1.</p>
+
+<h4>NP-Hard Problem</h4>
+<ul>
+  <li>Minimizing classification error (0–1 loss) is <strong>NP-hard</strong>.</li>
+  <li>Reason: Loss is discrete → non-continuous → cannot use derivatives → hard optimization.</li>
+</ul>
+
+<h3>Key Formulae</h3>
+<p><strong>0–1 Loss Function</strong></p>
+<p class="formula">L(h) = (1/n) Σᵢ I(h(xᵢ) ≠ yᵢ)</p>
+<p>Where I(condition)=1 if TRUE, else 0.</p>
+<p><strong>Linear Hypothesis Function:</strong> h<sub>w</sub>(x) = sign(wᵀx)</p>
+<p><strong>Sign Function</strong></p>
+<p class="formula">sign(z) = 1 if z &gt; 0; &nbsp; 0 or −1 if z ≤ 0</p>
+
+<h3>Examples</h3>
+<div class="example-box">
+<strong>Email Spam Detection</strong>
+<ul>
+  <li><strong>Input:</strong> Email features (words, links, etc.)</li>
+  <li><strong>Output:</strong> 1 → Spam, 0 → Not Spam</li>
+</ul>
+</div>
+
+<h3>Geometric View (2D Case)</h3>
+<ul>
+  <li>Line: wᵀx = 0</li>
+  <li>Points:
+    <ul>
+      <li>One side → Positive class</li>
+      <li>Other side → Negative class</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Classification vs Regression</h3>
+<table>
+  <tr><th>Feature</th><th>Classification</th><th>Regression</th></tr>
+  <tr><td>Output</td><td>Discrete (class labels)</td><td>Continuous values</td></tr>
+  <tr><td>Loss</td><td>0–1 Loss (discrete)</td><td>Squared Error (continuous)</td></tr>
+  <tr><td>Goal</td><td>Correct class</td><td>Accurate value</td></tr>
+</table>
+
+<h3>Why Linear Regression is NOT Good for Classification</h3>
+<ul>
+  <li><strong>Sensitive to Outliers:</strong> Squared error → large errors dominate.</li>
+  <li><strong>Tilt Problem:</strong> Far-away points shift decision boundary → misclassification.</li>
+  <li><strong>Wrong Objective:</strong> Regression cares about exact value, classification cares only about sign.</li>
+</ul>
+
+<div class="summary">
+<strong>Final Summary (Memory Trick):</strong>
+<ul>
+  <li>Binary classification → 2 classes.</li>
+  <li>Use sign(wᵀx) for prediction.</li>
+  <li>Boundary → wᵀx=0.</li>
+  <li>Loss → 0–1 (count mistakes).</li>
+  <li>Hard to optimize → NP-hard.</li>
+  <li>Regression ❌ for classification (tilt + outliers).</li>
+</ul>
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 2: K-Nearest Neighbours</h2>
+
+<h3>Core Concept (Nearest Neighbor)</h3>
+<ul>
+  <li><strong>Idea:</strong> Classify a new point based on similar existing data.</li>
+  <li><strong>1-Nearest Neighbor (1-NN):</strong>
+    <ul>
+      <li>Find closest training point x*.</li>
+      <li>Assign its label to the test point.</li>
+      <li>Rule: y<sub>test</sub> = y*</li>
+    </ul>
+  </li>
+  <li><strong>Problem:</strong> Highly sensitive to outliers. One wrong neighbor → wrong prediction.</li>
+</ul>
+
+<h3>K-NN Algorithm (Improved Version)</h3>
+<p>Instead of 1 neighbor → use k neighbors.</p>
+<p><strong>Steps:</strong></p>
+<ol>
+  <li>Compute distance from test point to all training points.</li>
+  <li>Select k nearest neighbors.</li>
+  <li>Take majority vote.</li>
+</ol>
+<p><strong>Prediction Rule:</strong> y<sub>test</sub> = majority label among k neighbors</p>
+<p>Reduces effect of outliers.</p>
+
+<h3>Distance Function</h3>
+<ul>
+  <li><strong>Most common:</strong> Euclidean Distance d(x,y) = Σ(xᵢ−yᵢ)²</li>
+  <li>Other options: Manhattan distance; Cosine similarity.</li>
+</ul>
+
+<h3>Decision Boundary</h3>
+<ul>
+  <li><strong>Small k (e.g., k=1):</strong> Complex, irregular boundary. Sensitive to noise.</li>
+  <li><strong>Large k (e.g., k=n):</strong> Very smooth boundary. Ignores local structure.</li>
+  <li><strong>Optimal k:</strong> Balance between noise handling and data structure.</li>
+</ul>
+
+<h3>Choosing Best k</h3>
+<p>Use Cross-Validation:</p>
+<ol>
+  <li>Try multiple k values.</li>
+  <li>Evaluate accuracy on validation set.</li>
+  <li>Choose best k.</li>
+</ol>
+
+<div class="example-box">
+<strong>Example</strong><br>
+Dataset: Class +1 (Red), Class −1 (Blue).<br>
+Test point near 3 red, 2 blue neighbors.<br>
+Prediction: y = +1<br>
+Because majority = red.
+</div>
+
+<h3>Advantages</h3>
+<ul>
+  <li>Simple &amp; intuitive.</li>
+  <li>No training phase.</li>
+  <li>Works well for small datasets.</li>
+</ul>
+
+<h3>Major Issues of K-NN</h3>
+<ol>
+  <li><strong>Distance Problem</strong>
+    <ul>
+      <li>Not all features equally important.</li>
+      <li>Scaling issues.</li>
+    </ul>
+  </li>
+  <li><strong>Computational Cost</strong>
+    <ul>
+      <li>For each test point: compute distance to all training points, sort to find k nearest.</li>
+      <li>Very slow for large datasets.</li>
+    </ul>
+  </li>
+  <li><strong>No Learning (Lazy Learning)</strong>
+    <ul>
+      <li>K-NN does not build a model.</li>
+      <li>Stores entire dataset.</li>
+      <li>Problems: high memory usage, no abstraction of data.</li>
+    </ul>
+  </li>
+</ol>
+
+<h3>Key Insight</h3>
+<p>K-NN is called a <strong>Lazy Learning Algorithm</strong>. Because: No training; Learning happens during prediction.</p>
+
+<div class="summary">
+<strong>Quick Revision Summary:</strong>
+<ul>
+  <li>1-NN: Uses 1 neighbor → sensitive to noise.</li>
+  <li>K-NN: Uses k neighbors → majority vote.</li>
+  <li>Key parameter: k (hyperparameter).</li>
+  <li>Distance: Usually Euclidean.</li>
+  <li>Trade-off: Small k → overfitting; Large k → underfitting.</li>
+  <li>Weakness: Slow + no model.</li>
+</ul>
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 3: Introduction to Decision Trees</h2>
+
+<h3>Introduction</h3>
+<ul>
+  <li>Decision Tree is a <strong>model-based learning</strong> algorithm.</li>
+  <li>Unlike K-NN: Learns a model (tree) from data; No need to store full dataset after training.</li>
+  <li><strong>Benefits:</strong> Fast prediction; Easy to understand; Foundation for advanced models (Random Forest, Boosting).</li>
+</ul>
+
+<h3>Structure of a Decision Tree</h3>
+<p><strong>Components:</strong></p>
+<ul>
+  <li><strong>Root Node</strong> → Starting point.</li>
+  <li><strong>Internal Nodes</strong> → Questions (yes/no).</li>
+  <li><strong>Leaf Nodes</strong> → Final prediction.</li>
+</ul>
+<p><strong>Key Idea:</strong> Each path = sequence of decisions. Each leaf = predicted label.</p>
+
+<h3>Prediction Mechanism</h3>
+<p>For a test point x<sub>test</sub>:</p>
+<ol>
+  <li>Start at root.</li>
+  <li>Answer questions: YES → go left; NO → go right.</li>
+  <li>Reach a leaf.</li>
+</ol>
+<p>Output: Label at leaf. <strong>Advantage:</strong> Very fast prediction (O(depth)).</p>
+
+<h3>Nature of Questions</h3>
+<p>Questions are of type: Feature ≤ Threshold?</p>
+<p><strong>Example:</strong> Is height ≤ 180 cm? Is age ≤ 25?</p>
+<p><strong>Effect:</strong> Splits data into subsets D<sub>yes</sub> and D<sub>no</sub>.</p>
+
+<h3>Building the Tree (Greedy Approach)</h3>
+<p>At each node: Choose best question. Goal: Make subsets as pure as possible.</p>
+
+<h3>Concept of Purity</h3>
+<ul>
+  <li><strong>Pure node</strong> → all labels same.</li>
+  <li><strong>Impure node</strong> → mixed labels.</li>
+</ul>
+
+<h3>Entropy (Impurity Measure)</h3>
+<p class="formula">H(p) = −p log₂p − (1−p)log₂(1−p)</p>
+<p><strong>Properties:</strong></p>
+<ul>
+  <li>H=0 → perfectly pure.</li>
+  <li>H=1 → maximum impurity (50-50 split).</li>
+  <li>Symmetric: 25%-75% = same entropy as 75%-25%.</li>
+</ul>
+
+<h3>Information Gain</h3>
+<p>Measures how good a split is.</p>
+<p class="formula">IG = H(D) − [γH(D<sub>yes</sub>) + (1−γ)H(D<sub>no</sub>)]</p>
+<p>Where: γ = |D<sub>yes</sub>| / |D|</p>
+<p><strong>Idea:</strong> High gain = better split. Choose question with maximum IG.</p>
+
+<h3>Example</h3>
+<table>
+  <tr><th>Height</th><th>Label</th></tr>
+  <tr><td>170</td><td>+1</td></tr>
+  <tr><td>180</td><td>+1</td></tr>
+  <tr><td>160</td><td>-1</td></tr>
+  <tr><td>150</td><td>-1</td></tr>
+</table>
+<p><strong>Possible Question:</strong> Is height ≤ 165?</p>
+<ul>
+  <li>YES → {160,150} → all -1 (pure).</li>
+  <li>NO → {170,180} → all +1 (pure).</li>
+</ul>
+<p>Entropy becomes 0 after split. Information Gain = maximum.</p>
+
+<h3>Key Insights</h3>
+<ul>
+  <li>Decision tree builds step-by-step (greedy).</li>
+  <li>At each step: choose best feature + threshold.</li>
+  <li>Stops when: Data becomes pure; Or max depth reached.</li>
+</ul>
+
+<h3>Advantages</h3>
+<ul>
+  <li>Easy to understand.</li>
+  <li>Fast prediction.</li>
+  <li>Works with non-linear data.</li>
+  <li>No need for feature scaling.</li>
+</ul>
+
+<h3>Limitations</h3>
+<ul>
+  <li>Can overfit (very deep tree).</li>
+  <li>Sensitive to small data changes.</li>
+  <li>Greedy approach → not globally optimal.</li>
+</ul>
+
+<div class="summary">
+<strong>Quick Revision Summary:</strong>
+<ul>
+  <li>Tree = questions + answers → prediction.</li>
+  <li>Metric: Entropy → impurity.</li>
+  <li>Information Gain → split quality.</li>
+  <li>Goal: Maximize IG, minimize impurity.</li>
+  <li>Prediction: Follow path root → leaf.</li>
+</ul>
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 4: Decision Tree Algorithm</h2>
+
+<h3>Decision Tree Algorithm Steps</h3>
+<h4>Step 1: Choosing Questions</h4>
+<ul>
+  <li>For each feature, create questions like: f<sub>k</sub> ≤ θ<sub>k</sub>?</li>
+  <li>For continuous features: convert into intervals (discretization).</li>
+</ul>
+
+<h4>Step 2: Select Best Split</h4>
+<p>Choose question with maximum Information Gain:</p>
+<p class="formula">IG = H(D) − [γH(D<sub>yes</sub>) + (1−γ)H(D<sub>no</sub>)]</p>
+
+<h4>Step 3: Recursive Partitioning</h4>
+<ul>
+  <li>Split dataset into D<sub>yes</sub> and D<sub>no</sub>.</li>
+  <li>Repeat process on each subset.</li>
+</ul>
+
+<h4>Step 4: Pruning Redundant Questions</h4>
+<ul>
+  <li>Avoid useless splits.</li>
+  <li>Example: If already f<sub>k</sub> ≤ 5, then asking f<sub>k</sub> ≤ 10 is redundant.</li>
+</ul>
+
+<h3>Stopping Criteria &amp; Hyperparameters</h3>
+<p>Trees grow greedily but must stop.</p>
+<h4>(A) Node Purity</h4>
+<ul>
+  <li>Stop if node is almost pure.</li>
+  <li>Example: 90% same label → stop.</li>
+</ul>
+<h4>(B) Maximum Depth</h4>
+<ul>
+  <li>Limit number of levels in tree.</li>
+  <li>Depth = number of questions from root to leaf.</li>
+</ul>
+<h4>(C) Cross-Validation</h4>
+<ul>
+  <li>Try different depths.</li>
+  <li>Choose best accuracy.</li>
+</ul>
+
+<h3>Impurity Measures</h3>
+<p><strong>(A) Entropy:</strong> H(p) = −p log₂p − (1−p)log₂(1−p)</p>
+<p><strong>(B) Gini Index:</strong> G(p) = 1−p² − (1−p)²</p>
+<p><strong>Properties:</strong></p>
+<ul>
+  <li>= 0 → pure node.</li>
+  <li>Maximum at p=0.5.</li>
+  <li>Symmetric.</li>
+</ul>
+
+<h3>Decision Boundaries</h3>
+<ul>
+  <li>Each split = axis-parallel line.</li>
+  <li>Result: Feature space divided into rectangles.</li>
+</ul>
+
+<h3>Overfitting vs Generalization</h3>
+<ul>
+  <li><strong>Overfitting:</strong> Very deep tree, memorizes noise, creates tiny regions.</li>
+  <li><strong>Generalization:</strong> Moderate depth, captures real pattern.</li>
+</ul>
+<p><strong>Analogy:</strong> Depth in trees ≈ k in K-NN.</p>
+<table>
+  <tr><th>Model</th><th>Effect</th></tr>
+  <tr><td>Deep Tree</td><td>Overfitting</td></tr>
+  <tr><td>Shallow Tree</td><td>Underfitting</td></tr>
+</table>
+
+<h3>Example</h3>
+<table>
+  <tr><th>Age</th><th>Label</th></tr>
+  <tr><td>20</td><td>+1</td></tr>
+  <tr><td>22</td><td>+1</td></tr>
+  <tr><td>50</td><td>-1</td></tr>
+  <tr><td>55</td><td>-1</td></tr>
+</table>
+<p><strong>Best Split:</strong> Is Age ≤ 30?</p>
+<ul>
+  <li>Yes → all +1.</li>
+  <li>No → all -1.</li>
+</ul>
+<p>Perfect split → high IG.</p>
+
+<h3>Key Advantages</h3>
+<ul>
+  <li><strong>Interpretability:</strong> Easy to explain decisions.</li>
+  <li><strong>Human-Readable:</strong> Small trees (~10 levels) are understandable.</li>
+  <li><strong>Model-Based:</strong> No need to store dataset after training.</li>
+</ul>
+
+<h3>Limitations</h3>
+<ul>
+  <li>Overfitting risk.</li>
+  <li>Sensitive to small changes.</li>
+  <li>Greedy (not globally optimal).</li>
+</ul>
+
+<div class="summary">
+<strong>Quick Revision Summary:</strong>
+<ul>
+  <li>Build tree: choose best split (max IG).</li>
+  <li>Recursively divide data.</li>
+  <li>Stop using: purity, max depth.</li>
+  <li>Impurity: Entropy / Gini.</li>
+  <li>Boundary: Rectangular regions.</li>
+  <li>Trade-off: Depth vs generalization.</li>
+</ul>
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 5: Generative and Discriminative Models</h2>
+
+<h3>Core Problem of Learning</h3>
+<ul>
+  <li><strong>Main Challenge:</strong> Model must perform well on unseen (test) data, not just training data.</li>
+  <li><strong>Problem with Memorization:</strong> Memorizing training data = no generalization. Fails on new inputs.</li>
+  <li><strong>Key Requirement:</strong> There must be a relationship between train &amp; test data.</li>
+  <li><strong>Example:</strong> If trained on student marks → should work on new students.</li>
+</ul>
+
+<h3>Fundamental Distribution Assumption</h3>
+<ul>
+  <li><strong>Key Idea:</strong> Data comes from an unknown distribution D.</li>
+  <li><strong>Representation:</strong> (x,y) ∼ D</li>
+  <li>x → features, y → label.</li>
+  <li><strong>Assumption:</strong> Training data and test data are drawn from the same distribution.</li>
+  <li><strong>Objective:</strong> Learn patterns of D to predict correctly.</li>
+</ul>
+
+<h3>Two Types of Modeling</h3>
+<h4>A. Generative Models</h4>
+<ul>
+  <li><strong>Definition:</strong> Model joint probability P(x,y).</li>
+  <li><strong>Idea:</strong> Learn how data is generated.</li>
+</ul>
+<p><strong>Process:</strong></p>
+<p class="formula">P(y|x) = P(x,y) / P(x)</p>
+<ul>
+  <li><strong>Focus:</strong> Understand data generation mechanism.</li>
+  <li><strong>Examples:</strong> Naive Bayes, Gaussian Naive Bayes.</li>
+  <li><strong>Analogy:</strong> If you know a language, you can generate sentences and identify the language easily.</li>
+</ul>
+
+<h4>B. Discriminative Models</h4>
+<ul>
+  <li><strong>Definition:</strong> Model conditional probability P(y∣x).</li>
+  <li><strong>Idea:</strong> Directly learn decision boundary.</li>
+  <li><strong>Focus:</strong> Only care about classification.</li>
+  <li><strong>Examples:</strong> K-Nearest Neighbors (KNN), Decision Trees, Logistic Regression.</li>
+  <li><strong>Analogy:</strong> You can't speak a language, but can still recognize it.</li>
+</ul>
+
+<h3>Key Differences</h3>
+<table>
+  <tr><th>Aspect</th><th>Generative</th><th>Discriminative</th></tr>
+  <tr><td>Probability Modeled</td><td>P(x, y) (joint probability)</td><td>P(y | x) (conditional probability)</td></tr>
+  <tr><td>Focus</td><td>Learn how data is generated</td><td>Directly learn decision boundary / classification</td></tr>
+  <tr><td>Complexity</td><td>Usually higher, requires modeling feature distribution</td><td>Usually simpler, focuses only on labels</td></tr>
+  <tr><td>Risk</td><td>Wrong assumptions can hurt performance</td><td>Safer, fewer assumptions about features</td></tr>
+</table>
+
+<h3>Choosing Between Models</h3>
+<ul>
+  <li><strong>Use Generative When:</strong>
+    <ul>
+      <li>You know how data is generated.</li>
+      <li>Strong domain knowledge.</li>
+    </ul>
+  </li>
+  <li><strong>Use Discriminative When:</strong>
+    <ul>
+      <li>Feature generation is unknown.</li>
+      <li>Most real-world cases.</li>
+    </ul>
+  </li>
+  <li><strong>Important:</strong> Wrong generative assumptions → bad performance.</li>
+</ul>
+
+<h3>Examples in Practice</h3>
+<ul>
+  <li><strong>K-Nearest Neighbors (KNN):</strong> Discriminative, predicts using neighbors.</li>
+  <li><strong>Decision Trees:</strong> Discriminative, uses feature-based questions.</li>
+  <li><strong>Key Insight:</strong> These models don't model P(x).</li>
+</ul>
+
+<h3>Trivial Probabilities</h3>
+<ul>
+  <li>In many discriminative models, output is deterministic: 1 (certain) or 0 (not possible).</li>
+  <li><strong>Example:</strong> Decision Tree leaf → fixed label. KNN → majority class.</li>
+</ul>
+
+<div class="summary">
+<strong>Quick Revision Summary:</strong>
+<ul>
+  <li>Goal: Generalize from train → test.</li>
+  <li>Assumption: Data comes from same distribution D.</li>
+  <li>Models: Generative → learn P(x,y). Discriminative → learn P(y∣x).</li>
+  <li>Real-world: Discriminative models are more common.</li>
+</ul>
+<p><strong>One-Line Intuition:</strong> Generative = "How data is created." Discriminative = "How to classify data."</p>
+</div>
+</div>
+
+</body>
+</html>
