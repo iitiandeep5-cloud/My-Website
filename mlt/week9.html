@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>Week 9: Short Notes - Machine Learning</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 0 20px;
+    line-height: 1.6;
+    color: #222;
+    background: #fdfdfd;
+  }
+  h1 {
+    text-align: center;
+    color: #1a1a2e;
+    border-bottom: 3px solid #1a73e8;
+    padding-bottom: 10px;
+  }
+  h2 {
+    color: #1a73e8;
+    margin-top: 40px;
+    border-left: 5px solid #1a73e8;
+    padding-left: 10px;
+  }
+  h3 {
+    color: #0d47a1;
+    margin-top: 25px;
+  }
+  h4 {
+    color: #333;
+    margin-bottom: 5px;
+  }
+  ul {
+    margin-top: 5px;
+  }
+  li {
+    margin-bottom: 4px;
+  }
+  .summary {
+    background: #eef4ff;
+    border-left: 4px solid #1a73e8;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-top: 15px;
+  }
+  .formula {
+    background: #f5f5f5;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    display: inline-block;
+    margin: 4px 0;
+  }
+  .lecture {
+    margin-top: 60px;
+    padding-top: 10px;
+    border-top: 2px dashed #ccc;
+  }
+  code {
+    background: #f0f0f0;
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 12px 0;
+    width: 100%;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px 14px;
+    text-align: left;
+  }
+  th {
+    background: #eef4ff;
+    color: #1a73e8;
+  }
+  .example-box {
+    background: #fff8e6;
+    border-left: 4px solid #e6a817;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin: 10px 0;
+  }
+</style>
+</head>
+<body>
+
+<h1>Week 9: Short Notes</h1>
+
+<div class="lecture">
+<h2>Lecture 1: Perceptron Learning Algorithm</h2>
+
+<h3>Supervised Learning (Binary Classification)</h3>
+
+<h4>Generative Models</h4>
+<ul>
+  <li>Learn how data is generated.</li>
+  <li>Model:
+    <ul>
+      <li>Prior: P(y)</li>
+      <li>Class-conditional: P(x|y)</li>
+    </ul>
+  </li>
+  <li>Bayes theorem:</li>
+</ul>
+<p class="formula">P(y|x) = P(x|y)P(y) / P(x)</p>
+<ul>
+  <li>Examples:
+    <ul>
+      <li>Naive Bayes (assumes feature independence)</li>
+      <li>Gaussian Discriminant Analysis (continuous data)</li>
+    </ul>
+  </li>
+</ul>
+
+<h4>Discriminative Models</h4>
+<ul>
+  <li>Learn direct mapping from input to output.</li>
+  <li>Directly model: P(y|x)</li>
+  <li>Examples:
+    <ul>
+      <li>K-Nearest Neighbors (KNN)</li>
+      <li>Decision Trees</li>
+    </ul>
+  </li>
+</ul>
+
+<h4>Why Linear Discriminative Models?</h4>
+<ul>
+  <li>Generative models (e.g., Naive Bayes) often lead to linear decision boundaries.</li>
+  <li>Instead of modeling the full distribution, we directly learn a linear function.</li>
+  <li>Decision boundary: wᵀx = 0</li>
+</ul>
+
+<h4>Linear Separability Assumption</h4>
+<p><strong>Decision Rule:</strong></p>
+<p class="formula">y = +1 if wᵀx ≥ 0; −1 otherwise</p>
+<ul>
+  <li><strong>Definition:</strong> Data is linearly separable if a line (or hyperplane) can perfectly separate classes.</li>
+  <li><strong>Limitation:</strong> Fails when data overlaps or outliers exist.</li>
+</ul>
+
+<h3>Computational Complexity</h3>
+<ul>
+  <li>General case: Minimizing classification error (0−1 loss) is NP-hard.</li>
+  <li>Special case (linearly separable): A perfect separator exists → problem becomes solvable efficiently.</li>
+</ul>
+
+<h3>Perceptron Algorithm</h3>
+<h4>Idea</h4>
+<ul>
+  <li>Inspired by biological neurons.</li>
+  <li>Learns a linear classifier.</li>
+</ul>
+<p><strong>Input</strong> Dataset: {(x₁,y₁), (x₂,y₂), …, (xₙ,yₙ)} where xᵢ ∈ Rᵈ, yᵢ ∈ {+1,−1}.</p>
+<p><strong>Initialization</strong> w = 0</p>
+<p><strong>Prediction</strong> ŷ = sign(wᵀx)</p>
+<h4>Update Rule</h4>
+<ul>
+  <li>If correct prediction: No change.</li>
+  <li>If wrong prediction: w<sub>t+1</sub> = w<sub>t</sub> + yᵢxᵢ</li>
+</ul>
+<h4>Convergence</h4>
+<ul>
+  <li>Guaranteed only if data is linearly separable.</li>
+  <li>May not converge for non-separable data.</li>
+</ul>
+
+<div class="example-box">
+<strong>Simple Example</strong>
+<table>
+  <tr><th>x</th><th>y</th></tr>
+  <tr><td>(2,2)</td><td>+1</td></tr>
+  <tr><td>(-1,-1)</td><td>-1</td></tr>
+</table>
+<p><strong>Step:</strong></p>
+<ul>
+  <li>Start: w=(0,0)</li>
+  <li>For (2,2), y=+1:
+    <ul>
+      <li>Prediction = 0 → wrong</li>
+      <li>Update: w = (0,0) + (1)(2,2) = (2,2)</li>
+    </ul>
+  </li>
+  <li>Now it starts classifying correctly.</li>
+</ul>
+</div>
+
+<h3>Key Takeaways</h3>
+<ul>
+  <li>Generative → model data distribution.</li>
+  <li>Discriminative → model decision boundary.</li>
+  <li>Linear models assume separability.</li>
+  <li>Perceptron:
+    <ul>
+      <li>Simple &amp; fast.</li>
+      <li>Works only for separable data.</li>
+      <li>Updates weights on mistakes.</li>
+    </ul>
+  </li>
+</ul>
+</div>
+
+<div class="lecture">
+<h2>Lecture 2: Understanding Perceptron Update Rule</h2>
+
+<h3>Perceptron Update Rule</h3>
+<ul>
+  <li><strong>Core Idea:</strong> Perceptron updates weights only when it makes a mistake.</li>
+  <li><strong>Update Formula:</strong> w<sub>t+1</sub> = w<sub>t</sub> + yᵢxᵢ</li>
+</ul>
+<p>Where:</p>
+<ul>
+  <li>w<sub>t</sub>: current weight vector</li>
+  <li>xᵢ: input vector</li>
+  <li>yᵢ ∈ {+1,−1}: true label</li>
+  <li>Prediction Rule: ŷ = sign(wᵀx)</li>
+</ul>
+
+<h3>Types of Mistakes</h3>
+<h4>Type 1 Mistake (False Positive)</h4>
+<ul>
+  <li>Predicted: +1 → wᵀxᵢ ≥ 0</li>
+  <li>Actual: −1</li>
+  <li>Update: w<sub>t+1</sub> = w<sub>t</sub> − xᵢ</li>
+  <li>Effect: w<sub>t+1</sub>ᵀxᵢ = w<sub>t</sub>ᵀxᵢ − ‖xᵢ‖² → Dot product decreases, pushing toward the correct class.</li>
+</ul>
+<h4>Type 2 Mistake (False Negative)</h4>
+<ul>
+  <li>Predicted: −1 → wᵀxᵢ &lt; 0</li>
+  <li>Actual: +1</li>
+  <li>Update: w<sub>t+1</sub> = w<sub>t</sub> + xᵢ</li>
+  <li>Effect: w<sub>t+1</sub>ᵀxᵢ = w<sub>t</sub>ᵀxᵢ + ‖xᵢ‖² → Dot product increases, pushing toward the correct class.</li>
+</ul>
+<p><strong>Key Insight:</strong> Each update moves weights in the correct direction. It may not fix immediately, but progress is guaranteed for that point.</p>
+
+<h3>Local vs Global Problem</h3>
+<ul>
+  <li><strong>Issue:</strong> Fixing one point = local improvement, but may harm others = global issue.</li>
+  <li><strong>Reason:</strong> Updating w shifts the decision boundary. Previously correct points may become incorrect.</li>
+  <li><strong>Result:</strong> Algorithm may keep correcting different points and enter an infinite loop.</li>
+</ul>
+
+<h3>Linear Separability is Not Always Enough</h3>
+<ul>
+  <li><strong>Edge Case:</strong> Points lying exactly on decision boundary (wᵀx=0).</li>
+  <li><strong>Issue:</strong> Sign function treats wᵀx ≥ 0 ⇒ +1, creating ambiguity.</li>
+  <li><strong>Counter Example:</strong> Points on boundary cause perceptron to keep switching decisions → no stabilization.</li>
+</ul>
+
+<h3>Linear Separability with γ-Margin</h3>
+<p><strong>Condition for Convergence:</strong> yᵢ(w*ᵀxᵢ) ≥ γ</p>
+<p>Where:</p>
+<ul>
+  <li>γ &gt; 0: margin</li>
+  <li>w*: optimal weight vector</li>
+  <li><strong>Meaning:</strong> All points are not just separable, but at least γ distance away from boundary.</li>
+  <li><strong>Visual Idea:</strong> Clear buffer zone between classes.</li>
+</ul>
+<p><strong>Importance:</strong></p>
+<ul>
+  <li>Removes boundary ambiguity</li>
+  <li>Prevents infinite cycling</li>
+  <li>Guarantees convergence of perceptron</li>
+</ul>
+
+<div class="example-box">
+<strong>Simple Example</strong>
+<table>
+  <tr><th>Point</th><th>Label</th></tr>
+  <tr><td>(2,2)</td><td>+1</td></tr>
+  <tr><td>(-2,-1)</td><td>-1</td></tr>
+</table>
+<ul>
+  <li>If points are far from boundary → large margin (γ) → perceptron quickly converges.</li>
+  <li>If point lies near/on boundary → may oscillate.</li>
+</ul>
+</div>
+
+<h3>Key Takeaways</h3>
+<ul>
+  <li>Perceptron updates only on mistakes.</li>
+  <li>Two mistake types handled by same formula.</li>
+  <li>Updates move weights in correct direction.</li>
+  <li>Local fixes may break global classification.</li>
+  <li>Linear separability alone is insufficient.</li>
+  <li>γ-margin ensures stability, convergence, and no ambiguity.</li>
+</ul>
+</div>
+
+<div class="lecture">
+<h2>Lecture 3: Proof of Convergence of Perceptron Algorithm</h2>
+
+<h3>Core Assumptions</h3>
+<p>To simplify the proof, we assume:</p>
+<ol>
+  <li><strong>Linear Separability with Margin (γ):</strong> yᵢ(w*ᵀxᵢ) ≥ γ, γ &gt; 0
+    <ul>
+      <li>Data is perfectly separable.</li>
+      <li>There is a clear gap (margin γ) from the boundary.</li>
+    </ul>
+  </li>
+  <li><strong>Radius Assumption (R):</strong> ‖xᵢ‖ ≤ R
+    <ul>
+      <li>All points lie inside a sphere of radius R.</li>
+    </ul>
+  </li>
+  <li><strong>Unit Length of Optimal Vector</strong> ‖w*‖ = 1
+    <ul>
+      <li>Scaling w* does not change the boundary, only rescales γ.</li>
+      <li>Hence, we can fix ‖w*‖ = 1.</li>
+    </ul>
+  </li>
+</ol>
+
+<h3>Perceptron Update Rule</h3>
+<ul>
+  <li><strong>Initialization:</strong> w₀ = 0</li>
+  <li><strong>Update (only on mistake):</strong> w<sub>t+1</sub> = w<sub>t</sub> + yᵢxᵢ</li>
+</ul>
+
+<h3>Goal of Proof</h3>
+<p>Show that the total number of mistakes L is finite. If mistakes are bounded, the algorithm must converge.</p>
+
+<h3>Observation 1: Upper Bound on Weight Length</h3>
+<ul>
+  <li>Track growth of: ‖w<sub>L</sub>‖²</li>
+  <li>Result: ‖w<sub>L</sub>‖² ≤ L·R²</li>
+  <li>Meaning: Weight vector cannot grow too fast. Each mistake increases length by at most R².</li>
+</ul>
+
+<h3>Observation 2: Alignment with Optimal Vector</h3>
+<ul>
+  <li>Track: w<sub>L</sub>ᵀw*</li>
+  <li>Result: w<sub>L</sub>ᵀw* ≥ L·γ</li>
+  <li>Meaning: Each update improves alignment with the true separator. Progress is consistent and positive.</li>
+</ul>
+
+<h3>Combining Both → Radius−Margin Bound</h3>
+<p>Using Cauchy−Schwarz Inequality: (w<sub>L</sub>ᵀw*)² ≤ ‖w<sub>L</sub>‖²·‖w*‖²</p>
+<p>Since ‖w*‖ = 1: (Lγ)² ≤ ‖w<sub>L</sub>‖²</p>
+<p>Using Observation 1: L²γ² ≤ LR²</p>
+<p class="formula"><strong>Final Result:</strong> L ≤ R²/γ²</p>
+
+<h3>Interpretation</h3>
+<p>Number of mistakes depends on:</p>
+<ul>
+  <li>R (data spread)</li>
+  <li>γ (margin size)</li>
+</ul>
+<table>
+  <tr><th>Case</th><th>Effect</th></tr>
+  <tr><td>Large γ (big margin)</td><td>Faster convergence</td></tr>
+  <tr><td>Small γ (tiny margin)</td><td>Slow convergence</td></tr>
+  <tr><td>γ = 0</td><td>No guarantee</td></tr>
+</table>
+
+<div class="example-box">
+<strong>Simple Example</strong>
+<ul>
+  <li><strong>Case 1: Good Margin:</strong> γ = 1, R = 2 → L ≤ 4/1 = 4. Few mistakes → fast learning.</li>
+  <li><strong>Case 2: Small Margin:</strong> γ = 0.1, R = 2 → L ≤ 4/0.01 = 400. Many mistakes → slow learning.</li>
+</ul>
+</div>
+
+<h3>Key Takeaways</h3>
+<ul>
+  <li>Perceptron converges only if margin exists.</li>
+  <li>Mistakes are bounded by: R²/γ²</li>
+  <li>Larger margin → better learning.</li>
+  <li>If γ=0, convergence guarantee breaks.</li>
+  <li>Foundation for:
+    <ul>
+      <li>Neural Networks</li>
+      <li>Support Vector Machines (SVMs)</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="summary">
+<strong>Final Intuition:</strong> Perceptron learns faster when classes are clearly separated with a large margin.
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 4: Sigmoid Function for Modeling Class Probabilities</h2>
+
+<h3>Limitations of Perceptron</h3>
+<ul>
+  <li><strong>Assumption:</strong> Data must be linearly separable.</li>
+  <li><strong>Mistake Bound:</strong> Mistakes ≤ R²/γ²</li>
+</ul>
+<p><strong>Problem:</strong> Perceptron assumes:</p>
+<p class="formula">P(y=1|x) = 1 if wᵀx ≥ 0; 0 if wᵀx &lt; 0</p>
+<p>This is too strict.</p>
+<ul>
+  <li>Cannot handle noisy data.</li>
+  <li>Cannot handle overlapping classes.</li>
+  <li>Probabilities are only 0 or 1.</li>
+</ul>
+
+<h3>Linear Score</h3>
+<ul>
+  <li><strong>Definition:</strong> Z = wᵀx</li>
+  <li><strong>Interpretation:</strong>
+    <ul>
+      <li>Z &gt; 0: leaning towards class +1</li>
+      <li>Z &lt; 0: leaning towards class −1</li>
+      <li>Z = 0: decision boundary</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Link Function (Sigmoid)</h3>
+<ul>
+  <li><strong>Need:</strong> Convert Z ∈ (−∞, ∞) into probability in [0,1].</li>
+  <li><strong>Sigmoid Function:</strong></li>
+</ul>
+<p class="formula">G(Z) = 1 / (1 + e⁻ᶻ)</p>
+<p><strong>Properties:</strong></p>
+<ul>
+  <li>G(0) = 0.5 → uncertainty</li>
+  <li>Z→∞ ⇒ G(Z) → 1</li>
+  <li>Z→−∞ ⇒ G(Z) → 0</li>
+</ul>
+
+<h3>Modeling Probabilities</h3>
+<p><strong>Final Model:</strong></p>
+<p class="formula">P(y=1|x) = 1 / (1 + e⁻ʷᵀˣ)</p>
+<p class="formula">P(y=−1|x) = 1 − P(y=1|x)</p>
+<ul>
+  <li><strong>Key Idea:</strong> Every point has non-zero probability.</li>
+  <li><strong>Interpretation:</strong> Like a biased coin, where bias depends on wᵀx.</li>
+</ul>
+
+<div class="example-box">
+<strong>Examples</strong><br>
+<strong>Example 1:</strong> wᵀx = 1 → P(y=1) = 1/(1+e⁻¹) ≈ 0.73<br>
+<strong>Example 2:</strong> wᵀx = 10 → P(y=1) ≈ 0.99995
+</div>
+
+<p><strong>Insight:</strong></p>
+<ul>
+  <li>Farther from boundary → higher confidence.</li>
+  <li>Closer to boundary → more uncertainty.</li>
+</ul>
+
+<h3>Maximum Likelihood Estimation (MLE)</h3>
+<ul>
+  <li><strong>Goal:</strong> Find best w such that likelihood is maximized.</li>
+  <li><strong>Likelihood Function:</strong></li>
+</ul>
+<p class="formula">L(w) = Π P(yᵢ|xᵢ), for i = 1 to n</p>
+<p><strong>Log-Likelihood (used in practice):</strong></p>
+<p class="formula">ℓ(w) = Σ log P(yᵢ|xᵢ), for i = 1 to n</p>
+<p><strong>Objective:</strong></p>
+<p class="formula">max over w of ℓ(w)</p>
+
+<h3>Key Takeaways</h3>
+<ul>
+  <li>Perceptron → hard classification (0 or 1).</li>
+  <li>Logistic Regression → probabilistic model.</li>
+  <li>Uses:
+    <ul>
+      <li>Linear score wᵀx.</li>
+      <li>Sigmoid function.</li>
+    </ul>
+  </li>
+  <li>Works well for:
+    <ul>
+      <li>Noisy data.</li>
+      <li>Non-separable data.</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="summary">
+<strong>Final Intuition:</strong> Logistic regression replaces hard decisions with smooth probabilities.
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 5: Sigmoid Function for Modeling Class Probabilities (continued)</h2>
+
+<h3>Core Concepts</h3>
+<p><strong>Sigmoid (Logistic) Function:</strong> Converts any real value into a probability in [0,1]:</p>
+<p class="formula">σ(z) = 1 / (1 + e⁻ᶻ)</p>
+<p><strong>Probabilistic Model</strong></p>
+<p class="formula">P(y=1|x) = 1 / (1 + e⁻ʷᵀˣ)</p>
+<ul>
+  <li>Output is a probability (confidence).</li>
+  <li>Unlike perceptron, not restricted to 0 or 1.</li>
+</ul>
+
+<h3>Maximum Likelihood Estimation (MLE)</h3>
+<ul>
+  <li><strong>Goal:</strong> Find w that makes observed labels most likely.</li>
+</ul>
+<p class="formula">max over w of P(data|w)</p>
+
+<h3>Gradient Intuition</h3>
+<ul>
+  <li>Gradient is a weighted sum of data points.</li>
+  <li>Points with large error → stronger updates.</li>
+</ul>
+
+<h3>Confidence Interpretation</h3>
+<ul>
+  <li>Output near 1 → high confidence.</li>
+  <li>Output near 0.5 → uncertain.</li>
+</ul>
+
+<h3>Key Formulae</h3>
+<ol>
+  <li><strong>Probability Model</strong>
+    <p class="formula">P(y=1|x) = 1 / (1 + e⁻ʷᵀˣ)</p>
+  </li>
+  <li><strong>Log-Likelihood Function</strong>
+    <p class="formula">ℓ(w) = Σ [(1−yᵢ)(−wᵀxᵢ) − log(1+e⁻ʷᵀˣⁱ)], for i = 1 to n</p>
+  </li>
+  <li><strong>Gradient of Log-Likelihood</strong>
+    <p class="formula">∇ℓ(w) = Σ xᵢ(yᵢ − 1/(1+e⁻ʷᵀˣⁱ)), for i = 1 to n</p>
+  </li>
+  <li><strong>Gradient Ascent Update</strong>
+    <p class="formula">w<sub>t+1</sub> = w<sub>t</sub> + ηₜ∇ℓ(w<sub>t</sub>)</p>
+    <p>where ηₜ is the learning rate.</p>
+  </li>
+  <li><strong>Regularized Logistic Regression</strong>
+    <p class="formula">min over w of Σ[log(1+e⁻ʷᵀˣⁱ) + (1−yᵢ)wᵀxᵢ] + λ‖w‖², for i = 1 to n</p>
+    <ul><li>λ controls overfitting.</li></ul>
+  </li>
+</ol>
+
+<h3>Examples</h3>
+<div class="example-box">
+<strong>Prediction Example</strong><br>
+For test point x<sub>test</sub>:
+<ol>
+  <li>Compute score: z = wᵀx<sub>test</sub></li>
+  <li>Probability: P(y=1) = σ(z)</li>
+  <li>Final prediction: ŷ = sign(wᵀx<sub>test</sub>)</li>
+</ol>
+</div>
+
+<div class="example-box">
+<strong>Mismatch Example</strong>
+<ul>
+  <li>True label: y=1</li>
+  <li>Predicted: P(y=1)=0.1</li>
+  <li>Error: 1−0.1=0.9</li>
+  <li>This point strongly influences the update.</li>
+</ul>
+<strong>Insight:</strong> Bigger mistake → bigger correction.
+</div>
+
+<h3>Handling Non-Linearity</h3>
+<ul>
+  <li>Logistic regression can be kernelized.</li>
+  <li>Represent: w = Σ αᵢxᵢ</li>
+  <li>Allows non-linear decision boundaries and complex patterns.</li>
+</ul>
+
+<h3>Comparison with Other Models</h3>
+<p><strong>Logistic Regression vs Perceptron</strong></p>
+<table>
+  <tr><th>Feature</th><th>Perceptron</th><th>Logistic Regression</th></tr>
+  <tr><td>Output</td><td>0 or 1</td><td>Probability</td></tr>
+  <tr><td>Data</td><td>Only separable</td><td>Any data</td></tr>
+  <tr><td>Noise handling</td><td>Poor</td><td>Good</td></tr>
+</table>
+
+<p><strong>Logistic Regression vs SVM</strong></p>
+<table>
+  <tr><th>Feature</th><th>Logistic Regression</th><th>SVM</th></tr>
+  <tr><td>Goal</td><td>Max likelihood</td><td>Max margin</td></tr>
+  <tr><td>Output</td><td>Probability</td><td>Class only</td></tr>
+  <tr><td>Boundary</td><td>Smooth</td><td>Sharp</td></tr>
+</table>
+
+<h3>IRLS Method</h3>
+<ul>
+  <li>Iteratively Reweighted Least Squares (IRLS) is a faster alternative to gradient descent.</li>
+  <li>Uses second-order information.</li>
+</ul>
+
+<h3>Key Takeaways</h3>
+<ul>
+  <li>Logistic regression is a probabilistic classifier.</li>
+  <li>Uses:
+    <ul>
+      <li>Linear score wᵀx.</li>
+      <li>Sigmoid function.</li>
+    </ul>
+  </li>
+  <li>Trained using:
+    <ul>
+      <li>MLE + Gradient ascent.</li>
+    </ul>
+  </li>
+  <li>Handles:
+    <ul>
+      <li>Noise.</li>
+      <li>Overlapping data.</li>
+    </ul>
+  </li>
+  <li>Regularization prevents overfitting.</li>
+</ul>
+
+<div class="summary">
+<strong>Final Intuition:</strong> Logistic regression predicts how likely a class is, not just which class.
+</div>
+</div>
+
+</body>
+</html>
