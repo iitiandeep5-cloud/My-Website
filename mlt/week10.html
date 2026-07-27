@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Week 10: Short Notes - Machine Learning Techniques</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 0 20px;
+    line-height: 1.6;
+    color: #222;
+    background: #fdfdfd;
+  }
+  h1 {
+    text-align: center;
+    color: #1a1a2e;
+    border-bottom: 3px solid #1a73e8;
+    padding-bottom: 10px;
+  }
+  h2 {
+    color: #1a73e8;
+    margin-top: 40px;
+    border-left: 5px solid #1a73e8;
+    padding-left: 10px;
+  }
+  h3 {
+    color: #0d47a1;
+    margin-top: 25px;
+  }
+  h4 {
+    color: #333;
+    margin-bottom: 5px;
+  }
+  ul {
+    margin-top: 5px;
+  }
+  li {
+    margin-bottom: 4px;
+  }
+  .summary {
+    background: #eef4ff;
+    border-left: 4px solid #1a73e8;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-top: 15px;
+  }
+  .formula {
+    background: #f5f5f5;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    display: inline-block;
+    margin: 4px 0;
+  }
+  .lecture {
+    margin-top: 60px;
+    padding-top: 10px;
+    border-top: 2px dashed #ccc;
+  }
+  code {
+    background: #f0f0f0;
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 12px 0;
+    width: 100%;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px 14px;
+    text-align: left;
+  }
+  th {
+    background: #eef4ff;
+    color: #1a73e8;
+  }
+  .example-box {
+    background: #fff8e6;
+    border-left: 4px solid #e6a817;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin: 10px 0;
+  }
+</style>
+</head>
+<body>
+
+<h1>Week 10: Short Notes</h1>
+
+<div class="lecture">
+<h2>Lecture 1: Perceptrons and Margin</h2>
+
+<h3>Core Concepts</h3>
+<h4>Linear Separability with Margin (γ)</h4>
+<ul>
+  <li>A dataset is linearly separable with margin γ if there exists a weight vector W* such that:
+    <ul>
+      <li>All points are correctly classified.</li>
+      <li>Each point lies at least γ distance away from the decision boundary.</li>
+    </ul>
+  </li>
+  <li>Larger γ ⇒ better separation.</li>
+</ul>
+
+<h4>Perceptron Convergence</h4>
+<ul>
+  <li>If data is linearly separable:
+    <ul>
+      <li>The Perceptron algorithm will always converge.</li>
+      <li>It finds a separating hyperplane in finite steps.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4>Quality of Solution</h4>
+<ul>
+  <li>Perceptron finds any valid separator, not the best one.</li>
+  <li>It does not maximize margin.</li>
+  <li>Stops as soon as no misclassification occurs.</li>
+</ul>
+
+<h4>Robustness &amp; Generalization</h4>
+<ul>
+  <li>Larger margin = better model:
+    <ul>
+      <li>More tolerance to noise.</li>
+      <li>Better performance on unseen data.</li>
+    </ul>
+  </li>
+  <li>Small margin ⇒ sensitive to small changes.</li>
+</ul>
+
+<h3>Key Formulae</h3>
+<p><strong>Margin Condition:</strong></p>
+<p class="formula">yᵢ(W*ᵀxᵢ) ≥ γ</p>
+<p>Ensures correct classification with margin γ.</p>
+
+<p><strong>Radius of Data (R):</strong></p>
+<p class="formula">‖xᵢ‖² ≤ R²</p>
+<p>All points lie inside a sphere of radius R.</p>
+
+<p><strong>Perceptron Mistake Bound:</strong></p>
+<p class="formula">Mistakes ≤ R²/γ²</p>
+<ul>
+  <li>Fewer mistakes when:
+    <ul>
+      <li>Margin (γ) is large.</li>
+      <li>Data spread (R) is small.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Boundary Hyperplanes:</strong></p>
+<p class="formula">W*ᵀx = γ and W*ᵀx = −γ</p>
+<p>Define the margin boundaries. Decision boundary lies in between.</p>
+
+<h3>Examples (Intuition)</h3>
+<div class="example-box">
+<strong>Example 1: Multiple Separators</strong><br>
+Same dataset → many possible separating lines.
+<table>
+  <tr><th>Separator Type</th><th>Description</th></tr>
+  <tr><td>Wide Margin (Good)</td><td>Large gap between classes</td></tr>
+  <tr><td>Thin Margin (Weak)</td><td>Small gap, less reliable</td></tr>
+</table>
+Perceptron may stop at a thin margin, even if a better one exists.
+</div>
+
+<div class="example-box">
+<strong>Example 2: Effect of Noise</strong><br>
+Suppose a point shifts slightly (real-world noise):
+<table>
+  <tr><th>Case</th><th>Result</th></tr>
+  <tr><td>Small Margin</td><td>Point may cross boundary → wrong classification</td></tr>
+  <tr><td>Large Margin</td><td>Still correctly classified</td></tr>
+</table>
+Larger margin = more robust model.
+</div>
+
+<h3>Final Takeaway</h3>
+<ul>
+  <li>Perceptron:
+    <ul>
+      <li>Simple &amp; guaranteed to converge.</li>
+      <li>Does not find optimal (max-margin) separator.</li>
+    </ul>
+  </li>
+  <li>Goal ahead:
+    <ul>
+      <li>Find a method that maximizes margin.</li>
+      <li>Improves robustness.</li>
+    </ul>
+  </li>
+</ul>
+<p>This leads to <strong>Support Vector Machines (SVM)</strong>.</p>
+
+<div class="summary">
+<strong>One-Line Summary:</strong> Perceptron finds a separator, but the best models are those that maximize the margin.
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 2: Maximum Margin: Formulation</h2>
+
+<h3>Core Concepts</h3>
+<h4>Objective of Maximum Margin</h4>
+<ul>
+  <li>Goal: Find weight vector w such that:
+    <ul>
+      <li>Data is correctly classified.</li>
+      <li>Margin γ is maximized.</li>
+    </ul>
+  </li>
+  <li>Larger margin ⇒ better generalization.</li>
+</ul>
+
+<h4>Problem of Arbitrary Scaling</h4>
+<ul>
+  <li>Constraint: yᵢ(wᵀxᵢ) ≥ γ</li>
+  <li>Issue:
+    <ul>
+      <li>If we multiply w by any constant, γ also scales.</li>
+      <li>Decision boundary does not change.</li>
+    </ul>
+  </li>
+  <li>Margin can become artificially large ⇒ ill-defined problem.</li>
+</ul>
+
+<h4>Fixing the Problem (Grounding)</h4>
+<p>We remove scaling ambiguity in two ways:</p>
+<ol>
+  <li><strong>Grounding w</strong>
+    <ul>
+      <li>Fix length: ‖w‖ = 1</li>
+      <li>Then maximize γ.</li>
+    </ul>
+  </li>
+  <li><strong>Grounding γ (Standard Approach)</strong>
+    <ul>
+      <li>Fix margin: γ = 1</li>
+      <li>Then optimize w.</li>
+      <li>This is the standard SVM formulation.</li>
+    </ul>
+  </li>
+</ol>
+
+<h4>Width of Margin</h4>
+<ul>
+  <li>Defined as distance between: wᵀx = 1 and wᵀx = −1</li>
+  <li>Key idea: Width ∝ 1/‖w‖</li>
+  <li>Smaller ‖w‖ ⇒ larger margin.</li>
+</ul>
+
+<h4>Primal Optimization Problem</h4>
+<ul>
+  <li>Final goal: Find w that maximizes margin.</li>
+  <li>Equivalent to minimizing length of w.</li>
+</ul>
+
+<h3>Key Formulae</h3>
+<p><strong>Margin Constraint:</strong> yᵢ(wᵀxᵢ) ≥ γ</p>
+<p><strong>Grounded Formulation (γ=1):</strong> yᵢ(wᵀxᵢ) ≥ 1</p>
+<p><strong>Width (Relation with w):</strong> Width ∝ 1/‖w‖</p>
+<p><strong>Final Primal Optimization:</strong></p>
+<p class="formula">min over w of (1/2)‖w‖² &nbsp; subject to &nbsp; yᵢ(wᵀxᵢ) ≥ 1</p>
+<p>This is the core SVM optimization problem.</p>
+
+<h3>Examples &amp; Intuition</h3>
+<div class="example-box">
+<strong>Example 1: Scaling Problem</strong>
+<ul>
+  <li>Suppose w gives margin = 5.</li>
+  <li>Scale w→2w: New margin = 10.</li>
+  <li>Decision boundary unchanged.</li>
+  <li>Margin increase is fake (just scaling).</li>
+</ul>
+</div>
+
+<div class="example-box">
+<strong>Example 2: Grounding γ=1</strong>
+<ul>
+  <li>If wᵀx = 5.</li>
+  <li>Scale: w′ = w/5.</li>
+  <li>Now w′ᵀx = 1.</li>
+  <li>Makes all solutions comparable.</li>
+</ul>
+</div>
+
+<div class="example-box">
+<strong>Example 3: Width vs Length of w</strong>
+<table>
+  <tr><th>Case</th><th>Interpretation</th></tr>
+  <tr><td>Small ‖w‖</td><td>Large margin (good)</td></tr>
+  <tr><td>Large ‖w‖</td><td>Small margin (bad)</td></tr>
+</table>
+Minimizing ‖w‖ = maximizing margin.
+</div>
+
+<div class="example-box">
+<strong>Example 4: Non-Separable Data</strong>
+<ul>
+  <li>If no w satisfies: yᵢ(wᵀxᵢ) ≥ 1</li>
+  <li>Dataset is not linearly separable.</li>
+</ul>
+</div>
+
+<h3>Final Takeaway</h3>
+<ul>
+  <li>Scaling issue makes raw margin maximization meaningless.</li>
+  <li>Fix by setting γ = 1.</li>
+  <li>Final objective: Minimize ‖w‖² while ensuring correct classification.</li>
+</ul>
+
+<h3>Next Step</h3>
+<ul>
+  <li>Study Dual Problem:
+    <ul>
+      <li>Helps in non-linear classification.</li>
+      <li>Enables kernel methods.</li>
+    </ul>
+  </li>
+  <li>Leads to full Support Vector Machines (SVM).</li>
+</ul>
+
+<div class="summary">
+<strong>One-Line Summary:</strong> Maximizing margin = minimizing weight magnitude under correct classification constraints.
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 3: Constrained Optimization</h2>
+
+<h3>Core Motivation</h3>
+<h4>Goal (in Classification)</h4>
+<ul>
+  <li>Find weight vector w such that:
+    <ul>
+      <li>Correctly classifies all data.</li>
+      <li>Has minimum length (⇒ maximum margin).</li>
+    </ul>
+  </li>
+  <li>Equivalent to minimizing ‖w‖ with constraints.</li>
+</ul>
+
+<p><strong>The Problem:</strong> General constrained optimization:</p>
+<p class="formula">min f(w) &nbsp; subject to &nbsp; g(w) ≤ 0</p>
+<p>Hard to solve directly → need a better approach.</p>
+
+<h4>Why Duality?</h4>
+<ul>
+  <li>Simplifies optimization.</li>
+  <li>Provides deeper insights.</li>
+  <li>Enables advanced methods (like kernels in SVM).</li>
+</ul>
+
+<h3>Lagrangian Function</h3>
+<p>To handle constraints, we combine them into one function:</p>
+<p class="formula">L(w,α) = f(w) + αg(w)</p>
+<ul>
+  <li>w: model parameters.</li>
+  <li>α: Lagrange multiplier (α ≥ 0).</li>
+</ul>
+
+<h3>Key Idea</h3>
+<p>We evaluate: max over α≥0 of L(w,α)</p>
+
+<h4>Case 1: Constraint Violated (g(w) &gt; 0)</h4>
+<p>Example: f(w)=−100, g(w)=5 → L(w,α)=−100+5α</p>
+<p>As α→∞, L(w,α)→∞.</p>
+<p><strong>Interpretation:</strong> Invalid solutions get infinite penalty.</p>
+
+<h4>Case 2: Constraint Satisfied (g(w) ≤ 0)</h4>
+<p>Example: f(w)=100, g(w)=−5 → L(w,α)=100−5α</p>
+<p>Maximization gives α=0. Result: Value = f(w).</p>
+
+<h4>Special Case: g(w)=0</h4>
+<p>L(w,α) = f(w) for any α</p>
+
+<h3>Min-Max Formulation</h3>
+<p>The constrained problem becomes:</p>
+<p class="formula">min over w of max over α≥0 of [f(w) + αg(w)]</p>
+<ul>
+  <li>If constraint violated → value = ∞.</li>
+  <li>If satisfied → value = f(w).</li>
+  <li>Minimum occurs only in feasible region.</li>
+</ul>
+
+<h3>Convex Duality</h3>
+<ul>
+  <li>General rule: Cannot swap min and max.</li>
+  <li><strong>Exception (Convex Case):</strong> If f(w) and g(w) are convex:</li>
+</ul>
+<p class="formula">max over α≥0 of min over w of [f(w) + αg(w)]</p>
+<ul>
+  <li>This is the Dual Problem.</li>
+  <li>Same solution as primal (strong duality).</li>
+</ul>
+
+<h3>Multiple Constraints</h3>
+<p>For k constraints: g₁(w), g₂(w), …, g_k(w)</p>
+<p><strong>Lagrangian with Multiple Constraints:</strong></p>
+<p class="formula">L(w,α₁,...,α_k) = f(w) + Σ αᵢgᵢ(w), for i = 1 to k</p>
+<ul>
+  <li>Each constraint has its own αᵢ ≥ 0.</li>
+  <li>If any constraint violated → Lagrangian → ∞.</li>
+  <li>If all satisfied → Value reduces to f(w).</li>
+</ul>
+
+<h3>Examples &amp; Intuition</h3>
+<div class="example-box">
+<strong>Example 1: Penalty Mechanism</strong>
+<ul>
+  <li>Violating constraint → huge penalty (∞).</li>
+  <li>Forces solution to stay feasible.</li>
+</ul>
+</div>
+<div class="example-box">
+<strong>Example 2: Valid Region</strong><br>
+Inside feasible region: Optimization behaves like normal minimization of f(w).
+</div>
+<div class="example-box">
+<strong>Example 3: Convex Case</strong>
+<ul>
+  <li>For convex functions: Primal = Dual.</li>
+  <li>Makes problem easier to solve.</li>
+</ul>
+</div>
+
+<h3>Final Takeaway</h3>
+<ul>
+  <li>Lagrangian converts constrained problem → unconstrained form.</li>
+  <li>Duality allows swapping min and max (if convex).</li>
+  <li>Important for:
+    <ul>
+      <li>Support Vector Machines (SVM).</li>
+      <li>Kernel tricks.</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="summary">
+<strong>One-Line Summary:</strong> Lagrangian turns constraints into penalties, and duality lets us solve optimization more efficiently (especially in convex problems).
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 4: Formulating the Dual Problem</h2>
+
+<h3>The Primal Problem</h3>
+<h4>Objective</h4>
+<ul>
+  <li>Find weight vector W that:
+    <ul>
+      <li>Minimizes length (⇒ maximizes margin).</li>
+      <li>Correctly classifies all points.</li>
+    </ul>
+  </li>
+</ul>
+<p><strong>Primal Optimization:</strong></p>
+<p class="formula">min over W of (1/2)‖W‖² &nbsp; subject to &nbsp; yᵢ(Wᵀxᵢ) ≥ 1</p>
+
+<h3>Standard Constraint Form</h3>
+<p>Convert to gᵢ(W) ≤ 0:</p>
+<p class="formula">gᵢ(W) = 1 − yᵢ(Wᵀxᵢ) ≤ 0</p>
+
+<h3>Convexity</h3>
+<ul>
+  <li>Objective: Quadratic (convex).</li>
+  <li>Constraints: Linear (convex).</li>
+</ul>
+<p>Ensures strong duality (min-max swap valid).</p>
+
+<h3>Lagrangian Formulation</h3>
+<p><strong>Lagrangian Function:</strong></p>
+<p class="formula">L(W,α) = (1/2)‖W‖² + Σ αᵢ(1 − yᵢWᵀxᵢ), for i = 1 to n</p>
+<p>with αᵢ ≥ 0.</p>
+
+<h4>Min-Max Conversion</h4>
+<ul>
+  <li>Original: min over W of max over α≥0 of L(W,α)</li>
+  <li>Dual form: max over α≥0 of min over W of L(W,α)</li>
+</ul>
+
+<h3>Solving Inner Minimization (Find Optimal W)</h3>
+<p><strong>Gradient w.r.t W:</strong></p>
+<p class="formula">∇_W L = W − Σ αᵢyᵢxᵢ = 0, for i = 1 to n</p>
+<p><strong>Optimal Weight Vector:</strong></p>
+<p class="formula">W* = Σ αᵢyᵢxᵢ, for i = 1 to n</p>
+<p><strong>Interpretation:</strong> W* is a linear combination of training points, weighted by labels yᵢ and importance αᵢ.</p>
+
+<h3>Dual Problem</h3>
+<p><strong>Substitution:</strong> Insert W* into Lagrangian.</p>
+<p><strong>Dual Optimization Problem:</strong></p>
+<p class="formula">max over α≥0 of ( Σ αᵢ − (1/2) Σ αᵢαⱼyᵢyⱼxᵢᵀxⱼ )</p>
+<p><strong>Key Observation:</strong> Depends only on dot products xᵢᵀxⱼ.</p>
+
+<h3>Advantages of Dual Problem</h3>
+<ul>
+  <li><strong>Lower Dimensionality</strong>
+    <ul>
+      <li>Primal: works in D (features).</li>
+      <li>Dual: works in n (data points).</li>
+      <li>If D ≫ n, dual is faster.</li>
+    </ul>
+  </li>
+  <li><strong>Simpler Constraints</strong>
+    <ul>
+      <li>Only αᵢ ≥ 0.</li>
+      <li>Easier optimization.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Kernel Trick:</strong></p>
+<p class="formula">Replace: xᵢᵀxⱼ → K(xᵢ,xⱼ)</p>
+<p>Enables non-linear classification and high-dimensional mapping.</p>
+
+<h3>Support Vectors (Key Concept)</h3>
+<p><strong>Final Weight Vector:</strong></p>
+<p class="formula">W* = Σ αᵢ*yᵢxᵢ, for i = 1 to n</p>
+<p><strong>Role of αᵢ*:</strong></p>
+<table>
+  <tr><th>Case</th><th>Meaning</th></tr>
+  <tr><td>αᵢ* = 0</td><td>Point not important</td></tr>
+  <tr><td>αᵢ* &gt; 0</td><td>Important point</td></tr>
+</table>
+<p><strong>Support Vectors:</strong> Points with αᵢ* &gt; 0. They define the decision boundary and lie on the margin.</p>
+
+<h3>Examples &amp; Intuition</h3>
+<ul>
+  <li><strong>Contribution of Points:</strong> Only a few points have αᵢ &gt; 0. Model depends only on support vectors.</li>
+  <li><strong>Geometry Insight:</strong> Support vectors are closest to boundary and define margin. Removing them changes classifier.</li>
+</ul>
+<p><strong>Kernel Trick:</strong> Instead of explicit features, use similarity function K(xᵢ,xⱼ). Enables complex boundaries.</p>
+
+<h3>Final Takeaway</h3>
+<ul>
+  <li>Primal → optimize W.</li>
+  <li>Dual → optimize α.</li>
+  <li>Key idea: Solution depends only on support vectors.</li>
+</ul>
+
+<div class="summary">
+<strong>One-Line Summary:</strong> SVM dual form expresses the model as a weighted combination of key data points (support vectors), enabling efficient optimization and kernel methods.
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 5: Support Vector Machine</h2>
+
+<h3>Lagrangian Duality</h3>
+<p><strong>Duality Principle:</strong> For convex problems: Primal = Dual (same optimal value).</p>
+<p><strong>Primal Problem:</strong></p>
+<p class="formula">min over w of max over α≥0 of [f(w) + αg(w)]</p>
+<p><strong>Dual Problem:</strong></p>
+<p class="formula">max over α≥0 of min over w of [f(w) + αg(w)]</p>
+<p><strong>Optimality Condition:</strong> At optimum: f(w*) = Dual objective at α*</p>
+<p>Both formulations give the same result.</p>
+
+<h3>Complementary Slackness</h3>
+<p><strong>Condition:</strong> αᵢ* ⋅ gᵢ(w*) = 0</p>
+<p><strong>Meaning:</strong></p>
+<table>
+  <tr><th>Case</th><th>Interpretation</th></tr>
+  <tr><td>αᵢ* &gt; 0</td><td>gᵢ(w*) = 0 (point lies on boundary)</td></tr>
+  <tr><td>gᵢ(w*) &lt; 0</td><td>αᵢ* = 0 (point inside margin)</td></tr>
+</table>
+<p><strong>In SVM</strong></p>
+<p>Constraint: gᵢ(w) = 1 − yᵢ(Wᵀxᵢ)</p>
+<p>Slackness becomes: αᵢ*[1−yᵢ(Wᵀxᵢ)] = 0</p>
+
+<h3>Support Vectors</h3>
+<p><strong>Definition:</strong> Points where αᵢ* &gt; 0. These are called Support Vectors.</p>
+<h4>Geometric Meaning</h4>
+<p>They satisfy: yᵢ(Wᵀxᵢ) = 1. Lie exactly on margin boundaries.</p>
+<p><strong>Sparsity:</strong> Only support vectors contribute to the model:</p>
+<p class="formula">w* = Σ αᵢ*yᵢxᵢ, for i = 1 to n</p>
+<p>Non-support points (αᵢ* = 0) do not contribute.</p>
+
+<div class="example-box">
+<strong>Example (Data Compression)</strong><br>
+Dataset: 1 billion points → Support vectors: few hundred.<br>
+Store only support vectors ⇒ huge memory saving.
+</div>
+
+<h3>Kernel SVM &amp; Prediction</h3>
+<p><strong>Idea:</strong> Replace dot product with kernel: xᵢᵀxⱼ → K(xᵢ,xⱼ)</p>
+<p><strong>Prediction Function:</strong></p>
+<p class="formula">Prediction = Σ αᵢ*yᵢK(xᵢ, x_test), for i ∈ SV</p>
+<p><strong>Key Insight:</strong> Only sum over support vectors. Efficient even in high dimensions.</p>
+
+<h3>Handling Noise &amp; Outliers</h3>
+<p><strong>Problem:</strong> Standard SVM assumes perfect linear separability.</p>
+<p>Fails if:</p>
+<ul>
+  <li>Outliers exist.</li>
+  <li>Data overlaps.</li>
+</ul>
+
+<h4>Solutions</h4>
+<ol>
+  <li><strong>Kernels</strong>
+    <ul>
+      <li>Used when boundary is non-linear.</li>
+      <li>Example: circular or polynomial separation.</li>
+    </ul>
+  </li>
+  <li><strong>Soft Margin SVM</strong>
+    <ul>
+      <li>Used when data has noise.</li>
+      <li>Allows small violations of margin.</li>
+    </ul>
+  </li>
+</ol>
+
+<div class="example-box">
+<strong>Example:</strong> One wrong point inside cluster:
+<ul>
+  <li>Hard SVM → fails.</li>
+  <li>Soft SVM → tolerates it.</li>
+</ul>
+</div>
+
+<h3>Final Takeaway</h3>
+<ul>
+  <li>Duality makes SVM solvable efficiently.</li>
+  <li>Complementary slackness identifies important points.</li>
+  <li>Only support vectors matter.</li>
+  <li>Kernel trick enables non-linear classification.</li>
+  <li>Soft margin handles real-world noisy data.</li>
+</ul>
+
+<div class="summary">
+<strong>One-Line Summary:</strong> SVM works by focusing only on critical boundary points (support vectors), using duality and kernels to efficiently handle complex and high-dimensional data.
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 6: Soft Margin SVM</h2>
+
+<h3>Core Concepts</h3>
+<h4>Limitation of Hard Margin SVM</h4>
+<p>Constraint: yᵢ(wᵀxᵢ) ≥ 1</p>
+<ul>
+  <li>Works only if data is perfectly separable.</li>
+  <li>Fails when noise or outliers are present.</li>
+  <li>No feasible w ⇒ model fails.</li>
+</ul>
+
+<h4>Slack Variables (ξᵢ)</h4>
+<ul>
+  <li>Introduced to relax constraints.</li>
+  <li>Act like a penalty (or "bribe").</li>
+</ul>
+<p><strong>Meaning of ξᵢ:</strong></p>
+<table>
+  <tr><th>Case</th><th>Interpretation</th></tr>
+  <tr><td>ξᵢ = 0</td><td>Correct &amp; outside margin</td></tr>
+  <tr><td>0 &lt; ξᵢ &lt; 1</td><td>Inside margin but correct side</td></tr>
+  <tr><td>ξᵢ ≥ 1</td><td>Misclassified point</td></tr>
+</table>
+
+<h3>Soft Margin SVM</h3>
+<ul>
+  <li>Goal: Maximize margin and minimize classification errors.</li>
+  <li>Balances margin vs mistakes.</li>
+</ul>
+
+<h4>Hyperparameter C</h4>
+<p>Controls trade-off:</p>
+<table>
+  <tr><th>C Value</th><th>Behavior</th></tr>
+  <tr><td>Small C</td><td>Allows more errors, wider margin</td></tr>
+  <tr><td>Large C</td><td>Fewer errors, narrower margin</td></tr>
+</table>
+<p>Chosen using cross-validation.</p>
+
+<h3>Key Formulae</h3>
+<p><strong>Soft Margin Objective:</strong></p>
+<p class="formula">min over w,ξ of [(1/2)‖w‖² + C Σ ξᵢ], for i = 1 to n</p>
+<p><strong>Constraints:</strong></p>
+<p>Modified margin constraint: yᵢ(wᵀxᵢ) ≥ 1 − ξᵢ</p>
+<p>Non-negativity: ξᵢ ≥ 0</p>
+
+<h3>Examples &amp; Intuition</h3>
+<div class="example-box">
+<strong>Example 1: Why Slack is Needed</strong>
+<ul>
+  <li>If one outlier exists:
+    <ul>
+      <li>Hard SVM → fails.</li>
+      <li>Soft SVM → allows small violation.</li>
+    </ul>
+  </li>
+  <li>⇒ Model becomes robust.</li>
+</ul>
+</div>
+
+<div class="example-box">
+<strong>Example 2: Case w=0</strong><br>
+If slack not penalized:
+<ul>
+  <li>Choose w=0 (minimum length).</li>
+  <li>All points pay ξᵢ=1.</li>
+  <li>⇒ Bad solution → need penalty term.</li>
+</ul>
+</div>
+
+<div class="example-box">
+<strong>Example 3: Effect of C=0</strong>
+<ul>
+  <li>No penalty on slack.</li>
+  <li>Model ignores errors.</li>
+  <li>Result: w=0.</li>
+  <li>⇒ Useless classifier.</li>
+</ul>
+</div>
+
+<div class="example-box">
+<strong>Example 4: Effect of C=∞</strong>
+<ul>
+  <li>Slack too costly.</li>
+  <li>Forces ξᵢ=0.</li>
+  <li>⇒ Becomes Hard Margin SVM.</li>
+</ul>
+</div>
+
+<div class="example-box">
+<strong>Example 5: Trade-off Intuition</strong>
+<table>
+  <tr><th>Scenario</th><th>Outcome</th></tr>
+  <tr><td>Large margin + few errors</td><td>Ideal</td></tr>
+  <tr><td>Large margin + many errors</td><td>Over-relaxed</td></tr>
+  <tr><td>Small margin + no errors</td><td>Overfitting</td></tr>
+</table>
+</div>
+
+<h3>Important Insight</h3>
+<p>Objective combines:</p>
+<ul>
+  <li>‖w‖² → controls margin.</li>
+  <li>Σξᵢ → controls errors.</li>
+</ul>
+<p>Different units balanced by C.</p>
+
+<h3>Final Takeaway</h3>
+<ul>
+  <li>Hard SVM = strict, unrealistic.</li>
+  <li>Soft SVM = flexible, practical.</li>
+  <li>Handles:
+    <ul>
+      <li>Noise.</li>
+      <li>Outliers.</li>
+      <li>Non-perfect data.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>What's Next?</h3>
+<ul>
+  <li>Derive Dual of Soft Margin SVM.</li>
+  <li>Explore:
+    <ul>
+      <li>Kernelization.</li>
+      <li>Efficient optimization.</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="summary">
+<strong>One-Line Summary:</strong> Soft Margin SVM allows controlled mistakes using slack variables, balancing margin size and classification errors through the parameter C.
+</div>
+</div>
+
+</body>
+</html>
