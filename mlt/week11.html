@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>Week 11: Short Notes - Machine Learning</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 0 20px;
+    line-height: 1.6;
+    color: #222;
+    background: #fdfdfd;
+  }
+  h1 {
+    text-align: center;
+    color: #1a1a2e;
+    border-bottom: 3px solid #1a73e8;
+    padding-bottom: 10px;
+  }
+  h2 {
+    color: #1a73e8;
+    margin-top: 40px;
+    border-left: 5px solid #1a73e8;
+    padding-left: 10px;
+  }
+  h3 {
+    color: #0d47a1;
+    margin-top: 25px;
+  }
+  h4 {
+    color: #333;
+    margin-bottom: 5px;
+  }
+  ul {
+    margin-top: 5px;
+  }
+  li {
+    margin-bottom: 4px;
+  }
+  .summary {
+    background: #eef4ff;
+    border-left: 4px solid #1a73e8;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-top: 15px;
+  }
+  .formula {
+    background: #f5f5f5;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    display: inline-block;
+    margin: 4px 0;
+  }
+  .lecture {
+    margin-top: 60px;
+    padding-top: 10px;
+    border-top: 2px dashed #ccc;
+  }
+  code {
+    background: #f0f0f0;
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 12px 0;
+    width: 100%;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px 14px;
+    text-align: left;
+  }
+  th {
+    background: #eef4ff;
+    color: #1a73e8;
+  }
+  .example-box {
+    background: #fff8e6;
+    border-left: 4px solid #e6a817;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin: 10px 0;
+  }
+</style>
+</head>
+<body>
+
+<h1>Week 11: Short Notes</h1>
+
+<div class="lecture">
+<h2>Lecture 1: Dual Formulation for Soft Margin SVM</h2>
+
+<p><strong>Core Idea:</strong> Soft Margin SVM allows classification errors to handle:</p>
+<ul>
+  <li>Noisy data</li>
+  <li>Non-linearly separable datasets</li>
+</ul>
+<p>Instead of forcing perfect separation, it balances <strong>margin size</strong> and <strong>classification errors</strong>.</p>
+
+<h3>Key Concepts</h3>
+<h4>Slack Variables (ξᵢ)</h4>
+<ul>
+  <li>Measure violation of margin constraint</li>
+  <li>Interpretation:
+    <ul>
+      <li>ξᵢ = 0 → correctly classified</li>
+      <li>0 &lt; ξᵢ ≤ 1 → inside margin</li>
+      <li>ξᵢ &gt; 1 → misclassified</li>
+    </ul>
+  </li>
+</ul>
+
+<h4>Hyperparameter (C)</h4>
+<p>Controls trade-off between margin width and classification errors:</p>
+<table>
+  <tr><th>C Value</th><th>Behavior</th></tr>
+  <tr><td>Small C</td><td>Allows more errors → wider margin</td></tr>
+  <tr><td>Large C</td><td>Penalizes errors heavily → narrower margin</td></tr>
+</table>
+<p>Think of C as the <strong>strictness level</strong> of the model.</p>
+
+<h4>Kernelization</h4>
+<p>Replace dot product with kernel function to handle non-linear data. Examples:</p>
+<ul>
+  <li>Linear kernel</li>
+  <li>Polynomial kernel</li>
+  <li>RBF kernel</li>
+</ul>
+
+<h4>Box Constraint</h4>
+<p>In dual form: 0 ≤ αᵢ ≤ C. Limits influence of each data point.</p>
+
+<h3>Mathematical Formulation</h3>
+<p><strong>(A) Primal Problem</strong></p>
+<p class="formula">min over w,ξ of (1/2)‖w‖² + C Σ ξᵢ, for i = 1 to n</p>
+
+<p><strong>(B) Lagrangian</strong></p>
+<p class="formula">L = (1/2)‖w‖² + C Σξᵢ + Σαᵢ(1−yᵢwᵀxᵢ−ξᵢ) + Σβᵢ(−ξᵢ)</p>
+
+<p><strong>(C) Optimality Conditions</strong></p>
+<ul>
+  <li>Weight vector: w* = Σαᵢyᵢxᵢ</li>
+  <li>Constraint: αᵢ + βᵢ = C</li>
+</ul>
+
+<p><strong>(D) Dual Problem</strong></p>
+<p class="formula">max over α of ( Σ αᵢ − (1/2)αᵀYᵀXᵀXYα ), for i = 1 to n</p>
+<p>Subject to:</p>
+<p class="formula">0 ≤ αᵢ ≤ C</p>
+
+<h3>Important Examples</h3>
+<div class="example-box">
+<strong>Case 1: C=0</strong>
+<ul>
+  <li>No penalty for errors</li>
+  <li>Result: αᵢ = 0, w = 0</li>
+  <li>Model does nothing (completely relaxed)</li>
+</ul>
+</div>
+<div class="example-box">
+<strong>Case 2: C→∞</strong>
+<ul>
+  <li>Errors not allowed</li>
+  <li>Equivalent to Hard Margin SVM</li>
+  <li>Works only if data is perfectly separable</li>
+</ul>
+</div>
+
+<h3>Key Insights</h3>
+<ul>
+  <li>Handles outliers by allowing controlled violations</li>
+  <li>Sparse solution: only support vectors matter</li>
+  <li>Easy optimization due to box constraint:
+    <ul>
+      <li>If αᵢ &lt; 0 → 0</li>
+      <li>If αᵢ &gt; C → C</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="summary">
+<strong>Intuition Summary:</strong> Soft Margin SVM tries to: "Maximize margin while minimizing classification mistakes."
+<br><br>
+<strong>One-Line Memory Trick:</strong>
+<ul>
+  <li>Hard Margin = No mistakes allowed</li>
+  <li>Soft Margin = Some mistakes allowed (controlled by C)</li>
+</ul>
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 2: Complementary Slackness Conditions for Soft-Margin SVM</h2>
+
+<p><strong>Core Idea:</strong> At optimality, the extra terms in the Lagrangian vanish (become zero). This gives Complementary Slackness (CS) conditions, which help us understand:</p>
+<ul>
+  <li>Which points matter</li>
+  <li>Where they lie geometrically</li>
+</ul>
+
+<h3>Key Conditions</h3>
+<p><strong>CS Condition 1 (CS1):</strong> αᵢ*(1 − yᵢw*ᵀxᵢ − ξᵢ*) = 0</p>
+<p>Meaning: Either αᵢ = 0, OR Constraint is exactly tight</p>
+
+<p><strong>CS Condition 2 (CS2):</strong> βᵢ*ξᵢ* = 0</p>
+<p>Meaning: Either βᵢ = 0, OR Slack ξᵢ = 0</p>
+
+<p><strong>Feasibility Relation:</strong> αᵢ* + βᵢ* = C</p>
+<p>Connects α and β using hyperparameter C.</p>
+
+<h3>Case Analysis</h3>
+<p>We classify points based on αᵢ*:</p>
+
+<h4>Case 1: αᵢ* = 0 → Non-Support Vectors</h4>
+<ul>
+  <li>Derivation: βᵢ* = C. Since βᵢ* ≠ 0, from CS2: ξᵢ* = 0.</li>
+  <li>Geometry: yᵢw*ᵀxᵢ ≥ 1. Point is correctly classified, outside or on margin.</li>
+  <li>Conclusion:
+    <ul>
+      <li>Not a support vector</li>
+      <li>Does not affect decision boundary</li>
+    </ul>
+  </li>
+</ul>
+
+<h4>Case 2: 0 &lt; αᵢ* &lt; C → Margin Support Vectors</h4>
+<ul>
+  <li>Derivation: βᵢ* ≠ 0 ⟹ ξᵢ* = 0. αᵢ* ≠ 0 ⟹ 1 − yᵢw*ᵀxᵢ − ξᵢ* = 0.</li>
+  <li>Geometry: yᵢw*ᵀxᵢ = 1. Point lies exactly on margin.</li>
+  <li>Conclusion:
+    <ul>
+      <li>Support vector</li>
+      <li>Defines hyperplane</li>
+    </ul>
+  </li>
+</ul>
+
+<h4>Case 3: αᵢ* = C → "Danger Zone" Support Vectors</h4>
+<ul>
+  <li>Derivation: βᵢ* = 0. From CS1: ξᵢ* = 1 − yᵢw*ᵀxᵢ</li>
+  <li>Geometry: yᵢw*ᵀxᵢ ≤ 1. Point lies inside margin or misclassified.</li>
+  <li>Two Types of Points:
+    <ol>
+      <li>Inside Margin (but correct): 0 ≤ yᵢw*ᵀxᵢ &lt; 1</li>
+      <li>Misclassified (Outliers): yᵢw*ᵀxᵢ &lt; 0</li>
+    </ol>
+  </li>
+  <li>Conclusion:
+    <ul>
+      <li>Strong support vectors</li>
+      <li>Maximum influence (αᵢ = C)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Final Summary</h3>
+<p><strong>Support Vectors in Soft Margin SVM</strong></p>
+<p>A point is a support vector if: αᵢ* &gt; 0</p>
+<table>
+  <tr><th>Type</th><th>Condition</th><th>Meaning</th></tr>
+  <tr><td>Margin SV</td><td>0 &lt; αᵢ &lt; C</td><td>On hyperplane</td></tr>
+  <tr><td>Error SV</td><td>αᵢ = C</td><td>Inside margin / misclassified</td></tr>
+</table>
+
+<p><strong>Non-Support Vectors</strong></p>
+<table>
+  <tr><th>Condition</th><th>Meaning</th></tr>
+  <tr><td>αᵢ = 0</td><td>No role in model</td></tr>
+</table>
+
+<p><strong>Intuition:</strong> Think of αᵢ as importance weight:</p>
+<ul>
+  <li>αᵢ = 0 → ignore point</li>
+  <li>Small αᵢ → normal support vector</li>
+  <li>αᵢ = C → critical/difficult point</li>
+</ul>
+
+<div class="summary">
+<strong>One-Line Memory Trick:</strong> "Only points with α &gt; 0 matter — rest are invisible."
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 3: Summary for Soft-Margin SVM</h2>
+
+<h3>Core Concepts</h3>
+<h4>Primal vs Dual View</h4>
+<ul>
+  <li><strong>Primal:</strong> Focus on finding optimal w* (hyperplane).</li>
+  <li><strong>Dual:</strong> Focus on αᵢ* (importance of each data point).</li>
+</ul>
+<p><strong>Key Idea:</strong> Final solution depends on α values, not all data points.</p>
+
+<h4>Support Vectors &amp; Sparsity</h4>
+<ul>
+  <li>Only points with αᵢ* &gt; 0 matter.</li>
+  <li>These are called Support Vectors.</li>
+</ul>
+<p><strong>Result:</strong> Model is sparse → depends on few points only.</p>
+
+<h4>Complementary Slackness (CS)</h4>
+<p>Links:</p>
+<ul>
+  <li>αᵢ (importance)</li>
+  <li>ξᵢ (error)</li>
+  <li>Margin position</li>
+</ul>
+<p>Helps identify:</p>
+<ul>
+  <li>Which points are support vectors</li>
+  <li>Where they lie geometrically</li>
+</ul>
+
+<h4>Soft Margin Properties</h4>
+<ul>
+  <li>Handles outliers</li>
+  <li>Works with non-linear data (via kernels)</li>
+  <li>Easy optimization due to box constraint: 0 ≤ αᵢ ≤ C</li>
+</ul>
+
+<h3>Important Formulae</h3>
+<p><strong>Feasibility Condition:</strong> yᵢw*ᵀxᵢ + ξᵢ* ≥ 1</p>
+<p><strong>Slack Variable Meaning:</strong> ξᵢ* ≥ 1 − yᵢw*ᵀxᵢ</p>
+<p>Shows how much a point violates the margin.</p>
+
+<h3>Classification of Points</h3>
+<h4>Case 1: Outside Margin</h4>
+<ul>
+  <li>Condition: yᵢw*ᵀxᵢ &gt; 1</li>
+  <li>Result: αᵢ* = 0</li>
+  <li>Interpretation:
+    <ul>
+      <li>Correctly classified</li>
+      <li>Far from boundary</li>
+      <li>No contribution</li>
+    </ul>
+  </li>
+</ul>
+
+<h4>Case 2: On Margin</h4>
+<ul>
+  <li>Condition: yᵢw*ᵀxᵢ = 1</li>
+  <li>Result: 0 &lt; αᵢ* &lt; C</li>
+  <li>Interpretation:
+    <ul>
+      <li>Lies exactly on hyperplane</li>
+      <li>Support vector</li>
+    </ul>
+  </li>
+</ul>
+
+<h4>Case 3: Inside Margin / Misclassified</h4>
+<ul>
+  <li>Condition: yᵢw*ᵀxᵢ &lt; 1</li>
+  <li>Result: αᵢ* = C</li>
+  <li>Interpretation:
+    <ul>
+      <li>Inside margin OR wrong side</li>
+      <li>Most important points</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Summary Table</h3>
+<table>
+  <tr><th>αᵢ* (Dual View)</th><th>Margin (Primal View)</th><th>Meaning</th></tr>
+  <tr><td>αᵢ = 0</td><td>≥ 1</td><td>Ignore point</td></tr>
+  <tr><td>0 &lt; αᵢ &lt; C</td><td>= 1</td><td>On margin</td></tr>
+  <tr><td>αᵢ = C</td><td>≤ 1</td><td>Inside margin / misclassified</td></tr>
+</table>
+
+<h3>Visualization (2D Intuition)</h3>
+<p>Hyperplanes:</p>
+<ul>
+  <li>wᵀx = 1 → positive margin</li>
+  <li>wᵀx = −1 → negative margin</li>
+</ul>
+<p>Points:</p>
+<ul>
+  <li>Far outside → α = 0</li>
+  <li>On lines → support vectors</li>
+  <li>Between/incorrect → α = C</li>
+</ul>
+
+<h3>Practical Insights</h3>
+<ul>
+  <li><strong>Optimization:</strong> Fast solvers exist (near linear time). Easy due to clipping (box constraint).</li>
+  <li><strong>SVM vs Logistic Regression:</strong> Both perform well in practice. Strategy: train both → choose best via validation.</li>
+  <li><strong>Use Cases:</strong> Best for structured/tabular data and high-dimensional features.</li>
+</ul>
+
+<h3>Bigger Picture (ML Context)</h3>
+<p>Soft Margin SVM is part of the classification family:</p>
+<ul>
+  <li>Naïve Bayes</li>
+  <li>Decision Trees</li>
+  <li>k-NN</li>
+  <li>Logistic Regression</li>
+  <li>Perceptron</li>
+</ul>
+<p>Advanced methods:</p>
+<ul>
+  <li>Bagging</li>
+  <li>Boosting</li>
+</ul>
+
+<div class="summary">
+<strong>Final Intuition:</strong> "Only difficult or boundary points shape the decision boundary."
+<ul>
+  <li>Easy points → ignored</li>
+  <li>Hard points → define model</li>
+</ul>
+<strong>One-Line Memory Trick:</strong>
+<ul>
+  <li>α = 0 → useless</li>
+  <li>0 &lt; α &lt; C → boundary</li>
+  <li>α = C → problematic points</li>
+</ul>
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 4: Overfitting and Underfitting</h2>
+
+<h3>Types of Supervised Learning Models</h3>
+<h4>Generative Models</h4>
+<ul>
+  <li>Learn joint probability: P(X,Y)</li>
+  <li>Model how data is generated.</li>
+  <li><strong>Examples:</strong> Naïve Bayes, Gaussian Discriminant Analysis (GDA).</li>
+  <li><strong>Idea:</strong> "Model the data distribution first, then classify."</li>
+</ul>
+
+<h4>Discriminative Models</h4>
+<p>Learn decision boundary or conditional probability: P(Y|X)</p>
+<ul>
+  <li><strong>Examples:</strong> K-Nearest Neighbors (KNN), Decision Trees, Support Vector Machines (SVM).</li>
+  <li><strong>Idea:</strong> "Directly separate classes."</li>
+</ul>
+
+<h4>Unified Framework</h4>
+<p>Most models follow: Loss + Regularization</p>
+<ul>
+  <li><strong>Loss:</strong> Fit to data.</li>
+  <li><strong>Regularization:</strong> Control complexity.</li>
+</ul>
+
+<h3>Ensemble Learning (Meta Models)</h3>
+<p><strong>Core Idea:</strong> Combine many weak learners → strong learner.</p>
+<h4>Weak Learner</h4>
+<ul>
+  <li>Slightly better than random.</li>
+  <li>Example: Binary classification ≈ 55–60% accuracy.</li>
+</ul>
+<p><strong>Strong Learner:</strong> High accuracy after combining weak models.</p>
+<p><strong>Why it works?</strong> Different models capture different patterns → combining improves prediction.</p>
+
+<h3>Overfitting vs Underfitting</h3>
+<table>
+  <tr><th>Feature</th><th>Overfitting</th><th>Underfitting</th></tr>
+  <tr><td>Definition</td><td>Learns noise</td><td>Misses pattern</td></tr>
+  <tr><td>Model</td><td>Too complex</td><td>Too simple</td></tr>
+  <tr><td>Training Error</td><td>Very low (≈0)</td><td>High</td></tr>
+  <tr><td>Test Error</td><td>High</td><td>High</td></tr>
+</table>
+<p><strong>Intuition:</strong></p>
+<ul>
+  <li>Overfitting → "memorizes data."</li>
+  <li>Underfitting → "doesn't learn enough."</li>
+</ul>
+
+<h3>Bias−Variance Trade-off</h3>
+<p><strong>Total Error Concept:</strong> Error ≈ Bias + Variance</p>
+<p><strong>Bias</strong></p>
+<ul>
+  <li>Error due to wrong assumptions.</li>
+  <li>Example: Fitting a line to a curve.</li>
+  <li>High Bias → underfitting.</li>
+</ul>
+<p><strong>Variance</strong></p>
+<ul>
+  <li>Sensitivity to data changes.</li>
+  <li>Example: Model changes drastically with small data changes.</li>
+  <li>High Variance → overfitting.</li>
+</ul>
+
+<p><strong>Trade-off Table</strong></p>
+<table>
+  <tr><th>Model Complexity</th><th>Bias</th><th>Variance</th></tr>
+  <tr><td>Low</td><td>High</td><td>Low</td></tr>
+  <tr><td>High</td><td>Low</td><td>High</td></tr>
+</table>
+<p><strong>Goal:</strong> Balance both to minimize test error.</p>
+
+<p><strong>Key Conceptual Relationship:</strong> Structure + Noise = Data (Labels)</p>
+<p>Model should:</p>
+<ul>
+  <li>Learn structure</li>
+  <li>Ignore noise</li>
+</ul>
+
+<h3>Important Examples</h3>
+<div class="example-box">
+<strong>Decision Trees</strong>
+<ul>
+  <li>Overfitting: Deep tree → memorizes noise.</li>
+  <li>Underfitting: Shallow tree (depth = 1) → too simple.</li>
+</ul>
+</div>
+<div class="example-box">
+<strong>Regression (Sine Curve Example)</strong>
+<ul>
+  <li>True pattern → sinusoidal curve.</li>
+  <li>Underfitting: Linear model → misses curve.</li>
+  <li>Overfitting: High-degree polynomial → fits noise.</li>
+</ul>
+</div>
+<div class="example-box">
+<strong>K-Nearest Neighbors (KNN)</strong>
+<ul>
+  <li>Small K: Complex boundary → overfitting.</li>
+  <li>Large K: Smooth boundary → underfitting.</li>
+  <li>Extreme case: K=N → predicts same value everywhere.</li>
+</ul>
+</div>
+
+<h3>Controlling Bias−Variance</h3>
+<p>Use hyperparameters:</p>
+<table>
+  <tr><th>Model</th><th>Parameter</th></tr>
+  <tr><td>KNN</td><td>K</td></tr>
+  <tr><td>Decision Tree</td><td>Depth</td></tr>
+  <tr><td>Logistic Regression / SVM</td><td>λ (regularization)</td></tr>
+</table>
+<p><strong>Role of Cross-Validation:</strong> Helps choose best parameter, balances bias &amp; variance.</p>
+
+<div class="summary">
+<strong>Final Intuition:</strong> "Simple models miss patterns, complex models chase noise — best model finds the balance."
+<br><br>
+<strong>One-Line Memory Trick:</strong>
+<ul>
+  <li>Underfit = High Bias</li>
+  <li>Overfit = High Variance</li>
+  <li>Goal = Balance both</li>
+</ul>
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 5: Bagging</h2>
+
+<h3>Core Idea of Bagging</h3>
+<ul>
+  <li><strong>Bagging (Bootstrap Aggregation):</strong> Combines multiple models to reduce variance.</li>
+  <li>Best for high-variance models (e.g., deep decision trees).</li>
+</ul>
+<p><strong>Key Idea:</strong> "Train many models on different data → average their predictions."</p>
+
+<h3>Why Bagging Works</h3>
+<ul>
+  <li><strong>Power of Averaging:</strong> Averaging multiple models reduces fluctuations and stabilizes predictions.</li>
+  <li>Works best when models are independent or less correlated.</li>
+</ul>
+
+<h3>Bootstrapping</h3>
+<ul>
+  <li><strong>Definition:</strong> Create multiple datasets from original dataset using sampling with replacement.</li>
+  <li><strong>Key Properties:</strong>
+    <ul>
+      <li>Each dataset (bag) has same size n.</li>
+      <li>Some points appear multiple times, some may not appear at all.</li>
+    </ul>
+  </li>
+</ul>
+<div class="example-box">
+<strong>Example</strong><br>
+Original dataset: D = {x₁, x₂, x₃, x₄, x₅}<br>
+Bootstrap sample: D₁ = {x₃, x₄, x₅, x₃, x₅}
+</div>
+
+<h3>Aggregation</h3>
+<ul>
+  <li>After training: models h₁, h₂, …, h_M.</li>
+  <li>Final prediction:</li>
+</ul>
+<p class="formula">H*(x) = sign( (1/M) Σ hᵢ(x) ), for i = 1 to M</p>
+<ul>
+  <li><strong>Classification:</strong> Majority vote.</li>
+  <li><strong>Regression:</strong> Average output.</li>
+</ul>
+
+<h3>Weak Learners in Bagging</h3>
+<ul>
+  <li>Usually deep decision trees.</li>
+  <li>High variance, low bias.</li>
+  <li>Bagging reduces their variance.</li>
+</ul>
+
+<h3>Important Formulae</h3>
+<p><strong>Sample Mean (MLE):</strong></p>
+<p class="formula">μ_ML = (1/n) Σ xᵢ, for i = 1 to n</p>
+<p>Averaging reduces variance.</p>
+
+<p><strong>Probability a Point is Not Selected:</strong> (1−1/n)ⁿ</p>
+<p><strong>Probability a Point is Selected:</strong> 1−1/e ≈ 0.67</p>
+<p>Approximately 67% of data appears in each bag.</p>
+
+<h3>Random Forest</h3>
+<ul>
+  <li><strong>Definition:</strong> Bagging applied to decision trees with extra randomness via feature selection.</li>
+  <li><strong>Feature Bagging:</strong> At each split, randomly select subset of features and choose best split only from them.</li>
+  <li><strong>Why it helps:</strong> Trees become less correlated → averaging gives stronger variance reduction.</li>
+</ul>
+<div class="example-box">
+<strong>Example:</strong> Total features = 1000. At a node → pick only 4 features randomly. Split based only on those 4.
+</div>
+
+<h3>Feature Selection Rule</h3>
+<table>
+  <tr><th>Task</th><th>Features Used</th></tr>
+  <tr><td>Classification</td><td>√d</td></tr>
+  <tr><td>Regression</td><td>d/3 or d/5</td></tr>
+</table>
+
+<h3>Intuition Example</h3>
+<ul>
+  <li><strong>Gaussian Mean Estimation:</strong>
+    <ul>
+      <li>Single sample → high variance.</li>
+      <li>Average of samples → stable estimate.</li>
+    </ul>
+  </li>
+</ul>
+<p>Same idea behind bagging.</p>
+
+<h3>Advantages</h3>
+<ul>
+  <li><strong>Parallel Training:</strong> Each model independent, can run on multiple CPUs.</li>
+  <li><strong>Robustness:</strong> Noise learned by individual trees gets averaged out.</li>
+  <li><strong>Better Generalization:</strong> Reduces overfitting significantly.</li>
+</ul>
+
+<div class="summary">
+<strong>Final Intuition:</strong> "Many noisy models → averaged → smooth &amp; reliable model."
+<br><br>
+<strong>One-Line Memory Trick:</strong> Bagging = Bootstrap + Average = Reduce Variance
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 6: Boosting</h2>
+
+<h3>Core Idea of Boosting</h3>
+<ul>
+  <li><strong>Boosting:</strong> Converts weak learners into strong learners using an iterative process.</li>
+  <li><strong>Key Idea:</strong> "Focus more on mistakes in each step and improve them."</li>
+</ul>
+
+<h4>Weak Learner</h4>
+<ul>
+  <li>Slightly better than random (≈ 55–60%).</li>
+  <li>Usually simple models, high bias, low variance.</li>
+</ul>
+
+<h4>Strong Learner</h4>
+<ul>
+  <li>Combination of weak learners.</li>
+  <li>Can achieve very high accuracy (even zero training error).</li>
+</ul>
+
+<h4>AdaBoost (Adaptive Boosting)</h4>
+<ul>
+  <li>Adjusts importance (weights) of data points.</li>
+  <li>Misclassified points → more focus in next round.</li>
+</ul>
+
+<h3>Decision Stumps (Common Weak Learners)</h3>
+<ul>
+  <li><strong>Definition:</strong> Very small decision tree (1−2 levels).</li>
+  <li>Makes decision based on one feature.</li>
+  <li><strong>Example:</strong> "Is feature1 &lt; threshold?"</li>
+  <li><strong>Properties:</strong> Fast, simple, low accuracy individually, perfect for boosting.</li>
+</ul>
+
+<h3>AdaBoost Algorithm Steps</h3>
+<p><strong>Step 1: Initialization:</strong> Assign equal weights: D₁(i) = 1/n</p>
+<p><strong>Step 2: Iterative Training (t = 1…T)</strong></p>
+<ol>
+  <li><strong>Train Weak Learner:</strong> Train model hₜ using weighted data.</li>
+  <li><strong>Compute Error:</strong> Error = sum of weights of misclassified points.</li>
+  <li><strong>Compute Classifier Importance:</strong>
+    <p class="formula">αₜ = (1/2) ln( (1−εₜ)/εₜ )</p>
+    Lower error → higher importance.
+  </li>
+  <li><strong>Update Weights:</strong>
+    <ul>
+      <li>Wrong prediction: D<sub>t+1</sub>(i) = Dₜ(i)·e^(αₜ)</li>
+      <li>Correct prediction: D<sub>t+1</sub>(i) = Dₜ(i)·e^(−αₜ)</li>
+    </ul>
+  </li>
+  <li><strong>Normalize:</strong> Ensure Σ D<sub>t+1</sub>(i) = 1.</li>
+</ol>
+
+<p><strong>Step 3: Final Model</strong></p>
+<p class="formula">H*(x) = sign( Σ αₜhₜ(x) ), for t = 1 to T</p>
+<p>Weighted majority vote.</p>
+
+<h3>Key Intuition</h3>
+<ul>
+  <li>Misclassified points → get higher weight.</li>
+  <li>Correct points → get lower weight.</li>
+  <li>Model keeps learning from mistakes.</li>
+</ul>
+
+<h3>Theoretical Insights</h3>
+<ul>
+  <li><strong>Training Error:</strong> If weak learner is slightly better than random, training error → 0 as T increases.</li>
+  <li><strong>Gamma (γ):</strong> Measures improvement over random.
+    <ul>
+      <li>Example: Accuracy = 60%, Random = 50%, γ=0.1.</li>
+    </ul>
+  </li>
+  <li><strong>Overfitting Behavior:</strong> Often does not overfit quickly; test error may continue to improve.</li>
+  <li><strong>Reason:</strong> Increases margin over time.</li>
+</ul>
+
+<h3>Practical Properties</h3>
+<ul>
+  <li><strong>Serial Nature:</strong> Each step depends on previous step → cannot parallelize (unlike Bagging).</li>
+  <li><strong>Low Tuning Needed:</strong> Works well with default settings.</li>
+  <li><strong>Best Use Case:</strong> Works best with simple models (decision stumps). Not ideal with already complex models.</li>
+</ul>
+
+<h3>Examples</h3>
+<div class="example-box">
+<strong>Weighted Sampling Example:</strong> Weight = 0.7 → 70% chance of being selected.
+</div>
+<div class="example-box">
+<strong>Weight Adjustment Example:</strong> Dataset = 1000 points.
+<ul>
+  <li>Correct: 600</li>
+  <li>Wrong: 400</li>
+  <li>Those 400 points get higher weight next round → model focuses on them.</li>
+</ul>
+</div>
+
+<h3>Boosting vs Bagging (Quick Insight)</h3>
+<table>
+  <tr><th>Feature</th><th>Bagging</th><th>Boosting</th></tr>
+  <tr><td>Goal</td><td>Reduce variance</td><td>Reduce bias</td></tr>
+  <tr><td>Training</td><td>Parallel</td><td>Sequential</td></tr>
+  <tr><td>Focus</td><td>Random samples</td><td>Hard examples</td></tr>
+  <tr><td>Models</td><td>Independent</td><td>Dependent</td></tr>
+</table>
+
+<div class="summary">
+<strong>Final Intuition:</strong> "Learn → find mistakes → focus on mistakes → repeat → combine."
+<br><br>
+<strong>One-Line Memory Trick:</strong> Boosting = Focus on errors + Weighted learning
+</div>
+</div>
+
+</body>
+</html>

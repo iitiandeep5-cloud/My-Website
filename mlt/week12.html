@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>Week 12: Short Notes - Machine Learning</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 0 20px;
+    line-height: 1.6;
+    color: #222;
+    background: #fdfdfd;
+  }
+  h1 {
+    text-align: center;
+    color: #1a1a2e;
+    border-bottom: 3px solid #1a73e8;
+    padding-bottom: 10px;
+  }
+  h2 {
+    color: #1a73e8;
+    margin-top: 40px;
+    border-left: 5px solid #1a73e8;
+    padding-left: 10px;
+  }
+  h3 {
+    color: #0d47a1;
+    margin-top: 25px;
+  }
+  h4 {
+    color: #333;
+    margin-bottom: 5px;
+  }
+  ul {
+    margin-top: 5px;
+  }
+  li {
+    margin-bottom: 4px;
+  }
+  .summary {
+    background: #eef4ff;
+    border-left: 4px solid #1a73e8;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-top: 15px;
+  }
+  .formula {
+    background: #f5f5f5;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    display: inline-block;
+    margin: 4px 0;
+  }
+  .lecture {
+    margin-top: 60px;
+    padding-top: 10px;
+    border-top: 2px dashed #ccc;
+  }
+  code {
+    background: #f0f0f0;
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 12px 0;
+    width: 100%;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px 14px;
+    text-align: left;
+  }
+  th {
+    background: #eef4ff;
+    color: #1a73e8;
+  }
+  .example-box {
+    background: #fff8e6;
+    border-left: 4px solid #e6a817;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin: 10px 0;
+  }
+</style>
+</head>
+<body>
+
+<h1>Week 12: Short Notes</h1>
+
+<div class="lecture">
+<h2>Lecture 1: Classification Loss Functions</h2>
+
+<h3>Problem Setup</h3>
+<p>We are given training data: (x₁, y₁), (x₂, y₂), …, (xₙ, yₙ)</p>
+<p>where: xᵢ ∈ Rᵈ (feature vector), yᵢ ∈ {+1,−1} (label)</p>
+<p><strong>Goal:</strong> Learn a function H:Rᵈ → {+1,−1}</p>
+
+<h3>Linear Classifier</h3>
+<p>We assume a linear decision boundary: <span class="formula">H(x) = sign(Wᵀx + b)</span></p>
+<p>W: weight vector &nbsp; b: bias</p>
+<p><strong>Interpretation:</strong></p>
+<ul>
+  <li>If Wᵀx + b &gt; 0 ⇒ class = +1</li>
+  <li>If Wᵀx + b &lt; 0 ⇒ class = −1</li>
+</ul>
+
+<h3>Dimensionality Trick (Bias Removal)</h3>
+<ul>
+  <li>Add an extra feature: x₀ = 1</li>
+  <li>Extend vector → x ∈ Rᵈ⁺¹</li>
+  <li>Then bias b becomes part of W</li>
+</ul>
+<p>Model becomes: <span class="formula">H(x) = sign(Wᵀx)</span></p>
+
+<h3>Performance Measure: 0–1 Loss</h3>
+<p><strong>Indicator Function:</strong> I(z) = 1 if z is true, 0 otherwise</p>
+<p><strong>Total Training Error:</strong> <span class="formula">Σ I(H(xᵢ) ≠ yᵢ), for i = 1 to n</span></p>
+<p><strong>Single Point Loss:</strong> I(y·G(x) &lt; 0)</p>
+<p><strong>Meaning:</strong></p>
+<ul>
+  <li>y·G(x) &gt; 0 ⇒ correct prediction → loss = 0</li>
+  <li>y·G(x) &lt; 0 ⇒ wrong prediction → loss = 1</li>
+</ul>
+
+<h4>Example Table</h4>
+<table>
+  <tr><th>y</th><th>G(x)</th><th>y·G(x)</th><th>Result</th></tr>
+  <tr><td>+1</td><td>2</td><td>+2</td><td>Correct</td></tr>
+  <tr><td>-1</td><td>3</td><td>-3</td><td>Wrong</td></tr>
+</table>
+
+<h3>Why is Optimization Hard?</h3>
+<p>Minimizing 0–1 loss is <strong>NP-hard</strong>.</p>
+<p><strong>Reasons:</strong></p>
+<ul>
+  <li>Discontinuous → sudden jump from 0 → 1</li>
+  <li>Non-convex → many local minima</li>
+  <li>No efficient algorithm guaranteed</li>
+</ul>
+<p><strong>Conclusion:</strong> Direct optimization is impractical.</p>
+
+<h3>Solution: Surrogate Loss Functions</h3>
+<p><strong>Idea:</strong> Replace 0–1 loss with a smooth, convex loss.</p>
+<p><strong>Advantages:</strong></p>
+<ul>
+  <li>Easier to optimize</li>
+  <li>Used in real algorithms</li>
+</ul>
+<p><strong>Examples:</strong></p>
+<ul>
+  <li>Logistic Regression → log loss</li>
+  <li>SVM → hinge loss</li>
+  <li>Perceptron → perceptron loss</li>
+</ul>
+
+<h3>Squared Loss (Regression Approach)</h3>
+<p>Treat classification as regression: (G(x)−y)²</p>
+<p>Equivalent form (for y ∈ {+1,−1}): (y·G(x)−1)²</p>
+<div class="example-box">
+<strong>Example:</strong>
+<ul>
+  <li>y = +1</li>
+  <li>If G(x) = 1 ⇒ loss = 0 (perfect)</li>
+  <li>If G(x) = 5 ⇒ loss is large</li>
+</ul>
+Even correct predictions can get high penalty.
+</div>
+
+<h3>Problems with Squared Loss</h3>
+<ol>
+  <li><strong>Penalizes "Too Correct" Predictions</strong>
+    <ul>
+      <li>Loss increases if y·G(x) is very large</li>
+      <li>But 0–1 loss = 0 (already correct)</li>
+    </ul>
+  </li>
+  <li><strong>Sensitive to Outliers</strong>
+    <ul>
+      <li>Far-away points dominate training</li>
+      <li>Can distort decision boundary</li>
+    </ul>
+  </li>
+</ol>
+
+<div class="summary">
+<strong>Final Intuition:</strong>
+<ul>
+  <li>0–1 loss = ideal but not computable efficiently</li>
+  <li>Surrogate losses are practical substitutes</li>
+  <li>Different ML algorithms = different surrogate losses</li>
+</ul>
+<strong>One-Line Summary:</strong> Binary classification = find a hyperplane that separates data, but since exact error minimization is hard, we optimize smooth approximations instead.
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 2: SVM and Logistic Loss</h2>
+
+<h3>Core Idea</h3>
+<ul>
+  <li>0–1 loss is hard to optimize</li>
+  <li>Surrogate losses (smooth + convex) make learning efficient and stable</li>
+</ul>
+
+<h3>Hinge Loss (Used in SVM)</h3>
+<p><strong>Formula:</strong> <span class="formula">max(0, 1 − y·G(x))</span></p>
+<p><strong>Full SVM Objective:</strong></p>
+<p class="formula">(1/2)‖w‖² + Σ max(0, 1 − yᵢG(xᵢ)), for i = 1 to n</p>
+<p><strong>Intuition:</strong> y·G(x) = margin → measures confidence of prediction.</p>
+
+<h4>Behavior Table</h4>
+<table>
+  <tr><th>Condition</th><th>Loss</th></tr>
+  <tr><td>yG(x) ≥ 1</td><td>0</td></tr>
+  <tr><td>yG(x) &lt; 1</td><td>Linear increase</td></tr>
+</table>
+<p><strong>Key Points:</strong></p>
+<ul>
+  <li>No penalty if correct <strong>and confident</strong> (margin ≥ 1)</li>
+  <li>Penalizes wrong predictions and weakly correct predictions</li>
+</ul>
+
+<h4>Example</h4>
+<table>
+  <tr><th>y</th><th>G(x)</th><th>y·G(x)</th><th>Loss</th></tr>
+  <tr><td>+1</td><td>2</td><td>2</td><td>0</td></tr>
+  <tr><td>+1</td><td>0.5</td><td>0.5</td><td>0.5</td></tr>
+  <tr><td>-1</td><td>1</td><td>-1</td><td>2</td></tr>
+</table>
+<p><strong>Takeaway:</strong> Hinge loss focuses on the decision boundary (support vectors).</p>
+
+<h3>Logistic Loss (Used in Logistic Regression)</h3>
+<p><strong>Formula:</strong> <span class="formula">log(1 + e^(−y·G(x)))</span></p>
+<p><strong>Intuition:</strong></p>
+<ul>
+  <li>Smooth approximation of 0–1 loss</li>
+  <li>Derived from maximum likelihood estimation</li>
+</ul>
+
+<h4>Behavior Table</h4>
+<table>
+  <tr><th>Margin yG(x)</th><th>Loss</th></tr>
+  <tr><td>Large positive</td><td>≈ 0</td></tr>
+  <tr><td>0</td><td>≈ 0.69</td></tr>
+  <tr><td>Negative</td><td>Large</td></tr>
+</table>
+<p><strong>Key Points:</strong></p>
+<ul>
+  <li>Always positive</li>
+  <li>Smooth and differentiable</li>
+  <li>Gradually decreases (no sharp cutoff)</li>
+</ul>
+
+<h4>Example</h4>
+<table>
+  <tr><th>y</th><th>G(x)</th><th>y·G(x)</th><th>Loss</th></tr>
+  <tr><td>+1</td><td>3</td><td>3</td><td>≈ 0.05</td></tr>
+  <tr><td>+1</td><td>0</td><td>0</td><td>≈ 0.69</td></tr>
+  <tr><td>-1</td><td>2</td><td>-2</td><td>Large</td></tr>
+</table>
+<p><strong>Takeaway:</strong> Logistic loss provides probabilistic interpretation and smooth learning.</p>
+
+<h3>Squared Loss (For Comparison)</h3>
+<p><strong>Formula:</strong> (G(x)−y)²</p>
+<p><strong>Issues:</strong></p>
+<ul>
+  <li>Penalizes even correct predictions</li>
+  <li>Sensitive to outliers</li>
+  <li>Not ideal for classification</li>
+</ul>
+
+<h3>Comparison of Loss Functions</h3>
+<table>
+  <tr><th>Property</th><th>Hinge Loss</th><th>Logistic Loss</th><th>Squared Loss</th></tr>
+  <tr><td>Type</td><td>Convex</td><td>Convex</td><td>Convex</td></tr>
+  <tr><td>Smooth</td><td>No</td><td>Yes</td><td>Yes</td></tr>
+  <tr><td>Output</td><td>Margin-based</td><td>Probabilistic</td><td>Regression</td></tr>
+  <tr><td>Penalizes confident correct points</td><td>No</td><td>Slight</td><td>Yes</td></tr>
+  <tr><td>Best for classification</td><td>Yes</td><td>Yes</td><td>No</td></tr>
+</table>
+
+<div class="summary">
+<strong>Final Intuition:</strong>
+<ul>
+  <li><strong>Hinge Loss (SVM):</strong> Focuses on maximum margin, ignores very confident correct points</li>
+  <li><strong>Logistic Loss:</strong> Smooth, probabilistic, better for gradient-based optimization</li>
+  <li><strong>Squared Loss:</strong> Designed for regression, not ideal for classification</li>
+</ul>
+<strong>One-Line Summary:</strong> Different ML algorithms differ mainly in the surrogate loss they use to approximate the hard 0–1 classification loss.
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 3: Perceptron and Boosting Loss</h2>
+
+<h3>Perceptron as Gradient Descent</h3>
+<p><strong>Core Idea:</strong> Perceptron = Stochastic Gradient Descent (SGD). Updates weights using one data point at a time.</p>
+<p><strong>Standard Update Rule:</strong> <span class="formula">Wₜ₊₁ = Wₜ + yₜxₜ</span></p>
+<p>Applied only when prediction is wrong.</p>
+<p><strong>Gradient Descent View:</strong> General GD update: <span class="formula">Wₜ₊₁ = Wₜ − η∇L(W)</span></p>
+<ul>
+  <li>Learning rate η = 1</li>
+  <li>Uses single sample (SGD)</li>
+</ul>
+<p><strong>Perceptron Loss Function:</strong> max(0, −y·Wᵀx)</p>
+<p><strong>Difference from SVM:</strong></p>
+<ul>
+  <li>SVM: max(0, 1−yWᵀx)</li>
+  <li>Perceptron: removes margin "1 −"</li>
+</ul>
+
+<h4>Example</h4>
+<table>
+  <tr><th>y</th><th>Wᵀx</th><th>y·Wᵀx</th><th>Loss</th><th>Update</th></tr>
+  <tr><td>+1</td><td>-2</td><td>-2</td><td>2</td><td>Yes</td></tr>
+  <tr><td>+1</td><td>3</td><td>3</td><td>0</td><td>No</td></tr>
+</table>
+<p><strong>Takeaway:</strong> Perceptron updates only on mistakes.</p>
+
+<h3>Hinge Loss &amp; Subgradients</h3>
+<p><strong>Standard Hinge Loss:</strong> max(0, 1−y·Wᵀx)</p>
+<h4>Gradient Cases</h4>
+<table>
+  <tr><th>Condition</th><th>Gradient</th></tr>
+  <tr><td>yWᵀx &lt; 0</td><td>−yx</td></tr>
+  <tr><td>yWᵀx &gt; 0</td><td>0</td></tr>
+</table>
+<p><strong>Non-Differentiability:</strong> At yWᵀx = 0, function is not smooth.</p>
+<p><strong>Subgradient Concept:</strong></p>
+<ul>
+  <li>A subgradient is a valid "generalized gradient"</li>
+  <li>At non-smooth points → multiple possible slopes</li>
+</ul>
+<p>At yWᵀx = 0: Subgradient lies between [−yx, 0].</p>
+<p><strong>Perceptron Choice:</strong></p>
+<ul>
+  <li>Always picks −yx</li>
+  <li>Treats boundary case as mistake</li>
+</ul>
+
+<h3>Boosting &amp; Exponential Loss</h3>
+<p><strong>Exponential Loss:</strong> e^(−y·h(x))</p>
+<p><strong>Idea:</strong></p>
+<ul>
+  <li>Boosting builds model step-by-step</li>
+  <li>Adds a new weak learner each round</li>
+</ul>
+<p><strong>Mechanism:</strong></p>
+<ul>
+  <li>Acts like coordinate descent</li>
+  <li>Focuses more on misclassified points</li>
+</ul>
+
+<h4>Example</h4>
+<table>
+  <tr><th>y</th><th>h(x)</th><th>y·h(x)</th><th>Loss</th></tr>
+  <tr><td>+1</td><td>2</td><td>2</td><td>small</td></tr>
+  <tr><td>-1</td><td>2</td><td>-2</td><td>large</td></tr>
+</table>
+<p><strong>Takeaway:</strong> Boosting strongly penalizes wrong predictions → improves accuracy.</p>
+
+<h3>Convex Surrogates vs Neural Networks</h3>
+<p><strong>Convex Surrogate Methods:</strong></p>
+<ul>
+  <li>Examples: SVM → Hinge Loss, Logistic Regression → Logistic Loss</li>
+  <li>Convex function = single global minimum</li>
+  <li>Easy to optimize, reliable solutions</li>
+</ul>
+<p><strong>Neural Networks:</strong></p>
+<ul>
+  <li>Loss function is non-convex</li>
+  <li>Consequences: multiple local minima, no guarantee of global optimum</li>
+  <li>Still effective: good local minima → good performance</li>
+  <li>Very powerful for complex data</li>
+</ul>
+<p><strong>Historical Link:</strong> Neural networks are inspired by Perceptron.</p>
+
+<h4>Quick Comparison</h4>
+<table>
+  <tr><th>Concept</th><th>Perceptron</th><th>SVM</th><th>Boosting</th><th>Neural Networks</th></tr>
+  <tr><td>Loss</td><td>Modified hinge</td><td>Hinge</td><td>Exponential</td><td>Non-convex</td></tr>
+  <tr><td>Optimization</td><td>SGD</td><td>Convex</td><td>Iterative</td><td>Non-convex</td></tr>
+  <tr><td>Updates</td><td>Mistakes only</td><td>Margin-based</td><td>Weighted errors</td><td>Full optimization</td></tr>
+  <tr><td>Guarantee</td><td>No</td><td>Yes</td><td>Yes (theoretical)</td><td>No</td></tr>
+</table>
+
+<div class="summary">
+<strong>Final Intuition:</strong>
+<ul>
+  <li><strong>Perceptron:</strong> simplest, updates only on mistakes</li>
+  <li><strong>SVM:</strong> adds margin, more robust</li>
+  <li><strong>Boosting:</strong> combines weak learners into strong model</li>
+  <li><strong>Neural Networks:</strong> trade convexity for power</li>
+</ul>
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 4: Neural Networks</h2>
+
+<h3>Core Idea: Supervised Learning Framework</h3>
+<p><strong>Goal:</strong> Learn a model by minimizing: Loss Function + Regularization</p>
+<p><strong>Components:</strong></p>
+<ul>
+  <li><strong>Loss Function:</strong> Measures prediction error (depends on data)</li>
+  <li><strong>Regularizer:</strong> Controls model complexity (e.g., keeps weights W small)</li>
+</ul>
+
+<h4>Convex vs Non-Convex</h4>
+<table>
+  <tr><th>Type</th><th>Algorithms</th><th>Property</th></tr>
+  <tr><td>Convex</td><td>SVM, Logistic Regression</td><td>One global minimum</td></tr>
+  <tr><td>Non-Convex</td><td>Neural Networks</td><td>Many local minima</td></tr>
+</table>
+<p><strong>Important:</strong></p>
+<ul>
+  <li>Convex → easy optimization</li>
+  <li>Neural Networks → more powerful but harder to train</li>
+</ul>
+
+<h3>Neural Network Basics</h3>
+<p><strong>Definition:</strong> Inspired by biological neurons. Extension of Perceptron. Learns non-linear relationships.</p>
+<p><strong>Mathematical Model (1 Hidden Layer):</strong></p>
+<p>Input vector: X = [x₁, x₂, …, xd]ᵀ</p>
+<p>Hidden layer computation: Each neuron computes: a(WᵢᵀX)</p>
+<ul>
+  <li>Linear part: WᵢᵀX</li>
+  <li>Activation: a(·)</li>
+</ul>
+<p><strong>Final output:</strong> <span class="formula">ŷ = Σ W_out(i) · a(WᵢᵀX), for i = 1 to k</span></p>
+<p><strong>Parameters of Network:</strong></p>
+<ul>
+  <li>W₁, W₂, …, Wₖ: hidden layer weights</li>
+  <li>W_out: output weights</li>
+  <li>k: number of hidden neurons</li>
+  <li>a(·): activation function</li>
+</ul>
+
+<h3>Activation Functions</h3>
+<p><strong>Purpose:</strong> Add non-linearity → makes network powerful.</p>
+<ul>
+  <li><strong>Sigmoid Function:</strong> a(z) = 1/(1+e^(−z)). Properties: output between 0 and 1, smooth &amp; differentiable. Use: probability / soft decision.</li>
+  <li><strong>ReLU (Most Popular):</strong> a(z) = max(0,z). Properties: simple &amp; fast, avoids vanishing gradient.</li>
+  <li><strong>Step Function:</strong> a(z) = 1 if z ≥ 0, 0 if z &lt; 0. Hard decision, not smooth → difficult to optimize.</li>
+  <li><strong>TanH:</strong> Output range: (-1, 1), centered around zero.</li>
+</ul>
+
+<h3>Intuition &amp; Examples</h3>
+<ul>
+  <li><strong>Biological Analogy:</strong> Like real neurons: input signal → processed → neuron "fires"</li>
+  <li><strong>Voting Interpretation:</strong> Each hidden neuron detects a feature; activation = "vote"; output layer combines votes</li>
+  <li><strong>Example (Image Recognition):</strong>
+    <ul>
+      <li>Input = image pixels</li>
+      <li>Hidden nodes learn features: edges, curves, textures</li>
+      <li>Final output combines these features</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Learning Algorithms &amp; Loss Functions</h3>
+<table>
+  <tr><th>Algorithm</th><th>Loss Function</th></tr>
+  <tr><td>SVM</td><td>Hinge Loss</td></tr>
+  <tr><td>Logistic Regression</td><td>Logistic Loss</td></tr>
+  <tr><td>Boosting</td><td>Exponential Loss</td></tr>
+  <tr><td>Perceptron</td><td>Modified Hinge Loss</td></tr>
+</table>
+
+<h4>Key Comparison</h4>
+<table>
+  <tr><th>Feature</th><th>Linear Models</th><th>Neural Networks</th></tr>
+  <tr><td>Mapping</td><td>Linear</td><td>Non-linear</td></tr>
+  <tr><td>Optimization</td><td>Convex</td><td>Non-convex</td></tr>
+  <tr><td>Complexity</td><td>Low</td><td>High</td></tr>
+  <tr><td>Power</td><td>Limited</td><td>Very high</td></tr>
+</table>
+
+<div class="summary">
+<strong>Final Intuition:</strong>
+<ul>
+  <li>Without activation → network = linear model</li>
+  <li>With activation → learns complex patterns</li>
+  <li>Neural networks trade easy optimization for high power</li>
+</ul>
+<strong>One-Line Summary:</strong> Neural networks extend linear models by adding layers and non-linear activations, enabling them to learn complex patterns at the cost of harder (non-convex) optimization.
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 5: Computing Parameters of a Neural Networks</h2>
+
+<h3>Neural Network Parameters &amp; Representation</h3>
+<p><strong>Parameter Vector:</strong> All weights in the network are combined into one vector:</p>
+<p class="formula">θ = {W₁, W₂, …, Wₖ, W_out}</p>
+<p>This represents the entire model.</p>
+<p><strong>High Dimensionality:</strong> As number of layers (L) increases, and number of neurons increases, parameters (θ) become very large.</p>
+<p><strong>Network Structure:</strong></p>
+<ul>
+  <li>Input Layer → receives data</li>
+  <li>Hidden Layers (1 to L) → feature learning</li>
+  <li>Output Layer → prediction</li>
+</ul>
+<p>Number of neurons per layer = design choice.</p>
+
+<h3>Loss Functions</h3>
+<p><strong>(A) Regression Loss – Squared Loss:</strong> (NN(xᵢ; θ) − yᵢ)²</p>
+<p><strong>Total Loss:</strong> <span class="formula">Σ (NN(xᵢ; θ) − yᵢ)², for i = 1 to n</span></p>
+<div class="example-box">
+<strong>Example:</strong> True value = 5, Prediction = 3<br>
+Loss = (3−5)² = 4
+</div>
+
+<p><strong>(B) Binary Classification – Cross Entropy:</strong></p>
+<p>Output probability: σ(z) = 1/(1+e^(−z))</p>
+<p><strong>Idea:</strong></p>
+<ul>
+  <li>Predicts probability P(y = 1 | x)</li>
+  <li>Measures how close prediction is to actual label</li>
+</ul>
+<h4>Example</h4>
+<table>
+  <tr><th>Prediction</th><th>True Label</th><th>Loss</th></tr>
+  <tr><td>0.9</td><td>1</td><td>Low</td></tr>
+  <tr><td>0.9</td><td>0</td><td>High</td></tr>
+</table>
+<p><strong>Key Insight:</strong> Wrong confident predictions → very high loss.</p>
+
+<h3>Training: Gradient Descent &amp; Backpropagation</h3>
+<p><strong>Gradient Descent:</strong> Update parameters to minimize loss: <span class="formula">θ ← θ − η∇L(θ)</span></p>
+<p><strong>Backpropagation:</strong> Efficiently computes gradients using chain rule.</p>
+<p><strong>How it Works:</strong></p>
+<ol>
+  <li>Forward pass → compute output</li>
+  <li>Compute loss</li>
+  <li>Backward pass → compute gradients</li>
+  <li>Update weights</li>
+</ol>
+<p><strong>Intuition:</strong></p>
+<ul>
+  <li>Change in one layer affects next layers</li>
+  <li>Backprop "propagates error backward"</li>
+</ul>
+<p><strong>Non-Convex Optimization:</strong></p>
+<ul>
+  <li>Neural networks → non-convex loss</li>
+  <li>Consequences: multiple local minima, no guarantee of global optimum</li>
+  <li>Still works because good local minima → good performance</li>
+</ul>
+<p><strong>Tricks:</strong></p>
+<ul>
+  <li>Good initialization</li>
+  <li>Learning rate tuning</li>
+</ul>
+
+<h3>Neural Networks as Feature Learners</h3>
+<p><strong>Two-Step View:</strong></p>
+<p><strong>Feature Learning:</strong> Hidden layers map Rᵈ → Rᵐ.</p>
+<ol>
+  <li>Learn new features automatically</li>
+  <li><strong>Linear Prediction:</strong> Final layer applies linear model on features</li>
+</ol>
+
+<h4>Comparison with Kernel Methods</h4>
+<table>
+  <tr><th>Method</th><th>Feature Mapping</th></tr>
+  <tr><td>Kernel Machines</td><td>Pre-defined</td></tr>
+  <tr><td>Neural Networks</td><td>Learned from data</td></tr>
+</table>
+<p><strong>Key Insight:</strong> Neural networks learn both features and weights.</p>
+
+<h3>Specialized Architectures</h3>
+<ul>
+  <li><strong>CNN (Convolutional Neural Networks):</strong> Best for images. Detect edges, shapes, textures.</li>
+  <li><strong>RNN / LSTM:</strong> Best for sequences (time series, speech, text).</li>
+  <li><strong>Transformers:</strong> Modern architecture using attention mechanism. Best for NLP and complex tasks.</li>
+</ul>
+
+<h4>When to Use What</h4>
+<table>
+  <tr><th>Data Type</th><th>Best Method</th></tr>
+  <tr><td>Tabular data</td><td>SVM / Boosting</td></tr>
+  <tr><td>Images</td><td>CNN</td></tr>
+  <tr><td>Sequential data</td><td>RNN / LSTM</td></tr>
+  <tr><td>Complex NLP</td><td>Transformers</td></tr>
+</table>
+
+<div class="summary">
+<strong>Final Intuition:</strong>
+<ul>
+  <li>Neural networks = automatic feature learners</li>
+  <li>They replace manual feature engineering</li>
+  <li>Trade-off: lose easy optimization, gain high expressive power</li>
+</ul>
+<strong>One-Line Summary:</strong> Neural networks learn both features and predictions using high-dimensional parameters optimized via backpropagation, making them powerful for complex and unstructured data.
+</div>
+</div>
+
+<div class="lecture">
+<h2>Lecture 6: Summary of the Course and Future Directions</h2>
+
+<h3>A. Unsupervised Learning (No Labels)</h3>
+<h4>1. Representation Learning</h4>
+<ul>
+  <li><strong>PCA (Principal Component Analysis):</strong> Projects data onto directions of maximum variance</li>
+  <li><strong>Kernel PCA:</strong> Handles non-linear data using the kernel trick</li>
+</ul>
+<h4>2. Clustering</h4>
+<ul>
+  <li><strong>K-Means:</strong> Minimizes within-cluster distance</li>
+  <li><strong>Spectral Clustering:</strong> Uses graph structure, works well for complex shapes</li>
+</ul>
+<h4>3. Estimation</h4>
+<ul>
+  <li><strong>Maximum Likelihood Estimation (MLE)</strong></li>
+  <li><strong>Bayesian Methods</strong></li>
+  <li><strong>Mixture Models + EM Algorithm:</strong>
+    <ul>
+      <li><strong>E-step:</strong> Estimate hidden variables</li>
+      <li><strong>M-step:</strong> Update parameters</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>B. Supervised Learning (With Labels)</h3>
+<h4>1. Regression</h4>
+<ul>
+  <li><strong>Ordinary Least Squares:</strong> min Σ(yᵢ − Wᵀxᵢ)²</li>
+  <li><strong>Regularized Regression:</strong>
+    <ul>
+      <li><strong>Ridge Regression:</strong> Penalizes large weights. Σ(yᵢ − Wᵀxᵢ)² + λ‖W‖²</li>
+      <li><strong>Lasso Regression:</strong> Produces sparse weights. Σ(yᵢ − Wᵀxᵢ)² + λ‖W‖₁</li>
+    </ul>
+  </li>
+</ul>
+
+<h4>2. Classification Algorithms</h4>
+<table>
+  <tr><th>Algorithm</th><th>Key Idea</th></tr>
+  <tr><td>KNN</td><td>Nearest neighbors decide label</td></tr>
+  <tr><td>Decision Trees</td><td>If-then rules</td></tr>
+  <tr><td>Logistic Regression</td><td>Probabilities</td></tr>
+  <tr><td>Perceptron</td><td>Updates on mistakes</td></tr>
+  <tr><td>SVM</td><td>Maximum margin</td></tr>
+  <tr><td>Bagging</td><td>Reduce variance</td></tr>
+  <tr><td>Boosting</td><td>Focus on errors</td></tr>
+  <tr><td>Neural Networks</td><td>Non-linear learning</td></tr>
+</table>
+
+<h3>Topics Not Covered (Future Study)</h3>
+<ul>
+  <li><strong>Semi-Supervised Learning:</strong> Mix of labeled and unlabeled data</li>
+  <li><strong>Self-Supervised Learning:</strong> Creates labels from data itself, widely used in deep learning</li>
+  <li><strong>Sequential Decision Making:</strong> Data arrives one-by-one, model must learn continuously
+    <ul>
+      <li>Example: Online recommendation systems</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Deployable AI / ML (Real-World Challenges)</h3>
+<h4>1. Fairness</h4>
+<ul>
+  <li><strong>Problem:</strong> Models learn bias from data</li>
+  <li><strong>Example:</strong> Crime prediction system biased due to historical data</li>
+</ul>
+<h4>2. Explainability (XAI)</h4>
+<ul>
+  <li><strong>Problem:</strong> Some models are black boxes</li>
+  <li><strong>Easy to explain:</strong> Decision Trees</li>
+  <li><strong>Hard to explain:</strong> Neural Networks</li>
+  <li><strong>Examples:</strong>
+    <ul>
+      <li>Healthcare → doctor needs reasoning</li>
+      <li>Self-driving cars → accident accountability</li>
+    </ul>
+  </li>
+</ul>
+<h4>3. Privacy</h4>
+<ul>
+  <li><strong>Problem:</strong> Models may leak sensitive data</li>
+  <li><strong>Examples:</strong> Salary, medical records</li>
+</ul>
+<h4>4. AI for Edge Devices</h4>
+<ul>
+  <li><strong>Problem:</strong> Models too large</li>
+  <li><strong>Solutions:</strong> Model compression, pruning, subsampling</li>
+  <li><strong>Deployment:</strong> Phones, IoT devices</li>
+</ul>
+<h4>5. Continuous &amp; Transfer Learning</h4>
+<ul>
+  <li><strong>Continuous Learning:</strong> Handle data drift (data changes over time)</li>
+  <li><strong>Transfer Learning:</strong> Reuse knowledge from one task to another</li>
+  <li><strong>Example:</strong> Cricket match prediction → player form changes, model must adapt continuously</li>
+</ul>
+
+<h3>Big Picture Summary</h3>
+<table>
+  <tr><th>Area</th><th>Goal</th></tr>
+  <tr><td>Unsupervised</td><td>Find structure</td></tr>
+  <tr><td>Supervised</td><td>Predict output</td></tr>
+  <tr><td>Deployment</td><td>Make models usable</td></tr>
+</table>
+
+<div class="summary">
+<strong>Final Intuition:</strong> Machine Learning = learning patterns from data. The real challenge is not just training models, but making them:
+<ul>
+  <li>Fair</li>
+  <li>Explainable</li>
+  <li>Private</li>
+  <li>Adaptable</li>
+</ul>
+<strong>One-Line Summary:</strong> Machine Learning is not just about algorithms — it's about building reliable, fair, and adaptable systems that work in real-world environments.
+</div>
+</div>
+
+</body>
+</html>
