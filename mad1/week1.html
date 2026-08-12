@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 1: Short Notes — MAD 1</title>
+<style>
+  :root {
+    --bg: #faf8f5;
+    --panel: #ffffff;
+    --ink: #232323;
+    --sub: #5c5c5c;
+    --accent: #b4553f;
+    --accent-soft: #f4d9cf;
+    --line: #e7e1d8;
+    --code-bg: #2b2b2b;
+    --code-ink: #e9e4d8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Georgia', 'Iowan Old Style', serif;
+    line-height: 1.6;
+  }
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 24px 100px;
+  }
+  header.doc-header {
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+  }
+  header.doc-header h1 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 2.1rem;
+    margin: 0 0 6px;
+    letter-spacing: -0.5px;
+  }
+  header.doc-header p {
+    margin: 0;
+    color: var(--sub);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.95rem;
+  }
+  nav.toc {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 48px;
+  }
+  nav.toc h2 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    margin: 0 0 12px;
+  }
+  nav.toc ol {
+    columns: 2;
+    -webkit-columns: 2;
+    margin: 0;
+    padding-left: 20px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.92rem;
+  }
+  nav.toc li { margin-bottom: 6px; }
+  nav.toc a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--sub);
+  }
+  nav.toc a:hover { color: var(--accent); border-color: var(--accent); }
+
+  section.lecture {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 32px 36px;
+    margin-bottom: 32px;
+    scroll-margin-top: 20px;
+  }
+  section.lecture > h2 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 1.5rem;
+    margin: 0 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--accent-soft);
+    color: var(--accent);
+  }
+  h3 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 1.15rem;
+    margin: 28px 0 10px;
+    color: var(--ink);
+  }
+  h4 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 1rem;
+    margin: 18px 0 6px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.85rem;
+  }
+  p { margin: 8px 0; }
+  ul { margin: 6px 0; padding-left: 22px; }
+  ul ul { padding-left: 20px; margin: 4px 0; }
+  li { margin: 4px 0; }
+  strong { color: var(--ink); }
+
+  code, .inline-code {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    background: #efe9df;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: #7a3b25;
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-ink);
+    padding: 14px 18px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.88rem;
+    margin: 10px 0;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 14px 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--line);
+    padding: 8px 12px;
+    text-align: left;
+  }
+  th {
+    background: var(--accent-soft);
+    color: #6b2d1c;
+    font-weight: 600;
+  }
+  tr:nth-child(even) td { background: #faf6f0; }
+
+  .summary-box {
+    background: #fbf1ea;
+    border-left: 4px solid var(--accent);
+    padding: 14px 18px;
+    border-radius: 6px;
+    margin-top: 20px;
+    font-style: italic;
+  }
+  .summary-box strong { font-style: normal; color: var(--accent); }
+
+  .key-idea {
+    background: #f0efe8;
+    border-left: 4px solid #7a7a5c;
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin: 12px 0;
+  }
+
+  a.back-top {
+    display: inline-block;
+    margin-top: 18px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.8rem;
+    color: var(--sub);
+    text-decoration: none;
+  }
+  a.back-top:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    nav.toc ol { columns: 1; }
+    section.lecture { padding: 22px 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="doc-header" id="top">
+    <h1>Week 1: Short Notes</h1>
+    <p>MAD 1 — Modern Application Development</p>
+  </header>
+
+  <nav class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#l1">Lecture 1: What is an App?</a></li>
+      <li><a href="#l2">Lecture 2: Components of an App</a></li>
+      <li><a href="#l3">Lecture 3: Client-Server and Peer-to-Peer</a></li>
+      <li><a href="#l4">Lecture 4: Software Architecture</a></li>
+      <li><a href="#l5">Lecture 5: Introduction to the Web</a></li>
+      <li><a href="#l6">Lecture 6: How does the Web work?</a></li>
+      <li><a href="#l7">Lecture 7: Simple Web Server</a></li>
+      <li><a href="#l8">Lecture 8: What is a Protocol?</a></li>
+      <li><a href="#l9">Lecture 9: Performance of a Website</a></li>
+    </ol>
+  </nav>
+
+  <!-- LECTURE 1 -->
+  <section class="lecture" id="l1">
+    <h2>Lecture 1: What is an App?</h2>
+
+    <h3>What is an Application?</h3>
+    <p>An application (app) is a software program designed to perform a specific task.</p>
+    <ul>
+      <li><strong>Earlier usage:</strong> The term "app" referred to any software (desktop or mobile).</li>
+      <li><strong>After smartphones</strong> (e.g., Apple iPhone): The term evolved to mean small, downloadable programs.</li>
+      <li><strong>Today:</strong> An app is a focused tool solving a specific problem (e.g., chatting, editing, browsing).</li>
+    </ul>
+
+    <h3>Common Types of Applications</h3>
+
+    <h4>Browsers</h4>
+    <ul>
+      <li>Used to access web applications.</li>
+      <li>Examples: Google Chrome, Mozilla Firefox, Microsoft Edge, Safari.</li>
+      <li>Very important for web development.</li>
+    </ul>
+
+    <h4>Productivity &amp; Social Apps</h4>
+    <ul>
+      <li>Help in daily tasks and communication.</li>
+      <li>Examples: Microsoft Word (document editing), Instagram, X (social interaction).</li>
+    </ul>
+
+    <h4>Text Editors vs Word Processors</h4>
+    <ul>
+      <li><strong>Text Editors</strong>
+        <ul>
+          <li>Handle plain text.</li>
+          <li>Used for coding.</li>
+          <li>Examples: Visual Studio Code, Sublime Text, Vim.</li>
+          <li>Features: Syntax highlighting, auto indentation.</li>
+        </ul>
+      </li>
+      <li><strong>Word Processors</strong>
+        <ul>
+          <li>Used for formatted documents.</li>
+          <li>Example: Microsoft Word.</li>
+          <li>Features: Bold, italics, highlights, rich formatting.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h4>Terminal / Command Line</h4>
+    <ul>
+      <li>Used to run programs and manage systems.</li>
+      <li>Important for developers.</li>
+    </ul>
+
+    <h4>Desktop Applications</h4>
+    <ul>
+      <li>Run on computers (Windows, Mac, Linux).</li>
+      <li>Usually work offline.</li>
+      <li>Use local storage (files, data).</li>
+    </ul>
+
+    <h4>Development</h4>
+    <ul>
+      <li>Built using SDKs (Software Development Kits) and APIs (Application Programming Interfaces).</li>
+      <li>Often OS-specific (e.g., Windows app may not work on Linux).</li>
+    </ul>
+    <div class="key-idea"><strong>Key idea:</strong> Full-featured and powerful applications.</div>
+
+    <h3>Mobile Applications</h3>
+    <ul>
+      <li><strong>Platforms:</strong> Smartphones &amp; tablets.</li>
+      <li><strong>Interaction:</strong> Touch, voice/audio, camera gestures.</li>
+      <li><strong>Constraints:</strong> Less RAM, lower processing power, battery limitations.</li>
+    </ul>
+
+    <h4>Ecosystem</h4>
+    <ul>
+      <li>Apple: Uses Swift, strong ecosystem integration.</li>
+      <li>Android: Larger market share, supports cross-platform frameworks.</li>
+    </ul>
+
+    <h4>Connectivity</h4>
+    <ul>
+      <li>Most apps are internet-based.</li>
+      <li>Connect to servers for real-time data.</li>
+    </ul>
+
+    <h3>Web Applications</h3>
+    <ul>
+      <li>Run inside a browser.</li>
+      <li>No installation needed.</li>
+    </ul>
+
+    <h4>Key Features</h4>
+    <ul>
+      <li>Platform-independent (works on any OS).</li>
+      <li>Uses browsers as interface.</li>
+      <li>Processing can happen on server or client (browser).</li>
+    </ul>
+    <p><strong>Examples:</strong> Gmail, online editors.</p>
+
+    <h4>Why Web Apps Matter</h4>
+    <ul>
+      <li>Work across Windows, Linux, Mac.</li>
+      <li>No OS dependency.</li>
+      <li>Easy to deploy and access.</li>
+      <li>Web development is the main focus of most courses.</li>
+    </ul>
+
+    <h3>Final Summary</h3>
+    <table>
+      <tr><th>Type</th><th>Runs On</th><th>Key Feature</th></tr>
+      <tr><td>Desktop</td><td>Computer</td><td>Offline, powerful</td></tr>
+      <tr><td>Mobile</td><td>Phone</td><td>Touch-based, battery constraints</td></tr>
+      <tr><td>Web</td><td>Browser</td><td>Platform-independent</td></tr>
+    </table>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 2 -->
+  <section class="lecture" id="l2">
+    <h2>Lecture 2: Components of an App</h2>
+
+    <h3>Core Components of an Application</h3>
+    <p>Every application is built using three main layers:</p>
+
+    <h4>Storage (Where data is stored)</h4>
+    <ul>
+      <li><strong>Cloud Storage</strong>
+        <ul>
+          <li>Data stored on remote servers.</li>
+          <li>Accessible from anywhere.</li>
+          <li>Example: Gmail stores emails on cloud servers.</li>
+          <li>Features: Hidden internal structure, optimized for fast search and retrieval.</li>
+        </ul>
+      </li>
+      <li><strong>Local Storage</strong>
+        <ul>
+          <li>Data stored on user's device.</li>
+          <li>Works even without internet.</li>
+          <li>Examples: Microsoft Outlook (proprietary files), Mozilla Thunderbird (formats like maildir/mbox).</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h4>Computation (Processing / Logic)</h4>
+    <ul>
+      <li>Also called business logic.</li>
+      <li>Defines how data is processed and used.</li>
+      <li>Example (Email app): Search emails by sender, date, or keywords.</li>
+      <li>Key idea: Happens on-the-fly (real-time processing).</li>
+    </ul>
+
+    <h4>Presentation (User Interface)</h4>
+    <ul>
+      <li>How data is shown to users.</li>
+      <li>Includes formatting text/images and organizing views (e.g., inbox, unread emails).</li>
+      <li>Goal: Make data easy to read and interact with.</li>
+    </ul>
+
+    <h3>Application Platforms &amp; Paradigms</h3>
+    <p>A paradigm is a way of thinking or designing how applications work.</p>
+
+    <h4>Desktop Paradigm</h4>
+    <ul>
+      <li>Uses KVM (Keyboard, Video, Mouse).</li>
+      <li>Based on desktop metaphor: files, folders.</li>
+      <li>Features: Large screens, full control, traditional interface.</li>
+    </ul>
+
+    <h4>Mobile Paradigm</h4>
+    <ul>
+      <li>Uses touchscreen instead of mouse/keyboard.</li>
+      <li>Features: Small screen, app-based design, sensors (voice, camera, gyroscope, tilt).</li>
+      <li>Focus: Small, focused apps.</li>
+    </ul>
+
+    <h4>Web-Based Paradigm</h4>
+    <ul>
+      <li>Runs via browser and internet.</li>
+      <li>Data stored in cloud (data centers).</li>
+      <li>Key advantage: Access from any device, anywhere.</li>
+      <li>Example: Gmail works seamlessly on phone and laptop.</li>
+    </ul>
+
+    <h4>Embedded Platforms</h4>
+    <ul>
+      <li>Designed for specific tasks only.</li>
+      <li>Examples: Digital cameras, smartwatches, smart appliances (fridge, microwave).</li>
+      <li>Features: Limited interface, single-purpose.</li>
+      <li>Note: Some modern embedded platforms are becoming smarter.</li>
+    </ul>
+
+    <h4>Course Focus</h4>
+    <ul>
+      <li>Main focus: Web-based applications.</li>
+      <li>Reasons:
+        <ul>
+          <li>Platform-independent.</li>
+          <li>Accessible anywhere.</li>
+          <li>Widely used in real-world systems.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Final Quick Revision</h3>
+    <p><strong>3 Core Layers</strong></p>
+    <ul>
+      <li>Storage → Data</li>
+      <li>Computation → Logic</li>
+      <li>Presentation → UI</li>
+    </ul>
+
+    <table>
+      <tr><th>Platform</th><th>Key Feature</th></tr>
+      <tr><td>Desktop</td><td>KVM, powerful</td></tr>
+      <tr><td>Mobile</td><td>Touch + sensors</td></tr>
+      <tr><td>Web</td><td>Cloud + browser</td></tr>
+      <tr><td>Embedded</td><td>Single-purpose</td></tr>
+    </table>
+
+    <div class="summary-box"><strong>One-Line Summary:</strong> Every application = Data (Storage) + Logic (Computation) + UI (Presentation) running on a specific platform.</div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 3 -->
+  <section class="lecture" id="l3">
+    <h2>Lecture 3: Client-Server and Peer-to-Peer Architecture</h2>
+
+    <p><strong>Client–Server Architecture:</strong> A widely used model where roles are clearly separated.</p>
+
+    <h3>Core Components</h3>
+    <ul>
+      <li><strong>Server</strong>
+        <ul>
+          <li>Stores data.</li>
+          <li>Handles requests.</li>
+          <li>May perform computations.</li>
+          <li>Example: Gmail servers store emails.</li>
+        </ul>
+      </li>
+      <li><strong>Client</strong>
+        <ul>
+          <li>Requests data from server.</li>
+          <li>Usually represents end-user actions.</li>
+          <li>Example: Browser requesting a webpage.</li>
+        </ul>
+      </li>
+      <li><strong>Network</strong>
+        <ul>
+          <li>Acts as a communication channel.</li>
+          <li>Transfers requests (client → server) and responses (server → client).</li>
+          <li>Important: Does not modify data, only transfers it.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Key Characteristics</h3>
+    <ul>
+      <li>Separation of roles: client and server are conceptually separate, even if running on the same machine.</li>
+      <li>Machine clients: clients are not always humans (e.g., antivirus checking updates automatically).</li>
+    </ul>
+
+    <h3>Examples</h3>
+    <ul>
+      <li><strong>Email:</strong> Server stores emails; client reads/manages emails.</li>
+      <li><strong>Databases:</strong> Application acts as client; server stores and returns data.</li>
+      <li><strong>Messaging:</strong> Example: WhatsApp. Server collects messages and sends them to receiver.</li>
+      <li><strong>Web Browsing:</strong> Client = browser; server = website server; uses URL to fetch data.</li>
+    </ul>
+
+    <h3>Advanced Architecture</h3>
+    <ul>
+      <li>Multiple servers used for database, web hosting, caching.</li>
+      <li>Also uses load balancing to distribute traffic.</li>
+    </ul>
+
+    <p><strong>Peer-to-Peer (P2P) Architecture:</strong> No fixed client/server roles; all devices are equal peers.</p>
+    <p><strong>Core Concept:</strong> Every node acts as both client and server.</p>
+
+    <h3>Key Characteristics</h3>
+    <ul>
+      <li><strong>Symmetry:</strong> You download and upload simultaneously.</li>
+      <li><strong>Decentralization:</strong> No central authority; network runs collectively.</li>
+      <li><strong>Fault Tolerance:</strong> System continues even if some nodes fail; new leader can be elected if needed.</li>
+    </ul>
+
+    <h3>Examples</h3>
+    <ul>
+      <li><strong>File Sharing:</strong> BitTorrent, where users both download and share files.</li>
+      <li><strong>Blockchain:</strong> Decentralized trust system used in Bitcoin.</li>
+      <li><strong>Distributed Storage:</strong> Examples include IPFS, where data is stored across multiple devices and encrypted for security.</li>
+    </ul>
+
+    <h3>Client–Server vs Peer-to-Peer (Comparison)</h3>
+    <table>
+      <tr><th>Feature</th><th>Client–Server</th><th>Peer-to-Peer</th></tr>
+      <tr><td>Control</td><td>Centralized</td><td>Decentralized</td></tr>
+      <tr><td>Roles</td><td>Fixed (client/server)</td><td>Equal peers</td></tr>
+      <tr><td>Reliability</td><td>Depends on server</td><td>High fault tolerance</td></tr>
+      <tr><td>Security</td><td>Easier to manage</td><td>More complex</td></tr>
+    </table>
+
+    <h3>Suitability</h3>
+    <ul>
+      <li><strong>Client–Server:</strong> Best for sensitive data. Example: Email (users trust central servers).</li>
+      <li><strong>P2P:</strong> Best for sharing large distributed data. Example: File sharing.</li>
+    </ul>
+
+    <h3>Node Hierarchy in P2P</h3>
+    <ul>
+      <li>Not all nodes are equal in practice.</li>
+      <li>Some nodes have higher bandwidth and act as major data providers.</li>
+    </ul>
+
+    <h3>Final Summary</h3>
+    <ul>
+      <li>Client–Server = centralized, controlled, structured.</li>
+      <li>P2P = decentralized, distributed, resilient.</li>
+    </ul>
+
+    <div class="summary-box"><strong>One-Line Revision:</strong> Client–Server = request–response model. P2P = everyone shares everything.</div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 4 -->
+  <section class="lecture" id="l4">
+    <h2>Lecture 4: Software Architecture</h2>
+
+    <h3>Introduction to Design Patterns</h3>
+    <h4>What is a Design Pattern?</h4>
+    <ul>
+      <li>A design pattern is a reusable solution to common software design problems. It is not code, but a strategy or blueprint.</li>
+      <li><strong>Purpose</strong>
+        <ul>
+          <li>Represents "best practices" used by experienced developers.</li>
+          <li>Saves time by avoiding reinventing solutions.</li>
+          <li>Helps in better planning and structured thinking.</li>
+        </ul>
+      </li>
+    </ul>
+    <div class="key-idea"><strong>Key Idea:</strong> Not the only solution, but a proven and reliable one.</div>
+
+    <h3>Model–View–Controller (MVC) Paradigm</h3>
+    <p>A very popular software architecture pattern. It divides an application into three main parts:</p>
+
+    <h4>Model (Data Layer)</h4>
+    <ul>
+      <li>Represents data and metadata.</li>
+      <li>Handles storage, retrieval, and indexing.</li>
+      <li>Example (Email app): Emails, sender, receiver, timestamp, attachments.</li>
+      <li>Can use databases (MySQL, SQLite), NoSQL, or even simple files.</li>
+    </ul>
+
+    <h4>View (User Interface)</h4>
+    <ul>
+      <li>What the user sees and interacts with.</li>
+      <li>Not just visual: includes GUI, keyboard interface, voice/audio systems.</li>
+      <li>Example: Inbox UI showing emails.</li>
+    </ul>
+
+    <h4>Controller (Logic Layer)</h4>
+    <ul>
+      <li>Handles user actions.</li>
+      <li>Controls how data is modified.</li>
+      <li>Example: Delete email, archive message, move to folder.</li>
+    </ul>
+
+    <h3>MVC Workflow</h3>
+    <p><strong>Flow:</strong> User interacts → Controller → Model → View → User.</p>
+    <p><strong>Important Rule:</strong></p>
+    <ul>
+      <li>View cannot directly modify Model.</li>
+      <li>Everything goes through Controller.</li>
+    </ul>
+    <p><strong>Closed Feedback Loop:</strong> Continuous cycle: User → Controller → Model → View → User.</p>
+
+    <h3>Benefits</h3>
+    <ul>
+      <li>Separation of concerns.</li>
+      <li>Cleaner and organized code.</li>
+      <li>Easier debugging and maintenance.</li>
+      <li>Scalable applications.</li>
+    </ul>
+    <p><strong>Origin:</strong> Introduced in 1979 with Smalltalk.</p>
+
+    <h3>Alternatives to MVC</h3>
+    <p>Other similar patterns include:</p>
+    <ul>
+      <li>MVP (Model–View–Presenter).</li>
+      <li>MVA (Model–View–Adapter).</li>
+      <li>HMVC (Hierarchical MVC).</li>
+    </ul>
+    <p><strong>Choosing a Pattern:</strong> Depends on programming language, platform (web/mobile/desktop), and developer preference.</p>
+
+    <h3>Modern Perspective</h3>
+    <ul>
+      <li>Some consider MVC outdated in certain cases.</li>
+      <li>Still very useful for understanding and structuring applications.</li>
+    </ul>
+
+    <h3>Course-Specific Focus</h3>
+    <ul>
+      <li>Platform: Focus on web applications.</li>
+      <li>Architecture: Uses client–server model.</li>
+      <li>Design Pattern: Uses MVC architecture.</li>
+      <li>Technologies: Central servers; web technologies like Hypertext (HTML) for display.</li>
+    </ul>
+
+    <h3>Final Quick Revision</h3>
+    <p><strong>MVC Components</strong></p>
+    <ul>
+      <li>Model → Data.</li>
+      <li>View → UI.</li>
+      <li>Controller → Logic.</li>
+    </ul>
+    <p><strong>Workflow:</strong> User → Controller → Model → View → User.</p>
+    <p><strong>Key Benefit:</strong> Separation of concerns = clean design.</p>
+
+    <div class="summary-box"><strong>One-Line Summary:</strong> MVC = Divide application into Data + UI + Logic for better structure.</div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 5 -->
+  <section class="lecture" id="l5">
+    <h2>Lecture 5: Introduction To The Web</h2>
+
+    <h3>Web as a Platform</h3>
+    <h4>Why Web is Important</h4>
+    <ul>
+      <li>The web is the primary platform for modern applications.</li>
+      <li>Works across Windows, Mac, Linux, phones, tablets, and PCs.</li>
+      <li>Platform-independent: no need to worry about device type.</li>
+    </ul>
+
+    <h4>Web as a "Universal OS"</h4>
+    <ul>
+      <li>Acts like a cross-platform operating system.</li>
+      <li>Hides hardware differences (keyboard, touchscreen, sensors).</li>
+      <li>Developers build once → works everywhere.</li>
+    </ul>
+
+    <h4>Development Considerations</h4>
+    <ul>
+      <li>Some tasks are easy on the web, others are hard or impossible.</li>
+      <li>Trade-offs include storage cost, network usage, and data center cost.</li>
+    </ul>
+
+    <h3>Evolution of Networking</h3>
+    <h4>Circuit-Switched Networks (Old)</h4>
+    <ul>
+      <li>Used in early telephone systems (1890s).</li>
+      <li>Requires dedicated connection.</li>
+      <li>Problem: Bandwidth is wasted even when no data is sent.</li>
+    </ul>
+
+    <h4>Packet-Switched Networks (Modern)</h4>
+    <ul>
+      <li>Data is broken into small packets.</li>
+      <li>Sent only when needed.</li>
+      <li>Benefits: Efficient use of network, multiple users share same connection.</li>
+    </ul>
+
+    <h4>Data Neutrality</h4>
+    <ul>
+      <li>Network does not care about data type (text, video, audio, images).</li>
+      <li>All treated equally.</li>
+    </ul>
+
+    <h3>Foundations of the Internet</h3>
+    <h4>Early Networks</h4>
+    <ul>
+      <li>ARPANET (1960s, US Defense).</li>
+      <li>Private networks by IBM, Xerox, DEC.</li>
+      <li>Problem: Networks could not communicate easily.</li>
+    </ul>
+    <p><strong>Protocols (Solution):</strong> Rules for formatting data, addressing, and error handling.</p>
+
+    <h4>Internet Protocol (IP)</h4>
+    <ul>
+      <li>Standardized in 1983.</li>
+      <li>Enables communication between different networks.</li>
+      <li>Core idea: "Connect all networks together."</li>
+    </ul>
+
+    <h4>Transmission Control Protocol (TCP)</h4>
+    <ul>
+      <li>Works on top of IP.</li>
+      <li>Ensures reliable data delivery.</li>
+      <li>Retries if data is lost.</li>
+      <li>Adjusts speed automatically.</li>
+    </ul>
+
+    <h4>Addressing System</h4>
+    <ul>
+      <li><strong>IP Address:</strong> Unique number for each machine (e.g., <code>192.168.1.1</code>).</li>
+      <li><strong>Domain Name System (DNS):</strong> Converts names into IP addresses.
+        <ul>
+          <li>Example: apple.com → IP address.</li>
+          <li>Easier for humans to remember.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>World Wide Web (WWW)</h3>
+    <p><strong>Origin:</strong> Invented in 1989 by Tim Berners-Lee at CERN.</p>
+
+    <h4>Key Concepts</h4>
+    <ul>
+      <li><strong>Hypertext:</strong> Text with formatting and embedded instructions.</li>
+      <li><strong>Hyperlinks:</strong> Links to other documents/pages.</li>
+    </ul>
+
+    <h4>Internet vs Web</h4>
+    <ul>
+      <li>Internet = Network of computers.</li>
+      <li>Web = System of linked documents.</li>
+    </ul>
+
+    <h3>Evolution: Web 1.0 → Web 2.0</h3>
+    <h4>Web 1.0 (Early Web)</h4>
+    <ul>
+      <li>Static web pages.</li>
+      <li>Simple text, limited styling.</li>
+      <li>Problems: No interactivity, browser conflicts (e.g., Netscape vs Internet Explorer).</li>
+    </ul>
+
+    <h4>Web 2.0 (Modern Web)</h4>
+    <ul>
+      <li>Dynamic content (after ~2004).</li>
+      <li>Pages generated in real-time.</li>
+      <li>Example: Personalized feeds, user-specific data.</li>
+    </ul>
+
+    <h4>HTTP Evolution</h4>
+    <ul>
+      <li>Originally for text transfer.</li>
+      <li>Now supports images, videos, PDFs.</li>
+      <li>Became a general data transport protocol.</li>
+    </ul>
+
+    <h4>Client-Side Power</h4>
+    <ul>
+      <li>Modern browsers are powerful.</li>
+      <li>Use JavaScript for interactivity.</li>
+      <li>Enables smooth UI and real-time updates.</li>
+    </ul>
+
+    <h3>Final Quick Revision</h3>
+    <p><strong>Networking:</strong> Circuit-switched → inefficient. Packet-switched → efficient.</p>
+    <p><strong>Internet Basics:</strong> IP → addressing. TCP → reliability. DNS → name conversion.</p>
+    <p><strong>Web Evolution:</strong> Web 1.0 → static. Web 2.0 → dynamic.</p>
+
+    <div class="summary-box"><strong>One-Line Summary:</strong> The web is a universal platform built on packet-switched networks using IP, TCP, DNS, and HTTP to deliver dynamic applications.</div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 6 -->
+  <section class="lecture" id="l6">
+    <h2>Lecture 6: How does the Web work?</h2>
+
+    <h3>What is a Web Server?</h3>
+    <ul>
+      <li>Any computer connected to a network can act as a web server, provided it has proper server software.</li>
+      <li>Examples: Apache HTTP Server, Nginx.</li>
+    </ul>
+
+    <h4>Functions of a Web Server</h4>
+    <ul>
+      <li>Listens for incoming requests.</li>
+      <li>Finds requested data (file/page).</li>
+      <li>Sends response back to client.</li>
+    </ul>
+
+    <h4>Performance Factors</h4>
+    <ul>
+      <li>Network speed.</li>
+      <li>CPU and memory.</li>
+      <li>Storage capacity.</li>
+      <li>Client-side computation.</li>
+    </ul>
+
+    <h3>Networking Mechanics: Ports &amp; Packets</h3>
+    <h4>Ports</h4>
+    <ul>
+      <li>A port is a communication channel.</li>
+      <li>Range: 0 to 65,535.</li>
+      <li>Common example: Port 80 → Web (HTTP).</li>
+    </ul>
+
+    <h4>Listening</h4>
+    <ul>
+      <li>Server software listens on a fixed port.</li>
+      <li>Waits for incoming requests.</li>
+    </ul>
+
+    <h4>OS vs Web Server</h4>
+    <ul>
+      <li><strong>Operating System (OS)</strong>
+        <ul>
+          <li>Handles network connections, packet receiving, and port management.</li>
+          <li>Receives packets and sends them to the correct application.</li>
+        </ul>
+      </li>
+      <li><strong>Web Server</strong>
+        <ul>
+          <li>Works at a higher level.</li>
+          <li>Understands what the request means.</li>
+          <li>Example: "Send index.html."</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Communication Protocols</h3>
+    <p><strong>What is a Protocol?</strong> A set of rules for communication between devices.</p>
+
+    <h4>HTTP (Hypertext Transfer Protocol)</h4>
+    <ul>
+      <li>Main protocol of the web.</li>
+      <li>Features: Text-based, easy to read/debug, defines request and response format.</li>
+    </ul>
+
+    <h4>HTTP Headers</h4>
+    <p>Contain information such as:</p>
+    <ul>
+      <li>Requested file.</li>
+      <li>Language preferences.</li>
+      <li>Supported formats.</li>
+    </ul>
+
+    <h3>Hypertext &amp; Links</h3>
+    <h4>Hypertext</h4>
+    <ul>
+      <li>Text with embedded instructions (HTML).</li>
+      <li>Example: Formatting (bold, color), links.</li>
+    </ul>
+
+    <h4>Links (Hyperlinks)</h4>
+    <ul>
+      <li>Connect one document to another.</li>
+      <li>When clicked: Browser sends new request to server.</li>
+    </ul>
+
+    <h3>Request–Response Cycle</h3>
+    <p><strong>Core Working of the Web — Step-by-step flow:</strong></p>
+    <ul>
+      <li><strong>1. Client Request:</strong> Browser sends request (data + headers + port).</li>
+      <li><strong>2. OS Processing:</strong> Receives packet, identifies port, sends to correct server application.</li>
+      <li><strong>3. Server Processing:</strong> Finds requested resource, prepares response.</li>
+      <li><strong>4. Server Response:</strong> Sends back HTML page, image, video, etc.</li>
+    </ul>
+
+    <h3>Final Quick Revision</h3>
+    <p><strong>Key Concepts:</strong> Server = listens + responds. Port = communication channel. HTTP = communication protocol.</p>
+    <p><strong>Flow:</strong> Client → OS → Server → Response → Client.</p>
+
+    <div class="summary-box"><strong>One-Line Summary:</strong> The web works through a request–response cycle using HTTP over ports, where servers listen and send data back to clients.</div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 7 -->
+  <section class="lecture" id="l7">
+    <h2>Lecture 7: Simple Web Server</h2>
+
+    <h3>Core Tools &amp; Commands</h3>
+    <h4>Shell Scripting (Bash)</h4>
+    <ul>
+      <li>Servers can be written using Bash (Bourne Again Shell).</li>
+      <li>Used to interact with Unix/Linux systems via the command line.</li>
+    </ul>
+
+    <h4>echo Command</h4>
+    <ul>
+      <li>Prints output to STDOUT (screen/output stream).</li>
+      <li>In servers: used to send HTTP response (headers + data).</li>
+    </ul>
+
+    <h4>Netcat (nc)</h4>
+    <p>Acts as a simple server tool.</p>
+    <pre>nc -l 1500</pre>
+    <ul>
+      <li><code>-l</code> → listen mode.</li>
+      <li>Listens for incoming connections on a port.</li>
+    </ul>
+
+    <h4>Piping (|)</h4>
+    <p>Connects output of one command to another.</p>
+    <pre>echo "Hello" | nc -l 1500</pre>
+    <ul>
+      <li>Output of <code>echo</code> goes into <code>nc</code>.</li>
+    </ul>
+
+    <h4>curl</h4>
+    <ul>
+      <li>Tool to send HTTP requests manually.</li>
+      <li>Used for testing servers without a browser.</li>
+    </ul>
+    <pre>curl http://localhost:1500</pre>
+
+    <h3>Server Logic &amp; Structure</h3>
+    <p><strong>Infinite Loop:</strong> <code>while true</code> keeps the server running continuously.</p>
+    <p><strong>Dynamic Content:</strong> <code>$(date)</code> generates real-time data, making the server dynamic.</p>
+
+    <h4>Port Usage</h4>
+    <ul>
+      <li>Uses port 1500 instead of 80.</li>
+      <li>Reason: avoids conflicts and simplifies testing.</li>
+    </ul>
+
+    <h4>Shebang Line</h4>
+    <ul>
+      <li><code>#!/bin/bash</code></li>
+      <li>Meaning: tells the OS to use the Bash interpreter.</li>
+    </ul>
+
+    <h3>HTTP Protocol Basics</h3>
+    <h4>URL (Uniform Resource Locator)</h4>
+    <ul>
+      <li>Structure: <code>protocol://server/path</code>.</li>
+      <li>Example: <code>http://localhost:1500/</code>.</li>
+    </ul>
+
+    <h4>HTTP Status Codes</h4>
+    <table>
+      <tr><th>Code</th><th>Meaning</th></tr>
+      <tr><td>200</td><td>OK (success)</td></tr>
+      <tr><td>301</td><td>Moved permanently</td></tr>
+      <tr><td>404</td><td>Not found</td></tr>
+    </table>
+
+    <h4>HTTP Versions</h4>
+    <ul>
+      <li><strong>HTTP/1.1:</strong> Most widely used, requires Host header.</li>
+      <li><strong>HTTP/2:</strong> Faster, supports multiple requests.</li>
+      <li><strong>HTTP/3:</strong> Newer, still evolving.</li>
+    </ul>
+
+    <h3>Request–Response Cycle</h3>
+    <p><strong>Client Request:</strong> Includes:</p>
+    <ul>
+      <li><strong>Method:</strong> GET → fetch data.</li>
+      <li><strong>Path:</strong> / → root.</li>
+      <li><strong>Headers:</strong> Extra info like User-Agent, Accept.</li>
+    </ul>
+
+    <p><strong>MIME Types:</strong> Define data format:</p>
+    <ul>
+      <li><code>text/html</code></li>
+      <li><code>image/png</code></li>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h4>Blank Line Rule</h4>
+    <ul>
+      <li>Headers and body must be separated by <code>\n\n</code>.</li>
+      <li>Without this, client cannot understand the response.</li>
+    </ul>
+
+    <p><strong>Server Response:</strong> Includes status line (e.g., 200 OK), headers, and body (actual data).</p>
+
+    <h4>Localhost</h4>
+    <ul>
+      <li>Special address: <code>127.0.0.1</code> (IPv4), <code>::1</code> (IPv6).</li>
+      <li>Refers to your own computer.</li>
+    </ul>
+
+    <h3>Final Quick Revision</h3>
+    <p><strong>Tools:</strong> Bash → scripting. echo → output. nc → server. curl → client.</p>
+    <p><strong>Key Rules:</strong> Port = communication channel. HTTP = protocol. \n\n separates headers and body.</p>
+    <p><strong>Flow:</strong> curl → request → nc server → response.</p>
+
+    <div class="summary-box"><strong>One-Line Summary:</strong> A simple web server can be built using Bash + Netcat, where HTTP requests are handled via a continuous loop and responses are sent using standard output.</div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 8 -->
+  <section class="lecture" id="l8">
+    <h2>Lecture 8: What is a Protocol?</h2>
+
+    <h3>Definition &amp; Role of a Protocol</h3>
+    <ul>
+      <li>Protocol = set of rules for communication between two systems.</li>
+      <li>Simple idea: an agreement on how to talk.</li>
+      <li>Human analogy: just like greetings or handshakes, computers also need rules to understand each other.</li>
+      <li>Why needed: Without protocols, systems cannot interpret messages even if connected.</li>
+      <li>Protocols define: Request format, Response format, Supported data types, Communication behavior.</li>
+    </ul>
+
+    <h3>HTTP (Hypertext Transfer Protocol)</h3>
+    <p><strong>Key characteristics:</strong></p>
+    <ul>
+      <li>Text-based → easy to read and debug.</li>
+      <li>Uses headers (metadata) for details like accepted language, encoding formats, response types, caching rules.</li>
+    </ul>
+    <p><strong>Status codes:</strong></p>
+    <ul>
+      <li>200 → OK (success)</li>
+      <li>404 → Not Found</li>
+      <li>500 → Server Error</li>
+      <li>300s → Redirection/warnings</li>
+    </ul>
+
+    <h3>HTTP Methods</h3>
+    <ul>
+      <li><strong>GET</strong> → retrieve data (e.g., opening a webpage).</li>
+      <li><strong>POST</strong> → send large or complex data (e.g., forms, emails in Gmail).</li>
+      <li><strong>PUT</strong> → update data.</li>
+      <li><strong>DELETE</strong> → remove data.</li>
+      <li>Common in APIs and CRUD operations.</li>
+    </ul>
+
+    <h3>Server Behavior &amp; Conventions</h3>
+    <p><strong>Simple server (Python):</strong></p>
+    <pre>python -m http.server</pre>
+    <ul>
+      <li>Starts a server on port 8000.</li>
+      <li>Directory convention: If a folder is requested, server looks for <code>index.html</code>.</li>
+    </ul>
+
+    <p><strong>Debugging tool:</strong></p>
+    <pre>curl -v http://localhost:8000</pre>
+    <ul>
+      <li>Shows request headers, response headers, and full communication.</li>
+    </ul>
+
+    <h3>Data Identification (MIME Types)</h3>
+    <ul>
+      <li><strong>Content-Type:</strong> tells browser how to interpret data.
+        <ul>
+          <li>Examples: <code>text/html</code> → webpage, <code>application/pdf</code> → PDF.</li>
+        </ul>
+      </li>
+      <li><strong>MIME Types:</strong> identify type of file/data.
+        <ul>
+          <li>Example: <code>application/x-sh</code> → shell script.</li>
+        </ul>
+      </li>
+      <li><strong>Content-Length:</strong> size of response in bytes.</li>
+      <li><strong>Last-Modified:</strong> timestamp of last update.
+        <ul>
+          <li>Benefit: avoids reloading unchanged data, improves efficiency.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Final Quick Revision</h3>
+    <ul>
+      <li>Protocol → rules for communication.</li>
+      <li>HTTP basics → text-based, uses headers + status codes.</li>
+      <li>Methods → GET (fetch), POST (send), PUT (update), DELETE (remove).</li>
+      <li>Important headers → Content-Type, Content-Length, Last-Modified.</li>
+    </ul>
+
+    <div class="summary-box"><strong>One-Line Summary:</strong> Protocols define communication rules, and HTTP uses methods, headers, and status codes to enable structured data exchange between client and server.</div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 9 -->
+  <section class="lecture" id="l9">
+    <h2>Lecture 9: Performance of a Website</h2>
+
+    <h3>Latency (Delay in Communication)</h3>
+    <ul>
+      <li><strong>Definition:</strong> Latency = time between sending a request and receiving a response.</li>
+      <li><strong>Physical limits:</strong>
+        <ul>
+          <li>Speed of light in vacuum ≈ 3×10⁸ m/s.</li>
+          <li>Speed in cables ≈ 2×10⁸ m/s.</li>
+        </ul>
+      </li>
+      <li><strong>Examples:</strong>
+        <ul>
+          <li>1000 km → ~5 ms.</li>
+          <li>Chennai ↔ Delhi (~2000 km) → ~20 ms round trip.</li>
+        </ul>
+      </li>
+      <li><strong>Impact:</strong>
+        <ul>
+          <li>If each request waits for response: max ≈ 50 requests/sec.</li>
+          <li>Latency limits speed even with fast computers.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Bandwidth &amp; Response Size</h3>
+    <ul>
+      <li><strong>What server sends:</strong> Not just file, but also HTTP headers, CSS, JavaScript.</li>
+      <li><strong>Bandwidth example:</strong>
+        <ul>
+          <li>100 Mbps ≈ 10 MB/s.</li>
+          <li>If 1 KB per request → max ≈ 10,000 requests/sec.</li>
+        </ul>
+      </li>
+      <li><strong>Real-world case:</strong>
+        <ul>
+          <li>Even simple pages (e.g., Google homepage) ≈ 100 KB per request.</li>
+          <li>Due to scripts, tracking, dynamic content.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Scaling for High Traffic</h3>
+    <ul>
+      <li><strong>Massive traffic:</strong> Large services handle ~60,000 requests/sec.</li>
+      <li><strong>Bandwidth need:</strong> Requires ~80 Gbps → impossible for a single server.</li>
+      <li><strong>Solution:</strong> Distribution.
+        <ul>
+          <li>Use multiple data centers worldwide.</li>
+          <li>Load distributed geographically.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Memory (RAM) &amp; Concurrent Users</h3>
+    <ul>
+      <li><strong>Problem:</strong> Each connection uses memory.
+        <ul>
+          <li>Example: 1 connection → 6 MB.</li>
+          <li>2 million users → 12 TB RAM (impossible).</li>
+        </ul>
+      </li>
+      <li><strong>Solution:</strong> Horizontal scaling.
+        <ul>
+          <li>Use many smaller servers.</li>
+          <li>Example: 1000 servers × 12 GB RAM.</li>
+        </ul>
+      </li>
+      <li><strong>Key idea:</strong> Don't build one big machine; build many small machines.</li>
+    </ul>
+
+    <h3>Storage Requirements</h3>
+    <ul>
+      <li><strong>Massive data scale:</strong> Search engines store hundreds of billions of pages.</li>
+      <li><strong>Storage needed:</strong> ~100 petabytes.</li>
+      <li><strong>Hardware requirement:</strong> Hundreds of thousands of disks.</li>
+      <li>Efficient retrieval systems required.</li>
+    </ul>
+
+    <h3>Summary of Web Foundations</h3>
+    <ul>
+      <li><strong>Platform:</strong> Web is OS-independent, universal platform.</li>
+      <li><strong>Protocols:</strong> HTTP → communication, HTML → presentation.</li>
+      <li><strong>Real challenge:</strong> Easy: build a basic server. Hard: build a scalable system.</li>
+      <li><strong>Key insight:</strong> Scaling is not just hardware; requires better algorithms, protocols, and smart system design.</li>
+    </ul>
+
+    <h3>Final Quick Revision</h3>
+    <p><strong>Constraints:</strong></p>
+    <ul>
+      <li>Latency → delay.</li>
+      <li>Bandwidth → capacity.</li>
+      <li>Memory → concurrent users.</li>
+      <li>Storage → data size.</li>
+    </ul>
+    <p><strong>Scaling solution:</strong> Distributed systems + multiple servers.</p>
+
+    <div class="summary-box"><strong>One-Line Summary:</strong> Web scalability is limited by latency, bandwidth, memory, and storage, and solved using distributed systems instead of single powerful machines.</div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+</div>
+</body>
+</html>
