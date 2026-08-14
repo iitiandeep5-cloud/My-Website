@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 4: Short Notes — MAD 1</title>
+<style>
+  :root {
+    --bg: #faf8f5;
+    --panel: #ffffff;
+    --ink: #232323;
+    --sub: #5c5c5c;
+    --accent: #4a8a6f;
+    --accent-soft: #d9ece1;
+    --line: #e2e8e4;
+    --code-bg: #1f2b24;
+    --code-ink: #dcefe3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Georgia', 'Iowan Old Style', serif;
+    line-height: 1.6;
+  }
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 24px 100px;
+  }
+  header.doc-header {
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+  }
+  header.doc-header h1 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 2.1rem;
+    margin: 0 0 6px;
+    letter-spacing: -0.5px;
+  }
+  header.doc-header p {
+    margin: 0;
+    color: var(--sub);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.95rem;
+  }
+  nav.toc {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 48px;
+  }
+  nav.toc h2 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    margin: 0 0 12px;
+  }
+  nav.toc ol {
+    columns: 2;
+    -webkit-columns: 2;
+    margin: 0;
+    padding-left: 20px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.92rem;
+  }
+  nav.toc li { margin-bottom: 6px; }
+  nav.toc a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--sub);
+  }
+  nav.toc a:hover { color: var(--accent); border-color: var(--accent); }
+
+  section.lecture {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 32px 36px;
+    margin-bottom: 32px;
+    scroll-margin-top: 20px;
+  }
+  section.lecture > h2 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 1.5rem;
+    margin: 0 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--accent-soft);
+    color: var(--accent);
+  }
+  h3 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 1.15rem;
+    margin: 28px 0 10px;
+    color: var(--ink);
+  }
+  h4 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 18px 0 6px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.85rem;
+  }
+  p { margin: 8px 0; }
+  ul { margin: 6px 0; padding-left: 22px; }
+  ul ul { padding-left: 20px; margin: 4px 0; }
+  ol { margin: 6px 0; padding-left: 22px; }
+  li { margin: 4px 0; }
+  strong { color: var(--ink); }
+
+  code, .inline-code {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    background: #e3f0e9;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: #245c40;
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-ink);
+    padding: 14px 18px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.88rem;
+    margin: 10px 0;
+  }
+  pre code { background: none; padding: 0; color: inherit; }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 14px 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--line);
+    padding: 8px 12px;
+    text-align: left;
+  }
+  th {
+    background: var(--accent-soft);
+    color: #1f4a35;
+    font-weight: 600;
+  }
+  tr:nth-child(even) td { background: #f4f9f6; }
+
+  .summary-box {
+    background: #eaf5ef;
+    border-left: 4px solid var(--accent);
+    padding: 14px 18px;
+    border-radius: 6px;
+    margin-top: 20px;
+    font-style: italic;
+  }
+  .summary-box strong { font-style: normal; color: var(--accent); }
+
+  .key-idea {
+    background: #f0efe8;
+    border-left: 4px solid #7a7a5c;
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin: 12px 0;
+  }
+
+  .analogy {
+    background: #fbf6e8;
+    border-left: 4px solid #c69a2a;
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin: 12px 0;
+    font-style: italic;
+  }
+
+  a.back-top {
+    display: inline-block;
+    margin-top: 18px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.8rem;
+    color: var(--sub);
+    text-decoration: none;
+  }
+  a.back-top:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    nav.toc ol { columns: 1; }
+    section.lecture { padding: 22px 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="doc-header" id="top">
+    <h1>Week 4: Short Notes</h1>
+    <p>MAD 1 — Modern Application Development</p>
+  </header>
+
+  <nav class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#l1">Lecture 1: Persistent Storage</a></li>
+      <li><a href="#l2">Lecture 2: Mechanisms for Persistent Storage and Relational Databases</a></li>
+      <li><a href="#l3">Lecture 3: Relations and ER Diagram</a></li>
+      <li><a href="#l4">Lecture 4: SQL</a></li>
+    </ol>
+  </nav>
+
+  <!-- LECTURE 1 -->
+  <section class="lecture" id="l1">
+    <h2>Lecture 1: Persistent Storage</h2>
+
+    <h3>Role of the Model</h3>
+    <ul>
+      <li>Handles <strong>data</strong> and <strong>business logic</strong> of the application.</li>
+      <li>Ensures <strong>persistent storage</strong> so data survives crashes/restarts.</li>
+      <li>Allows users to <strong>resume where they left off</strong>.</li>
+    </ul>
+
+    <h3>Structured Data Basics</h3>
+    <ul>
+      <li><strong>Table</strong> → Collection of related data (like a sheet).</li>
+      <li><strong>Row</strong> → One complete record (e.g., one student).</li>
+      <li><strong>Column/Cell</strong> → Specific data field (e.g., name, marks).</li>
+    </ul>
+
+    <h3>Unique Identifiers (IDs)</h3>
+    <ul>
+      <li>Every record must have a unique ID.</li>
+      <li>Examples: Roll number, Student ID.</li>
+    </ul>
+    <p><strong>Importance:</strong></p>
+    <ul>
+      <li>Avoids confusion (same names possible).</li>
+      <li>Enables efficient data retrieval &amp; linking.</li>
+      <li>Supports validation (correct format checking).</li>
+    </ul>
+
+    <h3>Data Redundancy</h3>
+    <ul>
+      <li>Repetition of the same data (e.g., address multiple times) is:
+        <ul>
+          <li>Inefficient</li>
+          <li>Unrealistic</li>
+        </ul>
+      </li>
+    </ul>
+    <p><strong>Solution:</strong> Store data once and use references (IDs).</p>
+
+    <h3>Relationships &amp; Joins</h3>
+    <ul>
+      <li>Data across tables is connected using IDs.</li>
+      <li>A <strong>join table</strong> links records.</li>
+    </ul>
+    <p><strong>Example:</strong> Student ID + Course ID → shows enrollment.</p>
+
+    <h3>Data Identification Patterns</h3>
+    <ul>
+      <li>IDs often follow fixed formats:
+        <ul>
+          <li>Student ID → MAD001</li>
+          <li>Course ID → EE1001</li>
+        </ul>
+      </li>
+    </ul>
+    <p><strong>Best Practice:</strong></p>
+    <ul>
+      <li>Use simple integer keys (1, 2, 3...).</li>
+      <li>Faster and more efficient.</li>
+    </ul>
+
+    <h3>Example: Student Gradebook</h3>
+    <h4>Students Table</h4>
+    <ul>
+      <li>ID: MAD001, MAD002 (Unique)</li>
+      <li>Name: Can repeat</li>
+      <li>Other info: Address, hostel, room</li>
+    </ul>
+
+    <h4>Courses Table</h4>
+    <ul>
+      <li>Course ID: EE1001, AM1100</li>
+      <li>Course Name: Usually unique</li>
+      <li>Extra: Department, year</li>
+    </ul>
+
+    <h4>Student–Course Table (Join Table)</h4>
+    <table>
+      <tr><th>Student ID</th><th>Course ID</th><th>Marks</th></tr>
+      <tr><td>MAD001</td><td>BT1010</td><td>78</td></tr>
+    </table>
+    <p><strong>Meaning:</strong> Student MAD001 scored 78 in BT1010.</p>
+
+    <h3>Tools for Data Modeling</h3>
+    <ul>
+      <li><strong>Spreadsheets:</strong> Google Sheets, Microsoft Excel, LibreOffice Calc.</li>
+      <li>Used for:
+        <ul>
+          <li>Visualizing data</li>
+          <li>Designing tables before databases</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Quick Revision Summary</h3>
+    <div class="summary-box">
+      Model = data + logic<br>
+      Use tables (rows + columns) to organize data<br>
+      Always use unique IDs<br>
+      Avoid data repetition<br>
+      Use joins to connect tables<br>
+      Prefer integer keys for efficiency
+    </div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 2 -->
+  <section class="lecture" id="l2">
+    <h2>Lecture 2: Mechanisms For Persistent Storage and Relational Databases</h2>
+
+    <h3>Data Representation in Python</h3>
+    <h4>Lists &amp; Tuples</h4>
+    <ul>
+      <li><strong>Lists</strong> → Store entities (students, courses).</li>
+      <li><strong>Tuples</strong> → Store relationships (student–course mapping).</li>
+    </ul>
+
+    <h4>Problem with Strings</h4>
+    <ul>
+      <li>Typos and case issues.</li>
+      <li>Cannot distinguish same names.</li>
+      <li>Not scalable.</li>
+    </ul>
+
+    <h4>Solution → Keys (IDs)</h4>
+    <ul>
+      <li>Assign unique IDs (numeric/string).</li>
+      <li>Ensures uniqueness and compact storage.</li>
+      <li>Reduces errors.</li>
+    </ul>
+
+    <h3>Class-Based Modeling (OOP)</h3>
+    <ul>
+      <li><strong>Classes in Python:</strong> Store structured data using variables (e.g., <code>self.name</code>).</li>
+      <li><strong>ID Handling:</strong>
+        <ul>
+          <li>Can use class variable (<code>idnext</code>).</li>
+          <li>Better: let database assign IDs (handles concurrency safely).</li>
+        </ul>
+      </li>
+    </ul>
+    <p><strong>Advantages:</strong></p>
+    <ul>
+      <li>Add custom functions (e.g., full name generator).</li>
+      <li>Easily extend fields (hostel, address, etc.).</li>
+      <li>More organized and flexible than lists.</li>
+    </ul>
+
+    <h3>Persistent Storage Methods</h3>
+    <ul>
+      <li><strong>Problem:</strong> Memory data is lost after program/server stops.</li>
+      <li><strong>Serialization</strong>
+        <ul>
+          <li>Using Python's <code>pickle</code>.</li>
+          <li>Saves objects to disk and reloads them later.</li>
+          <li>Preserves exact structure.</li>
+        </ul>
+      </li>
+      <li><strong>Tabular Files</strong>
+        <ul>
+          <li>Formats: CSV, TSV.</li>
+          <li>Simple and widely used.</li>
+        </ul>
+      </li>
+      <li><strong>Limitations:</strong> CSV struggles with special characters (commas). Limited flexibility.</li>
+      <li><strong>Spreadsheets</strong>
+        <ul>
+          <li>Tools: Excel, Google Sheets.</li>
+          <li>Easy for visualization.</li>
+        </ul>
+      </li>
+      <li><strong>Drawbacks:</strong> Hard to manage relationships across sheets. Not powerful like databases.</li>
+    </ul>
+
+    <h3>Relational Databases (SQL)</h3>
+    <ul>
+      <li><strong>Structure:</strong> Tables → Rows + Columns.</li>
+      <li>Strong mathematical foundation.</li>
+    </ul>
+
+    <h4>Stored Procedures</h4>
+    <ul>
+      <li>Predefined database operations.</li>
+      <li>Simplify complex tasks.</li>
+    </ul>
+
+    <h4>Atomic Operations</h4>
+    <ul>
+      <li>"All or nothing" execution.</li>
+      <li>Prevents partial data errors.</li>
+    </ul>
+
+    <h3>SQL vs NoSQL Databases</h3>
+    <h4>Structured Databases (SQL)</h4>
+    <ul>
+      <li>Fixed schema (same columns in every row).</li>
+      <li>Strong validation.</li>
+      <li>Faster and reliable.</li>
+    </ul>
+
+    <h4>Unstructured / Semi-structured (NoSQL)</h4>
+    <ul>
+      <li>Flexible schema (different fields allowed).</li>
+      <li>Examples: MongoDB, CouchDB.</li>
+    </ul>
+
+    <p><strong>When to Use NoSQL:</strong></p>
+    <ul>
+      <li>When data varies across entries.</li>
+      <li>Example:
+        <ul>
+          <li>Hosteller → needs mess info.</li>
+          <li>Day scholar → needs local address.</li>
+        </ul>
+      </li>
+      <li>Add fields without affecting whole database.</li>
+    </ul>
+
+    <h3>Quick Revision Summary</h3>
+    <div class="summary-box">
+      Use IDs (keys) instead of names.<br>
+      Classes → better structure than lists.<br>
+      Memory data is temporary → use storage methods.<br>
+      CSV/Sheets → simple but limited.<br>
+      SQL → structured, reliable, atomic.<br>
+      NoSQL → flexible, real-world adaptable.
+    </div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 3 -->
+  <section class="lecture" id="l3">
+    <h2>Lecture 3: Relations And ER Diagram</h2>
+
+    <h3>Core Purpose of Databases</h3>
+    <h4>Beyond Storage</h4>
+    <ul>
+      <li>Databases are not just for storage.</li>
+      <li>They store data and represent relationships.</li>
+    </ul>
+
+    <h4>Tabular Structure</h4>
+    <ul>
+      <li>Tables → Overall data.</li>
+      <li>Rows → Individual records.</li>
+      <li>Columns → Attributes (fields).</li>
+    </ul>
+
+    <h3>Database Structure &amp; Identifiers</h3>
+    <p><strong>Unique Identifiers:</strong> Every record must be uniquely identifiable.</p>
+    <ul>
+      <li>Humans prefer patterns (e.g., roll numbers).</li>
+      <li>Computers only require uniqueness.</li>
+    </ul>
+
+    <p><strong>Primary Key (PK):</strong> Unique ID for each row (usually integer).</p>
+    <ul>
+      <li>Ensures:
+        <ul>
+          <li>No duplicates.</li>
+          <li>Fast retrieval.</li>
+          <li>Easy indexing.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <p><strong>Foreign Key (FK):</strong> A field that links to another table's Primary Key.</p>
+    <ul>
+      <li>Used to connect tables.</li>
+    </ul>
+
+    <h3>Types of Relationships</h3>
+
+    <h4>One-to-One (1:1)</h4>
+    <ul>
+      <li>One record ↔ one record.</li>
+      <li>Examples:
+        <ul>
+          <li>Student ↔ Roll Number.</li>
+          <li>Email ↔ Message ID.</li>
+        </ul>
+      </li>
+      <li>Often can be merged into one table.</li>
+    </ul>
+
+    <h4>One-to-Many (1:M)</h4>
+    <ul>
+      <li>One record ↔ many records.</li>
+      <li>Examples:
+        <ul>
+          <li>One hostel → many students.</li>
+          <li>One folder → many emails.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h4>Many-to-Many (M:N)</h4>
+    <ul>
+      <li>Many records ↔ many records.</li>
+      <li>Examples:
+        <ul>
+          <li>Students ↔ Courses.</li>
+          <li>Emails ↔ Labels.</li>
+        </ul>
+      </li>
+      <li>Requires a joint table.</li>
+    </ul>
+
+    <h3>Entity-Relationship (ER) Diagrams</h3>
+    <p>Used to visually represent database structure.</p>
+    <p><strong>Components:</strong></p>
+    <ul>
+      <li>Entities: Objects (Student, Course, Customer).</li>
+      <li>Notation: Crow's Foot Notation.</li>
+    </ul>
+
+    <h4>Crow's Foot Symbols</h4>
+    <ul>
+      <li><code>|</code> → One.</li>
+      <li><code>≡</code> (three lines) → Many.</li>
+      <li><code>○</code> → Zero (optional).</li>
+    </ul>
+
+    <h4>Constraints</h4>
+    <ul>
+      <li><strong>Mandatory:</strong> Must exist (exactly one).</li>
+      <li><strong>Optional:</strong> May or may not exist (zero or more).</li>
+    </ul>
+
+    <h3>Practical Example (E-commerce)</h3>
+    <ul>
+      <li><strong>Customer ↔ Order</strong>
+        <ul>
+          <li>Each order → exactly one customer.</li>
+          <li>A customer → zero or many orders.</li>
+        </ul>
+      </li>
+      <li><strong>Order ↔ Shipment</strong>
+        <ul>
+          <li>Each shipment → one order.</li>
+          <li>One order → zero or many shipments.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Implementation &amp; Tools</h3>
+    <ul>
+      <li>ER diagrams can be converted into:
+        <ul>
+          <li>Database schemas.</li>
+          <li>Code structures.</li>
+        </ul>
+      </li>
+      <li><strong>Tools:</strong> app.diagrams.net (draw.io). PowerPoint / presentation tools.</li>
+    </ul>
+
+    <h3>Quick Revision Summary</h3>
+    <div class="summary-box">
+      Database = data + relationships.<br>
+      Use Primary Keys for uniqueness.<br>
+      Use Foreign Keys to connect tables.<br>
+      Three relationship types: 1:1, 1:M, M:N.<br>
+      ER diagrams help visualize structure.<br>
+      Crow's Foot notation shows relationships clearly.
+    </div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 4 -->
+  <section class="lecture" id="l4">
+    <h2>Lecture 4: SQL</h2>
+
+    <h3>Introduction to Relational Databases</h3>
+    <h4>Origin</h4>
+    <ul>
+      <li>Developed at IBM in the 1970s.</li>
+    </ul>
+
+    <h4>Basic Structure (Tabular)</h4>
+    <ul>
+      <li>Table → Complete dataset.</li>
+      <li>Columns (Fields) → Attributes (e.g., name, ID).</li>
+      <li>Rows (Records) → Individual entries (e.g., one student).</li>
+    </ul>
+
+    <h3>Database Keys &amp; Indexing</h3>
+    <h4>Primary Key (PK)</h4>
+    <ul>
+      <li>Unique identifier for each row.</li>
+      <li>Usually an integer (fast access).</li>
+      <li>Faster than searching by names.</li>
+    </ul>
+
+    <h4>Foreign Key (FK)</h4>
+    <ul>
+      <li>Connects one table to another.</li>
+      <li>Refers to the Primary Key of another table.</li>
+    </ul>
+
+    <h4>Indexing</h4>
+    <ul>
+      <li>Improves search speed on non-PK fields.</li>
+      <li>Example: roll number, course ID.</li>
+      <li>Makes queries faster.</li>
+    </ul>
+
+    <h3>Structured Query Language (SQL)</h3>
+    <ul>
+      <li><strong>Definition:</strong> Language used to query and manage databases.</li>
+      <li><strong>Features:</strong>
+        <ul>
+          <li>English-like syntax.</li>
+          <li>Strict rules (syntax-sensitive).</li>
+          <li>Can be verbose.</li>
+          <li>Based on mathematical logic.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Data Joining Techniques</h3>
+    <p><strong>Inner Join:</strong> Combines rows from two tables based on matching condition.</p>
+    <pre>student.hostelId = hostel.ID</pre>
+
+    <p><strong>Cartesian Product:</strong> All combinations of two tables.</p>
+    <ul>
+      <li>Size = N × M.</li>
+      <li>Problem: Can become huge and slow.</li>
+    </ul>
+
+    <h4>Performance Note</h4>
+    <ul>
+      <li>Complex joins → slower queries.</li>
+      <li>Must be used carefully.</li>
+    </ul>
+
+    <h3>Constructing Complex Queries</h3>
+    <h4>Aliasing</h4>
+    <ul>
+      <li>Short names for tables.</li>
+      <li>Example: <code>students</code> → <code>s</code>.</li>
+      <li>Reduces typing.</li>
+    </ul>
+
+    <h4>Multi-Step Queries</h4>
+    <ul>
+      <li>Combine multiple operations into one query.</li>
+      <li>Example: Find names of students in a course using:
+        <ul>
+          <li>Student table.</li>
+          <li>Course table.</li>
+          <li>Enrollment table.</li>
+        </ul>
+      </li>
+      <li>SQL handles it in one statement.</li>
+    </ul>
+
+    <h3>The "Model" in Applications (MVC)</h3>
+    <p><strong>Persistence:</strong> Data stored permanently on disk. Survives server restart.</p>
+
+    <h4>Storage Options</h4>
+    <ul>
+      <li>CSV files.</li>
+      <li>Spreadsheets.</li>
+      <li>SQL databases.</li>
+      <li>NoSQL databases.</li>
+    </ul>
+
+    <h4>Separation of Concerns</h4>
+    <ul>
+      <li>Model ≠ View.</li>
+      <li>Model → handles data.</li>
+      <li>View → handles UI.</li>
+      <li>Model does not deal with HTML/UI.</li>
+    </ul>
+
+    <p><strong>Flexibility:</strong> Can change database (e.g., MySQL → SQLite). No need to change rest of application.</p>
+
+    <h3>Quick Summary</h3>
+    <div class="summary-box">
+      Relational DB = tables (rows + columns).<br>
+      Use Primary Keys for uniqueness.<br>
+      Use Foreign Keys for relationships.<br>
+      Indexing improves speed.<br>
+      SQL = query language (strict but powerful).<br>
+      Joins combine data (watch performance).<br>
+      Model = data layer, independent of UI.
+    </div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+</div>
+</body>
+</html>
