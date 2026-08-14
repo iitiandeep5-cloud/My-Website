@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 2: Short Notes — MAD 1</title>
+<style>
+  :root {
+    --bg: #faf8f5;
+    --panel: #ffffff;
+    --ink: #232323;
+    --sub: #5c5c5c;
+    --accent: #3f6fb4;
+    --accent-soft: #d6e2f4;
+    --line: #e2e6ea;
+    --code-bg: #24303d;
+    --code-ink: #dbe7f3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Georgia', 'Iowan Old Style', serif;
+    line-height: 1.6;
+  }
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 24px 100px;
+  }
+  header.doc-header {
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+  }
+  header.doc-header h1 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 2.1rem;
+    margin: 0 0 6px;
+    letter-spacing: -0.5px;
+  }
+  header.doc-header p {
+    margin: 0;
+    color: var(--sub);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.95rem;
+  }
+  nav.toc {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 48px;
+  }
+  nav.toc h2 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    margin: 0 0 12px;
+  }
+  nav.toc ol {
+    columns: 2;
+    -webkit-columns: 2;
+    margin: 0;
+    padding-left: 20px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.92rem;
+  }
+  nav.toc li { margin-bottom: 6px; }
+  nav.toc a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--sub);
+  }
+  nav.toc a:hover { color: var(--accent); border-color: var(--accent); }
+
+  section.lecture {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 32px 36px;
+    margin-bottom: 32px;
+    scroll-margin-top: 20px;
+  }
+  section.lecture > h2 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 1.5rem;
+    margin: 0 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--accent-soft);
+    color: var(--accent);
+  }
+  h3 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 1.15rem;
+    margin: 28px 0 10px;
+    color: var(--ink);
+  }
+  h4 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 18px 0 6px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.85rem;
+  }
+  p { margin: 8px 0; }
+  ul { margin: 6px 0; padding-left: 22px; }
+  ul ul { padding-left: 20px; margin: 4px 0; }
+  li { margin: 4px 0; }
+  strong { color: var(--ink); }
+
+  code, .inline-code {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    background: #e7edf4;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: #24507f;
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-ink);
+    padding: 14px 18px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.88rem;
+    margin: 10px 0;
+  }
+  pre code { background: none; padding: 0; color: inherit; }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 14px 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--line);
+    padding: 8px 12px;
+    text-align: left;
+  }
+  th {
+    background: var(--accent-soft);
+    color: #1f3f66;
+    font-weight: 600;
+  }
+  tr:nth-child(even) td { background: #f4f7fb; }
+
+  .summary-box {
+    background: #eef3fa;
+    border-left: 4px solid var(--accent);
+    padding: 14px 18px;
+    border-radius: 6px;
+    margin-top: 20px;
+    font-style: italic;
+  }
+  .summary-box strong { font-style: normal; color: var(--accent); }
+
+  .key-idea {
+    background: #f0efe8;
+    border-left: 4px solid #7a7a5c;
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin: 12px 0;
+  }
+
+  .analogy {
+    background: #fbf6e8;
+    border-left: 4px solid #c69a2a;
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin: 12px 0;
+    font-style: italic;
+  }
+
+  a.back-top {
+    display: inline-block;
+    margin-top: 18px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.8rem;
+    color: var(--sub);
+    text-decoration: none;
+  }
+  a.back-top:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    nav.toc ol { columns: 1; }
+    section.lecture { padding: 22px 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="doc-header" id="top">
+    <h1>Week 2: Short Notes</h1>
+    <p>MAD 1 — Modern Application Development</p>
+  </header>
+
+  <nav class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#l1">Lecture 1: Information Representation in a Machine</a></li>
+      <li><a href="#l2">Lecture 2: Efficiency of Encoding</a></li>
+      <li><a href="#l3">Lecture 3: What is Markup?</a></li>
+      <li><a href="#l4">Lecture 4: Introduction to HTML</a></li>
+      <li><a href="#l5">Lecture 5: Introduction to Styling</a></li>
+      <li><a href="#l6">Lecture 6: Types of CSS Styling and Responsive Websites</a></li>
+    </ol>
+  </nav>
+
+  <!-- LECTURE 1 -->
+  <section class="lecture" id="l1">
+    <h2>Lecture 1: Information Representation in a Machine</h2>
+
+    <h3>Markup &amp; User Interface (UI)</h3>
+    <ul>
+      <li><strong>Definition:</strong> Markup controls how content appears on a screen (layout, structure, design).</li>
+      <li><strong>Role in UI:</strong> A key part of the User Interface (UI), focusing on aesthetics and usability.</li>
+      <li><strong>Purpose:</strong> Developers use markup to change appearance without altering content.</li>
+      <li><strong>Technologies:</strong>
+        <ul>
+          <li>HTML5 → Defines structure (what is on the page).</li>
+          <li>CSS → Defines styling (how it looks).</li>
+        </ul>
+      </li>
+    </ul>
+    <div class="analogy">Analogy: HTML = skeleton, CSS = styling/beauty.</div>
+
+    <h3>Information Representation (Bits)</h3>
+    <ul>
+      <li><strong>Binary System:</strong> Computers use bits (0 and 1).</li>
+      <li><strong>Electrical Meaning:</strong>
+        <ul>
+          <li>0 → low voltage (0V).</li>
+          <li>1 → high voltage.</li>
+        </ul>
+      </li>
+      <li><strong>Advantages:</strong>
+        <ul>
+          <li>Enables mathematical computations.</li>
+          <li>Reliable (noise-resistant).</li>
+        </ul>
+      </li>
+    </ul>
+    <div class="key-idea"><strong>Key Idea:</strong> Everything in a computer (text, images, videos) is a sequence of bits.</div>
+
+    <h3>Context &amp; Interpretation of Bits</h3>
+    <ul>
+      <li><strong>Meaning:</strong> Bits alone have no meaning; context defines interpretation.</li>
+      <li><strong>Examples:</strong>
+        <ul>
+          <li><code>0110</code> → 6 (number system).</li>
+          <li><code>1010</code> → +10 (unsigned), –6 (2's complement).</li>
+          <li><code>01000001</code> → Number 65, Character 'A', or just a binary sequence.</li>
+        </ul>
+      </li>
+      <li><strong>In Memory:</strong> Programs define context (variable, string, number).</li>
+    </ul>
+    <div class="key-idea"><strong>Key Idea:</strong> Bits + Context = Meaning.</div>
+
+    <h3>Text Encoding Standards</h3>
+    <p>To share data, computers need a common encoding system.</p>
+
+    <h4>ASCII</h4>
+    <ul>
+      <li>Developed in 1960s–70s.</li>
+      <li>7-bit system → 128 characters.</li>
+      <li>Includes:
+        <ul>
+          <li>Letters: A–Z, a–z.</li>
+          <li>Digits: 0–9.</li>
+          <li>Symbols: @, $, %.</li>
+          <li>Control characters: Enter, Backspace.</li>
+        </ul>
+      </li>
+      <li><strong>Extended ASCII:</strong> 8-bit (256 characters), supports European special characters.</li>
+    </ul>
+
+    <h4>Unicode</h4>
+    <ul>
+      <li>Created to support all world languages.</li>
+      <li>Handles languages like Hindi, Tamil, Chinese, Japanese.</li>
+      <li><strong>Types:</strong>
+        <ul>
+          <li>UCS-2 → 2 bytes (65,536 characters).</li>
+          <li>UCS-4 → 4 bytes (~4 billion characters).</li>
+        </ul>
+      </li>
+      <li><strong>Current Status:</strong>
+        <ul>
+          <li>100,000+ characters defined.</li>
+          <li>Plenty of space for future expansion.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Quick Summary</h3>
+    <div class="summary-box">
+      Markup (HTML + CSS) → Controls UI appearance.<br>
+      Bits (0/1) → Basic unit of all data.<br>
+      Context → Gives meaning to bits.<br>
+      Encoding (ASCII, Unicode) → Standard way to represent text.
+    </div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 2 -->
+  <section class="lecture" id="l2">
+    <h2>Lecture 2: Efficiency of Encoding</h2>
+
+    <h3>Encoding Efficiency Problem</h3>
+    <ul>
+      <li><strong>Background:</strong> ASCII worked well due to English dominance in early web content.</li>
+      <li><strong>Problem with UTF-32 (UCS-4):</strong>
+        <ul>
+          <li>Uses 4 bytes per character.</li>
+          <li>Example (5,000 characters):
+            <ul>
+              <li>UTF-32 = 160,000 bits.</li>
+              <li>ASCII (8-bit) = 40,000 bits.</li>
+              <li>ASCII (7-bit) = 35,000 bits.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><strong>Impact:</strong>
+        <ul>
+          <li>More storage required.</li>
+          <li>Higher memory usage.</li>
+          <li>Slower processing.</li>
+        </ul>
+      </li>
+    </ul>
+    <div class="key-idea"><strong>Key Idea:</strong> Universal encoding ≠ efficient encoding.</div>
+
+    <h3>Frequency-Based Encoding &amp; Compression</h3>
+    <ul>
+      <li><strong>Character Frequency:</strong>
+        <ul>
+          <li>Frequent letters: E, T.</li>
+          <li>Rare letters: Z, Q, J.</li>
+        </ul>
+      </li>
+      <li><strong>Huffman Encoding:</strong>
+        <ul>
+          <li>Short codes → frequent characters.</li>
+          <li>Long codes → rare characters.</li>
+          <li>Example: 5,000 characters → 10,000–20,000 bits.</li>
+        </ul>
+      </li>
+      <li><strong>Data Compression:</strong>
+        <ul>
+          <li>Tools like ZIP compress data using patterns and frequencies.</li>
+          <li>Works for text, images, videos, etc.</li>
+        </ul>
+      </li>
+    </ul>
+    <div class="key-idea"><strong>Key Idea:</strong> Smarter encoding = less space.</div>
+
+    <h3>Variable-Length Encoding (Unicode Solution)</h3>
+    <ul>
+      <li><strong>Goal:</strong> Balance efficiency with global language support.</li>
+      <li><strong>Encodings:</strong>
+        <ul>
+          <li><strong>UTF-8:</strong>
+            <ul>
+              <li>Uses 1 to 4 bytes.</li>
+              <li>ASCII-compatible.</li>
+              <li>Rule: If byte starts with 0 → ASCII character.</li>
+              <li>Most widely used on the web.</li>
+            </ul>
+          </li>
+          <li><strong>UTF-16:</strong>
+            <ul>
+              <li>Uses 2 or 4 bytes.</li>
+              <li>More efficient for some languages.</li>
+            </ul>
+          </li>
+          <li><strong>UTF-32:</strong>
+            <ul>
+              <li>Always 4 bytes.</li>
+              <li>Simple but least efficient.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <div class="key-idea"><strong>Key Idea:</strong> Common characters → fewer bytes; rare characters → more bytes.</div>
+
+    <h3>UTF-8 Working (Prefix Codes)</h3>
+    <ul>
+      <li><strong>Prefix Rules:</strong>
+        <ul>
+          <li>Starts with 0 → 1-byte (ASCII).</li>
+          <li>Starts with 11 → start of multi-byte character.</li>
+          <li>Starts with 10 → continuation byte.</li>
+        </ul>
+      </li>
+      <li><strong>Feature: Self-Synchronization</strong>
+        <ul>
+          <li>Detects start and middle of a character.</li>
+          <li>Makes text easy to process and recover.</li>
+        </ul>
+      </li>
+      <li><strong>Capacity:</strong> Supports ~1 million characters (enough for all languages).</li>
+    </ul>
+
+    <h3>Practical Encoding Examples</h3>
+    <table>
+      <tr><th>Character</th><th>Code Point</th><th>UTF-8 Size</th></tr>
+      <tr><td>'A'</td><td>U+0041</td><td>1 byte</td></tr>
+      <tr><td>Hebrew</td><td>U+05D0</td><td>2 bytes</td></tr>
+      <tr><td>Kanji</td><td>U+597D</td><td>3 bytes</td></tr>
+      <tr><td>Rare</td><td>U+233B4</td><td>4 bytes</td></tr>
+    </table>
+    <p><strong>Pattern:</strong> More complex/rare characters → more bytes.</p>
+
+    <h3>Importance in Web Development</h3>
+    <ul>
+      <li><strong>Global Support:</strong> Apps must support languages like Hindi, Tamil, Chinese.</li>
+      <li><strong>Browser Handling:</strong> Browsers rely on UTF-8 to display text correctly and process strings.</li>
+      <li><strong>HTML Standard Practice:</strong> <code>&lt;meta charset="UTF-8"&gt;</code>
+        <ul>
+          <li>Ensures correct display across devices.</li>
+          <li>Prevents encoding errors.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Quick Summary</h3>
+    <div class="summary-box">
+      UTF-32 → Simple but inefficient.<br>
+      Huffman Encoding → Compress using frequency.<br>
+      UTF-8 → Best balance (efficient + universal).<br>
+      Prefix Codes → Identify character length.<br>
+      UTF-8 → Standard for web development.
+    </div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 3 -->
+  <section class="lecture" id="l3">
+    <h2>Lecture 3: What is Markup?</h2>
+
+    <h3>Definition &amp; Purpose of Markup</h3>
+    <ul>
+      <li><strong>Definition:</strong> Markup = adding codes/cues in text to control how it is displayed.</li>
+      <li><strong>Separation:</strong>
+        <ul>
+          <li>Content → what is written.</li>
+          <li>Presentation/Meaning → how it appears or is interpreted.</li>
+        </ul>
+      </li>
+      <li><strong>Purpose:</strong> Makes text clear, structured, and easy to understand.</li>
+      <li><strong>Usefulness:</strong>
+        <ul>
+          <li>For humans → readability.</li>
+          <li>For machines → processing.</li>
+        </ul>
+      </li>
+      <li><strong>Everyday Examples:</strong> Punctuation (., ?, !), capitalization.</li>
+    </ul>
+    <div class="key-idea"><strong>Key Idea:</strong> Markup gives structure + meaning to raw text.</div>
+
+    <h3>Historical &amp; Conceptual Background</h3>
+    <ul>
+      <li><strong>Origin:</strong> From editing on paper (marking titles, headings, corrections).</li>
+      <li><strong>Computing Use:</strong> Since 1970s (e.g., LaTeX).</li>
+      <li><strong>Importance:</strong> Helps machines identify parts like abstract, introduction, results.</li>
+      <li><strong>Benefit:</strong> Machines don't need to "understand" text like humans.</li>
+    </ul>
+    <div class="key-idea"><strong>Key Idea:</strong> Markup enables automation and structured processing.</div>
+
+    <h3>Types of Markup</h3>
+
+    <h4>1. Presentational Markup</h4>
+    <ul>
+      <li><strong>Focus:</strong> Appearance (look).</li>
+      <li><strong>Basis:</strong> WYSIWYG (What You See Is What You Get).</li>
+      <li><strong>Features:</strong> Immediate visual output.</li>
+      <li><strong>Example:</strong> Bold text, center alignment.</li>
+      <li><strong>Drawback:</strong> Code is complex and hard to read in raw form.</li>
+    </ul>
+
+    <h4>2. Procedural Markup</h4>
+    <ul>
+      <li><strong>Focus:</strong> Step-by-step instructions.</li>
+      <li><strong>Example:</strong>
+        <ul>
+          <li>Set font → Arial.</li>
+          <li>Set size → 24pt.</li>
+          <li>Add spacing.</li>
+        </ul>
+      </li>
+      <li><strong>Advantage:</strong> Simple for machine to follow.</li>
+    </ul>
+    <div class="key-idea"><strong>Key Idea:</strong> Tool doesn't need to be smart → just follow instructions.</div>
+
+    <h4>3. Descriptive (Semantic) Markup</h4>
+    <ul>
+      <li><strong>Focus:</strong> Meaning, not appearance.</li>
+      <li><strong>Example:</strong>
+        <ul>
+          <li><code>&lt;title&gt;</code> instead of "make bold".</li>
+          <li><code>&lt;heading&gt;</code> instead of "increase font size".</li>
+        </ul>
+      </li>
+      <li><strong>Advantages:</strong>
+        <ul>
+          <li>Tool-independent.</li>
+          <li>Long-term usability.</li>
+          <li>Better for search and data processing.</li>
+        </ul>
+      </li>
+    </ul>
+    <div class="key-idea"><strong>Key Idea:</strong> Most important type in modern systems.</div>
+
+    <h3>Semantics vs Presentation</h3>
+    <ul>
+      <li><strong>Semantics:</strong> Meaning + structure of content. Answers: "What is this?"</li>
+      <li><strong>Presentation:</strong> Visual appearance. Answers: "How does it look?"</li>
+      <li><strong>Semantic Languages:</strong> HTML, XML, LaTeX.</li>
+      <li><strong>Example:</strong>
+        <ul>
+          <li>Presentational: "Make text bold."</li>
+          <li>Semantic: "This text is important (emphasis)."</li>
+        </ul>
+      </li>
+      <li><strong>Outcome:</strong> Display system decides bold/color/style.</li>
+    </ul>
+
+    <h3>Problem with WYSIWYG Tools</h3>
+    <ul>
+      <li><strong>Example:</strong> Microsoft Word.</li>
+      <li><strong>Produces:</strong> Complex, bloated code.</li>
+      <li><strong>Issue:</strong> When converted to HTML → messy, hard to read, hard to maintain.</li>
+    </ul>
+    <div class="key-idea"><strong>Key Idea:</strong> WYSIWYG = easy for users, messy for developers.</div>
+
+    <h3>Quick Summary</h3>
+    <div class="summary-box">
+      Markup = structure + display instructions.<br>
+      Types: Presentational → looks. Procedural → steps. Descriptive → meaning.<br>
+      Semantic markup → most powerful.<br>
+      WYSIWYG tools → easy but inefficient.
+    </div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 4 -->
+  <section class="lecture" id="l4">
+    <h2>Lecture 4: Introduction To HTML</h2>
+
+    <h3>History &amp; Origin of HTML</h3>
+    <ul>
+      <li><strong>Creation:</strong> HTML (HyperText Markup Language) was created by Tim Berners-Lee in 1989 at CERN.</li>
+      <li><strong>Inspiration:</strong> Based on SGML (Standard Generalized Markup Language).</li>
+      <li><strong>Key Difference:</strong>
+        <ul>
+          <li>SGML → strict rules.</li>
+          <li>HTML → forgiving, error-tolerant.</li>
+        </ul>
+      </li>
+      <li><strong>Browser Behavior:</strong> Browsers follow "best effort interpretation." Even with missing/wrong tags, pages still display.</li>
+    </ul>
+
+    <h3>Core Structure &amp; Syntax</h3>
+    <ul>
+      <li><strong>Basic Structure:</strong> Starts with <code>&lt;!DOCTYPE html&gt;</code>.</li>
+      <li><strong>Tags:</strong>
+        <ul>
+          <li>Written using angle brackets <code>&lt; &gt;</code>.</li>
+          <li>Usually in pairs: <code>&lt;tag&gt; … &lt;/tag&gt;</code>.</li>
+        </ul>
+      </li>
+      <li><strong>Case Rule:</strong> Case-insensitive (<code>&lt;h1&gt;</code> = <code>&lt;H1&gt;</code>), but lowercase is best practice.</li>
+      <li><strong>Common Elements:</strong>
+        <ul>
+          <li><code>&lt;html&gt;</code> → root element.</li>
+          <li><code>&lt;body&gt;</code> → main content.</li>
+          <li><code>&lt;h1&gt;</code> → heading.</li>
+          <li><code>&lt;p&gt;</code> → paragraph.</li>
+        </ul>
+      </li>
+      <li><strong>Nesting Rule:</strong> Tags can be inside others.
+        <ul>
+          <li>Correct: <code>&lt;p&gt;&lt;b&gt;Text&lt;/b&gt;&lt;/p&gt;</code>.</li>
+          <li>Wrong: <code>&lt;p&gt;&lt;b&gt;Text&lt;/p&gt;&lt;/b&gt;</code>.</li>
+        </ul>
+      </li>
+      <li><strong>Rule:</strong> Close inner tag first, then outer tag.</li>
+    </ul>
+
+    <h3>Semantic vs Physical Markup</h3>
+
+    <h4>Semantic (Logical) Markup</h4>
+    <ul>
+      <li><strong>Focus:</strong> Meaning of content.</li>
+      <li><strong>Examples:</strong>
+        <ul>
+          <li><code>&lt;strong&gt;</code> → important text.</li>
+          <li><code>&lt;em&gt;</code> → emphasized text.</li>
+        </ul>
+      </li>
+      <li><strong>HTML5 Semantic Tags:</strong>
+        <ul>
+          <li><code>&lt;nav&gt;</code> → navigation.</li>
+          <li><code>&lt;footer&gt;</code> → footer section.</li>
+          <li><code>&lt;div&gt;</code> → block container.</li>
+        </ul>
+      </li>
+      <li><strong>Benefits:</strong> Better for SEO, accessibility (screen readers), and code clarity.</li>
+    </ul>
+
+    <h4>Physical (Presentational) Markup</h4>
+    <ul>
+      <li><strong>Focus:</strong> Appearance only.</li>
+      <li><strong>Examples:</strong>
+        <ul>
+          <li><code>&lt;b&gt;</code> → bold.</li>
+          <li><code>&lt;center&gt;</code>, <code>&lt;font&gt;</code> → deprecated.</li>
+        </ul>
+      </li>
+      <li><strong>Problem:</strong> No meaning, only styling.</li>
+    </ul>
+    <div class="key-idea"><strong>Key Idea:</strong> Use semantic markup &gt; physical markup.</div>
+
+    <h3>Evolution of HTML</h3>
+    <ul>
+      <li><strong>Versions Timeline:</strong>
+        <ul>
+          <li>HTML (1990) → first version.</li>
+          <li>HTML 2 (1995).</li>
+          <li>HTML 3/4 (1997).</li>
+        </ul>
+      </li>
+      <li><strong>XHTML:</strong>
+        <ul>
+          <li>Based on XML.</li>
+          <li>Stricter rules, cleaner structure.</li>
+        </ul>
+      </li>
+      <li><strong>HTML5 (Modern Standard):</strong>
+        <ul>
+          <li>Developed in 2008, standardized in 2014 (W3C).</li>
+          <li>Key Features: Replaced Adobe Flash; added <code>&lt;audio&gt;</code> and <code>&lt;video&gt;</code> support.</li>
+          <li>Now the most widely used version.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>DOM (Document Object Model) &amp; APIs</h3>
+    <ul>
+      <li><strong>DOM Concept:</strong> Browser converts HTML into a tree structure.</li>
+    </ul>
+    <pre>&lt;html&gt;
+  &lt;body&gt;
+    &lt;p&gt;</pre>
+    <ul>
+      <li><strong>Importance:</strong> Enables dynamic updates and interactive web pages.</li>
+      <li><strong>DOM Manipulation:</strong> Developers use JavaScript to:
+        <ul>
+          <li>Change content.</li>
+          <li>Modify styles.</li>
+          <li>Add/remove elements.</li>
+        </ul>
+      </li>
+      <li><strong>HTML5 APIs:</strong>
+        <ul>
+          <li>Canvas → drawing graphics.</li>
+          <li>Offline API → run apps without internet.</li>
+          <li>Web Storage → store data locally.</li>
+          <li>Drag &amp; Drop → interactive UI features.</li>
+        </ul>
+      </li>
+      <li><strong>Related Technologies:</strong>
+        <ul>
+          <li>JavaScript → controls behavior (DOM manipulation).</li>
+          <li>CSS → controls design &amp; layout.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Quick Summary</h3>
+    <div class="summary-box">
+      HTML created by Tim Berners-Lee (1989).<br>
+      Forgiving language → works even with errors.<br>
+      Tags + nesting → define structure.<br>
+      Semantic &gt; physical markup.<br>
+      HTML5 → modern standard (audio, video, APIs).<br>
+      DOM → tree structure of webpage.<br>
+      JavaScript + CSS → behavior + styling.
+    </div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 5 -->
+  <section class="lecture" id="l5">
+    <h2>Lecture 5: Introduction To Styling</h2>
+
+    <h3>Markup vs Styling (Core Concept)</h3>
+    <ul>
+      <li><strong>Markup:</strong> Defines structure and meaning of content.
+        <ul>
+          <li>Example: <code>&lt;h1&gt;</code> → heading.</li>
+          <li>Does not control appearance.</li>
+        </ul>
+      </li>
+      <li><strong>Styling:</strong> Controls appearance (look &amp; design).
+        <ul>
+          <li>Includes colors, fonts, layout.</li>
+        </ul>
+      </li>
+      <li><strong>Separation of Concerns:</strong> Keep markup (HTML) and styling (CSS) separate.
+        <ul>
+          <li>Benefits: Same content → different designs; easy maintenance; flexible UI design.</li>
+        </ul>
+      </li>
+    </ul>
+    <div class="key-idea"><strong>Key Idea:</strong> HTML = structure, CSS = appearance.</div>
+
+    <h3>Themes</h3>
+    <ul>
+      <li><strong>Definition:</strong> Theme = different visual styles for the same content.</li>
+      <li><strong>Examples:</strong> Light mode, Dark mode.</li>
+      <li><strong>Important:</strong> Functionality remains the same; only appearance changes.</li>
+    </ul>
+    <div class="key-idea"><strong>Key Idea:</strong> Themes = styling applied on same structure.</div>
+
+    <h3>Style Sheets &amp; CSS</h3>
+    <ul>
+      <li><strong>Style Sheets:</strong> Files containing only styling rules. Define how HTML elements should look.</li>
+      <li><strong>CSS (Cascading Style Sheets):</strong> Purpose is to separate design from content.</li>
+      <li><strong>Cascading Concept:</strong> Multiple styles can apply to the same element.
+        <ul>
+          <li>If conflict occurs → last rule wins.</li>
+        </ul>
+      </li>
+      <li><strong>Example:</strong> Two styles for <code>&lt;p&gt;</code> → latest one is applied.</li>
+    </ul>
+
+    <h3>Browser Developer Tools</h3>
+    <ul>
+      <li><strong>Definition:</strong> Built-in tools in browsers (Chrome, Edge, etc.).</li>
+      <li><strong>Uses:</strong> View HTML structure, inspect CSS styles, debug UI issues.</li>
+      <li><strong>Benefits:</strong>
+        <ul>
+          <li>Identify which code affects which element.</li>
+          <li>See applied styles in real-time.</li>
+        </ul>
+      </li>
+    </ul>
+    <div class="key-idea"><strong>Key Idea:</strong> Bridge between code and visual output.</div>
+
+    <h3>Default Browser Styles</h3>
+    <ul>
+      <li><strong>Behavior:</strong> If no CSS is written, browser applies default styling.</li>
+      <li><strong>Examples:</strong>
+        <ul>
+          <li>Headings (<code>&lt;h1&gt;</code>): <code>display: block</code>; <code>font-size: ~2em</code>; <code>font-weight: bold</code>; margin above &amp; below.</li>
+          <li>Links (<code>&lt;a&gt;</code>): <code>color: blue</code>; <code>text-decoration: underline</code>; cursor changes to pointer on hover.</li>
+        </ul>
+      </li>
+    </ul>
+    <div class="key-idea"><strong>Key Idea:</strong> Browsers ensure basic readability by default.</div>
+
+    <h3>Important CSS Properties</h3>
+    <ul>
+      <li><strong>Text Styling:</strong>
+        <ul>
+          <li><code>font-size</code> → text size.</li>
+          <li><code>font-weight</code> → thickness (bold).</li>
+        </ul>
+      </li>
+      <li><strong>Colors:</strong>
+        <ul>
+          <li><code>color</code> → text color.</li>
+          <li><code>background</code> → background color.</li>
+        </ul>
+      </li>
+      <li><strong>Layout:</strong>
+        <ul>
+          <li><code>display</code> → positioning (block, inline, etc.).</li>
+        </ul>
+      </li>
+      <li><strong>Effects:</strong>
+        <ul>
+          <li><code>text-decoration</code> → underline, etc.</li>
+          <li><code>cursor</code> → mouse pointer style.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Quick Summary</h3>
+    <div class="summary-box">
+      Markup → structure (HTML).<br>
+      Styling → appearance (CSS).<br>
+      Separation → flexibility &amp; reusability.<br>
+      CSS → cascading (last rule wins).<br>
+      Browser → default styles applied.<br>
+      Dev tools → debug &amp; inspect UI.
+    </div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 6 -->
+  <section class="lecture" id="l6">
+    <h2>Lecture 6: Types of CSS Styling and Responsive Websites</h2>
+
+    <p><strong>Types of CSS Styling:</strong> CSS allows developers to override browser default styles by adding new rules.</p>
+
+    <h3>Inline CSS</h3>
+    <ul>
+      <li><strong>Definition:</strong> Applied directly inside an HTML tag.</li>
+    </ul>
+    <pre>&lt;h1 style="color: blue;"&gt;Heading&lt;/h1&gt;</pre>
+    <ul>
+      <li><strong>Advantage:</strong> Quick and specific changes.</li>
+      <li><strong>Disadvantage:</strong> Not reusable, hard to maintain (must change every tag manually).</li>
+    </ul>
+
+    <h3>Internal CSS</h3>
+    <ul>
+      <li><strong>Definition:</strong> Written inside <code>&lt;style&gt;</code> tag (in <code>&lt;head&gt;</code> section).</li>
+    </ul>
+    <pre>&lt;style&gt;
+h1 {
+  color: blue;
+}
+&lt;/style&gt;</pre>
+    <ul>
+      <li><strong>Advantage:</strong> Styles apply to entire page, easier to manage than inline.</li>
+    </ul>
+
+    <h3>External CSS</h3>
+    <ul>
+      <li><strong>Definition:</strong> Stored in a separate <code>.css</code> file, linked to HTML.</li>
+    </ul>
+    <pre>&lt;link rel="stylesheet" href="style.css"&gt;</pre>
+    <ul>
+      <li><strong>Advantages:</strong>
+        <ul>
+          <li>Reusable across multiple pages.</li>
+          <li>Cleaner code.</li>
+          <li>Faster loading (browser caching).</li>
+        </ul>
+      </li>
+    </ul>
+    <div class="key-idea"><strong>Key Idea:</strong> External CSS = best practice.</div>
+
+    <h3>Cascading Concept</h3>
+    <ul>
+      <li><strong>Definition:</strong> CSS works in layers (cascade).</li>
+      <li><strong>Rule:</strong> If a style is missing, browser checks lower layers.</li>
+      <li><strong>Priority Order:</strong>
+        <ol>
+          <li>Inline CSS.</li>
+          <li>Internal CSS.</li>
+          <li>External CSS.</li>
+          <li>Browser default.</li>
+        </ol>
+      </li>
+    </ul>
+    <div class="key-idea"><strong>Key Idea:</strong> Closest (top) rule wins.</div>
+
+    <h3>Responsive Web Design</h3>
+    <ul>
+      <li><strong>Goal:</strong> Make websites work on desktop, tablet, and mobile.</li>
+      <li><strong>How it Works:</strong> HTML stays the same, CSS changes based on screen size.</li>
+      <li><strong>Adaptive Changes:</strong>
+        <ul>
+          <li>Horizontal layout → vertical layout.</li>
+          <li>Font sizes adjust.</li>
+          <li>Menus → hamburger menu.</li>
+          <li>Better use of screen space.</li>
+        </ul>
+      </li>
+    </ul>
+    <div class="key-idea"><strong>Key Idea:</strong> One website → works on all devices.</div>
+
+    <h3>CSS Frameworks (Bootstrap)</h3>
+    <ul>
+      <li><strong>Definition:</strong> Frameworks are pre-built CSS components that save development time.</li>
+      <li><strong>Bootstrap:</strong>
+        <ul>
+          <li>Open-source, developed by Twitter.</li>
+          <li>Features: Mobile-first design; ready-made components: buttons, forms, navigation.</li>
+        </ul>
+      </li>
+    </ul>
+    <div class="key-idea"><strong>Key Idea:</strong> Faster UI development with ready styles.</div>
+
+    <h3>Role of JavaScript</h3>
+    <ul>
+      <li><strong>Definition:</strong> A programming language for adding behavior to web pages.</li>
+      <li><strong>Difference:</strong>
+        <ul>
+          <li>HTML → structure.</li>
+          <li>CSS → styling.</li>
+          <li>JavaScript → behavior.</li>
+        </ul>
+      </li>
+      <li><strong>Uses:</strong>
+        <ul>
+          <li>Form validation (e.g., email check).</li>
+          <li>Dynamic content generation.</li>
+          <li>DOM manipulation.</li>
+        </ul>
+      </li>
+    </ul>
+    <div class="key-idea"><strong>Key Idea:</strong> JavaScript makes websites interactive.</div>
+
+    <h3>Core Principle of Web Development</h3>
+    <ul>
+      <li><strong>Separation of Concerns:</strong>
+        <ul>
+          <li>HTML → Content.</li>
+          <li>CSS → Style.</li>
+          <li>JavaScript → Behavior.</li>
+        </ul>
+      </li>
+      <li><strong>Benefits:</strong>
+        <ul>
+          <li>Easy to maintain.</li>
+          <li>Flexible design.</li>
+          <li>Works across devices.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Quick Summary</h3>
+    <div class="summary-box">
+      CSS types → Inline, Internal, External.<br>
+      Cascading → top rule overrides lower.<br>
+      Responsive design → adapts to screen size.<br>
+      Bootstrap → ready-made UI framework.<br>
+      JavaScript → adds interactivity.<br>
+      Core idea → separate content, style, behavior.
+    </div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+</div>
+</body>
+</html>
