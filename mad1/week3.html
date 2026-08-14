@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 3: Short Notes — MAD 1</title>
+<style>
+  :root {
+    --bg: #faf8f5;
+    --panel: #ffffff;
+    --ink: #232323;
+    --sub: #5c5c5c;
+    --accent: #4a8a6f;
+    --accent-soft: #d9ece1;
+    --line: #e2e8e4;
+    --code-bg: #1f2b24;
+    --code-ink: #dcefe3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Georgia', 'Iowan Old Style', serif;
+    line-height: 1.6;
+  }
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 24px 100px;
+  }
+  header.doc-header {
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+  }
+  header.doc-header h1 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 2.1rem;
+    margin: 0 0 6px;
+    letter-spacing: -0.5px;
+  }
+  header.doc-header p {
+    margin: 0;
+    color: var(--sub);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.95rem;
+  }
+  nav.toc {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 48px;
+  }
+  nav.toc h2 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    margin: 0 0 12px;
+  }
+  nav.toc ol {
+    columns: 2;
+    -webkit-columns: 2;
+    margin: 0;
+    padding-left: 20px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.92rem;
+  }
+  nav.toc li { margin-bottom: 6px; }
+  nav.toc a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--sub);
+  }
+  nav.toc a:hover { color: var(--accent); border-color: var(--accent); }
+
+  section.lecture {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 32px 36px;
+    margin-bottom: 32px;
+    scroll-margin-top: 20px;
+  }
+  section.lecture > h2 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 1.5rem;
+    margin: 0 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--accent-soft);
+    color: var(--accent);
+  }
+  h3 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 1.15rem;
+    margin: 28px 0 10px;
+    color: var(--ink);
+  }
+  h4 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 18px 0 6px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.85rem;
+  }
+  p { margin: 8px 0; }
+  ul { margin: 6px 0; padding-left: 22px; }
+  ul ul { padding-left: 20px; margin: 4px 0; }
+  ol { margin: 6px 0; padding-left: 22px; }
+  li { margin: 4px 0; }
+  strong { color: var(--ink); }
+
+  code, .inline-code {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    background: #e3f0e9;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: #245c40;
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-ink);
+    padding: 14px 18px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.88rem;
+    margin: 10px 0;
+  }
+  pre code { background: none; padding: 0; color: inherit; }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 14px 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--line);
+    padding: 8px 12px;
+    text-align: left;
+  }
+  th {
+    background: var(--accent-soft);
+    color: #1f4a35;
+    font-weight: 600;
+  }
+  tr:nth-child(even) td { background: #f4f9f6; }
+
+  .summary-box {
+    background: #eaf5ef;
+    border-left: 4px solid var(--accent);
+    padding: 14px 18px;
+    border-radius: 6px;
+    margin-top: 20px;
+    font-style: italic;
+  }
+  .summary-box strong { font-style: normal; color: var(--accent); }
+
+  .key-idea {
+    background: #f0efe8;
+    border-left: 4px solid #7a7a5c;
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin: 12px 0;
+  }
+
+  .analogy {
+    background: #fbf6e8;
+    border-left: 4px solid #c69a2a;
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin: 12px 0;
+    font-style: italic;
+  }
+
+  a.back-top {
+    display: inline-block;
+    margin-top: 18px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.8rem;
+    color: var(--sub);
+    text-decoration: none;
+  }
+  a.back-top:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    nav.toc ol { columns: 1; }
+    section.lecture { padding: 22px 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="doc-header" id="top">
+    <h1>Week 3: Short Notes</h1>
+    <p>MAD 1 — Modern Application Development</p>
+  </header>
+
+  <nav class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#l1">Lecture 1: Overview of MVC</a></li>
+      <li><a href="#l2">Lecture 2: Views</a></li>
+      <li><a href="#l3">Lecture 3: User Interface Design</a></li>
+      <li><a href="#l4">Lecture 4: Usability Heuristics</a></li>
+      <li><a href="#l5">Lecture 5: Tools - Part I</a></li>
+      <li><a href="#l6">Lecture 6: Tools - Part II</a></li>
+      <li><a href="#l7">Lecture 7: Accessibility</a></li>
+    </ol>
+  </nav>
+
+  <!-- LECTURE 1 -->
+  <section class="lecture" id="l1">
+    <h2>Lecture 1: Overview of MVC</h2>
+
+    <p><strong>Definition:</strong> MVC (Model–View–Controller) is a design structure used in web and GUI applications to separate concerns into three parts:</p>
+    <ul>
+      <li><strong>Model</strong> → Manages data and logic</li>
+      <li><strong>View</strong> → Displays data (UI)</li>
+      <li><strong>Controller</strong> → Handles user input and connects Model &amp; View</li>
+    </ul>
+    <p><strong>Goal:</strong> Make applications organized, scalable, and easy to maintain.</p>
+
+    <h3>Components of MVC</h3>
+
+    <h4>Model (Data Layer)</h4>
+    <ul>
+      <li>Stores actual data + metadata</li>
+      <li>Usually resides on the server</li>
+      <li>Handles data validation and rules</li>
+    </ul>
+    <p><strong>Example (Email App):</strong></p>
+    <ul>
+      <li>Email content</li>
+      <li>Sender, receiver, timestamp</li>
+    </ul>
+
+    <h4>View (User Interface)</h4>
+    <ul>
+      <li>What the user sees and interacts with</li>
+      <li>Displays data in different formats: tables, charts, JSON, text</li>
+    </ul>
+    <p><strong>Example:</strong></p>
+    <ul>
+      <li>Inbox screen</li>
+      <li>Email compose page</li>
+    </ul>
+
+    <h4>Controller (Logic Handler)</h4>
+    <ul>
+      <li>Acts as a bridge between Model &amp; View</li>
+      <li>Processes user actions: button clicks, form inputs</li>
+      <li>Updates Model and refreshes View</li>
+    </ul>
+    <p><strong>Example:</strong></p>
+    <ul>
+      <li>Add/delete email</li>
+      <li>Sort/filter messages</li>
+    </ul>
+
+    <h3>Historical Background</h3>
+    <ul>
+      <li>Developed in 1970s–80s</li>
+      <li>Originated from Smalltalk at Xerox PARC</li>
+      <li>Not a single pattern → combination of multiple design patterns</li>
+      <li>Based on object-oriented programming</li>
+    </ul>
+
+    <h3>Object-Oriented Perspective</h3>
+    <ul>
+      <li>Model &amp; View are objects</li>
+    </ul>
+    <p><strong>Model properties:</strong> Data attributes (e.g., marks, sender info)</p>
+    <p><strong>View properties:</strong></p>
+    <ul>
+      <li>Layout</li>
+      <li>Screen size</li>
+      <li>Button placement</li>
+    </ul>
+
+    <h3>Example: Student Grade Book System</h3>
+    <h4>Model</h4>
+    <ul>
+      <li>Students list (with unique IDs)</li>
+      <li>Courses list</li>
+      <li>Relationship table: Student ID ↔ Course ID ↔ Marks</li>
+      <li>Ensures: no duplicate entries, data consistency</li>
+    </ul>
+
+    <h4>View</h4>
+    <ul>
+      <li>Displays student performance: tables, graphs, reports</li>
+      <li>Example: enter student ID → view marks</li>
+    </ul>
+
+    <h4>Controller</h4>
+    <ul>
+      <li>Handles operations: add student, update course, enter marks</li>
+      <li>Controls data flow between Model &amp; View</li>
+    </ul>
+
+    <h3>User Interaction in MVC</h3>
+    <ul>
+      <li><strong>Consumption:</strong> User views information (e.g., reading marks or emails)</li>
+      <li><strong>Input:</strong> User provides data (e.g., filling forms, clicking buttons)</li>
+    </ul>
+
+    <h3>Accessibility</h3>
+    <ul>
+      <li>Ensures UI is easy to use, inclusive, and user-friendly</li>
+      <li>Important for effective View design</li>
+    </ul>
+
+    <h3>Key Advantages of MVC</h3>
+    <ul>
+      <li>Separation of concerns</li>
+      <li>Easier maintenance</li>
+      <li>Reusable components</li>
+      <li>Better scalability</li>
+      <li>Parallel development possible</li>
+    </ul>
+
+    <div class="summary-box"><strong>One-Line Summary:</strong> MVC separates data, UI, and logic to make applications clean, modular, and easy to manage.</div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 2 -->
+  <section class="lecture" id="l2">
+    <h2>Lecture 2: Views</h2>
+
+    <p><strong>Definition:</strong> A View is any representation of data useful to humans or machines. It shows information in a meaningful and usable form.</p>
+    <p><strong>Examples:</strong> Web pages, charts, JSON responses.</p>
+
+    <h3>Composition of a View</h3>
+    <p>A view has two main parts:</p>
+
+    <h4>(a) User Interface (UI)</h4>
+    <ul>
+      <li>What the system presents to the user</li>
+      <li>Includes everything the user can see, hear, or feel</li>
+    </ul>
+
+    <h4>(b) User Interaction</h4>
+    <ul>
+      <li>How the user interacts with the system</li>
+      <li>Includes input methods like typing, clicking, speaking</li>
+    </ul>
+
+    <h3>User Interface (UI) Details</h3>
+    <h4>Types of Feedback</h4>
+    <ul>
+      <li><strong>Visual:</strong> Screens, text, images</li>
+      <li><strong>Audio:</strong> Sounds, voice responses</li>
+      <li><strong>Haptic:</strong> Vibrations, touch feedback</li>
+    </ul>
+
+    <h4>UI in Real Life (Abstraction)</h4>
+    <ul>
+      <li>Even simple objects have UI</li>
+      <li>Example: Door handle → guides user to push/pull/turn</li>
+      <li>Called a <em>motor interface</em> (guides physical action)</li>
+    </ul>
+
+    <h3>User Interaction</h3>
+    <h4>Interaction Methods</h4>
+    <ul>
+      <li><strong>Desktop:</strong> Keyboard + Mouse</li>
+      <li><strong>Mobile/Tablet:</strong> Touchscreen</li>
+      <li><strong>Smart Assistants:</strong> Voice commands (e.g., Alexa, Siri, Google Assistant)</li>
+    </ul>
+
+    <h4>Hardware Constraints</h4>
+    <ul>
+      <li>Interaction depends on device capabilities</li>
+      <li>Example: App needing keyboard → not ideal for mobile users</li>
+    </ul>
+
+    <h4>User Agent</h4>
+    <ul>
+      <li>Information sent from client to server: device type, location, browser</li>
+      <li>Helps server customize the view accordingly</li>
+    </ul>
+
+    <h3>Design Principles</h3>
+    <ul>
+      <li>Good design = easy to understand and use</li>
+      <li>Inspired by real-world design (doors, switches)</li>
+      <li>Designers must:
+        <ul>
+          <li>Understand user behavior</li>
+          <li>Adapt to limited control over user devices</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Types of Web Views (Based on Dynamism)</h3>
+    <ul>
+      <li><strong>Static Pages:</strong> Content does not change, pure HTML (basic webpage layout)</li>
+      <li><strong>Partly Dynamic Pages:</strong> Mix of static and dynamic content (e.g., news sections, featured articles)</li>
+      <li><strong>Mostly Dynamic Pages:</strong> Content changes based on user data, time, behavior (e.g., personalized homepages)</li>
+    </ul>
+    <p><strong>Note:</strong> Fully dynamic pages are rare; some static parts always exist.</p>
+
+    <h3>Types of Output Representations</h3>
+    <ul>
+      <li><strong>Direct HTML:</strong> Most common; browser renders text, layout, design</li>
+      <li><strong>Dynamically Generated Images:</strong> Created in real-time (e.g., graphs, histograms)</li>
+      <li><strong>Machine-Readable Formats:</strong> For applications, not humans (e.g., JSON, XML)</li>
+    </ul>
+
+    <div class="summary-box"><strong>One-Line Summary:</strong> A View is how data is presented and interacted with, combining UI and user input while adapting to devices and context.</div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 3 -->
+  <section class="lecture" id="l3">
+    <h2>Lecture 3: User Interface Design</h2>
+
+    <p><strong>Goal of UI Design:</strong> The main objective of UI design is to enable smooth interaction between the user and the application.</p>
+    <p>A good UI should be:</p>
+    <ul>
+      <li>Easy to understand</li>
+      <li>Easy to use</li>
+    </ul>
+    <p><strong>Principle:</strong> Even a new user should quickly figure out how it works.</p>
+
+    <h3>Primary Goals of UI Design</h3>
+
+    <h4>Simplicity</h4>
+    <ul>
+      <li>Interface should be clear and intuitive</li>
+      <li>Users should not need instructions to use it</li>
+      <li>Example:
+        <ul>
+          <li>Simple button → easy to understand</li>
+          <li>Complex controls → confusing</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h4>Efficiency</h4>
+    <ul>
+      <li>Users should achieve goals with minimum effort</li>
+      <li>Reduce unnecessary steps</li>
+      <li>Example:
+        <ul>
+          <li>Push plate on a door → clear &amp; fast</li>
+          <li>Complicated handle → inefficient</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Aesthetics in UI Design</h3>
+    <p><strong>Definition:</strong> Aesthetics = how visually pleasing a design is</p>
+    <h4>Common Mistakes</h4>
+    <ul>
+      <li>Too many fonts</li>
+      <li>Bright or clashing colors</li>
+      <li>Blinking elements</li>
+    </ul>
+    <p>→ These make the UI look unprofessional and confusing</p>
+
+    <h4>Good Design Practices</h4>
+    <ul>
+      <li>Follow standard design principles (layout, colors, fonts)</li>
+      <li>Keep design clean, consistent, and balanced</li>
+    </ul>
+
+    <h4>Using UI Libraries</h4>
+    <ul>
+      <li>Example: Bootstrap</li>
+      <li>Benefits:
+        <ul>
+          <li>Pre-designed components</li>
+          <li>Good spacing and color schemes</li>
+          <li>Saves time</li>
+          <li>Looks professional</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Accessibility</h3>
+    <p><strong>Definition:</strong> Accessibility ensures UI is usable for people with disabilities.</p>
+    <h4>Low Vision Needs</h4>
+    <ul>
+      <li>Large fonts</li>
+      <li>High contrast colors</li>
+    </ul>
+
+    <h4>Aesthetics vs Accessibility</h4>
+    <ul>
+      <li>Conflict exists:
+        <ul>
+          <li>Accessible design → may look harsh</li>
+          <li>Beautiful design → may be hard to read</li>
+        </ul>
+      </li>
+      <li>Goal: Balance both</li>
+    </ul>
+
+    <h3>Systematic UI Design Process</h3>
+    <ol>
+      <li><strong>Requirement Gathering</strong>
+        <ul>
+          <li>Understand what the application should do</li>
+          <li>Talk to users</li>
+          <li>Example: Large data → need bulk upload, not manual entry</li>
+        </ul>
+      </li>
+      <li><strong>User &amp; Task Analysis</strong>
+        <ul>
+          <li>Identify who will use the system</li>
+          <li>Identify what tasks they perform</li>
+        </ul>
+      </li>
+      <li><strong>Prototyping</strong>
+        <ul>
+          <li>Create mockups / wireframes</li>
+          <li>Not fully functional</li>
+          <li>Used to visualize layout and get feedback</li>
+        </ul>
+      </li>
+      <li><strong>Testing &amp; User Acceptance</strong>
+        <ul>
+          <li>Final product is tested by users</li>
+          <li>Ensure requirements are met</li>
+          <li>Ensure tasks are easy to perform</li>
+        </ul>
+      </li>
+    </ol>
+
+    <div class="summary-box"><strong>One-Line Summary:</strong> Good UI design focuses on simplicity, efficiency, aesthetics, and accessibility, built through a structured design process.</div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 4 -->
+  <section class="lecture" id="l4">
+    <h2>Lecture 4: Usability Heuristics</h2>
+
+    <h3>Definition</h3>
+    <ul>
+      <li>Proposed by Jakob Nielsen</li>
+      <li>A set of 10 principles for designing user-friendly interfaces</li>
+      <li><strong>Goal:</strong> Improve usability, efficiency, and user experience</li>
+    </ul>
+
+    <h3>Ten Usability Heuristics</h3>
+
+    <h4>1. Visibility of System Status</h4>
+    <ul>
+      <li>System should always inform users about what is happening</li>
+      <li>Provide instant feedback</li>
+      <li>Examples: loading indicator, cursor changes, "You are here" map marker</li>
+    </ul>
+
+    <h4>2. Match with Real World</h4>
+    <ul>
+      <li>Use real-world language and concepts</li>
+      <li>Avoid technical jargon</li>
+      <li>Example: stove knobs matching burner positions</li>
+    </ul>
+
+    <h4>3. User Control &amp; Freedom</h4>
+    <ul>
+      <li>Users should be able to undo or exit mistakes easily</li>
+      <li>Examples: undo button, recycle bin</li>
+    </ul>
+
+    <h4>4. Consistency &amp; Standards</h4>
+    <ul>
+      <li>Keep design uniform across the system</li>
+      <li>Same actions → same results</li>
+      <li>Example: same button styles and link behavior everywhere</li>
+    </ul>
+
+    <h4>5. Error Prevention</h4>
+    <ul>
+      <li>Prevent errors before they happen</li>
+      <li>Examples: confirmation before deleting, input validation</li>
+      <li>Principle: better to avoid errors than fix them later</li>
+    </ul>
+
+    <h4>6. Recognition Rather Than Recall</h4>
+    <ul>
+      <li>Reduce memory load</li>
+      <li>Show options instead of making users remember</li>
+      <li>Example: visible menu options instead of hidden commands</li>
+    </ul>
+
+    <h4>7. Flexibility &amp; Efficiency</h4>
+    <ul>
+      <li>Support both beginners and advanced users</li>
+      <li>Example: keyboard shortcuts for faster actions</li>
+    </ul>
+
+    <h4>8. Aesthetic &amp; Minimalist Design</h4>
+    <ul>
+      <li>Keep UI clean, simple, and relevant</li>
+      <li>Avoid unnecessary information</li>
+      <li>Traits: clear fonts, proper spacing, balanced colors</li>
+    </ul>
+
+    <h4>9. Error Handling &amp; Recovery</h4>
+    <ul>
+      <li>Error messages should be simple (no codes), explain the problem, and suggest a solution</li>
+      <li>Detect errors early</li>
+    </ul>
+
+    <h4>10. Help &amp; Documentation</h4>
+    <ul>
+      <li>Provide help when needed</li>
+      <li>Should be easy to search and task-focused</li>
+      <li>Even simple systems need guidance</li>
+    </ul>
+
+    <h3>Core Principles (Summary)</h3>
+    <ul>
+      <li><strong>Consistency:</strong> same design &amp; behavior everywhere</li>
+      <li><strong>Simple Language:</strong> use easy, understandable words</li>
+      <li><strong>Minimalism:</strong> keep everything simple and clutter-free</li>
+    </ul>
+
+    <h3>Subjectivity in Design</h3>
+    <ul>
+      <li>Design (especially aesthetics) is subjective</li>
+      <li>Different users have different preferences</li>
+      <li>Best approach: focus on simplicity + minimalism, avoid unnecessary complexity</li>
+    </ul>
+
+    <div class="summary-box"><strong>One-Line Summary:</strong> Nielsen's heuristics provide 10 practical rules to design simple, consistent, and user-friendly interfaces.</div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 5 -->
+  <section class="lecture" id="l5">
+    <h2>Lecture 5: Tools - Part I</h2>
+
+    <h3>Wireframes in Web Design</h3>
+    <p><strong>Definition:</strong> A wireframe is a basic visual blueprint of a webpage.</p>
+    <p>It shows:</p>
+    <ul>
+      <li>Layout</li>
+      <li>Structure</li>
+      <li>User flow</li>
+    </ul>
+    <p><strong>Focus:</strong> "Where things go," not the final design.</p>
+
+    <h3>Purpose of Wireframes</h3>
+    <ul>
+      <li>Plan page structure before coding</li>
+      <li>Show information placement, navigation flow, and user interactions</li>
+    </ul>
+    <p><strong>Communication Tool:</strong></p>
+    <ul>
+      <li>Present ideas to clients</li>
+      <li>Get feedback early</li>
+      <li>Save time by avoiding redesign later</li>
+    </ul>
+
+    <h3>Key Components of a Wireframe</h3>
+
+    <h4>Information Hierarchy</h4>
+    <ul>
+      <li>Organizes what content appears (names, images, contact details, categories)</li>
+      <li>Helps prioritize important information</li>
+    </ul>
+
+    <h4>Placeholders (Lorem Ipsum)</h4>
+    <ul>
+      <li>Dummy text used instead of real content</li>
+      <li>Helps visualize spacing and focus on layout</li>
+    </ul>
+
+    <h4>Navigation</h4>
+    <ul>
+      <li>Plans menus, links, search bar</li>
+      <li>Usually placed at the top for easy access</li>
+    </ul>
+
+    <h4>Annotations</h4>
+    <ul>
+      <li>Notes added to explain buttons, links, actions</li>
+      <li>Helps developers understand functionality</li>
+    </ul>
+
+    <h3>Design Considerations</h3>
+
+    <h4>View vs Data Model</h4>
+    <ul>
+      <li>Wireframe focuses only on the View (UI design)</li>
+      <li>Actual data is stored in the Model (server)</li>
+    </ul>
+
+    <h4>Device Responsiveness</h4>
+    <ul>
+      <li>Different layouts needed for desktop, mobile, and tablet</li>
+      <li>Prevents messy or unreadable designs</li>
+    </ul>
+
+    <h4>Evolutionary Design</h4>
+    <ul>
+      <li>Starts simple → gradually improves</li>
+      <li>Adds logos, banners, extra sections</li>
+    </ul>
+
+    <h3>Tools for Wireframing</h3>
+    <h4>Digital Tools</h4>
+    <ul>
+      <li>Example: Lucidchart</li>
+      <li>Also: drawing apps, design software</li>
+    </ul>
+
+    <h4>Physical Tools</h4>
+    <ul>
+      <li>Graph paper + pencil</li>
+      <li>Simple, fast, and effective</li>
+    </ul>
+
+    <h3>Workflow</h3>
+    <ol>
+      <li>Create wireframe</li>
+      <li>Get feedback</li>
+      <li>Finalize design</li>
+      <li>Convert into HTML and CSS</li>
+    </ol>
+    <p><strong>Result:</strong> Coding becomes easy after planning.</p>
+
+    <div class="summary-box"><strong>One-Line Summary:</strong> A wireframe is a simple visual layout used to plan and communicate webpage design before development.</div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 6 -->
+  <section class="lecture" id="l6">
+    <h2>Lecture 6: Tools - Part II</h2>
+
+    <h3>Programmatic HTML Generation in Python</h3>
+
+    <h4>Basic Programmatic Generation</h4>
+    <p><strong>Using Print Statements</strong></p>
+    <ul>
+      <li>Simplest method to generate HTML</li>
+      <li>Write HTML using multiple <code>print()</code> statements</li>
+    </ul>
+    <p><strong>Problems:</strong></p>
+    <ul>
+      <li>Messy and hard to manage</li>
+      <li>Easy to make syntax errors (missing tags)</li>
+      <li>Not suitable for large applications</li>
+    </ul>
+
+    <h4>Using Custom Python Functions</h4>
+    <p>Create functions for HTML tags</p>
+    <pre>def h1(text):
+    return f"&lt;h1&gt;{text}&lt;/h1&gt;"</pre>
+    <p><strong>Advantages:</strong></p>
+    <ul>
+      <li>Ensures proper opening &amp; closing tags</li>
+      <li>Reduces syntax errors</li>
+      <li>Allows styling using CSS</li>
+    </ul>
+
+    <h4>Using pyhtml Library</h4>
+    <p><strong>Definition:</strong> A Python library to build HTML using nested functions.</p>
+    <pre>import pyhtml as h
+t = h.html(
+    h.head(),
+    h.body()
+)</pre>
+    <p><strong>Best Practice</strong></p>
+    <ul>
+      <li>Use <code>import pyhtml as h</code> → avoids naming conflicts</li>
+    </ul>
+    <p><strong>Rendering Output:</strong> <code>t.render()</code> generates final HTML.</p>
+    <p><strong>Key Features</strong></p>
+    <ul>
+      <li>Automatic indentation → clean code</li>
+      <li>Valid HTML → handles closing tags automatically</li>
+      <li>List comprehensions → generate elements like tables easily</li>
+    </ul>
+    <p><strong>Limitations:</strong></p>
+    <ul>
+      <li>Hard to manage large pages</li>
+      <li>Difficult to locate and edit specific parts</li>
+      <li>Not scalable for complex applications</li>
+    </ul>
+
+    <h3>Templates (Most Preferred)</h3>
+    <p><strong>Concept:</strong> Templates separate:</p>
+    <ul>
+      <li>Static content (HTML)</li>
+      <li>Dynamic data (variables)</li>
+    </ul>
+
+    <h4>Python String Templates</h4>
+    <ul>
+      <li>Uses <code>$</code> for variables</li>
+      <li>Example: <code>"Hello $name"</code></li>
+      <li>Replace values using: <code>t.substitute(name="John")</code></li>
+    </ul>
+
+    <h4>Jinja2 Templating Engine</h4>
+    <ul>
+      <li>Widely used with Flask</li>
+      <li>Simple and powerful</li>
+    </ul>
+    <p><strong>Syntax:</strong></p>
+    <ul>
+      <li>Variables: <code>{{ variable }}</code></li>
+      <li>Control Structures:</li>
+    </ul>
+    <pre>{% for item in list %}
+   ...
+{% endfor %}</pre>
+    <p><strong>Features:</strong></p>
+    <ul>
+      <li>Template reuse</li>
+      <li>Template nesting</li>
+      <li>Clean separation of logic and UI</li>
+    </ul>
+    <p><strong>Versatility:</strong> Can generate HTML, text files, PDFs, even code</p>
+
+    <h3>Comparison Summary</h3>
+    <table>
+      <tr><th>Method</th><th>Pros</th><th>Cons</th></tr>
+      <tr><td>Print Statements</td><td>Simple</td><td>Messy, error-prone</td></tr>
+      <tr><td>Custom Functions</td><td>Safer than print</td><td>Still not scalable</td></tr>
+      <tr><td>pyhtml</td><td>Structured, valid HTML</td><td>Hard to maintain</td></tr>
+      <tr><td>Templates (Jinja2)</td><td>Clean, reusable, scalable</td><td>Slight learning curve</td></tr>
+    </table>
+
+    <div class="summary-box"><strong>One-Line Summary:</strong> Templates (especially Jinja2) are the best way to generate HTML because they separate design from data and scale well.</div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 7 -->
+  <section class="lecture" id="l7">
+    <h2>Lecture 7: Accessibility</h2>
+
+    <p><strong>Definition:</strong> Accessibility means designing systems usable by everyone, including people with disabilities.</p>
+    <p><strong>Goal:</strong> Maximize the number of users who can access the application.</p>
+    <div class="key-idea"><strong>Key Idea:</strong> Accessibility is essential; aesthetics are secondary.</div>
+
+    <h3>Why Accessibility Matters</h3>
+    <p>Not all users have:</p>
+    <ul>
+      <li>Normal vision</li>
+      <li>Normal hearing</li>
+      <li>Normal motor skills</li>
+    </ul>
+    <p><strong>Principle:</strong> Design must include everyone.</p>
+
+    <h3>Types of Impairments</h3>
+    <ul>
+      <li><strong>Visual Impairment:</strong> blindness or low vision → needs large fonts, high contrast</li>
+      <li><strong>Speech Impairment:</strong> difficulty speaking commands or understanding audio</li>
+      <li><strong>Motor/Sensory Disabilities:</strong> difficulty with mouse precision or touch gestures</li>
+    </ul>
+
+    <h3>Role of World Wide Web Consortium (W3C)</h3>
+    <ul>
+      <li>Global organization for web standards</li>
+      <li>Provides accessibility guidelines (WCAG)</li>
+      <li>These are recommendations, not strict laws</li>
+    </ul>
+
+    <h3>Four Principles of Accessibility (WCAG)</h3>
+
+    <h4>I. Perceivable</h4>
+    <ul>
+      <li>Information must be visible or understandable in multiple ways</li>
+      <li>Provide text alternatives for images/audio</li>
+      <li>Add captions for videos</li>
+      <li>Allow flexible formats (text, charts, etc.)</li>
+      <li>Avoid text inside images</li>
+    </ul>
+
+    <h4>II. Operable</h4>
+    <ul>
+      <li>Users must be able to navigate and interact</li>
+      <li>Full keyboard support</li>
+      <li>Give enough time to read content</li>
+      <li>Avoid flashing lights (seizure risk)</li>
+      <li>Support multiple input devices</li>
+    </ul>
+
+    <h4>III. Understandable</h4>
+    <ul>
+      <li>Content should be easy to understand</li>
+      <li>Use simple language</li>
+      <li>Keep behavior predictable</li>
+      <li>Provide input help &amp; validation</li>
+    </ul>
+
+    <h4>IV. Robust</h4>
+    <ul>
+      <li>Content must work across devices and technologies</li>
+      <li>Follow standards</li>
+      <li>Ensure browser compatibility</li>
+      <li>Avoid outdated or unsupported tags</li>
+    </ul>
+
+    <h3>Interplay of Components</h3>
+    <p>Accessibility depends on:</p>
+    <ul>
+      <li><strong>Webpage Content:</strong> HTML structure, images, text, tags</li>
+      <li><strong>User Agent:</strong> browser or screen reader; must support mobile devices and voice-based systems</li>
+      <li><strong>Authoring Tools:</strong> templates, generators; affect accessibility quality</li>
+    </ul>
+
+    <h3>Aesthetics vs Accessibility</h3>
+    <ul>
+      <li><strong>Key Point:</strong> Aesthetics are subjective; accessibility is necessary</li>
+      <li><strong>Modern Trends:</strong> simple, clean, minimal design (e.g., flat UI styles)</li>
+      <li><strong>Rule:</strong> Never sacrifice accessibility for aesthetics</li>
+    </ul>
+
+    <h3>Practical Implementation</h3>
+    <ul>
+      <li><strong>Evaluation Tools:</strong> check accessibility and provide ratings</li>
+      <li><strong>Use of Templates:</strong> maintain consistency and automatically ensure accessibility; best for large applications</li>
+    </ul>
+
+    <div class="summary-box"><strong>One-Line Summary:</strong> Accessibility ensures that applications are usable by all users by following WCAG principles: perceivable, operable, understandable, and robust.</div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+</div>
+</body>
+</html>
