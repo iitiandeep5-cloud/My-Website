@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 6: Short Notes — MAD 1</title>
+<style>
+  :root {
+    --bg: #faf8f5;
+    --panel: #ffffff;
+    --ink: #232323;
+    --sub: #5c5c5c;
+    --accent: #4a8a6f;
+    --accent-soft: #d9ece1;
+    --line: #e2e8e4;
+    --code-bg: #1f2b24;
+    --code-ink: #dcefe3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Georgia', 'Iowan Old Style', serif;
+    line-height: 1.6;
+  }
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 24px 100px;
+  }
+  header.doc-header {
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+  }
+  header.doc-header h1 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 2.1rem;
+    margin: 0 0 6px;
+    letter-spacing: -0.5px;
+  }
+  header.doc-header p {
+    margin: 0;
+    color: var(--sub);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.95rem;
+  }
+  nav.toc {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 48px;
+  }
+  nav.toc h2 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    margin: 0 0 12px;
+  }
+  nav.toc ol {
+    columns: 2;
+    -webkit-columns: 2;
+    margin: 0;
+    padding-left: 20px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.92rem;
+  }
+  nav.toc li { margin-bottom: 6px; }
+  nav.toc a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--sub);
+  }
+  nav.toc a:hover { color: var(--accent); border-color: var(--accent); }
+
+  section.lecture {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 32px 36px;
+    margin-bottom: 32px;
+    scroll-margin-top: 20px;
+  }
+  section.lecture > h2 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 1.5rem;
+    margin: 0 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--accent-soft);
+    color: var(--accent);
+  }
+  h3 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 1.15rem;
+    margin: 28px 0 10px;
+    color: var(--ink);
+  }
+  h4 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 18px 0 6px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.85rem;
+  }
+  p { margin: 8px 0; }
+  ul { margin: 6px 0; padding-left: 22px; }
+  ul ul { padding-left: 20px; margin: 4px 0; }
+  ol { margin: 6px 0; padding-left: 22px; }
+  li { margin: 4px 0; }
+  strong { color: var(--ink); }
+
+  code, .inline-code {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    background: #e3f0e9;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: #245c40;
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-ink);
+    padding: 14px 18px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.88rem;
+    margin: 10px 0;
+  }
+  pre code { background: none; padding: 0; color: inherit; }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 14px 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--line);
+    padding: 8px 12px;
+    text-align: left;
+  }
+  th {
+    background: var(--accent-soft);
+    color: #1f4a35;
+    font-weight: 600;
+  }
+  tr:nth-child(even) td { background: #f4f9f6; }
+
+  .summary-box {
+    background: #eaf5ef;
+    border-left: 4px solid var(--accent);
+    padding: 14px 18px;
+    border-radius: 6px;
+    margin-top: 20px;
+    font-style: italic;
+  }
+  .summary-box strong { font-style: normal; color: var(--accent); }
+
+  .key-idea {
+    background: #f0efe8;
+    border-left: 4px solid #7a7a5c;
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin: 12px 0;
+  }
+
+  .analogy {
+    background: #fbf6e8;
+    border-left: 4px solid #c69a2a;
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin: 12px 0;
+    font-style: italic;
+  }
+
+  .warning {
+    background: #fdecea;
+    border-left: 4px solid #c0392b;
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin: 12px 0;
+  }
+
+  a.back-top {
+    display: inline-block;
+    margin-top: 18px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.8rem;
+    color: var(--sub);
+    text-decoration: none;
+  }
+  a.back-top:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    nav.toc ol { columns: 1; }
+    section.lecture { padding: 22px 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="doc-header" id="top">
+    <h1>Week 6: Short Notes</h1>
+    <p>MAD 1 — Modern Application Development</p>
+  </header>
+
+  <nav class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#l1">Lecture 1: API Design</a></li>
+      <li><a href="#l2">Lecture 2: REST</a></li>
+      <li><a href="#l3">Lecture 3: REST APIs - Examples I</a></li>
+      <li><a href="#l4">Lecture 4: REST APIs - Examples II</a></li>
+      <li><a href="#l5">Lecture 5: OpenAPI</a></li>
+      <li><a href="#l6">Lecture 6: Important Concepts of an API</a></li>
+    </ol>
+  </nav>
+
+  <!-- LECTURE 1 -->
+  <section class="lecture" id="l1">
+    <h2>Lecture 1: API Design</h2>
+
+    <h3>What is an API?</h3>
+    <ul>
+      <li><strong>API</strong> = Application Programming Interface</li>
+      <li>Bridge between client &amp; server</li>
+      <li><strong>Flow:</strong> Client → API → Database → Response</li>
+    </ul>
+
+    <h3>What is REST?</h3>
+    <ul>
+      <li><strong>REST</strong> = Representational State Transfer</li>
+      <li>Introduced by Roy Fielding (2000)</li>
+      <li><strong>Type:</strong> Architectural style (guidelines)</li>
+      <li>Not strict rules / not code pattern</li>
+    </ul>
+
+    <h3>Web as Distributed System</h3>
+    <ul>
+      <li><strong>Client–Server Model:</strong> Client (browser/app), Server (backend)</li>
+      <li>Run on different machines</li>
+    </ul>
+    <p><strong>Challenges:</strong></p>
+    <ul>
+      <li>Distance → latency</li>
+      <li>Network issues → slow/mobile</li>
+      <li>Authentication → added later</li>
+      <li>State problem → server &amp; client unaware of each other's state</li>
+    </ul>
+
+    <h3>Six REST Constraints</h3>
+
+    <h4>1. Client–Server Separation</h4>
+    <ul>
+      <li>Client = UI, Server = Data</li>
+      <li>Example: Mobile app ↔ Backend API</li>
+    </ul>
+
+    <h4>2. Statelessness</h4>
+    <ul>
+      <li>Each request independent</li>
+      <li>Example: Login required for secure requests</li>
+    </ul>
+
+    <h4>3. Layered Architecture</h4>
+    <ul>
+      <li>Multiple hidden layers (load balancer, middleware, backend)</li>
+      <li>Client doesn't know structure</li>
+    </ul>
+
+    <h4>4. Cacheability</h4>
+    <ul>
+      <li>Server defines cache rules</li>
+      <li>Example: Static data cached → faster</li>
+    </ul>
+
+    <h4>5. Uniform Interface</h4>
+    <ul>
+      <li>Standard communication</li>
+      <li>Resource-based: <code>/users</code>, <code>/orders/1</code></li>
+      <li>Self-discovery: links in responses</li>
+    </ul>
+
+    <h4>6. Code on Demand (Optional)</h4>
+    <ul>
+      <li>Server sends executable code</li>
+      <li>Example: JavaScript for frontend</li>
+    </ul>
+
+    <h3>REST + HTTP Methods</h3>
+    <table>
+      <tr><th>Method</th><th>Action</th><th>Example</th></tr>
+      <tr><td>GET</td><td>Read</td><td>Get user</td></tr>
+      <tr><td>POST</td><td>Create</td><td>Add user</td></tr>
+      <tr><td>PUT/PATCH</td><td>Update</td><td>Edit user</td></tr>
+      <tr><td>DELETE</td><td>Remove</td><td>Delete user</td></tr>
+    </table>
+    <p><strong>REST Flow:</strong> Client → HTTP Request → API → Server → Response → Client</p>
+
+    <h3>Memory Tricks</h3>
+    <ul>
+      <li>API = Bridge</li>
+      <li>REST = Rules for web</li>
+      <li>Resource = Everything is an object</li>
+      <li>Stateless = No memory</li>
+    </ul>
+
+    <h3>Final Takeaways</h3>
+    <div class="summary-box">
+      REST = best practice for web architecture<br>
+      Designed for scalability, flexibility, performance<br>
+      Works well with HTTP, APIs, distributed systems
+    </div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 2 -->
+  <section class="lecture" id="l2">
+    <h2>Lecture 2: REST</h2>
+
+    <h3>Definition</h3>
+    <ul>
+      <li>REST = Representational State Transfer</li>
+      <li>Architecture: state transferred between client &amp; server via standardized representations</li>
+      <li><strong>Example:</strong> Shopping cart → state moves back &amp; forth, server doesn't store "current view"</li>
+    </ul>
+
+    <h3>Statelessness</h3>
+    <ul>
+      <li>Server does not remember client status between requests</li>
+      <li>Each request = independent &amp; complete</li>
+      <li><strong>Example:</strong> Refresh page → server responds correctly based on submitted data</li>
+    </ul>
+
+    <h3>Resources &amp; Identifiers</h3>
+    <h4>URI vs URL</h4>
+    <ul>
+      <li>URI = identifies any resource</li>
+      <li>URL = browser address</li>
+      <li>Example:
+        <ul>
+          <li>URL: <code>https://example.com/users/1</code></li>
+          <li>URI: <code>https://example.com/users/1?id=1&amp;format=json</code></li>
+        </ul>
+      </li>
+    </ul>
+    <h4>Resource Operations</h4>
+    <ul>
+      <li>Identifier → which resource</li>
+      <li>Action → what to do (CRUD)</li>
+    </ul>
+
+    <h3>HTTP Verbs (REST Actions)</h3>
+    <table>
+      <tr><th>Verb</th><th>Function</th><th>Example</th></tr>
+      <tr><td>GET</td><td>Read / retrieve</td><td>Get user info</td></tr>
+      <tr><td>POST</td><td>Create / submit</td><td>Add new user</td></tr>
+      <tr><td>PUT</td><td>Create / Update</td><td>Update user 1</td></tr>
+      <tr><td>DELETE</td><td>Remove</td><td>Delete user 1</td></tr>
+    </table>
+
+    <h3>Idempotency</h3>
+    <ul>
+      <li><strong>Idempotent:</strong> same result if repeated → GET, PUT, DELETE
+        <ul>
+          <li>Example: Delete same user twice → no extra effect</li>
+        </ul>
+      </li>
+      <li><strong>Non-Idempotent:</strong> changes each time → POST</li>
+      <li>Example: Submit twice → duplicate entries</li>
+    </ul>
+
+    <h3>REST vs CRUD</h3>
+    <table>
+      <tr><th>Concept</th><th>Focus</th><th>Example</th></tr>
+      <tr><td>CRUD</td><td>Database operations</td><td>Add/Read/Update/Delete student</td></tr>
+      <tr><td>REST</td><td>Web architecture</td><td>Use HTTP verbs to implement CRUD</td></tr>
+    </table>
+    <p><strong>Key:</strong> REST implements CRUD but ≠ database</p>
+
+    <h3>Data Encoding in REST</h3>
+    <ul>
+      <li><strong>Machine-Readable Formats:</strong> JSON / XML / YAML</li>
+      <li><strong>JSON (Most Common):</strong> key-value pairs &amp; arrays (like Python dicts/lists)</li>
+    </ul>
+    <pre>{
+  "id": 1,
+  "name": "Alice",
+  "courses": ["Math", "Physics"]
+}</pre>
+    <ul>
+      <li><strong>Serialization:</strong> convert complex data → string for transfer</li>
+      <li><strong>YAML:</strong> compact alternative, used for config &amp; OpenAPI Spec</li>
+    </ul>
+
+    <h3>Memory Tricks</h3>
+    <ul>
+      <li>REST = Rules for Web Communication</li>
+      <li>Stateless = No memory</li>
+      <li>Resource = Object / Entity</li>
+      <li>Idempotent = Safe to repeat</li>
+      <li>JSON/YAML = Machine-friendly data</li>
+    </ul>
+
+    <h3>Key Takeaways</h3>
+    <div class="summary-box">
+      REST = Web architectural style<br>
+      CRUD = Database operations<br>
+      REST uses HTTP + resource identifiers + machine-readable data<br>
+      Idempotency prevents unintended side effects<br>
+      Serialization ensures smooth data transfer
+    </div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 3 -->
+  <section class="lecture" id="l3">
+    <h2>Lecture 3: REST APIs - Examples I</h2>
+
+    <h3>What is a REST API?</h3>
+    <ul>
+      <li>REST = Representational State Transfer</li>
+      <li>Architecture to transfer data between <strong>model ↔ controller</strong></li>
+      <li>Commonly used for <strong>CRUD</strong> (Create, Read, Update, Delete), but not limited to databases</li>
+      <li><strong>Examples:</strong>
+        <ul>
+          <li>Google Cloud → create/reboot VMs</li>
+          <li>Smart City → control street lights</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Purpose of an API</h3>
+    <ul>
+      <li>Formalizes system functionality → developers interact programmatically</li>
+      <li><strong>Example:</strong> Wikipedia API → search terms, get revision history, without direct DB access</li>
+    </ul>
+
+    <h3>Wikipedia REST API Case Study</h3>
+    <table>
+      <tr><th>Feature</th><th>Details</th><th>Example</th></tr>
+      <tr><td>Access URL</td><td>API endpoint</td><td><code>https://en.wikipedia.org/w/rest.</code></td></tr>
+      <tr><td>Data Format</td><td>Machine-readable</td><td>JSON (not HTML)</td></tr>
+      <tr><td>Versioning</td><td>Prevents breaking apps</td><td><code>v1</code> in URL</td></tr>
+      <tr><td>Endpoints &amp; Params</td><td>Routes + query info</td><td><code>/search/page?q=Python&amp;limit=</code></td></tr>
+    </table>
+
+    <h3>Interacting with APIs</h3>
+    <ul>
+      <li><strong>Tools:</strong> <code>curl</code> (command-line utility)</li>
+      <li><strong>Request:</strong> typically HTTP GET</li>
+      <li><strong>Response:</strong> JSON blob → dictionary/array in Python</li>
+    </ul>
+
+    <h4>Example JSON Response</h4>
+    <pre>{
+  "pageid": 12345,
+  "title": "Python",
+  "description": "Programming language",
+  "extract": "&lt;p&gt;Python is  ... &lt;/p&gt;",
+  "thumbnail": "https://example.com/python.png"
+}</pre>
+    <p>JSON easily parsed into Python dict for processing</p>
+
+    <h3>API Documentation &amp; Schema</h3>
+    <table>
+      <tr><th>Concept</th><th>Purpose</th><th>Example</th></tr>
+      <tr><td>Schema</td><td>Describes data types</td><td><code>"title" = string</code>, <code>"key" = URL</code></td></tr>
+      <tr><td>Route &amp; Method</td><td>URL + HTTP verb</td><td><code>/search/page → GET</code></td></tr>
+      <tr><td>Response Codes</td><td>Indicate result</td><td>200 → success, 400 → bad request, 500 → server error</td></tr>
+    </table>
+
+    <h3>Best Practices</h3>
+    <ul>
+      <li><strong>Public Service Etiquette:</strong> use responsibly</li>
+      <li><strong>Rate Limiting:</strong> avoid too many requests in short time</li>
+      <li><strong>Abuse Prevention:</strong> overloading → IP block/blacklist</li>
+      <li><strong>Example:</strong> Query Wikipedia API → 1 request/sec, not 100/sec</li>
+    </ul>
+
+    <h3>Memory Tricks</h3>
+    <ul>
+      <li>REST API = Bridge → Client ↔ Server</li>
+      <li>JSON = Machine-friendly data</li>
+      <li>Endpoints = URL routes</li>
+      <li>Versioning = backward compatibility</li>
+      <li>HTTP codes = result signals</li>
+    </ul>
+
+    <h3>Key Takeaways</h3>
+    <div class="summary-box">
+      REST APIs transfer state between client &amp; server<br>
+      CRUD can be implemented via REST<br>
+      JSON = standard for data exchange<br>
+      Documentation + schema ensure correct usage<br>
+      Respect rate limits &amp; server resources
+    </div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 4 -->
+  <section class="lecture" id="l4">
+    <h2>Lecture 4: REST APIs - Examples II</h2>
+
+    <h3>CoWin REST API</h3>
+    <h4>Overview</h4>
+    <ul>
+      <li>CoWin app (India) uses RESTful API architecture</li>
+      <li>Backend data separated from frontend app</li>
+      <li>Scales to manage 60–70% of India's population</li>
+      <li><strong>Docs include:</strong> production servers, user authentication (OTP), metadata &amp; schemas</li>
+    </ul>
+
+    <h3>API Types &amp; Schemas</h3>
+    <table>
+      <tr><th>Type</th><th>Purpose</th><th>Example</th></tr>
+      <tr><td>Unauthenticated</td><td>Search info</td><td>Find vaccination centers</td></tr>
+      <tr><td>Authenticated</td><td>Sensitive actions</td><td>Book slot, download certificate</td></tr>
+    </table>
+    <ul>
+      <li><strong>Schemas:</strong> define data structure (e.g., vaccination center → name, address, pincode)</li>
+      <li><strong>Versioning:</strong> e.g., V2 → avoids breaking changes</li>
+    </ul>
+
+    <h3>Technical Implementation (curl)</h3>
+    <ul>
+      <li><strong>Endpoints &amp; Routes:</strong> URL paths → access functions
+        <ul>
+          <li>Example: find sessions by pincode</li>
+        </ul>
+      </li>
+      <li><strong>HTTP Methods:</strong> default GET, optional POST (<code>-X POST</code>)</li>
+      <li><strong>Parameters:</strong> required query strings → pincode, date</li>
+      <li><strong>Headers (-H):</strong></li>
+    </ul>
+    <table>
+      <tr><th>Header</th><th>Purpose</th></tr>
+      <tr><td>Accept</td><td>Request format → <code>application/json</code></td></tr>
+      <tr><td>Language</td><td>Output language → <code>en</code>, <code>hi</code></td></tr>
+      <tr><td>User-Agent</td><td>Bypass automated protections</td></tr>
+    </table>
+
+    <h4>Example curl Command</h4>
+    <pre>curl -X GET "https://cdn-api.covin.in/api/v2/appointment/sessions/public/findByPin?pincode=110001&date=26-03-2026" -H "Accept: application/json" -H "User-Agent: Mozilla/5.0"</pre>
+
+    <h3>Authentication Mechanisms</h3>
+    <table>
+      <tr><th>Mechanism</th><th>Description</th><th>Example</th></tr>
+      <tr><td>Tokens</td><td>Unique string per user request</td><td>Generated after OTP</td></tr>
+      <tr><td>OTP / Redirects</td><td>One-time password verification</td><td>SMS or Google login</td></tr>
+      <tr><td>API Keys</td><td>Permanent account-based key</td><td>GitHub API</td></tr>
+    </table>
+
+    <h3>Ethical Use &amp; Best Practices</h3>
+    <ul>
+      <li>Do not overload APIs → avoid health system crashes</li>
+      <li>Avoid automation abuse → no scripts hammering servers</li>
+      <li>Use non-production servers for testing</li>
+    </ul>
+
+    <h3>Summary &amp; Benefits</h3>
+    <ul>
+      <li>APIs = remote function calls → trigger actions on another system</li>
+      <li>Enable third-party integration → build apps that communicate with existing systems</li>
+      <li>REST APIs ensure <strong>structured, scalable, secure</strong> data exchange</li>
+    </ul>
+
+    <h3>Memory Tricks</h3>
+    <div class="summary-box">
+      CoWin API = REST + Secure + Scalable<br>
+      Unauthenticated → Read-only, Authenticated → Write<br>
+      Headers &amp; Params = extra instructions for request<br>
+      Tokens / OTP = prove identity<br>
+      Use responsibly → live systems are critical
+    </div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 5 -->
+  <section class="lecture" id="l5">
+    <h2>Lecture 5: OpenAPI</h2>
+
+    <h3>1. What is an API?</h3>
+    <p><strong>API</strong> (Application Programming Interface) = A bridge that allows different software systems to communicate.</p>
+    <p><strong>Examples:</strong></p>
+    <ul>
+      <li>A weather app calling a server to get temperature data.</li>
+      <li>Payment apps connecting to bank servers.</li>
+    </ul>
+
+    <h3>Core Concepts of APIs</h3>
+    <h4>Information Hiding</h4>
+    <ul>
+      <li>API hides internal implementation details.</li>
+      <li>Client doesn't need to know database type or internal logic.</li>
+    </ul>
+    <p><strong>Example:</strong></p>
+    <ul>
+      <li>Call <code>/getUser</code> → returns user data.</li>
+      <li>Storage/fetching details remain hidden.</li>
+    </ul>
+
+    <h4>Separation of Concerns</h4>
+    <ul>
+      <li>Backend (server) and frontend (client) work independently.</li>
+      <li>Server doesn't care if client is mobile or web.</li>
+      <li>Client doesn't care how backend works.</li>
+    </ul>
+
+    <h4>Unbreakable Contract</h4>
+    <ul>
+      <li>API = agreement between provider &amp; user.</li>
+      <li>Should not change frequently → prevents breaking apps/scripts.</li>
+    </ul>
+
+    <h4>Standardization &amp; Versioning</h4>
+    <p>APIs use version numbers.</p>
+    <p><strong>Example:</strong></p>
+    <ul>
+      <li><code>/api/v1/users</code></li>
+      <li><code>/api/v2/users</code></li>
+    </ul>
+
+    <h3>Problems with Traditional Documentation</h3>
+    <ul>
+      <li>Subjectivity → Docs vary by developer.</li>
+      <li>Incomplete Info → Missing parameters, unclear logic.</li>
+      <li>Outdated Docs → Code changes but docs don't.</li>
+      <li>Language Barriers → Hard for non-native speakers.</li>
+    </ul>
+
+    <h3>Machine-Readable Description Files</h3>
+    <p><strong>Solution:</strong> Structured files describing APIs.</p>
+    <p><strong>Formats:</strong> JSON, XML.</p>
+    <p><strong>Benefits:</strong></p>
+    <ul>
+      <li>Structured format.</li>
+      <li>Automation (scaffolding).</li>
+      <li>CRUD auto-generation.</li>
+    </ul>
+    <h4>Example (JSON-like)</h4>
+    <pre>{
+  "endpoint": "/users",
+  "method": "GET",
+  "response": "List of users"
+}</pre>
+    <p>Tools can auto-generate functions like <code>getUsers()</code>, <code>createUser()</code>.</p>
+
+    <h3>OpenAPI Specification (OAS)</h3>
+    <p><strong>Definition:</strong> Standard format to describe REST APIs.</p>
+    <p><strong>Key Features:</strong></p>
+    <ul>
+      <li>Vendor-neutral.</li>
+      <li>Focused on web APIs (HTTP-based).</li>
+      <li>Not for local APIs (Java, C).</li>
+      <li>Originated from Swagger (~2015).</li>
+      <li>Current version: <strong>OAS 3</strong> (still called Swagger Docs).</li>
+    </ul>
+
+    <h4>Example of OpenAPI (YAML)</h4>
+    <pre>openapi: 3.0.0
+info:
+  title: User API
+  version: 1.0.0
+
+paths:
+  /users:
+    get:
+      summary: Get all users
+      responses:
+        '200':
+          description: Successful response</pre>
+    <p>Defines:</p>
+    <ul>
+      <li>Endpoint: <code>/users</code></li>
+      <li>Method: <code>GET</code></li>
+      <li>Response: <code>200 OK</code></li>
+    </ul>
+
+    <h3>Real-World Examples</h3>
+    <h4>Web APIs</h4>
+    <ul>
+      <li>Wikipedia API → fetch articles.</li>
+      <li>CoWIN API → vaccine registration data.</li>
+    </ul>
+
+    <p><strong>Automation APIs:</strong> Create VM on cloud (Google Cloud, AWS).</p>
+    <p>Example (pseudo-code):</p>
+    <pre>create_vm(name="test-vm", region="asia-south1")</pre>
+
+    <p><strong>Markup Language Example (XML):</strong></p>
+    <pre>&lt;user&gt;
+  &lt;name&gt;John&lt;/name&gt;
+  &lt;age&gt;25&lt;/age&gt;
+&lt;/user&gt;</pre>
+
+    <h3>Why OAS is Important</h3>
+    <ul>
+      <li>Standard documentation.</li>
+      <li>Enables automation.</li>
+      <li>Keeps API consistent.</li>
+      <li>Easy for developers to understand.</li>
+      <li>Helps testing tools (Swagger UI, Postman).</li>
+    </ul>
+
+    <h3>Quick Revision (1-Min Summary)</h3>
+    <div class="summary-box">
+      API = Communication bridge between systems.<br>
+      Key ideas: Information hiding, separation of concerns, unbreakable contract, versioning.<br>
+      Problem: Human docs are unreliable.<br>
+      Solution: Machine-readable files.<br>
+      OAS: Standard API description format.<br>
+      Swagger: Origin of OAS.<br>
+      Uses: Documentation, automation, testing.
+    </div>
+
+    <p><strong>One-Line Summary:</strong> APIs connect systems; OAS standardizes their description, enabling automation, consistency, and feature-rich documentation.</p>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 6 -->
+  <section class="lecture" id="l6">
+    <h2>Lecture 6: Important Concepts of an API</h2>
+
+    <h3>What is OpenAPI Specification (OAS)?</h3>
+    <ul>
+      <li><strong>OAS</strong> = Structured file that describes an API</li>
+      <li>It is: Human-readable &amp; Machine-readable</li>
+    </ul>
+    <p><strong>Purpose:</strong> Clearly define how an API works before coding.</p>
+
+    <h3>Format of OAS</h3>
+    <p><strong>YAML (Most Common):</strong> Key–value format (like dictionary).</p>
+    <pre>name: User API
+version: 1.0</pre>
+    <p><strong>JSON (Alternative)</strong></p>
+    <pre>{
+  "name": "User API",
+  "version": "1.0"
+}</pre>
+
+    <h3>Single Source of Truth</h3>
+    <ul>
+      <li>OAS file acts as the only reference.</li>
+    </ul>
+    <p>From this one file, we can generate: Documentation &amp; Code</p>
+    <div class="key-idea"><strong>Benefit:</strong> No mismatch between code &amp; docs.</div>
+
+    <h3>Design-First Approach</h3>
+    <ul>
+      <li>First design API → then write code.</li>
+    </ul>
+    <p><strong>Why important?</strong></p>
+    <ul>
+      <li>Reduces bugs.</li>
+      <li>Saves debugging time.</li>
+      <li>Improves structure.</li>
+    </ul>
+    <div class="analogy">Real idea: "Think before coding".</div>
+
+    <h3>Basic Structure of OpenAPI Document</h3>
+    <p>A minimal OAS file must have:</p>
+    <ol>
+      <li><code>openapi</code> → Defines version</li>
+    </ol>
+    <pre>openapi: 3.1.0</pre>
+    <ol start="2">
+      <li><code>info</code> → API details</li>
+    </ol>
+    <pre>info:
+  title: My API
+  version: 1.0.0</pre>
+    <ol start="3">
+      <li><code>paths</code> → Defines endpoints</li>
+    </ol>
+    <pre>paths: {}</pre>
+
+    <p><strong>Minimal Example:</strong></p>
+    <pre>openapi: 3.1.0
+info:
+  title: Minimal API
+  version: 1.0.0
+paths: {}</pre>
+    <p>Valid but not useful (no endpoints).</p>
+
+    <h3>Endpoints &amp; Operations</h3>
+    <p><strong>Endpoint</strong> = URL + HTTP method</p>
+    <p>Example: <code>GET /users</code></p>
+    <p><strong>Path Item Object</strong> → Defines operations allowed on a path.</p>
+    <p><strong>Operation Object</strong> → Contains request details.</p>
+    <pre>paths:
+  /users:
+    get:
+      summary: Get all users</pre>
+
+    <p><strong>Parameters (Dynamic values in URL):</strong></p>
+    <pre>/users/{id}
+parameters:
+  - name: id
+    in: path
+    required: true</pre>
+
+    <h3>Responses &amp; Content Handling</h3>
+    <p><strong>HTTP Status Codes:</strong></p>
+    <table>
+      <tr><th>Code</th><th>Meaning</th></tr>
+      <tr><td>200</td><td>Success</td></tr>
+      <tr><td>400</td><td>Bad Request</td></tr>
+      <tr><td>404</td><td>Not Found</td></tr>
+    </table>
+
+    <p><strong>Example Response:</strong></p>
+    <pre>responses:
+  '200':
+    description: Success</pre>
+
+    <p><strong>Content Types:</strong></p>
+    <ul>
+      <li><code>application/json</code> → JSON data</li>
+      <li><code>text/html</code> → Web page</li>
+    </ul>
+
+    <p><strong>Controller Logic:</strong></p>
+    <ul>
+      <li>Model → raw data</li>
+      <li>Controller → chooses format</li>
+      <li>View → JSON / HTML output</li>
+    </ul>
+
+    <h3>Schema (Data Structure)</h3>
+    <p>Defines structure of request/response.</p>
+    <pre>schema:
+  type: object
+  properties:
+    product_name:
+      type: string
+    product_price:
+      type: number</pre>
+
+    <h3>Example: Tic Tac Toe API</h3>
+    <p><strong>API Responsibilities:</strong></p>
+    <ul>
+      <li>Create game</li>
+      <li>Place X or O</li>
+      <li>Get board state</li>
+    </ul>
+    <p><strong>Not Responsible:</strong></p>
+    <ul>
+      <li>UI (display, buttons, etc.)</li>
+    </ul>
+
+    <p><strong>Example Paths:</strong></p>
+    <pre>paths:
+  /board:
+    get:
+      summary: Get current board
+
+    put:
+      summary: Initialize game</pre>
+    <div class="key-idea"><strong>Key Idea:</strong> API handles logic, UI handles display.</div>
+
+    <h3>Tools &amp; Maintenance</h3>
+    <p><strong>Swagger:</strong> Documentation, testing, code generation.</p>
+    <p><strong>Version Control (Git):</strong> Track changes, features, contributors.</p>
+    <p><strong>Automation:</strong></p>
+    <ul>
+      <li>YAML is error-prone → use tools.</li>
+      <li>Tools help validate syntax &amp; generate APIs.</li>
+    </ul>
+
+    <h3>Public APIs</h3>
+    <p><strong>Examples:</strong> Wikipedia API, GitHub API</p>
+    <p><strong>Benefits:</strong></p>
+    <ul>
+      <li>Others can build apps on your API.</li>
+      <li>Encourages innovation.</li>
+    </ul>
+
+    <h3>Quick Revision (1-Min Summary)</h3>
+    <div class="summary-box">
+      OAS = API description file (YAML/JSON).<br>
+      Key concepts: Single source of truth, design-first approach.<br>
+      Structure: openapi, info, paths.<br>
+      Includes: Endpoints, parameters, responses, schema.<br>
+      Tools: Swagger, Git.<br>
+      API ≠ UI → separation of concerns.
+    </div>
+
+    <p><strong>One-Line Summary:</strong> OpenAPI Specification = standardized blueprint for APIs, enabling documentation, automation, testing, and consistency across systems.</p>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+</div>
+</body>
+</html>
