@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 5: Short Notes — MAD 1</title>
+<style>
+  :root {
+    --bg: #faf8f5;
+    --panel: #ffffff;
+    --ink: #232323;
+    --sub: #5c5c5c;
+    --accent: #4a8a6f;
+    --accent-soft: #d9ece1;
+    --line: #e2e8e4;
+    --code-bg: #1f2b24;
+    --code-ink: #dcefe3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Georgia', 'Iowan Old Style', serif;
+    line-height: 1.6;
+  }
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 24px 100px;
+  }
+  header.doc-header {
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+  }
+  header.doc-header h1 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 2.1rem;
+    margin: 0 0 6px;
+    letter-spacing: -0.5px;
+  }
+  header.doc-header p {
+    margin: 0;
+    color: var(--sub);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.95rem;
+  }
+  nav.toc {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 48px;
+  }
+  nav.toc h2 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    margin: 0 0 12px;
+  }
+  nav.toc ol {
+    columns: 2;
+    -webkit-columns: 2;
+    margin: 0;
+    padding-left: 20px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.92rem;
+  }
+  nav.toc li { margin-bottom: 6px; }
+  nav.toc a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--sub);
+  }
+  nav.toc a:hover { color: var(--accent); border-color: var(--accent); }
+
+  section.lecture {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 32px 36px;
+    margin-bottom: 32px;
+    scroll-margin-top: 20px;
+  }
+  section.lecture > h2 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 1.5rem;
+    margin: 0 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--accent-soft);
+    color: var(--accent);
+  }
+  h3 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 1.15rem;
+    margin: 28px 0 10px;
+    color: var(--ink);
+  }
+  h4 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 18px 0 6px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.85rem;
+  }
+  p { margin: 8px 0; }
+  ul { margin: 6px 0; padding-left: 22px; }
+  ul ul { padding-left: 20px; margin: 4px 0; }
+  ol { margin: 6px 0; padding-left: 22px; }
+  li { margin: 4px 0; }
+  strong { color: var(--ink); }
+
+  code, .inline-code {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    background: #e3f0e9;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: #245c40;
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-ink);
+    padding: 14px 18px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.88rem;
+    margin: 10px 0;
+  }
+  pre code { background: none; padding: 0; color: inherit; }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 14px 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--line);
+    padding: 8px 12px;
+    text-align: left;
+  }
+  th {
+    background: var(--accent-soft);
+    color: #1f4a35;
+    font-weight: 600;
+  }
+  tr:nth-child(even) td { background: #f4f9f6; }
+
+  .summary-box {
+    background: #eaf5ef;
+    border-left: 4px solid var(--accent);
+    padding: 14px 18px;
+    border-radius: 6px;
+    margin-top: 20px;
+    font-style: italic;
+  }
+  .summary-box strong { font-style: normal; color: var(--accent); }
+
+  .key-idea {
+    background: #f0efe8;
+    border-left: 4px solid #7a7a5c;
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin: 12px 0;
+  }
+
+  .analogy {
+    background: #fbf6e8;
+    border-left: 4px solid #c69a2a;
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin: 12px 0;
+    font-style: italic;
+  }
+
+  .warning {
+    background: #fdecea;
+    border-left: 4px solid #c0392b;
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin: 12px 0;
+  }
+
+  a.back-top {
+    display: inline-block;
+    margin-top: 18px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.8rem;
+    color: var(--sub);
+    text-decoration: none;
+  }
+  a.back-top:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    nav.toc ol { columns: 1; }
+    section.lecture { padding: 22px 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="doc-header" id="top">
+    <h1>Week 5: Short Notes</h1>
+    <p>MAD 1 — Modern Application Development</p>
+  </header>
+
+  <nav class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#l1">Lecture 1: MVC Origins</a></li>
+      <li><a href="#l2">Lecture 2: Requests and Responses</a></li>
+      <li><a href="#l3">Lecture 3: CRUD</a></li>
+      <li><a href="#l4">Lecture 4: Group Actions by Controller</a></li>
+      <li><a href="#l5">Lecture 5: Routes and Controllers</a></li>
+    </ol>
+  </nav>
+
+  <!-- LECTURE 1 -->
+  <section class="lecture" id="l1">
+    <h2>Lecture 1: MVC Origins</h2>
+
+    <h3>Introduction</h3>
+    <ul>
+      <li><strong>MVC = Model–View–Controller</strong></li>
+      <li>Separates application into:
+        <ul>
+          <li><strong>Model</strong> → Data + Business Logic</li>
+          <li><strong>View</strong> → User Interface</li>
+          <li><strong>Controller</strong> → Input &amp; Flow Control</li>
+        </ul>
+      </li>
+      <li><strong>Idea:</strong> Divide responsibilities → clean, maintainable code</li>
+    </ul>
+    <div class="analogy">Analogy: Restaurant → User (You), Waiter (Controller), Kitchen (Model), Food served (View)</div>
+
+    <h3>Origins</h3>
+    <ul>
+      <li>Introduced ~1980 by Trygve Reenskaug at Xerox PARC</li>
+      <li>First used in Smalltalk-80 GUI systems</li>
+      <li>Based on Object-Oriented Programming</li>
+    </ul>
+
+    <h3>Components</h3>
+    <table>
+      <tr><th>Component</th><th>Role</th><th>Example</th><th>Mnemonic</th></tr>
+      <tr><td>Model</td><td>Data + Logic</td><td>Student DB (Name, Marks)</td><td>Brain</td></tr>
+      <tr><td>View</td><td>Presentation (UI)</td><td>Web page showing marks</td><td>Face</td></tr>
+      <tr><td>Controller</td><td>Handles input &amp; flow</td><td>Form handler, Submit btn</td><td>Manager</td></tr>
+    </table>
+
+    <h3>Principles</h3>
+    <ol>
+      <li><strong>Separation of Concerns</strong>
+        <ul>
+          <li>User → Controller → Model → View → User</li>
+        </ul>
+      </li>
+      <li><strong>No Direct Access to Model</strong>
+        <ul>
+          <li>Must go via Controller</li>
+        </ul>
+      </li>
+      <li><strong>View Independence</strong>
+        <ul>
+          <li>Only displays data</li>
+        </ul>
+      </li>
+      <li><strong>Controller Boundaries</strong>
+        <ul>
+          <li>Chooses views, doesn't design UI</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h3>Modern Web Development</h3>
+    <ul>
+      <li><strong>Challenge:</strong> State management (client vs server)</li>
+      <li><strong>Flexibility:</strong> MVC adapted, not strict</li>
+      <li><strong>Frameworks:</strong>
+        <ul>
+          <li>ASP.NET → Strong typing, clear MVC</li>
+          <li>Flask → Loosely applied MVC</li>
+        </ul>
+      </li>
+      <li><strong>Debate:</strong> Purity less important than using MVC concepts</li>
+    </ul>
+
+    <h3>MVC Flow</h3>
+    <ol>
+      <li>User interacts with View</li>
+      <li>Controller receives input</li>
+      <li>Controller updates Model</li>
+      <li>Model sends data to View</li>
+      <li>View updates UI</li>
+    </ol>
+
+    <h3>Key Points</h3>
+    <div class="summary-box">
+      MVC = clean architecture<br>
+      Improves Maintainability, Scalability, Reusability<br>
+      Used in Web, Mobile, Desktop apps
+    </div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 2 -->
+  <section class="lecture" id="l2">
+    <h2>Lecture 2: Requests and Responses</h2>
+
+    <h3>Evolution of Web</h3>
+    <ul>
+      <li><strong>Traditional Web:</strong> Static HTML, full page reloads (old sites).</li>
+      <li><strong>Modern Web:</strong> Dynamic, interactive (Instagram feed, live search).</li>
+      <li><strong>Key Idea:</strong> Web moved from pages → interactions.</li>
+    </ul>
+
+    <h3>Page Layout (View)</h3>
+    <ul>
+      <li><strong>Structure:</strong> Header (title/navbar), Sidebar (navigation), Main Body (content).</li>
+      <li><strong>Responsive Design:</strong> Adapts to screen size (hamburger menu ☰).</li>
+      <li><strong>Example:</strong> Same site on phone vs laptop.</li>
+    </ul>
+
+    <h3>URL &amp; Server Communication</h3>
+    <ul>
+      <li><strong>Domain Name → IP Address</strong> (e.g., <code>nptel.ac.in</code>).</li>
+      <li><strong>Data in URL:</strong> Encoded info → <code>/course/CS101/assessment</code>.</li>
+      <li><strong>Logical Naming:</strong> Human-friendly paths (e.g., "assessment").</li>
+    </ul>
+
+    <h3>MVC in Web Apps</h3>
+    <ul>
+      <li><strong>Flow:</strong> User → Controller → Model → View → User.</li>
+      <li><strong>Example:</strong> "View Marks" → Controller fetches (Model) → shows page (View).</li>
+      <li><strong>Multi-View:</strong> Same data, different views (desktop vs mobile).</li>
+    </ul>
+
+    <h3>HTTP Methods</h3>
+    <table>
+      <tr><th>Feature</th><th>GET (Fetch)</th><th>POST (Send)</th></tr>
+      <tr><td>Data</td><td>URL</td><td>Request Body</td></tr>
+      <tr><td>Security</td><td>Less</td><td>More</td></tr>
+      <tr><td>Example</td><td>Open page</td><td>Form submission</td></tr>
+    </table>
+
+    <h3>Application Design &amp; Data</h3>
+    <ul>
+      <li><strong>Common Logic:</strong> Users, Items, Relationships.
+        <ul>
+          <li>Ex: Student ↔ Course, Customer ↔ Product.</li>
+        </ul>
+      </li>
+      <li><strong>Data Storage:</strong> Tables in DB, linked via relationships.</li>
+    </ul>
+
+    <h3>CRUD Operations</h3>
+    <table>
+      <tr><th>Operation</th><th>Meaning</th><th>Example</th></tr>
+      <tr><td>Create</td><td>Add data</td><td>Add student</td></tr>
+      <tr><td>Read</td><td>View data</td><td>Show marks</td></tr>
+      <tr><td>Update</td><td>Modify</td><td>Edit marks</td></tr>
+      <tr><td>Delete</td><td>Remove</td><td>Delete record</td></tr>
+    </table>
+
+    <h3>Final Takeaways</h3>
+    <div class="summary-box">
+      Modern Web: Dynamic + interactive.<br>
+      MVC: Connects user ↔ data ↔ UI.<br>
+      URLs: Carry hidden logic.<br>
+      CRUD: Foundation of all apps.<br>
+      Memory Trick: Web = Interaction, MVC = Structure, CRUD = Actions.
+    </div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 3 -->
+  <section class="lecture" id="l3">
+    <h2>Lecture 3: CRUD</h2>
+
+    <h3>Definition</h3>
+    <ul>
+      <li><strong>CRUD = Create, Read, Update, Delete</strong></li>
+      <li>4 basic operations → manage data lifecycle</li>
+      <li><strong>Idea:</strong> Every app = Data + CRUD actions</li>
+    </ul>
+
+    <h3>Purpose</h3>
+    <ul>
+      <li>Simplifies data handling</li>
+      <li>Works across Databases, Web apps, APIs</li>
+      <li>Examples: Student system, e-commerce, social media</li>
+    </ul>
+
+    <h3>Core Operations</h3>
+    <table>
+      <tr><th>Operation</th><th>Meaning</th><th>Examples</th></tr>
+      <tr><td>Create</td><td>Add new record</td><td>Add student, Register user</td></tr>
+      <tr><td>Read</td><td>Fetch/view data</td><td>View marks, Count students</td></tr>
+      <tr><td>Update</td><td>Modify record</td><td>Edit marks, Change phone</td></tr>
+      <tr><td>Delete</td><td>Remove record</td><td>Delete user, Remove old data</td></tr>
+    </table>
+    <p><strong>Memory Trick:</strong> CRUD = Data Life Cycle → Create → Read → Update → Delete</p>
+
+    <h3>Data Management</h3>
+    <ul>
+      <li><strong>Delete:</strong> Permanent removal</li>
+      <li><strong>Archive:</strong> Backup storage (faster system, preserve old data)</li>
+    </ul>
+
+    <h4>Performance Types</h4>
+    <ul>
+      <li><strong>Read-heavy:</strong> Analytics dashboards</li>
+      <li><strong>Write-heavy:</strong> Logs, transactions</li>
+    </ul>
+
+    <h3>CRUD &amp; APIs</h3>
+    <ul>
+      <li><strong>API</strong> = Communication interface</li>
+      <li>Defines request/response format</li>
+      <li>Abstracts database details</li>
+    </ul>
+
+    <table>
+      <tr><th>CRUD</th><th>HTTP Method</th><th>Example API Call</th></tr>
+      <tr><td>Create</td><td>POST</td><td><code>POST /users</code></td></tr>
+      <tr><td>Read</td><td>GET</td><td><code>GET /users</code></td></tr>
+      <tr><td>Update</td><td>PUT/PATCH</td><td><code>PUT /users/1</code></td></tr>
+      <tr><td>Delete</td><td>DELETE</td><td><code>DELETE /users/1</code></td></tr>
+    </table>
+
+    <p><strong>Flow:</strong> User → API → Database → Response → User</p>
+
+    <h3>Final Takeaways</h3>
+    <div class="summary-box">
+      CRUD = foundation of all apps<br>
+      APIs = way to perform CRUD remotely<br>
+      Archiving = performance + preservation<br>
+      Every system = CRUD + API + Database
+    </div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 4 -->
+  <section class="lecture" id="l4">
+    <h2>Lecture 4: Group Actions by Controller</h2>
+
+    <h3>Actions &amp; Controllers</h3>
+    <h4>Actions</h4>
+    <ul>
+      <li><strong>Definition:</strong> Tasks requested by the user.</li>
+      <li><strong>Types:</strong>
+        <ul>
+          <li><strong>CRUD Actions:</strong> Create, Read, Update, Delete</li>
+          <li><strong>Side Actions:</strong> Extra tasks</li>
+        </ul>
+      </li>
+    </ul>
+    <p><strong>Examples:</strong></p>
+    <ul>
+      <li>Save user data → Create</li>
+      <li>Fetch marks → Read</li>
+      <li>Send email / WhatsApp alert → Side action</li>
+      <li>Check quiz answers → Side action</li>
+    </ul>
+
+    <h4>Controllers</h4>
+    <ul>
+      <li><strong>Definition:</strong> Group of related actions, usually tied to a model (resource).</li>
+      <li><strong>Example:</strong> <code>StudentController</code> handles: Add student, View student, Update student</li>
+    </ul>
+    <div class="key-idea"><strong>Note:</strong> "Controller" &amp; "Action" are often used interchangeably.</div>
+
+    <h3>Resource Controller Pattern</h3>
+    <h4>Standard Actions</h4>
+    <table>
+      <tr><th>Action</th><th>Purpose</th><th>Example</th></tr>
+      <tr><td>Index</td><td>List all items</td><td>Show all students</td></tr>
+      <tr><td>Create</td><td>Show form</td><td>Display add form</td></tr>
+      <tr><td>Store</td><td>Save data</td><td>Save new student</td></tr>
+      <tr><td>Show</td><td>Show one item</td><td>View student (id=1)</td></tr>
+      <tr><td>Edit</td><td>Show edit form</td><td>Edit student</td></tr>
+      <tr><td>Update</td><td>Modify data</td><td>Update marks</td></tr>
+      <tr><td>Delete</td><td>Remove item</td><td>Delete student</td></tr>
+    </table>
+
+    <h4>Create vs Store</h4>
+    <ul>
+      <li><strong>Create (GET):</strong> Show form</li>
+      <li><strong>Store (POST):</strong> Save data</li>
+    </ul>
+    <p><strong>Example Flow:</strong> User clicks "Add Student" → Form opens (Create) → Submits → Data saved (Store)</p>
+
+    <h3>APIs &amp; HTTP Verbs</h3>
+    <h4>API</h4>
+    <ul>
+      <li>Interface to communicate with server.</li>
+    </ul>
+
+    <h4>HTTP Methods</h4>
+    <table>
+      <tr><th>Method</th><th>Purpose</th><th>Example</th></tr>
+      <tr><td>GET</td><td>Fetch data</td><td>View page</td></tr>
+      <tr><td>POST</td><td>Create data</td><td>Submit form</td></tr>
+      <tr><td>PUT/PATCH</td><td>Update data</td><td>Edit data</td></tr>
+      <tr><td>DELETE</td><td>Remove data</td><td>Delete record</td></tr>
+    </table>
+    <div class="key-idea"><strong>Note:</strong> HTTP doesn't strictly enforce rules. Client &amp; server must agree on meaning.</div>
+
+    <h4>Example (Flask Routes)</h4>
+    <pre>from flask import Flask, request
+
+app = Flask(__name__)
+
+@app.route('/students', methods=['GET'])
+def index():
+    return "List of students"
+
+@app.route('/students', methods=['POST'])
+def store():
+    return "Student created"
+
+@app.route('/students/&lt;int:id&gt;', methods=['GET'])
+def show(id):
+    return f"Student {id}"
+
+@app.route('/students/&lt;int:id&gt;', methods=['PUT'])
+def update(id):
+    return f"Student {id} updated"
+
+@app.route('/students/&lt;int:id&gt;', methods=['DELETE'])
+def delete(id):
+    return f"Student {id} deleted"</pre>
+
+    <h3>MVC Rules of Thumb</h3>
+    <ul>
+      <li><strong>Model–View Independence</strong>
+        <ul>
+          <li>Model doesn't care about UI.</li>
+          <li>Same data → mobile &amp; desktop views.</li>
+        </ul>
+      </li>
+      <li><strong>Storage Abstraction</strong>
+        <ul>
+          <li>Change DB without changing UI.</li>
+          <li>Use ORM like SQLAlchemy.</li>
+        </ul>
+      </li>
+      <li><strong>Separation of Concerns</strong>
+        <ul>
+          <li>Controller ≠ Database access.</li>
+          <li>Only Model handles DB.</li>
+          <li>❌ Bad: SQL inside controller</li>
+          <li>✅ Good: Controller → Model → DB</li>
+        </ul>
+      </li>
+      <li><strong>Controller–View Link</strong>
+        <ul>
+          <li>Controller decides which view to show.</li>
+          <li>Example: Success → success page, Error → error page.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Memory Tricks</h3>
+    <ul>
+      <li>Action = Task</li>
+      <li>Controller = Manager</li>
+      <li>Route = Entry point (URL)</li>
+      <li>API = Communication bridge</li>
+    </ul>
+
+    <h3>Full Flow (Important)</h3>
+    <p><strong>User → Route → Controller → Model → DB → Controller → View → User</strong></p>
+
+    <h3>Final Takeaways</h3>
+    <div class="summary-box">
+      Controllers manage actions<br>
+      Routes map URL → action<br>
+      Resource pattern = standard structure<br>
+      Clean MVC = no mixing responsibilities
+    </div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- LECTURE 5 -->
+  <section class="lecture" id="l5">
+    <h2>Lecture 5: Routes and Controllers</h2>
+
+    <h3>Core Concept: Statelessness</h3>
+    <ul>
+      <li>Web apps = stateless client–server model</li>
+      <li>Server does not remember previous requests</li>
+      <li>Each request = independent</li>
+      <li>If connection breaks → user must request again</li>
+    </ul>
+    <p><strong>Example:</strong> Refresh page → form data lost (unless saved)</p>
+    <p><strong>Design Goal:</strong> Recover smoothly, avoid losing form inputs &amp; user progress</p>
+
+    <h3>Communication via HTTP</h3>
+    <ul>
+      <li>HTTP = text-based protocol</li>
+      <li>Ports: 80 (HTTP), 443 (HTTPS)</li>
+    </ul>
+
+    <h4>Request Structure</h4>
+    <ul>
+      <li>Verb (Action) → WHAT</li>
+      <li>URL (Location) → WHERE</li>
+    </ul>
+    <p><strong>Example:</strong> <code>GET /students/1</code> → fetch student ID 1</p>
+    <p><strong>Routing:</strong> URL + Method → Function mapping</p>
+
+    <h3>Python Decorators in Flask</h3>
+    <ul>
+      <li>Decorator = function adding extra behavior</li>
+    </ul>
+    <pre>@app.route('/')
+def home():
+    return "Hello"</pre>
+    <ul>
+      <li>Flask builds mapping table at runtime</li>
+    </ul>
+    <p><strong>Examples:</strong></p>
+    <ul>
+      <li><code>/</code> → <code>home()</code></li>
+      <li><code>/students</code> → <code>students()</code></li>
+    </ul>
+
+    <h3>Flask Routing Implementation</h3>
+    <ul>
+      <li>Explicit methods:</li>
+    </ul>
+    <pre>@app.route('/data', methods=['GET'])</pre>
+    <ul>
+      <li>Wrong method → ❌ error</li>
+    </ul>
+
+    <h4>Handling Data</h4>
+    <ul>
+      <li><code>POST</code> → send/store data (e.g., form → DB)</li>
+    </ul>
+
+    <h4>Dynamic Routes</h4>
+    <pre>@app.route('/user/&lt;int:id&gt;')</pre>
+    <ul>
+      <li><code>/user/5</code> → <code>id = 5</code></li>
+    </ul>
+
+    <h4>Multiple Methods (Same URL)</h4>
+    <ul>
+      <li>GET → show data</li>
+      <li>DELETE → remove data</li>
+    </ul>
+
+    <h3>MVC Philosophy in Flask</h3>
+    <ul>
+      <li>Flask ≠ strict MVC, but supports it</li>
+      <li>Separation of Concerns:
+        <ul>
+          <li>Model → Data</li>
+          <li>View → UI</li>
+          <li>Controller → Logic</li>
+        </ul>
+      </li>
+      <li><strong>Rule:</strong> Model ↔ View via Controller only</li>
+      <li>MVC = design mindset, not strict rule</li>
+    </ul>
+
+    <h3>Security Best Practices</h3>
+    <p>Destructive actions (UPDATE/DELETE) should not be simple URLs</p>
+    <div class="warning">
+      ❌ Bad: <code>GET /delete/1</code><br>
+      ✅ Secure: Use authentication, tokens, permissions
+    </div>
+    <p><strong>Example:</strong> Only logged-in user can delete account</p>
+
+    <h3>Full Flow</h3>
+    <p><strong>User → HTTP Request → Route → Controller → Model → Response → View</strong></p>
+
+    <h3>Memory Tricks</h3>
+    <ul>
+      <li>Stateless = No Memory</li>
+      <li>Route = Path → Function</li>
+      <li>Decorator = Connector</li>
+      <li>HTTP = Communication</li>
+      <li>MVC = Structure</li>
+    </ul>
+
+    <h3>Final Takeaways</h3>
+    <div class="summary-box">
+      Web = stateless system<br>
+      Routing = core of Flask<br>
+      Decorators map URL → function<br>
+      MVC = clean design principle<br>
+      Security = essential for destructive actions
+    </div>
+
+    <a class="back-top" href="#top">↑ Back to top</a>
+  </section>
+
+</div>
+</body>
+</html>
