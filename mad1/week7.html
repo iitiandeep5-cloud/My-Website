@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 7: Short Notes — MAD1</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1a1a1a;
+    --muted: #555;
+    --accent: #b0522d;
+    --accent-bg: #fdf3ee;
+    --border: #e5decf;
+    --code-bg: #1e1e1e;
+    --code-text: #d4d4d4;
+    --table-header: #f7ead9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #faf8f5;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 2.4rem;
+    margin-bottom: 40px;
+    letter-spacing: -0.5px;
+  }
+  h2 {
+    font-size: 1.6rem;
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 6px;
+    margin-top: 60px;
+    color: var(--accent);
+  }
+  h3 {
+    font-size: 1.2rem;
+    margin-top: 32px;
+    color: #222;
+  }
+  h4 {
+    font-size: 1.05rem;
+    margin-top: 24px;
+    color: #333;
+  }
+  ul {
+    padding-left: 22px;
+    margin: 10px 0;
+  }
+  li { margin-bottom: 4px; }
+  p { margin: 10px 0; }
+  strong { color: var(--accent); }
+  .example-label {
+    font-weight: 600;
+    margin-top: 16px;
+    margin-bottom: 6px;
+    color: var(--muted);
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 14px 18px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.88rem;
+    margin: 8px 0 18px;
+  }
+  code {
+    font-family: "Consolas", "Menlo", monospace;
+  }
+  .kw { color: #569cd6; }
+  .str { color: #ce9178; }
+  .num { color: #b5cea8; }
+  .com { color: #6a9955; }
+  .fn { color: #dcdcaa; }
+  .type { color: #4ec9b0; }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 14px 0 24px;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    text-align: left;
+  }
+  th {
+    background: var(--table-header);
+    font-weight: 600;
+  }
+  tr:nth-child(even) td {
+    background: #fbf7f1;
+  }
+  .summary-box {
+    background: var(--accent-bg);
+    border-left: 4px solid var(--accent);
+    padding: 14px 18px;
+    margin: 18px 0;
+    border-radius: 4px;
+  }
+  .summary-box strong { color: var(--accent); }
+  .lecture-block {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 8px 28px 28px;
+    margin-top: 40px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .formula {
+    font-family: "Consolas", "Menlo", monospace;
+    background: #f2f2f2;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .toc {
+    background: var(--accent-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 24px;
+    margin-bottom: 40px;
+  }
+  .toc h3 { margin-top: 0; }
+  .toc ul { margin: 0; }
+  .toc a { color: var(--accent); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    text-align: center;
+    line-height: 22px;
+    font-size: 0.8rem;
+    margin-right: 6px;
+  }
+  hr { border: none; border-top: 1px solid var(--border); margin: 30px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>Week_7: Short Notes</h1>
+
+  <div class="toc">
+    <h3>Contents</h3>
+    <ul>
+      <li><a href="#l1">Lecture 1: Memory Hierarchy</a></li>
+      <li><a href="#l2">Lecture 2: Data Search</a></li>
+      <li><a href="#l3">Lecture 3: Database Search</a></li>
+      <li><a href="#l4">Lecture 4: SQL vs. NoSQL</a></li>
+      <li><a href="#l5">Lecture 5: Scaling</a></li>
+      <li><a href="#l6">Lecture 6: Security of Databases</a></li>
+    </ul>
+  </div>
+
+  <!-- LECTURE 1 -->
+  <div class="lecture-block" id="l1">
+    <h2>Lecture 1: Memory Hierarchy</h2>
+
+    <h3>What is Storage Hierarchy?</h3>
+    <p>A system that organizes memory based on:</p>
+    <ul>
+      <li><strong>Speed, Cost, Capacity</strong></li>
+    </ul>
+    <p><strong>Key Idea:</strong></p>
+    <ul>
+      <li>Faster memory = smaller &amp; expensive.</li>
+      <li>Slower memory = larger &amp; cheaper.</li>
+    </ul>
+
+    <h3>Types of Storage (Hierarchy Order)</h3>
+
+    <h4>Registers (Fastest)</h4>
+    <ul>
+      <li>Located inside CPU.</li>
+      <li>Used for temporary calculations.</li>
+      <li>Capacity: ~10–30 values.</li>
+      <li>Speed: ⚡ Extremely fast (nanoseconds).</li>
+    </ul>
+    <div class="example-label">Example:</div>
+    <pre><code><span class="type">int</span> a = <span class="num">10</span>; <span class="com">// may be stored in register</span></code></pre>
+
+    <h4>Cache Memory (L1 / L2)</h4>
+    <ul>
+      <li>Built using <strong>SRAM</strong>.</li>
+      <li>Acts as buffer between CPU &amp; RAM.</li>
+      <li>Capacity: KB → ~1 MB.</li>
+      <li>Faster than RAM.</li>
+    </ul>
+
+    <h4>Main Memory (RAM)</h4>
+    <ul>
+      <li>Built using <strong>DRAM</strong>.</li>
+      <li>Stores programs currently running.</li>
+      <li>Capacity: 4GB – 16GB (typical).</li>
+      <li>Volatile (data lost on power off).</li>
+    </ul>
+
+    <h4>Solid State Drive (SSD)</h4>
+    <ul>
+      <li>Uses <strong>flash memory</strong>.</li>
+      <li>Non-volatile (data saved permanently).</li>
+      <li>Capacity: 256GB – 1TB+.</li>
+      <li>Faster than HDD.</li>
+    </ul>
+
+    <h4>Hard Disk Drive (HDD)</h4>
+    <ul>
+      <li>Uses <strong>magnetic storage</strong>.</li>
+      <li>Slower but cheaper.</li>
+      <li>Capacity: 2TB – 10TB.</li>
+    </ul>
+
+    <h4>Archival / Cold Storage</h4>
+    <ul>
+      <li>Used for long-term backup.</li>
+      <li>Very slow access.</li>
+    </ul>
+    <p>Example: Cloud backups (AWS Glacier, Google Cloud).</p>
+
+    <h3>Key Performance Parameters</h3>
+    <h4>Latency (Access Time)</h4>
+    <ul>
+      <li>Time to read data.</li>
+      <li>Lower = better.</li>
+    </ul>
+    <p><strong>Latency Comparison:</strong></p>
+    <table>
+      <tr><th>Storage</th><th>Latency</th></tr>
+      <tr><td>Registers</td><td>~Nanoseconds</td></tr>
+      <tr><td>Cache</td><td>10–100 ns</td></tr>
+      <tr><td>RAM</td><td>Microseconds</td></tr>
+      <tr><td>SSD</td><td>100s of µs</td></tr>
+      <tr><td>HDD</td><td>Milliseconds</td></tr>
+    </table>
+
+    <h4>Throughput</h4>
+    <ul>
+      <li>Data read per second (bytes/sec).</li>
+      <li>Important for RAM, SSD, HDD.</li>
+    </ul>
+
+    <h4>Cost &amp; Density</h4>
+    <ul><li>Storage efficiency (cost per bit).</li></ul>
+    <p>Order (best → worst): <strong>HDD &gt; SSD &gt; DRAM &gt; SRAM &gt; Registers</strong></p>
+
+    <h3>Important Scales &amp; Formula Concepts</h3>
+    <p><strong>Data Scale:</strong> 1 Petabyte (PB) = 10<sup>15</sup> bytes</p>
+    <p>Used in Google data centers, large cloud systems.</p>
+    <p><strong>Latency Gap:</strong></p>
+    <ul>
+      <li>Registers (1 ns) vs HDD (1 ms).</li>
+      <li>Difference = 10<sup>6</sup> (1 million times).</li>
+    </ul>
+    <p>Meaning: HDD is <strong>1,000,000 times slower</strong> than registers.</p>
+
+    <h3>Why This Matters for Developers 💻</h3>
+    <p><strong>Performance Bottlenecks:</strong></p>
+    <ul>
+      <li>Problem: Storing everything on disk (HDD/SSD).</li>
+      <li>Result: Slow server, low requests/sec.</li>
+    </ul>
+    <p><strong>Speed vs Cost Trade-off:</strong></p>
+    <table>
+      <tr><th>Option</th><th>Advantage</th><th>Disadvantage</th></tr>
+      <tr><td>RAM</td><td>Fast</td><td>Expensive + volatile</td></tr>
+      <tr><td>Disk</td><td>Cheap + permanent</td><td>Slow</td></tr>
+    </table>
+
+    <p><strong>Use-Case Based Decisions:</strong></p>
+    <ul>
+      <li><strong>Log File Analysis:</strong> Needs fast writing → Use SSD, sequential storage.</li>
+      <li><strong>Social Media / Student Records:</strong> Needs large storage + long-term safety → Use HDD + Cloud backup.</li>
+    </ul>
+
+    <div class="example-label">Example (Simple Code Concept):</div>
+    <pre><code><span class="com"># Bad approach (slow)</span>
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"data.txt"</span>) <span class="kw">as</span> f:
+    data = f.<span class="fn">read</span>()  <span class="com"># disk read every time</span>
+
+<span class="com"># Better approach (fast)</span>
+data = <span class="fn">load_into_memory</span>()  <span class="com"># RAM</span>
+<span class="fn">process</span>(data)</code></pre>
+
+    <div class="summary-box">
+      <strong>Quick Revision</strong>
+      <ul>
+        <li>Memory hierarchy: Registers &gt; Cache &gt; RAM &gt; SSD &gt; HDD &gt; Cold Storage.</li>
+        <li>Key points: Speed ↓ → Capacity ↑, Cost ↓ → Storage ↑.</li>
+        <li>Latency: Registers → ns, HDD → ms.</li>
+        <li>Important scale: 1 PB = 10<sup>15</sup> bytes.</li>
+        <li>Speed gap: 10<sup>6</sup>.</li>
+        <li>Developer focus: Avoid disk bottlenecks, balance cost vs speed.</li>
+      </ul>
+      <p><strong>One-Line Summary:</strong> Storage hierarchy balances speed, cost, and capacity: fast but small registers at the top, massive but slow archival storage at the bottom.</p>
+    </div>
+  </div>
+
+  <!-- LECTURE 2 -->
+  <div class="lecture-block" id="l2">
+    <h2>Lecture 2: Data Search</h2>
+
+    <h3>Big O Notation (O())</h3>
+    <ul>
+      <li><strong>Definition:</strong> Represents the order of complexity of an algorithm.</li>
+      <li><strong>Purpose:</strong> Shows how execution time grows with input size N.</li>
+    </ul>
+    <p><strong>Common Notations (Best → Worst):</strong></p>
+    <table>
+      <tr><th>Notation</th><th>Name</th><th>Description</th><th>Example</th></tr>
+      <tr><td>O(1)</td><td>Constant</td><td>Time does not change with input size</td><td>Accessing array index arr[5]</td></tr>
+      <tr><td>O(log N)</td><td>Logarithmic</td><td>Time grows slowly as N increases</td><td>Binary search in sorted array</td></tr>
+      <tr><td>O(N)</td><td>Linear</td><td>Time grows proportional to N</td><td>Searching in unsorted list</td></tr>
+      <tr><td>O(N²), O(N³)</td><td>Polynomial</td><td>Time grows fast with N</td><td>Nested loops for N² operations</td></tr>
+      <tr><td>O(k^N)</td><td>Exponential</td><td>Doubles/triples work per extra element</td><td>Recursive Fibonacci</td></tr>
+      <tr><td>O(N!)</td><td>Factorial</td><td>Very inefficient</td><td>Traveling Salesman problem (brute force)</td></tr>
+    </table>
+    <p><strong>Practical Goal:</strong> Keep algorithms ≤ O(log N) or O(N).</p>
+
+    <h3>Search Algorithms &amp; Data Structures</h3>
+
+    <h4>1️⃣ Linked Lists</h4>
+    <ul>
+      <li><strong>Structure:</strong> Node → Node → Node (A → B → C).</li>
+      <li><strong>Search Complexity:</strong> O(N).</li>
+      <li><strong>Average Steps:</strong> N/2 → Still O(N).</li>
+    </ul>
+    <div class="example-label">Example (Sequential Search):</div>
+    <pre><code>current = head
+<span class="kw">while</span> current:
+    <span class="kw">if</span> current.value == target:</code></pre>
+
+    <h4>2️⃣ Arrays</h4>
+    <ul>
+      <li><strong>Unsorted Array:</strong> Search O(N). Must check all elements.</li>
+      <li><strong>Sorted Array:</strong> Binary Search O(log N).</li>
+    </ul>
+    <p><strong>Binary Search Formula:</strong> <span class="formula">K = ⌈log₂N⌉</span></p>
+    <div class="example-label">Example (Binary Search):</div>
+    <pre><code><span class="kw">def</span> <span class="fn">binary_search</span>(arr, target):
+    low, high = <span class="num">0</span>, <span class="fn">len</span>(arr)-<span class="num">1</span>
+    <span class="kw">while</span> low &lt;= high:
+        mid = (low + high) // <span class="num">2</span>
+        <span class="kw">if</span> arr[mid] == target:
+            <span class="kw">return</span> mid
+        <span class="kw">elif</span> arr[mid] &lt; target:
+            low = mid + <span class="num">1</span>
+        <span class="kw">else</span>:
+            high = mid - <span class="num">1</span>
+    <span class="kw">return</span> -<span class="num">1</span></code></pre>
+    <p><strong>Limitation:</strong> Resizing arrays (insertion/deletion) is inefficient.</p>
+
+    <h4>3️⃣ Binary Search Tree (BST)</h4>
+    <ul>
+      <li><strong>Structure:</strong> Left &lt; Root &lt; Right.</li>
+      <li><strong>Average Search:</strong> O(log N).</li>
+      <li><strong>Unbalanced Trees:</strong> Performance drops → use AVL / Red-Black Trees.</li>
+    </ul>
+    <div class="example-label">Example (BST Search):</div>
+    <pre><code><span class="kw">def</span> <span class="fn">bst_search</span>(root, key):
+    <span class="kw">if</span> <span class="kw">not</span> root <span class="kw">or</span> root.val == key:
+        <span class="kw">return</span> root
+    <span class="kw">if</span> key &lt; root.val:
+        <span class="kw">return</span> <span class="fn">bst_search</span>(root.left, key)
+    <span class="kw">return</span> <span class="fn">bst_search</span>(root.right, key)</code></pre>
+
+    <h4>4️⃣ B-Trees</h4>
+    <ul>
+      <li>Designed for <strong>disk-based storage</strong>.</li>
+      <li>Optimized to retrieve data in large chunks.</li>
+      <li>Used in <strong>databases &amp; file systems</strong>.</li>
+    </ul>
+
+    <h4>5️⃣ Hash Tables</h4>
+    <ul>
+      <li>Compute index using hash function.</li>
+      <li><strong>Search Complexity:</strong> O(1).</li>
+    </ul>
+    <div class="example-label">Example (Python dict):</div>
+    <pre><code>data = {<span class="str">'Alice'</span>: <span class="num">25</span>, <span class="str">'Bob'</span>: <span class="num">30</span>}
+<span class="fn">print</span>(data[<span class="str">'Alice'</span>])  <span class="com"># O(1)</span></code></pre>
+
+    <h3>Comparison Table</h3>
+    <table>
+      <tr><th>Search Type</th><th>Data Structure</th><th>Complexity</th></tr>
+      <tr><td>Sequential Search</td><td>Linked List / Unsorted Array</td><td>O(N)</td></tr>
+      <tr><td>Binary Search</td><td>Sorted Array / Balanced BST</td><td>O(log N)</td></tr>
+      <tr><td>Hash Lookup</td><td>Hash Table</td><td>O(1)</td></tr>
+    </table>
+
+    <h3>Quick Formula Recap</h3>
+    <p><strong>Binary Search Steps:</strong> N→N/2→N/4→⋯→1</p>
+    <p><strong>Number of Steps:</strong> <span class="formula">K = ⌈log₂N⌉</span></p>
+    <p><strong>Big O Goal:</strong> Minimize time complexity → Faster algorithms.</p>
+
+    <h3>Tips for Developers</h3>
+    <ul>
+      <li>Use <strong>hash tables</strong> for fast lookup.</li>
+      <li>Use <strong>binary search / BST</strong> for sorted data.</li>
+      <li>Avoid nested loops / exponential algorithms for large datasets.</li>
+    </ul>
+
+    <div class="summary-box">
+      <strong>Quick Revision</strong>
+      <ul>
+        <li>Big O: Measures algorithm efficiency.</li>
+        <li>Best cases: O(1), O(log N).</li>
+        <li>Search complexities: Linked List / Unsorted Array → O(N); Sorted Array / BST → O(log N); Hash Table → O(1).</li>
+        <li>Formula: Binary search steps = ⌈log₂N⌉.</li>
+        <li>Developer focus: Choose efficient data structures, avoid exponential growth.</li>
+      </ul>
+      <p><strong>One-Line Summary:</strong> Big O notation helps evaluate algorithm efficiency; hash tables (O(1)) and binary search (O(log N)) are optimal for fast lookups, while nested loops and factorial algorithms should be avoided for large datasets.</p>
+    </div>
+  </div>
+
+  <!-- LECTURE 3 -->
+  <div class="lecture-block" id="l3">
+    <h2>Lecture 3: Database Search</h2>
+
+    <h3>Tabular Structure</h3>
+    <ul>
+      <li>Databases = tables with rows &amp; columns.</li>
+      <li>Each row = one record.</li>
+      <li>Each column = one attribute.</li>
+    </ul>
+    <p><strong>Relationships:</strong> Linking tables enables useful applications.</p>
+    <ul><li>Example: Student Table + Course Table → Student-Course link table.</li></ul>
+    <p><strong>Unique Identifiers:</strong> Columns like roll numbers or IDs ensure reliable searching.</p>
+    <p><strong>Problem with Unsorted Data:</strong></p>
+    <ul>
+      <li>Data often stored in insertion order.</li>
+      <li>Searching = linear scan → O(N).</li>
+      <li>Inefficient as database grows.</li>
+    </ul>
+
+    <h3>Database Indexing</h3>
+    <h4>What is an Index?</h4>
+    <ul>
+      <li>A sorted copy of data from one or more columns.</li>
+      <li>Includes links back to the original row.</li>
+    </ul>
+
+    <h4>🔹 B-Tree Index</h4>
+    <ul>
+      <li>Variant of binary tree.</li>
+      <li>Effective for:
+        <ul>
+          <li>Prefix searches (e.g., <code>Patrick%</code>).</li>
+          <li>Narrowing subtrees → skips irrelevant branches.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h4>◆ Hash Index</h4>
+    <ul>
+      <li>Optimized for <strong>exact equality searches</strong>.</li>
+      <li>Very fast, but cannot do ranges or partial matches.</li>
+      <li>Example: Searching for <code>Name = 'Nina'</code>.</li>
+    </ul>
+
+    <h3>Multi-column / Compound Indexes</h3>
+    <p>Index created on multiple columns.</p>
+    <ul>
+      <li>Example: <code>[DateOfBirth, City, Name]</code>.</li>
+      <li>Sorting: First by Date, then City, then Name.</li>
+    </ul>
+    <p><strong>Usage Rules:</strong></p>
+    <ul>
+      <li>Effective: Query using first column, or first + second in order.</li>
+      <li>Ineffective: Skipping first column, or using OR queries.</li>
+    </ul>
+
+    <h3>Search Formulae &amp; Efficiency</h3>
+    <p><strong>Binary Search Complexity:</strong> O(log N)</p>
+    <table>
+      <tr><th>Database Size</th><th>Linear Search</th><th>Indexed Search</th></tr>
+      <tr><td>N = 1000</td><td>1,000 steps</td><td>log₂(1000) ≈ 10 steps</td></tr>
+    </table>
+    <p>100x faster even for small datasets.</p>
+
+    <h3>Engineering Trade-offs</h3>
+    <ul>
+      <li><strong>Space vs Speed:</strong> Index = faster search but uses extra space.</li>
+      <li><strong>Over-indexing:</strong> Too many indexes → wasted space &amp; confusion.</li>
+      <li><strong>Developer Responsibility:</strong> ORMs help build queries but do not auto-optimize indexes.</li>
+    </ul>
+
+    <h3>Real-world Examples</h3>
+    <p><strong>Table Example:</strong></p>
+    <table>
+      <tr><th>Roll No</th><th>Name</th><th>Dept</th></tr>
+      <tr><td>101</td><td>Patrick</td><td>CS</td></tr>
+      <tr><td>102</td><td>Nina</td><td>EE</td></tr>
+    </table>
+
+    <div class="example-label">Effective Query:</div>
+    <pre><code><span class="kw">SELECT</span> * <span class="kw">FROM</span> student
+<span class="kw">WHERE</span> name <span class="kw">LIKE</span> <span class="str">'Patrick%'</span>;</code></pre>
+    <p>Uses B-Tree index → fast.</p>
+
+    <div class="example-label">Ineffective Query:</div>
+    <pre><code><span class="kw">SELECT</span> * <span class="kw">FROM</span> student
+<span class="kw">WHERE</span> name <span class="kw">LIKE</span> <span class="str">'%Pat%'</span>;</code></pre>
+    <p>Cannot use B-Tree → full scan needed.</p>
+
+    <p><strong>Compound Index Example:</strong></p>
+    <ul>
+      <li>Index: <code>[DateOfBirth, City, Name]</code>.</li>
+      <li>Good for: <code>WHERE DateOfBirth='2005-01-01'</code>.</li>
+      <li>Bad for: <code>WHERE Name='Patrick'</code> (without date &amp; city).</li>
+    </ul>
+
+    <h3>Key Takeaways</h3>
+    <ul>
+      <li>Index = sorted copy → faster search.</li>
+      <li>B-Tree = range &amp; prefix searches.</li>
+      <li>Hash = exact matches only.</li>
+      <li>Compound index = order matters.</li>
+      <li>Binary search → O(log N) vs linear → O(N).</li>
+    </ul>
+
+    <div class="summary-box">
+      <strong>Quick Revision</strong>
+      <ul>
+        <li>Databases = tables with rows &amp; columns.</li>
+        <li>Indexing = sorted copy of data for faster search.</li>
+        <li>B-Tree → prefix &amp; range queries.</li>
+        <li>Hash → exact matches only.</li>
+        <li>Compound indexes → column order matters.</li>
+        <li>Binary search O(log N) vs linear O(N).</li>
+        <li>Trade-off: speed vs space.</li>
+      </ul>
+      <p><strong>One-Line Summary:</strong> Database indexing transforms slow linear scans into efficient O(log N) searches, with B-Trees for ranges, Hashes for exact matches, and compound indexes for multi-column queries.</p>
+    </div>
+  </div>
+
+  <!-- LECTURE 4 -->
+  <div class="lecture-block" id="l4">
+    <h2>Lecture 4: SQL vs. NoSQL</h2>
+
+    <h3>SQL / Relational Database (RDBMS)</h3>
+    <ul>
+      <li><strong>Concept:</strong> Data stored in tables (rows &amp; columns), with relationships between tables.</li>
+      <li>Every row = same set of columns.</li>
+    </ul>
+    <p><strong>Advantages:</strong></p>
+    <ul>
+      <li>Prior knowledge of data size → predictable structure.</li>
+      <li>Efficient indexing → faster searches.</li>
+    </ul>
+    <p><strong>Limitations:</strong></p>
+    <ul><li><strong>Null Problem:</strong> Rigid table structure forces unnecessary columns.</li></ul>
+    <table>
+      <tr><th>Student</th><th>Mess Fees</th><th>Gate Pass</th></tr>
+      <tr><td>Hosteller</td><td>2000</td><td>NULL</td></tr>
+      <tr><td>Day Scholar</td><td>NULL</td><td>1</td></tr>
+    </table>
+    <p>Wastes space when many fields are irrelevant.</p>
+
+    <h3>NoSQL – "Not Only SQL"</h3>
+    <ul>
+      <li>Flexible, not limited to traditional SQL queries.</li>
+      <li>Can store data differently: <strong>document, key-value, graph, column, time series</strong>.</li>
+    </ul>
+
+    <h4>A. Document Databases</h4>
+    <ul>
+      <li>Stores structured but flexible documents (often JSON).</li>
+      <li>Indexing: Specific keys (e.g., <code>document.info.rating</code>).</li>
+      <li><strong>Examples:</strong> MongoDB, Amazon DocumentDB.</li>
+    </ul>
+    <p><strong>Use Case:</strong> Students database.</p>
+    <pre><code>{
+  <span class="str">"name"</span>: <span class="str">"Patrick"</span>,
+  <span class="str">"hosteller"</span>: {<span class="str">"mess"</span>: <span class="str">"A"</span>}
+}</code></pre>
+
+    <h4>B. Key-Value Stores</h4>
+    <ul>
+      <li>Stores key → value pairs like a dictionary or hash table.</li>
+      <li>Fast exact lookups, poor for ranges.</li>
+      <li><strong>Examples:</strong> Redis, Memcached, BerkeleyDB.</li>
+    </ul>
+    <p><strong>Use Case:</strong> Instantaneous checks (enrollment status).</p>
+    <pre><code>students = {<span class="str">"101"</span>: <span class="str">"Patrick"</span>, <span class="str">"102"</span>: <span class="str">"Nina"</span>}
+<span class="fn">print</span>(students[<span class="str">"101"</span>])  <span class="com"># O(1)</span></code></pre>
+
+    <h4>C. Columnar / Wide Column Stores</h4>
+    <ul>
+      <li>Stores data by column instead of row.</li>
+      <li>Efficient for queries on specific attributes.</li>
+      <li><strong>Use Case:</strong> Find all students born on a given date.</li>
+    </ul>
+
+    <h4>D. Graph Databases</h4>
+    <ul>
+      <li>Stores nodes (entities) &amp; edges (relationships).</li>
+      <li><strong>Use Case:</strong> Social networks, shortest path, LinkedIn connections.</li>
+      <li><strong>Example:</strong> Neo4J.</li>
+    </ul>
+
+    <h4>E. Time Series Databases (TSDB)</h4>
+    <ul>
+      <li>Optimized for time-based metrics.</li>
+      <li>Stores aggregates to save space.</li>
+      <li><strong>Examples:</strong> InfluxDB, Prometheus, RRD tool.</li>
+      <li><strong>Use Case:</strong> Monitoring requests per second, log analysis.</li>
+    </ul>
+
+    <h3>Core Database Principles</h3>
+    <p><strong>ACID (Traditional SQL):</strong></p>
+    <ul>
+      <li><strong>Atomicity:</strong> All or nothing.</li>
+      <li><strong>Consistency:</strong> Database always valid.</li>
+      <li><strong>Isolation:</strong> Transactions don't interfere.</li>
+      <li><strong>Durability:</strong> Committed data saved permanently.</li>
+    </ul>
+    <p>Example: Bank transfer – money deducted from A only if credited to B.</p>
+
+    <p><strong>Eventual Consistency (NoSQL):</strong></p>
+    <ul>
+      <li>Immediate consistency sacrificed for scaling &amp; performance.</li>
+      <li>Guarantees: If no new updates, all reads eventually return latest value.</li>
+    </ul>
+    <p>Example: Facebook friend request may take seconds to show for everyone.</p>
+    <p>Counter Example: Financial transactions must be ACID.</p>
+
+    <h3>Storage Considerations</h3>
+    <table>
+      <tr><th>Type</th><th>Speed</th><th>Scalability</th><th>Notes</th></tr>
+      <tr><td>In-Memory</td><td>Extremely fast</td><td>Limited across machines</td><td>Redis, Memcached</td></tr>
+      <tr><td>Disk-Based</td><td>Slower (latency)</td><td>Scales well</td><td>Use B-Trees, indexes for efficiency</td></tr>
+    </table>
+
+    <h3>Quick Example Code Snippets</h3>
+    <div class="example-label">SQL Query Example:</div>
+    <pre><code><span class="com">-- Get students from CS department</span>
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> students <span class="kw">WHERE</span> department=<span class="str">'CS'</span>;</code></pre>
+
+    <div class="example-label">NoSQL Query Example (MongoDB):</div>
+    <pre><code><span class="com">// Find hostellers with mess A</span>
+db.students.<span class="fn">find</span>({<span class="str">"hosteller.mess"</span>: <span class="str">"A"</span>})</code></pre>
+
+    <div class="example-label">Key-Value Example (Redis / Python):</div>
+    <pre><code>redis.<span class="fn">set</span>(<span class="str">"101"</span>, <span class="str">"Patrick"</span>)  <span class="com"># O(1)</span>
+name = redis.<span class="fn">get</span>(<span class="str">"101"</span>)</code></pre>
+
+    <h3>Key Takeaways</h3>
+    <ul>
+      <li><strong>RDBMS:</strong> Structured, ACID-compliant, great for predictable schemas.</li>
+      <li><strong>NoSQL:</strong> Flexible, scalable, eventual consistency, suited for JSON, key-value, graph, column, time-series data.</li>
+      <li><strong>Indexes &amp; Storage:</strong> Use in-memory for speed, disk-based for scale.</li>
+      <li><strong>Choice:</strong> Depends on use case — Financial → SQL, Social apps → NoSQL.</li>
+    </ul>
+
+    <div class="summary-box">
+      <strong>Quick Revision</strong>
+      <ul>
+        <li>SQL → Tables, ACID, predictable structure.</li>
+        <li>NoSQL → Flexible, scalable, eventual consistency.</li>
+        <li>Types: Document, Key-Value, Columnar, Graph, Time-Series.</li>
+        <li>Storage: In-memory (fast), disk-based (scalable).</li>
+        <li>Use case decides choice.</li>
+      </ul>
+      <p><strong>One-Line Summary:</strong> SQL ensures structure &amp; reliability, while NoSQL provides flexibility &amp; scalability — developers choose based on use case (finance → SQL, social apps → NoSQL).</p>
+    </div>
+  </div>
+
+  <!-- LECTURE 5 -->
+  <div class="lecture-block" id="l5">
+    <h2>Lecture 5: Scaling</h2>
+
+    <h3>Core Concepts of Data Duplication</h3>
+    <h4>Redundancy</h4>
+    <ul>
+      <li><strong>Purpose:</strong> Keep multiple copies of data for backup and disaster recovery.</li>
+      <li><strong>Focus:</strong> Ensure data survival, not speed.</li>
+      <li>Example: Laptop + external backup of photos/documents.</li>
+    </ul>
+
+    <h4>Replication</h4>
+    <ul>
+      <li><strong>Purpose:</strong> Improve performance and availability rather than backup.</li>
+      <li>Example: Two identical database servers in the same data center handling read queries.</li>
+      <li><strong>Limitation:</strong> If both servers are destroyed (same location), data is lost.</li>
+      <li><strong>Requirement:</strong> Careful design for live replication to maintain data integrity.</li>
+    </ul>
+
+    <h3>Scaling Strategies</h3>
+    <h4>Scale Up (Vertical Scaling)</h4>
+    <ul>
+      <li><strong>Idea:</strong> Make a single machine more powerful.</li>
+      <li>Example: Add more RAM, faster CPU, better network.</li>
+      <li><strong>Implementation:</strong>
+        <ul>
+          <li>May require infrastructure changes.</li>
+          <li>Sometimes requires restart, though "hot swapping" can allow upgrades while running.</li>
+        </ul>
+      </li>
+      <li><strong>Best For:</strong> Traditional RDBMS like Oracle.</li>
+    </ul>
+
+    <h4>Scale Out (Horizontal Scaling)</h4>
+    <ul>
+      <li><strong>Idea:</strong> Add more machines to the pool rather than making one stronger.</li>
+      <li>Example: Cloud platforms like Google App Engine or AWS.</li>
+      <li><strong>Implementation:</strong>
+        <ul>
+          <li>New VM added to handle increasing traffic.</li>
+          <li>Can happen automatically at runtime.</li>
+        </ul>
+      </li>
+      <li><strong>Best For:</strong> Distributed, high-traffic systems.</li>
+    </ul>
+
+    <h3>Consistency Models</h3>
+    <h4>ACID</h4>
+    <ul>
+      <li><strong>Used by:</strong> Traditional RDBMS.</li>
+      <li><strong>Guarantees:</strong> Atomicity, Consistency, Isolation, Durability.</li>
+      <li><strong>Use Case:</strong> Financial transactions.</li>
+    </ul>
+
+    <h4>BASE</h4>
+    <ul>
+      <li><strong>Used by:</strong> NoSQL databases.</li>
+      <li><strong>Stands for:</strong>
+        <ul>
+          <li>Basically Available</li>
+          <li>Soft state</li>
+          <li>Eventually consistent</li>
+        </ul>
+      </li>
+      <li><strong>Eventual Consistency:</strong> Replicas may lag, but system remains highly available.</li>
+    </ul>
+    <p><strong>Constraints:</strong> Real-time replication across geographically distributed servers is difficult due to latency.</p>
+
+    <h3>Application-Specific Use Cases &amp; Trade-offs</h3>
+    <table>
+      <tr><th>Application Type</th><th>Consistency Needs</th><th>Strategy</th><th>Example</th></tr>
+      <tr><td>Financial Transactions</td><td>Cannot tolerate inconsistencies</td><td>ACID, Scale Up</td><td>Bank transactions</td></tr>
+      <tr><td>Web &amp; Social Media</td><td>Minor delays acceptable</td><td>Eventual Consistency, Scale Out</td><td>Facebook, Twitter feeds</td></tr>
+      <tr><td>E-Commerce (Hybrid)</td><td>Mix of both</td><td>Scale Out for search/catalog, ACID for payments</td><td>Amazon, Flipkart</td></tr>
+    </table>
+
+    <p><strong>Example – Amazon Payment Flow:</strong></p>
+    <ul>
+      <li><strong>Item Search:</strong> Stored in NoSQL, scaled horizontally for high traffic.</li>
+      <li><strong>Payment Processing:</strong> Uses ACID, scaled vertically to ensure transaction correctness.</li>
+    </ul>
+
+    <div class="summary-box">
+      <strong>Key Takeaways</strong>
+      <ul>
+        <li><strong>Redundancy ≠ Replication:</strong> Redundancy is for survival, replication is for performance.</li>
+        <li><strong>Scale Up = Vertical, Scale Out = Horizontal:</strong> Know when to use each.</li>
+        <li><strong>ACID = Strict Consistency, BASE = High Availability &amp; Eventual Consistency.</strong></li>
+        <li><strong>Hybrid Strategies:</strong> Common in modern applications – critical parts (payments) use ACID, non-critical parts (catalog/search) use BASE.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- LECTURE 6 -->
+  <div class="lecture-block" id="l6">
+    <h2>Lecture 6: Security Of Databases</h2>
+
+    <h3>Query Placement</h3>
+    <ul>
+      <li><strong>MVC Framework:</strong>
+        <ul>
+          <li><strong>Model:</strong> Only place for SQL queries.</li>
+          <li><strong>Controller:</strong> Constructs queries and sends them to the Model.</li>
+        </ul>
+      </li>
+      <li><strong>Non-MVC Risk:</strong> Queries scattered in scripts (e.g., PHP) → higher security risk.</li>
+    </ul>
+
+    <h3>SQL Injection (SQLi)</h3>
+    <p><strong>Definition:</strong> Malicious input is inserted into SQL queries to manipulate database behavior.</p>
+    <p><strong>Common Causes:</strong> Direct concatenation of user input into query strings without sanitization.</p>
+    <div class="example-label">Example Vulnerable Query (Python):</div>
+    <pre><code>user_input = <span class="str">"' OR '1'='1"</span>
+query = <span class="str">"SELECT * FROM users WHERE username = '"</span> + user_input + <span class="str">"';"</span></code></pre>
+
+    <p><strong>Attack Methods:</strong></p>
+    <ul>
+      <li><strong>Bypass Authentication:</strong> <code>' OR '1'='1</code> returns all rows.</li>
+      <li><strong>Data Destruction:</strong> <code>; DROP TABLE users;</code> deletes tables.</li>
+      <li><strong>Client Manipulation:</strong> Attackers skip forms and send crafted HTTP requests using tools like curl.</li>
+    </ul>
+
+    <h3>Input Validation Strategies</h3>
+    <p><strong>Timing:</strong> Validate just before hitting the database.</p>
+    <p><strong>Core Checks:</strong></p>
+    <ul>
+      <li><strong>Character Filtering:</strong> Remove special characters like <code>;</code>, <code>'</code>, <code>"</code>.</li>
+      <li><strong>Escaping:</strong> If special characters are needed, escape them.</li>
+      <li><strong>Format Validation:</strong> Check emails, dates, phone numbers.</li>
+      <li><strong>Framework Use:</strong> Use tested frameworks for built-in security and patches.</li>
+    </ul>
+
+    <div class="example-label">Example (Parameterized Query in Python with SQLite):</div>
+    <pre><code><span class="kw">import</span> sqlite3
+
+conn = sqlite3.<span class="fn">connect</span>(<span class="str">"users.db"</span>)
+cursor = conn.<span class="fn">cursor</span>()
+cursor.<span class="fn">execute</span>(<span class="str">"SELECT * FROM users WHERE username = ?"</span>, (user_input,))</code></pre>
+    <p>This avoids SQL injection by separating data from query logic.</p>
+
+    <h3>HTTPS and Network Security</h3>
+    <ul>
+      <li><strong>SSL / HTTPS:</strong> Encrypts communication between client and server.</li>
+      <li><strong>Server Certificates:</strong> Verified by trusted authorities; hard to spoof.</li>
+    </ul>
+    <p><strong>Limitations:</strong></p>
+    <ul>
+      <li>Only secures the link, not the data itself.</li>
+      <li>Can impact performance and cacheability.</li>
+    </ul>
+
+    <h3>Additional Security Concepts</h3>
+    <ul>
+      <li><strong>Buffer/Input Overflows:</strong> Maliciously long URLs or queries can crash servers/clients.</li>
+      <li><strong>Character Encodings:</strong> Using visually similar but different characters to crash systems.</li>
+      <li><strong>Full Stack Awareness:</strong> Security is required at every layer: OS, language, hardware.</li>
+      <li><strong>Managed Services:</strong> Platforms like Google App Engine handle:
+        <ul>
+          <li>Security patches.</li>
+          <li>Buffer overflow protection.</li>
+          <li>Developers can focus on application-level validation.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Quick Summary Table</h3>
+    <table>
+      <tr><th>Concept</th><th>Key Points</th><th>Example / Notes</th></tr>
+      <tr><td>Query Placement</td><td>Keep SQL in Model</td><td>MVC pattern</td></tr>
+      <tr><td>SQL Injection</td><td>Malicious input manipulation</td><td><code>'; DROP TABLE users;</code></td></tr>
+      <tr><td>Input Validation</td><td>Filter, escape, validate formats</td><td>Parameterized queries</td></tr>
+      <tr><td>HTTPS / SSL</td><td>Secure client-server communication</td><td><code>https://</code> + certificates</td></tr>
+      <tr><td>Buffer Overflow</td><td>Too long input crashing system</td><td>URL/query attacks</td></tr>
+      <tr><td>Character Encoding</td><td>Look-alike chars can exploit servers</td><td>Unicode tricks</td></tr>
+      <tr><td>Managed Services</td><td>Offload server security</td><td>Google App Engine</td></tr>
+    </table>
+
+    <div class="summary-box">
+      <strong>Final Insight</strong>
+      <p>SQL security requires proper query placement, strict input validation, and layered defenses. Client-side checks improve UX, but server-side validation and secure frameworks are mandatory to prevent SQL injection and other attacks.</p>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

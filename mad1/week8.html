@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 8: Short Notes — MAD1</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1a1a1a;
+    --muted: #555;
+    --accent: #2d6cb0;
+    --accent-bg: #eef4fb;
+    --border: #dbe6f2;
+    --code-bg: #1e1e1e;
+    --code-text: #d4d4d4;
+    --table-header: #dceafb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #f7fafc;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 2.4rem;
+    margin-bottom: 40px;
+    letter-spacing: -0.5px;
+  }
+  h2 {
+    font-size: 1.6rem;
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 6px;
+    margin-top: 60px;
+    color: var(--accent);
+  }
+  h3 {
+    font-size: 1.2rem;
+    margin-top: 32px;
+    color: #222;
+  }
+  h4 {
+    font-size: 1.05rem;
+    margin-top: 24px;
+    color: #333;
+  }
+  ul, ol {
+    padding-left: 22px;
+    margin: 10px 0;
+  }
+  li { margin-bottom: 4px; }
+  p { margin: 10px 0; }
+  strong { color: var(--accent); }
+  .example-label {
+    font-weight: 600;
+    margin-top: 16px;
+    margin-bottom: 6px;
+    color: var(--muted);
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 14px 18px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.88rem;
+    margin: 8px 0 18px;
+  }
+  code {
+    font-family: "Consolas", "Menlo", monospace;
+  }
+  p code, li code {
+    background: #eef1f4;
+    padding: 1px 6px;
+    border-radius: 4px;
+    color: #b0522d;
+    font-size: 0.9em;
+  }
+  .kw { color: #569cd6; }
+  .str { color: #ce9178; }
+  .num { color: #b5cea8; }
+  .com { color: #6a9955; }
+  .fn { color: #dcdcaa; }
+  .type { color: #4ec9b0; }
+  .tag { color: #4ec9b0; }
+  .attr { color: #9cdcfe; }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 14px 0 24px;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    text-align: left;
+  }
+  th {
+    background: var(--table-header);
+    font-weight: 600;
+  }
+  tr:nth-child(even) td {
+    background: #f4f9fd;
+  }
+  .summary-box {
+    background: var(--accent-bg);
+    border-left: 4px solid var(--accent);
+    padding: 14px 18px;
+    margin: 18px 0;
+    border-radius: 4px;
+  }
+  .summary-box strong { color: var(--accent); }
+  .lecture-block {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 8px 28px 28px;
+    margin-top: 40px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .toc {
+    background: var(--accent-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 24px;
+    margin-bottom: 40px;
+  }
+  .toc h3 { margin-top: 0; }
+  .toc ul { margin: 0; }
+  .toc a { color: var(--accent); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 30px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>Week_8: Short Notes</h1>
+
+  <div class="toc">
+    <h3>Contents</h3>
+    <ul>
+      <li><a href="#l1">Lecture 1: Application Frontends</a></li>
+      <li><a href="#l2">Lecture 2: Asynchronous Updates</a></li>
+      <li><a href="#l3">Lecture 3: Browser/Client Operations</a></li>
+      <li><a href="#l4">Lecture 4: Client-Side Computations and Security Implications</a></li>
+    </ul>
+  </div>
+
+  <!-- LECTURE 1 -->
+  <div class="lecture-block" id="l1">
+    <h2>Lecture 1: Application Frontends</h2>
+
+    <h3>Introduction</h3>
+    <p>The frontend is the <strong>user-facing part of an application</strong> – what the user sees and interacts with.</p>
+    <ul>
+      <li>Usually accessed via a web browser.</li>
+      <li>Can also be:
+        <ul>
+          <li>Native apps (direct hardware access)</li>
+          <li>Embedded interfaces (e.g., Google Assistant using HTTP without a screen)</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Core Design Concepts</h3>
+    <ul>
+      <li><strong>UI (User Interface):</strong> Actual buttons, forms, menus, and controls.</li>
+      <li><strong>UX (User Experience):</strong> Overall ease, flow, and feel of using the application. Critical for retention.</li>
+    </ul>
+
+    <p><strong>Web Standards:</strong></p>
+    <p>Most web frontends rely on three pillars:</p>
+    <ol>
+      <li><strong>HTML:</strong> Structure and content</li>
+      <li><strong>CSS:</strong> Styling &amp; layout (frameworks like Bootstrap, Tailwind)</li>
+      <li><strong>JavaScript:</strong> Interactivity; originally optional, now essential for dynamic apps</li>
+    </ol>
+
+    <h3>Frontend Implementation Approaches</h3>
+
+    <h4>(1) Fully Static Web Pages</h4>
+    <ul>
+      <li><strong>How it works:</strong> Pages are precompiled; server just serves files.</li>
+      <li><strong>Pros:</strong> Very fast, high performance; great caching.</li>
+      <li><strong>Cons:</strong> Hard to personalize or adapt at runtime; minor changes may require rebuilding the site.</li>
+      <li><strong>Tools/Examples:</strong> Jekyll, Hugo, Next.js</li>
+    </ul>
+
+    <h4>(2) Runtime (Server-Side) Generation</h4>
+    <ul>
+      <li><strong>How it works:</strong> Server generates pages dynamically per request (e.g., using Flask, WordPress).</li>
+      <li><strong>Pros:</strong> Flexible, easy to implement dynamic content/templates.</li>
+      <li><strong>Cons:</strong> Heavy server load; database bottlenecks possible; performance drop (~100× fewer requests per second vs static pages).</li>
+    </ul>
+
+    <div class="example-label">Example Code (Python Flask):</div>
+    <pre><code><span class="kw">from</span> flask <span class="kw">import</span> Flask, render_template
+app = <span class="fn">Flask</span>(__name__)
+
+<span class="fn">@app.route</span>(<span class="str">'/'</span>)
+<span class="kw">def</span> <span class="fn">home</span>():
+    user = {<span class="str">"name"</span>: <span class="str">"John"</span>}
+    <span class="kw">return</span> <span class="fn">render_template</span>(<span class="str">'index.html'</span>, user=user)
+
+<span class="kw">if</span> __name__ == <span class="str">"__main__"</span>:
+    app.<span class="fn">run</span>(debug=<span class="kw">True</span>)</code></pre>
+    <p><code>index.html</code> can use <code>{{ user.name }}</code> to personalize content.</p>
+
+    <h4>(3) Client-Side Computation</h4>
+    <ul>
+      <li><strong>How it works:</strong> Browser executes JavaScript; server only provides data updates.</li>
+      <li><strong>Pros:</strong> Reduces server load; reusable components/widgets (navigation bars, modals).</li>
+      <li><strong>Cons:</strong> Requires more client resources; security risks (data exposure, XSS).</li>
+      <li><strong>Examples:</strong> Single Page Applications (SPAs) like React, Vue.js, Angular.</li>
+    </ul>
+
+    <div class="example-label">React Example:</div>
+    <pre><code><span class="kw">function</span> <span class="fn">Greeting</span>({ name }) {
+  <span class="kw">return</span> &lt;h1&gt;Hello, {name}!&lt;/h1&gt;;
+}</code></pre>
+    <p><strong>Evolution:</strong> Led to Node.js, allowing JavaScript to run on backend.</p>
+
+    <h3>Server Performance &amp; Security</h3>
+    <p><strong>Performance:</strong></p>
+    <ul>
+      <li>Static pages: Apache/Nginx can handle 10,000–20,000 requests/sec.</li>
+      <li>Dynamic pages: Drops to ~100 requests/sec.</li>
+    </ul>
+    <p><strong>Security Considerations:</strong></p>
+    <ul>
+      <li>Always validate client inputs.</li>
+      <li>Protect against JavaScript vulnerabilities (XSS, data leaks).</li>
+    </ul>
+
+    <h3>Quick Summary Table</h3>
+    <table>
+      <tr><th>Approach</th><th>Pros</th><th>Cons</th><th>Examples</th></tr>
+      <tr><td>Static</td><td>Fast, cacheable</td><td>No runtime personalization</td><td>Jekyll, Hugo, Next.js</td></tr>
+      <tr><td>Server-Side</td><td>Flexible, dynamic</td><td>Heavy server load</td><td>Flask, WordPress</td></tr>
+      <tr><td>Client-Side</td><td>Reduces server load, reusable components</td><td>More client resources, security risks</td><td>React, Vue.js, Angular</td></tr>
+    </table>
+
+    <div class="summary-box">
+      <strong>Final Insight</strong>
+      <p>Frontend development balances <strong>performance, flexibility, and security</strong>.</p>
+      <ul>
+        <li>Static sites → best for speed and caching.</li>
+        <li>Server-side rendering → best for dynamic personalization.</li>
+        <li>Client-side computation → best for interactive, modern applications.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- LECTURE 2 -->
+  <div class="lecture-block" id="l2">
+    <h2>Lecture 2: Asynchronous Updates</h2>
+
+    <h3>Traditional Web Model (Late 80s/Early 90s)</h3>
+    <ul>
+      <li>Every user action required a full page request to the server.</li>
+      <li>The server sent a complete HTML page back.</li>
+      <li>Browser had to parse and render the entire page even if only a small part changed.</li>
+    </ul>
+    <p><strong>Issues:</strong></p>
+    <ul>
+      <li><strong>Network/Server Load:</strong> Headers, footers, and menus were resent unnecessarily.</li>
+      <li><strong>Poor UX:</strong> Full-page refreshes felt slow and disruptive.</li>
+    </ul>
+
+    <h3>Asynchronous Updates</h3>
+    <ul>
+      <li>Only part of the page is updated, while the rest stays as is.</li>
+      <li>Happens in the background, so it doesn't block the initial page rendering.</li>
+    </ul>
+    <p><strong>Key Concept:</strong> Asynchronous = updates happen outside the critical path of page display.</p>
+
+    <h3>AJAX (Asynchronous JavaScript and XML)</h3>
+    <p><strong>Definition:</strong> Early way to update pages dynamically without full reloads.</p>
+    <p><strong>Purpose:</strong> Servers send structured data, not entire HTML pages.</p>
+    <p><strong>Note:</strong> "XML" in AJAX is just a structured format; JSON is commonly used today.</p>
+
+    <p><strong>Example – Animal Form:</strong></p>
+    <ul>
+      <li>Traditional: Clicking "Cat" reloads entire page (menus + content).</li>
+      <li>AJAX: Clicking "Cat" fetches only cat data, updates a specific section of the page.</li>
+    </ul>
+
+    <div class="example-label">Modern Example (fetch + JSON):</div>
+    <pre><code><span class="fn">fetch</span>(<span class="str">'/api/animal/cat'</span>)
+  .<span class="fn">then</span>(response =&gt; response.<span class="fn">json</span>())
+  .<span class="fn">then</span>(data =&gt; {
+    document.<span class="fn">getElementById</span>(<span class="str">'animal-info'</span>).innerText =
+      `Name: ${data.name}, Habitat: ${data.habitat}`;
+  });</code></pre>
+
+    <h3>Document Object Model (DOM)</h3>
+    <p><strong>Definition:</strong> A tree-like representation of the webpage stored in memory.</p>
+    <p>Allows programmatic manipulation of elements.</p>
+    <p>JavaScript is the primary language for DOM manipulation in browsers.</p>
+
+    <p><strong>Key Capabilities:</strong></p>
+    <ul>
+      <li><strong>Retrieve Elements:</strong></li>
+    </ul>
+    <pre><code><span class="kw">const</span> paragraphs = document.<span class="fn">querySelectorAll</span>(<span class="str">'p'</span>);
+paragraphs.<span class="fn">forEach</span>(p =&gt; <span class="fn">alert</span>(p.nodeName));</code></pre>
+
+    <ul><li><strong>Dynamically Update Content:</strong></li></ul>
+    <pre><code>window.onload = <span class="kw">function</span>() {
+  <span class="kw">const</span> h1 = document.<span class="fn">createElement</span>(<span class="str">'h1'</span>);
+  <span class="kw">const</span> text = document.<span class="fn">createTextNode</span>(<span class="str">'Big Head'</span>);
+  h1.<span class="fn">appendChild</span>(text);
+  document.body.<span class="fn">appendChild</span>(h1);
+};</code></pre>
+    <p>No page reload needed.</p>
+
+    <h3>Implications for Development</h3>
+    <p><strong>Advantages:</strong></p>
+    <ul>
+      <li><strong>Flexibility:</strong> Use loops, iterators, and object composition directly in browser.</li>
+      <li><strong>Better UX:</strong> Updates happen smoothly without page reloads.</li>
+    </ul>
+    <p><strong>Cautions:</strong></p>
+    <ul>
+      <li><strong>Increased Complexity:</strong> Can make frontend logic harder to understand and maintain.</li>
+      <li>Developers must balance power vs. maintainability.</li>
+    </ul>
+
+    <h3>Quick Summary Table</h3>
+    <table>
+      <tr><th>Concept</th><th>Traditional Model</th><th>Asynchronous (AJAX/DOM)</th></tr>
+      <tr><td>Page Reload</td><td>Full page</td><td>Partial updates only</td></tr>
+      <tr><td>Data Sent</td><td>Complete HTML</td><td>Structured data (XML/JSON)</td></tr>
+      <tr><td>UX</td><td>Slow, disruptive</td><td>Smooth, responsive</td></tr>
+      <tr><td>Developer Tools</td><td>Limited</td><td>Loops, DOM manipulation, dynamic content</td></tr>
+      <tr><td>Example</td><td>Click link → reload</td><td>Click button → fetch data, update div</td></tr>
+    </table>
+
+    <div class="summary-box">
+      <strong>Final Insight</strong>
+      <p>The shift from <strong>traditional full-page reloads</strong> to <strong>asynchronous updates (AJAX + DOM manipulation)</strong> transformed web applications, enabling smoother user experiences and more efficient data handling.</p>
+    </div>
+  </div>
+
+  <!-- LECTURE 3 -->
+  <div class="lecture-block" id="l3">
+    <h2>Lecture 3: Browser/Client Operations</h2>
+
+    <h3>Browser Fundamentals</h3>
+
+    <h4>1. HTML Rendering</h4>
+    <ul>
+      <li><strong>Purpose:</strong> Display web content for the end user.</li>
+      <li><strong>Behavior:</strong> Browsers usually follow conventions (e.g., <code>&lt;h1&gt;</code> is large), but HTML specifications only require semantic meaning, not exact visuals.</li>
+    </ul>
+
+    <h4>2. Cookies and Sessions</h4>
+    <ul>
+      <li><strong>Function:</strong> Browsers must store and send cookies to servers for session management and authentication.</li>
+      <li><strong>Example:</strong> Logging into Gmail keeps you signed in via cookies.</li>
+    </ul>
+
+    <h4>3. Text-Mode Browsers</h4>
+    <ul>
+      <li><strong>Definition:</strong> Browsers without a GUI, operating in command-line mode.</li>
+      <li><strong>Limitations:</strong>
+        <ul>
+          <li>Cannot render images, complex JavaScript, or advanced styling.</li>
+          <li>Only display raw HTML.</li>
+        </ul>
+      </li>
+      <li><strong>Examples:</strong> Lynx, w3m.</li>
+    </ul>
+
+    <h4>4. Design Principles &amp; Accessibility</h4>
+    <ul>
+      <li><strong>W3C Guidelines:</strong>
+        <ul>
+          <li>Avoid using only color or font size to convey meaning.</li>
+          <li>Ensures content is usable on minimal browsers or screen readers.</li>
+        </ul>
+      </li>
+      <li><strong>Separation of Concerns:</strong>
+        <ul>
+          <li>HTML: Structure and semantic meaning.</li>
+          <li>CSS: Styling and visual presentation.</li>
+          <li>Benefits: Improves accessibility and flexibility.</li>
+        </ul>
+      </li>
+      <li><strong>CSS Accessibility:</strong>
+        <ul>
+          <li>Proper CSS usage allows browser choice on styling.</li>
+          <li>Better readability for users with visual impairments.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h4>5. JavaScript &amp; Client-Side Execution</h4>
+    <ul>
+      <li><strong>Core Points:</strong>
+        <ul>
+          <li>Standard language for interactivity and dynamic content.</li>
+          <li>Works with the DOM to create/manipulate content not originally in HTML.</li>
+        </ul>
+      </li>
+      <li><strong>Scripting Engines:</strong>
+        <ul>
+          <li>V8 (Chrome) – fast and memory-efficient.</li>
+          <li>Other engines: Firefox, Safari.</li>
+          <li>Mostly API-compatible.</li>
+        </ul>
+      </li>
+      <li><strong>Resource Impact:</strong>
+        <ul>
+          <li>JavaScript runs on client CPU and sometimes GPU.</li>
+          <li>Heavy scripts may block browser or hang tabs.</li>
+          <li>Modern browsers sandbox tabs to prevent full crashes.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <div class="example-label">Example – DOM Update:</div>
+    <pre><code>document.<span class="fn">getElementById</span>(<span class="str">'title'</span>).innerText = <span class="str">"Hello, World!"</span>;</code></pre>
+    <p>Updates content without a page reload.</p>
+
+    <h3>6. Machine Clients and APIs</h3>
+    <ul>
+      <li><strong>Non-human users:</strong> IoT devices, sensors, robots.</li>
+      <li><strong>Interaction:</strong> Use standard HTTP APIs instead of custom protocols.</li>
+      <li><strong>Limitation:</strong> Usually cannot execute JavaScript; just send/receive structured data.</li>
+    </ul>
+    <p><strong>Example:</strong> Temperature sensor posts JSON to <code>/api/temperature</code>:</p>
+    <pre><code>{
+  <span class="str">"device_id"</span>: <span class="str">"sensor_01"</span>,
+  <span class="str">"temperature"</span>: <span class="num">28.5</span>
+}</code></pre>
+
+    <h3>7. Advanced &amp; Emerging Technologies</h3>
+    <ul>
+      <li><strong>Transpilation:</strong> Convert code from other languages into JavaScript to run in browsers.</li>
+      <li><strong>Brython:</strong> Run Python 3 in the browser; JS engine interprets Python code.</li>
+      <li><strong>WebAssembly (WASM):</strong> Binary instruction format for high-performance web apps.
+        <ul>
+          <li>Can run C/C++/Rust code in browsers.</li>
+          <li>Use cases: 3D editing, online office suites.</li>
+        </ul>
+      </li>
+    </ul>
+    <div class="example-label">Example (Emscripten converts C++ → WASM):</div>
+    <pre><code><span class="kw">#include</span> &lt;iostream&gt;
+<span class="type">int</span> <span class="fn">main</span>() { std::cout &lt;&lt; <span class="str">"Hello WebAssembly!"</span>; }</code></pre>
+
+    <h3>8. Native Mode Applications</h3>
+    <ul>
+      <li><strong>Definition:</strong> Web apps behave like desktop/mobile apps.</li>
+      <li><strong>Access:</strong> File systems, cameras, messaging APIs (requires permissions).</li>
+      <li><strong>Security:</strong> Standard JavaScript is sandboxed; permissions needed for native features.</li>
+      <li><strong>Example:</strong> Visual Studio Code
+        <ul>
+          <li>Runs in a Chromium shell.</li>
+          <li>Uses HTML, CSS, JS for UI.</li>
+          <li>Can access filesystem and extensions.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Quick Summary Table</h3>
+    <table>
+      <tr><th>Concept</th><th>Key Points</th><th>Examples</th></tr>
+      <tr><td>HTML Rendering</td><td>Display semantic content</td><td>&lt;h1&gt;, &lt;p&gt;</td></tr>
+      <tr><td>Cookies/Sessions</td><td>Store/send cookies for auth</td><td>Gmail login</td></tr>
+      <tr><td>Text-mode Browsers</td><td>CLI-based, minimal</td><td>Lynx, w3m</td></tr>
+      <tr><td>Accessibility</td><td>Follow W3C, separate HTML/CSS</td><td>Screen readers</td></tr>
+      <tr><td>JavaScript</td><td>DOM manipulation, interactivity</td><td>document.getElementById()</td></tr>
+      <tr><td>Machine Clients</td><td>Non-human API users</td><td>IoT sensors, JSON API</td></tr>
+      <tr><td>Transpilation</td><td>Other languages → JS</td><td>TypeScript → JS</td></tr>
+      <tr><td>Brython</td><td>Python in browser</td><td>print("Hi") in browser</td></tr>
+      <tr><td>WebAssembly</td><td>High-performance apps</td><td>3D editors, C++ → WASM</td></tr>
+      <tr><td>Native Mode Apps</td><td>Web apps with OS access</td><td>VS Code, Chrome Apps</td></tr>
+    </table>
+  </div>
+
+  <!-- LECTURE 4 -->
+  <div class="lecture-block" id="l4">
+    <h2>Lecture 4: Client Side Computations and Security Implications</h2>
+
+    <h3>Client-Side Validation</h3>
+    <p><strong>Purpose:</strong></p>
+    <ul>
+      <li>Catch basic errors before sending data to the server.</li>
+      <li>Reduces server load and network traffic.</li>
+      <li>Improves user experience.</li>
+    </ul>
+    <p><strong>Limitations:</strong></p>
+    <ul><li>Cannot stop malicious users who bypass the browser.</li></ul>
+
+    <p><strong>Tools &amp; Methods:</strong></p>
+    <ul><li><strong>HTML5 Built-in Controls:</strong></li></ul>
+    <pre><code>&lt;<span class="tag">input</span> <span class="attr">type</span>=<span class="str">"text"</span> <span class="attr">required</span> <span class="attr">minlength</span>=<span class="str">"3"</span> <span class="attr">maxlength</span>=<span class="str">"20"</span>&gt;
+&lt;<span class="tag">input</span> <span class="attr">type</span>=<span class="str">"number"</span> <span class="attr">min</span>=<span class="str">"1"</span> <span class="attr">max</span>=<span class="str">"100"</span>&gt;</code></pre>
+
+    <ul><li><strong>Regular Expressions:</strong> Validate patterns like email or phone.</li></ul>
+    <pre><code><span class="kw">const</span> emailPattern = <span class="str">/^[^\s@]+@[^\s@]+\.[^\s@]+$/</span>;
+<span class="kw">if</span>(!emailPattern.<span class="fn">test</span>(emailInput.value)){
+  <span class="fn">alert</span>(<span class="str">"Invalid email"</span>);
+}</code></pre>
+
+    <ul><li><strong>JavaScript Custom Validation:</strong> Use the Constraint Validation API and attach event listeners for live feedback.</li></ul>
+    <pre><code><span class="kw">const</span> input = document.<span class="fn">querySelector</span>(<span class="str">'#username'</span>);
+input.<span class="fn">addEventListener</span>(<span class="str">'input'</span>, () =&gt; {
+  <span class="kw">if</span>(input.value.length &lt; <span class="num">3</span>) input.<span class="fn">setCustomValidity</span>(<span class="str">"Too short!"</span>);
+  <span class="kw">else</span> input.<span class="fn">setCustomValidity</span>(<span class="str">""</span>);
+});</code></pre>
+
+    <h3>Server-Side Role</h3>
+    <ul>
+      <li><strong>Mandatory Validation:</strong> Every request must be validated server-side.</li>
+      <li><strong>Zero Trust Principle:</strong> Assume every request could be malicious.</li>
+    </ul>
+
+    <h3>Backward Compatibility</h3>
+    <ul>
+      <li>Older browsers may not support HTML5/JS features.</li>
+      <li>Use frameworks like jQuery, Angular, React for compatibility.</li>
+      <li>Trade-off: Extra code may slow down applications.</li>
+    </ul>
+
+    <h3>Proof of Humanity (CAPTCHA)</h3>
+    <p><strong>Purpose:</strong> Stop bots from automated actions (e.g., ticket bookings, vaccine appointments).</p>
+    <ul>
+      <li><strong>Google reCAPTCHA:</strong>
+        <ul>
+          <li>Tracks mouse movement, clicks, keystrokes.</li>
+          <li>Determines if user is human.</li>
+        </ul>
+      </li>
+      <li><strong>Privacy Concern:</strong> Detailed tracking may raise privacy issues.</li>
+    </ul>
+
+    <h3>High-Performance Computation</h3>
+    <ul>
+      <li>Modern JavaScript engines are fast, near CPU speed.</li>
+      <li>Scripts can access GPU for video/image rendering.</li>
+      <li>Can make asynchronous background calls to servers.</li>
+    </ul>
+    <p><strong>Warning:</strong> Some sites abuse this for crypto mining (malicious, discouraged).</p>
+
+    <h3>Security and Sandboxing</h3>
+    <ul>
+      <li><strong>Sandboxing:</strong> JavaScript is restricted from accessing sensitive local files or networks directly.</li>
+      <li><strong>DoS Attacks:</strong> Malicious JS can coordinate millions of requests to a server.</li>
+      <li><strong>Resource Exhaustion:</strong> Scripts can consume client CPU/memory, but modern browsers can terminate them.</li>
+    </ul>
+
+    <h3>Native Resource Access</h3>
+    <ul>
+      <li><strong>Hardware Access:</strong> Cameras, GPS, magnetometers, tilt sensors (only if user allows).</li>
+      <li><strong>Native-like Experience:</strong>
+        <ul>
+          <li>Apps can use OS APIs or compile to native resources.</li>
+          <li>Reduces browser overhead and improves smoothness.</li>
+        </ul>
+      </li>
+    </ul>
+    <div class="example-label">Example – WebRTC for camera access:</div>
+    <pre><code>navigator.mediaDevices.<span class="fn">getUserMedia</span>({ video: <span class="kw">true</span> })
+  .<span class="fn">then</span>(stream =&gt; {
+    document.<span class="fn">querySelector</span>(<span class="str">'video'</span>).srcObject = stream;
+  });</code></pre>
+
+    <h3>Quick Summary Table</h3>
+    <table>
+      <tr><th>Concept</th><th>Purpose</th><th>Examples / Notes</th></tr>
+      <tr><td>Client-Side Validation</td><td>Reduce server load, improve UX</td><td>HTML5 required, JS regex, Constraint API</td></tr>
+      <tr><td>Server-Side Validation</td><td>Mandatory final check</td><td>Treat every request as untrusted</td></tr>
+      <tr><td>Backward Compatibility</td><td>Support older browsers</td><td>Frameworks like jQuery, Angular</td></tr>
+      <tr><td>CAPTCHA</td><td>Prevent automation</td><td>Google reCAPTCHA tracks mouse/keystrokes</td></tr>
+      <tr><td>High-Performance JS</td><td>Fast execution, GPU usage</td><td>Async calls, video rendering</td></tr>
+      <tr><td>Security &amp; Sandboxing</td><td>Prevent malicious access</td><td>JS sandbox, DoS protection</td></tr>
+      <tr><td>Native Resource Access</td><td>Hardware &amp; OS features</td><td>Camera, GPS, tilt sensors, WebRTC</td></tr>
+    </table>
+
+    <div class="summary-box">
+      <strong>Final Insight</strong>
+      <p>Client-side validation improves user experience but <strong>cannot replace server-side checks</strong>. Modern browsers balance <strong>performance, security, and native access</strong> while protecting users from malicious scripts.</p>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
