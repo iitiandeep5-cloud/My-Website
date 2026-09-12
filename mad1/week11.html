@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week_11: Short Notes — MAD1</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1f2328;
+    --muted: #57606a;
+    --accent: #0969da;
+    --border: #d0d7de;
+    --code-bg: #f6f8fa;
+    --lecture-bg: #f6f8fa;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+    line-height: 1.6;
+  }
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 8px;
+    border-bottom: 3px solid var(--text);
+    padding-bottom: 16px;
+  }
+  h2.lecture-title {
+    background: var(--lecture-bg);
+    border-left: 5px solid var(--accent);
+    padding: 10px 16px;
+    margin-top: 48px;
+    font-size: 1.4rem;
+    border-radius: 4px;
+  }
+  h3 {
+    font-size: 1.1rem;
+    margin-top: 28px;
+    margin-bottom: 8px;
+    color: var(--text);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 4px;
+  }
+  h4 {
+    font-size: 1rem;
+    margin-top: 18px;
+    margin-bottom: 6px;
+    color: var(--muted);
+  }
+  ul, ol {
+    margin: 6px 0 6px 0;
+    padding-left: 22px;
+  }
+  li {
+    margin: 4px 0;
+  }
+  code {
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.9em;
+    color: #cf222e;
+  }
+  strong {
+    color: var(--text);
+  }
+  .drawback {
+    background: #fff8f0;
+    border-left: 4px solid #e8590c;
+    padding: 8px 14px;
+    margin: 10px 0;
+    border-radius: 4px;
+  }
+  .summary-box {
+    background: #f0f7ff;
+    border: 1px solid #b6d4f5;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-top: 20px;
+  }
+  .summary-box h4 {
+    margin-top: 0;
+    color: var(--accent);
+  }
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+  }
+  .toc {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 24px;
+    margin: 24px 0 8px;
+  }
+  .toc h3 { border: none; margin-top: 0; }
+  .toc a { color: var(--accent); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<h1>Week_11: Short Notes</h1>
+
+<div class="toc">
+  <h3>Contents</h3>
+  <ol>
+    <li><a href="#lecture1">Lecture 1: Beyond HTML</a></li>
+    <li><a href="#lecture2">Lecture 2: JavaScript</a></li>
+    <li><a href="#lecture3">Lecture 3: Custom Elements</a></li>
+    <li><a href="#lecture4">Lecture 4: Frameworks</a></li>
+  </ol>
+</div>
+
+<!-- ===================== LECTURE 1 ===================== -->
+<h2 class="lecture-title" id="lecture1">Lecture 1: Beyond HTML</h2>
+
+<h3>Focus</h3>
+<ul>
+  <li>What comes after HTML &amp; CSS &rarr; building dynamic, interactive applications.</li>
+  <li>Approach: Learn <strong>core concepts</strong>, not specific frameworks.</li>
+  <li>Benefit: Easier adaptation to new technologies.</li>
+</ul>
+
+<h3>Fundamentals of Markup Languages</h3>
+<ul>
+  <li><strong>Markup:</strong> Adding tags to text to give meaning and structure.</li>
+  <li><strong>Origin:</strong> 1960s (typesetting &amp; publishing).</li>
+  <li><strong>Purpose:</strong>
+    <ul>
+      <li>Machine-readable.</li>
+      <li>Extract structured info (e.g., table of contents).</li>
+    </ul>
+  </li>
+  <li><strong>Evolution:</strong> Different users &rarr; different markup styles.</li>
+  <li>Works across print, web, and digital media.</li>
+</ul>
+
+<h3>SGML (Standard Generalized Markup Language)</h3>
+<ul>
+  <li><strong>Meta-language:</strong> Used to create other markup languages.</li>
+</ul>
+
+<h4>Key Concepts</h4>
+<ul>
+  <li><strong>DTD (Document Type Definition):</strong> Defines allowed tags.</li>
+  <li><strong>Declarative Nature:</strong> Specifies <em>what</em>, not <em>how</em>.</li>
+  <li><strong>Strict Structure:</strong> Proper opening/closing tags required.</li>
+  <li>Supports complex data.</li>
+</ul>
+
+<div class="drawback"><strong>Drawback:</strong> Too complex, hard to implement &rarr; led to simpler languages.</div>
+
+<h3>Evolution of HTML</h3>
+<ul>
+  <li>Created by Tim Berners-Lee.</li>
+  <li>Based on SGML but made simpler &amp; forgiving.</li>
+</ul>
+
+<h4>Versions</h4>
+<ul>
+  <li><strong>HTML 2.0 &amp; 4.0:</strong> Tried to follow SGML, limited by backward compatibility.</li>
+  <li><strong>HTML5:</strong> Broke away from SGML, defined its own rules.</li>
+</ul>
+
+<h3>XML (Extensible Markup Language)</h3>
+<ul>
+  <li>Simplified version of SGML.</li>
+  <li>Flexible + structured.</li>
+</ul>
+
+<h4>Features</h4>
+<ul>
+  <li>Human-readable.</li>
+  <li>Machine-readable.</li>
+  <li>Custom tags allowed.</li>
+</ul>
+
+<h4>Applications</h4>
+<ul>
+  <li>RSS Feeds &rarr; Website updates.</li>
+  <li>SVG &rarr; Graphics (shapes like circles, rectangles).</li>
+  <li>Documents: <code>.docx</code>, <code>.odt</code> = zipped XML files.</li>
+</ul>
+
+<h3>XML vs JSON</h3>
+<ul>
+  <li><strong>JSON:</strong> Simpler, widely used.</li>
+  <li><strong>XML:</strong> More structured, better parsing.</li>
+</ul>
+
+<h3>XHTML &amp; HTML5</h3>
+<h4>XHTML</h4>
+<ul>
+  <li>HTML reformulated using XML rules.</li>
+  <li>Very strict, hard to extend.</li>
+</ul>
+
+<h4>HTML5</h4>
+<ul>
+  <li>Supports video, audio, graphics (canvas).</li>
+  <li>Easy to use.</li>
+  <li><strong>Living Standard:</strong> Maintained by WHATWG, continuously updated.</li>
+</ul>
+
+<h3>Software-Defined Extension</h3>
+<h4>JavaScript Integration</h4>
+<ul>
+  <li>Add custom elements (new tags) using JavaScript.</li>
+  <li>Makes web apps more powerful.</li>
+</ul>
+
+<h4>Semantic Challenge</h4>
+<ul>
+  <li>Custom tags may confuse search engines.</li>
+  <li>Standard tags (like <code>&lt;h1&gt;</code>, <code>&lt;title&gt;</code>) are important for:
+    <ul>
+      <li>SEO.</li>
+      <li>Page understanding.</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="summary-box">
+  <h4>Quick Summary</h4>
+  <ul>
+    <li>Markup = structure + meaning.</li>
+    <li>SGML = base (complex).</li>
+    <li>HTML = simplified, widely used.</li>
+    <li>XML = flexible, structured.</li>
+    <li>HTML5 = modern, evolving.</li>
+    <li>JavaScript extends HTML functionality.</li>
+    <li>Use standard tags for clarity + SEO.</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ===================== LECTURE 2 ===================== -->
+<h2 class="lecture-title" id="lecture2">Lecture 2: JavaScript</h2>
+
+<h3>Introduction</h3>
+<ul>
+  <li><strong>JavaScript (JS):</strong> High-level programming language for the web.</li>
+  <li>Similar to Python (dynamic), but not the same as Java.</li>
+  <li>Role: One of the three pillars of the web &rarr; HTML, CSS, JavaScript.</li>
+</ul>
+
+<h3>Core Characteristics</h3>
+<ul>
+  <li><strong>High-Level Language:</strong> No need to manage memory or pointers.</li>
+  <li><strong>Dynamic Typing:</strong> Data type decided at runtime.</li>
+  <li><strong>Object-Oriented (Prototype-based):</strong> Uses prototypes instead of traditional classes.</li>
+  <li><strong>Built-in Data Structures:</strong>
+    <ul>
+      <li>Arrays (lists).</li>
+      <li>Objects (key-value pairs like dictionaries).</li>
+      <li>Can build trees, graphs.</li>
+    </ul>
+  </li>
+  <li><strong>Browser-Native:</strong> Runs directly inside web browsers.</li>
+</ul>
+
+<h3>Programming Paradigms</h3>
+<ol>
+  <li><strong>Imperative:</strong> Step-by-step execution of instructions.</li>
+  <li><strong>Functional:</strong>
+    <ul>
+      <li>Functions are first-class objects.</li>
+      <li>Can be stored in variables, passed as arguments, returned from functions.</li>
+    </ul>
+  </li>
+  <li><strong>Event-Driven (Most Important):</strong>
+    <ul>
+      <li>Code runs based on events (click, hover, input).</li>
+    </ul>
+  </li>
+</ol>
+
+<h3>Role in Web Development</h3>
+<h4>DOM (Document Object Model)</h4>
+<ul>
+  <li>Interface to interact with HTML.</li>
+  <li>Allows modification of content, updating styles, adding/removing elements.</li>
+  <li>No page reload needed.</li>
+</ul>
+
+<h4>APIs Instead of Native I/O</h4>
+<ul>
+  <li>No direct file/system access.</li>
+  <li>Uses browser APIs for:
+    <ul>
+      <li>Dates.</li>
+      <li>Strings.</li>
+      <li>Pattern matching.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Syntax &amp; Programming Basics</h3>
+<ul>
+  <li><strong>Variables:</strong>
+    <ul>
+      <li><code>const</code> &rarr; cannot change.</li>
+      <li><code>let</code> &rarr; block-scoped variable.</li>
+      <li><code>var</code> &rarr; old method (avoid).</li>
+    </ul>
+  </li>
+  <li><strong>Functions:</strong>
+    <ul>
+      <li>Defined using <code>function</code> keyword.</li>
+      <li>Anonymous functions: no name, used directly.
+        <ul>
+          <li>Example: <code>button.onclick = function() { ... }</code></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Operators &amp; Logic:</strong>
+    <ul>
+      <li>Arithmetic: <code>+ - * /</code></li>
+      <li>Conditions: <code>if...else</code></li>
+    </ul>
+  </li>
+  <li><strong>Comments:</strong>
+    <ul>
+      <li>Single-line &rarr; <code>//</code></li>
+      <li>Multi-line &rarr; <code>/* */</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Practical Tools</h3>
+<ul>
+  <li><strong>Document Querying:</strong> <code>document.querySelector()</code> &rarr; select HTML elements using ID, tag, class.</li>
+  <li><strong>Event Listeners:</strong> <code>addEventListener()</code> &rarr; attach actions to events.
+    <br>Example: <code>button.addEventListener("click", function() { ... });</code>
+  </li>
+  <li><strong>Debugging Tools:</strong>
+    <ul>
+      <li>Browser Developer Tools (F12).</li>
+      <li>Inspect HTML, debug JS, see live changes.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Learning Resource</h3>
+<ul>
+  <li><strong>Mozilla Developer Network (MDN):</strong> Most trusted resource for web development.</li>
+</ul>
+
+<div class="summary-box">
+  <h4>Quick Summary</h4>
+  <ul>
+    <li>JS = dynamic, high-level, browser-based language.</li>
+    <li>Supports imperative, functional, and event-driven paradigms.</li>
+    <li>DOM &rarr; controls webpage dynamically.</li>
+    <li>Uses APIs (no direct I/O).</li>
+    <li>Key tools: <code>querySelector</code>, <code>addEventListener</code>.</li>
+    <li>Debug using browser developer tools.</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ===================== LECTURE 3 ===================== -->
+<h2 class="lecture-title" id="lecture3">Lecture 3: Custom Elements</h2>
+
+<h3>Why JavaScript in HTML?</h3>
+<ul>
+  <li><strong>Purpose:</strong> To create custom elements (new HTML tags).</li>
+  <li><strong>Limitation of HTML5:</strong> Only predefined tags allowed (e.g., <code>&lt;h1&gt;</code>, <code>&lt;title&gt;</code>).</li>
+  <li>Cannot directly create new tags like <code>&lt;my-button&gt;</code>.</li>
+  <li><strong>Solution:</strong> Use JavaScript to define:
+    <ul>
+      <li>How the element looks.</li>
+      <li>How it behaves.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Problem of Interpretation</h3>
+<ul>
+  <li>Browsers do not understand custom tags by default.</li>
+  <li>JavaScript provides:
+    <ul>
+      <li>Rendering logic: What appears on screen.</li>
+      <li>Behavior definition: How the element acts.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>State Management</h3>
+<ul>
+  <li>Elements can have internal states.</li>
+  <li>Example: Checkbox &rarr; checked/unchecked.</li>
+  <li>Custom elements can also maintain their own states using JavaScript.</li>
+</ul>
+
+<h3>Types of Custom Elements</h3>
+<h4>Autonomous Custom Elements</h4>
+<ul>
+  <li>Completely new elements.</li>
+  <li>Not based on existing HTML tags.</li>
+  <li>Example: <code>&lt;flag-icon&gt;</code></li>
+</ul>
+
+<h4>Customized Built-in Elements</h4>
+<ul>
+  <li>Extend existing HTML elements.</li>
+  <li>Example: Extend <code>&lt;p&gt;</code> to add word count feature.</li>
+</ul>
+
+<h3>Web Components (Three Pillars)</h3>
+<ol>
+  <li><strong>Custom Elements API</strong> &rarr; Used to define new HTML tags.</li>
+  <li><strong>Shadow DOM</strong> &rarr; Provides encapsulation, keeps styles isolated, prevents CSS conflicts.</li>
+  <li><strong>HTML Templates</strong> &rarr;
+    <ul>
+      <li><code>&lt;template&gt;</code> &rarr; reusable structure.</li>
+      <li><code>&lt;slot&gt;</code> &rarr; dynamic content insertion.</li>
+      <li>Helps create reusable UI parts.</li>
+    </ul>
+  </li>
+</ol>
+
+<h3>Implementation &amp; Standards</h3>
+<ul>
+  <li><strong>HTML Living Standard:</strong> Maintained by WHATWG, continuously evolving.</li>
+  <li><strong>Non-Normative Sections:</strong> Some parts are not fixed and may change.</li>
+</ul>
+<p><strong>JavaScript Definition:</strong> Create a class extending <code>HTMLElement</code>.<br>
+Register using: <code>customElements.define('tag-name', ClassName);</code></p>
+
+<h3>Rendering</h3>
+<ul>
+  <li>Class defines:
+    <ul>
+      <li>What to display.</li>
+      <li>How it updates.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Reusability &amp; Benefits</h3>
+<ul>
+  <li><strong>Encapsulation:</strong> Shadow DOM &rarr; self-contained components.</li>
+  <li><strong>Reusability:</strong> Components can be reused across projects, shared via files or platforms like GitHub.</li>
+  <li><strong>Widgets:</strong> Main goal &rarr; build reusable UI components.
+    <ul>
+      <li>Examples: Buttons, cards, custom inputs.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Standardization Challenges</h3>
+<ul>
+  <li>API is standardized.</li>
+  <li>Implementation styles vary.</li>
+  <li>Developers may use different Shadow DOM patterns or template structures.</li>
+</ul>
+
+<div class="summary-box">
+  <h4>Quick Summary</h4>
+  <ul>
+    <li>Custom elements = new HTML tags using JavaScript.</li>
+    <li>Browser needs JS to understand custom tags.</li>
+    <li>Two types: Autonomous and Customized built-in.</li>
+    <li>Web Components = Custom Elements + Shadow DOM + Templates.</li>
+    <li>Shadow DOM = style isolation.</li>
+    <li>Highly reusable and modular.</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ===================== LECTURE 4 ===================== -->
+<h2 class="lecture-title" id="lecture4">Lecture 4: Frameworks</h2>
+
+<h3>Definition</h3>
+<ul>
+  <li><strong>Framework:</strong> A ready-made structure that helps build applications without starting from scratch.</li>
+</ul>
+
+<h3>Why Frameworks?</h3>
+<ul>
+  <li><strong>Remove Boilerplate Code:</strong> Avoid repeating common setup code.</li>
+  <li><strong>Avoid Reinventing the Wheel:</strong> Provides standard solutions to common problems.</li>
+  <li><strong>Consistency:</strong> Same structure and practices across projects.</li>
+  <li><strong>Distilled Experience:</strong> Based on years of developer knowledge, similar to design patterns (like MVC).</li>
+</ul>
+
+<h3>Single Page Applications (SPAs)</h3>
+<ul>
+  <li><strong>Definition:</strong> Web app runs on one single page.</li>
+  <li><strong>How it works:</strong> Updates content using JavaScript in the background.</li>
+</ul>
+
+<h4>Benefits</h4>
+<ul>
+  <li>Faster user experience.</li>
+  <li>No full page reloads.</li>
+  <li>Feels like a desktop/mobile app.</li>
+</ul>
+
+<h3>React (Case Study): Developed by Meta Platforms</h3>
+<h4>Key Features</h4>
+<ul>
+  <li><strong>Declarative Approach:</strong> Define what UI should look like, not how to build it.</li>
+  <li><strong>Components:</strong> UI broken into small reusable parts; each manages its own logic.</li>
+  <li><strong>Instant Rendering:</strong> Updates happen instantly in browser, no reload needed.</li>
+  <li><strong>Stateful Components:</strong> Components can store internal data (state).
+    <ul>
+      <li>Example: Timer, input field.</li>
+    </ul>
+  </li>
+  <li><strong>Encapsulation:</strong> Each component is self-contained.
+    <ul>
+      <li>Examples: To-do list, Markdown editor.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Popular Frameworks Overview</h3>
+<ul>
+  <li><strong>React:</strong> Most popular, UI-focused.</li>
+  <li><strong>Angular:</strong> Full-featured, component-based.</li>
+  <li><strong>Vue.js:</strong> Simple, lightweight alternative.</li>
+  <li><strong>Ember.js:</strong> Includes routing + services.</li>
+  <li><strong>Flask:</strong> Backend framework (Python).</li>
+</ul>
+
+<h3>Modern Web Development Stack</h3>
+<ul>
+  <li><strong>The "Triple Threat":</strong>
+    <ul>
+      <li>HTML &rarr; Structure.</li>
+      <li>CSS &rarr; Styling.</li>
+      <li>JavaScript &rarr; Logic.</li>
+    </ul>
+  </li>
+</ul>
+<p><strong>HTML5 as Living Standard:</strong> Continuously updated, no major version jumps.</p>
+
+<h3>Role of JavaScript</h3>
+<ul>
+  <li>Acts as adaptation layer.</li>
+  <li>Handles dynamic updates and user interaction.</li>
+  <li>Reduces server dependency &rarr; faster apps.</li>
+</ul>
+
+<h3>Frameworks as Gap Fillers</h3>
+<ul>
+  <li>Raw HTML + CSS + JS can be messy.</li>
+  <li>Frameworks:
+    <ul>
+      <li>Remove boilerplate.</li>
+      <li>Provide structure.</li>
+      <li>Suggest best practices.</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="summary-box">
+  <h4>Quick Summary</h4>
+  <ul>
+    <li>Framework = pre-built structure for apps.</li>
+    <li>SPAs = fast, no page reloads.</li>
+    <li>React = component-based, declarative UI.</li>
+    <li>Popular tools: React, Angular, Vue, Flask.</li>
+    <li>Web stack = HTML + CSS + JavaScript.</li>
+    <li>Frameworks simplify development and improve consistency.</li>
+  </ul>
+</div>
+
+</body>
+</html>

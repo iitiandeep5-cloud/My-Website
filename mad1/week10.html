@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 10: Short Notes — MAD1</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1a1a1a;
+    --muted: #555;
+    --accent: #2d6cb0;
+    --accent-bg: #eef4fb;
+    --border: #dbe6f2;
+    --code-bg: #1e1e1e;
+    --code-text: #d4d4d4;
+    --table-header: #dceafb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #f7fafc;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 2.4rem;
+    margin-bottom: 40px;
+    letter-spacing: -0.5px;
+  }
+  h2 {
+    font-size: 1.6rem;
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 6px;
+    margin-top: 60px;
+    color: var(--accent);
+  }
+  h3 {
+    font-size: 1.2rem;
+    margin-top: 32px;
+    color: #222;
+  }
+  h4 {
+    font-size: 1.05rem;
+    margin-top: 24px;
+    color: #333;
+  }
+  ul, ol {
+    padding-left: 22px;
+    margin: 10px 0;
+  }
+  li { margin-bottom: 4px; }
+  p { margin: 10px 0; }
+  strong { color: var(--accent); }
+  .example-label {
+    font-weight: 600;
+    margin-top: 16px;
+    margin-bottom: 6px;
+    color: var(--muted);
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 14px 18px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.88rem;
+    margin: 8px 0 18px;
+  }
+  code {
+    font-family: "Consolas", "Menlo", monospace;
+  }
+  p code, li code {
+    background: #eef1f4;
+    padding: 1px 6px;
+    border-radius: 4px;
+    color: #b0522d;
+    font-size: 0.9em;
+  }
+  .kw { color: #569cd6; }
+  .str { color: #ce9178; }
+  .num { color: #b5cea8; }
+  .com { color: #6a9955; }
+  .fn { color: #dcdcaa; }
+  .type { color: #4ec9b0; }
+  .tag { color: #4ec9b0; }
+  .attr { color: #9cdcfe; }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 14px 0 24px;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    text-align: left;
+  }
+  th {
+    background: var(--table-header);
+    font-weight: 600;
+  }
+  tr:nth-child(even) td {
+    background: #f4f9fd;
+  }
+  .summary-box {
+    background: var(--accent-bg);
+    border-left: 4px solid var(--accent);
+    padding: 14px 18px;
+    margin: 18px 0;
+    border-radius: 4px;
+  }
+  .summary-box strong { color: var(--accent); }
+  .lecture-block {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 8px 28px 28px;
+    margin-top: 40px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .toc {
+    background: var(--accent-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 24px;
+    margin-bottom: 40px;
+  }
+  .toc h3 { margin-top: 0; }
+  .toc ul { margin: 0; }
+  .toc a { color: var(--accent); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 30px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>Week_10: Short Notes</h1>
+
+  <div class="toc">
+    <h3>Contents</h3>
+    <ul>
+      <li><a href="#l1">Lecture 1: Application Testing</a></li>
+      <li><a href="#l2">Lecture 2: Levels Of Testing</a></li>
+      <li><a href="#l3">Lecture 3: Test Generation</a></li>
+      <li><a href="#l4">Lecture 4: Pytest</a></li>
+    </ul>
+  </div>
+
+  <!-- LECTURE 1 -->
+  <div class="lecture-block" id="l1">
+    <h2>Lecture 1: Application Testing</h2>
+
+    <h3>Core Concept of Testing</h3>
+    <p><strong>Definition:</strong> Testing is the process of checking whether a system behaves according to its requirements or specifications.</p>
+    <p><strong>Purpose:</strong></p>
+    <ul>
+      <li>Verify functionality (meets design intent)</li>
+      <li>Handle corner cases and invalid inputs</li>
+      <li>Check performance (e.g., response &lt; 100 ms)</li>
+      <li>Ensure proper installation/setup</li>
+      <li>Evaluate usability (user-friendly)</li>
+    </ul>
+    <p><strong>Requirements:</strong> Predefined goals are set by the user or designer, and tests are built to satisfy these goals.</p>
+
+    <h3>Types of Testing</h3>
+    <p><strong>Static Testing (No execution):</strong></p>
+    <ul>
+      <li>Code is not run.</li>
+      <li>Examples: Code reviews, proof checking, equivalence checking.</li>
+      <li>Used to find logical errors, poor design, missing initialization.</li>
+    </ul>
+    <p><strong>Dynamic Testing (Execution-based):</strong></p>
+    <ul>
+      <li>Code is executed with inputs.</li>
+      <li>Most common type.</li>
+      <li>Includes input-output testing, handling invalid inputs, crash recovery testing.</li>
+    </ul>
+
+    <h3>Testing Approaches ("Box" Methods)</h3>
+    <p><strong>White Box Testing:</strong></p>
+    <ul>
+      <li>Full knowledge of internal code.</li>
+      <li><strong>Pros:</strong> Deep and detailed testing.</li>
+      <li><strong>Cons:</strong> Focus on unnecessary details, breaks abstraction.</li>
+    </ul>
+    <p><strong>Black Box Testing:</strong></p>
+    <ul>
+      <li>Only inputs/outputs (APIs) visible.</li>
+      <li><strong>Pros:</strong> Real-world testing, clean abstraction.</li>
+      <li><strong>Cons:</strong> Hard debugging, misses internal corner cases (e.g., overflow).</li>
+    </ul>
+    <p><strong>Grey Box Testing:</strong></p>
+    <ul>
+      <li>Hybrid approach.</li>
+      <li>Tester starts as black-box, then uses internal info for debugging.</li>
+      <li>Requires developer–tester collaboration.</li>
+    </ul>
+
+    <h3>Regression Testing</h3>
+    <p><strong>Definition:</strong> Ensures new changes do not break existing features.</p>
+    <p><strong>Key Terms:</strong></p>
+    <ul>
+      <li><strong>Regression:</strong> Old feature stops working after change.</li>
+      <li><strong>Test Suite:</strong> Set of automated tests run after updates.</li>
+      <li><strong>Versioning (V1 vs V2):</strong> Breaking changes → release new version, maintain old version for users.</li>
+    </ul>
+
+    <h3>Code Coverage Metrics</h3>
+    <p><strong>Definition:</strong> Measures how much code is executed by tests.</p>
+    <p><strong>Types:</strong></p>
+    <ul>
+      <li><strong>Function Coverage:</strong> Every function is called at least once.</li>
+      <li><strong>Statement Coverage:</strong> Every line of code executed.</li>
+      <li><strong>Branch Coverage:</strong> Every decision path (if/else) tested.</li>
+      <li><strong>Condition Coverage:</strong> Every boolean condition tested (true &amp; false).</li>
+    </ul>
+    <p><strong>Important Rule:</strong> 100% Coverage ≠ Bug-Free Code.</p>
+    <p>Coverage measures execution, not correctness. Bugs can still exist in logic.</p>
+
+    <h3>Examples</h3>
+    <p><strong>Car Analogy:</strong></p>
+    <ul>
+      <li>Specs: Petrol, X people, Y speed.</li>
+      <li>Test: What happens if diesel is used?</li>
+      <li>Checks correctness and failure handling.</li>
+    </ul>
+    <p><strong>Exam Software:</strong></p>
+    <ul>
+      <li>Must respond to clicks quickly.</li>
+      <li>Example: Move to next question in &lt;100 ms.</li>
+      <li>Tests performance and usability.</li>
+    </ul>
+    <p><strong>Function Example (foo):</strong></p>
+    <ul>
+      <li>Case 1: <code>foo(1,1)</code> → 100% Statement Coverage (not sufficient).</li>
+      <li>Case 2: <code>foo(1,1) + foo(1,0)</code> → 100% Branch Coverage.</li>
+      <li>Case 3: <code>foo(0,1) + foo(1,0)</code> → 100% Condition Coverage (may not execute all branches).</li>
+    </ul>
+    <p><strong>Key Insight:</strong></p>
+    <ul>
+      <li>Condition coverage ≠ Branch coverage.</li>
+      <li>Branch coverage ≠ Full correctness.</li>
+    </ul>
+
+    <div class="summary-box">
+      <strong>Final Revision Summary</strong>
+      <ul>
+        <li>Testing ensures correctness, performance, and usability.</li>
+        <li>Two main types: Static &amp; Dynamic.</li>
+        <li>Three approaches: White, Black, Grey Box.</li>
+        <li>Regression testing prevents breaking old features.</li>
+        <li>Coverage metrics: Function, Statement, Branch, Condition.</li>
+        <li>100% coverage does not guarantee bug-free code.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- LECTURE 2 -->
+  <div class="lecture-block" id="l2">
+    <h2>Lecture 2: Levels Of Testing</h2>
+
+    <h3>Requirements Gathering (Design Phase)</h3>
+    <p><strong>Definition:</strong> Before coding, define what the system should do and its scope.</p>
+    <p><strong>Stakeholders:</strong> Users of the system include:</p>
+    <ul>
+      <li>Students</li>
+      <li>Teachers</li>
+      <li>Administrators</li>
+    </ul>
+
+    <p><strong>Types of Requirements:</strong></p>
+    <p><strong>Functional Requirements</strong> (What the system does): Specific actions and features.</p>
+    <ul>
+      <li>Examples:
+        <ul>
+          <li>Student registers for a course</li>
+          <li>Administrator updates database</li>
+        </ul>
+      </li>
+      <li>In code:
+        <ul>
+          <li>Controllers = logic</li>
+          <li>Views = user interface</li>
+        </ul>
+      </li>
+    </ul>
+
+    <p><strong>Non-Functional Requirements</strong> (How the system behaves): Focus on experience and quality.</p>
+    <ul>
+      <li>Examples:
+        <ul>
+          <li>Page color, font, logo</li>
+          <li>Performance and scalability</li>
+        </ul>
+      </li>
+    </ul>
+
+    <p><strong>Language Ambiguity:</strong> Natural language can be unclear.</p>
+    <p>Example: "update registration" → Does this mean add, delete, or modify?</p>
+    <p><strong>Solution – Use Cases:</strong> Real-world scenarios clarify behavior.</p>
+    <p>Example: Student logs in → selects course → clicks register → confirmation shown.</p>
+
+    <h3>Unit Testing</h3>
+    <p><strong>Definition:</strong> Testing small individual components (such as a function or controller).</p>
+    <p><strong>Key Concepts:</strong></p>
+    <p><strong>Isolation:</strong> Test each unit separately using dummy data or a fake database.</p>
+    <ul><li>Example: To test "add course," the student must exist in a dummy database.</li></ul>
+
+    <p><strong>Test-Driven Development (TDD):</strong></p>
+    <ul>
+      <li>Process:
+        <ol>
+          <li>Write test → fails</li>
+          <li>Write code → passes</li>
+          <li>Test passes successfully</li>
+        </ol>
+      </li>
+    </ul>
+    <p><strong>Regression Testing:</strong> Unit tests become part of a test suite and are re-run after every change.</p>
+
+    <div class="example-label">Example Code (Python-like):</div>
+    <pre><code><span class="kw">def</span> <span class="fn">test_add_course</span>():
+    student = <span class="fn">DummyStudent</span>(id=<span class="num">1</span>)
+    result = <span class="fn">add_course</span>(student, <span class="str">"ML"</span>)
+    <span class="kw">assert</span> result == <span class="str">"Course Added"</span></code></pre>
+
+    <h3>Integration Testing</h3>
+    <p><strong>Definition:</strong> Testing the interaction between modules.</p>
+    <p><strong>Example Modules:</strong></p>
+    <ul>
+      <li>Student system</li>
+      <li>Payment gateway</li>
+      <li>Admin panel</li>
+    </ul>
+    <p><strong>Common Problems:</strong> Modules may work alone but fail together due to:</p>
+    <ul>
+      <li>Dependency conflicts</li>
+      <li>Poor communication</li>
+    </ul>
+    <p><strong>Continuous Integration (CI):</strong> Every code commit runs tests automatically to detect issues early.</p>
+    <p><strong>Tools:</strong></p>
+    <ul>
+      <li>GitHub Actions</li>
+      <li>GitLab CI</li>
+    </ul>
+
+    <h3>System Level Testing</h3>
+    <p><strong>Definition:</strong> Testing the complete system in a real environment.</p>
+    <p><strong>Key Areas:</strong></p>
+    <ul>
+      <li><strong>Black Box Testing:</strong> Test from the user perspective without internal code knowledge.</li>
+      <li><strong>Non-Functional Testing:</strong> Performance under load and scalability.</li>
+    </ul>
+    <p><strong>Example:</strong> 1000 users log in simultaneously → check response time.</p>
+
+    <p><strong>Browser Automation:</strong> Tools simulate real user actions:</p>
+    <ul>
+      <li>Click buttons</li>
+      <li>Fill forms</li>
+      <li>Verify HTML</li>
+    </ul>
+    <p><strong>Example Checks:</strong></p>
+    <ul>
+      <li>Login button exists</li>
+      <li>Input fields present</li>
+    </ul>
+
+    <div class="example-label">Example (Selenium-like):</div>
+    <pre><code>driver.<span class="fn">get</span>(<span class="str">"http://app.com/login"</span>)
+<span class="kw">assert</span> driver.<span class="fn">find_element</span>(<span class="str">"name"</span>, <span class="str">"username"</span>)</code></pre>
+
+    <h3>User Acceptance Testing (UAT)</h3>
+    <p><strong>Definition:</strong> Final testing by real users before release.</p>
+    <p><strong>Types:</strong></p>
+    <ul>
+      <li><strong>Beta / Pilot Testing:</strong> Limited release to selected users.</li>
+      <li><strong>Intelligent Feedback:</strong> Detailed bug reports.</li>
+    </ul>
+    <p><strong>Example:</strong></p>
+    <ul>
+      <li>Bad: "App crashed"</li>
+      <li>Good: "App crashed when clicking submit after empty form"</li>
+    </ul>
+
+    <h3>Concepts &amp; Code Summary</h3>
+    <p><strong>Key Concepts:</strong></p>
+    <ul>
+      <li>Requirements → Controllers + Views</li>
+      <li>HTTP Methods:
+        <ul>
+          <li>GET → Fetch data/page</li>
+          <li>POST → Submit data</li>
+        </ul>
+      </li>
+    </ul>
+    <p><strong>Validation:</strong> Check invalid inputs</p>
+    <ul>
+      <li>Example: Empty form → error message</li>
+      <li>HTML Verification: Ensure required elements exist</li>
+    </ul>
+    <p><strong>Key Methodology – Test-Driven Development (TDD):</strong> Flow: Write Test → Fail → Write Code → Pass</p>
+
+    <p><strong>Important Notes</strong></p>
+    <ul>
+      <li>Testing happens at multiple levels: Unit → Integration → System → UAT</li>
+      <li>Dummy data is crucial for isolation</li>
+      <li>Continuous Integration ensures early bug detection</li>
+      <li>Real users validate final usability</li>
+    </ul>
+
+    <div class="summary-box">
+      <strong>Final Quick Revision</strong>
+      <ul>
+        <li>Requirements = Functional + Non-functional</li>
+        <li>Unit Testing = Small components</li>
+        <li>Integration Testing = Module interaction</li>
+        <li>System Testing = Full application testing</li>
+        <li>UAT = Real user validation</li>
+        <li>TDD = Test first, then code</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- LECTURE 3 -->
+  <div class="lecture-block" id="l3">
+    <h2>Lecture 3: Test Generation</h2>
+
+    <h3>API-Based Testing</h3>
+    <p><strong>Definition:</strong> Testing using the API (Application Programming Interface) instead of the user interface.</p>
+    <p><strong>Focus:</strong></p>
+    <ul>
+      <li>Endpoints</li>
+      <li>Requests and responses</li>
+    </ul>
+    <p><strong>Single Source of Truth:</strong> Use OpenAPI (Swagger) specifications. The same file can generate:</p>
+    <ul>
+      <li>Stub code</li>
+      <li>Test cases</li>
+    </ul>
+    <p><strong>Key Capabilities:</strong> Define query parameters, authentication, and request body. Tests can be automatically generated.</p>
+    <p><strong>Use Cases:</strong></p>
+    <ul>
+      <li>Import API definitions → auto-generate tests</li>
+      <li>Record API traffic → inject error cases</li>
+      <li>Help beginners using pre-defined testing patterns</li>
+    </ul>
+
+    <div class="example-label">Example (Python – requests):</div>
+    <pre><code><span class="kw">import</span> requests
+
+response = requests.<span class="fn">get</span>(<span class="str">"http://api.com/hello"</span>)
+<span class="kw">assert</span> response.status_code == <span class="num">200</span>
+<span class="kw">assert</span> <span class="str">"Hello"</span> <span class="kw">in</span> response.text</code></pre>
+
+    <h3>Abstract vs Executable Tests</h3>
+    <p><strong>Abstract Test:</strong> Human-readable test description, not code.</p>
+    <p>Example: "Send request to / and check if response contains 'Hello world'"</p>
+    <p><strong>Executable Test:</strong> Actual coded test.</p>
+    <div class="example-label">Example (PyTest):</div>
+    <pre><code><span class="kw">def</span> <span class="fn">test_homepage</span>(client):
+    response = client.<span class="fn">get</span>(<span class="str">"/"</span>)
+    <span class="kw">assert</span> <span class="str">"Hello world"</span> <span class="kw">in</span> response.data.<span class="fn">decode</span>()</code></pre>
+
+    <p><strong>Key Idea:</strong></p>
+    <ul>
+      <li>Abstract → Easy to understand</li>
+      <li>Executable → Runs automatically</li>
+    </ul>
+
+    <h3>Model-Based Testing</h3>
+    <p><strong>Definition:</strong> System is modeled as a Finite State Machine (FSM).</p>
+    <p><strong>State-Based Testing:</strong> Example states:</p>
+    <ul>
+      <li>Not logged in</li>
+      <li>Logged in</li>
+      <li>Password reset</li>
+    </ul>
+    <p>Test all transitions:</p>
+    <ul>
+      <li>Login → Logout</li>
+      <li>Reset → Login</li>
+    </ul>
+    <p><strong>Advantages:</strong></p>
+    <ul>
+      <li>Automatic test generation</li>
+      <li>Covers all system flows</li>
+    </ul>
+    <p><strong>Generic Nature:</strong> Same abstract tests can work across frameworks such as Flask, Django, and Laravel.</p>
+
+    <h3>UI / GUI Testing</h3>
+    <p><strong>Definition:</strong> Testing the user interface (frontend).</p>
+    <p><strong>What to Test:</strong></p>
+    <ul>
+      <li>HTML structure (semantics)</li>
+      <li>CSS styling</li>
+      <li>User interaction</li>
+    </ul>
+    <p><strong>Challenges:</strong></p>
+    <ul>
+      <li>CAPTCHA blocks automation</li>
+      <li>Dynamic UI behavior</li>
+    </ul>
+    <p><strong>Tools:</strong></p>
+    <ul>
+      <li>Selenium: Automates real browser, simulates clicks, typing, navigation</li>
+      <li>Requests library: Simple API calls (no browser)</li>
+    </ul>
+
+    <div class="example-label">Example (Selenium):</div>
+    <pre><code><span class="kw">from</span> selenium <span class="kw">import</span> webdriver
+
+driver = webdriver.<span class="fn">Chrome</span>()
+driver.<span class="fn">get</span>(<span class="str">"http://app.com"</span>)
+<span class="kw">assert</span> <span class="str">"Login"</span> <span class="kw">in</span> driver.page_source</code></pre>
+
+    <h3>Security Testing</h3>
+    <p><strong>Goal:</strong> Prevent crashes (DoS attacks) and data corruption.</p>
+    <p><strong>Testing Approaches:</strong></p>
+    <ul>
+      <li>Black Box: No knowledge of system, simulates real attacker</li>
+      <li>White Box: Full code knowledge, more powerful testing</li>
+    </ul>
+    <p><strong>Common Attacks:</strong></p>
+    <ul>
+      <li><strong>SQL Injection:</strong> Inject malicious SQL queries. Example: <code>' OR '1'='1</code>. Can bypass login if not handled properly.</li>
+      <li><strong>Fuzz Testing (Fuzzing):</strong> Send random inputs to crash system, break validation, and find hidden bugs.</li>
+    </ul>
+
+    <div class="example-label">Example (Simple fuzzing idea):</div>
+    <pre><code><span class="kw">import</span> random
+<span class="kw">import</span> string
+
+random_input = <span class="str">''</span>.<span class="fn">join</span>(random.<span class="fn">choices</span>(string.ascii_letters, k=<span class="num">100</span>))
+response = requests.<span class="fn">post</span>(<span class="str">"http://api.com/login"</span>, data={<span class="str">"username"</span>: random_input})</code></pre>
+
+    <h3>Summary of Concepts</h3>
+    <table>
+      <tr><th>Topic</th><th>Key Idea</th></tr>
+      <tr><td>API Testing</td><td>Test via endpoints</td></tr>
+      <tr><td>Abstract Test</td><td>Human-readable</td></tr>
+      <tr><td>Executable Test</td><td>Code-based</td></tr>
+      <tr><td>Model-Based</td><td>FSM-based testing</td></tr>
+      <tr><td>UI Testing</td><td>Test frontend</td></tr>
+      <tr><td>Security Testing</td><td>Prevent attacks</td></tr>
+    </table>
+
+    <p><strong>Important Points</strong></p>
+    <ul>
+      <li>API testing is faster than UI testing.</li>
+      <li>Abstract tests improve clarity.</li>
+      <li>FSM ensures full coverage of states.</li>
+      <li>Selenium enables real browser testing.</li>
+      <li>Always test for SQL Injection and fuzzing.</li>
+    </ul>
+
+    <div class="summary-box">
+      <strong>Final Quick Revision</strong>
+      <ul>
+        <li>API testing uses OpenAPI specifications.</li>
+        <li>Abstract → description, Executable → code.</li>
+        <li>Model-based testing = state transitions.</li>
+        <li>UI testing uses Selenium.</li>
+        <li>Security testing includes SQL Injection and fuzzing.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- LECTURE 4 -->
+  <div class="lecture-block" id="l4">
+    <h2>Lecture 4: Pytest</h2>
+
+    <h3>Introduction to Pytest</h3>
+    <p><strong>Definition:</strong> Pytest is a testing framework in Python, serving as an alternative to <code>unittest</code>.</p>
+    <p><strong>Philosophy:</strong></p>
+    <ul>
+      <li>Opinionated → follows fixed conventions.</li>
+      <li>Automatically handles test discovery and execution.</li>
+    </ul>
+    <p><strong>Benefits:</strong></p>
+    <ul>
+      <li>Less boilerplate code.</li>
+      <li>Easy test writing.</li>
+      <li>Reduces developer confusion.</li>
+      <li>Advanced features: fixtures, monkeypatching.</li>
+    </ul>
+
+    <h3>Basic Mechanics &amp; Assertions</h3>
+    <p><strong>assert Statement:</strong> Core of Pytest.</p>
+    <pre><code><span class="kw">assert</span> <span class="num">2</span> + <span class="num">2</span> == <span class="num">4</span>   <span class="com"># Pass</span>
+<span class="kw">assert</span> <span class="num">2</span> + <span class="num">2</span> == <span class="num">5</span>   <span class="com"># Fail</span></code></pre>
+    <p>If condition is false → <code>AssertionError</code>.</p>
+
+    <p><strong>Test Discovery Rules:</strong></p>
+    <table>
+      <tr><th>Element</th><th>Naming Rule</th></tr>
+      <tr><td>File</td><td><code>test_*.py</code> or <code>*_test.py</code></td></tr>
+      <tr><td>Function</td><td>starts with <code>test_</code></td></tr>
+      <tr><td>Class</td><td>starts with <code>Test</code></td></tr>
+    </table>
+
+    <p><strong>Output Symbols:</strong></p>
+    <table>
+      <tr><th>Symbol</th><th>Meaning</th></tr>
+      <tr><td>.</td><td>Pass</td></tr>
+      <tr><td>F</td><td>Fail</td></tr>
+    </table>
+    <p>Pytest also shows expected vs actual values.</p>
+
+    <h3>Testing Exceptions &amp; Environment</h3>
+    <p><strong>pytest.raises:</strong> Used to check exceptions.</p>
+    <pre><code><span class="kw">import</span> pytest
+
+<span class="kw">def</span> <span class="fn">test_error</span>():
+    <span class="kw">with</span> pytest.<span class="fn">raises</span>(ZeroDivisionError):
+        x = <span class="num">1</span> / <span class="num">0</span></code></pre>
+
+    <p><strong>Temporary Directory (tmpdir):</strong> Creates a temporary folder, auto-deleted after test.</p>
+    <pre><code><span class="kw">def</span> <span class="fn">test_file</span>(tmpdir):
+    file = tmpdir.<span class="fn">join</span>(<span class="str">"test.txt"</span>)
+    file.<span class="fn">write</span>(<span class="str">"Hello"</span>)
+    <span class="kw">assert</span> file.<span class="fn">read</span>() == <span class="str">"Hello"</span></code></pre>
+
+    <h3>Test Fixtures</h3>
+    <p><strong>Definition:</strong> Reusable setup for tests.</p>
+    <div class="example-label">Example:</div>
+    <pre><code><span class="kw">import</span> pytest
+
+<span class="fn">@pytest.fixture</span>
+<span class="kw">def</span> <span class="fn">sample_data</span>():
+    <span class="kw">return</span> {<span class="str">"name"</span>: <span class="str">"John"</span>}
+
+<span class="kw">def</span> <span class="fn">test_name</span>(sample_data):
+    <span class="kw">assert</span> sample_data[<span class="str">"name"</span>] == <span class="str">"John"</span></code></pre>
+
+    <p><strong>Key Points:</strong></p>
+    <ul>
+      <li>Fixture runs before test.</li>
+      <li>Cannot be called directly.</li>
+      <li>Passed as parameter.</li>
+    </ul>
+
+    <h3>Testing Flask Applications</h3>
+    <p><strong>client Fixture:</strong> Simulates browser behavior.</p>
+
+    <div class="example-label">Setup &amp; Teardown using yield:</div>
+    <pre><code><span class="kw">import</span> pytest
+<span class="kw">from</span> app <span class="kw">import</span> create_app
+
+<span class="fn">@pytest.fixture</span>
+<span class="kw">def</span> <span class="fn">client</span>():
+    app = <span class="fn">create_app</span>()
+    <span class="kw">with</span> app.<span class="fn">test_client</span>() <span class="kw">as</span> client:
+        <span class="kw">yield</span> client  <span class="com"># setup before, cleanup after</span></code></pre>
+
+    <p><strong>Testing Endpoints:</strong></p>
+    <div class="example-label">GET Request:</div>
+    <pre><code><span class="kw">def</span> <span class="fn">test_home</span>(client):
+    response = client.<span class="fn">get</span>(<span class="str">"/"</span>)
+    <span class="kw">assert</span> b<span class="str">"Welcome"</span> <span class="kw">in</span> response.data</code></pre>
+
+    <div class="example-label">POST Request:</div>
+    <pre><code><span class="kw">def</span> <span class="fn">test_login</span>(client):
+    response = client.<span class="fn">post</span>(<span class="str">"/login"</span>, data={
+        <span class="str">"username"</span>: <span class="str">"admin"</span>,
+        <span class="str">"password"</span>: <span class="str">"123"</span>
+    }, follow_redirects=<span class="kw">True</span>)
+
+    <span class="kw">assert</span> b<span class="str">"Dashboard"</span> <span class="kw">in</span> response.data</code></pre>
+
+    <div class="example-label">Helper Functions:</div>
+    <pre><code><span class="kw">def</span> <span class="fn">login</span>(client):
+    <span class="kw">return</span> client.<span class="fn">post</span>(<span class="str">"/login"</span>, data={
+        <span class="str">"username"</span>: <span class="str">"admin"</span>,
+        <span class="str">"password"</span>: <span class="str">"123"</span>
+    })</code></pre>
+    <p>Not treated as a test (no <code>test_</code> prefix).</p>
+
+    <h3>Importance of Automated Testing</h3>
+    <p><strong>Benefits:</strong></p>
+    <ul>
+      <li>Confidence in system design.</li>
+      <li>Detects regressions.</li>
+      <li>Useful in grading systems.</li>
+    </ul>
+    <p><strong>Limitation:</strong> 100% coverage ≠ Bug-free code.</p>
+    <p>Tests may miss edge cases. Continuous testing is necessary.</p>
+
+    <h3>Quick Summary</h3>
+    <table>
+      <tr><th>Concept</th><th>Key Idea</th></tr>
+      <tr><td>Pytest</td><td>Easy Python testing framework</td></tr>
+      <tr><td>assert</td><td>Core testing mechanism</td></tr>
+      <tr><td>Fixtures</td><td>Setup reusable data</td></tr>
+      <tr><td>client</td><td>Test Flask apps</td></tr>
+      <tr><td>pytest.raises</td><td>Test exceptions</td></tr>
+      <tr><td>tmpdir</td><td>Temporary file testing</td></tr>
+    </table>
+
+    <div class="summary-box">
+      <strong>Final Revision</strong>
+      <ul>
+        <li>Pytest uses <code>assert</code> statements.</li>
+        <li>Naming rules are important for discovery.</li>
+        <li>Fixtures = reusable setup.</li>
+        <li><code>client</code> = simulate browser.</li>
+        <li><code>pytest.raises</code> = test errors.</li>
+        <li>Testing must be continuous.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week_12: Short Notes — MAD1</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1f2328;
+    --muted: #57606a;
+    --accent: #0969da;
+    --border: #d0d7de;
+    --code-bg: #f6f8fa;
+    --lecture-bg: #f6f8fa;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+    line-height: 1.6;
+  }
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 8px;
+    border-bottom: 3px solid var(--text);
+    padding-bottom: 16px;
+  }
+  h2.lecture-title {
+    background: var(--lecture-bg);
+    border-left: 5px solid var(--accent);
+    padding: 10px 16px;
+    margin-top: 48px;
+    font-size: 1.4rem;
+    border-radius: 4px;
+  }
+  h3 {
+    font-size: 1.1rem;
+    margin-top: 28px;
+    margin-bottom: 8px;
+    color: var(--text);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 4px;
+  }
+  h4 {
+    font-size: 1rem;
+    margin-top: 18px;
+    margin-bottom: 6px;
+    color: var(--muted);
+  }
+  ul, ol {
+    margin: 6px 0 6px 0;
+    padding-left: 22px;
+  }
+  li {
+    margin: 4px 0;
+  }
+  code {
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.9em;
+    color: #cf222e;
+  }
+  strong {
+    color: var(--text);
+  }
+  .drawback {
+    background: #fff8f0;
+    border-left: 4px solid #e8590c;
+    padding: 8px 14px;
+    margin: 10px 0;
+    border-radius: 4px;
+  }
+  .summary-box {
+    background: #f0f7ff;
+    border: 1px solid #b6d4f5;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-top: 20px;
+  }
+  .summary-box h4 {
+    margin-top: 0;
+    color: var(--accent);
+  }
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+  }
+  .toc {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 24px;
+    margin: 24px 0 8px;
+  }
+  .toc h3 { border: none; margin-top: 0; }
+  .toc a { color: var(--accent); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0;
+    font-size: 0.95rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    text-align: left;
+  }
+  th {
+    background: var(--code-bg);
+  }
+  .yes { color: #1a7f37; font-weight: bold; }
+  .no { color: #cf222e; font-weight: bold; }
+  .conclusion {
+    background: #f0fff4;
+    border-left: 4px solid #1a7f37;
+    padding: 8px 14px;
+    margin: 10px 0;
+    border-radius: 4px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Week_12: Short Notes</h1>
+
+<div class="toc">
+  <h3>Contents</h3>
+  <ol>
+    <li><a href="#lecture1">Lecture 1: Components of an App</a></li>
+    <li><a href="#lecture2">Lecture 2: Service Approach I</a></li>
+    <li><a href="#lecture3">Lecture 3: Service Approach II</a></li>
+    <li><a href="#lecture4">Lecture 4: Deployment</a></li>
+    <li><a href="#lecture5">Lecture 5: Containers</a></li>
+  </ol>
+</div>
+
+<!-- ===================== LECTURE 1 ===================== -->
+<h2 class="lecture-title" id="lecture1">Lecture 1: Components of an App</h2>
+
+<h3>Introduction to Deployment</h3>
+<h4>Definition</h4>
+<ul>
+  <li><strong>Deployment:</strong> Process of making your application available to users.</li>
+  <li><strong>Transition:</strong> Local (your laptop) &rarr; Remote server (internet).</li>
+</ul>
+
+<h3>Local Development vs Deployment</h3>
+<h4>Local Development</h4>
+<ul>
+  <li>Code runs on your personal computer.</li>
+  <li>Uses: Source code, images, CSS, documents.</li>
+</ul>
+
+<h4>Limitations of Local Systems</h4>
+<ul>
+  <li><strong>Availability:</strong> Laptop not always on.</li>
+  <li><strong>Reliability:</strong> Crash = downtime/data loss.</li>
+  <li><strong>Capacity:</strong> Cannot handle many users/services.</li>
+</ul>
+
+<h4>Requirements for Deployment</h4>
+<ul>
+  <li>Dedicated servers to run the app.</li>
+  <li>Always-on internet with high bandwidth.</li>
+  <li>Power backup and cooling (data center infrastructure).</li>
+</ul>
+
+<h3>Data Centers &amp; Cloud</h3>
+<ul>
+  <li><strong>Data Centers:</strong> Facilities with servers, cooling, and high-speed internet.</li>
+</ul>
+
+<h4>Cloud Computing</h4>
+<ul>
+  <li>Shared infrastructure (no need to own servers).</li>
+  <li><strong>Major Providers:</strong> Amazon Web Services (AWS), Google Cloud, Microsoft Azure.</li>
+</ul>
+
+<h4>Benefits</h4>
+<ul>
+  <li>No hardware management.</li>
+  <li>Scalable.</li>
+  <li>Cost-effective.</li>
+</ul>
+
+<h3>App Scaling &amp; Infrastructure</h3>
+<ul>
+  <li><strong>Scaling:</strong> Handling growth (few users &rarr; millions of users).</li>
+</ul>
+
+<h4>Networking Basics</h4>
+<ul>
+  <li><strong>HTTP:</strong> Communication between browser and server.</li>
+  <li><strong>DNS:</strong> Converts domain (e.g., google.com) &rarr; IP address.</li>
+</ul>
+
+<h4>Optimization Strategies</h4>
+<ul>
+  <li><strong>Splitting Services:</strong> Frontend and database on separate machines &rarr; optimized performance.</li>
+  <li><strong>Security (HTTPS):</strong> Encryption using secure servers.</li>
+  <li><strong>Load Balancer:</strong> Distributes traffic across servers &rarr; improves speed and reliability.</li>
+  <li><strong>Logging:</strong> Records system activity &rarr; helps debugging, monitoring, and security.</li>
+  <li><strong>Content Delivery Network (CDN):</strong>
+    <ul>
+      <li>Purpose: Deliver static files quickly.</li>
+      <li>Examples: Libraries (React, Bootstrap), images.</li>
+      <li>Advantages: Faster loading, reduced server load, cached in browser.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Deployment Complexity</h3>
+<ul>
+  <li>Building an app = easy.</li>
+  <li>Deploying at scale = hard.</li>
+</ul>
+
+<h4>Required Infrastructure</h4>
+<ul>
+  <li>Always-on servers.</li>
+  <li>Auto-restart systems.</li>
+  <li>Monitoring and logging.</li>
+  <li>High-speed networks.</li>
+</ul>
+
+<h3>Containers (Advanced)</h3>
+<ul>
+  <li>Help package applications for deployment.</li>
+  <li>Concept: Lightweight environments for portability and consistency.</li>
+</ul>
+
+<div class="summary-box">
+  <h4>Quick Summary</h4>
+  <ul>
+    <li>Deployment = local &rarr; live app.</li>
+    <li>Local systems are unreliable for real users.</li>
+    <li>Use cloud and data centers.</li>
+    <li>Scaling requires load balancers, service separation, logging.</li>
+    <li>CDN speeds up static content delivery.</li>
+    <li>Deployment is complex but essential.</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ===================== LECTURE 2 ===================== -->
+<h2 class="lecture-title" id="lecture2">Lecture 2: Service Approach I</h2>
+
+<h3>Idea: Specialization</h3>
+<ul>
+  <li>Work is divided among experts.</li>
+  <li><strong>Traditional Approach:</strong>
+    <ul>
+      <li>One person manages everything (hardware, power, networking, OS).</li>
+      <li>Complex and inefficient.</li>
+    </ul>
+  </li>
+  <li><strong>Service Approach:</strong>
+    <ul>
+      <li>Datacenter providers handle infrastructure.</li>
+      <li>Developers focus on coding.</li>
+      <li>More efficient and scalable.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Key Service Categories</h3>
+<h4>Software as a Service (SaaS)</h4>
+<ul>
+  <li>Ready-to-use software via internet.</li>
+  <li>No installation required.</li>
+  <li><strong>Examples:</strong> Google Docs, Gmail, Microsoft Office 365, WordPress, GitLab.</li>
+  <li><strong>Features:</strong> Fully managed, no maintenance needed.</li>
+</ul>
+
+<h4>Infrastructure as a Service (IaaS)</h4>
+<ul>
+  <li>Provides virtual machines/servers.</li>
+  <li><strong>Responsibility Split:</strong>
+    <ul>
+      <li>Provider &rarr; hardware, power, network.</li>
+      <li>User &rarr; OS, updates, security.</li>
+    </ul>
+  </li>
+  <li><strong>Examples:</strong> Amazon Web Services, Google Compute Engine, Microsoft Azure, DigitalOcean, Linode.</li>
+</ul>
+
+<h4>Platform as a Service (PaaS)</h4>
+<ul>
+  <li>Provides platform + tools + infrastructure.</li>
+  <li><strong>Features:</strong>
+    <ul>
+      <li>Pre-configured environment (Python, PHP, etc.).</li>
+      <li>Just deploy code &rarr; it runs.</li>
+    </ul>
+  </li>
+  <li><strong>Includes:</strong> Database support (MySQL, Redis, Firebase), built-in scaling support.</li>
+</ul>
+
+<h3>Physical Infrastructure (Datacenters)</h3>
+<ul>
+  <li>Secure buildings.</li>
+  <li>Fire protection systems.</li>
+  <li>Cooling systems.</li>
+  <li>High-speed internet.</li>
+  <li>Backup power.</li>
+  <li>Permanent IP addresses.</li>
+</ul>
+
+<h3>Case Studies</h3>
+<h4>Replit</h4>
+<ul>
+  <li>Focus: Learning &amp; development.</li>
+  <li>Uses Poetry (dependency manager).</li>
+  <li>Provides Linux shell access, shared CPU/RAM.</li>
+  <li><strong>Limitation:</strong> Shuts down after inactivity, resets server state.</li>
+</ul>
+
+<h4>Glitch</h4>
+<ul>
+  <li>Similar to Replit.</li>
+  <li>Better for simple app deployment.</li>
+  <li>Supports collaborative coding.</li>
+  <li><strong>Classification:</strong> Both are PaaS.
+    <ul>
+      <li>Manage server + networking + tools.</li>
+      <li>Provide browser-based editors.</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="summary-box">
+  <h4>Quick Summary</h4>
+  <ul>
+    <li>Service approach = specialization of tasks.</li>
+    <li>Three models:
+      <ul>
+        <li>SaaS: Ready-to-use apps.</li>
+        <li>IaaS: Raw infrastructure.</li>
+        <li>PaaS: Ready platform for developers.</li>
+      </ul>
+    </li>
+    <li>Datacenters provide secure, always-on systems.</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ===================== LECTURE 3 ===================== -->
+<h2 class="lecture-title" id="lecture3">Lecture 3: Service Approach II</h2>
+
+<h3>Overview of Google App Engine (GAE)</h3>
+<h4>Introduction</h4>
+<ul>
+  <li><strong>Google App Engine (GAE):</strong> A Platform as a Service (PaaS).</li>
+  <li>Unlike Google Compute Engine (IaaS), there is no need to manage virtual machines.</li>
+  <li><strong>Key Idea:</strong> GAE handles web server, runtime (Python, etc.), and scaling &rarr; developers focus only on code.</li>
+</ul>
+
+<h4>Google Cloud Console</h4>
+<ul>
+  <li>Access via dashboard.</li>
+  <li>Provides:
+    <ul>
+      <li>Requests per second.</li>
+      <li>Application status.</li>
+      <li>Monitoring and logging.</li>
+      <li>HTTPS setup.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4>Pricing</h4>
+<ul>
+  <li>Paid service.</li>
+  <li>Free tier and trial credits available.</li>
+</ul>
+
+<h3>Development Tools in GAE</h3>
+<h4>Google Cloud Shell</h4>
+<ul>
+  <li>Linux environment.</li>
+  <li>Provides: 4 CPUs, 16 GB RAM.</li>
+  <li>Pre-installed cloud tools.</li>
+</ul>
+
+<h4>Cloud Editor</h4>
+<ul>
+  <li>Browser-based code editor.</li>
+  <li>Similar to VS Code.</li>
+  <li>Interface style: professional development and scaling focus.</li>
+</ul>
+
+<h3>Comparison of Platforms</h3>
+<ul>
+  <li><strong>Replit:</strong> Best for learning and collaboration; auto shuts down when idle.</li>
+  <li><strong>Glitch:</strong> Good for small deployment and testing; supports collaborative development.</li>
+  <li><strong>Google App Engine:</strong> More complex; best for large-scale apps and production systems.</li>
+</ul>
+
+<h3>Key Characteristics of PaaS</h3>
+<p>Provider manages:</p>
+<ul>
+  <li>Operating system.</li>
+  <li>Web server.</li>
+  <li>HTTPS security.</li>
+  <li>Storage.</li>
+  <li>Crash recovery.</li>
+</ul>
+
+<h3>Other PaaS Providers</h3>
+<ul>
+  <li>AWS Elastic Beanstalk.</li>
+  <li>Heroku.</li>
+</ul>
+
+<h3>Supported Tech Stacks</h3>
+<ul>
+  <li><strong>Python:</strong> Flask, Django.</li>
+  <li><strong>PHP:</strong> Laravel.</li>
+  <li><strong>JavaScript:</strong> Node.js, React.</li>
+</ul>
+
+<h3>Integration &amp; Best Practices</h3>
+<ul>
+  <li><strong>Version Control:</strong> Track changes in code.</li>
+  <li><strong>CI/CD:</strong> Continuous Integration, Continuous Delivery, Continuous Deployment &rarr; automates testing and deployment.</li>
+  <li><strong>Scaling &amp; Automation:</strong> Automatically handle user growth, reduce manual work.</li>
+</ul>
+
+<div class="summary-box">
+  <h4>Quick Summary</h4>
+  <ul>
+    <li>GAE = PaaS &rarr; no server management needed.</li>
+    <li>Console &rarr; monitor app performance.</li>
+    <li>Tools: Cloud Shell + Cloud Editor.</li>
+    <li>Replit/Glitch = beginner tools.</li>
+    <li>GAE = production-level scaling.</li>
+    <li>PaaS handles OS, security, deployment.</li>
+    <li>Best practices: version control, CI/CD, scaling.</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ===================== LECTURE 4 ===================== -->
+<h2 class="lecture-title" id="lecture4">Lecture 4: Deployment</h2>
+
+<h3>Version Control</h3>
+<ul>
+  <li><strong>Definition:</strong> System to track code changes over time.</li>
+</ul>
+
+<h4>Why Use It?</h4>
+<ul>
+  <li>Track history.</li>
+  <li>Avoid breaking working code.</li>
+  <li>Experiment safely.</li>
+</ul>
+
+<h3>Git Branching Workflow</h3>
+<h4>Main Branches</h4>
+<ul>
+  <li><strong>Master/Main:</strong> Final, stable version (production code).</li>
+  <li><strong>Develop:</strong> Daily development happens here.</li>
+</ul>
+
+<h4>Supporting Branches</h4>
+<ul>
+  <li><strong>Feature Branch:</strong> For new features, merged into develop.</li>
+  <li><strong>Hotfix Branch:</strong> Fix urgent bugs, created from master, merged into master + develop.</li>
+  <li><strong>Release Branch:</strong> Prepare final version, bug fixing before release.</li>
+</ul>
+
+<h3>Key Git Operations</h3>
+<ul>
+  <li><strong>Merge:</strong> Combine branches.</li>
+  <li><strong>Push:</strong> Upload code to server.</li>
+  <li><strong>Pull Request (PR):</strong> Code review before merging.</li>
+</ul>
+
+<h3>Distributed vs Centralized Systems</h3>
+<ul>
+  <li><strong>Git (Distributed):</strong>
+    <ul>
+      <li>Work offline.</li>
+      <li>No file locking.</li>
+    </ul>
+  </li>
+  <li><strong>Old Systems (Centralized):</strong>
+    <ul>
+      <li>Example: SVN.</li>
+      <li>Required locking.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Popular Platforms</h3>
+<ul>
+  <li>GitHub.</li>
+  <li>GitLab.</li>
+  <li>Bitbucket.</li>
+</ul>
+
+<h3>Continuous Integration (CI)</h3>
+<ul>
+  <li><strong>Definition:</strong> Automatically integrates and tests code changes.</li>
+  <li><strong>How It Works:</strong> Developer pushes code &rarr; server builds project and runs tests.</li>
+</ul>
+
+<h4>Best Practices</h4>
+<ul>
+  <li><strong>Test-Driven Development (TDD):</strong> Write tests before code.</li>
+  <li><strong>Code Review:</strong> Peer feedback before merge.</li>
+  <li><strong>Fast Pipelines:</strong> Keep testing quick.</li>
+</ul>
+
+<h3>Continuous Delivery &amp; Deployment (CD)</h3>
+<h4>Continuous Delivery</h4>
+<ul>
+  <li>Code is packaged and ready for release.</li>
+  <li>Example: downloadable build.</li>
+</ul>
+
+<h4>Continuous Deployment</h4>
+<ul>
+  <li>Code is automatically deployed to production.</li>
+  <li>Live immediately.</li>
+</ul>
+
+<h4>Pros &amp; Cons</h4>
+<ul>
+  <li><strong>Benefits:</strong> Faster bug fixes, quick feature releases, seamless updates.</li>
+  <li><strong>Risks:</strong> Bugs may reach users, system crashes possible if tests fail.</li>
+</ul>
+
+<div class="summary-box">
+  <h4>Quick Summary</h4>
+  <ul>
+    <li><strong>Git:</strong> Track changes and manage code safely.</li>
+    <li><strong>Branches:</strong> Main, Develop, Feature, Hotfix, Release.</li>
+    <li><strong>CI:</strong> Auto test and integrate code.</li>
+    <li><strong>CD:</strong> Auto deliver and deploy code.</li>
+    <li><strong>Platforms:</strong> GitHub, GitLab, Bitbucket.</li>
+    <li><strong>DevOps:</strong> Automation and faster delivery.</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ===================== LECTURE 5 ===================== -->
+<h2 class="lecture-title" id="lecture5">Lecture 5: Containers</h2>
+
+<h3>Definition</h3>
+<ul>
+  <li><strong>Container:</strong> A self-contained environment with:
+    <ul>
+      <li>Minimal operating system.</li>
+      <li>Required libraries.</li>
+      <li>Application.</li>
+    </ul>
+  </li>
+  <li>Runs a specific process independently.</li>
+</ul>
+
+<h3>Containers vs Virtual Machines (VMs)</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Containers (Efficient)</th>
+      <th>Virtual Machines (Heavy)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Size</td>
+      <td class="yes">Lightweight</td>
+      <td class="no">Heavy</td>
+    </tr>
+    <tr>
+      <td>Speed</td>
+      <td class="yes">Fast startup</td>
+      <td class="no">Slower</td>
+    </tr>
+    <tr>
+      <td>Operating System</td>
+      <td class="yes">Shared OS kernel</td>
+      <td class="no">Full OS</td>
+    </tr>
+    <tr>
+      <td>Resource Usage</td>
+      <td class="yes">Low</td>
+      <td class="no">High</td>
+    </tr>
+  </tbody>
+</table>
+<div class="conclusion"><strong>Conclusion:</strong> Containers are more efficient than VMs.</div>
+
+<h3>Core Mechanisms</h3>
+<ul>
+  <li><strong>Linux Kernel:</strong> Core system software managing hardware and resources.</li>
+  <li><strong>Namespaces:</strong> Isolate processes; each container has its own environment.</li>
+  <li><strong>Control Groups (cgroups):</strong> Limit resource usage (CPU, memory).</li>
+  <li><strong>Process Isolation:</strong> One process cannot affect another.</li>
+  <li><strong>Sandboxing:</strong> Each container runs in its own restricted environment; failure in one does not affect others.</li>
+  <li><strong>Networking:</strong> Containers communicate via defined networks, not direct data sharing.</li>
+</ul>
+
+<h3>Benefits of Containers</h3>
+<ul>
+  <li>Lightweight and fast.</li>
+  <li>Easy version control.</li>
+  <li>Portable (runs anywhere).</li>
+  <li>Simplifies deployment.</li>
+  <li>Works well with CI/CD pipelines.</li>
+</ul>
+
+<h3>History &amp; Evolution</h3>
+<ul>
+  <li><strong>1970s:</strong> chroot &rarr; basic isolation.</li>
+  <li><strong>2000s:</strong> FreeBSD Jail &rarr; improved isolation.</li>
+  <li><strong>Linux projects:</strong> openVZ, VServer.</li>
+  <li><strong>2008:</strong> Namespaces added &rarr; modern containers.</li>
+</ul>
+
+<h3>Key Tools</h3>
+<ul>
+  <li><strong>Docker:</strong> Most popular container tool; manages containers and images.</li>
+  <li><strong>Docker Compose:</strong> Simple multi-container setup.</li>
+  <li><strong>Kubernetes:</strong> Advanced orchestration; used for large-scale systems.</li>
+</ul>
+
+<h3>Containers in Scaling</h3>
+<ul>
+  <li>Replace heavy servers with multiple containers.</li>
+  <li>Used for:
+    <ul>
+      <li>Load balancing.</li>
+      <li>Web servers.</li>
+      <li>Databases.</li>
+      <li>Logging systems.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Middleware Concept:</strong> Components between frontend and backend:</p>
+<ul>
+  <li>Authentication.</li>
+  <li>Load balancing.</li>
+  <li>Proxy.</li>
+  <li>Logging.</li>
+</ul>
+
+<h3>Development Workflow</h3>
+<ol>
+  <li>Requirements.</li>
+  <li>Development &amp; Testing.</li>
+  <li>Integration.</li>
+  <li>Packaging (containers).</li>
+  <li>Deployment (PaaS/cloud).</li>
+</ol>
+
+<div class="summary-box">
+  <h4>Quick Summary</h4>
+  <ul>
+    <li>Container = lightweight isolated environment.</li>
+    <li>Uses Linux kernel (namespaces + cgroups).</li>
+    <li>Faster and more efficient than VMs.</li>
+    <li>Tools: Docker, Kubernetes.</li>
+    <li>Helps in scaling, CI/CD, and deployment.</li>
+  </ul>
+</div>
+
+</body>
+</html>

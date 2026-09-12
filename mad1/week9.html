@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 9: Short Notes — MAD1</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1a1a1a;
+    --muted: #555;
+    --accent: #2d6cb0;
+    --accent-bg: #eef4fb;
+    --border: #dbe6f2;
+    --code-bg: #1e1e1e;
+    --code-text: #d4d4d4;
+    --table-header: #dceafb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #f7fafc;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 2.4rem;
+    margin-bottom: 40px;
+    letter-spacing: -0.5px;
+  }
+  h2 {
+    font-size: 1.6rem;
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 6px;
+    margin-top: 60px;
+    color: var(--accent);
+  }
+  h3 {
+    font-size: 1.2rem;
+    margin-top: 32px;
+    color: #222;
+  }
+  h4 {
+    font-size: 1.05rem;
+    margin-top: 24px;
+    color: #333;
+  }
+  ul, ol {
+    padding-left: 22px;
+    margin: 10px 0;
+  }
+  li { margin-bottom: 4px; }
+  p { margin: 10px 0; }
+  strong { color: var(--accent); }
+  .example-label {
+    font-weight: 600;
+    margin-top: 16px;
+    margin-bottom: 6px;
+    color: var(--muted);
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 14px 18px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.88rem;
+    margin: 8px 0 18px;
+  }
+  code {
+    font-family: "Consolas", "Menlo", monospace;
+  }
+  p code, li code {
+    background: #eef1f4;
+    padding: 1px 6px;
+    border-radius: 4px;
+    color: #b0522d;
+    font-size: 0.9em;
+  }
+  .kw { color: #569cd6; }
+  .str { color: #ce9178; }
+  .num { color: #b5cea8; }
+  .com { color: #6a9955; }
+  .fn { color: #dcdcaa; }
+  .type { color: #4ec9b0; }
+  .tag { color: #4ec9b0; }
+  .attr { color: #9cdcfe; }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 14px 0 24px;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    text-align: left;
+  }
+  th {
+    background: var(--table-header);
+    font-weight: 600;
+  }
+  tr:nth-child(even) td {
+    background: #f4f9fd;
+  }
+  .summary-box {
+    background: var(--accent-bg);
+    border-left: 4px solid var(--accent);
+    padding: 14px 18px;
+    margin: 18px 0;
+    border-radius: 4px;
+  }
+  .summary-box strong { color: var(--accent); }
+  .lecture-block {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 8px 28px 28px;
+    margin-top: 40px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .toc {
+    background: var(--accent-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 24px;
+    margin-bottom: 40px;
+  }
+  .toc h3 { margin-top: 0; }
+  .toc ul { margin: 0; }
+  .toc a { color: var(--accent); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 30px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>Week_9: Short Notes</h1>
+
+  <div class="toc">
+    <h3>Contents</h3>
+    <ul>
+      <li><a href="#l1">Lecture 1: Access Control</a></li>
+      <li><a href="#l2">Lecture 2: Security Mechanisms</a></li>
+      <li><a href="#l3">Lecture 3: Sessions</a></li>
+      <li><a href="#l3b">Lecture 3: HTTPS</a></li>
+      <li><a href="#l4">Lecture 4: Logging</a></li>
+    </ul>
+  </div>
+
+  <!-- LECTURE 1 -->
+  <div class="lecture-block" id="l1">
+    <h2>Lecture 1: Access Control</h2>
+
+    <p><strong>Security Overview:</strong> Security ensures safe access, data privacy, and monitoring in applications.</p>
+    <p><strong>Key Areas:</strong></p>
+    <ul>
+      <li>Access Control – Who can do what</li>
+      <li>Session Management – Keep user sessions safe</li>
+      <li>HTTPS – Secure connection</li>
+      <li>Logging &amp; Analysis – Track actions &amp; detect anomalies</li>
+    </ul>
+
+    <h3>Access Control</h3>
+    <p><strong>Definition:</strong> Mechanism to decide who can read, write, or modify data.</p>
+    <p><strong>Why Needed:</strong> Protect sensitive info from unauthorized users.</p>
+    <p><strong>Examples:</strong></p>
+    <ul>
+      <li><strong>E-commerce:</strong> Protect personal data (phone, address, payment info)</li>
+      <li><strong>Banking:</strong> Users cannot view each other's accounts</li>
+      <li><strong>Education:</strong> Students see only their own grades</li>
+    </ul>
+
+    <p><strong>Levels of Access:</strong></p>
+    <table>
+      <tr><th>Level</th><th>Description</th></tr>
+      <tr><td>Read-only</td><td>View only</td></tr>
+      <tr><td>Read-Write</td><td>CRUD operations (Create, Read, Update, Delete)</td></tr>
+      <tr><td>Fine-grained</td><td>Restrict specific actions (e.g., modify but cannot delete)</td></tr>
+    </table>
+
+    <h3>Access Control Models</h3>
+
+    <h4>a) Discretionary Access Control (DAC)</h4>
+    <ul>
+      <li>Owner decides who can access their files/data.</li>
+      <li>Permissions: read, write, delete</li>
+      <li>Example: File sharing in Google Drive</li>
+    </ul>
+
+    <h4>b) Mandatory Access Control (MAC)</h4>
+    <ul>
+      <li>Central authority assigns strict permissions.</li>
+      <li>Users cannot share access.</li>
+      <li>Used in: Military, high-security systems</li>
+    </ul>
+
+    <h4>c) Role-Based Access Control (RBAC)</h4>
+    <ul>
+      <li>Access based on roles, not individual users.</li>
+      <li>Users can have multiple roles.</li>
+      <li>Supports hierarchies: higher role inherits permissions of lower roles.</li>
+      <li>Example:
+        <ul>
+          <li>Teacher → can grade students</li>
+          <li>HOD → Teacher permissions + department management</li>
+        </ul>
+      </li>
+      <li><strong>Benefit:</strong> Easy management when people change positions</li>
+    </ul>
+
+    <h4>d) Attribute-Based Access Control (ABAC)</h4>
+    <ul>
+      <li>Access based on user attributes (extra info).</li>
+      <li>Example: Only allow access during work hours or weekdays</li>
+    </ul>
+
+    <h3>Key Concepts in Implementation</h3>
+    <p><strong>Permissions vs Policies</strong></p>
+    <table>
+      <tr><th>Term</th><th>Description</th></tr>
+      <tr><td>Permissions</td><td>Simple allow/deny rules (single bit)</td></tr>
+      <tr><td>Policies</td><td>Complex conditions (e.g., user must be bank employee AND access after 8 AM)</td></tr>
+    </table>
+
+    <h4>Principle of Least Privilege</h4>
+    <ul>
+      <li>Give only the minimal access needed for a task.</li>
+      <li><strong>Benefits:</strong>
+        <ul>
+          <li>Higher security</li>
+          <li>Prevent accidental errors</li>
+          <li>Easier deployment</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h4>Privilege Escalation</h4>
+    <ul><li>Temporarily gaining higher privileges.</li></ul>
+
+    <div class="example-label">Linux Examples:</div>
+    <pre><code><span class="fn">sudo</span> apt update   <span class="com"># perform one action with higher privileges</span>
+<span class="fn">su</span> root            <span class="com"># switch user to root</span></code></pre>
+
+    <p><strong>Best Practices:</strong></p>
+    <ul>
+      <li>Use as last resort</li>
+      <li>Limit scope</li>
+      <li>Log every escalation</li>
+    </ul>
+
+    <h3>Enforcement Layers</h3>
+    <table>
+      <tr><th>Layer</th><th>How Access is Controlled</th><th>Example</th></tr>
+      <tr><td>Hardware</td><td>Physical tokens, NFC, keys</td><td>USB token access</td></tr>
+      <tr><td>OS</td><td>File system permissions, memory protection</td><td>chmod in Linux</td></tr>
+      <tr><td>Application</td><td>Restrict access in DB or app modules</td><td>Flask decorators</td></tr>
+    </table>
+
+    <p><strong>MVC Enforcement:</strong> Controller is best for access checks</p>
+
+    <div class="example-label">Flask Example:</div>
+    <pre><code><span class="kw">from</span> flask <span class="kw">import</span> Flask, redirect, url_for
+<span class="kw">from</span> functools <span class="kw">import</span> wraps
+
+app = <span class="fn">Flask</span>(__name__)
+
+<span class="com"># Decorator to check login</span>
+<span class="kw">def</span> <span class="fn">login_required</span>(f):
+    <span class="fn">@wraps</span>(f)
+    <span class="kw">def</span> <span class="fn">decorated_function</span>(*args, **kwargs):
+        <span class="kw">if</span> <span class="kw">not</span> user_logged_in:
+            <span class="kw">return</span> <span class="fn">redirect</span>(<span class="fn">url_for</span>(<span class="str">'login'</span>))
+        <span class="kw">return</span> <span class="fn">f</span>(*args, **kwargs)
+    <span class="kw">return</span> decorated_function
+
+<span class="fn">@app.route</span>(<span class="str">'/dashboard'</span>)
+<span class="fn">@login_required</span>
+<span class="kw">def</span> <span class="fn">dashboard</span>():
+    <span class="kw">return</span> <span class="str">"Welcome to Dashboard!"</span></code></pre>
+
+    <div class="summary-box">
+      <strong>Quick Recap</strong>
+      <ul>
+        <li><strong>Access Control</strong> = Who can do what</li>
+        <li><strong>Models:</strong> DAC, MAC, RBAC, ABAC</li>
+        <li><strong>Key Principles:</strong> Least Privilege, Permissions vs Policies</li>
+        <li><strong>Enforcement:</strong> Hardware, OS, Application</li>
+        <li><strong>Best Practices:</strong> Limit escalations, use logging</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- LECTURE 2 -->
+  <div class="lecture-block" id="l2">
+    <h2>Lecture 2: Security Mechanisms</h2>
+
+    <h3>Basic Security Approaches</h3>
+    <table>
+      <tr><th>Approach</th><th>Description</th><th>Example / Risk</th></tr>
+      <tr><td>Security by Obscurity</td><td>Hiding the app on a non-standard port</td><td>e.g., port 1356 instead of 80. Bad idea — ports can be discovered easily</td></tr>
+      <tr><td>Host-based Access Control</td><td>Restrict access based on IP whitelist</td><td>Common in SSH. Risk: If a trusted machine is hacked, attacker gains access</td></tr>
+    </table>
+
+    <h3>Login &amp; Password Management</h3>
+    <p><strong>Username/Password Authentication:</strong> Server prompts users for credentials.</p>
+    <p><strong>Password Storage Best Practices:</strong></p>
+    <ul>
+      <li>Never store plain text — if server is hacked, passwords are exposed.</li>
+      <li>Use hashing → store a cryptographic hash (irreversible).</li>
+    </ul>
+
+    <div class="example-label">Example: Python password hashing</div>
+    <pre><code><span class="kw">import</span> hashlib
+
+password = <span class="str">"MySecret123"</span>
+hashed = hashlib.<span class="fn">sha256</span>(password.<span class="fn">encode</span>()).<span class="fn">hexdigest</span>()
+<span class="fn">print</span>(hashed)  <span class="com"># Store this hash, not the plain password</span></code></pre>
+
+    <h3>HTTP Authentication Mechanisms</h3>
+    <p><strong>HTTP Status Codes:</strong></p>
+    <ul>
+      <li>401 Unauthorized → can try login</li>
+      <li>403 Forbidden → access denied regardless</li>
+      <li>404 Not Found → resource missing</li>
+    </ul>
+
+    <h4>a) Basic HTTP Authentication</h4>
+    <ul>
+      <li>Server sends: <code>WWW-Authenticate</code> header (with realm)</li>
+      <li>Client sends: <code>Authorization</code> header (username:password Base64 encoded)</li>
+    </ul>
+    <p><strong>Problems:</strong></p>
+    <ul>
+      <li>Base64 is reversible</li>
+      <li>Password sent in clear text</li>
+      <li>Logout requires closing browser</li>
+    </ul>
+    <p><strong>Example:</strong> Browser pop-up login</p>
+
+    <h4>b) Digest Authentication</h4>
+    <ul>
+      <li>Secure variant using one-way hash functions (e.g., MD5)</li>
+      <li>Uses a nonce (number used once) to prevent replay attacks</li>
+      <li>Client sends a hash of (username + realm + password + nonce)</li>
+    </ul>
+    <p><strong>Benefit:</strong> Safer because token changes every request</p>
+
+    <h3>Tokens &amp; Certificates</h3>
+    <table>
+      <tr><th>Method</th><th>Description</th><th>Example</th></tr>
+      <tr><td>Token-based Authentication</td><td>For machine-to-machine; uses long, unguessable string</td><td>API calls between services</td></tr>
+      <tr><td>Client Certificates</td><td>Digital certificate proves client identity</td><td>Like HTTPS server certificates, used in secure networks</td></tr>
+    </table>
+
+    <h3>Form-based Security</h3>
+    <p><strong>GET vs POST:</strong></p>
+    <ul>
+      <li>GET → data in URL, unsafe for passwords</li>
+      <li>POST → data in request body, safer</li>
+    </ul>
+    <p><strong>HTTPS required:</strong> Encrypts form data in transit</p>
+
+    <div class="example-label">Example: Login form</div>
+    <pre><code>&lt;<span class="tag">form</span> <span class="attr">action</span>=<span class="str">"/login"</span> <span class="attr">method</span>=<span class="str">"POST"</span>&gt;
+  Username: &lt;<span class="tag">input</span> <span class="attr">type</span>=<span class="str">"text"</span> <span class="attr">name</span>=<span class="str">"username"</span>&gt;
+  Password: &lt;<span class="tag">input</span> <span class="attr">type</span>=<span class="str">"password"</span> <span class="attr">name</span>=<span class="str">"password"</span>&gt;
+  &lt;<span class="tag">input</span> <span class="attr">type</span>=<span class="str">"submit"</span> <span class="attr">value</span>=<span class="str">"Login"</span>&gt;
+&lt;/<span class="tag">form</span>&gt;</code></pre>
+
+    <h3>Cookies &amp; Session Management</h3>
+    <p><strong>HTTP is stateless</strong> → server doesn't remember users automatically</p>
+    <p><strong>Cookies:</strong></p>
+    <ul>
+      <li>Server sends <code>Set-Cookie</code> header</li>
+      <li>Client returns cookie on every request → session maintained</li>
+    </ul>
+    <p><strong>Server Controls:</strong></p>
+    <ul>
+      <li>Set timeout, delete cookies to log out users</li>
+      <li>Clients can use incognito mode to avoid saving cookies</li>
+    </ul>
+
+    <div class="example-label">Example (Flask session):</div>
+    <pre><code><span class="kw">from</span> flask <span class="kw">import</span> Flask, session
+
+app = <span class="fn">Flask</span>(__name__)
+app.secret_key = <span class="str">"secret_key"</span>
+
+<span class="fn">@app.route</span>(<span class="str">'/login'</span>)
+<span class="kw">def</span> <span class="fn">login</span>():
+    session[<span class="str">'user'</span>] = <span class="str">'Alice'</span>
+    <span class="kw">return</span> <span class="str">"Logged in!"</span>
+
+<span class="fn">@app.route</span>(<span class="str">'/dashboard'</span>)
+<span class="kw">def</span> <span class="fn">dashboard</span>():
+    <span class="kw">if</span> <span class="str">'user'</span> <span class="kw">in</span> session:
+        <span class="kw">return</span> <span class="fn">f</span><span class="str">"Welcome {session['user']}"</span>
+    <span class="kw">return</span> <span class="str">"Please log in"</span></code></pre>
+
+    <h3>API Level Security</h3>
+    <ul>
+      <li><strong>API Keys</strong> → for automated clients (no interactive login)</li>
+      <li>Each client gets a unique token</li>
+      <li>Token sent in every request header</li>
+      <li>Server can invalidate/expire keys if compromised</li>
+    </ul>
+
+    <div class="example-label">Example: Using API Key in a request</div>
+    <pre><code><span class="fn">curl</span> -H <span class="str">"Authorization: ApiKey abc123xyz"</span> https://api.example.com/data</code></pre>
+
+    <div class="summary-box">
+      <strong>Quick Recap</strong>
+      <ul>
+        <li><strong>Security Basics:</strong> Obscurity (bad), IP whitelist (risk)</li>
+        <li><strong>Passwords:</strong> Store hashes, not plain text</li>
+        <li><strong>HTTP Auth:</strong> Basic (unsafe), Digest (secure)</li>
+        <li><strong>Tokens &amp; Certificates:</strong> Machine auth / digital identity</li>
+        <li><strong>Forms:</strong> POST + HTTPS</li>
+        <li><strong>Sessions:</strong> Cookies maintain state</li>
+        <li><strong>API Security:</strong> Use API keys, manage expiry</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- LECTURE 3: SESSIONS -->
+  <div class="lecture-block" id="l3">
+    <h2>Lecture 3: Sessions</h2>
+
+    <h3>Session Management in Web Security</h3>
+    <h4>Definition &amp; Purpose</h4>
+    <p><strong>Why needed:</strong> HTTP is stateless → server doesn't remember clients between requests.</p>
+    <p><strong>Purpose:</strong></p>
+    <ul>
+      <li>Track client status (logged in or not)</li>
+      <li>Maintain shopping cart, preferences, or other client-specific info</li>
+      <li>Customize responses per client</li>
+    </ul>
+
+    <h3>Types of Sessions</h3>
+    <table>
+      <tr><th>Type</th><th>Storage</th><th>Notes / Example</th></tr>
+      <tr><td>Client-side</td><td>Cookie stores all session info</td><td>Quick, but insecure if cookie is tampered</td></tr>
+      <tr><td>Server-side</td><td>Cookie stores only session ID; data on server</td><td>Safer, can store in database, file, or Redis</td></tr>
+      <tr><td>Redis backend</td><td>In-memory key-value store</td><td>Lightweight, fast; good for temporary session storage</td></tr>
+    </table>
+
+    <h3>Cookies &amp; Security</h3>
+    <p><strong>Cookies:</strong></p>
+    <ul>
+      <li>Sent by server using <code>Set-Cookie</code> header</li>
+      <li>Client sends it back on every request</li>
+    </ul>
+    <p><strong>Risks:</strong></p>
+    <ul><li>Users can tamper with cookies (e.g., change username to admin)</li></ul>
+    <p><strong>Protection:</strong></p>
+    <ul>
+      <li>Encrypt or sign cookies using a secret key</li>
+      <li>Store keys securely (not in source code, use <code>config.py</code> or environment variables)</li>
+    </ul>
+
+    <div class="example-label">Flask Example: Signing Cookies</div>
+    <pre><code><span class="kw">from</span> flask <span class="kw">import</span> Flask, session
+
+app = <span class="fn">Flask</span>(__name__)
+app.secret_key = <span class="str">"super_secret_key"</span>  <span class="com"># Never commit this to source control</span></code></pre>
+
+    <p><strong>Implementation in Flask:</strong> Sessions are like Python dictionaries</p>
+
+    <div class="example-label">Login Example</div>
+    <pre><code><span class="kw">from</span> flask <span class="kw">import</span> session
+
+<span class="com"># Store username in session after login</span>
+session[<span class="str">'username'</span>] = <span class="str">'Alice'</span></code></pre>
+
+    <div class="example-label">Logout Example</div>
+    <pre><code><span class="com"># Remove user info to log out</span>
+session.<span class="fn">pop</span>(<span class="str">'username'</span>, <span class="kw">None</span>)</code></pre>
+
+    <div class="example-label">Decorator for Authentication</div>
+    <pre><code><span class="kw">from</span> functools <span class="kw">import</span> wraps
+<span class="kw">from</span> flask <span class="kw">import</span> redirect, url_for
+
+<span class="kw">def</span> <span class="fn">login_required</span>(f):
+    <span class="fn">@wraps</span>(f)
+    <span class="kw">def</span> <span class="fn">decorated</span>(*args, **kwargs):
+        <span class="kw">if</span> <span class="str">'username'</span> <span class="kw">not in</span> session:
+            <span class="kw">return</span> <span class="fn">redirect</span>(<span class="fn">url_for</span>(<span class="str">'login'</span>))
+        <span class="kw">return</span> <span class="fn">f</span>(*args, **kwargs)
+    <span class="kw">return</span> decorated
+
+<span class="fn">@app.route</span>(<span class="str">'/dashboard'</span>)
+<span class="fn">@login_required</span>
+<span class="kw">def</span> <span class="fn">dashboard</span>():
+    <span class="kw">return</span> <span class="fn">f</span><span class="str">"Welcome {session['username']}"</span></code></pre>
+
+    <p>Decorators can chain checks, e.g., for roles:</p>
+    <ul><li><code>@login_required @role_required('admin')</code></li></ul>
+
+    <h3>Major Security Risks</h3>
+    <table>
+      <tr><th>Risk</th><th>Description</th><th>Mitigation</th></tr>
+      <tr><td>Public Computers</td><td>User forgets to log out → next user can access session</td><td>Always log out; use short session expiry</td></tr>
+      <tr><td>CSRF</td><td>Malicious site triggers requests on another site using logged-in session</td><td>Use CSRF tokens in sensitive forms (most frameworks handle this)</td></tr>
+      <tr><td>Wire Security</td><td>Data intercepted during transmission</td><td>Always use HTTPS to encrypt client-server traffic</td></tr>
+    </table>
+
+    <div class="summary-box">
+      <strong>Quick Recap</strong>
+      <ul>
+        <li><strong>Sessions:</strong> Solve HTTP statelessness, track user activity</li>
+        <li><strong>Types:</strong> Client-side (cookie only), Server-side (cookie + server storage)</li>
+        <li><strong>Security:</strong> Sign cookies, secure secret keys, use HTTPS</li>
+        <li><strong>Flask Implementation:</strong> session dict, <code>login_required</code> decorator</li>
+        <li><strong>Risks:</strong> Public machines, CSRF, intercepted traffic</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- LECTURE 3: HTTPS -->
+  <div class="lecture-block" id="l3b">
+    <h2>Lecture 3: HTTPS</h2>
+
+    <h3>HTTP vs HTTPS</h3>
+    <table>
+      <tr><th>Protocol</th><th>Port</th><th>Data Transmission</th><th>Security</th></tr>
+      <tr><td>HTTP</td><td>80</td><td>Readable (plain text)</td><td>Not secure</td></tr>
+      <tr><td>HTTPS</td><td>443</td><td>Encrypted using SSL/TLS</td><td>Secure channel between client &amp; server</td></tr>
+    </table>
+    <p><strong>Key Point:</strong> HTTPS prevents eavesdropping and tampering.</p>
+
+    <h3>The Need for Security: The "Wire"</h3>
+    <p><strong>Wire Concept:</strong> Data travels over multiple links (WiFi, Ethernet, fiber optics).</p>
+    <p><strong>Threat:</strong> Attackers can tap these links at coffee shops, office networks, or via splitters.</p>
+    <p><strong>Risks of Tapping:</strong></p>
+    <ul>
+      <li>Information theft – passwords, personal data, credit cards</li>
+      <li>Data alteration – e.g., modifying a GET request to POST to change account info</li>
+    </ul>
+
+    <h3>Encryption and Shared Secrets</h3>
+    <p><strong>Goal:</strong> Convert readable data into a code only client and server understand.</p>
+    <p><strong>Shared Secret / Key:</strong> A long binary number known only to the client &amp; server.</p>
+    <p><strong>Process:</strong> Even if attacker listens, complex math (like Diffie-Hellman) allows secure key sharing.</p>
+
+    <div class="example-label">Simple XOR Example (illustrative only):</div>
+    <pre><code><span class="com"># Very basic example, not for real use</span>
+data = <span class="num">0b1101</span>
+key  = <span class="num">0b1011</span>
+encrypted = data ^ key
+decrypted = encrypted ^ key
+<span class="fn">print</span>(<span class="fn">bin</span>(decrypted))  <span class="com"># Outputs original data: 0b1101</span></code></pre>
+
+    <h3>Authentication &amp; Chain of Trust</h3>
+    <p><strong>Server Authentication:</strong> Confirm you're talking to the real server (e.g., Gmail).</p>
+    <p><strong>Trust via Certificate Authorities (CA):</strong> Root CA → Intermediate CA → Server certificate</p>
+    <p><strong>Browser/OS Integration:</strong> Preloaded trusted root certificates.</p>
+    <p><strong>Chain of Trust Verification:</strong> Browser implicitly trusts server if root is trusted.</p>
+    <p><strong>Example:</strong> <code>mail.google.com</code> → Certificate from GTS CA → Root CA trusted by Chrome/OS</p>
+
+    <h3>Specialized Certificates &amp; Failure Points</h3>
+    <table>
+      <tr><th>Type / Issue</th><th>Description</th></tr>
+      <tr><td>Wildcard Certificates</td><td>Cover multiple subdomains (*.iitm.ac.in → www.iitm.ac.in, academic.iitm.ac.in)</td></tr>
+      <tr><td>Stolen Root Certificates</td><td>Attackers can issue fake certificates browsers trust</td></tr>
+      <tr><td>DNS Hacks</td><td>Browser usually blocks certificate mismatch</td></tr>
+      <tr><td>Old Browsers</td><td>May not recognize newer root certificates</td></tr>
+    </table>
+
+    <h3>HTTPS: Impact &amp; Trade-offs</h3>
+    <p><strong>Benefits:</strong></p>
+    <ul>
+      <li>Prevents wiretapping on public networks</li>
+      <li>Ensures data integrity and confidentiality</li>
+    </ul>
+    <p><strong>Negatives:</strong></p>
+    <ul>
+      <li>Slight performance overhead due to encryption</li>
+      <li>Encrypted data prevents caching by intermediate proxies → may affect load speed</li>
+    </ul>
+
+    <div class="summary-box">
+      <strong>Quick Recap</strong>
+      <ul>
+        <li><strong>HTTP = plain text, HTTPS = encrypted</strong></li>
+        <li><strong>Wire threat:</strong> attackers can steal/modify data</li>
+        <li><strong>Encryption:</strong> shared secret, converts readable data into secure bits</li>
+        <li><strong>Authentication:</strong> chain of trust via CA certificates</li>
+        <li><strong>Wildcard &amp; potential failures:</strong> stolen roots, DNS hacks, old browsers</li>
+        <li><strong>Trade-offs:</strong> security vs performance/caching</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- LECTURE 4 -->
+  <div class="lecture-block" id="l4">
+    <h2>Lecture 4: Logging</h2>
+
+    <h3>Definition &amp; Purpose</h3>
+    <p><strong>Logging:</strong> Recording all accesses and actions in an application.</p>
+    <p><strong>Purpose:</strong></p>
+    <ul>
+      <li>Identify bugs, server errors, crashes</li>
+      <li>Gather usage statistics (site visits, popular pages, peak hours)</li>
+      <li>Optimize site performance based on patterns</li>
+      <li>Security monitoring → detect attacks or anomalies</li>
+    </ul>
+
+    <h3>Levels of Logging</h3>
+    <table>
+      <tr><th>Level</th><th>Description</th><th>Notes</th></tr>
+      <tr><td>Application-Level</td><td>Built into app; logs user actions, POST data, errors</td><td>Can feed data to analysis pipeline for insights</td></tr>
+      <tr><td>Server-Level</td><td>Built into web server (Apache, Nginx)</td><td>Logs URLs, IPs, but limited detail (no POST body)</td></tr>
+    </table>
+
+    <h3>Security Applications of Logs</h3>
+    <ul>
+      <li>Detect attacks: SQL injection, brute force, malformed requests</li>
+      <li>Spot anomalous patterns: high traffic spikes, repeated 404s</li>
+      <li>Track server crashes and stack traces for fixing vulnerabilities</li>
+    </ul>
+
+    <h3>Technical Components of a Log</h3>
+    <table>
+      <tr><th>Component</th><th>Example / Explanation</th></tr>
+      <tr><td>IP Address</td><td>Source of the request</td></tr>
+      <tr><td>Timestamp</td><td>Exact date &amp; time of access</td></tr>
+      <tr><td>HTTP Verb &amp; URL</td><td>GET / POST and resource accessed</td></tr>
+      <tr><td>Status Code</td><td>200 (OK), 3xx (redirect), 4xx (client error), 404 (Not Found)</td></tr>
+      <tr><td>Referrer</td><td>Previous URL (internal link)</td></tr>
+    </table>
+
+    <div class="example-label">Flask Example of Logging Requests</div>
+    <pre><code><span class="kw">from</span> flask <span class="kw">import</span> Flask, request
+<span class="kw">import</span> logging
+
+app = <span class="fn">Flask</span>(__name__)
+
+logging.<span class="fn">basicConfig</span>(filename=<span class="str">'app.log'</span>, level=logging.INFO)
+
+<span class="fn">@app.route</span>(<span class="str">'/login'</span>, methods=[<span class="str">'GET'</span>,<span class="str">'POST'</span>])
+<span class="kw">def</span> <span class="fn">login</span>():
+    logging.<span class="fn">info</span>(<span class="fn">f</span><span class="str">"IP: {request.remote_addr} | Method: {request.method} | URL: {request.url}"</span>)
+    <span class="kw">return</span> <span class="str">"Login page accessed"</span></code></pre>
+
+    <h3>Log Management &amp; Maintenance</h3>
+    <ul>
+      <li><strong>Volume Control:</strong> High traffic → logs can fill disks</li>
+      <li><strong>Log Rotation:</strong> Keep fixed number of files (e.g., last 10 logs), delete oldest</li>
+      <li><strong>Cloud Facilities:</strong> Platforms like Google App Engine offer automated analysis &amp; reporting</li>
+    </ul>
+
+    <h3>Data Analysis &amp; Tools</h3>
+    <ul>
+      <li><strong>Time-Series Analysis:</strong> Logs are timestamped → analyze performance during events (like exam openings)</li>
+      <li><strong>Databases for Logs:</strong> RRDTool, InfluxDB → efficient storage &amp; analysis</li>
+      <li><strong>Use Cases:</strong> Detect traffic spikes, response times, error frequency</li>
+    </ul>
+
+    <h3>Core Security Principles</h3>
+    <ul>
+      <li><strong>Knowledge Needed:</strong> Cryptography, SQL, OS vulnerabilities</li>
+      <li><strong>Frameworks:</strong> Using well-tested frameworks is safer than building custom security</li>
+      <li><strong>Continuous Monitoring:</strong> Security is ongoing → analyze logs regularly to fix emerging problems</li>
+    </ul>
+
+    <div class="summary-box">
+      <strong>Quick Recap</strong>
+      <ul>
+        <li><strong>Logging</strong> = record accesses &amp; actions for debugging, stats, optimization, and security</li>
+        <li><strong>Levels:</strong> App-level (detailed), Server-level (basic)</li>
+        <li><strong>Components:</strong> IP, timestamp, HTTP verb, status code, referrer</li>
+        <li><strong>Security:</strong> Detect attacks &amp; anomalies</li>
+        <li><strong>Management:</strong> Log rotation, cloud analysis tools</li>
+        <li><strong>Analysis:</strong> Time-series, specialized DBs</li>
+        <li><strong>Principles:</strong> Use frameworks, monitor continuously</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
