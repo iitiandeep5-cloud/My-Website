@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 11 — Backup and Recovery (DBMS Short Notes)</title>
+<style>
+:root{
+  --paper:#f6f7f5;
+  --panel:#ffffff;
+  --ink:#16181c;
+  --ink-soft:#4d5560;
+  --rule:#d9dcd6;
+  --accent:#1f5f4f;
+  --accent-soft:#e3efe9;
+  --mark:#b4531a;
+  --code-bg:#1b1f24;
+  --code-ink:#e6e8ea;
+  --code-key:#7fb2ff;
+  --code-str:#e4a97a;
+  --yes:#1f7a5a;
+  --no:#b03434;
+  --sans:"Segoe UI",Roboto,"Helvetica Neue",Arial,system-ui,sans-serif;
+  --serif:Georgia,"Times New Roman",Cambria,serif;
+  --mono:ui-monospace,Menlo,Consolas,"Courier New",monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#131619;
+    --panel:#1a1e22;
+    --ink:#e8eae6;
+    --ink-soft:#a3aab2;
+    --rule:#2d3339;
+    --accent:#7fc9b0;
+    --accent-soft:#1f2c29;
+    --mark:#e9a06a;
+    --code-bg:#0f1216;
+    --code-ink:#e6e8ea;
+    --yes:#7fc9b0;
+    --no:#e58b8b;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#131619;
+  --panel:#1a1e22;
+  --ink:#e8eae6;
+  --ink-soft:#a3aab2;
+  --rule:#2d3339;
+  --accent:#7fc9b0;
+  --accent-soft:#1f2c29;
+  --mark:#e9a06a;
+  --code-bg:#0f1216;
+  --code-ink:#e6e8ea;
+  --yes:#7fc9b0;
+  --no:#e58b8b;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:1.5rem}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--serif);
+  font-size:17px;
+  line-height:1.65;
+  -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 1.25rem 5rem}
+
+/* Masthead */
+header.top{
+  border-bottom:2px solid var(--ink);
+  margin-bottom:2.5rem;
+  padding:3.5rem 0 1.25rem;
+}
+.kicker{
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:.9rem;
+  color:var(--accent);
+  margin:0 0 .6rem;
+}
+h1{
+  font-family:var(--sans);
+  font-weight:700;
+  font-size:clamp(2.1rem,6vw,3.6rem);
+  line-height:1.05;
+  margin:0 0 .5rem;
+  letter-spacing:-.02em;
+}
+.standfirst{margin:0;max-width:56ch;color:var(--ink-soft)}
+
+/* Layout */
+.cols{display:grid;grid-template-columns:1fr;gap:2.5rem}
+@media (min-width:900px){
+  .cols{grid-template-columns:230px minmax(0,1fr);gap:3.5rem;align-items:start}
+  nav.toc{position:sticky;top:1.5rem}
+}
+nav.toc{font-family:var(--sans);font-size:.9rem}
+nav.toc p{margin:0 0 .75rem;font-weight:700}
+nav.toc ol{list-style:none;margin:0;padding:0;border-left:1px solid var(--rule)}
+nav.toc li{margin:0}
+nav.toc a{
+  display:block;padding:.35rem .75rem;color:var(--ink-soft);
+  text-decoration:none;border-left:2px solid transparent;margin-left:-1px;
+}
+nav.toc a:hover,nav.toc a:focus-visible{color:var(--accent);border-left-color:var(--accent)}
+
+/* Sections */
+section.lecture{margin:0 0 4rem;max-width:74ch}
+section.lecture > h2{
+  font-family:var(--sans);
+  font-size:clamp(1.5rem,3.4vw,2.1rem);
+  font-weight:700;letter-spacing:-.015em;
+  margin:0 0 1.75rem;padding-bottom:.6rem;
+  border-bottom:1px solid var(--rule);
+}
+section.lecture > h2 .num{display:inline-block;color:var(--accent);margin-right:.5rem}
+h3{font-family:var(--sans);font-size:1.25rem;font-weight:700;margin:2.25rem 0 .6rem;letter-spacing:-.01em}
+h4{font-family:var(--sans);font-size:1rem;font-weight:600;margin:1.4rem 0 .35rem;color:var(--ink-soft)}
+p{margin:.5rem 0}
+ul,ol{margin:.5rem 0 .9rem;padding-left:1.35rem}
+li{margin:.2rem 0}
+li::marker{color:var(--accent)}
+strong{font-weight:700}
+
+/* Callouts */
+.note{
+  border-left:3px solid var(--accent);
+  background:var(--accent-soft);
+  padding:.75rem 1rem;margin:1rem 0;border-radius:0 4px 4px 0;
+}
+.note b{font-family:var(--sans)}
+.summary{
+  border:1px solid var(--rule);background:var(--panel);
+  padding:1rem 1.25rem;border-radius:6px;margin:1.75rem 0 0;
+}
+.summary h3{margin-top:0}
+.trick{
+  border:1px dashed var(--accent);border-radius:6px;
+  padding:.6rem 1rem;margin:1rem 0;font-family:var(--sans);font-size:.95rem;
+}
+.trick ul{margin:.3rem 0 0}
+
+/* Tables */
+.tablewrap{overflow-x:auto;margin:1rem 0 1.25rem}
+table{border-collapse:collapse;width:100%;min-width:320px;font-size:.95rem;background:var(--panel)}
+caption{text-align:left;font-family:var(--sans);font-size:.9rem;color:var(--ink-soft);padding-bottom:.4rem}
+th,td{border:1px solid var(--rule);padding:.5rem .7rem;text-align:left;vertical-align:top}
+thead th{font-family:var(--sans);font-weight:600;background:var(--accent-soft);color:var(--ink)}
+tbody tr:nth-child(even) td{background:rgba(125,125,125,.08)}
+.yes{color:var(--yes);font-weight:700}
+.no{color:var(--no);font-weight:700}
+
+/* Code */
+pre{
+  background:var(--code-bg);color:var(--code-ink);
+  padding:.9rem 1rem;border-radius:6px;overflow-x:auto;
+  font-family:var(--mono);font-size:.86rem;line-height:1.55;margin:.75rem 0 1.1rem;
+}
+pre .k{color:var(--code-key)}
+pre .s{color:var(--code-str)}
+code{
+  font-family:var(--mono);font-size:.88em;
+  background:rgba(125,125,125,.18);padding:.08em .35em;border-radius:3px;
+}
+pre code{background:none;padding:0;font-size:1em}
+.ascii{
+  font-family:var(--mono);font-size:.85rem;
+  border:1px dashed var(--rule);padding:.75rem 1rem;border-radius:4px;
+  white-space:pre;overflow-x:auto;color:var(--ink-soft);margin:.75rem 0;
+}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+footer{
+  border-top:1px solid var(--rule);margin-top:3rem;padding-top:1rem;
+  font-family:var(--sans);font-size:.85rem;color:var(--ink-soft);
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <p class="kicker">DBMS · Week 11 short notes</p>
+  <h1>Backup &amp; Recovery</h1>
+  </header>
+
+<div class="cols">
+
+<nav class="toc" aria-label="Contents">
+  <p>Lectures</p>
+  <ol>
+    <li><a href="#l1">1 · Backup basics</a></li>
+    <li><a href="#l2">2 · Recovery / 1</a></li>
+    <li><a href="#l3">3 · Recovery / 2</a></li>
+    <li><a href="#l4">4 · Recovery / 3</a></li>
+    <li><a href="#l5">5 · RAID</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ================= LECTURE 1 ================= -->
+<section class="lecture" id="l1">
+  <h2><span class="num">1</span>Backup &amp; Recovery / 1 — Backup / 1</h2>
+
+  <h3>Introduction</h3>
+  <ul>
+    <li>Earlier topics: transactions (ACID), serializability, deadlocks.</li>
+    <li>Failures can still occur → backup &amp; recovery is essential.</li>
+    <li><strong>Goal:</strong> restore the database to a consistent state after failure.</li>
+  </ul>
+
+  <h3>Key definitions</h3>
+  <ul>
+    <li><strong>Backup:</strong> a copy of the database (data + control files)</li>
+    <li><strong>Recovery:</strong> the process of restoring the database after a failure</li>
+  </ul>
+
+  <h3>Why backup is important</h3>
+  <ul>
+    <li><strong>Disaster recovery:</strong> handles system crashes, hardware failure</li>
+    <li><strong>Business changes:</strong> roll back to older versions</li>
+    <li><strong>Auditing &amp; legal needs:</strong> maintain historical data</li>
+    <li><strong>Minimise downtime:</strong> keep systems running smoothly</li>
+  </ul>
+
+  <h3>What data should be backed up?</h3>
+  <ul>
+    <li><strong>Business data:</strong> customers, sales, inventory</li>
+    <li><strong>System data:</strong> config files, logs, software setup</li>
+    <li><strong>Media data:</strong> images, videos, large files</li>
+  </ul>
+
+  <h3>Physical vs logical backup</h3>
+  <ul>
+    <li><strong>Physical backup:</strong> a copy of the actual files (data + logs); fast to restore.</li>
+    <li><strong>Logical backup:</strong> an export of tables, views, procedures; more flexible, smaller in size.</li>
+  </ul>
+
+  <h3>Backup strategies</h3>
+  <ul>
+    <li><strong>Full backup:</strong> entire database copy — easy recovery, but time-consuming and needs large storage.</li>
+    <li><strong>Incremental backup:</strong> only changes since the last backup — saves time &amp; space, but recovery is complex and needs all previous backups.</li>
+    <li><strong>Differential backup:</strong> changes since the last full backup — faster recovery than incremental, but size grows over time.</li>
+  </ul>
+
+  <h3>Cold vs hot backup</h3>
+  <ul>
+    <li><strong>Cold backup:</strong> database is offline — simple and safe, but the system is unavailable.</li>
+    <li><strong>Hot backup:</strong> database is running, uses transaction logs — no downtime (24/7 systems), but complex, costly and error-sensitive.</li>
+  </ul>
+
+  <div class="note">
+    <b>Key insight</b>
+    <ul>
+      <li>Full = simple but heavy</li>
+      <li>Incremental = efficient but risky</li>
+      <li>Differential = balance between both</li>
+      <li>Hot backup = availability priority</li>
+      <li>Cold backup = safety priority</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= LECTURE 2 ================= -->
+<section class="lecture" id="l2">
+  <h2><span class="num">2</span>Backup &amp; Recovery / 2 — Recovery / 1</h2>
+
+  <h3>Types of failures</h3>
+  <ul>
+    <li><strong>Transaction failure</strong> — causes: logical errors (bugs in code), system issues (e.g. deadlock rollback). Only the specific transaction fails, not the entire system.</li>
+    <li><strong>System crash</strong> — causes: power failure, OS crash. Assumption: disk (non-volatile storage) is safe; only main-memory data is lost.</li>
+    <li><strong>Disk failure</strong> — causes: hardware damage (e.g. head crash). Results in data loss on disk; detected using checksums.</li>
+  </ul>
+
+  <h3>Storage types</h3>
+  <ul>
+    <li><strong>Volatile storage</strong> — example: RAM, cache. Data lost on crash.</li>
+    <li><strong>Non-volatile storage</strong> — example: disk, flash. Data survives a crash.</li>
+    <li><strong>Stable storage (ideal concept)</strong> — never loses data; practically achieved by multiple copies stored in different locations.</li>
+  </ul>
+
+  <h3>Stable storage implementation</h3>
+  <h4>Writing strategy</h4>
+  <ul>
+    <li>Write to Block 1 → then Block 2.</li>
+    <li>Output is complete only if both succeed.</li>
+  </ul>
+  <h4>Handling errors</h4>
+  <ul>
+    <li>Use checksums.</li>
+    <li>One copy corrupt → replace with the correct one.</li>
+    <li>Both correct but different → the first copy overwrites the second.</li>
+  </ul>
+  <h4>Optimisation</h4>
+  <ul>
+    <li>Track in-progress writes.</li>
+    <li>Avoid full disk comparisons (faster recovery).</li>
+  </ul>
+
+  <h3>Data access protocol</h3>
+  <ul>
+    <li>Transactions do not directly access disk.</li>
+    <li><strong>System buffer</strong> → main memory (shared); <strong>local buffer</strong> → private to each transaction.</li>
+    <li><strong>Read:</strong> system buffer → local buffer</li>
+    <li><strong>Write:</strong> local buffer → system buffer</li>
+    <li><strong>Output:</strong> system buffer → disk</li>
+  </ul>
+
+  <h3>Log-based recovery</h3>
+  <p><strong>Log:</strong> a record of all database changes (audit trail).</p>
+  <p><strong>Log format:</strong></p>
+<pre><code>&lt;Ti start&gt;         <span class="s">→ transaction begins</span>
+&lt;Ti, X, V1, V2&gt;     <span class="s">→ X changed from V1 to V2</span>
+&lt;Ti commit&gt;         <span class="s">→ transaction completed</span></code></pre>
+  <ul>
+    <li><strong>Immediate modification:</strong> changes can be written before commit; the log must be written first (write-ahead logging).</li>
+    <li><strong>Commit point:</strong> a transaction commits only when <code>&lt;Ti commit&gt;</code> is saved to stable storage and all previous logs are also saved.</li>
+  </ul>
+
+  <h3>Undo &amp; redo operations</h3>
+  <ul>
+    <li><strong>Undo:</strong> restores the old value (V1); used for uncommitted transactions.</li>
+    <li><strong>Redo:</strong> applies the new value (V2); used for committed transactions.</li>
+    <li><strong>Compensation log:</strong> records undo actions; helps maintain consistency.</li>
+  </ul>
+
+  <h3>Checkpoints</h3>
+  <p><strong>Why needed:</strong> full log scanning is slow.</p>
+  <p><strong>Checkpoint steps:</strong></p>
+  <ol>
+    <li>Pause transactions.</li>
+    <li>Save all logs to stable storage.</li>
+    <li>Save all modified buffers to disk.</li>
+    <li>Write <code>&lt;checkpoint L&gt;</code> (L = list of active transactions).</li>
+  </ol>
+  <p><strong>Recovery using checkpoint:</strong></p>
+  <ul>
+    <li><strong>Ignore:</strong> transactions committed before the checkpoint</li>
+    <li><strong>Redo:</strong> transactions committed after the checkpoint</li>
+    <li><strong>Undo:</strong> transactions active during the crash</li>
+  </ul>
+
+  <div class="trick"><b>Quick memory trick:</b>
+    <ul>
+      <li>Undo → uncommitted</li>
+      <li>Redo → reliable (committed)</li>
+      <li>Checkpoint → shortcut for recovery</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= LECTURE 3 ================= -->
+<section class="lecture" id="l3">
+  <h2><span class="num">3</span>Backup &amp; Recovery / 3 — Recovery / 2</h2>
+
+  <h3>Purpose &amp; storage types</h3>
+  <p><strong>Why backup &amp; recovery?</strong> Ensures atomicity, consistency and durability (ACID), and protects against system crashes, power failures and disk failures.</p>
+  <p><strong>Storage types used:</strong></p>
+  <ul>
+    <li>Volatile → lost on crash (RAM)</li>
+    <li>Non-volatile → survives crash (disk, flash)</li>
+    <li>Stable storage → ideal (multiple copies)</li>
+  </ul>
+  <ul>
+    <li><strong>Cold backup:</strong> periodic full/differential/incremental backup, stored on slower media (disk/tape); a snapshot of the database.</li>
+    <li><strong>Hot backup:</strong> real-time backup of transaction logs, stored on fast storage; captures changes between cold backups.</li>
+  </ul>
+
+  <h3>Transactional logging</h3>
+  <h4>Why logging?</h4>
+  <ul>
+    <li>Full database backup in real time is expensive.</li>
+    <li>Solution → log every operation.</li>
+  </ul>
+  <h4>Log contents</h4>
+  <ul>
+    <li>Read/write operations</li>
+    <li>Updates to: data, indexes (e.g. B+ trees), free space</li>
+  </ul>
+  <div class="note"><b>Key rule — write-ahead logging (WAL):</b> the log is written before the actual database update.</div>
+  <p><strong>Advantages:</strong> logs are smaller, faster, and efficient for recovery.</p>
+
+  <h3>Recovery vs restoration</h3>
+  <ul>
+    <li><strong>Recovery:</strong> fetch the last backup and the transaction logs.</li>
+    <li><strong>Restoration:</strong> reapply logs to the database, bringing the DB to a consistent state.</li>
+    <li><strong>Important:</strong> systems usually replay full logs, not selective updates.</li>
+  </ul>
+
+  <h3>Concurrent transactions &amp; buffers</h3>
+  <ul>
+    <li><strong>Rule for consistency:</strong> if transaction Ti modifies data, no other transaction can modify it until commit or abort.</li>
+    <li><strong>Buffer structure:</strong> local buffer → private (per transaction); system buffer → shared memory; disk → permanent storage.</li>
+    <li><strong>Flow:</strong> the transaction works on the local buffer while the system handles disk I/O separately.</li>
+  </ul>
+
+  <h3>Checkpointing</h3>
+  <p><strong>Why needed:</strong> logs grow very large → recovery becomes slow.</p>
+  <p><strong>Checkpoint process:</strong></p>
+  <ol>
+    <li>Pause the system briefly.</li>
+    <li>Save all updates to disk.</li>
+    <li>Mark the checkpoint.</li>
+  </ol>
+  <div class="tablewrap">
+    <table>
+      <caption>Transaction categories</caption>
+      <thead><tr><th>Transaction</th><th>Status</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td>Ta</td><td>Committed before checkpoint</td><td>Ignore</td></tr>
+        <tr><td>Tb, Tc</td><td>Committed after checkpoint</td><td>Redo</td></tr>
+        <tr><td>Td</td><td>Not committed</td><td>Undo</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Redo &amp; undo phases</h3>
+  <ul>
+    <li><strong>Redo phase (forward scan):</strong> reapply all updates after the checkpoint, including committed, uncommitted and aborted.</li>
+    <li><strong>Undo phase (backward scan):</strong> reverse incomplete transactions and restore old values.</li>
+    <li><strong>Compensation log records (CLR):</strong> written during undo; track rollback actions.</li>
+  </ul>
+  <div class="note"><b>Key insight:</b> always redo first, then undo — first reach the exact crash state, then fix inconsistencies.</div>
+
+  <div class="trick"><b>Quick memory tricks:</b>
+    <ul>
+      <li>WAL → write log first</li>
+      <li>Redo → repeat changes</li>
+      <li>Undo → uncommitted remove</li>
+      <li>Checkpoint → recovery shortcut</li>
+    </ul>
+  </div>
+  <div class="summary">
+    <h3>One-line summary</h3>
+    <p>Backup saves data, logging tracks changes, checkpoints speed up recovery, and undo/redo ensure consistency.</p>
+  </div>
+</section>
+
+<!-- ================= LECTURE 4 ================= -->
+<section class="lecture" id="l4">
+  <h2><span class="num">4</span>Backup &amp; Recovery / 4 — Recovery / 3</h2>
+
+  <h3>Introduction</h3>
+  <ul>
+    <li>Real systems deal with physical storage: disks, files, indexes.</li>
+    <li>Operations go beyond simple read/write → include complex structures like B+ trees.</li>
+    <li>Requires advanced concurrency control and recovery mechanisms.</li>
+  </ul>
+
+  <h3>Recovery with early lock release</h3>
+  <p><strong>Concept:</strong> locks are released before a transaction commits → improves performance and concurrency.</p>
+  <p><strong>Problem:</strong> multiple transactions can modify the same data structure before commit.</p>
+  <div class="ascii">T1 inserts → node splits
+T2 inserts before T1 commits → structure changes
+Physical undo fails: restoring the old node state removes
+T2's valid changes → inconsistent database</div>
+
+  <h3>Logical undo operations</h3>
+  <p><strong>Solution:</strong> logical undo instead of physical undo — reverse the operation rather than restoring the old state.</p>
+  <ul>
+    <li>Insert → undo by delete</li>
+    <li>Delete → undo by insert</li>
+  </ul>
+  <p><strong>Used for:</strong> index structures (B+ trees) and system-level structures (free space tracking, block management).</p>
+
+  <h3>Logging for logical operations</h3>
+  <p><strong>Logging steps:</strong></p>
+  <ul>
+    <li><strong>Operation begin</strong> → <code>&lt;Oi start&gt;</code> for transaction Ti</li>
+    <li><strong>During execution</strong> → physical logs (old/new values)</li>
+    <li><strong>Operation end</strong> → <code>&lt;Oi end, U&gt;</code> where U = logical undo operation</li>
+  </ul>
+  <p><strong>Redo vs undo:</strong></p>
+  <ul>
+    <li><strong>Redo</strong> → physical (simpler, safe)</li>
+    <li><strong>Undo</strong> → logical (avoids conflicts from early lock release)</li>
+  </ul>
+
+  <h3>Handling rollbacks &amp; crashes</h3>
+  <ul>
+    <li><strong>Case 1 — crash before operation end:</strong> no <code>&lt;Oi end&gt;</code> found → use physical undo.</li>
+    <li><strong>Case 2 — crash after operation end:</strong> <code>&lt;Oi end&gt;</code> exists → use logical undo (U), ignore physical undo.</li>
+  </ul>
+  <p><strong>Rollback process:</strong></p>
+  <ol>
+    <li>Scan the log backward.</li>
+    <li>If <code>&lt;Oi end&gt;</code> found → perform logical undo, log it, write <code>&lt;Oi abort&gt;</code>.</li>
+    <li>Skip to <code>&lt;Oi start&gt;</code>.</li>
+    <li>Finish with <code>&lt;Ti abort&gt;</code>.</li>
+  </ol>
+
+  <h3>Backup &amp; recovery planning</h3>
+  <p><strong>Key factors:</strong></p>
+  <ol>
+    <li>Data importance → critical vs non-critical</li>
+    <li>Frequency of change → frequent vs rare updates</li>
+    <li>Recovery speed → downtime tolerance vs cost</li>
+    <li>Cost &amp; resources → hardware, software, skilled staff</li>
+    <li>Storage strategy → on-site vs off-site backups, number of copies</li>
+  </ol>
+
+  <div class="note">
+    <b>Key takeaways</b>
+    <ul>
+      <li>Early lock release → better performance but more complex recovery</li>
+      <li>Physical undo fails in shared structures</li>
+      <li>Logical undo = safest solution</li>
+      <li>Redo is always physical</li>
+      <li>Checkpoints + logs = efficient recovery</li>
+    </ul>
+  </div>
+  <div class="summary">
+    <h3>One-line summary</h3>
+    <p>Modern recovery uses logical undo and physical redo to handle concurrency safely while maintaining performance.</p>
+  </div>
+</section>
+
+<!-- ================= LECTURE 5 ================= -->
+<section class="lecture" id="l5">
+  <h2><span class="num">5</span>Backup &amp; Recovery / 5 — Backup / 2</h2>
+
+  <h3>Introduction to RAID</h3>
+  <p><strong>Definition:</strong> RAID = Redundant Array of Independent Disks. It combines multiple physical disks so they act as one logical disk.</p>
+  <p><strong>Purpose:</strong></p>
+  <ul>
+    <li><strong>High capacity</strong> → store large data</li>
+    <li><strong>High speed</strong> → parallel data access</li>
+    <li><strong>High reliability</strong> → data recovery even if a disk fails</li>
+  </ul>
+  <div class="note"><b>Important insight:</b> more disks → higher chance of failure. RAID ensures no data loss using redundancy.</div>
+
+  <h3>Core RAID techniques</h3>
+  <ul>
+    <li><strong>Mirroring (shadowing):</strong> duplicate data on multiple disks — fast reads, but double the storage required.</li>
+    <li><strong>Striping:</strong> splits data across disks — bit-level, byte-level, or block-level (most used); improves speed via parallel access.</li>
+    <li><strong>Parity:</strong> uses extra data (via XOR) for error recovery — less storage than mirroring, and can recover from disk failure.</li>
+  </ul>
+
+  <h3>RAID levels</h3>
+  <ul>
+    <li><strong>RAID 0 (striping):</strong> high speed &amp; full storage use, no fault tolerance.</li>
+    <li><strong>RAID 1 (mirroring):</strong> high reliability, 50% storage efficiency.</li>
+    <li><strong>RAID 2:</strong> bit-level striping + Hamming code, rarely used.</li>
+    <li><strong>RAID 3:</strong> byte-level striping + 1 parity disk.</li>
+    <li><strong>RAID 4:</strong> block-level striping + 1 parity disk; parity disk bottleneck.</li>
+    <li><strong>RAID 5 (most popular):</strong> block-level + distributed parity — good performance + reliability, handles 1 disk failure.</li>
+    <li><strong>RAID 6:</strong> dual parity — handles 2 disk failures, slightly slower writes.</li>
+  </ul>
+
+  <h3>Hybrid RAID (nested RAID)</h3>
+  <ul>
+    <li><strong>RAID 01 (mirror of stripes):</strong> RAID 1 over RAID 0</li>
+    <li><strong>RAID 10 (stripe of mirrors):</strong> RAID 0 over RAID 1 — very fast + reliable, widely used in databases</li>
+  </ul>
+
+  <div class="tablewrap">
+    <table>
+      <caption>RAID comparison</caption>
+      <thead><tr><th>RAID</th><th>Benefit</th><th>Use case</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Speed</td><td>Temporary data</td></tr>
+        <tr><td>1</td><td>Safety</td><td>OS, transactions</td></tr>
+        <tr><td>5</td><td>Balance</td><td>Web servers</td></tr>
+        <tr><td>6</td><td>High safety</td><td>Archives</td></tr>
+        <tr><td>10</td><td>Speed + safety</td><td>Databases</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Limitations of RAID</h3>
+  <ul>
+    <li><strong>Not a backup:</strong> cannot protect from fire, theft, human error, malware.</li>
+    <li><strong>No 100% uptime:</strong> failures can still occur.</li>
+    <li><strong>Low flexibility:</strong> hard to expand, often requires a full rebuild.</li>
+  </ul>
+
+  <div class="trick"><b>Quick memory tricks:</b>
+    <ul>
+      <li>RAID 0 → 0 safety</li>
+      <li>RAID 1 → 1 copy extra</li>
+      <li>RAID 5 → 1 disk failure</li>
+      <li>RAID 6 → 2 disk failure</li>
+      <li>RAID 10 → best combo</li>
+    </ul>
+  </div>
+
+  <div class="summary">
+    <h3>One-line summary</h3>
+    <p>RAID improves speed, capacity, and reliability using striping, mirroring, and parity — but it is <strong>not a replacement for backup</strong>.</p>
+  </div>
+</section>
+
+<footer>Week 11 short notes — Backup and Recovery</footer>
+
+</main>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 10 — Transactions and Concurrency Control (DBMS Short Notes)</title>
+<style>
+:root{
+  --paper:#f6f7f5;
+  --panel:#ffffff;
+  --ink:#16181c;
+  --ink-soft:#4d5560;
+  --rule:#d9dcd6;
+  --accent:#1f5f4f;
+  --accent-soft:#e3efe9;
+  --mark:#b4531a;
+  --code-bg:#1b1f24;
+  --code-ink:#e6e8ea;
+  --code-key:#7fb2ff;
+  --code-str:#e4a97a;
+  --yes:#1f7a5a;
+  --no:#b03434;
+  --sans:"Segoe UI",Roboto,"Helvetica Neue",Arial,system-ui,sans-serif;
+  --serif:Georgia,"Times New Roman",Cambria,serif;
+  --mono:ui-monospace,Menlo,Consolas,"Courier New",monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#131619;
+    --panel:#1a1e22;
+    --ink:#e8eae6;
+    --ink-soft:#a3aab2;
+    --rule:#2d3339;
+    --accent:#7fc9b0;
+    --accent-soft:#1f2c29;
+    --mark:#e9a06a;
+    --code-bg:#0f1216;
+    --code-ink:#e6e8ea;
+    --yes:#7fc9b0;
+    --no:#e58b8b;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#131619;
+  --panel:#1a1e22;
+  --ink:#e8eae6;
+  --ink-soft:#a3aab2;
+  --rule:#2d3339;
+  --accent:#7fc9b0;
+  --accent-soft:#1f2c29;
+  --mark:#e9a06a;
+  --code-bg:#0f1216;
+  --code-ink:#e6e8ea;
+  --yes:#7fc9b0;
+  --no:#e58b8b;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:1.5rem}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--serif);
+  font-size:17px;
+  line-height:1.65;
+  -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 1.25rem 5rem}
+
+/* Masthead */
+header.top{
+  border-bottom:2px solid var(--ink);
+  margin-bottom:2.5rem;
+  padding:3.5rem 0 1.25rem;
+}
+.kicker{
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:.9rem;
+  color:var(--accent);
+  margin:0 0 .6rem;
+}
+h1{
+  font-family:var(--sans);
+  font-weight:700;
+  font-size:clamp(2.1rem,6vw,3.6rem);
+  line-height:1.05;
+  margin:0 0 .5rem;
+  letter-spacing:-.02em;
+}
+.standfirst{margin:0;max-width:56ch;color:var(--ink-soft)}
+
+/* Layout */
+.cols{display:grid;grid-template-columns:1fr;gap:2.5rem}
+@media (min-width:900px){
+  .cols{grid-template-columns:230px minmax(0,1fr);gap:3.5rem;align-items:start}
+  nav.toc{position:sticky;top:1.5rem}
+}
+nav.toc{font-family:var(--sans);font-size:.9rem}
+nav.toc p{margin:0 0 .75rem;font-weight:700}
+nav.toc ol{list-style:none;margin:0;padding:0;border-left:1px solid var(--rule)}
+nav.toc li{margin:0}
+nav.toc a{
+  display:block;padding:.35rem .75rem;color:var(--ink-soft);
+  text-decoration:none;border-left:2px solid transparent;margin-left:-1px;
+}
+nav.toc a:hover,nav.toc a:focus-visible{color:var(--accent);border-left-color:var(--accent)}
+
+/* Sections */
+section.lecture{margin:0 0 4rem;max-width:74ch}
+section.lecture > h2{
+  font-family:var(--sans);
+  font-size:clamp(1.5rem,3.4vw,2.1rem);
+  font-weight:700;letter-spacing:-.015em;
+  margin:0 0 1.75rem;padding-bottom:.6rem;
+  border-bottom:1px solid var(--rule);
+}
+section.lecture > h2 .num{display:inline-block;color:var(--accent);margin-right:.5rem}
+h3{font-family:var(--sans);font-size:1.25rem;font-weight:700;margin:2.25rem 0 .6rem;letter-spacing:-.01em}
+h4{font-family:var(--sans);font-size:1rem;font-weight:600;margin:1.4rem 0 .35rem;color:var(--ink-soft)}
+p{margin:.5rem 0}
+ul,ol{margin:.5rem 0 .9rem;padding-left:1.35rem}
+li{margin:.2rem 0}
+li::marker{color:var(--accent)}
+strong{font-weight:700}
+
+/* Callouts */
+.note{
+  border-left:3px solid var(--accent);
+  background:var(--accent-soft);
+  padding:.75rem 1rem;margin:1rem 0;border-radius:0 4px 4px 0;
+}
+.note b{font-family:var(--sans)}
+.summary{
+  border:1px solid var(--rule);background:var(--panel);
+  padding:1rem 1.25rem;border-radius:6px;margin:1.75rem 0 0;
+}
+.summary h3{margin-top:0}
+.trick{
+  border:1px dashed var(--accent);border-radius:6px;
+  padding:.6rem 1rem;margin:1rem 0;font-family:var(--sans);font-size:.95rem;
+}
+.trick ul{margin:.3rem 0 0}
+
+/* Tables */
+.tablewrap{overflow-x:auto;margin:1rem 0 1.25rem}
+table{border-collapse:collapse;width:100%;min-width:320px;font-size:.95rem;background:var(--panel)}
+caption{text-align:left;font-family:var(--sans);font-size:.9rem;color:var(--ink-soft);padding-bottom:.4rem}
+th,td{border:1px solid var(--rule);padding:.5rem .7rem;text-align:left;vertical-align:top}
+thead th{font-family:var(--sans);font-weight:600;background:var(--accent-soft);color:var(--ink)}
+tbody tr:nth-child(even) td{background:rgba(125,125,125,.08)}
+.yes{color:var(--yes);font-weight:700}
+.no{color:var(--no);font-weight:700}
+
+/* Code */
+pre{
+  background:var(--code-bg);color:var(--code-ink);
+  padding:.9rem 1rem;border-radius:6px;overflow-x:auto;
+  font-family:var(--mono);font-size:.86rem;line-height:1.55;margin:.75rem 0 1.1rem;
+}
+pre .k{color:var(--code-key)}
+pre .s{color:var(--code-str)}
+code{
+  font-family:var(--mono);font-size:.88em;
+  background:rgba(125,125,125,.18);padding:.08em .35em;border-radius:3px;
+}
+pre code{background:none;padding:0;font-size:1em}
+.ascii{
+  font-family:var(--mono);font-size:.85rem;
+  border:1px dashed var(--rule);padding:.75rem 1rem;border-radius:4px;
+  white-space:pre;overflow-x:auto;color:var(--ink-soft);margin:.75rem 0;
+}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+footer{
+  border-top:1px solid var(--rule);margin-top:3rem;padding-top:1rem;
+  font-family:var(--sans);font-size:.85rem;color:var(--ink-soft);
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <p class="kicker">DBMS · Week 10 short notes</p>
+  <h1>Transactions &amp; Concurrency Control</h1>
+  </header>
+
+<div class="cols">
+
+<nav class="toc" aria-label="Contents">
+  <p>Lectures</p>
+  <ol>
+    <li><a href="#l1">1 · Transactions</a></li>
+    <li><a href="#l2">2 · Serializability</a></li>
+    <li><a href="#l3">3 · Recoverability</a></li>
+    <li><a href="#l4">4 · Concurrency control 1</a></li>
+    <li><a href="#l5">5 · Concurrency control 2</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ================= LECTURE 1 ================= -->
+<section class="lecture" id="l1">
+  <h2><span class="num">1</span>Transactions / 1</h2>
+
+  <h3>What is a transaction?</h3>
+  <p>A transaction is a single logical unit of work in a database that performs:</p>
+  <ul>
+    <li>Read operations</li>
+    <li>Write/update operations</li>
+    <li>Computations</li>
+  </ul>
+
+  <h4>Example — bank transfer (A → B, ₹50)</h4>
+  <ol>
+    <li>Read balance of A</li>
+    <li>Subtract ₹50 from A</li>
+    <li>Add ₹50 to B</li>
+    <li>Update both accounts</li>
+  </ol>
+
+  <h4>Challenges</h4>
+  <ul>
+    <li>System failures (crash, power loss)</li>
+    <li>Concurrent execution (multiple users accessing the same data)</li>
+  </ul>
+
+  <h3>ACID properties</h3>
+  <h4>Atomicity (all or nothing)</h4>
+  <ul>
+    <li>Either the complete transaction happens or nothing happens.</li>
+    <li>If a failure occurs → rollback.</li>
+    <li>Example: ₹50 deducted from A but not added to B → rollback required.</li>
+  </ul>
+  <h4>Consistency</h4>
+  <ul>
+    <li>The database moves from one valid state to another valid state.</li>
+    <li>Rules and constraints must always hold.</li>
+    <li>Example: the total balance of A + B stays the same before and after the transfer.</li>
+  </ul>
+  <h4>Isolation</h4>
+  <ul>
+    <li>Transactions run independently without interference.</li>
+    <li>Example: two users updating the same account should not overwrite each other.</li>
+  </ul>
+  <h4>Durability</h4>
+  <ul>
+    <li>Once committed, changes are permanent and survive crashes.</li>
+    <li>Example: after a successful transfer, the data remains even after a system crash.</li>
+  </ul>
+
+  <h3>Transaction states (lifecycle)</h3>
+  <ul>
+    <li><strong>Active</strong> → transaction starts execution</li>
+    <li><strong>Partially committed</strong> → last operation done, waiting to save permanently</li>
+    <li><strong>Committed</strong> → successfully saved</li>
+    <li><strong>Failed</strong> → error occurred</li>
+    <li><strong>Aborted</strong> → changes rolled back</li>
+    <li><strong>Terminated</strong> → end of transaction</li>
+  </ul>
+
+  <h3>Concurrent execution &amp; schedules</h3>
+  <h4>Why concurrency?</h4>
+  <ul>
+    <li>Better CPU utilisation</li>
+    <li>Faster response time</li>
+    <li>Multiple users at the same time</li>
+  </ul>
+  <p><strong>Schedule:</strong> an ordered sequence of operations from multiple transactions. It must include all operations, and the order within each transaction must be preserved.</p>
+
+  <h3>Types of schedules</h3>
+  <h4>Serial schedule</h4>
+  <ul>
+    <li>Transactions execute one after another.</li>
+    <li>Example: T1 → T2 or T2 → T1</li>
+    <li>Always correct but slow performance.</li>
+  </ul>
+  <h4>Serializable schedule</h4>
+  <ul>
+    <li>Concurrent but equivalent to serial execution.</li>
+    <li>Ensures correctness and efficiency.</li>
+  </ul>
+  <h4>Non-serializable schedule</h4>
+  <ul>
+    <li>Leads to inconsistency.</li>
+    <li>Problems: lost updates, incorrect data, "vanishing money".</li>
+    <li>Example: two transactions update the same account → one overwrites the other.</li>
+  </ul>
+
+  <div class="tablewrap">
+    <table>
+      <caption>Quick summary (revision table)</caption>
+      <thead><tr><th>Concept</th><th>Key idea</th></tr></thead>
+      <tbody>
+        <tr><td>Transaction</td><td>Unit of work</td></tr>
+        <tr><td>Atomicity</td><td>All or nothing</td></tr>
+        <tr><td>Consistency</td><td>Valid state maintained</td></tr>
+        <tr><td>Isolation</td><td>No interference</td></tr>
+        <tr><td>Durability</td><td>Permanent storage</td></tr>
+        <tr><td>Serial schedule</td><td>Safe but slow</td></tr>
+        <tr><td>Serializable</td><td>Safe + efficient</td></tr>
+        <tr><td>Non-serializable</td><td>Unsafe</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================= LECTURE 2 ================= -->
+<section class="lecture" id="l2">
+  <h2><span class="num">2</span>Transactions / 2 — Serializability</h2>
+
+  <h3>Core concepts &amp; assumptions</h3>
+  <p><strong>Transaction:</strong> a set of operations that modify the database. Example: updating an account balance, booking tickets.</p>
+  <p><strong>ACID properties</strong> — every transaction should follow:</p>
+  <ul>
+    <li><strong>Atomicity</strong> → all or nothing</li>
+    <li><strong>Consistency</strong> → valid state maintained</li>
+    <li><strong>Isolation</strong> → no interference</li>
+    <li><strong>Durability</strong> → permanent changes</li>
+  </ul>
+
+  <h4>Consistency assumption</h4>
+  <ul>
+    <li>Each transaction individually keeps the database consistent.</li>
+    <li>Errors inside a transaction are ignored in concurrency control.</li>
+  </ul>
+  <p><strong>Example of a wrong transaction:</strong> A → −50, B → +40 → inconsistent (logical error).</p>
+
+  <h4>Serial execution</h4>
+  <p>Transactions executed one by one, e.g. T1 → T2 → T3. Always consistent, but slow performance.</p>
+
+  <div class="note"><b>Serializability:</b> a concurrent schedule is correct if it is equivalent to some serial schedule. Even if operations are mixed, the final result must match serial execution.</div>
+  <p><strong>Types:</strong> conflict serializability (most important) and view serializability (rare, complex).</p>
+
+  <h3>Conflict in instructions</h3>
+  <p>Only <strong>Read (R)</strong> and <strong>Write (W)</strong> matter. Two operations conflict if:</p>
+  <ul>
+    <li>They belong to different transactions</li>
+    <li>They access the same data item</li>
+    <li>At least one is a WRITE</li>
+  </ul>
+
+  <div class="tablewrap">
+    <table>
+      <caption>Types of conflicts</caption>
+      <thead><tr><th>Operation pair</th><th>Conflict?</th><th>Reason</th></tr></thead>
+      <tbody>
+        <tr><td>Read–Read</td><td>No</td><td>No change in data</td></tr>
+        <tr><td>Read–Write</td><td>Yes</td><td>Read may get the wrong value</td></tr>
+        <tr><td>Write–Read</td><td>Yes</td><td>Order matters</td></tr>
+        <tr><td>Write–Write</td><td>Yes</td><td>Final value depends on the last write</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="ascii">T1: R(A), W(A)
+T2: W(A)
+→ Conflict: Write-Write, Write-Read</div>
+
+  <h3>Conflict serializability</h3>
+  <ul>
+    <li><strong>Conflict equivalence:</strong> two schedules are equivalent if non-conflicting operations can be swapped to make them identical.</li>
+    <li><strong>Conflict serializable:</strong> a schedule that can be converted into a serial schedule using swaps.</li>
+  </ul>
+  <p><strong>Important points:</strong></p>
+  <ul>
+    <li>Conflict serializable ⇒ always serializable</li>
+    <li>Serializable ≠ always conflict serializable</li>
+  </ul>
+  <div class="ascii">Schedule S:
+T1: R(A), W(A)
+T2: R(A), W(A)
+→ If the order can be rearranged, the schedule is serializable.</div>
+
+  <h3>Precedence graph (testing method)</h3>
+  <p>Use a graph to check if a schedule is conflict serializable.</p>
+  <ul>
+    <li><strong>Nodes</strong> → transactions (T1, T2, …)</li>
+    <li><strong>Edges (Ti → Tj)</strong> → if Ti executes first and conflicts with Tj</li>
+  </ul>
+  <div class="ascii">T1: W(A)
+T2: R(A)
+→ Edge: T1 → T2</div>
+  <div class="note"><b>Acyclic rule (golden rule):</b> a schedule is conflict serializable if and only if the graph has no cycles.</div>
+  <ul>
+    <li><strong>Case 1 — acyclic graph:</strong> T1 → T2 → T3 — serializable, valid execution.</li>
+    <li><strong>Case 2 — cycle exists:</strong> T1 → T2 → T1 — not serializable, leads to inconsistency.</li>
+  </ul>
+
+  <h3>Topological sorting</h3>
+  <p>If the graph is acyclic, perform a topological sort — it gives the equivalent serial order.</p>
+  <div class="ascii">Graph:       T1 → T2 → T3
+Serial order: T1 → T2 → T3</div>
+  <p><strong>Time complexity:</strong> precedence graph check = <code>O(n²)</code>, where <em>n</em> = number of transactions.</p>
+
+  <div class="tablewrap">
+    <table>
+      <caption>Quick revision table</caption>
+      <thead><tr><th>Concept</th><th>Key idea</th></tr></thead>
+      <tbody>
+        <tr><td>Serializability</td><td>Equivalent to serial execution</td></tr>
+        <tr><td>Conflict</td><td>Same data + at least one write</td></tr>
+        <tr><td>Conflict serializable</td><td>Can reorder using swaps</td></tr>
+        <tr><td>Precedence graph</td><td>Detect conflicts</td></tr>
+        <tr><td>Acyclic graph</td><td>Serializable</td></tr>
+        <tr><td>Cycle</td><td>Not serializable</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="trick"><b>One-line memory trick:</b> "No cycle = safe schedule"</div>
+</section>
+
+<!-- ================= LECTURE 3 ================= -->
+<section class="lecture" id="l3">
+  <h2><span class="num">3</span>Transactions / 3 — Recoverability</h2>
+
+  <h3>Recoverability &amp; consistency</h3>
+  <p><strong>Problem:</strong> system failures (crash, power loss) can occur during a transaction. If a failure happens after a write but before commit → inconsistent database.</p>
+
+  <h4>Recoverable schedule</h4>
+  <p>A schedule is recoverable if: when Tj reads data written by Ti, then Ti must commit before Tj commits.</p>
+  <div class="ascii">Non-recoverable example:
+T8: W(A)  (not committed yet)
+T9: R(A) → COMMIT
+T8: FAIL → ABORT</div>
+  <p><strong>Problem:</strong> T9 has already committed using a wrong value. It cannot be undone → inconsistency.</p>
+
+  <h3>Cascading rollbacks</h3>
+  <p>When one transaction fails, others depending on it must also roll back.</p>
+  <div class="ascii">T10: W(A)
+T11: R(A)
+T12: R(A)
+If T10 fails → abort, then T11 and T12 must roll back.</div>
+  <p>This chain reaction is called a cascading rollback (expensive).</p>
+
+  <h4>Cascadeless schedule</h4>
+  <p><strong>Condition:</strong> if Tj reads Ti's data, then Ti must commit before Tj reads.</p>
+  <div class="ascii">Safe example:
+T1: W(A) → COMMIT
+T2: R(A)
+No cascading rollback → safe and efficient.</div>
+
+  <h3>Transaction Control Language (TCL)</h3>
+  <p>Controls transaction execution in SQL.</p>
+  <ul>
+    <li><strong>COMMIT</strong> → saves all changes permanently</li>
+    <li><strong>ROLLBACK</strong> → undoes changes</li>
+    <li><strong>SAVEPOINT</strong> → creates a checkpoint inside a transaction, allowing partial undo</li>
+    <li><strong>SET TRANSACTION</strong> → sets properties</li>
+  </ul>
+<pre><code><span class="k">COMMIT</span>;
+<span class="k">ROLLBACK</span>;
+<span class="k">SAVEPOINT</span> sp1;
+<span class="k">ROLLBACK TO</span> sp1;
+<span class="k">SET TRANSACTION READ ONLY</span>;</code></pre>
+  <p><strong>Implicit commit:</strong> by default, each SQL statement auto-commits. This can be disabled, e.g. <code>setAutoCommit(false)</code>.</p>
+
+  <h3>View serializability</h3>
+  <p>More flexible than conflict serializability — it accepts more schedules. Two schedules are view equivalent if they produce the same reads and the same final result.</p>
+
+  <h4>Conditions for view equivalence</h4>
+  <ol>
+    <li><strong>Initial read:</strong> if Ti reads the initial value of Q in S, the same must happen in S′.</li>
+    <li><strong>Read-from relation:</strong> if Ti reads a value written by Tj in S, it must read from the same Tj in S′.</li>
+    <li><strong>Final write:</strong> the transaction doing the last write on Q must be the same.</li>
+  </ol>
+  <div class="ascii">T1: W(A)
+T2: W(A)
+Final write = T2 → any equivalent schedule must end with T2.</div>
+
+  <h4>Key properties</h4>
+  <ul>
+    <li><strong>Relation:</strong> conflict serializable ⇒ view serializable, but the reverse is not always true.</li>
+    <li><strong>Blind write:</strong> a write without reading. T1: W(A), T2: W(A) → can be view serializable but not conflict serializable.</li>
+    <li><strong>Complexity:</strong> checking view serializability is NP-complete — there is no efficient algorithm like the precedence graph.</li>
+  </ul>
+
+  <h4>Testing view serializability</h4>
+  <p>Since a direct check is hard, use the elimination method:</p>
+  <ol>
+    <li>Identify the final write transaction.</li>
+    <li>Fix it at the end of the serial order.</li>
+    <li>Check read relationships.</li>
+    <li>Eliminate invalid orders.</li>
+  </ol>
+  <p><strong>Example:</strong> if the final write on A is by T3, valid serial orders must end with T3.</p>
+
+  <div class="tablewrap">
+    <table>
+      <caption>Quick revision table</caption>
+      <thead><tr><th>Concept</th><th>Key idea</th></tr></thead>
+      <tbody>
+        <tr><td>Recoverable</td><td>Commit order must follow read dependency</td></tr>
+        <tr><td>Cascading rollback</td><td>One failure → chain rollback</td></tr>
+        <tr><td>Cascadeless</td><td>Read only after commit</td></tr>
+        <tr><td>COMMIT</td><td>Save changes</td></tr>
+        <tr><td>ROLLBACK</td><td>Undo changes</td></tr>
+        <tr><td>SAVEPOINT</td><td>Partial rollback</td></tr>
+        <tr><td>View serializable</td><td>Same read + final write</td></tr>
+        <tr><td>Blind write</td><td>Write without read</td></tr>
+        <tr><td>Complexity</td><td>NP-complete</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="trick"><b>Memory tricks:</b>
+    <ul>
+      <li>"Read after commit = safe schedule"</li>
+      <li>"No cascade = high performance"</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= LECTURE 4 ================= -->
+<section class="lecture" id="l4">
+  <h2><span class="num">4</span>Concurrency Control / 1</h2>
+
+  <h3>Objectives of concurrency control</h3>
+  <p><strong>Goal:</strong> ensure schedules are conflict serializable, recoverable (preferably cascadeless), and follow the ACID properties.</p>
+  <h4>Key insight</h4>
+  <ul>
+    <li>Conflict serializability → efficient to test (polynomial time)</li>
+    <li>View serializability → hard (NP-complete)</li>
+  </ul>
+  <p>Hence, most protocols focus on conflict serializability.</p>
+  <h4>Trade-off</h4>
+  <ul>
+    <li>More concurrency → better performance</li>
+    <li>More control → more overhead</li>
+  </ul>
+
+  <h3>Lock-based protocol (basics)</h3>
+  <p>Locking is a mechanism to control access to data items. It ensures isolation in transactions.</p>
+  <h4>Lock types</h4>
+  <ol>
+    <li><strong>Shared lock (S-lock):</strong> only read allowed; multiple transactions can share. Example: T1: S(A), T2: S(A) → allowed.</li>
+    <li><strong>Exclusive lock (X-lock):</strong> read + write allowed; only one transaction allowed. Example: T1: X(A), T2: S(A) → not allowed.</li>
+  </ol>
+
+  <div class="tablewrap">
+    <table>
+      <caption>Lock compatibility matrix</caption>
+      <thead><tr><th>Lock type</th><th>S-lock</th><th>X-lock</th></tr></thead>
+      <tbody>
+        <tr><td>S-lock</td><td class="yes">✔</td><td class="no">✘</td></tr>
+        <tr><td>X-lock</td><td class="no">✘</td><td class="no">✘</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Working</h4>
+  <ul>
+    <li>Transaction requests a lock</li>
+    <li>Lock manager checks compatibility</li>
+    <li>If compatible → granted</li>
+    <li>Else → transaction waits</li>
+  </ul>
+
+  <h3>Two-phase locking (2PL)</h3>
+  <p>Ensures conflict serializability.</p>
+  <ul>
+    <li><strong>Growing phase:</strong> can acquire locks, cannot release locks</li>
+    <li><strong>Shrinking phase:</strong> can release locks, cannot acquire new locks</li>
+  </ul>
+  <p><strong>Lock conversions:</strong> upgrade (S → X) only in the growing phase; downgrade (X → S) only in the shrinking phase.</p>
+  <div class="ascii">Growing:   S(A) → X(A)
+Shrinking: unlock(A)</div>
+
+  <h3>Problems in locking</h3>
+  <h4>Deadlock</h4>
+  <ul>
+    <li>Circular waiting condition.</li>
+    <li>T1: X(A) → waiting for B; T2: X(B) → waiting for A. Both stuck forever → deadlock.</li>
+  </ul>
+  <h4>Starvation (livelock)</h4>
+  <ul>
+    <li>A transaction waits indefinitely while others keep getting locks.</li>
+  </ul>
+  <h4>Cascading rollback</h4>
+  <ul>
+    <li>If locks are released early, other transactions may read uncommitted data.</li>
+    <li>A failure then causes multiple rollbacks.</li>
+  </ul>
+
+  <h3>Special locking protocols</h3>
+  <h4>Strict 2PL</h4>
+  <ul>
+    <li>Hold all X-locks until commit/abort</li>
+    <li>Prevents cascading rollback</li>
+    <li>Ensures recoverability</li>
+  </ul>
+  <h4>Rigorous 2PL</h4>
+  <ul>
+    <li>Hold all locks (S + X) until commit</li>
+    <li>Strongest protocol</li>
+    <li>Transactions serialized by commit order</li>
+  </ul>
+
+  <div class="tablewrap">
+    <table>
+      <caption>Trade-off</caption>
+      <thead><tr><th>Protocol</th><th>Safety</th><th>Concurrency</th></tr></thead>
+      <tbody>
+        <tr><td>Basic 2PL</td><td>Medium</td><td>High</td></tr>
+        <tr><td>Strict 2PL</td><td>High</td><td>Medium</td></tr>
+        <tr><td>Rigorous 2PL</td><td>Very high</td><td>Low</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Lock manager (implementation)</h3>
+  <p><strong>Role:</strong> controls all lock operations.</p>
+  <h4>Lock table</h4>
+  <p>Tracks which transaction holds a lock and which transactions are waiting.</p>
+  <p><strong>Structure:</strong> each data item → linked list of granted locks and a waiting queue.</p>
+  <h4>Functions</h4>
+  <ul>
+    <li>Grant locks</li>
+    <li>Block requests</li>
+    <li>Release locks</li>
+    <li>Handle rollback</li>
+  </ul>
+  <p>On abort, all locks of that transaction are released.</p>
+
+  <div class="tablewrap">
+    <table>
+      <caption>Quick revision table</caption>
+      <thead><tr><th>Concept</th><th>Key idea</th></tr></thead>
+      <tbody>
+        <tr><td>Concurrency control</td><td>Maintain correctness</td></tr>
+        <tr><td>Locking</td><td>Control access</td></tr>
+        <tr><td>S-lock</td><td>Read only</td></tr>
+        <tr><td>X-lock</td><td>Read + write</td></tr>
+        <tr><td>2PL</td><td>Growing + shrinking</td></tr>
+        <tr><td>Deadlock</td><td>Circular wait</td></tr>
+        <tr><td>Starvation</td><td>Infinite wait</td></tr>
+        <tr><td>Strict 2PL</td><td>No cascading rollback</td></tr>
+        <tr><td>Rigorous 2PL</td><td>Strongest safety</td></tr>
+        <tr><td>Lock manager</td><td>Controls locks</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="trick"><b>Memory tricks:</b>
+    <ul>
+      <li>"Growing = lock, shrinking = unlock"</li>
+      <li>"Hold X-lock till commit = safe"</li>
+      <li>"Cycle = deadlock"</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= LECTURE 5 ================= -->
+<section class="lecture" id="l5">
+  <h2><span class="num">5</span>Concurrency Control / 2</h2>
+
+  <h3>Deadlock in concurrency control</h3>
+  <p>A deadlock occurs when every transaction in a set is waiting for a resource held by another transaction in the same set.</p>
+  <div class="ascii">T1: holds A → waiting for B
+T2: holds B → waiting for A
+→ Circular wait → Deadlock</div>
+  <div class="note"><b>Key point:</b> deadlocks are unavoidable. A DBMS must handle them using prevention, detection and recovery.</div>
+
+  <h3>Deadlock prevention</h3>
+  <p><strong>Goal:</strong> never allow a deadlock to occur.</p>
+  <ol>
+    <li><strong>Pre-declaration:</strong> the transaction locks all resources before starting. Hard to implement and reduces concurrency.</li>
+    <li><strong>Partial ordering:</strong> define a fixed order of accessing data, e.g. always lock A before B. Prevents cycles.</li>
+    <li><strong>Timestamp-based schemes</strong> — each transaction gets a timestamp (TS):
+      <ul>
+        <li><strong>Wait-die (non-preemptive):</strong> older → younger = wait; younger → older = die (rollback).</li>
+        <li><strong>Wound-wait (preemptive):</strong> older → younger = wound (kill the younger); younger → older = wait.</li>
+        <li><strong>Important:</strong> restarted transactions keep the same timestamp → prevents starvation.</li>
+      </ul>
+    </li>
+    <li><strong>Timeout scheme:</strong> wait for a fixed time; if not granted → rollback. May cause starvation.</li>
+  </ol>
+
+  <h3>Deadlock detection</h3>
+  <p>Used when prevention is not applied.</p>
+  <p><strong>Wait-for graph:</strong> nodes → transactions; edge (Ti → Tj) → Ti is waiting for Tj.</p>
+  <div class="note"><b>Golden rule:</b> a cycle exists ⇨ a deadlock exists.</div>
+  <div class="ascii">T1 → T2 → T3 → T1   → Deadlock
+T1 → T2 → T3        → Safe</div>
+
+  <h3>Deadlock recovery</h3>
+  <ul>
+    <li><strong>Break the cycle:</strong> roll back one or more transactions.</li>
+    <li><strong>Victim selection:</strong> choose a transaction to roll back based on cost, work done and resources used.</li>
+    <li><strong>Total rollback:</strong> abort completely and restart.</li>
+    <li><strong>Partial rollback:</strong> roll back only to a safe point → more efficient.</li>
+    <li><strong>Starvation prevention:</strong> track the rollback count to avoid repeatedly killing the same transaction.</li>
+  </ul>
+
+  <h3>Timestamp-based protocol</h3>
+  <p>An alternative to locking: no waiting → no deadlocks.</p>
+  <p>Each transaction gets a timestamp TS(Ti), and the execution order is determined by timestamps.</p>
+  <p><strong>Data item Q stores:</strong></p>
+  <ul>
+    <li><strong>W-timestamp(Q)</strong> → last write</li>
+    <li><strong>R-timestamp(Q)</strong> → last read</li>
+  </ul>
+
+  <h4>Read rule — if Ti wants to read Q</h4>
+  <ul>
+    <li>If TS(Ti) &lt; W-timestamp(Q) → reject &amp; rollback.</li>
+    <li>Else → allow the read.</li>
+    <li>Update: R-timestamp(Q) = max(R-timestamp(Q), TS(Ti)).</li>
+  </ul>
+
+  <h4>Write rule — if Ti wants to write Q</h4>
+  <ul>
+    <li><strong>Case 1:</strong> TS(Ti) &lt; R-timestamp(Q) → reject (violates order).</li>
+    <li><strong>Case 2:</strong> TS(Ti) &lt; W-timestamp(Q) → reject (obsolete write).</li>
+    <li>Otherwise → allow the write.</li>
+    <li>Update: W-timestamp(Q) = TS(Ti).</li>
+  </ul>
+
+  <h4>Advantages</h4>
+  <ul><li>No deadlock</li><li>Ensures serializability</li></ul>
+  <h4>Disadvantages</h4>
+  <ul><li>May cause cascading rollback</li><li>May lead to non-recoverable schedules</li></ul>
+
+  <div class="tablewrap">
+    <table>
+      <caption>Quick revision table</caption>
+      <thead><tr><th>Concept</th><th>Key idea</th></tr></thead>
+      <tbody>
+        <tr><td>Deadlock</td><td>Circular waiting</td></tr>
+        <tr><td>Prevention</td><td>Avoid deadlock</td></tr>
+        <tr><td>Detection</td><td>Use wait-for graph</td></tr>
+        <tr><td>Recovery</td><td>Rollback transactions</td></tr>
+        <tr><td>Wait-die</td><td>Younger dies</td></tr>
+        <tr><td>Wound-wait</td><td>Younger killed by older</td></tr>
+        <tr><td>Timestamp protocol</td><td>No waiting</td></tr>
+        <tr><td>Read rule</td><td>Check W-timestamp</td></tr>
+        <tr><td>Write rule</td><td>Check R &amp; W timestamps</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="trick"><b>Memory tricks:</b>
+    <ul>
+      <li>"Cycle = deadlock"</li>
+      <li>"Older wins, younger dies"</li>
+      <li>"Timestamp → no waiting → no deadlock"</li>
+    </ul>
+  </div>
+</section>
+
+<footer>Week 10 short notes — Transactions and Concurrency Control</footer>
+
+</main>
+</div>
+</div>
+</body>
+</html>

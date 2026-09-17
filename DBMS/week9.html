@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 9 — Indexing and Hashing (DBMS Short Notes)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f6f7f5;
+  --panel:#ffffff;
+  --ink:#16181c;
+  --ink-soft:#4d5560;
+  --rule:#d9dcd6;
+  --accent:#1f5f4f;
+  --accent-soft:#e3efe9;
+  --mark:#b4531a;
+  --code-bg:#1b1f24;
+  --code-ink:#e6e8ea;
+  --code-key:#7fb2ff;
+  --code-str:#e4a97a;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#131619;
+    --panel:#1a1e22;
+    --ink:#e8eae6;
+    --ink-soft:#a3aab2;
+    --rule:#2d3339;
+    --accent:#7fc9b0;
+    --accent-soft:#1f2c29;
+    --mark:#e9a06a;
+    --code-bg:#0f1216;
+    --code-ink:#e6e8ea;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#131619;
+  --panel:#1a1e22;
+  --ink:#e8eae6;
+  --ink-soft:#a3aab2;
+  --rule:#2d3339;
+  --accent:#7fc9b0;
+  --accent-soft:#1f2c29;
+  --mark:#e9a06a;
+  --code-bg:#0f1216;
+  --code-ink:#e6e8ea;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:1.5rem}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Source Serif 4",Georgia,"Times New Roman",serif;
+  font-size:17px;
+  line-height:1.65;
+  -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 1.25rem 5rem}
+
+/* Masthead */
+header.top{
+  border-bottom:2px solid var(--ink);
+  margin-bottom:2.5rem;
+  padding:3.5rem 0 1.25rem;
+}
+.kicker{
+  font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-weight:500;
+  font-size:.9rem;
+  color:var(--accent);
+  margin:0 0 .6rem;
+  letter-spacing:.01em;
+}
+h1{
+  font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-weight:700;
+  font-size:clamp(2.1rem,6vw,3.6rem);
+  line-height:1.02;
+  margin:0 0 .5rem;
+  letter-spacing:-.02em;
+}
+.standfirst{margin:0;max-width:56ch;color:var(--ink-soft)}
+
+/* Layout */
+.cols{display:grid;grid-template-columns:1fr;gap:2.5rem}
+@media (min-width:900px){
+  .cols{grid-template-columns:230px minmax(0,1fr);gap:3.5rem;align-items:start}
+  nav.toc{position:sticky;top:1.5rem}
+}
+nav.toc{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:.9rem}
+nav.toc p{margin:0 0 .75rem;font-weight:700}
+nav.toc ol{list-style:none;margin:0;padding:0;border-left:1px solid var(--rule)}
+nav.toc li{margin:0}
+nav.toc a{
+  display:block;padding:.35rem .75rem;color:var(--ink-soft);
+  text-decoration:none;border-left:2px solid transparent;margin-left:-1px;
+}
+nav.toc a:hover,nav.toc a:focus-visible{color:var(--accent);border-left-color:var(--accent)}
+
+/* Sections */
+section.lecture{margin:0 0 4rem;max-width:74ch}
+section.lecture > h2{
+  font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-size:clamp(1.5rem,3.4vw,2.1rem);
+  font-weight:700;letter-spacing:-.015em;
+  margin:0 0 1.75rem;padding-bottom:.6rem;
+  border-bottom:1px solid var(--rule);
+}
+section.lecture > h2 .num{
+  display:inline-block;color:var(--accent);margin-right:.5rem;
+}
+h3{
+  font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-size:1.25rem;font-weight:700;margin:2.25rem 0 .6rem;letter-spacing:-.01em;
+}
+h4{
+  font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-size:1rem;font-weight:500;margin:1.4rem 0 .35rem;color:var(--ink-soft);
+}
+p{margin:.5rem 0}
+ul,ol{margin:.5rem 0 .9rem;padding-left:1.35rem}
+li{margin:.2rem 0}
+li::marker{color:var(--accent)}
+strong{font-weight:600}
+.term{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:500}
+
+/* Callouts */
+.note{
+  border-left:3px solid var(--accent);
+  background:var(--accent-soft);
+  padding:.75rem 1rem;margin:1rem 0;border-radius:0 4px 4px 0;
+}
+.note b{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:500}
+.summary{
+  border:1px solid var(--rule);background:var(--panel);
+  padding:1rem 1.25rem;border-radius:6px;margin:1.75rem 0 0;
+}
+.summary h3{margin-top:0}
+
+/* Tables */
+.tablewrap{overflow-x:auto;margin:1rem 0 1.25rem}
+table{border-collapse:collapse;width:100%;min-width:320px;font-size:.95rem;background:var(--panel)}
+caption{
+  text-align:left;font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-size:.9rem;color:var(--ink-soft);padding-bottom:.4rem;
+}
+th,td{border:1px solid var(--rule);padding:.5rem .7rem;text-align:left;vertical-align:top}
+thead th{
+  font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:500;
+  background:var(--accent-soft);color:var(--ink);
+}
+tbody tr:nth-child(even) td{background:color-mix(in srgb,var(--rule) 22%,transparent)}
+
+/* Code */
+pre{
+  background:var(--code-bg);color:var(--code-ink);
+  padding:.9rem 1rem;border-radius:6px;overflow-x:auto;
+  font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  font-size:.86rem;line-height:1.55;margin:.75rem 0 1.1rem;
+}
+pre .k{color:var(--code-key)}
+pre .s{color:var(--code-str)}
+code{
+  font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  font-size:.88em;background:color-mix(in srgb,var(--rule) 40%,transparent);
+  padding:.08em .35em;border-radius:3px;
+}
+pre code{background:none;padding:0;font-size:1em}
+.ascii{
+  font-family:"JetBrains Mono",ui-monospace,monospace;font-size:.85rem;
+  border:1px dashed var(--rule);padding:.75rem 1rem;border-radius:4px;
+  white-space:pre;overflow-x:auto;color:var(--ink-soft);margin:.75rem 0;
+}
+.big{color:var(--mark);font-weight:600}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+footer{
+  border-top:1px solid var(--rule);margin-top:3rem;padding-top:1rem;
+  font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-size:.85rem;color:var(--ink-soft);
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <p class="kicker">DBMS · Week 9 short notes</p>
+  <h1>Indexing and Hashing</h1>
+  </header>
+
+<div class="cols">
+
+<nav class="toc" aria-label="Contents">
+  <p>Lectures</p>
+  <ol>
+    <li><a href="#l1">1 · Indexing basics</a></li>
+    <li><a href="#l2">2 · Trees to B-Trees</a></li>
+    <li><a href="#l3">3 · B+ Trees</a></li>
+    <li><a href="#l4">4 · Hashing</a></li>
+    <li><a href="#l5">5 · Index design</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ================= LECTURE 1 ================= -->
+<section class="lecture" id="l1">
+  <h2><span class="num">1</span>Indexing / 1</h2>
+
+  <h3>Database indexing</h3>
+  <ul>
+    <li>A technique to speed up data retrieval in a database.</li>
+    <li>Instead of scanning the whole table, an index helps locate data quickly.</li>
+  </ul>
+  <div class="note"><b>Analogy:</b> Book index → you don't read the whole book, you jump directly to the page.</div>
+
+  <h3>Why do we need indexing?</h3>
+  <ul>
+    <li><strong>Without index:</strong> search requires linear search — <code>O(n)</code></li>
+    <li><strong>With index:</strong> faster search using structures like binary search — <code>O(log n)</code></li>
+  </ul>
+
+  <h3>Basic structure of an index</h3>
+  <ul>
+    <li><strong>Search key:</strong> attribute used for searching (e.g. Name, Roll No, Phone Number)</li>
+    <li><strong>Pointer:</strong> address of the actual record in memory/disk</li>
+  </ul>
+  <div class="tablewrap">
+    <table>
+      <caption>Example</caption>
+      <thead><tr><th>Name</th><th>Pointer</th></tr></thead>
+      <tbody>
+        <tr><td>Aditi</td><td>→ Record 101</td></tr>
+        <tr><td>Rahul</td><td>→ Record 205</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>ISAM (Indexed Sequential Access Method)</h4>
+  <ul>
+    <li>Combines sequential storage with index-based access.</li>
+    <li>Helps in both fast lookup and ordered traversal.</li>
+  </ul>
+
+  <h3>Types of ordered index</h3>
+
+  <h4>1. Primary (clustering) index</h4>
+  <ul>
+    <li>Data is physically sorted based on this key.</li>
+    <li>Usually (but not always) the primary key.</li>
+    <li>Example: records sorted by roll number.</li>
+  </ul>
+
+  <h4>2. Secondary (non-clustering) index</h4>
+  <ul>
+    <li>Data is not sorted on this key.</li>
+    <li>Used for searching on other attributes.</li>
+    <li>Example: file sorted by Roll No, but index on Name.</li>
+  </ul>
+
+  <h4>3. Dense index — contains an entry for every record</h4>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Key</th><th>Pointer</th></tr></thead>
+      <tbody>
+        <tr><td>A</td><td>→ R1</td></tr>
+        <tr><td>B</td><td>→ R2</td></tr>
+        <tr><td>C</td><td>→ R3</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <ul><li>Fast access</li><li>More storage required</li></ul>
+
+  <h4>4. Sparse index — entries for some records only (usually the first record of each block)</h4>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Key</th><th>Pointer</th></tr></thead>
+      <tbody>
+        <tr><td>A</td><td>→ Block 1</td></tr>
+        <tr><td>M</td><td>→ Block 2</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <ul><li>Less storage</li><li>Slightly slower than dense</li></ul>
+
+  <h3>Multi-level indexing</h3>
+  <ul>
+    <li>When the index becomes too large, create an index on the index (hierarchy).</li>
+    <li><strong>Inner index:</strong> the original index</li>
+    <li><strong>Outer index:</strong> points to inner index blocks</li>
+    <li>Keeps search efficient even for large data.</li>
+  </ul>
+  <div class="note"><b>Analogy:</b> Book → Chapters → Topics → Pages</div>
+
+  <h3>Index maintenance (costs)</h3>
+  <ul>
+    <li><strong>Storage overhead:</strong> extra space required for index files</li>
+    <li><strong>Insert:</strong> new key must be added to the index — in a sparse index, only if a new block is created</li>
+    <li><strong>Delete:</strong> remove the key from the index if no record exists — sparse index may need adjustment</li>
+  </ul>
+
+  <h3>Performance factors</h3>
+  <ol>
+    <li><strong>Access type:</strong> equality search (<code>WHERE id = 5</code>), range queries (<code>WHERE age BETWEEN 20 AND 30</code>)</li>
+    <li><strong>Access time:</strong> time to retrieve data</li>
+    <li><strong>Update time:</strong> cost of insert/delete</li>
+    <li><strong>Query pattern:</strong> analyse frequent queries and optimise the index accordingly</li>
+  </ol>
+
+  <div class="tablewrap">
+    <table>
+      <caption>Dense vs sparse at a glance</caption>
+      <thead><tr><th>Feature</th><th>Dense index</th><th>Sparse index</th></tr></thead>
+      <tbody>
+        <tr><td>Entries</td><td>Every record</td><td>Some records</td></tr>
+        <tr><td>Speed</td><td>Faster</td><td>Slower</td></tr>
+        <tr><td>Space</td><td>More</td><td>Less</td></tr>
+        <tr><td>Maintenance</td><td>High</td><td>Low</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Key formulas / complexity</h3>
+  <ul>
+    <li><strong>Linear search:</strong> <code>O(n)</code></li>
+    <li><strong>Binary search / indexed:</strong> <code>O(log n)</code></li>
+  </ul>
+
+  <div class="summary">
+    <h3>Final summary</h3>
+    <ul>
+      <li>Index = search accelerator</li>
+      <li>Uses key + pointer</li>
+      <li>Types: primary, secondary, dense, sparse</li>
+      <li>Multi-level indexing improves scalability</li>
+      <li>Trade-off = speed vs storage vs update cost</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= LECTURE 2 ================= -->
+<section class="lecture" id="l2">
+  <h2><span class="num">2</span>Indexing / 2</h2>
+
+  <h3>Introduction to external indexing</h3>
+  <h4>Context</h4>
+  <ul>
+    <li>Previously: primary, secondary, dense, sparse indexing.</li>
+    <li>Now: how indexing works on disk (external memory).</li>
+  </ul>
+  <h4>Goal</h4>
+  <ul>
+    <li>Handle huge data (millions of records).</li>
+    <li>Work efficiently on disk storage.</li>
+  </ul>
+  <div class="note"><b>Solution:</b> use B-Trees / B+ Trees.</div>
+
+  <h3>Balanced binary search trees (BSTs)</h3>
+  <p>Basic idea: a BST improves search compared to linear search.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Method</th><th>Time complexity</th></tr></thead>
+      <tbody>
+        <tr><td>Linear search</td><td><code>O(n)</code></td></tr>
+        <tr><td>BST (ideal)</td><td><code>O(log n)</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Problem: tree height</h4>
+  <ul>
+    <li>Search time depends on height <em>h</em>; complexity = <code>O(h)</code>.</li>
+    <li><strong>Worst case:</strong> tree becomes skewed → <code>O(n)</code>.</li>
+    <li><strong>Balanced tree definition:</strong> height is always <code>O(log n)</code>.</li>
+  </ul>
+
+  <h3>Balancing strategies</h3>
+  <ol>
+    <li><strong>AVL trees (strict balance)</strong>
+      <ul>
+        <li>Condition: |h<sub>L</sub> − h<sub>R</sub>| ≤ 1</li>
+        <li>Uses rotations to rebalance</li>
+        <li>Guarantees <code>O(log n)</code></li>
+        <li>Rotations are costly</li>
+      </ul>
+    </li>
+    <li><strong>Randomized BST</strong>
+      <ul>
+        <li>Random decisions maintain balance</li>
+        <li>Works well on average</li>
+        <li>High probability of <code>O(log n)</code></li>
+      </ul>
+    </li>
+    <li><strong>Skip lists</strong>
+      <ul>
+        <li>Multi-level linked lists</li>
+        <li>Random promotion of elements</li>
+        <li>Search: <code>O(log n)</code></li>
+        <li>Simple alternative to trees</li>
+      </ul>
+    </li>
+    <li><strong>Splay trees (amortized)</strong>
+      <ul>
+        <li>Frequently accessed elements move to the top</li>
+        <li>Average cost <code>O(log n)</code> over many operations</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h3>Limitations of standard trees</h3>
+  <p>Not suitable for databases because they:</p>
+  <ul>
+    <li>Cannot handle millions of records</li>
+    <li>Require frequent rotations</li>
+    <li>Are not efficient for disk storage</li>
+  </ul>
+
+  <h3>2-3-4 tree concept</h3>
+  <div class="note"><b>Need a better structure</b> → multi-way trees.</div>
+  <h4>Key idea</h4>
+  <ul>
+    <li>Store multiple values per node.</li>
+    <li>Keep all leaves at the same level.</li>
+  </ul>
+  <div class="tablewrap">
+    <table>
+      <caption>Node types</caption>
+      <thead><tr><th>Node type</th><th>Keys</th><th>Children</th></tr></thead>
+      <tbody>
+        <tr><td>2-node</td><td>1</td><td>2</td></tr>
+        <tr><td>3-node</td><td>2</td><td>3</td></tr>
+        <tr><td>4-node</td><td>3</td><td>4</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Example (3-node)</h4>
+  <ul>
+    <li>Keys: S, L</li>
+    <li>Branches: left → values &lt; S · middle → between S and L · right → &gt; L</li>
+  </ul>
+
+  <h4>Search in a 2-3-4 tree</h4>
+  <ul>
+    <li>Compare with multiple keys.</li>
+    <li>Choose the correct branch.</li>
+    <li>Complexity: <code>O(log n)</code>.</li>
+  </ul>
+
+  <h3>Insertion in a 2-3-4 tree</h3>
+  <p><strong>Steps:</strong> find the correct leaf, then insert the key.</p>
+  <p><strong>Cases:</strong></p>
+  <ul>
+    <li>2-node → becomes 3-node</li>
+    <li>3-node → becomes 4-node</li>
+    <li>4-node → split required</li>
+  </ul>
+  <p><strong>Splitting rule</strong> — if a node has [S, M, L]: M goes up to the parent, and S and L become separate nodes.</p>
+  <div class="ascii">Before split:  [S  M  L]
+
+After split:      M
+                 / \
+                S   L</div>
+  <p><strong>Height change:</strong> height increases only if the root splits; the tree remains perfectly balanced.</p>
+  <p><strong>Splitting strategies:</strong></p>
+  <ul>
+    <li><strong>Early split:</strong> split while moving down → faster insertion</li>
+    <li><strong>Late split:</strong> split only when needed → fewer operations</li>
+  </ul>
+
+  <h3>Deletion</h3>
+  <ul>
+    <li>Reverse of splitting → merge nodes.</li>
+    <li>If a node underflows: borrow from a sibling, or merge nodes.</li>
+  </ul>
+
+  <h3>Advantages of 2-3-4 trees</h3>
+  <ul>
+    <li>Always balanced</li>
+    <li>Height = <code>O(log n)</code></li>
+    <li>Sorted data maintained</li>
+    <li>Efficient for large data</li>
+  </ul>
+
+  <h3>From 2-3-4 trees → B-Trees</h3>
+  <ul>
+    <li><strong>Generalization:</strong> instead of small nodes, use large nodes (disk blocks).</li>
+    <li><strong>Half-full rule:</strong> every node (except the root) must be at least 50% full.</li>
+  </ul>
+  <p><strong>Why:</strong> reduces height, minimises disk access, improves performance.</p>
+
+  <div class="tablewrap">
+    <table>
+      <caption>Final complexity summary</caption>
+      <thead><tr><th>Operation</th><th>Complexity</th></tr></thead>
+      <tbody>
+        <tr><td>Search</td><td><code>O(log n)</code></td></tr>
+        <tr><td>Insert</td><td><code>O(log n)</code></td></tr>
+        <tr><td>Delete</td><td><code>O(log n)</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="summary">
+    <h3>Final summary</h3>
+    <ul>
+      <li>BST → fast but can become slow</li>
+      <li>Balanced trees → fix height</li>
+      <li>Still not good for disks</li>
+      <li>2-3-4 trees → multi-value nodes</li>
+      <li>Leads to → B-Trees / B+ Trees (used in DBMS)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= LECTURE 3 ================= -->
+<section class="lecture" id="l3">
+  <h2><span class="num">3</span>Indexing / 3 — B+ Trees</h2>
+
+  <h3>What is a B+ Tree?</h3>
+  <ul>
+    <li>A balanced multi-level index structure.</li>
+    <li>Used in databases for fast searching on disk.</li>
+  </ul>
+  <p><strong>Purpose:</strong> avoid the performance issues of sequential files and reduce reorganisation overhead.</p>
+
+  <h3>Relation to 2-3-4 trees</h3>
+  <ul>
+    <li>A B+ Tree is an advanced version of the 2-3-4 tree.</li>
+    <li>Properties: multi-value nodes · always balanced · all leaf nodes at the same level.</li>
+  </ul>
+
+  <h3>Structure of a B+ Tree</h3>
+  <h4>Key properties</h4>
+  <ul>
+    <li><strong>Balanced height:</strong> all leaves at the same level → equal access time.</li>
+    <li><strong>Half-full rule:</strong> if max pointers = <em>n</em>, each node must have at least <em>n</em>/2 pointers. The root is an exception (it can have fewer).</li>
+  </ul>
+  <h4>Node types</h4>
+  <ul>
+    <li><strong>Leaf nodes:</strong> store actual data pointers/records; connected like a linked list; benefit — fast range queries and easy sequential access.</li>
+    <li><strong>Internal nodes:</strong> store only keys + pointers; do not store actual data; their role is to guide the search path.</li>
+  </ul>
+
+  <h3>Operations</h3>
+  <p><strong>Search:</strong> start at root → compare key → follow pointer → reach leaf → linear search. Complexity: <code>O(log n)</code>.</p>
+  <p><strong>Insertion:</strong></p>
+  <ul>
+    <li>Insert into the leaf node.</li>
+    <li>If the node is full → a split occurs.</li>
+    <li>Splitting rule: divide keys into two nodes, push the middle key up.</li>
+    <li>The split may propagate upward.</li>
+    <li>Height increases only at the root.</li>
+  </ul>
+  <p><strong>Deletion:</strong></p>
+  <ul>
+    <li>Remove the key from the leaf.</li>
+    <li>If node &lt; <em>n</em>/2 → borrow from a sibling or merge nodes.</li>
+    <li>Height may decrease.</li>
+  </ul>
+
+  <h3>Performance &amp; efficiency</h3>
+  <div class="note"><b>Height formula:</b> Height ≈ O(log<sub>(n/2)</sub> K), where <em>n</em> = max pointers and <em>K</em> = number of keys.</div>
+  <div class="tablewrap">
+    <table>
+      <caption>Comparison example</caption>
+      <thead><tr><th>Structure</th><th>Height (1M records)</th></tr></thead>
+      <tbody>
+        <tr><td>Binary tree</td><td>~20</td></tr>
+        <tr><td>B+ Tree (n = 100)</td><td>~4</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <ul><li>Fewer levels → fewer disk accesses.</li></ul>
+  <p><strong>Trade-off:</strong> increasing node size means fewer levels, but slower search inside a node.</p>
+
+  <h3>Advanced concepts</h3>
+  <h4>Handling duplicates</h4>
+  <ul>
+    <li>Buckets (list of pointers)</li>
+    <li>Store multiple records</li>
+    <li>Add a unique ID</li>
+  </ul>
+  <h4>Record relocation problem</h4>
+  <ul>
+    <li>If data moves, updating all indices is costly.</li>
+    <li>Solution: the secondary index stores the primary key instead of the physical address.</li>
+  </ul>
+  <h4>String indexing</h4>
+  <ul>
+    <li>Use prefix compression.</li>
+    <li>Example: instead of storing "DATABASE", store "DATA" (enough for uniqueness).</li>
+    <li>Saves space.</li>
+  </ul>
+
+  <h3>B-Tree vs B+ Tree</h3>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Feature</th><th>B-Tree</th><th>B+ Tree</th></tr></thead>
+      <tbody>
+        <tr><td>Data storage</td><td>Internal + leaf</td><td>Only leaf</td></tr>
+        <tr><td>Key repetition</td><td>No</td><td>Yes</td></tr>
+        <tr><td>Internal node size</td><td>Large</td><td>Smaller</td></tr>
+        <tr><td>Fan-out</td><td>Low</td><td>High</td></tr>
+        <tr><td>Performance</td><td>Slower</td><td>Faster</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>Why the B+ Tree is preferred:</strong> higher fan-out → smaller height; better disk efficiency; faster range queries (linked leaves).</p>
+
+  <div class="summary">
+    <h3>Final summary</h3>
+    <ul>
+      <li>B+ Tree = best indexing structure for a DBMS</li>
+      <li>Balanced → <code>O(log n)</code></li>
+      <li>Leaf nodes store data</li>
+      <li>Internal nodes guide the search</li>
+      <li>Efficient for large-scale data on disk</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= LECTURE 4 ================= -->
+<section class="lecture" id="l4">
+  <h2><span class="num">4</span>Hashing</h2>
+
+  <h3>What is hashing?</h3>
+  <p>Hashing is a technique to convert large data (keys) into small numeric values using a hash function.</p>
+  <p><strong>Purpose:</strong> enable fast searching (almost <code>O(1)</code>) and avoid full table scans.</p>
+  <div class="note"><b>Basic idea:</b> Key (e.g. Name) → hash function → bucket address. Example: "Rahul" → h(key) → Bucket 5.</div>
+
+  <h3>Buckets</h3>
+  <ul>
+    <li>Storage locations (usually disk blocks).</li>
+    <li>Each bucket stores one or more records.</li>
+  </ul>
+  <p><strong>Collisions</strong> occur when two different keys map to the same bucket. For example, h("Aman") = 3 and h("Ravi") = 3 — both go to the same bucket.</p>
+  <p><strong>An ideal hash function</strong> distributes keys uniformly and minimises collisions.</p>
+
+  <h3>Static hashing</h3>
+  <h4>Concept</h4>
+  <ul>
+    <li>Fixed number of buckets.</li>
+    <li>Hash function remains constant.</li>
+  </ul>
+  <p><strong>Overflow handling:</strong> if a bucket is full → create an overflow bucket (chain).</p>
+  <p><strong>Limitations:</strong></p>
+  <ul>
+    <li>Long overflow chains → slow search</li>
+    <li>Wastage if too many buckets</li>
+    <li>Hard to resize</li>
+    <li>Rehashing required for changes</li>
+  </ul>
+
+  <h3>Dynamic (extendable) hashing</h3>
+  <h4>Concept</h4>
+  <ul>
+    <li>Buckets grow/shrink dynamically.</li>
+    <li>No fixed size limitation.</li>
+  </ul>
+  <p><strong>Key idea — prefix bits:</strong> use the first <em>i</em> bits of the hash value. Example: hash = 101101; if <em>i</em> = 3 → use 101.</p>
+  <p><strong>Directory (bucket table):</strong> a table of size 2<sup><em>i</em></sup> that points to buckets.</p>
+  <div class="tablewrap">
+    <table>
+      <caption>Depth concepts</caption>
+      <thead><tr><th>Type</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>Global depth</td><td>Number of bits used</td></tr>
+        <tr><td>Local depth</td><td>Bits used by a bucket</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>Bucket splitting:</strong> when a bucket is full → split the bucket, redistribute records, increase depth if needed.</p>
+  <p><strong>Trade-off:</strong> adapts to growth, but directory expansion is costly.</p>
+
+  <h3>Hashing vs ordered indexing</h3>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Feature</th><th>Hashing</th><th>B+ Tree</th></tr></thead>
+      <tbody>
+        <tr><td>Search (exact match)</td><td>Very fast</td><td>Good</td></tr>
+        <tr><td>Range queries</td><td>Not efficient</td><td>Excellent</td></tr>
+        <tr><td>Structure</td><td>Unordered</td><td>Ordered</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>Conclusion:</strong> use hashing for exact search (<code>WHERE id = 5</code>); use a B+ Tree for range queries (<code>BETWEEN 10 AND 50</code>).</p>
+
+  <h3>Bitmap index</h3>
+  <p>Used for attributes with few possible values (low cardinality) — e.g. Gender, City, Income Level. Instead of storing values, it uses bit arrays (0/1).</p>
+  <div class="tablewrap">
+    <table>
+      <caption>Example table</caption>
+      <thead><tr><th>Record</th><th>Male</th><th>Female</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>1</td><td>0</td></tr>
+        <tr><td>2</td><td>0</td><td>1</td></tr>
+        <tr><td>3</td><td>1</td><td>0</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>Fast query using bit operations:</strong> to find "Male AND High Income", perform a bitwise AND.</p>
+  <p><strong>Advantages:</strong> very fast queries, memory efficient, ideal for data warehouses.</p>
+
+  <div class="summary">
+    <h3>Final summary</h3>
+    <ul>
+      <li>Hashing = fastest for exact match</li>
+      <li>Static hashing = simple but rigid</li>
+      <li>Dynamic hashing = flexible but complex</li>
+      <li>Collisions handled via chaining/splitting</li>
+      <li>Bitmap index = best for low-cardinality data</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= LECTURE 5 ================= -->
+<section class="lecture" id="l5">
+  <h2><span class="num">5</span>Index Design</h2>
+
+  <h3>Creating &amp; dropping an index</h3>
+<pre><code><span class="k">CREATE INDEX</span> index_name
+<span class="k">ON</span> table_name (column1, column2);</code></pre>
+  <p>Example:</p>
+<pre><code><span class="k">CREATE INDEX</span> idx_name
+<span class="k">ON</span> Student(name);</code></pre>
+<pre><code><span class="k">DROP INDEX</span> index_name;</code></pre>
+  <p>Example:</p>
+<pre><code><span class="k">DROP INDEX</span> idx_name;</code></pre>
+
+  <h3>Types of index</h3>
+  <h4>1. Simple index — created on a single column</h4>
+<pre><code><span class="k">CREATE INDEX</span> idx_roll
+<span class="k">ON</span> Student(roll_no);</code></pre>
+
+  <h4>2. Composite index — created on multiple columns (max ≈ 32); order matters (left → right)</h4>
+<pre><code><span class="k">CREATE INDEX</span> idx_name_city
+<span class="k">ON</span> Student(name, city);</code></pre>
+
+  <h4>3. Unique index — ensures no duplicate values; acts like a candidate key</h4>
+<pre><code><span class="k">CREATE UNIQUE INDEX</span> idx_email
+<span class="k">ON</span> Student(email);</code></pre>
+
+  <h3>Storage parameters</h3>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Parameter</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>TABLESPACE</td><td>Where the index is stored</td></tr>
+        <tr><td>INITIAL</td><td>Size of the first block</td></tr>
+        <tr><td>NEXT</td><td>Size of the next block</td></tr>
+        <tr><td>PCTINCREASE</td><td>Growth rate of storage</td></tr>
+        <tr><td>PCTFREE</td><td>Free space reserved</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Advanced indexing concepts</h3>
+  <h4>Function-based index</h4>
+  <p>Used when queries apply functions — a normal index won't work here:</p>
+<pre><code><span class="k">SELECT</span> * <span class="k">FROM</span> Student <span class="k">WHERE</span> <span class="k">UPPER</span>(name) = <span class="s">'RAM'</span>;</code></pre>
+  <p>Solution:</p>
+<pre><code><span class="k">CREATE INDEX</span> idx_upper_name
+<span class="k">ON</span> Student(<span class="k">UPPER</span>(name));</code></pre>
+
+  <h4>Bitmap index</h4>
+  <p>Best for low distinct values (e.g. Gender, Semester).</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Record</th><th>Male</th><th>Female</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>1</td><td>0</td></tr>
+        <tr><td>2</td><td>0</td><td>1</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <ul><li>Fast queries using bitwise operations (AND, OR).</li></ul>
+
+  <h4>Multi-key access strategy</h4>
+  <ul>
+    <li>Query on multiple columns.</li>
+    <li>Option 1: use multiple single indexes → intersect results.</li>
+    <li>Option 2: use a composite index.</li>
+  </ul>
+  <div class="note"><b>Rule:</b> the leftmost column is used first.</div>
+
+  <h3>Privileges &amp; administration</h3>
+  <div class="tablewrap">
+    <table>
+      <caption>Required permissions</caption>
+      <thead><tr><th>Privilege</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>INDEX</td><td>Create index</td></tr>
+        <tr><td>TABLESPACE</td><td>Storage access</td></tr>
+        <tr><td>CREATE ANY INDEX</td><td>Index other schemas</td></tr>
+        <tr><td>QUERY REWRITE</td><td>Function-based index</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>DBA role:</strong> grants permissions and manages the indexing strategy.</p>
+
+  <h3>Seven golden rules of indexing</h3>
+  <ul>
+    <li><strong>Rule 0 — trade-off:</strong> faster reads, but slower updates and more storage.</li>
+    <li><strong>Rule 1 — correct table:</strong> use an index if the query retrieves &lt; 15% of rows.</li>
+    <li><strong>Rule 2 — correct column:</strong> choose columns with high uniqueness; use bitmap for low distinct values.</li>
+    <li><strong>Rule 3 — limit indices:</strong> too many indices → slow inserts/updates.</li>
+    <li><strong>Rule 4 — column order:</strong> in a composite index, put the most selective column first, e.g. (name, city) if name is more unique.</li>
+    <li><strong>Rule 5 — gather statistics:</strong> <code>COMPUTE STATISTICS;</code> helps the query optimiser.</li>
+    <li><strong>Rule 6 — drop unused index:</strong> saves space, improves performance.</li>
+  </ul>
+
+  <h3>Physical vs logical design</h3>
+  <ul>
+    <li><strong>Logical design:</strong> done during the design phase — e.g. normalization removes redundancy.</li>
+    <li><strong>Physical design:</strong> done during execution/runtime; includes indexing and hashing; depends on query patterns and data size.</li>
+  </ul>
+
+  <div class="note"><b>Composite index size rule:</b> index key size ≤ ½ of the data block size.</div>
+
+  <div class="summary">
+    <h3>Final summary</h3>
+    <ul>
+      <li>Index improves search speed</li>
+      <li>Types: simple, composite, unique</li>
+      <li>Advanced: function-based, bitmap</li>
+      <li>Follow the 7 rules for best performance</li>
+      <li>Trade-off: speed vs storage vs update cost</li>
+    </ul>
+  </div>
+</section>
+
+<footer>Week 9 short notes — Indexing and Hashing</footer>
+
+</main>
+</div>
+</div>
+</body>
+</html>

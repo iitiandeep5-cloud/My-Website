@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 12 — Query Processing, RDBMS Architecture &amp; NoSQL (DBMS Short Notes)</title>
+<style>
+:root{
+  --paper:#f6f7f5;
+  --panel:#ffffff;
+  --ink:#16181c;
+  --ink-soft:#4d5560;
+  --rule:#d9dcd6;
+  --accent:#1f5f4f;
+  --accent-soft:#e3efe9;
+  --mark:#b4531a;
+  --code-bg:#1b1f24;
+  --code-ink:#e6e8ea;
+  --code-key:#7fb2ff;
+  --code-str:#e4a97a;
+  --yes:#1f7a5a;
+  --no:#b03434;
+  --sans:"Segoe UI",Roboto,"Helvetica Neue",Arial,system-ui,sans-serif;
+  --serif:Georgia,"Times New Roman",Cambria,serif;
+  --mono:ui-monospace,Menlo,Consolas,"Courier New",monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#131619;
+    --panel:#1a1e22;
+    --ink:#e8eae6;
+    --ink-soft:#a3aab2;
+    --rule:#2d3339;
+    --accent:#7fc9b0;
+    --accent-soft:#1f2c29;
+    --mark:#e9a06a;
+    --code-bg:#0f1216;
+    --code-ink:#e6e8ea;
+    --yes:#7fc9b0;
+    --no:#e58b8b;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#131619;
+  --panel:#1a1e22;
+  --ink:#e8eae6;
+  --ink-soft:#a3aab2;
+  --rule:#2d3339;
+  --accent:#7fc9b0;
+  --accent-soft:#1f2c29;
+  --mark:#e9a06a;
+  --code-bg:#0f1216;
+  --code-ink:#e6e8ea;
+  --yes:#7fc9b0;
+  --no:#e58b8b;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:1.5rem}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--serif);
+  font-size:17px;
+  line-height:1.65;
+  -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 1.25rem 5rem}
+
+/* Masthead */
+header.top{
+  border-bottom:2px solid var(--ink);
+  margin-bottom:2.5rem;
+  padding:3.5rem 0 1.25rem;
+}
+.kicker{
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:.9rem;
+  color:var(--accent);
+  margin:0 0 .6rem;
+}
+h1{
+  font-family:var(--sans);
+  font-weight:700;
+  font-size:clamp(2.1rem,6vw,3.6rem);
+  line-height:1.05;
+  margin:0 0 .5rem;
+  letter-spacing:-.02em;
+}
+.standfirst{margin:0;max-width:56ch;color:var(--ink-soft)}
+
+/* Layout */
+.cols{display:grid;grid-template-columns:1fr;gap:2.5rem}
+@media (min-width:900px){
+  .cols{grid-template-columns:230px minmax(0,1fr);gap:3.5rem;align-items:start}
+  nav.toc{position:sticky;top:1.5rem}
+}
+nav.toc{font-family:var(--sans);font-size:.9rem}
+nav.toc p{margin:0 0 .75rem;font-weight:700}
+nav.toc ol{list-style:none;margin:0;padding:0;border-left:1px solid var(--rule)}
+nav.toc li{margin:0}
+nav.toc a{
+  display:block;padding:.35rem .75rem;color:var(--ink-soft);
+  text-decoration:none;border-left:2px solid transparent;margin-left:-1px;
+}
+nav.toc a:hover,nav.toc a:focus-visible{color:var(--accent);border-left-color:var(--accent)}
+
+/* Sections */
+section.lecture{margin:0 0 4rem;max-width:74ch}
+section.lecture > h2{
+  font-family:var(--sans);
+  font-size:clamp(1.5rem,3.4vw,2.1rem);
+  font-weight:700;letter-spacing:-.015em;
+  margin:0 0 1.75rem;padding-bottom:.6rem;
+  border-bottom:1px solid var(--rule);
+}
+section.lecture > h2 .num{display:inline-block;color:var(--accent);margin-right:.5rem}
+h3{font-family:var(--sans);font-size:1.25rem;font-weight:700;margin:2.25rem 0 .6rem;letter-spacing:-.01em}
+h4{font-family:var(--sans);font-size:1rem;font-weight:600;margin:1.4rem 0 .35rem;color:var(--ink-soft)}
+p{margin:.5rem 0}
+ul,ol{margin:.5rem 0 .9rem;padding-left:1.35rem}
+li{margin:.2rem 0}
+li::marker{color:var(--accent)}
+strong{font-weight:700}
+
+/* Callouts */
+.note{
+  border-left:3px solid var(--accent);
+  background:var(--accent-soft);
+  padding:.75rem 1rem;margin:1rem 0;border-radius:0 4px 4px 0;
+}
+.note b{font-family:var(--sans)}
+.summary{
+  border:1px solid var(--rule);background:var(--panel);
+  padding:1rem 1.25rem;border-radius:6px;margin:1.75rem 0 0;
+}
+.summary h3{margin-top:0}
+.trick{
+  border:1px dashed var(--accent);border-radius:6px;
+  padding:.6rem 1rem;margin:1rem 0;font-family:var(--sans);font-size:.95rem;
+}
+.trick ul{margin:.3rem 0 0}
+
+/* Tables */
+.tablewrap{overflow-x:auto;margin:1rem 0 1.25rem}
+table{border-collapse:collapse;width:100%;min-width:320px;font-size:.95rem;background:var(--panel)}
+caption{text-align:left;font-family:var(--sans);font-size:.9rem;color:var(--ink-soft);padding-bottom:.4rem}
+th,td{border:1px solid var(--rule);padding:.5rem .7rem;text-align:left;vertical-align:top}
+thead th{font-family:var(--sans);font-weight:600;background:var(--accent-soft);color:var(--ink)}
+tbody tr:nth-child(even) td{background:rgba(125,125,125,.08)}
+.yes{color:var(--yes);font-weight:700}
+.no{color:var(--no);font-weight:700}
+
+/* Code */
+pre{
+  background:var(--code-bg);color:var(--code-ink);
+  padding:.9rem 1rem;border-radius:6px;overflow-x:auto;
+  font-family:var(--mono);font-size:.86rem;line-height:1.55;margin:.75rem 0 1.1rem;
+}
+pre .k{color:var(--code-key)}
+pre .s{color:var(--code-str)}
+code{
+  font-family:var(--mono);font-size:.88em;
+  background:rgba(125,125,125,.18);padding:.08em .35em;border-radius:3px;
+}
+pre code{background:none;padding:0;font-size:1em}
+.ascii{
+  font-family:var(--mono);font-size:.85rem;
+  border:1px dashed var(--rule);padding:.75rem 1rem;border-radius:4px;
+  white-space:pre;overflow-x:auto;color:var(--ink-soft);margin:.75rem 0;
+}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+footer{
+  border-top:1px solid var(--rule);margin-top:3rem;padding-top:1rem;
+  font-family:var(--sans);font-size:.85rem;color:var(--ink-soft);
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <p class="kicker">DBMS · Week 12 short notes</p>
+  <h1>Query Processing, Architecture &amp; NoSQL</h1>
+  </header>
+
+<div class="cols">
+
+<nav class="toc" aria-label="Contents">
+  <p>Lectures</p>
+  <ol>
+    <li><a href="#l1">1 · Processing</a></li>
+    <li><a href="#l2">2 · Optimization</a></li>
+    <li><a href="#l3">3 · RDBMS performance</a></li>
+    <li><a href="#l4">4 · NoSQL</a></li>
+    <li><a href="#l5">5 · DBMSs &amp; recap</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ================= LECTURE 1 ================= -->
+<section class="lecture" id="l1">
+  <h2><span class="num">1</span>Query Processing and Optimization / 1 — Processing</h2>
+
+  <h3>Query processing flow</h3>
+  <p>The database converts an SQL query into results in three main steps:</p>
+  <ul>
+    <li><strong>Parsing &amp; translation:</strong> SQL → relational algebra</li>
+    <li><strong>Optimization:</strong> chooses the least-cost execution plan using statistics such as number of tuples and size</li>
+    <li><strong>Evaluation:</strong> executes the plan and returns output</li>
+  </ul>
+
+  <h3>Query cost (performance measure)</h3>
+  <ul>
+    <li><strong>Main goal:</strong> minimise total execution time</li>
+    <li><strong>Most important factor:</strong> disk I/O (more significant than CPU or network)</li>
+  </ul>
+  <p><strong>Disk access includes:</strong> seek time (finding data), read time, and write time (costlier due to verification).</p>
+  <div class="note"><b>Cost formula:</b> Cost = b·t<sub>T</sub> + S·t<sub>S</sub>, where <em>b</em> = number of block transfers, <em>t<sub>T</sub></em> = transfer time per block, <em>S</em> = number of seeks, <em>t<sub>S</sub></em> = seek time.</div>
+  <p><strong>Note:</strong> more buffer memory ⇒ fewer disk accesses ⇒ faster queries.</p>
+
+  <h3>Selection (σ) operation strategies</h3>
+  <ul>
+    <li><strong>Without index:</strong>
+      <ul>
+        <li>Linear search → scan the entire file (slow).</li>
+        <li>If the key is unique → stop early (average half scan).</li>
+      </ul>
+    </li>
+    <li><strong>With index:</strong>
+      <ul>
+        <li>Primary index (key): very fast, tree height traversal.</li>
+        <li>Primary index (non-key): multiple records must be fetched.</li>
+        <li>Secondary index: fast for key, slower for non-key (records scattered).</li>
+      </ul>
+    </li>
+    <li><strong>Complex conditions:</strong>
+      <ul>
+        <li>AND (conjunction): use one index + filter the remaining.</li>
+        <li>OR (disjunction): usually a full scan; if multiple indexes exist → combine results.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>Sorting techniques</h3>
+  <ul>
+    <li><strong>When data fits in memory:</strong> use quicksort (fast).</li>
+    <li><strong>When data is large:</strong> use external merge sort.</li>
+  </ul>
+  <p><strong>External merge sort phases:</strong></p>
+  <ol>
+    <li><strong>Run creation:</strong> break into chunks, sort each chunk, store as sorted runs.</li>
+    <li><strong>Merge:</strong> merge runs step-by-step until the final output is fully sorted.</li>
+  </ol>
+
+  <h3>Join operations</h3>
+  <ul>
+    <li><strong>Nested loop join:</strong> compare every tuple with every tuple (very slow).</li>
+    <li><strong>Block nested loop join:</strong> compare block-by-block (reduces I/O significantly).</li>
+    <li><strong>Indexed nested loop join:</strong> uses an index on the join attribute (much faster).</li>
+  </ul>
+
+  <h3>Other operations</h3>
+  <ul>
+    <li><strong>Duplicate elimination:</strong> done using sorting or hashing; optimisation — remove duplicates during merge.</li>
+    <li><strong>Aggregation (GROUP BY):</strong> functions — min, max, sum, count, avg.</li>
+  </ul>
+  <div class="note"><b>Trick for average:</b> Avg = Sum / Count</div>
+
+  <div class="trick"><b>Quick revision:</b>
+    <ul>
+      <li>Disk I/O = biggest cost</li>
+      <li>Index = speed booster</li>
+      <li>External sorting = for big data</li>
+      <li>Indexed join = best join method</li>
+      <li>Use AND smartly, OR carefully</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= LECTURE 2 ================= -->
+<section class="lecture" id="l2">
+  <h2><span class="num">2</span>Query Processing and Optimization / 2 — Optimization</h2>
+
+  <h3>Core idea</h3>
+  <ul>
+    <li><strong>Goal:</strong> find the most efficient way to execute a query.</li>
+    <li>Achieved by converting a query into multiple equivalent forms and choosing the lowest-cost plan.</li>
+  </ul>
+
+  <h3>Optimization process</h3>
+  <ol>
+    <li>SQL → relational algebra</li>
+    <li>Generate equivalent expressions</li>
+    <li>Assign algorithms to operations</li>
+    <li>Estimate the cost of each plan</li>
+    <li>Choose the best (cheapest) plan</li>
+  </ol>
+
+  <h3>Evaluation plan</h3>
+  <ul>
+    <li>Represented as a query tree with annotations.</li>
+    <li>Specifies operations (select, join, project) and the algorithms used (linear scan, index scan, merge join, hash join).</li>
+  </ul>
+  <p>Think of it as a step-by-step execution blueprint.</p>
+
+  <h3>Cost estimation</h3>
+  <p><strong>Based on:</strong> relation size, intermediate result size, and available indexes. It uses cost formulas to compare plans.</p>
+  <div class="note"><b>Key insight:</b> smaller intermediate results ⇒ faster queries.</div>
+
+  <h3>Equivalence rules</h3>
+  <p>Two expressions are equivalent if they give the same result.</p>
+  <h4>Selection rules (σ)</h4>
+  <ul>
+    <li><strong>Conjunction rule:</strong> <code>σ<sub>θ1∧θ2</sub>(E) = σ<sub>θ1</sub>(σ<sub>θ2</sub>(E))</code></li>
+    <li><strong>Commutativity:</strong> <code>σ<sub>θ1</sub>(σ<sub>θ2</sub>(E)) = σ<sub>θ2</sub>(σ<sub>θ1</sub>(E))</code></li>
+  </ul>
+  <h4>Join rules (⋈)</h4>
+  <ul>
+    <li><strong>Commutative:</strong> E₁⋈E₂ = E₂⋈E₁</li>
+    <li><strong>Associative:</strong> (E₁⋈E₂)⋈E₃ = E₁⋈(E₂⋈E₃)</li>
+  </ul>
+  <h4>Distribution rules</h4>
+  <ul>
+    <li><strong>Selection over join:</strong> push the condition down if it uses only one relation → reduces data before the join.</li>
+    <li><strong>Projection over join:</strong> keep only needed attributes early (must keep join attributes).</li>
+  </ul>
+  <h4>Set operation rules</h4>
+  <ul>
+    <li><strong>Union (∪) &amp; intersection (∩):</strong> commutative &amp; associative.</li>
+    <li><strong>Selection distributes over:</strong> union, intersection, difference.</li>
+  </ul>
+
+  <h3>Key optimization strategies</h3>
+  <ul>
+    <li><strong>Push selection down:</strong> apply filters early to reduce tuples.</li>
+    <li><strong>Push projection down:</strong> remove unnecessary columns early to reduce data size.</li>
+    <li><strong>Optimal join order:</strong> join smaller relations first; statistics guide decisions.</li>
+  </ul>
+  <p><strong>Note:</strong> join order greatly affects performance.</p>
+
+  <h3>Challenges in optimization</h3>
+  <p><strong>Problem:</strong> too many possible query plans → brute force means exponential time.</p>
+  <p><strong>Solutions:</strong></p>
+  <ul>
+    <li><strong>Space optimization:</strong> avoid duplicate sub-expressions, share common parts of the query tree.</li>
+    <li><strong>Dynamic programming:</strong> store the best cost for sub-parts, ignore worse options early.</li>
+  </ul>
+  <p><strong>Result:</strong> optimization becomes feasible and fast.</p>
+
+  <div class="trick"><b>Quick summary:</b>
+    <ul>
+      <li>Equivalent expressions = same result</li>
+      <li>Push selection &amp; projection early</li>
+      <li>Join order matters significantly</li>
+      <li>Dynamic programming avoids explosion of plans</li>
+      <li>Goal = minimum cost, maximum efficiency</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= LECTURE 3 ================= -->
+<section class="lecture" id="l3">
+  <h2><span class="num">3</span>RDBMS Performance &amp; Architecture</h2>
+
+  <h3>Core performance factors</h3>
+  <ul>
+    <li><strong>Correctness:</strong> ensured by ACID properties. Transactions must update data accurately and safely.</li>
+    <li><strong>Throughput:</strong> measured as TPS (transactions per second). Higher TPS = better performance.</li>
+    <li><strong>Response time:</strong> time between query request and result. Lower response time = faster system.</li>
+    <li><strong>Availability:</strong> measured by MTTF (mean time to failure). Higher MTTF = more reliable system.</li>
+  </ul>
+
+  <h3>Levels of optimization</h3>
+  <ul>
+    <li><strong>Transaction level:</strong> concurrency control, query optimization, hardware support (e.g. RAID).</li>
+    <li><strong>System level:</strong> hardware components — CPU, memory, disk, network.</li>
+    <li><strong>Database level:</strong> how DB processes run on the system; resource allocation &amp; scheduling.</li>
+  </ul>
+
+  <h3>Performance tuning</h3>
+  <p><strong>Goal:</strong> remove bottlenecks.</p>
+  <ul>
+    <li><strong>Hardware tuning:</strong> add more disks → faster I/O; increase memory → better caching; faster CPU → improved processing.</li>
+    <li><strong>Database parameter tuning:</strong> increase buffer size → fewer disk accesses; proper checkpointing → faster recovery; optimise schema &amp; indexes.</li>
+  </ul>
+
+  <h3>Scalability concepts</h3>
+  <p><strong>Definition:</strong> the ability to handle more data, more users, and more workload without losing performance.</p>
+
+  <h4>Speedup</h4>
+  <ul>
+    <li>Use <em>n</em>× resources for the same task.</li>
+    <li><strong>Ideal:</strong> speedup = <em>n</em>.</li>
+    <li><strong>Reality:</strong> less than <em>n</em> due to startup overhead, resource contention, uneven workload.</li>
+  </ul>
+  <h4>Scaleup</h4>
+  <ul>
+    <li>Increase data + system size by <em>n</em>×.</li>
+    <li><strong>Ideal:</strong> execution time remains the same (ratio = 1).</li>
+    <li><strong>Reality:</strong> slight performance drop due to overhead.</li>
+  </ul>
+
+  <h3>RDBMS architectures</h3>
+  <ul>
+    <li><strong>Centralized system:</strong> single machine, suitable for small systems.</li>
+    <li><strong>Client-server architecture:</strong> front-end (client) — UI, SQL queries, reports; back-end (server) — SQL engine executes queries. Types: transactional query server, data server.</li>
+    <li><strong>Parallel systems:</strong> multiple processors + disks connected via a fast network.
+      <ul>
+        <li>Interconnection types: bus (simple, low scalability), mesh/toroid (moderate scalability), hypercube (best — log n communication time).</li>
+        <li>Configurations: shared memory, shared disk, shared nothing (best scalability), hybrid.</li>
+      </ul>
+    </li>
+    <li><strong>Distributed systems:</strong> data spread across multiple locations. Types: homogeneous (same DB + schema), heterogeneous (different DB/schema).</li>
+  </ul>
+
+  <h3>Scaling strategies</h3>
+  <ul>
+    <li><strong>Vertical scaling (scale up):</strong> increase the power of a single machine — easy to implement, works with the existing system; but a single point of failure, limited scalability, expensive upgrades.</li>
+    <li><strong>Horizontal scaling (scale out):</strong> add more machines — high fault tolerance, better scalability, parallel processing; but complex management, data consistency challenges.</li>
+  </ul>
+
+  <h3>Modern techniques</h3>
+  <ul>
+    <li><strong>Replication (master-slave):</strong> master handles writes, slaves handle reads.</li>
+    <li><strong>Sharding:</strong> split data across machines, each handling a subset of data; improves performance &amp; scalability.</li>
+  </ul>
+
+  <div class="trick"><b>Quick summary:</b>
+    <ul>
+      <li>ACID → ensures correctness</li>
+      <li>TPS ↑ and response time ↓ = good system</li>
+      <li>Push bottlenecks out via tuning</li>
+      <li>Speedup ≠ perfect due to overhead</li>
+      <li>Horizontal scaling &gt; vertical scaling (modern systems)</li>
+      <li>Sharding + replication = real-world scaling tools</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= LECTURE 4 ================= -->
+<section class="lecture" id="l4">
+  <h2><span class="num">4</span>Non-Relational DBMS: NoSQL</h2>
+
+  <h3>What is Big Data?</h3>
+  <ul>
+    <li>Extremely large and complex datasets.</li>
+    <li>Traditional DBMS tools cannot handle it efficiently.</li>
+  </ul>
+
+  <h3>The 5 V's of Big Data</h3>
+  <ul>
+    <li><strong>Volume:</strong> massive amount of data (TBs, PBs, etc.)</li>
+    <li><strong>Variety:</strong> different data types (text, images, audio, video)</li>
+    <li><strong>Velocity:</strong> speed of data generation and processing (e.g. real-time streaming)</li>
+    <li><strong>Variability:</strong> data is inconsistent and changing</li>
+    <li><strong>Veracity:</strong> data quality and accuracy may vary</li>
+  </ul>
+
+  <h3>What is NoSQL?</h3>
+  <ul>
+    <li>Non-relational database model.</li>
+    <li>Data is not stored in tables.</li>
+  </ul>
+  <h4>Why NoSQL?</h4>
+  <ul>
+    <li>Handles big data scale.</li>
+    <li>Supports real-time applications.</li>
+    <li>Manages complex data.</li>
+  </ul>
+  <h4>Key features</h4>
+  <ul>
+    <li>No fixed schema (flexible).</li>
+    <li>Horizontal scaling (scale-out).</li>
+    <li>Data replication (fault tolerance).</li>
+    <li>High performance for simple queries.</li>
+  </ul>
+  <h4>Limitations</h4>
+  <ul>
+    <li>No standard query language.</li>
+    <li>More coding required.</li>
+    <li>Weak ACID guarantees.</li>
+  </ul>
+
+  <h3>CAP theorem</h3>
+  <p><strong>Core idea:</strong> a distributed system cannot guarantee all three together:</p>
+  <ul>
+    <li><strong>Consistency (C):</strong> same data everywhere.</li>
+    <li><strong>Availability (A):</strong> every request gets a response.</li>
+    <li><strong>Partition tolerance (P):</strong> works despite network failures.</li>
+  </ul>
+  <div class="note"><b>Important insight:</b> in real systems, partition tolerance is mandatory. CP systems combine consistency + partition tolerance; AP systems combine availability + partition tolerance.</div>
+
+  <h3>ACID vs BASE</h3>
+  <ul>
+    <li><strong>ACID (RDBMS):</strong> strong consistency, reliable transactions.</li>
+    <li><strong>BASE (NoSQL):</strong>
+      <ul>
+        <li><strong>Basically available</strong> → system always responds.</li>
+        <li><strong>Soft state</strong> → data may change over time.</li>
+        <li><strong>Eventual consistency</strong> → data becomes consistent later.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>Gossip protocol</h3>
+  <ul>
+    <li>Nodes share updates randomly.</li>
+    <li>Data spreads like "rumours".</li>
+    <li>Ensures eventual consistency.</li>
+  </ul>
+
+  <h3>Types of NoSQL databases</h3>
+  <ul>
+    <li><strong>Key-value stores:</strong> data = (key, value) pairs — very fast and scalable, not suitable for complex data.</li>
+    <li><strong>Document stores:</strong> data stored as JSON/XML — supports nested structures, flexible and widely used.</li>
+    <li><strong>Column stores:</strong> data stored column-wise — efficient for large datasets, uses timestamps for versions.</li>
+    <li><strong>Graph databases:</strong> data as nodes and edges — best for relationships (e.g. social networks).</li>
+  </ul>
+
+  <div class="tablewrap">
+    <table>
+      <caption>RDBMS vs NoSQL</caption>
+      <thead><tr><th>Feature</th><th>RDBMS (relational)</th><th>NoSQL (non-relational)</th></tr></thead>
+      <tbody>
+        <tr><td>Data model</td><td>Tables (structured)</td><td>Flexible (semi/unstructured)</td></tr>
+        <tr><td>Schema</td><td>Fixed</td><td>Dynamic</td></tr>
+        <tr><td>Scalability</td><td>Vertical</td><td>Horizontal</td></tr>
+        <tr><td>Consistency</td><td>Strong (ACID)</td><td>Eventual (BASE)</td></tr>
+        <tr><td>Use case</td><td>Banking, enterprise</td><td>Big data, web apps</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="trick"><b>Quick summary:</b>
+    <ul>
+      <li>Big Data = 5 V's</li>
+      <li>NoSQL = flexible + scalable</li>
+      <li>CAP theorem → pick any 2 (with partition tolerance mandatory)</li>
+      <li>ACID vs BASE = strong vs eventual consistency</li>
+      <li>Graph DB = best for relationships</li>
+      <li>Document DB = most commonly used</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= LECTURE 5 ================= -->
+<section class="lecture" id="l5">
+  <h2><span class="num">5</span>Widely Used DBMSs and Course Summarization</h2>
+
+  <h3>Core idea</h3>
+  <ul>
+    <li>Data stored in tables (relations).</li>
+    <li>Structure: rows → tuples, columns → attributes.</li>
+    <li>Relationships via primary key &amp; foreign key.</li>
+    <li>Uses SQL for queries.</li>
+  </ul>
+
+  <h3>Types of RDBMS</h3>
+  <ul>
+    <li><strong>Commercial (paid):</strong> Oracle Corporation (market leader ~48.8%), IBM (Db2), Microsoft (SQL Server), SAP (Sybase), Teradata.</li>
+    <li><strong>Open source (free):</strong> PostgreSQL, MySQL, SQLite.</li>
+  </ul>
+
+  <h3>Market trends</h3>
+  <ul>
+    <li><strong>Top databases:</strong> Oracle Database, MySQL</li>
+    <li><strong>Fast-growing:</strong> PostgreSQL</li>
+    <li><strong>Rapid rise:</strong> Snowflake</li>
+    <li><strong>Widely used in mobile:</strong> SQLite</li>
+  </ul>
+
+  <h3>Specialized databases</h3>
+  <ul>
+    <li><strong>Object-relational DB:</strong> uses pointers for relationships, avoids expensive joins. Example: Illustra.</li>
+    <li><strong>Data warehousing:</strong> designed for large-scale analytics. Examples: Apache Hive, Teradata.</li>
+  </ul>
+
+  <h3>Relational vs NoSQL</h3>
+  <ul>
+    <li><strong>Dominance:</strong> the top 4 databases are still relational — Oracle Database, MySQL, Microsoft SQL Server, PostgreSQL.</li>
+    <li><strong>NoSQL leaders:</strong> MongoDB, Redis.</li>
+  </ul>
+
+  <div class="tablewrap">
+    <table>
+      <caption>Key differences</caption>
+      <thead><tr><th>Feature</th><th>RDBMS (relational)</th><th>NoSQL (non-relational)</th></tr></thead>
+      <tbody>
+        <tr><td>Use case</td><td>OLTP (transactions)</td><td>Large-scale apps</td></tr>
+        <tr><td>Data</td><td>Structured</td><td>Flexible</td></tr>
+        <tr><td>Scaling</td><td>Vertical</td><td>Horizontal</td></tr>
+        <tr><td>Consistency</td><td>Strong (ACID)</td><td>Flexible (CAP-based)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>Real-world usage:</strong> large companies like Facebook, Amazon and Google use NoSQL for massive-scale systems.</p>
+
+  <h3>Full course recap (Weeks 1–12)</h3>
+
+  <h4>Weeks 1–3: Foundations</h4>
+  <ul>
+    <li>DBMS vs file system</li>
+    <li>Relational model</li>
+    <li>SQL (basic → advanced)</li>
+    <li>Nested queries</li>
+    <li>Views</li>
+    <li>Transactions</li>
+  </ul>
+
+  <h4>Weeks 4–6: Design</h4>
+  <ul>
+    <li>ER model</li>
+    <li>Relational algebra</li>
+    <li>Functional dependencies</li>
+    <li>Normal forms: 1NF, 2NF, 3NF, BCNF</li>
+    <li><strong>Goal:</strong> reduce redundancy &amp; improve integrity</li>
+  </ul>
+
+  <h4>Weeks 7–8: Advanced design</h4>
+  <ul>
+    <li>4NF</li>
+    <li>Multivalued dependencies</li>
+    <li>Temporal &amp; spatial data</li>
+    <li><strong>Architecture:</strong> 2-tier, 3-tier, n-tier</li>
+    <li><strong>Tools:</strong> Flask + PostgreSQL</li>
+  </ul>
+
+  <h4>Weeks 9–10: Storage &amp; indexing</h4>
+  <ul>
+    <li>Physical storage</li>
+    <li>B+ trees (most important index)</li>
+    <li>Hashing: static, dynamic</li>
+  </ul>
+
+  <h4>Weeks 11–12: Transactions</h4>
+  <ul>
+    <li>Concurrency control</li>
+    <li>Locking protocols</li>
+    <li>Deadlocks</li>
+    <li>Serializability</li>
+    <li>Recovery using logs</li>
+  </ul>
+
+  <h4>Week 12: Modern trends</h4>
+  <ul>
+    <li>Query optimization</li>
+    <li>Horizontal scaling</li>
+    <li>Big Data &amp; NoSQL</li>
+    <li>Gossip protocol</li>
+  </ul>
+
+  <h3>Keys to success in DBMS</h3>
+  <ul>
+    <li><strong>Practice:</strong> write SQL queries regularly, design schemas.</li>
+    <li><strong>Strong fundamentals:</strong> algorithms, data structures, discrete mathematics.</li>
+    <li><strong>Expand knowledge:</strong> learn UML (Unified Modeling Language) — useful for complex systems &amp; NoSQL.</li>
+  </ul>
+
+  <div class="summary">
+    <h3>Quick summary</h3>
+    <ul>
+      <li>RDBMS = structured + strong consistency</li>
+      <li>NoSQL = scalable + flexible</li>
+      <li>PostgreSQL = rising star</li>
+      <li>B+ Tree = most important index</li>
+      <li>Normalization = reduce redundancy</li>
+      <li>Practice SQL daily = key to mastery</li>
+    </ul>
+  </div>
+</section>
+
+<footer>Week 12 short notes — Query Processing, Architecture and NoSQL</footer>
+
+</main>
+</div>
+</div>
+</body>
+</html>
