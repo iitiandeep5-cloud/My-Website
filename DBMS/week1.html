@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>Week 1: DBMS Short Notes</title>
+<style>
+  :root{
+    --bg:#ffffff; --fg:#1a1a1a; --muted:#5a5a5a; --accent:#2b6cb0;
+    --card:#f7f9fc; --border:#e2e8f0; --code:#eef2f7;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#12151a; --fg:#e8eaed; --muted:#a0a7b3; --accent:#7fb2ff;
+      --card:#1b2029; --border:#2a313d; --code:#20262f;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#12151a; --fg:#e8eaed; --muted:#a0a7b3; --accent:#7fb2ff;
+    --card:#1b2029; --border:#2a313d; --code:#20262f;
+  }
+  *{box-sizing:border-box;}
+  body{
+    background:var(--bg); color:var(--fg);
+    font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height:1.6; margin:0; padding:0;
+  }
+  .wrap{max-width:860px; margin:0 auto; padding:32px 20px 80px;}
+  h1{
+    font-size:1.9rem; margin-bottom:4px; color:var(--fg);
+  }
+  .subtitle{color:var(--muted); margin-top:0; margin-bottom:32px; font-size:0.95rem;}
+  h2.lecture{
+    font-size:1.3rem; margin-top:48px; margin-bottom:14px;
+    color:var(--accent); border-bottom:2px solid var(--border); padding-bottom:8px;
+  }
+  h3{
+    font-size:1.05rem; margin-top:24px; margin-bottom:8px; color:var(--fg);
+  }
+  h4{
+    font-size:0.95rem; margin-top:18px; margin-bottom:6px; color:var(--muted);
+    text-transform:uppercase; letter-spacing:0.03em;
+  }
+  p{margin:6px 0;}
+  ul{margin:6px 0 12px 0; padding-left:22px;}
+  li{margin:4px 0;}
+  .card{
+    background:var(--card); border:1px solid var(--border);
+    border-radius:10px; padding:16px 20px; margin:16px 0;
+  }
+  .quick-revision{
+    background:var(--card); border-left:4px solid var(--accent);
+    border-radius:6px; padding:14px 18px; margin-top:20px;
+  }
+  .quick-revision h4{color:var(--accent); margin-top:0;}
+  table{
+    width:100%; border-collapse:collapse; margin:14px 0;
+    overflow-x:auto; display:block;
+  }
+  @media(min-width:600px){ table{display:table;} }
+  th,td{
+    border:1px solid var(--border); padding:8px 12px; text-align:left; font-size:0.92rem;
+  }
+  th{background:var(--code); color:var(--fg);}
+  code{
+    background:var(--code); padding:2px 6px; border-radius:4px; font-size:0.9em;
+  }
+  .toc{
+    background:var(--card); border:1px solid var(--border); border-radius:10px;
+    padding:16px 22px; margin-bottom:12px;
+  }
+  .toc a{color:var(--accent); text-decoration:none;}
+  .toc a:hover{text-decoration:underline;}
+  .toc ul{margin:6px 0;}
+  strong{color:var(--fg);}
+  hr{border:none; border-top:1px solid var(--border); margin:40px 0;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Week 1: Short Notes — DBMS</h1>
+  <p class="subtitle">Course Overview &amp; Introduction to Database Management Systems</p>
+
+  <div class="toc">
+    <strong>Contents</strong>
+    <ul>
+      <li><a href="#lec1">Lecture 1: Course Overview</a></li>
+      <li><a href="#lec2">Lecture 2: Why DBMS? / 1</a></li>
+      <li><a href="#lec3">Lecture 3: Why DBMS? / 2</a></li>
+      <li><a href="#lec4">Lecture 4: Introduction to DBMS / 1</a></li>
+      <li><a href="#lec5">Lecture 5: Introduction to DBMS / 2</a></li>
+    </ul>
+  </div>
+
+  <!-- LECTURE 1 -->
+  <h2 class="lecture" id="lec1">Lecture 1: Course Overview</h2>
+
+  <h3>What is DBMS?</h3>
+  <p>A <strong>Database Management System (DBMS)</strong> is software used to store, manage, and retrieve data efficiently for an organization.</p>
+
+  <h4>Key Requirements</h4>
+  <ul>
+    <li>Collection of interrelated data</li>
+    <li>Programs to process and manage data</li>
+  </ul>
+
+  <h4>Characteristics</h4>
+  <ul>
+    <li>Easy to use</li>
+    <li>Efficient</li>
+    <li>Reliable</li>
+  </ul>
+
+  <h4>Career Scope</h4>
+  <ul>
+    <li>Database Developer</li>
+    <li>Database Designer</li>
+    <li>Database Administrator (DBA)</li>
+  </ul>
+
+  <h3>Real-World Applications of DBMS</h3>
+  <ul>
+    <li><strong>Banking &amp; Finance:</strong> Net banking, UPI, Paytm, Google Pay</li>
+    <li><strong>Reservation Systems:</strong> Railway &amp; airline booking (e.g., IRCTC)</li>
+    <li><strong>Education:</strong> ERP systems (admissions, marks, timetable)</li>
+    <li><strong>E-commerce:</strong> Amazon, eBay, Snapdeal</li>
+    <li><strong>Daily Apps:</strong> Email (Gmail, Yahoo), Social Media (Instagram, WhatsApp, Facebook)</li>
+    <li><strong>Other Areas:</strong> HR, manufacturing, travel industry</li>
+  </ul>
+
+  <h3>File System vs DBMS</h3>
+  <p><strong>File-Based Storage (Old System):</strong> Data stored in files (CSV, text files).</p>
+
+  <h4>Problems in File Systems</h4>
+  <ul>
+    <li><strong>Data Redundancy:</strong> Same data repeated → waste of space</li>
+    <li><strong>Data Inconsistency:</strong> Different files have different values</li>
+    <li><strong>Data Access Difficulty:</strong> Hard to search and automate tasks</li>
+    <li><strong>Data Isolation:</strong> Data scattered in multiple files</li>
+    <li><strong>Integrity Issues:</strong> Rules (e.g., minimum balance) hard to enforce</li>
+    <li><strong>Atomicity Problem:</strong> Transactions may fail midway (e.g., money deducted but not credited)</li>
+    <li><strong>Concurrency Issues:</strong> Multiple users accessing same data → conflicts</li>
+    <li><strong>Security Problems:</strong> Weak protection → risk of data theft</li>
+  </ul>
+
+  <h4>Why DBMS is Better?</h4>
+  <ul>
+    <li>Reduces redundancy</li>
+    <li>Ensures consistency</li>
+    <li>Provides security</li>
+    <li>Handles multiple users</li>
+    <li>Supports transactions (ACID properties)</li>
+  </ul>
+
+  <h3>Prerequisites for DBMS</h3>
+  <h4>Mathematics</h4>
+  <ul>
+    <li>Set Theory (union, intersection)</li>
+    <li>Relations &amp; Functions</li>
+    <li>Propositional Logic (AND, OR, NOT)</li>
+    <li>Predicate Logic (∀, ∃)</li>
+  </ul>
+  <h4>Computer Science</h4>
+  <ul>
+    <li>Data Structures: Arrays, Linked Lists, Trees (BST, B-Trees), Hashing</li>
+    <li>Python Programming: For database connectivity &amp; applications</li>
+  </ul>
+  <h4>Good to Know</h4>
+  <ul>
+    <li>Algorithms (sorting, searching)</li>
+    <li>C Programming</li>
+    <li>OOP Concepts (Java/C++)</li>
+  </ul>
+
+  <h3>Course Structure</h3>
+  <div class="card">
+    <p><strong>Duration:</strong> 12 Weeks (60 Modules)</p>
+    <p><strong>Breakdown:</strong></p>
+    <ul>
+      <li>Weeks 1–8: Application Programming (most important for placements)</li>
+      <li>Weeks 9–12: Database Design &amp; Administration</li>
+    </ul>
+    <p><strong>Recommended Book:</strong> <em>Database System Concepts</em> by Silberschatz, Korth &amp; Sudarshan (6th Edition)</p>
+  </div>
+
+  <div class="quick-revision">
+    <h4>Quick Summary</h4>
+    <ul>
+      <li>DBMS = Efficient data management system</li>
+      <li>Replaces file systems (fixes redundancy, security, consistency issues)</li>
+      <li>Used in banking, e-commerce, social media, etc.</li>
+      <li>Requires basics of math + data structures + programming</li>
+      <li>Course focuses first on applications, then advanced DB topics</li>
+    </ul>
+  </div>
+
+  <!-- LECTURE 2 -->
+  <h2 class="lecture" id="lec2">Lecture 2: Why DBMS? / 1</h2>
+
+  <p><strong>Pervasiveness of Databases:</strong> Databases are everywhere in daily life, often unnoticed.</p>
+
+  <h4>Everyday Examples</h4>
+  <ul>
+    <li><strong>Mobile Communication:</strong> Stores call logs, locations, and network data via towers</li>
+    <li><strong>Health Apps:</strong> Aarogya Setu tracks infection proximity</li>
+    <li><strong>Vaccination Systems:</strong> COWIN stores vaccination status, dates, locations, and identity verification (Aadhaar/passport)</li>
+  </ul>
+  <p><em>Key Idea:</em> Databases silently power most digital services around us.</p>
+
+  <h3>Basic Needs of Data Management</h3>
+  <p>Every system (physical or digital) must fulfill these needs:</p>
+  <ul>
+    <li><strong>Storage:</strong> Store data permanently (e.g., bank records, employee data)</li>
+    <li><strong>Retrieval:</strong> Quickly access stored data when needed</li>
+    <li><strong>Transactions:</strong> Handle data changes safely (e.g., money transfer, ownership change)</li>
+    <li><strong>Audit:</strong> Verify correctness of operations, detect fraud or errors</li>
+    <li><strong>Archival:</strong> Store old data for future reference</li>
+  </ul>
+
+  <h3>Key Parameters of Modern Data Systems</h3>
+  <ul>
+    <li><strong>Durability:</strong> Data should not be lost, even after failures</li>
+    <li><strong>Scalability:</strong> Handle growth from hundreds to billions of users</li>
+    <li><strong>Security:</strong> Protect against unauthorized access; level depends on application (normal vs military)</li>
+    <li><strong>Retrieval Speed:</strong> Fast access, ranging from seconds to nanoseconds</li>
+    <li><strong>Consistency:</strong> Database must always remain correct (e.g., no money should disappear in transfer)</li>
+    <li><strong>Efficiency:</strong> Time efficiency, storage optimization, cost-effectiveness</li>
+  </ul>
+
+  <h3>Evolution of Data Management</h3>
+
+  <h4>A. Physical Era (Bookkeeping)</h4>
+  <ul>
+    <li>Data stored in registers and ledgers</li>
+    <li><strong>Contributions:</strong>
+      <ul>
+        <li>Henry Brown → File cabinet invention</li>
+        <li>Herman Hollerith → Punch cards for computation</li>
+      </ul>
+    </li>
+    <li><strong>Problems:</strong> Easily damaged (fire, humidity), hard to scale, slow retrieval, poor security</li>
+  </ul>
+
+  <h4>B. Electronic Era</h4>
+  <ul>
+    <li><strong>1950s–60s:</strong> Punch cards, magnetic tapes</li>
+    <li><strong>1970s:</strong> Magnetic disks, COBOL language, CODASYL model, VisiCalc (first spreadsheet)</li>
+    <li><strong>1980s:</strong> Relational DBMS (RDBMS) introduced, SQL becomes standard, shift to distributed systems</li>
+    <li><strong>1990s:</strong> Internet enables global data access</li>
+    <li><strong>2000s–Present:</strong>
+      <ul>
+        <li>NoSQL databases handle unstructured data (images, videos)</li>
+        <li>Big Data &amp; Data Science systems (Google Bigtable, Amazon)</li>
+        <li>Applications: Data Warehousing, Data Mining</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h4>Limitations of Flat File Systems (CSV/Spreadsheets)</h4>
+  <ul>
+    <li><strong>Scalability Problem:</strong> Limited rows and size</li>
+    <li><strong>Consistency Issues:</strong> Hard to maintain rules (constraints), requires manual coding</li>
+    <li><strong>Limited Permissions:</strong> Basic password protection only, no proper multi-user roles</li>
+  </ul>
+
+  <div class="quick-revision">
+    <h4>Quick Revision</h4>
+    <ul>
+      <li>Databases are used everywhere (mobile, health, payments)</li>
+      <li>Core needs: storage, retrieval, transactions, audit, archival</li>
+      <li>Key features: durability, scalability, security, consistency</li>
+      <li>Evolution: Physical → Electronic → RDBMS → NoSQL &amp; Big Data</li>
+      <li>Flat files are limited in scalability, consistency, and security</li>
+    </ul>
+  </div>
+
+  <!-- LECTURE 3 -->
+  <h2 class="lecture" id="lec3">Lecture 3: Why DBMS? / 2</h2>
+
+  <p><strong>Overview:</strong> A simple banking system is used to compare File-Based Systems and DBMS.</p>
+
+  <h4>Main Operations</h4>
+  <ul>
+    <li>Open Account</li>
+    <li>Transfer Money</li>
+    <li>View Transaction History</li>
+  </ul>
+
+  <h4>Important Conditions</h4>
+  <ul>
+    <li><strong>Balance Check:</strong> No transfer if balance is insufficient</li>
+    <li><strong>Validation:</strong> Wrong account → transaction fails</li>
+    <li><strong>Confirmation:</strong> Success message after transaction</li>
+  </ul>
+
+  <h3>File-Based (Python) vs DBMS (SQL)</h3>
+
+  <h4>Data Storage</h4>
+  <ul>
+    <li><strong>File-Based System:</strong>
+      <ul>
+        <li>Uses <code>accounts.csv</code> (account details)</li>
+        <li>Uses <code>ledger.csv</code> (transactions)</li>
+      </ul>
+    </li>
+    <li><strong>DBMS:</strong>
+      <ul>
+        <li>Uses <code>accounts</code> table</li>
+        <li>Uses <code>ledger</code> table</li>
+        <li>Managed using SQL</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h4>A. Initialization &amp; Setup</h4>
+  <ul>
+    <li><strong>File-Based (Python):</strong>
+      <ul>
+        <li>Manual work required</li>
+        <li>Open files, read/write operations every time</li>
+        <li>More coding effort</li>
+      </ul>
+    </li>
+    <li><strong>DBMS (SQL):</strong>
+      <ul>
+        <li>Automatic handling</li>
+        <li>System already initialized</li>
+        <li>Less repetitive code</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h4>B. Transactions &amp; Consistency</h4>
+  <ul>
+    <li><strong>DBMS (SQL):</strong>
+      <ul>
+        <li><strong>Commit Mechanism:</strong> Saves changes permanently</li>
+        <li><strong>Rollback Mechanism:</strong> Cancels incomplete transactions, keeps data consistent</li>
+        <li><strong>Example:</strong> If debit happens but credit fails → rollback restores balance</li>
+      </ul>
+    </li>
+    <li><strong>File-Based System:</strong>
+      <ul>
+        <li>No built-in safety</li>
+        <li>System crash → inconsistent data</li>
+        <li><strong>Example:</strong> Money debited but not credited</li>
+        <li>Needs extra coding to handle this</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>Comparison Table</h3>
+  <table>
+    <thead>
+      <tr><th>Feature</th><th>File-Based (Python/CSV)</th><th>DBMS (SQL)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Scalability</td><td>Hard to manage large data</td><td>Easily scalable</td></tr>
+      <tr><td>Execution Time</td><td>Slow (seconds/minutes)</td><td>Fast (ms/µs)</td></tr>
+      <tr><td>Persistence</td><td>Manual save → risk of loss</td><td>Automatic &amp; reliable</td></tr>
+      <tr><td>Robustness</td><td>Hard to recover corrupted files</td><td>Backup &amp; recovery available</td></tr>
+      <tr><td>Security</td><td>Basic OS-level security</td><td>Advanced multi-level security</td></tr>
+      <tr><td>Productivity</td><td>More coding effort</td><td>Easier to manage</td></tr>
+      <tr><td>Arithmetic</td><td>Flexible (Python libraries)</td><td>Limited compared to Python</td></tr>
+      <tr><td>Cost</td><td>Low cost</td><td>Higher setup &amp; maintenance cost</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Conclusion: When to Use What?</h3>
+  <ul>
+    <li><strong>Use DBMS When:</strong>
+      <ul>
+        <li>Large-scale applications</li>
+        <li>Multi-user systems</li>
+        <li>Need high speed, data consistency, security, reliability</li>
+      </ul>
+    </li>
+    <li><strong>Use File-Based System When:</strong>
+      <ul>
+        <li>Small projects (100–200 records)</li>
+        <li>Simple applications</li>
+        <li>Budget is low</li>
+        <li>No need for complex features</li>
+      </ul>
+    </li>
+  </ul>
+
+  <div class="quick-revision">
+    <h4>Quick Revision</h4>
+    <ul>
+      <li>Banking system = real-life DBMS example</li>
+      <li>File-based uses CSV, DBMS uses tables + SQL</li>
+      <li>DBMS supports Commit and Rollback</li>
+      <li>DBMS is faster, more secure, scalable</li>
+      <li>File system is cheaper, simpler, but less reliable</li>
+    </ul>
+  </div>
+
+  <!-- LECTURE 4 -->
+  <h2 class="lecture" id="lec4">Lecture 4: Introduction to DBMS / 1</h2>
+
+  <p><strong>Levels of Abstraction:</strong> DBMS uses three levels to hide complexity and simplify usage.</p>
+
+  <h4>Physical Level (Lowest)</h4>
+  <ul>
+    <li>Describes how data is stored</li>
+    <li>Stored as bits, bytes, files</li>
+    <li>Deals with storage structures and memory layout</li>
+    <li>Used by: System-level engineers</li>
+  </ul>
+
+  <h4>Logical Level (Middle)</h4>
+  <ul>
+    <li>Describes what data is stored</li>
+    <li>Defines tables (records), attributes (columns), relationships</li>
+    <li>Example: <code>Customer(ID, Name, Balance)</code></li>
+    <li>Used by: Programmers &amp; DB designers</li>
+  </ul>
+
+  <h4>View Level (Highest)</h4>
+  <ul>
+    <li>What the user actually sees</li>
+    <li>Shows only relevant data</li>
+    <li>Can hide sensitive information (e.g., salary)</li>
+    <li>Can show derived data (e.g., age from DOB)</li>
+    <li>Used by: End users</li>
+  </ul>
+
+  <h3>Schema vs Instance</h3>
+  <h4>Schema (Structure)</h4>
+  <ul>
+    <li>Blueprint/design of database</li>
+    <li>Like the "type" of a variable</li>
+    <li>Changes rarely</li>
+    <li>Types:
+      <ul>
+        <li>Physical Schema → storage level</li>
+        <li>Logical Schema → table structure</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h4>Instance (Data)</h4>
+  <ul>
+    <li>Actual data stored</li>
+    <li>Like the "value" of a variable</li>
+    <li>Changes frequently</li>
+  </ul>
+
+  <h3>Physical Data Independence</h3>
+  <ul>
+    <li>Changes in physical storage do not affect logical schema</li>
+    <li><strong>Example:</strong> Changing disk type doesn't affect table structure</li>
+  </ul>
+
+  <h3>Data Models</h3>
+  <p>Tools to describe data, relationships, and constraints.</p>
+  <h4>Types</h4>
+  <ul>
+    <li><strong>Relational Model (Most Important):</strong>
+      <ul>
+        <li>Data in tables</li>
+        <li>Rows = records, Columns = attributes</li>
+      </ul>
+    </li>
+    <li><strong>ER Model:</strong> Used for database design, shows entities &amp; relationships</li>
+    <li><strong>Other Models:</strong> Hierarchical, Network, Object-based, Graph (social networks), NoSQL (images, videos, unstructured data)</li>
+  </ul>
+
+  <h3>Database Languages</h3>
+  <h4>DDL (Data Definition Language)</h4>
+  <ul>
+    <li>Defines structure</li>
+    <li>Examples: <code>CREATE TABLE</code>, <code>ALTER</code>, <code>DROP</code></li>
+  </ul>
+
+  <h4>Data Dictionary</h4>
+  <ul>
+    <li>Stores metadata</li>
+    <li>Contains table names, attributes, data types</li>
+  </ul>
+
+  <h4>DML (Data Manipulation Language)</h4>
+  <ul>
+    <li>Used to modify data</li>
+    <li>Examples: <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code></li>
+  </ul>
+
+  <h4>SQL (Structured Query Language)</h4>
+  <ul>
+    <li>Combines DDL + DML</li>
+    <li>Most widely used language</li>
+    <li><strong>Limitation:</strong> SQL is not Turing complete (cannot handle very complex logic alone)</li>
+  </ul>
+
+  <h4>Host Languages</h4>
+  <ul>
+    <li>SQL is used with Python, Java, C++</li>
+    <li>Reason: Handle complex logic outside DB</li>
+  </ul>
+
+  <h3>Database Design</h3>
+  <h4>Logical Design</h4>
+  <ul>
+    <li>Decide what data to store and how tables are structured</li>
+    <li>Balance business needs and efficiency</li>
+  </ul>
+  <h4>Physical Design</h4>
+  <ul>
+    <li>Decide storage methods and indexing (e.g., B-Trees)</li>
+  </ul>
+
+  <div class="quick-revision">
+    <h4>Quick Revision</h4>
+    <ul>
+      <li>Three Levels: Physical → Logical → View</li>
+      <li>Schema = structure, Instance = data</li>
+      <li>Data Models: Relational (most important), ER, NoSQL</li>
+      <li>Languages: DDL → structure, DML → data operations</li>
+      <li>SQL is powerful but not fully programmable</li>
+      <li>Design = Logical (what) + Physical (how)</li>
+    </ul>
+  </div>
+
+  <!-- LECTURE 5 -->
+  <h2 class="lecture" id="lec5">Lecture 5: Introduction to DBMS / 2</h2>
+
+  <p><strong>Database Design Parts:</strong> Database design has two main parts:</p>
+
+  <h4>Physical Design</h4>
+  <ul>
+    <li>How data is actually stored</li>
+    <li>Includes: files, pages, indexing (e.g., B-Trees)</li>
+  </ul>
+
+  <h4>Logical Design</h4>
+  <ul>
+    <li>What data is stored and how it is structured</li>
+    <li>Includes: tables (schemas), attributes (columns), relationships</li>
+  </ul>
+
+  <h4>Logical Design Decisions</h4>
+  <ul>
+    <li>Based on business needs (what data is required)</li>
+    <li>Algorithmic efficiency (easy queries, performance)</li>
+  </ul>
+
+  <h4>Physical Data Independence</h4>
+  <ul>
+    <li>Changes in storage do not affect logical schema</li>
+    <li><strong>Example:</strong> Changing storage disk → tables remain the same</li>
+  </ul>
+
+  <h3>Redundancy &amp; Normalization</h3>
+  <h4>Redundancy</h4>
+  <ul>
+    <li>Same data stored multiple times</li>
+    <li><strong>Example:</strong> Department budget repeated for every faculty</li>
+  </ul>
+
+  <h4>Problems (Anomalies)</h4>
+  <ul>
+    <li><strong>Update anomaly</strong> → inconsistent data</li>
+    <li>Insert/Delete issues</li>
+    <li>Wasted storage</li>
+  </ul>
+
+  <h4>Normalization</h4>
+  <p>Process of splitting tables into smaller related tables</p>
+  <p><strong>Benefits:</strong></p>
+  <ul>
+    <li>Removes redundancy</li>
+    <li>Prevents anomalies</li>
+    <li>Improves consistency</li>
+  </ul>
+  <p><strong>Example:</strong> Separate faculty table and department table</p>
+
+  <h3>Data Models</h3>
+  <h4>Relational Model</h4>
+  <ul>
+    <li>Data in tables</li>
+    <li>Atomic values (numbers, strings)</li>
+  </ul>
+  <h4>Object-Relational Model</h4>
+  <ul>
+    <li>Extension of relational model</li>
+    <li>Supports complex data types</li>
+  </ul>
+  <h4>XML (Extensible Markup Language)</h4>
+  <ul>
+    <li>Used for data exchange and hierarchical data</li>
+    <li>Example format: <code>&lt;name&gt;John&lt;/name&gt;</code></li>
+  </ul>
+
+  <h3>Database Engine</h3>
+  <p>The core system that runs DBMS.</p>
+  <h4>Storage Manager</h4>
+  <ul>
+    <li>Manages storage, retrieval, updates</li>
+    <li>Uses indexing and hashing</li>
+  </ul>
+  <h4>Query Processor</h4>
+  <ul>
+    <li>Converts SQL into execution plan</li>
+    <li>Tasks: query optimization, performance evaluation</li>
+  </ul>
+  <h4>Transaction Manager</h4>
+  <ul>
+    <li>Ensures transactions work as a single unit</li>
+    <li>Handles concurrency (multiple users) and consistency</li>
+  </ul>
+
+  <h3>Database Users &amp; Roles</h3>
+  <ul>
+    <li><strong>Naive Users:</strong> Use applications without DB knowledge (e.g., shopping apps)</li>
+    <li><strong>Application Programmers:</strong> Build applications and interfaces</li>
+    <li><strong>Analysts:</strong> Handle complex queries, build tools</li>
+    <li><strong>Database Administrator (DBA):</strong> Controls entire database
+      <ul>
+        <li>Responsibilities: storage management, security, backup &amp; recovery</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>Database Architecture Evolution</h3>
+  <h4>Centralized Systems</h4>
+  <ul>
+    <li>Single system</li>
+    <li>File-based (e.g., COBOL)</li>
+  </ul>
+  <h4>Client-Server RDBMS</h4>
+  <ul>
+    <li>Database = server, applications = clients</li>
+    <li>Examples: MySQL, Oracle</li>
+  </ul>
+  <h4>Parallel &amp; Distributed Systems</h4>
+  <ul>
+    <li>Spread across multiple machines</li>
+    <li>Used in internet and cloud systems</li>
+  </ul>
+  <h4>NoSQL Systems</h4>
+  <ul>
+    <li>For unstructured data (images, videos)</li>
+    <li>Used in Big Data and Data Science</li>
+  </ul>
+
+  <div class="quick-revision">
+    <h4>Quick Revision</h4>
+    <ul>
+      <li>Design = Logical (what) + Physical (how)</li>
+      <li>Redundancy causes anomalies → fixed by normalization</li>
+      <li>Models: Relational, Object-Relational, XML</li>
+      <li>Engine = Storage + Query + Transaction Manager</li>
+      <li>Users: Naive → Programmers → Analysts → DBA</li>
+      <li>Architecture: Centralized → Client-Server → Distributed → NoSQL</li>
+    </ul>
+  </div>
+
+  <hr>
+  <p style="text-align:center; color:var(--muted); font-size:0.85rem;">Week 1 — DBMS Short Notes</p>
+
+</div>
+</body>
+</html>
