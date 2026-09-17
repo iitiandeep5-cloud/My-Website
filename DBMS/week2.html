@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>Week 2: DBMS Short Notes</title>
+<style>
+  :root{
+    --bg:#ffffff; --fg:#1a1a1a; --muted:#5a5a5a; --accent:#2b6cb0;
+    --card:#f7f9fc; --border:#e2e8f0; --code:#eef2f7;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#12151a; --fg:#e8eaed; --muted:#a0a7b3; --accent:#7fb2ff;
+      --card:#1b2029; --border:#2a313d; --code:#20262f;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#12151a; --fg:#e8eaed; --muted:#a0a7b3; --accent:#7fb2ff;
+    --card:#1b2029; --border:#2a313d; --code:#20262f;
+  }
+  *{box-sizing:border-box;}
+  body{
+    background:var(--bg); color:var(--fg);
+    font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height:1.6; margin:0; padding:0;
+  }
+  .wrap{max-width:860px; margin:0 auto; padding:32px 20px 80px;}
+  h1{
+    font-size:1.9rem; margin-bottom:4px; color:var(--fg);
+  }
+  .subtitle{color:var(--muted); margin-top:0; margin-bottom:32px; font-size:0.95rem;}
+  h2.lecture{
+    font-size:1.3rem; margin-top:48px; margin-bottom:14px;
+    color:var(--accent); border-bottom:2px solid var(--border); padding-bottom:8px;
+  }
+  h3{
+    font-size:1.05rem; margin-top:24px; margin-bottom:8px; color:var(--fg);
+  }
+  h4{
+    font-size:0.95rem; margin-top:18px; margin-bottom:6px; color:var(--muted);
+    text-transform:uppercase; letter-spacing:0.03em;
+  }
+  p{margin:6px 0;}
+  ul{margin:6px 0 12px 0; padding-left:22px;}
+  li{margin:4px 0;}
+  .card{
+    background:var(--card); border:1px solid var(--border);
+    border-radius:10px; padding:16px 20px; margin:16px 0;
+  }
+  .quick-revision{
+    background:var(--card); border-left:4px solid var(--accent);
+    border-radius:6px; padding:14px 18px; margin-top:20px;
+  }
+  .quick-revision h4{color:var(--accent); margin-top:0;}
+  table{
+    width:100%; border-collapse:collapse; margin:14px 0;
+    overflow-x:auto; display:block;
+  }
+  @media(min-width:600px){ table{display:table;} }
+  th,td{
+    border:1px solid var(--border); padding:8px 12px; text-align:left; font-size:0.92rem;
+  }
+  th{background:var(--code); color:var(--fg);}
+  code{
+    background:var(--code); padding:2px 6px; border-radius:4px; font-size:0.9em;
+    font-family:'Consolas','Courier New',monospace;
+  }
+  pre{
+    background:#1e2530; color:#d7e2f0; border-radius:8px; padding:14px 18px;
+    overflow-x:auto; margin:14px 0; font-family:'Consolas','Courier New',monospace;
+    font-size:0.88rem; line-height:1.5;
+  }
+  pre .kw{color:#7fb2ff; font-weight:600;}
+  .toc{
+    background:var(--card); border:1px solid var(--border); border-radius:10px;
+    padding:16px 22px; margin-bottom:12px;
+  }
+  .toc a{color:var(--accent); text-decoration:none;}
+  .toc a:hover{text-decoration:underline;}
+  .toc ul{margin:6px 0;}
+  strong{color:var(--fg);}
+  hr{border:none; border-top:1px solid var(--border); margin:40px 0;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Week 2: Short Notes — DBMS</h1>
+  <p class="subtitle">Relational Model &amp; Introduction to SQL</p>
+
+  <div class="toc">
+    <strong>Contents</strong>
+    <ul>
+      <li><a href="#lec1">Lecture 1: Introduction to Relational Model / 1</a></li>
+      <li><a href="#lec2">Lecture 2: Introduction to Relational Model / 2</a></li>
+      <li><a href="#lec3">Lecture 3: Introduction to SQL / 1</a></li>
+      <li><a href="#lec4">Lecture 4: Introduction to SQL / 2</a></li>
+      <li><a href="#lec5">Lecture 5: Introduction to SQL / 3</a></li>
+    </ul>
+  </div>
+
+  <!-- LECTURE 1 -->
+  <h2 class="lecture" id="lec1">Lecture 1: Introduction to Relational Model / 1</h2>
+
+  <h3>Basic Concepts</h3>
+  <p><strong>Relation (Table):</strong> A relation is a table consisting of rows and columns.</p>
+
+  <h4>Attributes (Columns)</h4>
+  <ul>
+    <li>Represent properties (e.g., Name, Age)</li>
+    <li>Order does not matter, but names must be unique</li>
+    <li>Must be atomic → no multi-valued fields (e.g., avoid combining first &amp; last name in one column)</li>
+  </ul>
+
+  <h4>Tuples (Rows)</h4>
+  <ul>
+    <li>Each row represents a single record</li>
+  </ul>
+
+  <h4>Domain</h4>
+  <ul>
+    <li>Set of valid values for an attribute</li>
+    <li><strong>Example:</strong> Age → only numbers, Date → valid date format</li>
+  </ul>
+
+  <h4>Null Values</h4>
+  <ul>
+    <li>Represent unknown or missing data</li>
+    <li>Some attributes allow null (optional), others do not (mandatory like Roll No)</li>
+  </ul>
+
+  <h3>Schema vs Instance</h3>
+  <div class="card">
+    <p><strong>Schema:</strong> Structure/design of the table.</p>
+    <p><strong>Notation:</strong> <code>R(A₁, A₂, …, Aₙ)</code></p>
+    <p><strong>Example:</strong> <code>Student(Name, RollNo, Age)</code></p>
+    <p><strong>Instance:</strong> Actual data present at a given time.</p>
+    <p><strong>Mathematical View:</strong> Relation = subset of Cartesian Product → D₁ × D₂ × ... × Dₙ</p>
+  </div>
+
+  <h4>Set Properties</h4>
+  <ul>
+    <li>No duplicate rows</li>
+    <li>Order of rows does not matter</li>
+  </ul>
+
+  <h3>Keys</h3>
+  <ul>
+    <li><strong>Superkey:</strong> Any set of attributes that uniquely identifies a row</li>
+    <li><strong>Candidate Key:</strong> Minimal superkey (no extra attributes). Can have multiple candidate keys</li>
+    <li><strong>Primary Key:</strong> Chosen candidate key. Must be unique and non-null</li>
+    <li><strong>Alternate Key:</strong> Candidate keys not selected as primary key</li>
+    <li><strong>Surrogate Key:</strong> Artificial key (e.g., ID, Order Number)</li>
+    <li><strong>Foreign Key:</strong> Attribute in one table referring to another table's primary key. Used to create relationships</li>
+  </ul>
+
+  <h4>Choosing a Good Primary Key</h4>
+  <ul>
+    <li><strong>Uniqueness:</strong> Avoid attributes like Name (not unique)</li>
+    <li><strong>Non-null:</strong> Primary key cannot be NULL</li>
+    <li><strong>Meaningful (Optional):</strong> Keys like Roll No may encode info (year, dept)</li>
+  </ul>
+
+  <h3>Relational Query Languages</h3>
+  <ul>
+    <li><strong>Procedural Language:</strong> Specifies how to get data. Examples: C, Java, Python</li>
+    <li><strong>Declarative Language:</strong> Specifies what data is needed. Example: SQL</li>
+  </ul>
+
+  <h4>Models in Relational Systems</h4>
+  <ul>
+    <li>Relational Algebra</li>
+    <li>Tuple Calculus</li>
+    <li>Domain Calculus</li>
+  </ul>
+  <p><em>Note:</em> These models are not Turing complete.</p>
+
+  <div class="quick-revision">
+    <h4>Quick Summary</h4>
+    <ul>
+      <li>Relation = Table</li>
+      <li>Attribute = Column (atomic)</li>
+      <li>Tuple = Row</li>
+      <li>Domain = Valid values</li>
+      <li>Schema = Structure, Instance = Data</li>
+      <li>No duplicate rows (set property)</li>
+      <li>Keys → Superkey ⊇ Candidate Key ⊇ Primary Key</li>
+      <li>Foreign key → connects tables</li>
+      <li>SQL = Declarative language</li>
+    </ul>
+  </div>
+
+  <!-- LECTURE 2 -->
+  <h2 class="lecture" id="lec2">Lecture 2: Introduction to Relational Model / 2</h2>
+
+  <h3>Fundamental Concepts</h3>
+  <h4>Relation as a Set</h4>
+  <ul>
+    <li>A relation is treated like a mathematical set</li>
+    <li>Order of rows does not matter</li>
+    <li>No duplicate tuples: every row must be unique, duplicates are automatically removed</li>
+  </ul>
+
+  <h4>Input &amp; Output Rule</h4>
+  <ul>
+    <li>Every operation takes relation(s) as input</li>
+    <li>Always produces a relation (table) as output</li>
+    <li>Enables chaining of operations</li>
+  </ul>
+
+  <h3>Relational Operators</h3>
+
+  <h4>A. Unary Operators (Single Table)</h4>
+  <p><strong>Selection (σ):</strong></p>
+  <ul>
+    <li>Filters rows based on condition</li>
+    <li>Example: <code>σ(age &gt; 18)</code></li>
+    <li>Equivalent to <code>WHERE</code> in SQL</li>
+  </ul>
+  <p><strong>Projection (π):</strong></p>
+  <ul>
+    <li>Selects specific columns</li>
+    <li>Removes unwanted columns</li>
+    <li>Automatically removes duplicate rows</li>
+    <li>Equivalent to <code>SELECT</code> columns in SQL</li>
+  </ul>
+
+  <h4>B. Binary Operators (Two Tables)</h4>
+  <p><strong>Union (∪):</strong></p>
+  <ul>
+    <li>Combines rows of two relations</li>
+    <li>Conditions: Same attributes (same schema)</li>
+    <li>Removes duplicates</li>
+  </ul>
+  <p><strong>Set Difference (−):</strong></p>
+  <ul>
+    <li>Returns rows in r but not in s</li>
+  </ul>
+  <p><strong>Intersection (∩):</strong></p>
+  <ul>
+    <li>Common rows in both tables</li>
+    <li>Not a basic operator → can be derived: <code>r∩s = r−(r−s)</code></li>
+  </ul>
+  <p><strong>Cartesian Product (×):</strong></p>
+  <ul>
+    <li>Combines all rows of r with all rows of s</li>
+    <li>Produces all possible pairs</li>
+    <li>Can create very large tables</li>
+  </ul>
+
+  <h4>Attribute Naming Rule</h4>
+  <ul>
+    <li>If same column names exist → use prefix</li>
+    <li>Example: <code>r.A</code>, <code>s.A</code></li>
+  </ul>
+
+  <h3>Special Operations</h3>
+  <p><strong>Renaming (ρ):</strong></p>
+  <ul>
+    <li>Changes table or column names</li>
+    <li>Useful in self-join (r × r)</li>
+    <li>Avoids confusion</li>
+  </ul>
+  <p><strong>Natural Join (⋈):</strong></p>
+  <ul>
+    <li>Combines tables using common attributes</li>
+    <li>Keeps only matching rows</li>
+    <li>Removes duplicate columns</li>
+    <li>More efficient than Cartesian product</li>
+  </ul>
+
+  <h3>Aggregate Operations</h3>
+  <p><strong>Purpose:</strong> Perform calculations on data.</p>
+  <h4>Examples</h4>
+  <ul>
+    <li>SUM</li>
+    <li>AVG</li>
+    <li>MAX</li>
+    <li>MIN</li>
+    <li>COUNT</li>
+  </ul>
+  <p><strong>Output:</strong> Returns a single value (not a table).</p>
+  <h4>Usage</h4>
+  <ul>
+    <li>Can be applied after filtering</li>
+    <li>Example: Average marks of students with marks &gt; 50</li>
+  </ul>
+
+  <h3>Key Characteristics</h3>
+  <ul>
+    <li><strong>Input/Output:</strong> Tables → Operation → Table</li>
+    <li><strong>Chaining:</strong> Output of one operation can be used as input for another</li>
+    <li><strong>Not Turing Complete:</strong> Cannot solve all computational problems alone</li>
+    <li>Needs support of programming languages (e.g., SQL + Python)</li>
+  </ul>
+
+  <div class="quick-revision">
+    <h4>Quick Revision</h4>
+    <ul>
+      <li>Relation = Set (no order, no duplicates)</li>
+      <li>σ → Rows filter</li>
+      <li>π → Columns select</li>
+      <li>∪ → Combine tables</li>
+      <li>− → Difference</li>
+      <li>× → All combinations</li>
+      <li>⋈ → Smart join</li>
+      <li>ρ → Rename</li>
+      <li>Aggregates → Single value output</li>
+      <li>Output is always a table (except aggregates)</li>
+    </ul>
+  </div>
+
+  <!-- LECTURE 3 -->
+  <h2 class="lecture" id="lec3">Lecture 3: Introduction to SQL / 1</h2>
+
+  <h3>Introduction &amp; History</h3>
+  <p><strong>Origin:</strong> Developed by IBM in the 1970s–80s as SEQUEL for the System R project.</p>
+
+  <h4>Standardization</h4>
+  <ul>
+    <li><strong>SQL-86:</strong> First ANSI standard</li>
+    <li><strong>SQL-92:</strong> Most important base standard (widely used)</li>
+    <li><strong>SQL:1999:</strong> Added recursive queries, triggers, and procedural features</li>
+    <li><strong>Later updates:</strong> XML support (2003/2006), latest → SQL:2019</li>
+  </ul>
+  <p><em>Important Note:</em> SQL is the industry standard, but syntax may vary across databases (MySQL, Oracle, etc.).</p>
+
+  <h4>Alternatives</h4>
+  <ul>
+    <li>QUEL (rarely used)</li>
+    <li>SPARQL → used for graph/RDF databases</li>
+  </ul>
+
+  <h3>Data Definition Language (DDL)</h3>
+  <p><strong>Purpose:</strong> Used to define and modify database structure (schema).</p>
+
+  <h4>Common Data Types</h4>
+  <ul>
+    <li><code>char(n)</code> → Fixed-length string</li>
+    <li><code>varchar(n)</code> → Variable-length string</li>
+    <li><code>int</code>, <code>smallint</code> → Integers</li>
+    <li><code>numeric(p, d)</code> → Exact decimal values</li>
+    <li><code>float</code> → Approximate numbers</li>
+  </ul>
+
+  <h4>Table Creation</h4>
+  <ul>
+    <li><code>CREATE TABLE</code> → Creates a new table</li>
+    <li>Defines: table name, columns (attributes), data types</li>
+  </ul>
+
+  <h4>Integrity Constraints</h4>
+  <ul>
+    <li><code>NOT NULL</code> → Value must exist</li>
+    <li><code>PRIMARY KEY</code> → Unique + non-null</li>
+    <li><code>FOREIGN KEY</code> → Links tables (referential integrity)</li>
+  </ul>
+
+  <h4>Schema Modification</h4>
+  <ul>
+    <li><code>DROP TABLE</code> → Deletes table completely</li>
+    <li><code>ALTER TABLE</code> → Add/remove columns</li>
+    <li><code>DELETE FROM table</code> → Deletes all rows (structure remains)</li>
+  </ul>
+
+  <h3>Data Manipulation Language (DML)</h3>
+  <p><strong>Purpose:</strong> Used to query and manipulate data.</p>
+  <p><strong>SQL Nature:</strong> Declarative language → You specify <em>what</em> you want, not <em>how</em> to get it.</p>
+
+  <h4>Basic Query Structure</h4>
+  <pre>SELECT column_name
+FROM table_name
+WHERE condition;</pre>
+
+  <h4>SELECT Clause (Projection)</h4>
+  <ul>
+    <li>Selects columns</li>
+    <li>Allows duplicates by default</li>
+    <li>Options:
+      <ul>
+        <li><code>DISTINCT</code> → remove duplicates</li>
+        <li><code>ALL</code> → keep duplicates</li>
+      </ul>
+    </li>
+    <li>Special features:
+      <ul>
+        <li><code>*</code> → all columns</li>
+        <li>Calculations → <code>salary / 12</code></li>
+        <li>Renaming → <code>AS</code></li>
+      </ul>
+    </li>
+  </ul>
+
+  <h4>FROM Clause (Tables)</h4>
+  <ul>
+    <li>Specifies tables involved</li>
+    <li>Multiple tables → Cartesian Product (default)</li>
+  </ul>
+
+  <h4>WHERE Clause (Selection)</h4>
+  <ul>
+    <li>Filters rows using conditions</li>
+    <li>Uses comparisons (<code>=</code>, <code>&lt;</code>, <code>&gt;</code>) and logical operators (<code>AND</code>, <code>OR</code>, <code>NOT</code>)</li>
+    <li>Used for joining tables (e.g., matching IDs)</li>
+  </ul>
+
+  <h3>Key Characteristics</h3>
+  <ul>
+    <li><strong>Case-Insensitive:</strong> <code>SELECT</code> = <code>select</code> = <code>SeLeCt</code></li>
+    <li><strong>User-Friendly:</strong> Easy and intuitive syntax</li>
+    <li><strong>Default Behavior:</strong> New columns get NULL values for existing rows</li>
+    <li><strong>Embedding Support:</strong>
+      <ul>
+        <li>SQL inside Java → SQLJ</li>
+        <li>Java inside SQL → SQL/JRT</li>
+      </ul>
+    </li>
+  </ul>
+
+  <div class="quick-revision">
+    <h4>Quick Revision</h4>
+    <ul>
+      <li>SQL = Declarative language</li>
+      <li>DDL → Structure (CREATE, ALTER, DROP)</li>
+      <li>DML → Data (SELECT, WHERE)</li>
+      <li>SELECT → columns</li>
+      <li>FROM → tables</li>
+      <li>WHERE → conditions</li>
+      <li>Default allows duplicates → use DISTINCT</li>
+      <li>Keys → Primary &amp; Foreign</li>
+      <li>Case-insensitive</li>
+    </ul>
+  </div>
+
+  <!-- LECTURE 4 -->
+  <h2 class="lecture" id="lec4">Lecture 4: Introduction to SQL / 2</h2>
+
+  <h3>Cartesian Product &amp; Joins</h3>
+  <h4>Cartesian Product (×)</h4>
+  <ul>
+    <li>Combines every row of one table with every row of another</li>
+    <li>Occurs when multiple tables are listed in <code>FROM</code> without conditions</li>
+    <li>Produces large, often meaningless data</li>
+  </ul>
+
+  <h4>Qualified Names</h4>
+  <ul>
+    <li>Used when columns have the same names</li>
+    <li>Format: <code>table.column</code></li>
+    <li>Example: <code>instructor.ID</code>, <code>teaches.ID</code></li>
+  </ul>
+
+  <h4>Join using WHERE</h4>
+  <pre>SELECT *
+FROM instructor, teaches
+WHERE instructor.ID = teaches.ID;</pre>
+
+  <h4>Natural Join (⋈)</h4>
+  <ul>
+    <li>Automatically joins tables using common attributes</li>
+    <li>Removes duplicate columns</li>
+    <li>More efficient and cleaner than manual joins</li>
+  </ul>
+
+  <h3>Renaming &amp; Self-Joins</h3>
+  <h4>AS Clause (Renaming)</h4>
+  <ul>
+    <li>Used to rename tables or columns</li>
+    <li>Example: <code>instructor AS T</code></li>
+  </ul>
+
+  <h4>Self-Join</h4>
+  <p>Joining a table with itself using aliases.</p>
+  <pre>FROM instructor T, instructor S</pre>
+  <ul>
+    <li>Uses: compare rows within the same table, find hierarchical relations (e.g., manager → employee)</li>
+  </ul>
+
+  <h3>String Operations</h3>
+  <p><strong>LIKE Operator:</strong> Used for pattern matching.</p>
+  <h4>Wildcards</h4>
+  <ul>
+    <li><code>%</code> → Any sequence of characters
+      <ul><li>Example: <code>%dar%</code> → matches <em>Darwin</em>, <em>Sardar</em></li></ul>
+    </li>
+    <li><code>_</code> → Single character
+      <ul><li>Example: <code>_ar</code> → matches <em>car</em>, <em>bar</em></li></ul>
+    </li>
+  </ul>
+  <p><strong>Case Sensitivity:</strong> Strings inside quotes are case-sensitive.</p>
+  <h4>Other Functions</h4>
+  <ul>
+    <li>Concatenation</li>
+    <li><code>UPPER()</code>, <code>LOWER()</code></li>
+  </ul>
+
+  <h3>Sorting &amp; Limiting Results</h3>
+  <h4>ORDER BY</h4>
+  <ul>
+    <li>Sorts output</li>
+    <li>Default → Ascending (<code>ASC</code>)</li>
+    <li>Use <code>DESC</code> for descending: <code>ORDER BY salary DESC;</code></li>
+  </ul>
+
+  <h4>Limiting Rows (Database-Specific Syntax)</h4>
+  <table>
+    <thead>
+      <tr><th>Database</th><th>Syntax</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>MySQL</td><td><code>LIMIT n</code></td></tr>
+      <tr><td>SQL Server</td><td><code>TOP n</code></td></tr>
+      <tr><td>Oracle/Standard</td><td><code>FETCH FIRST n ROWS ONLY</code></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Advanced WHERE Conditions</h3>
+  <h4>BETWEEN ... AND ...</h4>
+  <ul>
+    <li>Range condition</li>
+    <li>Example: <code>salary BETWEEN 90000 AND 100000</code></li>
+  </ul>
+  <h4>Tuple Comparison</h4>
+  <ul>
+    <li>Compare multiple attributes together</li>
+  </ul>
+  <h4>IN Operator</h4>
+  <ul>
+    <li>Check membership in a set</li>
+    <li>Example: <code>dept_name IN ('CS', 'Biology')</code></li>
+  </ul>
+
+  <h3>Duplicate Handling (Multisets)</h3>
+  <ul>
+    <li><strong>SQL uses Multisets</strong> (not pure sets): Duplicates are allowed</li>
+    <li><strong>Default Behavior:</strong> Operations keep duplicates</li>
+    <li><strong>Remove duplicates:</strong> Use <code>DISTINCT</code></li>
+  </ul>
+
+  <div class="quick-revision">
+    <h4>Quick Revision</h4>
+    <ul>
+      <li>Cartesian Product → all combinations</li>
+      <li>WHERE → converts product into join</li>
+      <li>Natural Join → auto join on common columns</li>
+      <li>AS → rename tables</li>
+      <li>Self-join → table with itself</li>
+      <li>LIKE → pattern matching (%, _)</li>
+      <li>ORDER BY → sorting</li>
+      <li>LIMIT / TOP → restrict rows</li>
+      <li>BETWEEN, IN → conditions</li>
+      <li>SQL allows duplicates → use DISTINCT</li>
+    </ul>
+  </div>
+
+  <!-- LECTURE 5 -->
+  <h2 class="lecture" id="lec5">Lecture 5: Introduction to SQL / 3</h2>
+
+  <h3>Set Operations</h3>
+  <p>SQL can treat tables like sets (no duplicates).</p>
+  <h4>Requirements</h4>
+  <ul>
+    <li>Both queries must have the same number of columns</li>
+    <li>Columns must have the same data types</li>
+  </ul>
+
+  <h4>Main Operations</h4>
+  <ul>
+    <li><code>UNION</code> → Combines results (like OR), removes duplicates</li>
+    <li><code>INTERSECT</code> → Common records (like AND)</li>
+    <li><code>EXCEPT</code> → Records in first but not in second</li>
+  </ul>
+
+  <h4>Multiset Versions (Allow Duplicates)</h4>
+  <ul>
+    <li><code>UNION ALL</code> → m + n occurrences</li>
+    <li><code>INTERSECT ALL</code> → min(m, n)</li>
+    <li><code>EXCEPT ALL</code> → m − n (or 0)</li>
+  </ul>
+
+  <h3>NULL Values</h3>
+  <h4>Meaning</h4>
+  <ul>
+    <li>Represents unknown or missing value</li>
+  </ul>
+  <h4>Usage</h4>
+  <ul>
+    <li>Missing data</li>
+    <li>Newly added columns</li>
+  </ul>
+  <h4>Important Points</h4>
+  <ul>
+    <li>NULL ≠ 0
+      <ul>
+        <li>0 → known value</li>
+        <li>NULL → unknown</li>
+      </ul>
+    </li>
+  </ul>
+  <h4>Operations with NULL</h4>
+  <ul>
+    <li>Arithmetic → Result = NULL</li>
+    <li>Comparison → Cannot use <code>=</code></li>
+  </ul>
+  <h4>Correct Usage</h4>
+  <ul>
+    <li><code>IS NULL</code></li>
+    <li><code>IS NOT NULL</code></li>
+  </ul>
+
+  <h3>Three-Valued Logic</h3>
+  <p>SQL uses 3 logical values:</p>
+  <ul>
+    <li>TRUE</li>
+    <li>FALSE</li>
+    <li>UNKNOWN</li>
+  </ul>
+
+  <h4>Logic Rules</h4>
+  <ul>
+    <li><strong>OR:</strong>
+      <ul>
+        <li>TRUE OR UNKNOWN → TRUE</li>
+        <li>FALSE OR UNKNOWN → UNKNOWN</li>
+      </ul>
+    </li>
+    <li><strong>AND:</strong>
+      <ul>
+        <li>FALSE AND UNKNOWN → FALSE</li>
+        <li>TRUE AND UNKNOWN → UNKNOWN</li>
+      </ul>
+    </li>
+    <li><strong>NOT:</strong>
+      <ul>
+        <li>NOT UNKNOWN → UNKNOWN</li>
+      </ul>
+    </li>
+  </ul>
+  <p><strong>WHERE Clause Rule:</strong> UNKNOWN is treated as FALSE → row is excluded.</p>
+
+  <h3>Aggregate Functions</h3>
+  <p>Operate on a column → return single value.</p>
+  <h4>Main Functions</h4>
+  <ul>
+    <li><code>AVG()</code> → Average</li>
+    <li><code>MIN()</code> / <code>MAX()</code> → Smallest / Largest</li>
+    <li><code>SUM()</code> → Total</li>
+    <li><code>COUNT()</code> → Number of rows</li>
+  </ul>
+
+  <h4>COUNT Variants</h4>
+  <ul>
+    <li><code>COUNT(*)</code> → All rows</li>
+    <li><code>COUNT(column)</code> → Non-null values</li>
+    <li><code>COUNT(DISTINCT column)</code> → Unique values</li>
+  </ul>
+
+  <h4>NULL Handling</h4>
+  <ul>
+    <li>Ignored in <code>AVG</code>, <code>SUM</code>, etc.</li>
+    <li>Special case: Only NULL values →
+      <ul>
+        <li><code>COUNT</code> → 0</li>
+        <li>Others → NULL</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>GROUP BY &amp; HAVING</h3>
+  <h4>GROUP BY</h4>
+  <ul>
+    <li>Groups rows based on column values</li>
+    <li>Example: Salary per department</li>
+  </ul>
+  <p><strong>Rule:</strong> <code>SELECT</code> can only contain grouped columns or aggregate functions.</p>
+
+  <h4>HAVING</h4>
+  <p>Filters groups (after grouping).</p>
+
+  <h4>Difference</h4>
+  <table>
+    <thead>
+      <tr><th>Clause</th><th>Works On</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>WHERE</td><td>Individual rows</td></tr>
+      <tr><td>HAVING</td><td>Groups (after grouping)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="quick-revision">
+    <h4>Quick Revision</h4>
+    <ul>
+      <li>UNION / INTERSECT / EXCEPT → set operations</li>
+      <li>ALL → keeps duplicates</li>
+      <li>NULL = unknown (not 0)</li>
+      <li>Use IS NULL (not =)</li>
+      <li>SQL uses 3 logic → TRUE, FALSE, UNKNOWN</li>
+      <li>UNKNOWN → treated as FALSE in WHERE</li>
+      <li>Aggregates → AVG, SUM, COUNT</li>
+      <li>NULL ignored in aggregates</li>
+      <li>GROUP BY → grouping</li>
+      <li>HAVING → filter groups</li>
+    </ul>
+  </div>
+
+  <hr>
+  <p style="text-align:center; color:var(--muted); font-size:0.85rem;">Week 2 — DBMS Short Notes</p>
+
+</div>
+</body>
+</html>

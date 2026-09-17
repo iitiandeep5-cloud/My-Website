@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>Week 4: DBMS Short Notes</title>
+<style>
+  :root{
+    --bg:#ffffff; --fg:#1a1a1a; --muted:#5a5a5a; --accent:#2b6cb0;
+    --card:#f7f9fc; --border:#e2e8f0; --code:#eef2f7;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#12151a; --fg:#e8eaed; --muted:#a0a7b3; --accent:#7fb2ff;
+      --card:#1b2029; --border:#2a313d; --code:#20262f;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#12151a; --fg:#e8eaed; --muted:#a0a7b3; --accent:#7fb2ff;
+    --card:#1b2029; --border:#2a313d; --code:#20262f;
+  }
+  *{box-sizing:border-box;}
+  body{
+    background:var(--bg); color:var(--fg);
+    font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height:1.6; margin:0; padding:0;
+  }
+  .wrap{max-width:860px; margin:0 auto; padding:32px 20px 80px;}
+  h1{
+    font-size:1.9rem; margin-bottom:4px; color:var(--fg);
+  }
+  .subtitle{color:var(--muted); margin-top:0; margin-bottom:32px; font-size:0.95rem;}
+  h2.lecture{
+    font-size:1.3rem; margin-top:48px; margin-bottom:14px;
+    color:var(--accent); border-bottom:2px solid var(--border); padding-bottom:8px;
+  }
+  h3{
+    font-size:1.05rem; margin-top:24px; margin-bottom:8px; color:var(--fg);
+  }
+  h4{
+    font-size:0.95rem; margin-top:18px; margin-bottom:6px; color:var(--muted);
+    text-transform:uppercase; letter-spacing:0.03em;
+  }
+  p{margin:6px 0;}
+  ul{margin:6px 0 12px 0; padding-left:22px;}
+  ol{margin:6px 0 12px 0; padding-left:22px;}
+  li{margin:4px 0;}
+  .card{
+    background:var(--card); border:1px solid var(--border);
+    border-radius:10px; padding:16px 20px; margin:16px 0;
+  }
+  .quick-revision{
+    background:var(--card); border-left:4px solid var(--accent);
+    border-radius:6px; padding:14px 18px; margin-top:20px;
+  }
+  .quick-revision h4{color:var(--accent); margin-top:0;}
+  table{
+    width:100%; border-collapse:collapse; margin:14px 0;
+    overflow-x:auto; display:block;
+  }
+  @media(min-width:600px){ table{display:table;} }
+  th,td{
+    border:1px solid var(--border); padding:8px 12px; text-align:left; font-size:0.92rem;
+  }
+  th{background:var(--code); color:var(--fg);}
+  code{
+    background:var(--code); padding:2px 6px; border-radius:4px; font-size:0.9em;
+    font-family:'Consolas','Courier New',monospace;
+  }
+  pre{
+    background:#1e2530; color:#d7e2f0; border-radius:8px; padding:14px 18px;
+    overflow-x:auto; margin:14px 0; font-family:'Consolas','Courier New',monospace;
+    font-size:0.88rem; line-height:1.5;
+  }
+  .toc{
+    background:var(--card); border:1px solid var(--border); border-radius:10px;
+    padding:16px 22px; margin-bottom:12px;
+  }
+  .toc a{color:var(--accent); text-decoration:none;}
+  .toc a:hover{text-decoration:underline;}
+  .toc ul{margin:6px 0;}
+  strong{color:var(--fg);}
+  hr{border:none; border-top:1px solid var(--border); margin:40px 0;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Week 4: Short Notes — DBMS</h1>
+  <p class="subtitle">Formal Relational Query Languages &amp; the Entity-Relationship Model</p>
+
+  <div class="toc">
+    <strong>Contents</strong>
+    <ul>
+      <li><a href="#lec1">Lecture 1: Formal Relational Query Languages / 1</a></li>
+      <li><a href="#lec2">Lecture 2: Formal Relational Query Languages / 2</a></li>
+      <li><a href="#lec3">Lecture 3: Entity Relationship Model / 1</a></li>
+      <li><a href="#lec4">Lecture 4: Entity Relationship Model / 2</a></li>
+      <li><a href="#lec5">Lecture 5: Entity Relationship Model / 3</a></li>
+    </ul>
+  </div>
+
+  <!-- LECTURE 1 -->
+  <h2 class="lecture" id="lec1">Lecture 1: Formal Relational Query Languages / 1</h2>
+
+  <p><strong>Overview:</strong> Formal query languages form the theoretical foundation of databases, underlying SQL. There are three main types:</p>
+  <ul>
+    <li>Relational Algebra → Procedural (how to do)</li>
+    <li>Tuple Relational Calculus (TRC) → Non-procedural (what to get)</li>
+    <li>Domain Relational Calculus (DRC) → Non-procedural</li>
+  </ul>
+
+  <h4>Key Idea</h4>
+  <ul>
+    <li>Procedural = step-by-step operations</li>
+    <li>Non-procedural = describe final result only</li>
+  </ul>
+
+  <h3>Relational Algebra Basics</h3>
+  <ul>
+    <li>Developed by Edgar F. Codd (1970)</li>
+    <li>Procedural query language</li>
+  </ul>
+
+  <h4>Key Properties</h4>
+  <ul>
+    <li>Works on relations (tables)</li>
+    <li>Input → Relation</li>
+    <li>Output → Relation</li>
+    <li>Based on set theory</li>
+    <li>No duplicate tuples allowed</li>
+  </ul>
+
+  <h3>Basic Relational Algebra Operators</h3>
+
+  <h4>Unary Operators (Single Relation)</h4>
+  <ol>
+    <li><strong>Selection (σ)</strong>
+      <ul>
+        <li>Filters rows (tuples) based on condition</li>
+        <li>Example: <code>σ(age &gt; 20)</code></li>
+      </ul>
+    </li>
+    <li><strong>Projection (Π)</strong>
+      <ul>
+        <li>Selects specific columns</li>
+        <li>Removes duplicates automatically</li>
+        <li>Example: <code>Π(name, age)</code></li>
+      </ul>
+    </li>
+    <li><strong>Rename (ρ)</strong>
+      <ul>
+        <li>Renames table or attributes</li>
+        <li>Useful for avoiding conflicts</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h4>Binary Operators (Two Relations)</h4>
+  <ol start="4">
+    <li><strong>Union (∪)</strong>
+      <ul>
+        <li>Combines tuples from both relations</li>
+        <li>Conditions: same number of columns, compatible data types</li>
+      </ul>
+    </li>
+    <li><strong>Set Difference (−)</strong>
+      <ul>
+        <li>Tuples in R but not in S</li>
+        <li>Condition: must be union compatible</li>
+      </ul>
+    </li>
+    <li><strong>Cartesian Product (×)</strong>
+      <ul>
+        <li>Combines every tuple of R with every tuple of S</li>
+        <li>Can produce very large results</li>
+        <li>Attribute names must be distinct</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h3>Derived (Optional) Operations</h3>
+  <p>These are not basic but can be built from basic operators.</p>
+  <ol>
+    <li><strong>Intersection (∩)</strong>
+      <ul>
+        <li>Common tuples in both relations</li>
+        <li>Formula: <code>r∩s = r−(r−s)</code></li>
+      </ul>
+    </li>
+    <li><strong>Join (⋈)</strong>
+      <ul>
+        <li>Combines related tuples from two relations</li>
+        <li>Types:
+          <ul>
+            <li>Theta Join → condition-based (&gt;, &lt;, =)</li>
+            <li>Equi Join → only equality condition</li>
+            <li>Natural Join → joins on same attribute names automatically</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+  <h3>Division Operator (÷)</h3>
+  <p><strong>Purpose:</strong> Used for "for all" queries<br>
+  <strong>Example:</strong> Find students who passed all subjects</p>
+
+  <h4>Concept</h4>
+  <ul>
+    <li>If <code>R(Z)</code>, <code>S(X)</code></li>
+    <li>Result has attributes <code>Y = Z − X</code></li>
+    <li>A tuple appears in result if it is related to every tuple in S</li>
+  </ul>
+
+  <p><em>Note:</em> Division is not a basic operator. It can be expressed using:</p>
+  <ul>
+    <li>Projection (Π)</li>
+    <li>Cartesian Product (×)</li>
+    <li>Set Difference (−)</li>
+  </ul>
+
+  <div class="quick-revision">
+    <h4>Quick Summary</h4>
+    <table>
+      <thead><tr><th>Concept</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>Relational Algebra</td><td>Procedural query language</td></tr>
+        <tr><td>Set Property</td><td>No duplicates</td></tr>
+        <tr><td>Unary Operators</td><td>σ, Π, ρ</td></tr>
+        <tr><td>Binary Operators</td><td>∪, −, ×</td></tr>
+        <tr><td>Derived Operations</td><td>∩, ⋈</td></tr>
+        <tr><td>Division</td><td>"For all" queries</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- LECTURE 2 -->
+  <h2 class="lecture" id="lec2">Lecture 2: Formal Relational Query Languages / 2</h2>
+
+  <h3>Foundation: Predicate Logic</h3>
+  <p>Relational calculus is based on <strong>predicate logic</strong>, which extends Boolean logic using predicates and quantifiers.</p>
+
+  <h4>Predicate</h4>
+  <ul>
+    <li>Represents a property of a variable</li>
+    <li>Written as: <code>P(x)</code></li>
+    <li>Example:
+      <ul>
+        <li><code>P(x): x &gt; 3</code></li>
+        <li><code>P(5) → True</code></li>
+        <li><code>P(2) → False</code></li>
+      </ul>
+    </li>
+  </ul>
+
+  <h4>Quantifiers</h4>
+  <ol>
+    <li><strong>Universal Quantifier (∀)</strong> → "For all"
+      <ul>
+        <li>Property must hold for every value</li>
+        <li>Example: ∀ x(x + 2 &gt; x) → True (for natural numbers)</li>
+      </ul>
+    </li>
+    <li><strong>Existential Quantifier (∃)</strong> → "There exists"
+      <ul>
+        <li>Property must hold for at least one value</li>
+        <li>Example: ∃ x(x &gt; 3) → True (e.g., 4, 5)</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h3>Tuple Relational Calculus (TRC)</h3>
+  <p><strong>Idea:</strong> TRC describes <em>what</em> result we want, not <em>how</em> to compute it.</p>
+  <p><strong>Basic Formula:</strong> <code>{t ∣ P(t)}</code><br>
+  <strong>Meaning:</strong> Set of all tuples t such that P(t) is true.</p>
+
+  <h4>Components of TRC</h4>
+  <ul>
+    <li>Attributes: <code>t.age</code>, <code>t.name</code></li>
+    <li>Constants: <code>10</code>, <code>"DBMS"</code></li>
+    <li>Comparison Operators: <code>&lt;</code>, <code>&gt;</code>, <code>=</code></li>
+    <li>Logical Connectives: ∧ (AND), ∨ (OR), ¬ (NOT)</li>
+    <li>Implication: <code>x ⇒ y ≡ ¬x∨y</code></li>
+    <li>Quantifiers: ∀, ∃</li>
+  </ul>
+
+  <h4>Safety of Expressions</h4>
+  <ul>
+    <li>A query is safe if it produces a finite result</li>
+    <li>Unsafe queries may attempt to return infinite data</li>
+    <li>Example (unsafe): Returning all values not in a table</li>
+  </ul>
+
+  <h3>Domain Relational Calculus (DRC)</h3>
+
+  <h4>Key Difference from TRC</h4>
+  <table>
+    <thead><tr><th>TRC</th><th>DRC</th></tr></thead>
+    <tbody>
+      <tr><td>Uses one variable (t) for whole tuple</td><td>Uses separate variables for each attribute</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Representation</h4>
+  <ul>
+    <li>TRC: <code>t</code></li>
+    <li>DRC: <code>x₁, x₂, …, xₙ</code></li>
+  </ul>
+  <p><strong>Example:</strong> Relation with 3 attributes:</p>
+  <ul>
+    <li>TRC → <code>t</code></li>
+    <li>DRC → <code>x₁, x₂, x₃</code></li>
+  </ul>
+
+  <h3>Equivalence with Relational Algebra</h3>
+  <p><strong>Important Concept:</strong> Relational Algebra = TRC = DRC. All have the same expressive power.</p>
+
+  <h4>Examples of Equivalence</h4>
+  <table>
+    <thead><tr><th>Relational Algebra</th><th>TRC Equivalent</th></tr></thead>
+    <tbody>
+      <tr><td><code>σ<sub>B = 17</sub>(r)</code></td><td><code>{t ∣ ...}</code></td></tr>
+      <tr><td>Projection (π)</td><td>Specify required attributes</td></tr>
+      <tr><td>Join</td><td>Using ∧ and ∃</td></tr>
+      <tr><td>Union, Difference</td><td>Logical expressions</td></tr>
+    </tbody>
+  </table>
+
+  <h3>TRC Query Examples</h3>
+  <ol>
+    <li><strong>Simple Selection:</strong> Get first names of students older than 21:
+      <pre>{t.firstName ∣ student(t) ∧ t.age > 21}</pre>
+    </li>
+    <li><strong>Join-Type Query:</strong> Students who took "DBMS":
+      <pre>{s.name ∣ student(s) ∧ ∃c(course(c) ∧ c.id = s.courseID ∧ c.name = 'DBMS')}</pre>
+    </li>
+    <li><strong>Multi-Table Query:</strong> Employee IDs of pilots certified for "Boeing":
+      <pre>{c.eid ∣ certified(c) ∧ ∃a(aircraft(a) ∧ a.name = 'Boeing' ∧ a.id = c.id)}</pre>
+    </li>
+  </ol>
+
+  <div class="quick-revision">
+    <h4>Quick Summary</h4>
+    <table>
+      <thead><tr><th>Concept</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>Predicate</td><td>Property of variable (P(x))</td></tr>
+        <tr><td>∀</td><td>For all values</td></tr>
+        <tr><td>∃</td><td>Exists at least one</td></tr>
+        <tr><td>TRC</td><td>Uses tuple variables (t)</td></tr>
+        <tr><td>DRC</td><td>Uses attribute variables (x₁, x₂, …)</td></tr>
+        <tr><td>Formula</td><td>{t ∣ P(t)}</td></tr>
+        <tr><td>Safety</td><td>Must return finite results</td></tr>
+        <tr><td>Equivalence</td><td>Same power as Relational Algebra</td></tr>
+      </tbody>
+    </table>
+    <h4>Memory Trick</h4>
+    <ul>
+      <li>TRC → Tuple-based</li>
+      <li>DRC → Domain (attribute)-based</li>
+      <li>∃ → "at least one"</li>
+      <li>∀ → "everyone"</li>
+    </ul>
+  </div>
+
+  <!-- LECTURE 3 -->
+  <h2 class="lecture" id="lec3">Lecture 3: Entity Relationship Model / 1</h2>
+
+  <h3>Database Design Process</h3>
+  <h4>Starting Point</h4>
+  <ul>
+    <li>Begins with Requirement Specification (Functional Requirements)</li>
+    <li>Defines what the system should do</li>
+  </ul>
+
+  <h4>Key Considerations</h4>
+  <ul>
+    <li><strong>Stakeholders:</strong> Users or people affected (students, admins, customers)</li>
+    <li><strong>Constraints:</strong> Business rules (e.g., one student can enroll in max 5 courses)</li>
+    <li><strong>Target Medium:</strong>
+      <ul>
+        <li>Small shop → PC</li>
+        <li>Large system → servers/supercomputers</li>
+      </ul>
+    </li>
+    <li><strong>Performance Metrics:</strong>
+      <ul>
+        <li>Fast response time (e.g., &lt; 1 sec in banking)</li>
+        <li>Supports multiple users (concurrency)</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h4>Three Main Phases</h4>
+  <ol>
+    <li>Requirement Analysis → Understand and define system needs</li>
+    <li>Database Design
+      <ul>
+        <li>Logical Design: Conceptual (E-R model)</li>
+        <li>Physical Design: Storage (files, pages, memory)</li>
+      </ul>
+    </li>
+    <li>Implementation → Data migration + testing</li>
+  </ol>
+
+  <h3>Abstraction &amp; Modeling</h3>
+  <p><strong>Abstraction:</strong> Focus only on relevant details, ignore unnecessary ones</p>
+  <div class="card">
+    <p><strong>Example:</strong></p>
+    <ul>
+      <li>Academic system → ignore teacher salary</li>
+      <li>Budget system → salary is important</li>
+    </ul>
+  </div>
+
+  <p><strong>Modeling:</strong> Represent real-world systems using mathematical/logical models</p>
+  <p><strong>Example (Physics Model):</strong> <code>S = ut + ½at²</code><br>
+  Where: S = distance, u = initial velocity, t = time, a = acceleration</p>
+
+  <p><strong>Other examples:</strong></p>
+  <ul>
+    <li>Circuit laws (Kirchhoff)</li>
+    <li>Maps (geography)</li>
+    <li>Scientific models</li>
+  </ul>
+
+  <h3>Entity-Relationship (E-R) Model</h3>
+  <p><strong>Purpose:</strong> Used for conceptual database design</p>
+
+  <h4>Entities &amp; Attributes</h4>
+  <ul>
+    <li><strong>Entity:</strong> A real-world object (e.g., Student, Instructor)</li>
+    <li><strong>Entity Set:</strong> Collection of similar entities (e.g., All students)</li>
+  </ul>
+
+  <h4>Types of Attributes</h4>
+  <table>
+    <thead><tr><th>Type</th><th>Meaning</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td>Simple</td><td>Basic value</td><td>Age, ID</td></tr>
+      <tr><td>Composite</td><td>Multiple parts</td><td>Name (first, last)</td></tr>
+      <tr><td>Multi-valued</td><td>Multiple values</td><td>Phone numbers</td></tr>
+      <tr><td>Derived</td><td>Calculated</td><td>Age from DOB</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Domain</h4>
+  <ul>
+    <li>Set of valid values</li>
+    <li>Example: Age ∈ (0–120)</li>
+  </ul>
+
+  <h4>Primary Key</h4>
+  <ul>
+    <li>Uniquely identifies each entity</li>
+    <li>Example: Student_ID</li>
+  </ul>
+
+  <h3>Relationships</h3>
+  <p><strong>Definition:</strong> Connection between entities<br>
+  Example: Student enrolls in Course</p>
+  <p><strong>Relationship Attributes:</strong> Relationships can have attributes<br>
+  Example: Advisor relationship → "date assigned"</p>
+
+  <h4>Degree of Relationship</h4>
+  <table>
+    <thead><tr><th>Type</th><th>Entities Involved</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td>Binary</td><td>2</td><td>Student–Course</td></tr>
+      <tr><td>Ternary</td><td>3</td><td>Student–Instructor–Project</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Redundancy:</strong> Duplicate/unnecessary data should be avoided<br>
+  Example: Instructor's department stored twice</p>
+
+  <h3>Cardinality Constraints</h3>
+  <p>Defines how many entities are related.</p>
+
+  <h4>Types of Cardinality</h4>
+  <table>
+    <thead><tr><th>Type</th><th>Meaning</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td>1 : 1</td><td>One-to-one</td><td>Person–Passport</td></tr>
+      <tr><td>1 : M</td><td>One-to-many</td><td>Father–Children</td></tr>
+      <tr><td>M : 1</td><td>Many-to-one</td><td>Students → One Dept</td></tr>
+      <tr><td>M : M</td><td>Many-to-many</td><td>Students–Courses</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Participation</h4>
+  <ul>
+    <li><strong>Total Participation:</strong> Every entity must participate</li>
+    <li><strong>Partial Participation:</strong> Some entities may not participate</li>
+  </ul>
+  <p><strong>Example:</strong></p>
+  <ul>
+    <li>Every student must enroll (total)</li>
+    <li>Some teachers may not guide projects (partial)</li>
+  </ul>
+
+  <div class="quick-revision">
+    <h4>Quick Summary</h4>
+    <table>
+      <thead><tr><th>Concept</th><th>Key Idea</th></tr></thead>
+      <tbody>
+        <tr><td>Requirement Analysis</td><td>Understand system needs</td></tr>
+        <tr><td>Logical Design</td><td>E-R model</td></tr>
+        <tr><td>Physical Design</td><td>Storage details</td></tr>
+        <tr><td>Abstraction</td><td>Ignore unnecessary info</td></tr>
+        <tr><td>Modeling</td><td>Real-world representation</td></tr>
+        <tr><td>Entity</td><td>Object (Student)</td></tr>
+        <tr><td>Attribute</td><td>Property (Age)</td></tr>
+        <tr><td>Primary Key</td><td>Unique identifier</td></tr>
+        <tr><td>Relationship</td><td>Connection between entities</td></tr>
+        <tr><td>Cardinality</td><td>Number of relationships</td></tr>
+      </tbody>
+    </table>
+    <h4>Memory Tips</h4>
+    <ul>
+      <li>E-R = Entities + Relationships</li>
+      <li>1:M = One → Many</li>
+      <li>M:M = Many ↔ Many</li>
+      <li>Derived = Calculated</li>
+      <li>Composite = Parts inside</li>
+    </ul>
+  </div>
+
+  <!-- LECTURE 4 -->
+  <h2 class="lecture" id="lec4">Lecture 4: Entity Relationship Model / 2</h2>
+
+  <h3>ER Diagram Components</h3>
+  <p>ER diagrams visually represent database structure (similar to UML style).</p>
+
+  <h4>Entity Sets</h4>
+  <ul>
+    <li>Represented by rectangles</li>
+    <li>Contains entity name and attributes</li>
+    <li>Example: Student (ID, Name, Age)</li>
+  </ul>
+
+  <h4>Primary Key</h4>
+  <ul>
+    <li>Underlined attribute</li>
+    <li>Uniquely identifies each entity</li>
+    <li>Example: Student (<strong>ID</strong>, Name, Age)</li>
+  </ul>
+
+  <h4>Relationships</h4>
+  <ul>
+    <li>Represented by diamonds</li>
+    <li>Connect entity sets</li>
+    <li>Example: Student —— Enrolls —— Course</li>
+    <li>By default: connects primary keys of entities</li>
+  </ul>
+
+  <h4>Relationship Attributes</h4>
+  <ul>
+    <li>Attached to relationship (diamond)</li>
+    <li>Shown using dashed line</li>
+    <li>Example: Advisor (date_assigned)</li>
+  </ul>
+
+  <h4>Roles (Recursive Relationship)</h4>
+  <ul>
+    <li>When entity relates to itself</li>
+    <li>Example: Course —— prerequisite —— Course</li>
+    <li>Roles: Course ID, Prerequisite ID</li>
+  </ul>
+
+  <h3>Cardinality &amp; Participation</h3>
+  <h4>Cardinality Symbols</h4>
+  <ul>
+    <li>Arrow (→) → One</li>
+    <li>Line (—) → Many</li>
+  </ul>
+
+  <h4>Min..Max Notation</h4>
+  <table>
+    <thead><tr><th>Notation</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td>1..1</td><td>Exactly one</td></tr>
+      <tr><td>0..1</td><td>Optional</td></tr>
+      <tr><td>0..*</td><td>Zero or many</td></tr>
+      <tr><td>1..*</td><td>At least one</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Participation</h4>
+  <table>
+    <thead><tr><th>Type</th><th>Representation</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td>Total</td><td>Double line</td><td>Must participate</td></tr>
+      <tr><td>Partial</td><td>Single line</td><td>Optional</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Example:</strong></p>
+  <ul>
+    <li>Every student must enroll → Total</li>
+    <li>Some teachers may not guide → Partial</li>
+  </ul>
+
+  <h3>Attribute Types in ER</h3>
+  <p><strong>Composite Attribute:</strong> Made of multiple parts<br>
+  Example: Name → First, Middle, Last; Address → Street, City, State</p>
+
+  <p><strong>Multi-valued Attribute:</strong> Represented using <code>{ }</code><br>
+  Example: <code>{phone_number}</code></p>
+
+  <p><strong>Derived Attribute:</strong> Computed from other attributes<br>
+  Represented using <code>( )</code><br>
+  Example: <code>Age()</code> from Date_of_Birth</p>
+
+  <h3>Weak Entity Sets</h3>
+  <p><strong>Definition:</strong> No primary key of its own. Depends on a strong entity.</p>
+
+  <h4>Representation</h4>
+  <table>
+    <thead><tr><th>Component</th><th>Symbol</th></tr></thead>
+    <tbody>
+      <tr><td>Weak Entity</td><td>Double rectangle</td></tr>
+      <tr><td>Identifying Relationship</td><td>Double diamond</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Discriminator</h4>
+  <ul>
+    <li>Attribute to distinguish weak entities</li>
+    <li>Dashed underline</li>
+  </ul>
+
+  <p><strong>Primary Key Formula:</strong> Primary Key (Weak Entity) = Primary Key (Strong Entity) + Discriminator</p>
+  <p><strong>Example:</strong></p>
+  <ul>
+    <li>Strong: Employee(ID)</li>
+    <li>Weak: Dependent(Name)</li>
+    <li>Key = (Employee_ID + Dependent_Name)</li>
+  </ul>
+
+  <h3>ER to Relational Schema (Reduction)</h3>
+  <h4>Entity → Table</h4>
+  <ul>
+    <li>Entity name → Table name</li>
+    <li>Attributes → Columns</li>
+    <li>Example: <code>Student(ID, Name, Age)</code></li>
+  </ul>
+
+  <h4>Relationship → Table</h4>
+  <p>Create new table using primary keys of both entities<br>
+  Example: <code>Enroll(Student_ID, Course_ID)</code></p>
+
+  <h4>Composite Attributes</h4>
+  <p>Flatten into separate columns<br>
+  Example: Address → Street, City, State</p>
+
+  <h4>Multi-valued Attributes</h4>
+  <p>Create separate table<br>
+  Example:</p>
+  <ul>
+    <li><code>Student(ID)</code></li>
+    <li><code>Student_Phone(ID, Phone_Number)</code></li>
+  </ul>
+
+  <h3>Schema Optimization</h3>
+  <p><strong>Key Idea:</strong> Reduce unnecessary tables and joins</p>
+  <p><strong>Rule:</strong> If relationship is Many-to-One (M:1) and participation is total on many side → Add foreign key directly</p>
+
+  <p><strong>Example:</strong> Instead of:</p>
+  <ul>
+    <li><code>Student_Department(Student_ID, Dept_Name)</code></li>
+  </ul>
+  <p>Use: <code>Student(ID, Name, Dept_Name)</code></p>
+
+  <h4>Benefits</h4>
+  <ul>
+    <li>Fewer joins</li>
+    <li>Faster queries</li>
+    <li>Less overhead</li>
+  </ul>
+
+  <div class="quick-revision">
+    <h4>Quick Summary</h4>
+    <table>
+      <thead><tr><th>Concept</th><th>Key Idea</th></tr></thead>
+      <tbody>
+        <tr><td>Entity</td><td>Rectangle</td></tr>
+        <tr><td>Relationship</td><td>Diamond</td></tr>
+        <tr><td>Primary Key</td><td>Underlined</td></tr>
+        <tr><td>Weak Entity</td><td>Double rectangle</td></tr>
+        <tr><td>Multi-valued</td><td>{ }</td></tr>
+        <tr><td>Derived</td><td>( )</td></tr>
+        <tr><td>Cardinality</td><td>1:1, 1:M, M:M</td></tr>
+        <tr><td>Participation</td><td>Total / Partial</td></tr>
+        <tr><td>Reduction</td><td>ER → Tables</td></tr>
+        <tr><td>Optimization</td><td>Reduce joins</td></tr>
+      </tbody>
+    </table>
+    <h4>Memory Tricks</h4>
+    <ul>
+      <li>Rectangle = Entity</li>
+      <li>Diamond = Relationship</li>
+      <li>Double = Weak / Total</li>
+      <li>{ } = Multiple values</li>
+      <li>( ) = Calculated</li>
+    </ul>
+  </div>
+
+  <!-- LECTURE 5 -->
+  <h2 class="lecture" id="lec5">Lecture 5: Entity Relationship Model / 3</h2>
+
+  <h3>Ternary &amp; Non-Binary Relationships</h3>
+  <p><strong>Concept:</strong> Relationships are usually binary (two entities). Non-binary relationships involve three or more entities (e.g., ternary).</p>
+
+  <h4>Ternary Relationship Example</h4>
+  <ul>
+    <li>Project – Instructor – Student</li>
+    <li>Represents: which instructor guides which student for which project</li>
+  </ul>
+
+  <h4>Cardinality Issue</h4>
+  <ul>
+    <li>Arrows become ambiguous in ternary relationships</li>
+    <li>Example confusion:
+      <ul>
+        <li>Does A map to one (B, C)?</li>
+        <li>Or does (A, B) map to one C?</li>
+      </ul>
+    </li>
+  </ul>
+  <p><strong>Ground Rule:</strong> Only one arrow allowed in non-binary relationships → avoids ambiguity.</p>
+
+  <h4>Decomposition into Binary</h4>
+  <ul>
+    <li>Convert ternary → binary using a new entity E</li>
+    <li>Mapping Formula:
+      <ul>
+        <li>Original tuples: <code>(ai, bi, ci)</code></li>
+        <li>Create: <code>(ei, ai), (ei, bi), (ei, ci)</code></li>
+        <li>Where <code>ei</code> = identifier in new entity E</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h4>Limitation</h4>
+  <ul>
+    <li>Binary relations cannot fully capture ternary constraints</li>
+    <li>May lose original relationship meaning</li>
+  </ul>
+
+  <h3>Specialization &amp; Generalization (ISA)</h3>
+  <p><strong>Specialization (Top-Down):</strong> Break one entity into sub-entities.<br>
+  Example: Person → Student, Employee.</p>
+
+  <p><strong>Generalization (Bottom-Up):</strong> Combine entities into higher-level entity.<br>
+  Example: Student + Employee → Person.</p>
+
+  <p><strong>Inheritance:</strong> Sub-entities inherit attributes.<br>
+  Example: Instructor → Employee → Person.</p>
+
+  <p><strong>ISA Relationship:</strong> Represents "is-a" relationship.<br>
+  Example: Student ISA Person.</p>
+
+  <h4>Constraints</h4>
+  <ol>
+    <li><strong>Overlapping vs Disjoint</strong>
+      <ul>
+        <li>Overlapping: can belong to multiple (Person = Student + Employee)</li>
+        <li>Disjoint: only one category (Employee ≠ Instructor &amp; Secretary)</li>
+      </ul>
+    </li>
+    <li><strong>Total vs Partial</strong>
+      <ul>
+        <li>Total: must belong (Every student → UG or PG)</li>
+        <li>Partial: optional (Not all persons are students)</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h3>Relational Schema for ISA</h3>
+
+  <h4>Method 1: Separate Tables</h4>
+  <ul>
+    <li>One table for higher-level entity</li>
+    <li>Separate tables for lower-level entities</li>
+    <li>Example:
+      <ul>
+        <li><code>Person(ID, Name)</code></li>
+        <li><code>Student(ID, Credits)</code></li>
+        <li><code>Employee(ID, Salary)</code></li>
+      </ul>
+    </li>
+  </ul>
+  <p><strong>Pros:</strong> No redundancy, no anomalies &nbsp;|&nbsp; <strong>Cons:</strong> Requires joins</p>
+
+  <h4>Method 2: Flattened Tables</h4>
+  <ul>
+    <li>Each sub-entity stores all attributes</li>
+    <li>Example:
+      <ul>
+        <li><code>Student(ID, Name, Credits)</code></li>
+        <li><code>Employee(ID, Name, Salary)</code></li>
+      </ul>
+    </li>
+  </ul>
+  <p><strong>Pros:</strong> Faster (no joins) &nbsp;|&nbsp; <strong>Cons:</strong> Data redundancy, possible anomalies</p>
+
+  <h3>Aggregation</h3>
+  <p><strong>Concept:</strong> Treat a relationship as an entity.</p>
+  <p><strong>Purpose:</strong> Avoid redundancy when linking relationships.</p>
+
+  <p><strong>Example:</strong></p>
+  <ul>
+    <li>Relationship: Project-Guide (Student, Instructor, Project)</li>
+    <li>Add Evaluation</li>
+    <li>Instead of repeating (Student, Instructor, Project), treat Project-Guide as entity</li>
+  </ul>
+
+  <p><strong>Representation:</strong> <code>Eval_For(ProjectGuide_ID, Evaluation_ID)</code></p>
+  <ul>
+    <li>Uses:
+      <ul>
+        <li>Primary key of aggregated relation</li>
+        <li>Primary key of new entity</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>Key Design Issues</h3>
+  <p><strong>Attribute vs Entity:</strong> Example: Phone Number<br>
+  Single → Attribute<br>
+  Multiple → Separate Entity/Table</p>
+
+  <p><strong>Entity vs Relationship:</strong></p>
+  <ul>
+    <li>Decide:
+      <ul>
+        <li>Is it an object? → Entity</li>
+        <li>Is it a connection? → Relationship</li>
+      </ul>
+    </li>
+  </ul>
+
+  <p><strong>Binary vs Non-Binary:</strong></p>
+  <ul>
+    <li>Some can be split: Person–Father, Person–Mother</li>
+    <li>Some cannot: Project–Guide (needs 3 entities together)</li>
+  </ul>
+
+  <p><strong>Modularity:</strong></p>
+  <ul>
+    <li>Use specialization/generalization</li>
+    <li>Benefits: cleaner design, separation of concerns</li>
+    <li>Example: Person → common attributes; Student → specific (credits)</li>
+  </ul>
+
+  <div class="quick-revision">
+    <h4>Quick Summary</h4>
+    <table>
+      <thead><tr><th>Concept</th><th>Key Idea</th></tr></thead>
+      <tbody>
+        <tr><td>Ternary</td><td>3 entities</td></tr>
+        <tr><td>Decomposition</td><td>Use new entity E</td></tr>
+        <tr><td>ISA</td><td>"is-a" relationship</td></tr>
+        <tr><td>Specialization</td><td>Top-down</td></tr>
+        <tr><td>Generalization</td><td>Bottom-up</td></tr>
+        <tr><td>Inheritance</td><td>Child gets parent attributes</td></tr>
+        <tr><td>Aggregation</td><td>Relationship → Entity</td></tr>
+        <tr><td>Flattening</td><td>Avoid joins</td></tr>
+        <tr><td>Modularity</td><td>Cleaner design</td></tr>
+      </tbody>
+    </table>
+    <h4>Memory Tricks</h4>
+    <ul>
+      <li>ISA = "is-a"</li>
+      <li>Ternary = 3 entities</li>
+      <li>Aggregation = relationship becomes entity</li>
+      <li>Flatten = faster but redundant</li>
+      <li>Separate = clean but slow</li>
+    </ul>
+  </div>
+
+  <hr>
+  <p style="text-align:center; color:var(--muted); font-size:0.85rem;">Week 4 — DBMS Short Notes</p>
+
+</div>
+</body>
+</html>

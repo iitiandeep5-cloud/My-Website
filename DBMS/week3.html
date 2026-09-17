@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>Week 3: DBMS Short Notes</title>
+<style>
+  :root{
+    --bg:#ffffff; --fg:#1a1a1a; --muted:#5a5a5a; --accent:#2b6cb0;
+    --card:#f7f9fc; --border:#e2e8f0; --code:#eef2f7;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#12151a; --fg:#e8eaed; --muted:#a0a7b3; --accent:#7fb2ff;
+      --card:#1b2029; --border:#2a313d; --code:#20262f;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#12151a; --fg:#e8eaed; --muted:#a0a7b3; --accent:#7fb2ff;
+    --card:#1b2029; --border:#2a313d; --code:#20262f;
+  }
+  *{box-sizing:border-box;}
+  body{
+    background:var(--bg); color:var(--fg);
+    font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height:1.6; margin:0; padding:0;
+  }
+  .wrap{max-width:860px; margin:0 auto; padding:32px 20px 80px;}
+  h1{
+    font-size:1.9rem; margin-bottom:4px; color:var(--fg);
+  }
+  .subtitle{color:var(--muted); margin-top:0; margin-bottom:32px; font-size:0.95rem;}
+  h2.lecture{
+    font-size:1.3rem; margin-top:48px; margin-bottom:14px;
+    color:var(--accent); border-bottom:2px solid var(--border); padding-bottom:8px;
+  }
+  h3{
+    font-size:1.05rem; margin-top:24px; margin-bottom:8px; color:var(--fg);
+  }
+  h4{
+    font-size:0.95rem; margin-top:18px; margin-bottom:6px; color:var(--muted);
+    text-transform:uppercase; letter-spacing:0.03em;
+  }
+  p{margin:6px 0;}
+  ul{margin:6px 0 12px 0; padding-left:22px;}
+  ol{margin:6px 0 12px 0; padding-left:22px;}
+  li{margin:4px 0;}
+  .card{
+    background:var(--card); border:1px solid var(--border);
+    border-radius:10px; padding:16px 20px; margin:16px 0;
+  }
+  .quick-revision{
+    background:var(--card); border-left:4px solid var(--accent);
+    border-radius:6px; padding:14px 18px; margin-top:20px;
+  }
+  .quick-revision h4{color:var(--accent); margin-top:0;}
+  table{
+    width:100%; border-collapse:collapse; margin:14px 0;
+    overflow-x:auto; display:block;
+  }
+  @media(min-width:600px){ table{display:table;} }
+  th,td{
+    border:1px solid var(--border); padding:8px 12px; text-align:left; font-size:0.92rem;
+  }
+  th{background:var(--code); color:var(--fg);}
+  code{
+    background:var(--code); padding:2px 6px; border-radius:4px; font-size:0.9em;
+    font-family:'Consolas','Courier New',monospace;
+  }
+  pre{
+    background:#1e2530; color:#d7e2f0; border-radius:8px; padding:14px 18px;
+    overflow-x:auto; margin:14px 0; font-family:'Consolas','Courier New',monospace;
+    font-size:0.88rem; line-height:1.5;
+  }
+  .toc{
+    background:var(--card); border:1px solid var(--border); border-radius:10px;
+    padding:16px 22px; margin-bottom:12px;
+  }
+  .toc a{color:var(--accent); text-decoration:none;}
+  .toc a:hover{text-decoration:underline;}
+  .toc ul{margin:6px 0;}
+  strong{color:var(--fg);}
+  hr{border:none; border-top:1px solid var(--border); margin:40px 0;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Week 3: Short Notes — DBMS</h1>
+  <p class="subtitle">SQL Examples, Intermediate SQL &amp; Advanced SQL (Functions, Procedures, Triggers)</p>
+
+  <div class="toc">
+    <strong>Contents</strong>
+    <ul>
+      <li><a href="#lec1">Lecture 1: SQL Examples</a></li>
+      <li><a href="#lec2">Lecture 2: Intermediate SQL / 1</a></li>
+      <li><a href="#lec3">Lecture 3: Intermediate SQL / 2</a></li>
+      <li><a href="#lec4">Lecture 4: Intermediate SQL / 3</a></li>
+      <li><a href="#lec5">Lecture 5: Advanced SQL</a></li>
+    </ul>
+  </div>
+
+  <!-- LECTURE 1 -->
+  <h2 class="lecture" id="lec1">Lecture 1: SQL Examples</h2>
+
+  <h3>Basic Query Structure (SELECT–FROM–WHERE)</h3>
+  <h4>Core Structure</h4>
+  <pre>SELECT column_name
+FROM table_name
+WHERE condition;</pre>
+  <ul>
+    <li><code>FROM</code> → specifies table(s) to use</li>
+    <li><code>WHERE</code> → filters rows based on condition</li>
+    <li><code>SELECT</code> → chooses which columns to display</li>
+  </ul>
+
+  <h4>Duplicates Handling</h4>
+  <ul>
+    <li>SQL returns duplicates by default (multiset)</li>
+    <li><code>DISTINCT</code> → removes duplicates</li>
+    <li><code>ALL</code> → keeps duplicates (default)</li>
+  </ul>
+
+  <h3>Joins &amp; Cartesian Product</h3>
+  <p>Multiple tables → SQL first creates a <strong>Cartesian product</strong> (all combinations).</p>
+  <h4>Join Condition</h4>
+  <pre>WHERE student.dept = department.name</pre>
+  <h4>Aliases (AS)</h4>
+  <pre>FROM student AS s</pre>
+  <ul>
+    <li>Renames tables/columns for clarity</li>
+    <li>Essential for <strong>self-joins</strong></li>
+  </ul>
+
+  <h3>Advanced Predicates &amp; Logic</h3>
+  <h4>Logical Operators</h4>
+  <ul>
+    <li><code>AND</code>, <code>OR</code>, <code>NOT</code></li>
+    <li>Use parentheses for correct precedence</li>
+  </ul>
+  <h4>IN Operator</h4>
+  <pre>WHERE dept IN ('CSE', 'ECE')</pre>
+  <h4>Pattern Matching (LIKE)</h4>
+  <ul>
+    <li><code>_</code> → exactly one character</li>
+    <li><code>%</code> → any number of characters</li>
+  </ul>
+  <pre>WHERE name LIKE 'A%'</pre>
+
+  <h3>Sorting Results</h3>
+  <h4>ORDER BY</h4>
+  <pre>ORDER BY column_name;</pre>
+  <ul>
+    <li>Default → Ascending (<code>ASC</code>)</li>
+    <li>Use <code>DESC</code> for descending</li>
+  </ul>
+  <h4>Multiple Columns</h4>
+  <pre>ORDER BY dept, credits DESC;</pre>
+
+  <h3>Set Operations</h3>
+  <p>Work like mathematical sets (duplicates removed by default).</p>
+  <h4>Operators</h4>
+  <ul>
+    <li><code>UNION</code> → combines results</li>
+    <li><code>INTERSECT</code> → common rows</li>
+    <li><code>EXCEPT</code> → rows in first but not second</li>
+    <li>Use <code>ALL</code> → to keep duplicates</li>
+  </ul>
+
+  <h3>Aggregate Functions &amp; GROUP BY</h3>
+  <h4>Aggregate Functions</h4>
+  <ul>
+    <li><code>AVG()</code> → average</li>
+    <li><code>MIN()</code> → minimum</li>
+    <li><code>MAX()</code> → maximum</li>
+    <li><code>COUNT()</code> → number of rows</li>
+    <li><code>SUM()</code> → total</li>
+  </ul>
+  <h4>GROUP BY</h4>
+  <pre>GROUP BY department;</pre>
+  <ul>
+    <li>Groups rows with same values</li>
+  </ul>
+  <h4>Filtering Groups (HAVING)</h4>
+  <pre>HAVING AVG(salary) > 50000;</pre>
+  <ul>
+    <li><code>WHERE</code> → filters rows</li>
+    <li><code>HAVING</code> → filters groups</li>
+  </ul>
+
+  <div class="quick-revision">
+    <h4>Quick Summary</h4>
+    <ul>
+      <li>SELECT–FROM–WHERE → basic query</li>
+      <li>DISTINCT → remove duplicates</li>
+      <li>JOIN + WHERE → combine tables</li>
+      <li>IN / LIKE → advanced filtering</li>
+      <li>ORDER BY → sorting</li>
+      <li>UNION / INTERSECT / EXCEPT → set operations</li>
+      <li>GROUP BY + HAVING → aggregation</li>
+    </ul>
+  </div>
+
+  <!-- LECTURE 2 -->
+  <h2 class="lecture" id="lec2">Lecture 2: Intermediate SQL / 1</h2>
+
+  <h3>Introduction</h3>
+  <ul>
+    <li>Moves beyond basic SQL → focuses on <strong>advanced querying</strong> and <strong>data modification</strong></li>
+    <li>Two main topics:
+      <ul>
+        <li>Nested Subqueries</li>
+        <li>Data Manipulation (<code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>)</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>Nested Subqueries</h3>
+  <p><strong>Definition:</strong> A subquery is a query inside another query, written using <code>SELECT–FROM–WHERE</code>.</p>
+  <p><strong>Key Idea:</strong> Output of one query (relation) is used as input to another query.</p>
+
+  <h4>A. Subqueries in WHERE Clause</h4>
+  <ol>
+    <li><strong>Set Membership</strong>
+      <ul><li><code>IN</code> / <code>NOT IN</code> → check if value exists in subquery result</li></ul>
+      <pre>WHERE dept IN (SELECT dept FROM instructor)</pre>
+    </li>
+    <li><strong>Set Comparison</strong>
+      <ul>
+        <li><code>SOME</code> (<code>ANY</code>) → true if condition holds for at least one value</li>
+        <li><code>ALL</code> → true if condition holds for all values</li>
+      </ul>
+    </li>
+    <li><strong>Empty Relation Test</strong>
+      <ul>
+        <li><code>EXISTS</code> → true if subquery returns any row</li>
+        <li><code>NOT EXISTS</code> → true if no rows returned</li>
+      </ul>
+    </li>
+    <li><strong>Correlated Subqueries</strong>
+      <ul><li>Inner query depends on outer query</li></ul>
+      <pre>WHERE salary > (
+  SELECT AVG(salary)
+  FROM instructor i2
+  WHERE i2.dept = i1.dept
+)</pre>
+    </li>
+    <li><strong>Uniqueness Test</strong>
+      <ul><li><code>UNIQUE</code> → checks no duplicates in subquery result</li></ul>
+    </li>
+  </ol>
+
+  <h4>B. Subqueries in FROM Clause</h4>
+  <ul>
+    <li>Acts like a temporary table</li>
+    <li>Useful for breaking complex queries</li>
+    <li>Alternative to <code>HAVING</code></li>
+  </ul>
+  <pre>FROM (SELECT dept, AVG(salary) AS avg_sal
+      FROM instructor
+      GROUP BY dept) AS temp</pre>
+
+  <h4>C. Subqueries in SELECT Clause</h4>
+  <ul>
+    <li>Must return a single value (scalar)</li>
+    <li>If multiple values returned → error</li>
+  </ul>
+  <pre>SELECT name,
+       (SELECT COUNT(*) FROM teaches) AS total_courses</pre>
+
+  <h4>D. WITH Clause (CTE)</h4>
+  <ul>
+    <li>Creates temporary named relation</li>
+    <li>Improves readability and reuse</li>
+  </ul>
+  <pre>WITH temp AS (
+  SELECT dept, AVG(salary) AS avg_sal
+  FROM instructor
+  GROUP BY dept
+)
+SELECT * FROM temp;</pre>
+
+  <h3>Data Manipulation (Modification)</h3>
+
+  <h4>A. DELETE</h4>
+  <pre>DELETE FROM table_name WHERE condition;</pre>
+  <ul>
+    <li>Deletes selected rows</li>
+    <li>No <code>WHERE</code> → deletes all rows</li>
+    <li>Subqueries are evaluated before deletion starts</li>
+  </ul>
+
+  <h4>B. INSERT</h4>
+  <pre>INSERT INTO table_name VALUES (...);
+INSERT INTO table_name (col1, col2) VALUES (...);</pre>
+  <p><strong>Key Points:</strong></p>
+  <ul>
+    <li>Order must match schema (if columns not specified)</li>
+    <li><code>NULL</code> allowed for unknown values</li>
+  </ul>
+  <p><strong>Insert from Query:</strong></p>
+  <pre>INSERT INTO table_name
+SELECT * FROM another_table;</pre>
+  <ul>
+    <li><code>SELECT</code> runs completely first (avoids infinite loops)</li>
+  </ul>
+
+  <h4>C. UPDATE</h4>
+  <pre>UPDATE table_name
+SET column = value
+WHERE condition;</pre>
+
+  <p><strong>CASE Expression (Multiple Conditions):</strong></p>
+  <pre>UPDATE instructor
+SET salary = CASE
+  WHEN salary < 50000 THEN salary * 1.1
+  ELSE salary * 1.05
+END;</pre>
+
+  <p><strong>Using Subqueries in UPDATE:</strong></p>
+  <pre>UPDATE instructor
+SET salary = (
+  SELECT AVG(salary) FROM instructor
+);</pre>
+
+  <div class="quick-revision">
+    <h4>Quick Summary</h4>
+    <ul>
+      <li><strong>Subqueries</strong> → query inside query</li>
+      <li><strong>WHERE subqueries</strong> → IN, EXISTS, SOME, ALL</li>
+      <li><strong>FROM subqueries</strong> → temporary tables</li>
+      <li><strong>SELECT subqueries</strong> → scalar values only</li>
+      <li><strong>WITH</strong> → improves readability</li>
+      <li><strong>Data Modification:</strong>
+        <ul>
+          <li>DELETE → remove data</li>
+          <li>INSERT → add data</li>
+          <li>UPDATE → modify data</li>
+          <li>CASE → handle multiple update conditions</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <!-- LECTURE 3 -->
+  <h2 class="lecture" id="lec3">Lecture 3: Intermediate SQL / 2</h2>
+
+  <h3>Join Operations</h3>
+  <p><strong>Purpose:</strong> Combine data from multiple tables meaningfully.</p>
+  <ul>
+    <li>Based on Cartesian Product + condition</li>
+  </ul>
+
+  <h4>Types of Joins</h4>
+  <ol>
+    <li><strong>Cross Join</strong>
+      <ul>
+        <li>Pure Cartesian Product</li>
+        <li>Every row of table A × every row of table B</li>
+        <li>If A has <em>m</em> rows and B has <em>n</em> rows → result = <em>m × n</em></li>
+      </ul>
+    </li>
+    <li><strong>Inner Join</strong>
+      <ul>
+        <li>Keeps only matching rows</li>
+        <li>Non-matching rows are discarded</li>
+        <li>Represents intersection of data</li>
+      </ul>
+      <pre>SELECT *
+FROM A INNER JOIN B
+ON A.id = B.id;</pre>
+    </li>
+    <li><strong>Outer Joins</strong>
+      <ul>
+        <li>Used to avoid data loss (fills missing values with <code>NULL</code>)</li>
+        <li><strong>Left Outer Join</strong> → keeps all rows from left table</li>
+        <li><strong>Right Outer Join</strong> → keeps all rows from right table</li>
+        <li><strong>Full Outer Join</strong> → keeps all rows from both tables</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h4>Join Conditions &amp; Keywords</h4>
+  <ol>
+    <li><strong>NATURAL JOIN</strong>
+      <ul>
+        <li>Automatically joins on same attribute names</li>
+        <li>Removes duplicate columns</li>
+      </ul>
+    </li>
+    <li><strong>ON Clause</strong>
+      <ul><li>Specifies join condition explicitly</li></ul>
+      <pre>ON A.id = B.id</pre>
+    </li>
+    <li><strong>USING Clause</strong>
+      <ul><li>Joins using common attributes</li></ul>
+      <pre>USING (id)</pre>
+    </li>
+  </ol>
+
+  <h4>Performance Note</h4>
+  <ul>
+    <li>Joins are expensive operations</li>
+    <li>Large tables → huge intermediate results</li>
+    <li>Example: 1M × 1M = 1 trillion combinations</li>
+  </ul>
+
+  <h3>Database Views</h3>
+  <p><strong>Definition:</strong> A view is a virtual table.</p>
+  <ul>
+    <li>Does not store data physically</li>
+    <li>Used for:
+      <ul>
+        <li>Security (hide sensitive data)</li>
+        <li>Simplification (complex queries)</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h4>Creating a View</h4>
+  <pre>CREATE VIEW view_name AS
+SELECT ...;</pre>
+
+  <h4>Key Properties</h4>
+  <ul>
+    <li>View is recomputed every time it is used</li>
+    <li>Always shows latest data from base tables</li>
+  </ul>
+
+  <h4>View Expansion</h4>
+  <ul>
+    <li>System replaces view with its original query</li>
+    <li>Continues until only real tables remain</li>
+  </ul>
+
+  <h4>View Dependencies</h4>
+  <ul>
+    <li>Views can be built on other views</li>
+    <li>Creates a dependency chain</li>
+  </ul>
+
+  <h4>Updating Views</h4>
+  <ul>
+    <li>Possible only if convertible to base table operations</li>
+    <li><strong>Limitations:</strong>
+      <ul>
+        <li>Fails if required columns are hidden</li>
+        <li>Fails if view is too complex (joins, aggregates)</li>
+      </ul>
+    </li>
+    <li>Most DBMS allow updates only on simple views (single table)</li>
+  </ul>
+
+  <h4>Materialized Views</h4>
+  <ul>
+    <li>Stored physically as tables</li>
+    <li>Faster access but:
+      <ul>
+        <li>Can become outdated</li>
+        <li>Need regular refresh</li>
+      </ul>
+    </li>
+  </ul>
+
+  <div class="quick-revision">
+    <h4>Quick Summary</h4>
+    <ul>
+      <li><strong>Cross Join</strong> → all combinations</li>
+      <li><strong>Inner Join</strong> → only matches</li>
+      <li><strong>Outer Join</strong> → keeps unmatched with NULL</li>
+      <li><strong>NATURAL / ON / USING</strong> → join conditions</li>
+      <li><strong>View</strong> → virtual table (no storage)</li>
+      <li><strong>Materialized View</strong> → stored but needs updates</li>
+    </ul>
+  </div>
+
+  <!-- LECTURE 4 -->
+  <h2 class="lecture" id="lec4">Lecture 4: Intermediate SQL / 3</h2>
+
+  <h3>Transactions</h3>
+  <p><strong>Definition:</strong> A transaction is a group of SQL operations treated as one unit.</p>
+  <h4>Properties (ACID – simplified)</h4>
+  <ul>
+    <li><strong>Atomicity</strong> → All or nothing (success or rollback)</li>
+    <li><strong>Isolation</strong> → Transactions don't interfere with each other</li>
+  </ul>
+  <h4>Control Commands</h4>
+  <pre>COMMIT;    -- save changes
+ROLLBACK;  -- undo changes</pre>
+
+  <h3>Integrity Constraints</h3>
+  <p>Ensure data correctness and consistency.</p>
+
+  <h4>A. Single Relation Constraints</h4>
+  <ul>
+    <li><code>NOT NULL</code> → no empty values</li>
+    <li><code>UNIQUE</code> → values must be distinct (can allow NULL)</li>
+  </ul>
+
+  <h4>B. CHECK Clause</h4>
+  <p>Applies custom conditions.</p>
+  <pre>CHECK (semester IN ('fall', 'winter', 'spring', 'summer'))</pre>
+
+  <h4>C. Referential Integrity (Foreign Key)</h4>
+  <ul>
+    <li>Ensures valid relationships between tables</li>
+    <li>Example: instructor's department must exist in department table</li>
+  </ul>
+
+  <h4>D. Cascading Actions</h4>
+  <ul>
+    <li>Automatically propagate changes</li>
+    <li><code>ON DELETE CASCADE</code> → delete dependent rows</li>
+    <li><code>ON UPDATE CASCADE</code> → update dependent rows</li>
+  </ul>
+
+  <h4>E. Constraint Checking</h4>
+  <ul>
+    <li>Used in complex cases (like self-referencing tables)</li>
+    <li>Can be delayed (deferred checking)</li>
+  </ul>
+
+  <h3>SQL Data Types &amp; Schema Concepts</h3>
+
+  <h4>A. Date &amp; Time</h4>
+  <ul>
+    <li>Types: <code>DATE</code>, <code>TIME</code>, <code>TIMESTAMP</code></li>
+    <li>Difference stored as <code>INTERVAL</code></li>
+    <li>Supports arithmetic (add/subtract time)</li>
+  </ul>
+
+  <h4>B. Index</h4>
+  <ul>
+    <li>Improves search speed</li>
+    <li>Uses structures like B-tree</li>
+  </ul>
+  <p><strong>Trade-off:</strong></p>
+  <ul>
+    <li>Faster queries</li>
+    <li>Slower updates (maintenance cost)</li>
+  </ul>
+
+  <h4>C. User-Defined Types</h4>
+  <pre>CREATE TYPE dollar AS numeric(10,2);</pre>
+  <ul>
+    <li>Alias for existing type</li>
+    <li>Example: <code>dollar</code> for currency</li>
+  </ul>
+
+  <h4>D. Domain</h4>
+  <pre>CREATE DOMAIN age INT CHECK (age >= 18);</pre>
+  <ul>
+    <li>Type + constraints</li>
+    <li>Reusable &amp; stricter</li>
+  </ul>
+
+  <h4>E. Large Objects</h4>
+  <ul>
+    <li><code>BLOB</code> → binary data (images, videos)</li>
+    <li><code>CLOB</code> → large text data</li>
+    <li>Stored externally → DB stores reference</li>
+  </ul>
+
+  <h3>Authorization</h3>
+  <p>Controls who can access what.</p>
+
+  <h4>A. Privileges</h4>
+  <ul>
+    <li><strong>Data operations:</strong> <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code></li>
+    <li><strong>Schema operations:</strong> create/alter tables, indices</li>
+    <li><strong>REFERENCES:</strong> needed for foreign keys</li>
+  </ul>
+
+  <h4>B. Commands</h4>
+  <pre>GRANT privilege TO user;
+REVOKE privilege FROM user;</pre>
+
+  <h4>C. WITH GRANT OPTION</h4>
+  <p>Allows user to grant permissions to others.</p>
+
+  <h4>D. Roles</h4>
+  <ul>
+    <li>Group of privileges</li>
+    <li>Assign roles instead of individual permissions</li>
+    <li>Example: role = instructor, admin</li>
+  </ul>
+
+  <h4>E. Views &amp; Security</h4>
+  <ul>
+    <li>Permissions can be given on views</li>
+    <li>Users can access limited data without seeing full tables</li>
+  </ul>
+
+  <div class="quick-revision">
+    <h4>Quick Summary</h4>
+    <ul>
+      <li><strong>Transaction</strong> → unit of work (COMMIT / ROLLBACK)</li>
+      <li><strong>Constraints</strong> → ensure valid data (NOT NULL, UNIQUE, FK)</li>
+      <li><strong>CASCADE</strong> → automatic updates/deletes</li>
+      <li><strong>Index</strong> → faster search</li>
+      <li><strong>Domain</strong> → reusable constrained type</li>
+      <li><strong>BLOB/CLOB</strong> → large data storage</li>
+      <li><strong>GRANT/REVOKE</strong> → control access</li>
+      <li><strong>Roles &amp; Views</strong> → simplify security</li>
+    </ul>
+  </div>
+
+  <!-- LECTURE 5 -->
+  <h2 class="lecture" id="lec5">Lecture 5: Advanced SQL</h2>
+
+  <h3>Functions &amp; Procedures in SQL</h3>
+  <p><strong>Purpose:</strong> Add programming logic inside SQL.</p>
+
+  <h4>Integration Models</h4>
+  <ul>
+    <li><strong>External Invocation</strong> → SQL calls functions written in C, Java, Python</li>
+    <li><strong>Embedded SQL</strong> → SQL written inside another programming language</li>
+    <li><strong>Native SQL (SQL:1999)</strong> → Procedures/functions written fully in SQL</li>
+  </ul>
+
+  <h4>Why Use External Languages?</h4>
+  <ul>
+    <li>Handle complex logic</li>
+    <li>Work with special data (images, geometry)</li>
+    <li>Support object-oriented features</li>
+  </ul>
+
+  <h3>Table-Valued Functions</h3>
+  <ul>
+    <li>Return a table instead of a single value</li>
+    <li>Used like a table in <code>FROM</code></li>
+  </ul>
+  <pre>SELECT *
+FROM TABLE(function_name(...));</pre>
+
+  <h4>Defining Functions</h4>
+  <pre>CREATE FUNCTION func_name(parameters)
+RETURNS data_type
+BEGIN
+  -- logic
+END;</pre>
+  <ul>
+    <li>Returns a single value</li>
+    <li>Supports overloading</li>
+  </ul>
+
+  <h4>Procedures</h4>
+  <ul>
+    <li>Do not return value directly</li>
+    <li>Use <code>IN</code> / <code>OUT</code> parameters</li>
+  </ul>
+  <pre>CALL procedure_name(...);</pre>
+
+  <h3>Procedural Language Constructs</h3>
+  <h4>Compound Statements</h4>
+  <pre>BEGIN
+  -- multiple statements
+END;</pre>
+
+  <h4>Loops</h4>
+  <ul>
+    <li><strong>WHILE</strong> → runs while condition is true</li>
+    <li><strong>REPEAT</strong> → runs at least once</li>
+    <li><strong>FOR</strong> → loops over query results</li>
+  </ul>
+
+  <h4>Conditionals</h4>
+  <ul>
+    <li><strong>IF–THEN–ELSE</strong></li>
+    <li><strong>CASE:</strong>
+      <ul>
+        <li>Simple CASE → like switch</li>
+        <li>Searched CASE → complex conditions</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h4>Variables</h4>
+  <pre>SET variable = value;</pre>
+
+  <h4>Exception Handling</h4>
+  <ul>
+    <li><code>SIGNAL</code> → raise error</li>
+    <li><code>HANDLER</code> → manage errors</li>
+  </ul>
+
+  <h3>Triggers</h3>
+  <p><strong>Definition:</strong> Automatic actions executed on data changes.</p>
+
+  <h4>Trigger Events</h4>
+  <ul>
+    <li><code>INSERT</code></li>
+    <li><code>UPDATE</code></li>
+    <li><code>DELETE</code></li>
+  </ul>
+
+  <h4>Trigger Timing</h4>
+  <ul>
+    <li><strong>BEFORE</strong> → runs before change (validation/modification)</li>
+    <li><strong>AFTER</strong> → runs after change (logging/integrity)</li>
+  </ul>
+
+  <h4>Trigger Types (Granularity)</h4>
+  <ul>
+    <li><strong>Statement-level</strong> → once per query</li>
+    <li><strong>Row-level</strong> → once per row affected</li>
+  </ul>
+
+  <h4>Data Referencing</h4>
+  <ul>
+    <li><code>OLD</code> → previous data</li>
+    <li><code>NEW</code> → updated/new data</li>
+  </ul>
+
+  <h4>When to Use Triggers</h4>
+  <ul>
+    <li>Logging &amp; auditing</li>
+    <li>Maintaining integrity</li>
+    <li>Simple validation</li>
+  </ul>
+
+  <h4>When to Avoid</h4>
+  <ul>
+    <li>Too many triggers</li>
+    <li>Complex logic</li>
+    <li>Recursive triggers</li>
+    <li>Expensive operations</li>
+  </ul>
+
+  <div class="quick-revision">
+    <h4>Quick Summary</h4>
+    <ul>
+      <li><strong>Functions</strong> → return value</li>
+      <li><strong>Procedures</strong> → use IN/OUT, no direct return</li>
+      <li><strong>Table functions</strong> → return tables</li>
+      <li><strong>Loops &amp; IF/CASE</strong> → control flow</li>
+      <li><strong>Triggers</strong> → automatic actions on DB changes</li>
+    </ul>
+  </div>
+
+  <hr>
+  <p style="text-align:center; color:var(--muted); font-size:0.85rem;">Week 3 — DBMS Short Notes</p>
+
+</div>
+</body>
+</html>
