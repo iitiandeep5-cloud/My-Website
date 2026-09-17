@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Java · Week 3 Notes</title>
+<style>
+  :root {
+    --ink: #1c2b2a;
+    --ink-soft: #3d504e;
+    --paper: #f9faf8;
+    --panel: #eef1ec;
+    --line: #d6dcd3;
+    --accent: #1f6f5c;
+    --accent-soft: #e4efe9;
+    --amber: #b3781f;
+    --code-bg: #16211f;
+    --code-fg: #dbe6de;
+    --code-key: #e8b064;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #e8ede9;
+      --ink-soft: #aebab3;
+      --paper: #101614;
+      --panel: #17201d;
+      --line: #2a352f;
+      --accent: #6fbfa2;
+      --accent-soft: #1c2b26;
+      --amber: #d9a24e;
+      --code-bg: #0b1211;
+      --code-fg: #d7e2db;
+      --code-key: #e8b064;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #e8ede9;
+    --ink-soft: #aebab3;
+    --paper: #101614;
+    --panel: #17201d;
+    --line: #2a352f;
+    --accent: #6fbfa2;
+    --accent-soft: #1c2b26;
+    --amber: #d9a24e;
+    --code-bg: #0b1211;
+    --code-fg: #d7e2db;
+    --code-key: #e8b064;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .layout {
+    display: flex;
+    max-width: 1180px;
+    margin: 0 auto;
+    align-items: flex-start;
+  }
+
+  /* Sidebar */
+  nav.toc {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 250px;
+    flex-shrink: 0;
+    padding: 2.5rem 1.25rem 2rem 1.75rem;
+    border-right: 1px solid var(--line);
+    overflow-y: auto;
+  }
+  nav.toc .course-tag {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    margin: 0 0 0.15rem 0;
+  }
+  nav.toc h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.55rem;
+    font-weight: 600;
+    margin: 0 0 1.75rem 0;
+    line-height: 1.25;
+  }
+  nav.toc ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: lec;
+  }
+  nav.toc li { counter-increment: lec; margin-bottom: 0.15rem; }
+  nav.toc a {
+    display: flex;
+    gap: 0.65rem;
+    align-items: baseline;
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    padding: 0.4rem 0.5rem;
+    border-radius: 6px;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  nav.toc a:hover { background: var(--accent-soft); color: var(--ink); }
+  nav.toc a::before {
+    content: counter(lec);
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    min-width: 1.1em;
+  }
+
+  main {
+    flex: 1;
+    min-width: 0;
+    padding: 3rem 3.5rem 6rem 3.5rem;
+  }
+
+  header.masthead {
+    margin-bottom: 3.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--line);
+  }
+  header.masthead p.kicker {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: var(--accent);
+    margin: 0 0 0.75rem 0;
+  }
+  header.masthead h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 700;
+    font-size: 2.6rem;
+    line-height: 1.15;
+    margin: 0 0 0.9rem 0;
+    max-width: 16ch;
+  }
+  header.masthead p.dek {
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    max-width: 58ch;
+    margin: 0;
+  }
+
+  section.lecture {
+    margin-bottom: 4.5rem;
+    scroll-margin-top: 2rem;
+  }
+  section.lecture > h2 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.7rem;
+    font-weight: 600;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin: 0 0 0.3rem 0;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--accent);
+  }
+  section.lecture > h2 .num {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 1.05rem;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  h3 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin: 2.1rem 0 0.6rem 0;
+    color: var(--ink);
+  }
+  h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 1.3rem 0 0.4rem 0;
+    color: var(--ink-soft);
+  }
+
+  p { margin: 0.5rem 0 0.8rem 0; max-width: 72ch; }
+
+  ul, ol.plain { margin: 0.4rem 0 0.9rem 0; padding-left: 1.3rem; max-width: 68ch; }
+  li { margin-bottom: 0.3rem; }
+  li::marker { color: var(--accent); }
+
+  .callout {
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    padding: 0.85rem 1.1rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1rem 0 1.2rem 0;
+    max-width: 66ch;
+    font-size: 0.95rem;
+  }
+  .callout strong { color: var(--accent); }
+
+  pre {
+    background: var(--code-bg);
+    color: var(--code-fg);
+    padding: 1rem 1.2rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.85rem;
+    line-height: 1.55;
+    margin: 0.8rem 0 1.3rem 0;
+    max-width: 68ch;
+  }
+  code {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.88em;
+    background: var(--panel);
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+  }
+  pre code { background: none; padding: 0; }
+
+  .table-wrap { overflow-x: auto; margin: 0.8rem 0 1.4rem 0; max-width: 72ch; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.92rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.55rem 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  th {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 600;
+    color: var(--accent);
+    border-bottom: 2px solid var(--line);
+  }
+  tr:last-child td { border-bottom: none; }
+
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    max-width: 68ch;
+    margin: 0.8rem 0 1.3rem 0;
+  }
+  .compare .col {
+    background: var(--panel);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+  }
+  .compare .col h5 {
+    margin: 0 0 0.5rem 0;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.78rem;
+    color: var(--amber);
+    text-transform: none;
+  }
+  .compare .col ul { margin: 0; padding-left: 1.1rem; }
+
+  .takeaways {
+    background: var(--panel);
+    border-radius: 10px;
+    padding: 1.1rem 1.4rem;
+    margin-top: 1.6rem;
+    max-width: 68ch;
+  }
+  .takeaways h4 {
+    margin-top: 0;
+    color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1rem;
+  }
+  .takeaways ul { margin-bottom: 0; }
+
+  footer {
+    max-width: 68ch;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+
+  @media (max-width: 900px) {
+    .layout { flex-direction: column; }
+    nav.toc {
+      position: relative;
+      width: 100%;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid var(--line);
+      padding: 1.5rem;
+    }
+    main { padding: 2rem 1.25rem 4rem 1.25rem; }
+    header.masthead h1 { font-size: 2rem; }
+    .compare { grid-template-columns: 1fr; }
+  }
+
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <nav class="toc" aria-label="Lecture contents">
+    <p class="course-tag">Week 3</p>
+    <h1>Java: Inheritance &amp; Polymorphism</h1>
+    <ol>
+      <li><a href="#l1">Philosophy of OOP</a></li>
+      <li><a href="#l2">Subclasses &amp; Inheritance</a></li>
+      <li><a href="#l3">Dynamic Dispatch</a></li>
+      <li><a href="#l4">The Java Class Hierarchy</a></li>
+      <li><a href="#l5">Subtyping vs Inheritance</a></li>
+      <li><a href="#l6">Java Modifiers</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <header class="masthead">
+      <h1>From Objects to Polymorphism</h1>
+    </header>
+
+    <!-- LECTURE 1 -->
+    <section class="lecture" id="l1">
+      <h2><span class="num">01</span> The Philosophy of OO Programming</h2>
+
+      <h3>A shift in programming philosophy</h3>
+      <p><strong>Procedural programming (1960s–70s)</strong> follows Niklaus Wirth's formula: <em>Algorithms + Data Structures = Programs</em>. It focuses first on algorithms and functions, dividing large programs into smaller procedures, with data often shared globally.</p>
+      <p><strong>Object-oriented programming</strong> shifts the focus from functions to data — identify objects first (Customer, Bank Account, Order), where each object combines data and behavior.</p>
+
+      <h3>Managing complexity with OOP</h3>
+      <div class="compare">
+        <div class="col">
+          <h5>procedural</h5>
+          <ul>
+            <li>2,000 global functions — hard to manage</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h5>oop</h5>
+          <ul>
+            <li>100 classes × 20 methods — organized, modular</li>
+          </ul>
+        </div>
+      </div>
+      <p>Classes divide the system into manageable units, so errors are localized to a handful of object methods rather than spread across thousands of functions.</p>
+
+      <h3>Key concepts of OO design</h3>
+      <ul>
+        <li><strong>Nouns = objects</strong> — Item, Order, Payment, Address</li>
+        <li><strong>Verbs = methods</strong> — Add Item, Ship Order, Cancel Order</li>
+      </ul>
+
+      <h3>Core properties of objects</h3>
+      <ul>
+        <li><strong>State</strong> — data stored inside an object (e.g. an Order's state: Empty, In Cart, Shipped)</li>
+        <li><strong>Behavior</strong> — methods that manipulate state (Add Item, Cancel Order)</li>
+        <li><strong>Encapsulation</strong> — hide internal data, access only via methods, for security and reliability</li>
+        <li><strong>Identity</strong> — every object is unique, even two orders with identical items</li>
+      </ul>
+
+      <h3>Relationships between classes</h3>
+      <p><strong>Dependence &amp; coupling</strong> — an Order depends on an Account for payment; coupling is the degree of that dependency, and the goal is to minimize it.</p>
+      <p><strong>Composition</strong> — objects contain other objects (an Order contains Items).</p>
+      <p><strong>Inheritance</strong> — creating a new class from an existing one (<code>ExpressOrder</code> inherits <code>Order</code>) for code reuse and easier extension.</p>
+
+      <div class="callout"><strong>Languages built around OOP —</strong> Java, C++, Python.</div>
+
+      <div class="takeaways">
+        <h4>Conclusion</h4>
+        <ul>
+          <li>OOP focuses on objects and data, helping manage large, complex systems through better organization, easier debugging, reusability, and security via encapsulation.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- LECTURE 2 -->
+    <section class="lecture" id="l2">
+      <h2><span class="num">02</span> Subclasses and Inheritance</h2>
+
+      <h3>Introduction to inheritance</h3>
+      <p>A new class (subclass/child) is created from an existing class (superclass/parent). This is an <strong>"is-a" relationship</strong> — a subclass is a specialized version of the superclass. Example: a Manager <em>is-an</em> Employee, so Manager inherits Employee's features and adds new ones.</p>
+      <pre><code>class Manager extends Employee</code></pre>
+      <p>Benefit: <strong>code reusability</strong> — the subclass inherits fields and methods, avoiding duplication.</p>
+
+      <h3>The this keyword</h3>
+      <p><code>this</code> refers to the current object — <code>this.salary</code> is the salary of the current object.</p>
+      <div class="compare">
+        <div class="col">
+          <h5>java</h5>
+          <ul><li><code>this</code> is implicit, e.g. <code>salary = this.salary</code></li></ul>
+        </div>
+        <div class="col">
+          <h5>python</h5>
+          <ul><li>An explicit <code>self</code> parameter is required</li></ul>
+        </div>
+      </div>
+
+      <h3>Privacy and encapsulation in subclasses</h3>
+      <p>Private variables of the parent class cannot be accessed directly by a subclass:</p>
+      <pre><code>private double salary;
+// subclass cannot do: salary = 50000;
+// must use a public method like setSalary()</code></pre>
+      <p>This matters because encapsulation protects data, separates concerns so the subclass remains unaffected by internal changes in the parent, and improves security, reliability, and maintainability.</p>
+
+      <h3>The super keyword and constructors</h3>
+      <p><code>super</code> calls the parent constructor — needed because private variables must be initialized through it:</p>
+      <pre><code>super(name, salary);</code></pre>
+      <p>A subclass constructor has the special privilege of invoking the parent constructor via <code>super</code>.</p>
+
+      <h3>Subtyping and substitutability</h3>
+      <p>A subclass object can be used wherever the parent type is expected (upcasting):</p>
+      <pre><code>Employee e = new Manager();   // valid</code></pre>
+      <p>This is a one-way relationship — the reverse isn't allowed:</p>
+      <pre><code>Manager m = new Employee();   // invalid</code></pre>
+      <p>Employee lacks Manager-specific features, like secretary or bonus methods.</p>
+
+      <h3>Arrays and polymorphism</h3>
+      <pre><code>Employee[] staff = new Employee[10];</code></pre>
+      <p>An array of <code>Employee</code> can dynamically store subtype objects like <code>Manager</code>, with a runtime check ensuring compatibility and safe storage.</p>
+
+      <h3>Method overriding (preview)</h3>
+      <p>A subclass redefines a method inherited from its parent to customize behavior — e.g. bonus calculation: Employee → <code>salary * 0.1</code>, Manager → <code>salary * 0.2</code>.</p>
+
+      <div class="takeaways">
+        <h4>Conclusion</h4>
+        <ul>
+          <li>Inheritance enables code reusability, better organization, extension of existing classes, and reduced duplication.</li>
+          <li>Key concepts: <code>extends</code>, <code>this</code>, <code>super</code>, encapsulation, upcasting, method overriding.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- LECTURE 3 -->
+    <section class="lecture" id="l3">
+      <h2><span class="num">03</span> Dynamic Dispatch and Polymorphism</h2>
+
+      <h3>Inheritance and method overriding</h3>
+      <pre><code>class Manager extends Employee</code></pre>
+      <p><code>Employee</code> is the parent/superclass, <code>Manager</code> the child/subclass — the subclass inherits instance variables and methods, but private fields still require getters/setters to support encapsulation.</p>
+      <p><strong>Method overriding</strong> lets a subclass redefine an inherited method — e.g. a different bonus calculation for Employee vs. Manager — marked with the <code>@Override</code> annotation.</p>
+      <p>The <strong>super</strong> keyword calls a parent's constructor or method, letting a subclass reuse and extend parent logic ("piggybacking"):</p>
+      <pre><code>super.bonus();</code></pre>
+
+      <h3>Static type vs. dynamic type</h3>
+      <p><strong>Static type</strong> is the declared type at compile time:</p>
+      <pre><code>Employee e;   // static type = Employee</code></pre>
+      <p><strong>Dynamic type</strong> is the actual object at runtime:</p>
+      <pre><code>e = new Manager();   // dynamic type = Manager</code></pre>
+      <p>Upcasting is valid:</p>
+      <pre><code>Employee e = new Manager();   // valid</code></pre>
+      <p>But the static type restricts which methods are accessible — e.g. <code>e.setSecretary();</code> is invalid if that method is only defined on <code>Manager</code>.</p>
+
+      <h3>Dynamic dispatch (late binding)</h3>
+      <p>The runtime decides which overridden method to execute, based on the actual object type rather than the variable's declared type:</p>
+      <pre><code>Employee e = new Manager();
+e.bonus();   // calls Manager's bonus()</code></pre>
+      <p>All methods in Java are dynamically dispatched by default, enabling runtime polymorphism across heterogeneous collections — e.g. <code>Employee[] staff</code> holding both Employees and Managers.</p>
+
+      <h3>Three forms of polymorphism</h3>
+      <p>"Many forms" — functions behave differently depending on context.</p>
+      <h4>a) Runtime / inheritance polymorphism</h4>
+      <p>Based on inheritance and dynamic dispatch; occurs at runtime, depending on the actual object type.</p>
+      <h4>b) Overloading (static polymorphism)</h4>
+      <p>Same method name, different parameters; resolved at compile time, based on argument types/number.</p>
+      <h4>c) Structural polymorphism (generics)</h4>
+      <p>Functions that work for many types based on shared capabilities — e.g. a sorting function that works on integers, strings, or objects, as long as they're comparable. Widely used in generic programming and the collections framework.</p>
+
+      <h3>Type casting and reflection</h3>
+      <p><strong>Object casting:</strong></p>
+      <pre><code>Manager m = (Manager) e;</code></pre>
+      <p><strong>Primitive casting:</strong></p>
+      <pre><code>int x = (int) 5.7;   // x = 5</code></pre>
+      <p>Wrong casting causes runtime errors, e.g. <code>Manager m = (Manager) new Employee();</code> is invalid. The <code>instanceof</code> predicate checks type before casting:</p>
+      <pre><code>if (e instanceof Manager)</code></pre>
+      <p><strong>Reflection (introspection)</strong> lets a program examine its own structure at runtime — inspecting object types, methods, and classes.</p>
+
+      <div class="takeaways">
+        <h4>Conclusion</h4>
+        <ul>
+          <li>Key concepts: inheritance, method overriding, <code>super</code>, static vs. dynamic types, dynamic dispatch, polymorphism, type casting, reflection.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- LECTURE 4 -->
+    <section class="lecture" id="l4">
+      <h2><span class="num">04</span> The Java Class Hierarchy</h2>
+
+      <h3>Multiple inheritance and Java's design choice</h3>
+      <p>Multiple inheritance means a class inherits from more than one parent. Java does not support this for classes, unlike C++, to avoid ambiguity — if two parents both define <code>show()</code>, inheritance becomes unclear. Inheriting multiple parents also brings in their whole hierarchies (the <strong>transitivity problem</strong>), adding complexity and potential conflicts. Single inheritance is a bottleneck when features are needed from multiple sources.</p>
+
+      <h3>The universal Object class</h3>
+      <p>Every class has exactly one parent, forming a single tree structure rooted at <code>Object</code>:</p>
+      <pre><code>class Employee   // actually means: class Employee extends Object</code></pre>
+      <p>All classes — Employee, Manager, String, Date — ultimately extend <code>Object</code>.</p>
+
+      <h3>Important methods inherited from Object</h3>
+      <p><strong><code>toString()</code></strong> converts an object into a string representation — <code>System.out.println(myObject)</code> internally calls <code>myObject.toString()</code>, useful for debugging, printing, displaying info.</p>
+      <p><strong><code>equals(Object o)</code></strong> — by default, checks reference equality (same memory location); <code>a == b</code> is true only if both refer to the same object.</p>
+
+      <h3>Polymorphism and genericity</h3>
+      <p>A higher-level type can store a lower-level object:</p>
+      <pre><code>Object obj = new Employee();   // valid</code></pre>
+      <p>This enables generic programming:</p>
+      <pre><code>void print(Object o)   // accepts any object</code></pre>
+      <p>Benefit: reusability, flexibility, generic coding.</p>
+
+      <h3>Overriding methods and signature matching</h3>
+      <p>Method overriding requires the signature — name and parameter types — to match exactly:</p>
+      <pre><code>boolean equals(Date d)   // does NOT override equals(Object o)</code></pre>
+      <p>The correct strategy:</p>
+      <pre><code>boolean equals(Object o) {
+    if (o instanceof Date) {
+        Date d = (Date) o;
+        // compare day, month, year
+    }
+}</code></pre>
+
+      <h3>Dynamic dispatch and nearest match</h3>
+      <p>At runtime, Java checks the actual object type, searches upward through the hierarchy, and finds the nearest compatible method — the most specific one wins:</p>
+      <pre><code>Object o = new Employee();
+o.toString();   // calls Employee's toString() if overridden</code></pre>
+      <p>The <strong>static type</strong> (declared variable type) determines accessibility; the <strong>dynamic type</strong> (actual object) determines which overridden method executes.</p>
+
+      <div class="takeaways">
+        <h4>Conclusion</h4>
+        <ul>
+          <li>Key concepts: multiple inheritance, the Object class, <code>toString()</code> and <code>equals()</code>, polymorphism, generic programming, method overriding, dynamic dispatch, signature matching.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- LECTURE 5 -->
+    <section class="lecture" id="l5">
+      <h2><span class="num">05</span> Subtyping vs Inheritance</h2>
+
+      <h3>Subtyping: capability and compatibility</h3>
+      <p>Subtyping focuses on what an object can do — its interface/capabilities — not how it's implemented. Type B is a subtype of A if B supports all of A's capabilities and may add extra features.</p>
+      <p><strong>Substitution principle</strong> — if B is a subtype of A, any code expecting A can safely use B:</p>
+      <pre><code>Employee e = new Manager();   // valid — Manager can do everything Employee can, plus more</code></pre>
+      <p>A subtype may override or change implementation, but it cannot remove or forbid parent functions. Focus: interfaces, capabilities, compatibility.</p>
+
+      <h3>Inheritance: code and implementation reuse</h3>
+      <p>Inheritance focuses on reusing existing code — Type B inherits from A if B uses code already written in A, avoiding duplication:</p>
+      <pre><code>super.bonus();   // reuse Employee's bonus
+// Manager may extend it: super.bonus() * 2</code></pre>
+      <p>Focus: implementation, internal structure, reusability.</p>
+
+      <h3>Conflict between subtyping and inheritance</h3>
+      <p>Example structures — Queue (insert rear, delete front), Stack (insert front, delete front), Deque (insert/delete both ends).</p>
+      <div class="compare">
+        <div class="col">
+          <h5>subtyping view</h5>
+          <ul>
+            <li>Deque supports all Queue + Stack operations, so Deque is a subtype of both</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h5>inheritance view</h5>
+          <ul>
+            <li>Deque can't easily reuse Stack/Queue's limited code</li>
+            <li>The reverse works — Stack/Queue can inherit from Deque, hiding the extra functions</li>
+          </ul>
+        </div>
+      </div>
+      <p>So subtyping says Deque → subtype of Stack/Queue, while inheritance runs the other way — Stack/Queue inherit from Deque. Subtyping ≠ inheritance.</p>
+
+      <h3>Comparison</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Feature</th><th>Subtyping</th><th>Inheritance</th></tr></thead>
+          <tbody>
+            <tr><td>Focus</td><td>Interface / capabilities</td><td>Implementation / code reuse</td></tr>
+            <tr><td>Main idea</td><td>What it does</td><td>How it is built</td></tr>
+            <tr><td>Purpose</td><td>Compatibility</td><td>Reusability</td></tr>
+            <tr><td>Checking</td><td>Compile-time &amp; runtime compatibility</td><td>Reuse parent functions</td></tr>
+            <tr><td>Relationship</td><td>"Can perform all tasks"</td><td>"Uses existing code"</td></tr>
+            <tr><td>Example</td><td>Deque is subtype of Stack/Queue</td><td>Stack/Queue inherit from Deque</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>When both concepts match</h3>
+      <p>Manager reuses Employee's code (inheritance), and Manager can perform Employee's tasks (subtyping) — so Manager is both a subtype and an inherited class.</p>
+
+      <div class="takeaways">
+        <h4>Conclusion</h4>
+        <ul>
+          <li>Subtyping asks: can this object be used here? Inheritance asks: can this code help build another class?</li>
+          <li>Though often used together in Java, C++, and Python, subtyping and inheritance are theoretically separate concepts.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- LECTURE 6 -->
+    <section class="lecture" id="l6">
+      <h2><span class="num">06</span> Java Modifiers</h2>
+
+      <h3>Access modifiers: public and private</h3>
+      <p>Encapsulation hides internal object data, allows controlled access via methods, and protects state and security.</p>
+      <p><strong><code>public</code></strong> — accessible from outside the class, commonly used for methods/interfaces:</p>
+      <pre><code>public void display()</code></pre>
+      <p><strong><code>private</code></strong> — accessible only inside the same class, commonly used for instance variables:</p>
+      <pre><code>private int salary;</code></pre>
+      <p>Benefits of private variables: data protection, better control, prevents invalid changes, maintains consistency.</p>
+
+      <h3>Accessor and mutator methods</h3>
+      <p><strong>Accessor (getter)</strong> — retrieves object data, read-only, e.g. <code>getSalary()</code>. <strong>Mutator (setter)</strong> — updates object data while maintaining a valid state, e.g. <code>setSalary()</code>.</p>
+      <div class="callout"><strong>Design note —</strong> avoid separate setters like <code>setDay()</code>, <code>setMonth()</code>, <code>setYear()</code>, which risk invalid dates. Better: <code>setDate(day, month, year)</code>, validating all values together.</div>
+
+      <h3>Private methods</h3>
+      <p>Internal helper functions — e.g. <code>extendStack()</code> in a stack implementation, resizing an array internally without the user's awareness. Benefit: improves abstraction and simplicity.</p>
+
+      <h3>The static modifier</h3>
+      <p><code>static</code> means belonging to the class, not to individual objects.</p>
+      <p><strong>Static methods</strong> can be used without creating an object:</p>
+      <pre><code>public static void main(String[] args)
+Math.sqrt()</code></pre>
+      <p><strong>Static variables</strong> are shared among all objects — only one copy exists:</p>
+      <pre><code>// public static constants:
+Math.PI, Integer.MAX_VALUE
+
+// private static counters:
+private static int lastOrderId;</code></pre>
+      <div class="callout"><strong>Concurrency warning —</strong> multiple users updating static variables simultaneously risk duplicate IDs — related to multithreading.</div>
+
+      <h3>The final modifier</h3>
+      <p><strong>Final variables</strong> are constants — cannot change once assigned:</p>
+      <pre><code>final int MAX = 100;</code></pre>
+      <p><strong>Final methods</strong> prevent overriding in subclasses:</p>
+      <pre><code>final void display()</code></pre>
+      <p>Benefit: protects important logic and controls subclass behavior.</p>
+
+      <h3>Summary of modifier combinations</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Modifier combination</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td>Private instance variable</td><td>Encapsulation and data hiding</td></tr>
+            <tr><td><code>public static final</code></td><td>Global constants</td></tr>
+            <tr><td><code>private static</code></td><td>Shared counters/bookkeeping</td></tr>
+            <tr><td>Final method</td><td>Prevent method overriding</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="takeaways">
+        <h4>Conclusion</h4>
+        <ul>
+          <li>Modifiers help developers protect data, reuse code safely, share information efficiently, and prevent accidental changes.</li>
+          <li>Key concepts: <code>public</code>, <code>private</code>, <code>static</code>, <code>final</code>, encapsulation, getters/setters, private helper methods, constants, concurrency.</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>Week 3 short notes — Philosophy of OOP, Subclasses &amp; Inheritance, Dynamic Dispatch &amp; Polymorphism, The Java Class Hierarchy, Subtyping vs Inheritance, Java Modifiers.</footer>
+  </main>
+</div>
+</body>
+</html>

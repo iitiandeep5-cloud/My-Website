@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Java · Week 4 Notes</title>
+<style>
+  :root {
+    --ink: #1c2b2a;
+    --ink-soft: #3d504e;
+    --paper: #f9faf8;
+    --panel: #eef1ec;
+    --line: #d6dcd3;
+    --accent: #1f6f5c;
+    --accent-soft: #e4efe9;
+    --amber: #b3781f;
+    --code-bg: #16211f;
+    --code-fg: #dbe6de;
+    --code-key: #e8b064;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #e8ede9;
+      --ink-soft: #aebab3;
+      --paper: #101614;
+      --panel: #17201d;
+      --line: #2a352f;
+      --accent: #6fbfa2;
+      --accent-soft: #1c2b26;
+      --amber: #d9a24e;
+      --code-bg: #0b1211;
+      --code-fg: #d7e2db;
+      --code-key: #e8b064;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #e8ede9;
+    --ink-soft: #aebab3;
+    --paper: #101614;
+    --panel: #17201d;
+    --line: #2a352f;
+    --accent: #6fbfa2;
+    --accent-soft: #1c2b26;
+    --amber: #d9a24e;
+    --code-bg: #0b1211;
+    --code-fg: #d7e2db;
+    --code-key: #e8b064;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .layout {
+    display: flex;
+    max-width: 1180px;
+    margin: 0 auto;
+    align-items: flex-start;
+  }
+
+  /* Sidebar */
+  nav.toc {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 250px;
+    flex-shrink: 0;
+    padding: 2.5rem 1.25rem 2rem 1.75rem;
+    border-right: 1px solid var(--line);
+    overflow-y: auto;
+  }
+  nav.toc .course-tag {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    margin: 0 0 0.15rem 0;
+  }
+  nav.toc h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.55rem;
+    font-weight: 600;
+    margin: 0 0 1.75rem 0;
+    line-height: 1.25;
+  }
+  nav.toc ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: lec;
+  }
+  nav.toc li { counter-increment: lec; margin-bottom: 0.15rem; }
+  nav.toc a {
+    display: flex;
+    gap: 0.65rem;
+    align-items: baseline;
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    padding: 0.4rem 0.5rem;
+    border-radius: 6px;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  nav.toc a:hover { background: var(--accent-soft); color: var(--ink); }
+  nav.toc a::before {
+    content: counter(lec);
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    min-width: 1.1em;
+  }
+
+  main {
+    flex: 1;
+    min-width: 0;
+    padding: 3rem 3.5rem 6rem 3.5rem;
+  }
+
+  header.masthead {
+    margin-bottom: 3.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--line);
+  }
+  header.masthead p.kicker {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: var(--accent);
+    margin: 0 0 0.75rem 0;
+  }
+  header.masthead h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 700;
+    font-size: 2.6rem;
+    line-height: 1.15;
+    margin: 0 0 0.9rem 0;
+    max-width: 16ch;
+  }
+  header.masthead p.dek {
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    max-width: 58ch;
+    margin: 0;
+  }
+
+  section.lecture {
+    margin-bottom: 4.5rem;
+    scroll-margin-top: 2rem;
+  }
+  section.lecture > h2 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.7rem;
+    font-weight: 600;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin: 0 0 0.3rem 0;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--accent);
+  }
+  section.lecture > h2 .num {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 1.05rem;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  h3 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin: 2.1rem 0 0.6rem 0;
+    color: var(--ink);
+  }
+  h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 1.3rem 0 0.4rem 0;
+    color: var(--ink-soft);
+  }
+
+  p { margin: 0.5rem 0 0.8rem 0; max-width: 72ch; }
+
+  ul, ol.plain { margin: 0.4rem 0 0.9rem 0; padding-left: 1.3rem; max-width: 68ch; }
+  li { margin-bottom: 0.3rem; }
+  li::marker { color: var(--accent); }
+
+  .callout {
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    padding: 0.85rem 1.1rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1rem 0 1.2rem 0;
+    max-width: 66ch;
+    font-size: 0.95rem;
+  }
+  .callout strong { color: var(--accent); }
+
+  pre {
+    background: var(--code-bg);
+    color: var(--code-fg);
+    padding: 1rem 1.2rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.85rem;
+    line-height: 1.55;
+    margin: 0.8rem 0 1.3rem 0;
+    max-width: 68ch;
+  }
+  code {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.88em;
+    background: var(--panel);
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+  }
+  pre code { background: none; padding: 0; }
+
+  .table-wrap { overflow-x: auto; margin: 0.8rem 0 1.4rem 0; max-width: 72ch; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.92rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.55rem 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  th {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 600;
+    color: var(--accent);
+    border-bottom: 2px solid var(--line);
+  }
+  tr:last-child td { border-bottom: none; }
+
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    max-width: 68ch;
+    margin: 0.8rem 0 1.3rem 0;
+  }
+  .compare .col {
+    background: var(--panel);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+  }
+  .compare .col h5 {
+    margin: 0 0 0.5rem 0;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.78rem;
+    color: var(--amber);
+    text-transform: none;
+  }
+  .compare .col ul { margin: 0; padding-left: 1.1rem; }
+
+  .flow {
+    background: var(--panel);
+    border-radius: 8px;
+    padding: 1rem 1.3rem;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.85rem;
+    max-width: 40ch;
+    margin: 0.8rem 0 1.3rem 0;
+    line-height: 2;
+  }
+  .flow .arrow { color: var(--accent); text-align: center; display: block; }
+
+  .takeaways {
+    background: var(--panel);
+    border-radius: 10px;
+    padding: 1.1rem 1.4rem;
+    margin-top: 1.6rem;
+    max-width: 68ch;
+  }
+  .takeaways h4 {
+    margin-top: 0;
+    color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1rem;
+  }
+  .takeaways ul { margin-bottom: 0; }
+
+  footer {
+    max-width: 68ch;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+
+  @media (max-width: 900px) {
+    .layout { flex-direction: column; }
+    nav.toc {
+      position: relative;
+      width: 100%;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid var(--line);
+      padding: 1.5rem;
+    }
+    main { padding: 2rem 1.25rem 4rem 1.25rem; }
+    header.masthead h1 { font-size: 2rem; }
+    .compare { grid-template-columns: 1fr; }
+  }
+
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <nav class="toc" aria-label="Lecture contents">
+    <p class="course-tag">Week 4</p>
+    <h1>Java: Contracts &amp; State</h1>
+    <ol>
+      <li><a href="#l1">Abstract Classes &amp; Interfaces</a></li>
+      <li><a href="#l2">Interfaces</a></li>
+      <li><a href="#l3">Private Classes</a></li>
+      <li><a href="#l4">Controlled Interaction</a></li>
+      <li><a href="#l5">Callbacks</a></li>
+      <li><a href="#l6">Iterators</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <header class="masthead">
+      <h1>Abstraction, Encapsulation, State</h1>
+    </header>
+
+    <!-- LECTURE 1 -->
+    <section class="lecture" id="l1">
+      <h2><span class="num">01</span> Abstract Classes &amp; Interfaces</h2>
+
+      <h3>Class hierarchy and grouping</h3>
+      <p>A class hierarchy organizes related objects under one structure — e.g. <code>Shape</code> as a parent class, with <code>Circle</code>, <code>Square</code>, and <code>Rectangle</code> as subclasses. Each subclass redefines methods like <code>perimeter()</code>: <code>Circle</code> → <code>2πr</code>, <code>Square</code> → <code>4·side</code>.</p>
+
+      <h3>The need for abstract definitions</h3>
+      <p>In large projects, meaningless default implementations (e.g. returning <code>-1</code>) can cause errors. The fix is an <strong>abstract method</strong> — declaration only, no body — forcing every subclass to implement its own version:</p>
+      <pre><code>abstract double perimeter();</code></pre>
+
+      <h3>Abstract classes</h3>
+      <p>If a class has even one abstract method, the class itself must be declared abstract.</p>
+      <ul>
+        <li>Cannot be instantiated — <code>new Shape();</code> is invalid</li>
+        <li>Variables and arrays are still allowed: <code>Shape[] arr = new Shape[5];</code> can store <code>Circle</code>, <code>Square</code>, etc.</li>
+        <li><strong>Dynamic dispatch</strong> — the correct subclass method is chosen at runtime</li>
+      </ul>
+
+      <h3>Generic capabilities — the Comparable example</h3>
+      <p>Abstract classes and interfaces define reusable capabilities. The <strong>Comparable</strong> pattern's <code>cmp()</code> returns <code>-1</code>, <code>0</code>, or <code>+1</code>, letting sorting algorithms like quicksort work with any comparable class.</p>
+
+      <h3>Multiple inheritance and interfaces</h3>
+      <p>Java disallows multiple inheritance of classes to avoid conflicts — e.g. two parent classes defining the same method would be ambiguous. Interfaces sidestep this: all methods are abstract by default, offering only specifications with no implementation, which eliminates the risk of conflicting code.</p>
+
+      <h3>Extends vs. implements</h3>
+      <p><code>extends</code> inherits from a class; <code>implements</code> adopts an interface's capabilities:</p>
+      <pre><code>class Circle extends Shape implements Comparable</code></pre>
+      <p>This means Circle <em>is a</em> Shape, and Circle <em>is</em> Comparable.</p>
+      <div class="callout"><strong>Java's rule —</strong> a class can extend only one class, but can implement multiple interfaces — safely providing multiple capabilities.</div>
+
+      <div class="takeaways">
+        <h4>Quick revision</h4>
+        <ul>
+          <li>Abstract methods are declaration only; abstract classes cannot be instantiated.</li>
+          <li>Subclasses must implement abstract methods; dynamic dispatch gives runtime polymorphism.</li>
+          <li>No multiple inheritance of classes — interfaces give safe multiple capabilities, one class implementing many.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- LECTURE 2 -->
+    <section class="lecture" id="l2">
+      <h2><span class="num">02</span> Interfaces</h2>
+
+      <h3>Definition and core properties</h3>
+      <p>An interface is a purely abstract structure — traditionally, all methods are abstract, providing only declarations, never implementations.</p>
+      <div class="callout"><strong>No state —</strong> interfaces cannot hold instance variables or object state; they describe behavior/capabilities, not data.</div>
+
+      <h3>Keywords and multiple implementation</h3>
+      <p>A class <em>extends</em> another class, but <em>implements</em> an interface:</p>
+      <pre><code>class Circle implements Comparable</code></pre>
+      <p>A class can extend only one superclass, but implement multiple interfaces:</p>
+      <pre><code>class Circle extends Shape implements Comparable, Drawable</code></pre>
+      <p>This avoids multiple-inheritance conflicts while still enabling multiple capabilities.</p>
+
+      <h3>Purpose of interfaces — defining capabilities</h3>
+      <p>Interfaces describe what a class <em>can do</em>. Sorting algorithms like Quicksort and Merge Sort require comparable objects — the <code>Comparable</code> interface defines a comparison method, <code>cmp()</code>. The interface fixes the method's name, parameters, and return type; correct logic depends on the developer's implementation.</p>
+      <p>Expected return values: <code>-1</code> → smaller, <code>0</code> → equal, <code>1</code> → greater.</p>
+
+      <h3>Modern Java enhancements</h3>
+      <p>Originally fully abstract, interfaces now allow limited concrete methods.</p>
+
+      <h4>a) Static methods</h4>
+      <p>Belong to the interface itself — useful for utility/documentation helpers:</p>
+      <pre><code>static void cmpdoc()</code></pre>
+
+      <h4>b) Default methods</h4>
+      <p>Declared with <code>default</code>, providing an optional implementation classes inherit if they don't override it:</p>
+      <pre><code>default void show() {
+    System.out.println("Default Method");
+}</code></pre>
+
+      <h3>Managing inheritance conflicts</h3>
+      <div class="compare">
+        <div class="col">
+          <h5>interface vs interface</h5>
+          <ul>
+            <li>Two interfaces with the same default method → the class must override it</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h5>class vs interface</h5>
+          <ul>
+            <li>Superclass and interface define the same method → the class's method wins</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout"><strong>Rule —</strong> classes win over interfaces.</div>
+
+      <h3>Evolutionary philosophy of Java</h3>
+      <p>Backward compatibility prevents old programs from breaking, and controlled growth avoids the complexity of full multiple inheritance. Java introduces safe features instead — interfaces, default methods, static methods — balancing new functionality against the stability of old code.</p>
+
+      <div class="takeaways">
+        <h4>Quick revision</h4>
+        <ul>
+          <li>An interface is a purely abstract structure; classes implement it, and one class can implement several.</li>
+          <li>Interfaces define signatures, not guaranteed logic; modern interfaces allow static and default methods.</li>
+          <li>Interface clashes force an override; class-vs-interface clashes let the class method win.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- LECTURE 3 -->
+    <section class="lecture" id="l3">
+      <h2><span class="num">03</span> Private Classes</h2>
+
+      <h3>Introduction to nested objects</h3>
+      <p>In Java, one object can contain another inside its instance variables — helpful for organizing related data:</p>
+      <pre><code>class Employee {
+    Date joiningDate;
+}</code></pre>
+
+      <h3>Public vs. private scope</h3>
+      <p>Public nested classes are accessible by any class in the program — <code>Date</code> is public because many programs need it. Private nested classes are hidden, used only internally for encapsulation.</p>
+
+      <h3>Motivation for private classes</h3>
+      <p>Not every internal class should be visible — some exist only to support internal implementation. Classic example — <code>LinkedList</code> and <code>Node</code>:</p>
+      <pre><code>class Node {
+    int value;
+    Node next;
+}</code></pre>
+      <p>Users care about the list of values, not how nodes are connected. Hiding <code>Node</code> improves encapsulation and flexibility — if the implementation later changes (singly → doubly linked list), user code stays unaffected.</p>
+
+      <h3>Defining private inner classes</h3>
+      <p>A class can be declared inside another and marked private — an <strong>inner class</strong>:</p>
+      <pre><code>class LinkedList {
+    private class Node {
+        int value;
+        Node next;
+    }
+}</code></pre>
+      <p>Purpose: hide internal details, prevent outside access, increase encapsulation and security.</p>
+
+      <h3>Visibility and access rules</h3>
+      <div class="compare">
+        <div class="col">
+          <h5>host → inner</h5>
+          <ul>
+            <li>The outer class can create objects of the inner class</li>
+            <li>The outer class can access all members of the inner class</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h5>inner → host</h5>
+          <ul>
+            <li>The inner class can access private variables and methods of the outer class</li>
+          </ul>
+        </div>
+      </div>
+      <pre><code>class LinkedList {
+    private int size;
+    private class Node {
+        void showSize() {
+            System.out.println(size);
+        }
+    }
+}</code></pre>
+      <p>Inner and outer classes are treated as part of the same scope — similar to how two objects of the same class can access each other's private members.</p>
+
+      <h3>Advanced utility — interfaces and state control</h3>
+      <p>Private inner classes can work with interfaces to control how internal state is accessed and how data is exposed externally — giving better abstraction, safer data handling, and stronger encapsulation.</p>
+
+      <div class="takeaways">
+        <h4>Quick revision</h4>
+        <ul>
+          <li>Objects can contain other objects; nested classes organize related data.</li>
+          <li>LinkedList commonly hides its Node objects behind a private inner class.</li>
+          <li>Outer and inner classes can access each other's private members; interfaces + private classes control state safely.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- LECTURE 4 -->
+    <section class="lecture" id="l4">
+      <h2><span class="num">04</span> Controlled Interaction with Objects</h2>
+
+      <h3>Core principles of encapsulation</h3>
+      <p>Encapsulation keeps internal implementation private and provides controlled access via public methods.</p>
+
+      <h3>Accessor and mutator methods</h3>
+      <p><strong>Accessor methods (getters)</strong> retrieve instance variable values, e.g. <code>getDate()</code>. <strong>Mutator methods (setters)</strong> modify them, e.g. <code>setDate()</code>.</p>
+
+      <h3>The problem with simple getters and setters</h3>
+      <p>Simple setters may allow invalid states — like the 31st of February — leading to inconsistent data. The fix is a validation function that checks all values together, e.g. <code>setDate(day, month, year)</code>, for better data integrity and fewer incompatible states.</p>
+
+      <h3>Need for advanced interaction control</h3>
+      <p>Large systems — railway reservations, banking, online databases — need more than validation; they must control who can access data and how it's accessed.</p>
+      <div class="callout"><strong>Common threats —</strong> Denial of Service (flooding requests to block genuine users) and bots/scraping (automated data collection for black-marketing or price manipulation). The fix: queries should only work for authenticated users.</div>
+
+      <h3>Interaction with state</h3>
+      <p>Passing login details into every function is poor design:</p>
+      <pre><code>getStatus(userID, password)</code></pre>
+      <p>A better approach lets the system remember login state, session validity, and permission level, stored inside an object — interaction with state.</p>
+
+      <h3>Technical implementation: private classes + public interfaces</h3>
+      <p>A successful login returns a <strong>Query Object</strong> rather than granting direct database access.</p>
+      <pre><code>private class QueryObject</code></pre>
+      <p>The private class cannot be created manually by users, which prevents bypassing login validation. A public interface exposes only the allowed operations:</p>
+      <pre><code>interface QIF
+// returned as:
+QIF obj</code></pre>
+      <p>Users can call allowed methods, like <code>getStatus()</code>, without ever seeing the internal implementation.</p>
+
+      <h3>Controlling usage and lifetime</h3>
+      <ul>
+        <li><strong>Usage limits</strong> — the private query object tracks <code>numQueries</code> and stops responding past a limit, preventing automated abuse</li>
+        <li><strong>Temporal limits</strong> — session timeout tracks login time and last activity, expiring like a banking app after inactivity</li>
+        <li><strong>Powerful state management</strong> — the private object can access database data, maintain internal state, and regulate user activity intelligently</li>
+      </ul>
+
+      <div class="takeaways">
+        <h4>Quick revision</h4>
+        <ul>
+          <li>Encapsulation hides internal details; getters are accessors, setters are mutators.</li>
+          <li>Simple setters can create invalid states — validation improves data integrity.</li>
+          <li>Private inner classes secure implementation while public interfaces expose allowed operations; query objects enforce limits and timeouts.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- LECTURE 5 -->
+    <section class="lecture" id="l5">
+      <h2><span class="num">05</span> Callbacks</h2>
+
+      <h3>Introduction to callbacks</h3>
+      <p>A <strong>callback</strong> is when one object creates another to perform a task, and once it's done, the second object calls back a function on the original object — enabling controlled communication, asynchronous handling, and safe use of interfaces with private/internal classes.</p>
+      <div class="callout"><strong>Analogy —</strong> like a kitchen timer: you set it, keep working, and it notifies you when time is up.</div>
+
+      <h3>Mechanism of parallel execution</h3>
+      <p>Parallelism runs secondary tasks alongside the main program; Java's threads enable this.</p>
+      <pre><code>class MyTask implements Runnable</code></pre>
+      <p>The <code>Runnable</code> interface lets an object run as a separate thread — optimizing resources and supporting multitasking, e.g. running a clock or downloading files while browsing.</p>
+
+      <h3>Evolution of callback implementation</h3>
+      <h4>Version 1 — tight coupling</h4>
+      <pre><code>Timer(MyClass owner)</code></pre>
+      <p>Works only with one specific class — not reusable, tightly coupled.</p>
+
+      <h4>Version 2 — using Object class</h4>
+      <pre><code>Timer(Object owner)</code></pre>
+      <p>Accepts any class, but requires unsafe casting:</p>
+      <pre><code>((MyClass)owner).timerDone();</code></pre>
+
+      <h4>Version 3 — using interfaces (best approach)</h4>
+      <pre><code>interface TimerOwner {
+    void timerDone();
+}</code></pre>
+      <p>Any class can implement this interface, and the Timer accepts it directly:</p>
+      <pre><code>Timer(TimerOwner owner)
+// safe call:
+owner.timerDone();</code></pre>
+
+      <h3>Benefits of interfaces in callbacks</h3>
+      <ul>
+        <li><strong>Generic utility</strong> — works with any class implementing the interface</li>
+        <li><strong>Decoupling</strong> — the Timer only knows the object can receive notifications, not its details</li>
+        <li><strong>Abstraction</strong> — the receiver doesn't need to be the creator of the timer</li>
+      </ul>
+
+      <h3>Real-world example — web browsers</h3>
+      <p>Downloading files runs in the background while browsing continues. If the user stops a download, the browser sends a notification to the background process — a working example of callback plus thread communication.</p>
+
+      <div class="takeaways">
+        <h4>Quick revision</h4>
+        <ul>
+          <li>A callback lets one object notify another after a task completes, for asynchronous communication.</li>
+          <li>Threads run parallel tasks; the Runnable interface enables thread execution.</li>
+          <li>Tight coupling → Object-class casting → interfaces is the evolution toward flexible, reusable callbacks.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- LECTURE 6 -->
+    <section class="lecture" id="l6">
+      <h2><span class="num">06</span> Iterators</h2>
+
+      <h3>Core theme — interaction with state</h3>
+      <p>An object's behavior depends on its current internal state — as interaction continues, its responses change accordingly. This is implemented with private classes, private objects, and interfaces, to hide internal state and prevent external access.</p>
+
+      <h3>The concept of a linear list</h3>
+      <p>A linear list is an ordered sequence of values, commonly implemented two ways.</p>
+      <div class="compare">
+        <div class="col">
+          <h5>array-based</h5>
+          <pre><code>Object[] data;</code></pre>
+          <p style="margin:0.4rem 0 0;">Elements stored continuously in memory.</p>
+        </div>
+        <div class="col">
+          <h5>linked-list based</h5>
+          <pre><code>class Node {
+    Object data;
+    Node next;
+}</code></pre>
+          <p style="margin:0.4rem 0 0;">Each node holds data plus a reference to the next.</p>
+        </div>
+      </div>
+      <p>Adding elements to a linked list means traversing until <code>next == null</code>, then appending.</p>
+
+      <h3>Need for iterator abstraction</h3>
+      <p>If arrays or head nodes were public, users could loop directly and break encapsulation. An <strong>iterator</strong> provides a standard way to traverse collections without exposing internal details.</p>
+
+      <h3>Iterator interface</h3>
+      <p>Defines two key methods:</p>
+      <ul>
+        <li><strong><code>has_next()</code></strong> — checks whether another element exists, returning <code>true</code>/<code>false</code>; must be checked even before the first access, since the list may be empty</li>
+        <li><strong><code>get_next()</code></strong> — returns the next element and moves the iterator forward</li>
+      </ul>
+
+      <h3>Internal implementation and state tracking</h3>
+      <p>The iterator must remember its current position — its state.</p>
+      <div class="compare">
+        <div class="col">
+          <h5>arrays</h5>
+          <pre><code>int index;</code></pre>
+          <p style="margin:0.4rem 0 0;"><code>has_next()</code> checks bounds; <code>get_next()</code> increments the index.</p>
+        </div>
+        <div class="col">
+          <h5>linked lists</h5>
+          <pre><code>Node current;
+current = current.next;</code></pre>
+          <p style="margin:0.4rem 0 0;"><code>get_next()</code> moves the pointer forward.</p>
+        </div>
+      </div>
+      <p>Iterators are often implemented as <strong>private inner classes</strong> inside the list, so they can access its private data while remaining hidden externally — better security and encapsulation. Users request one via an <strong>object factory</strong>: calling <code>get_iterator()</code> returns a new iterator initialized at the start.</p>
+
+      <h3>Usage patterns</h3>
+      <p><strong>Standard iteration:</strong></p>
+      <pre><code>while (iterator.has_next()) {
+    Object x = iterator.get_next();
+}</code></pre>
+      <p><strong>Nested iteration</strong> — two loops running simultaneously (e.g. comparing pairs) each need their own iterator object; the outer iterator tracks the outer loop while the inner one restarts each pass.</p>
+
+      <h3>Modern iteration in Java</h3>
+      <p>The enhanced for-loop is similar to Python-style iteration, but still uses iterators internally, relying on state, private classes, and interfaces:</p>
+      <pre><code>for (Object x : collection)</code></pre>
+
+      <div class="takeaways">
+        <h4>Quick revision</h4>
+        <ul>
+          <li>Linear lists are ordered sequences, built as arrays or linked lists; iterators allow safe traversal.</li>
+          <li><code>has_next()</code> checks availability, <code>get_next()</code> returns the element and advances — arrays track an index, linked lists track a node pointer.</li>
+          <li>Iterators are often private inner classes; multiple iterators enable nested loops, and the enhanced for-loop uses iterators under the hood.</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>Week 4 short notes — Abstract Classes &amp; Interfaces, Interfaces, Private Classes, Controlled Interaction with Objects, Callbacks, Iterators.</footer>
+  </main>
+</div>
+</body>
+</html>
