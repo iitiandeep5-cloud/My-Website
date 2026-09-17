@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 6: Relational Database Design — Short Notes</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1f2430;
+    --muted: #5b6472;
+    --accent: #6d4aff;
+    --accent-soft: #f1ecff;
+    --card-bg: #faf9fc;
+    --border: #e4e1ec;
+    --code-bg: #f4f2fa;
+    --table-header: #ece6ff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #15151c;
+      --text: #eceaf4;
+      --muted: #a8a6b8;
+      --accent: #b19dff;
+      --accent-soft: #262138;
+      --card-bg: #1c1b26;
+      --border: #302e3d;
+      --code-bg: #211f2d;
+      --table-header: #2a2540;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #15151c;
+    --text: #eceaf4;
+    --muted: #a8a6b8;
+    --accent: #b19dff;
+    --accent-soft: #262138;
+    --card-bg: #1c1b26;
+    --border: #302e3d;
+    --code-bg: #211f2d;
+    --table-header: #2a2540;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Georgia", "Iowan Old Style", ui-serif, serif;
+    margin: 0;
+    padding: 2.5rem 1.25rem 5rem;
+    line-height: 1.65;
+  }
+
+  .wrap {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  header.title-block {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 3px solid var(--accent);
+  }
+
+  header.title-block .kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    color: var(--accent);
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-weight: 600;
+  }
+
+  header.title-block h1 {
+    font-size: 2rem;
+    margin: 0.4rem 0 0.3rem;
+    font-family: -apple-system, "Segoe UI", sans-serif;
+  }
+
+  header.title-block p.subtitle {
+    color: var(--muted);
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.95rem;
+  }
+
+  nav.toc {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 2.5rem;
+    font-family: -apple-system, "Segoe UI", sans-serif;
+  }
+
+  nav.toc h2 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 0 0 0.6rem;
+  }
+
+  nav.toc ol {
+    margin: 0;
+    padding-left: 1.2rem;
+    columns: 1;
+  }
+
+  nav.toc a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+  nav.toc a:hover { text-decoration: underline; }
+
+  section.lecture {
+    margin-bottom: 3.5rem;
+    padding-top: 0.5rem;
+  }
+
+  section.lecture > h2 {
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 1.5rem;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: inline-block;
+    padding: 0.35rem 0.9rem;
+    border-radius: 8px;
+    margin-bottom: 1.2rem;
+  }
+
+  h3 {
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 1.15rem;
+    margin: 1.8rem 0 0.6rem;
+    color: var(--text);
+    border-left: 4px solid var(--accent);
+    padding-left: 0.6rem;
+  }
+
+  p { margin: 0.5rem 0 0.9rem; }
+
+  ul, ol { margin: 0.4rem 0 1rem; padding-left: 1.4rem; }
+  li { margin-bottom: 0.35rem; }
+
+  strong { color: var(--text); font-weight: 700; }
+
+  .callout {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin: 1rem 0;
+  }
+
+  .callout.example {
+    border-left-color: #4aa8ff;
+  }
+  .callout.definition {
+    border-left-color: var(--accent);
+  }
+  .callout.important {
+    border-left-color: #ff8a4a;
+  }
+
+  .callout .label {
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  code, .fd {
+    font-family: "SFMono-Regular", Consolas, Menlo, monospace;
+    background: var(--code-bg);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.92em;
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.92rem;
+    min-width: 320px;
+  }
+
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.55rem 0.8rem;
+    text-align: left;
+  }
+
+  th {
+    background: var(--table-header);
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  tr:nth-child(even) td {
+    background: var(--card-bg);
+  }
+
+  .summary-box {
+    background: var(--accent-soft);
+    border-radius: 12px;
+    padding: 1.2rem 1.4rem;
+    margin-top: 1.5rem;
+  }
+
+  .summary-box .label {
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.78rem;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .summary-box ul { margin: 0; padding-left: 1.3rem; }
+
+  hr.divider {
+    border: none;
+    border-top: 1px dashed var(--border);
+    margin: 2.5rem 0;
+  }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.85rem;
+    margin-top: 3rem;
+  }
+
+  @media (max-width: 480px) {
+    header.title-block h1 { font-size: 1.5rem; }
+    body { padding: 1.5rem 1rem 4rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="title-block">
+    <div class="kicker">DBMS &middot; Week 6</div>
+    <h1>Relational Database Design</h1>
+    </header>
+
+  <nav class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#lecture1">Lecture 1 — Design/6: Normal Forms</a></li>
+      <li><a href="#lecture2">Lecture 2 — Design/7: Normal Forms (3NF &amp; BCNF)</a></li>
+      <li><a href="#lecture3">Lecture 3 — Design/8: Case Study</a></li>
+      <li><a href="#lecture4">Lecture 4 — Design/9: MVD &amp; 4NF</a></li>
+      <li><a href="#lecture5">Lecture 5 — Design/9: MVD &amp; 4NF (continued)</a></li>
+    </ol>
+  </nav>
+
+  <!-- LECTURE 1 -->
+  <section class="lecture" id="lecture1">
+    <h2>Lecture 1: Relational Database Design / 6 — Normal Forms</h2>
+
+    <h3>What is Normalization?</h3>
+    <p>Normalization is the process of organizing data in a database to remove redundancy (duplicate data), ensure proper data relationships, and improve data integrity.</p>
+    <div class="callout definition">
+      <span class="label">Simple Idea</span>
+      "Store data once, use it everywhere correctly."
+    </div>
+
+    <h3>Why Normalization? (Goals)</h3>
+    <p><strong>Main Objectives:</strong></p>
+    <ul>
+      <li>Eliminate data redundancy</li>
+      <li>Avoid data anomalies</li>
+      <li>Maintain data consistency</li>
+    </ul>
+
+    <p><strong>Types of Anomalies</strong></p>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Anomaly Type</th><th>Meaning</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>Insertion</td><td>Cannot insert data without other data</td><td>Cannot add a student without course</td></tr>
+          <tr><td>Deletion</td><td>Deleting one data removes useful info</td><td>Deleting last student removes course info</td></tr>
+          <tr><td>Update</td><td>Same data must be updated in multiple places</td><td>Changing teacher name everywhere</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Important Properties of Decomposition</h3>
+    <p>When breaking a table into smaller tables, we must ensure:</p>
+    <div class="callout definition">
+      <span class="label">1. Lossless Join</span>
+      After decomposition, we should be able to reconstruct the original table.<br>
+      Example: <span class="fd">Student(ID, Course, Teacher)</span> → <span class="fd">Student(ID, Course)</span> + <span class="fd">Course(Course, Teacher)</span><br>
+      Joining them gives the original table ✔️
+    </div>
+    <div class="callout definition">
+      <span class="label">2. Dependency Preservation</span>
+      All functional dependencies should be maintained without JOIN. Meaning: we should not need to combine tables just to check constraints.
+    </div>
+
+    <h3>First Normal Form (1NF)</h3>
+    <p><strong>Rule:</strong> All values must be atomic (single value); no multi-valued attributes.</p>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th colspan="2">Not in 1NF: Student(ID, Subjects)</th></tr></thead>
+        <tbody><tr><td>101</td><td>{Math, Science}</td></tr></tbody>
+      </table>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th colspan="2">In 1NF: Student(ID, Subject)</th></tr></thead>
+        <tbody><tr><td>101</td><td>Math</td></tr><tr><td>101</td><td>Science</td></tr></tbody>
+      </table>
+    </div>
+
+    <h3>Second Normal Form (2NF)</h3>
+    <p><strong>Rule:</strong> Must be in 1NF; no partial dependency.</p>
+    <p><strong>Key Concepts:</strong></p>
+    <ul>
+      <li><strong>Prime Attribute</strong> → Part of candidate key</li>
+      <li><strong>Non-prime Attribute</strong> → Not part of key</li>
+    </ul>
+    <div class="callout important">
+      <span class="label">Problem — Partial Dependency</span>
+      <span class="fd">Student(ID, Course, Teacher)</span>, Key = (ID, Course).<br>
+      Teacher depends only on Course ❌
+    </div>
+    <p><strong>Solution — Split table:</strong></p>
+    <ul>
+      <li><span class="fd">Student(ID, Course)</span></li>
+      <li><span class="fd">Course(Course, Teacher)</span></li>
+    </ul>
+
+    <h3>Third Normal Form (3NF)</h3>
+    <p><strong>Rule:</strong> Must be in 2NF; no transitive dependency.</p>
+    <div class="callout definition">
+      <span class="label">Transitive Dependency</span>
+      If A → B and B → C, then A → C.
+    </div>
+    <div class="callout example">
+      <span class="label">Example</span>
+      <span class="fd">Student(ID, Dept, HOD)</span><br>
+      ID → Dept, Dept → HOD, so ID → HOD (transitive).
+    </div>
+    <p><strong>Solution:</strong></p>
+    <ul>
+      <li><span class="fd">Student(ID, Dept)</span></li>
+      <li><span class="fd">Department(Dept, HOD)</span></li>
+    </ul>
+    <div class="callout definition">
+      <span class="label">Formal Rule</span>
+      For every dependency X → A: either X is a superkey, or A is a prime attribute.
+    </div>
+
+    <h3>Why 3NF is Important?</h3>
+    <p><strong>Advantages:</strong> Removes most redundancy; prevents anomalies; easy to implement.</p>
+    <p><strong>Maintains:</strong> Lossless join; dependency preservation.</p>
+    <p>That's why 3NF is widely used in real-world databases.</p>
+
+    <h3>Higher Normal Forms (Brief)</h3>
+    <p>Mostly, 3NF is enough in practice.</p>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Normal Form</th><th>Focus</th></tr></thead>
+        <tbody>
+          <tr><td>BCNF</td><td>Stronger version of 3NF</td></tr>
+          <tr><td>4NF</td><td>Multi-valued dependencies</td></tr>
+          <tr><td>5NF</td><td>Complex join dependencies</td></tr>
+          <tr><td>6NF</td><td>Rare, very advanced</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Normalization Hierarchy</h3>
+    <p><span class="fd">1NF → 2NF → 3NF → BCNF → 4NF → 5NF</span> — each level includes all previous rules.</p>
+
+    <div class="summary-box">
+      <span class="label">Final Summary — Quick Revision</span>
+      <ul>
+        <li>1NF → Atomic values</li>
+        <li>2NF → No partial dependency</li>
+        <li>3NF → No transitive dependency</li>
+        <li>Goal: Remove redundancy + anomalies</li>
+        <li>Must ensure: Lossless Join and Dependency Preservation</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- LECTURE 2 -->
+  <section class="lecture" id="lecture2">
+    <h2>Lecture 2: Relational Database Design / 7 — Normal Forms</h2>
+
+    <h3>Third Normal Form (3NF)</h3>
+    <div class="callout definition">
+      <span class="label">Definition</span>
+      A relation is in 3NF if for every dependency X→A, at least one is true: it's a trivial dependency (A already part of X), X is a superkey, or A is a prime attribute (part of some candidate key).
+    </div>
+    <p><strong>Shortcut to remember:</strong> "Either key determines it OR it is part of a key."</p>
+
+    <div class="callout example">
+      <span class="label">Example — Not in 3NF</span>
+      <span class="fd">Student(ID, Dept, HOD)</span><br>
+      Dependencies: ID → Dept, Dept → HOD.<br>
+      ID is key. Dept is NOT key. HOD depends on Dept (not key) → transitive dependency exists.
+    </div>
+    <p><strong>Convert to 3NF:</strong> <span class="fd">Student(ID, Dept)</span> + <span class="fd">Department(Dept, HOD)</span> — no transitive dependency, relation is in 3NF.</p>
+
+    <h3>Testing 3NF</h3>
+    <ul>
+      <li>Checking 3NF is NP-hard because we must find all candidate keys (can be many).</li>
+      <li>Trick: instead of checking full closure (F⁺), check only given dependencies (F).</li>
+    </ul>
+
+    <h3>3NF Decomposition Algorithm</h3>
+    <ol>
+      <li>Find Canonical Cover (Fc).</li>
+      <li>Remove redundant dependencies.</li>
+      <li>Create relations: for each FD X→Y, make table (X∪Y). Example: A→B ⇒ Table(A,B); B→C ⇒ Table(B,C).</li>
+      <li>Ensure candidate key exists — if no table contains a key, add one.</li>
+      <li>Remove redundant tables (if one table is subset of another).</li>
+    </ol>
+
+    <h3>Properties of 3NF</h3>
+    <ul>
+      <li>Lossless Join</li>
+      <li>Dependency Preserving</li>
+      <li>Removes most redundancy</li>
+    </ul>
+
+    <h3>Boyce-Codd Normal Form (BCNF)</h3>
+    <div class="callout definition">
+      <span class="label">Definition</span>
+      A relation is in BCNF if for every dependency X→A: either trivial, OR X must be a superkey. (No relaxation allowed unlike 3NF.)
+    </div>
+    <div class="callout important">
+      <span class="label">Example — Not in BCNF</span>
+      <span class="fd">Course(Student, Subject, Teacher)</span><br>
+      Dependencies: (Student, Subject) → Teacher; Teacher → Subject.<br>
+      Teacher is NOT a superkey but determines Subject → violates BCNF.
+    </div>
+    <p><strong>BCNF Decomposition:</strong> <span class="fd">Teacher(Teacher, Subject)</span> + <span class="fd">Course(Student, Teacher)</span> — now all determinants are superkeys.</p>
+
+    <h3>Testing BCNF</h3>
+    <ul>
+      <li>For original relation: check only given dependencies (F).</li>
+      <li>For decomposed relations: must use attribute closure (X⁺).</li>
+    </ul>
+
+    <h3>BCNF Decomposition Steps</h3>
+    <ol>
+      <li>Find violating dependency X→Y.</li>
+      <li>Decompose: R1 = (X∪Y), R2 = (R−(Y−X)).</li>
+      <li>Repeat until all relations satisfy BCNF.</li>
+    </ol>
+
+    <h3>Properties of BCNF</h3>
+    <ul>
+      <li>Always lossless join</li>
+      <li>May not preserve dependencies</li>
+    </ul>
+
+    <h3>Dependency Preservation</h3>
+    <p><strong>Meaning:</strong> After decomposition, we should be able to check all dependencies without joining tables.</p>
+    <p><strong>Methods:</strong></p>
+    <ol>
+      <li><strong>Exponential Algorithm:</strong> uses full closure (F⁺); always correct; very slow.</li>
+      <li><strong>Polynomial Algorithm:</strong> faster method; no false positives; may give false negatives (may say "not preserved" even if it is).</li>
+    </ol>
+
+    <h3>3NF vs BCNF (Comparison Table)</h3>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Feature</th><th>3NF</th><th>BCNF</th></tr></thead>
+        <tbody>
+          <tr><td>Redundancy</td><td>Allows some</td><td>Almost none</td></tr>
+          <tr><td>Dependency Preservation</td><td>Always</td><td>Not guaranteed</td></tr>
+          <tr><td>Lossless Join</td><td>Always</td><td>Always</td></tr>
+          <tr><td>Condition</td><td>X is superkey OR A is prime</td><td>X must be superkey</td></tr>
+          <tr><td>Strictness</td><td>Less strict</td><td>More strict</td></tr>
+          <tr><td>Complexity</td><td>Testing NP-hard</td><td>Uses closure</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="summary-box">
+      <span class="label">Final Quick Revision</span>
+      <ul>
+        <li><strong>3NF:</strong> Removes transitive dependency; allows slight redundancy; always safe choice.</li>
+        <li><strong>BCNF:</strong> Removes all redundancy; stricter than 3NF; may lose some dependencies.</li>
+        <li><strong>Key Difference:</strong> 3NF = Practical + Safe. BCNF = Pure + Strict.</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- LECTURE 3 -->
+  <section class="lecture" id="lecture3">
+    <h2>Lecture 3: Relational Database Design / 8 — Case Study</h2>
+
+    <h3>Process Overview</h3>
+    <p>Designing a database follows these steps:</p>
+    <ol>
+      <li>Identify Entities &amp; Attributes</li>
+      <li>Identify Relationships (ER Model)</li>
+      <li>Convert ER → Tables (Relational Schema)</li>
+      <li>Apply Normalization (3NF / BCNF)</li>
+      <li>Practical Refinement (for fast queries)</li>
+    </ol>
+    <div class="callout definition">
+      <span class="label">Simple Idea</span>
+      "From real-world description → clean, efficient tables"
+    </div>
+
+    <h3>Example (Library System)</h3>
+    <p>From description: "Students borrow books from library"</p>
+    <p><strong>We extract:</strong></p>
+    <ul>
+      <li>Entities → Student, Book</li>
+      <li>Relationship → Issue</li>
+    </ul>
+
+    <h3>Entity &amp; Attribute Identification</h3>
+    <p><strong>Types of Entities:</strong></p>
+    <ul>
+      <li><strong>Tangible Entities (Physical):</strong> Book, Member, Staff</li>
+      <li><strong>Intangible Entities (Conceptual):</strong> Rules like Quota (max books, time limit)</li>
+    </ul>
+    <p>These may be hidden in text and must be identified carefully.</p>
+
+    <h3>Unique Identifiers</h3>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Identifier</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td>ISBN</td><td>Same for all copies of a book</td></tr>
+          <tr><td>Accession No.</td><td>Unique for each physical copy</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout example">
+      <span class="label">Example</span>
+      Book Title: DBMS. ISBN: 12345 → same for all copies. Accession No: A1, A2, A3 → different copies.
+    </div>
+
+    <h3>Composite vs Atomic Attributes</h3>
+    <ul>
+      <li><strong>Composite:</strong> Name = "Rahul Sharma"</li>
+      <li><strong>Atomic:</strong> First_Name = Rahul, Last_Name = Sharma</li>
+    </ul>
+    <p>Always convert to atomic values.</p>
+
+    <h3>Implicit Entities</h3>
+    <p>Some entities are not directly mentioned but needed. Example: "Library system" → needs Staff entity, even if not written explicitly.</p>
+
+    <h3>Constraints &amp; Relationships</h3>
+    <p><strong>Value Constraints</strong> — restrict allowed values: <span class="fd">Member_Type ∈ {UG, PG, Faculty}</span></p>
+    <p><strong>Relationship Attributes</strong> — some attributes belong to relationships, not entities.</p>
+    <ul>
+      <li>Wrong: Assign Date of Issue (DOI) to Book or Member</li>
+      <li>Correct: <span class="fd">Issue(Member, Book, Date_of_Issue)</span></li>
+    </ul>
+
+    <h3>Cardinality (Relationship Type)</h3>
+    <div class="callout example">
+      <span class="label">Example — Issue Relationship</span>
+      One member → many books. One book copy → one member (at a time). So: Many-to-One relationship.
+    </div>
+
+    <h3>Functional Dependencies &amp; Normalization</h3>
+    <p><strong>Why Needed?</strong> To remove redundancy.</p>
+    <div class="callout important">
+      <span class="label">Example Problem</span>
+      <span class="fd">Book(Accession_No, ISBN, Title, Author, Publisher)</span><br>
+      FD: ISBN → Title, Author, Publisher.<br>
+      Problem: Same ISBN repeated for every copy → redundancy.
+    </div>
+    <p><strong>Solution (Decomposition):</strong></p>
+    <ul>
+      <li><span class="fd">Book_Copy(Accession_No, ISBN)</span></li>
+      <li><span class="fd">Book_Details(ISBN, Title, Author, Publisher)</span></li>
+    </ul>
+    <p>Now: no redundancy, achieves BCNF.</p>
+
+    <h3>Pragmatics &amp; Query Efficiency</h3>
+    <p><strong>Real Problem:</strong> A design can be theoretically perfect but practically inefficient.</p>
+    <div class="callout important">
+      <span class="label">Example Problem</span>
+      Separate tables: <span class="fd">Student(ID, Name)</span>, <span class="fd">Faculty(ID, Name)</span><br>
+      Query: "Who issued a book?" — problem: need to check BOTH tables.
+    </div>
+    <p><strong>Solution: Generalization</strong> — create one table:</p>
+    <p><span class="fd">Member(ID, Name, Member_Class, Member_Type)</span></p>
+    <p>Where Member_Class → Student / Faculty, Member_Type → UG / PG / Faculty.</p>
+    <p><strong>Benefit:</strong> Single query works; still normalized; efficient.</p>
+
+    <div class="summary-box">
+      <span class="label">Final Summary — Quick Revision</span>
+      <ul>
+        <li>Workflow: Identify → Model → Convert → Normalize → Optimize</li>
+        <li>Key Concepts: Entities = Objects; Attributes = Properties; Relationships = Connections</li>
+        <li>Important Rules: use atomic attributes; identify hidden entities; place attributes in correct relationships</li>
+        <li>Normalization: remove redundancy using FDs; use decomposition</li>
+        <li>Practical Design: balance theory + performance; use generalization for efficient queries</li>
+      </ul>
+      <p style="margin-top:0.8rem;"><strong>Memory Trick:</strong> "Good database = Clean structure + Fast queries"</p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- LECTURE 4 -->
+  <section class="lecture" id="lecture4">
+    <h2>Lecture 4: Relational Database Design / 9 — MVD &amp; 4NF</h2>
+
+    <h3>Introduction to Advanced Redundancy</h3>
+    <p><strong>Core Idea:</strong></p>
+    <ul>
+      <li>Traditional normalization (FDs, 3NF, BCNF) handles functional dependencies.</li>
+      <li>Real-world data often has multivalued attributes.</li>
+    </ul>
+    <p>Example: A person can have multiple phone numbers and multiple hobbies.</p>
+    <p><strong>Problem:</strong> Even after 1NF (atomic values), redundancy still exists.</p>
+
+    <p><strong>Example:</strong> <span class="fd">Person(Name, Phone, Hobby)</span></p>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Name</th><th>Phone</th><th>Hobby</th></tr></thead>
+        <tbody>
+          <tr><td>Rahul</td><td>123</td><td>Cricket</td></tr>
+          <tr><td>Rahul</td><td>123</td><td>Music</td></tr>
+          <tr><td>Rahul</td><td>456</td><td>Cricket</td></tr>
+          <tr><td>Rahul</td><td>456</td><td>Music</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>All combinations are stored, causing duplication.</p>
+
+    <div class="callout important">
+      <span class="label">Conclusion</span>
+      Functional dependencies alone are not enough. Need Multivalued Dependencies (MVDs).
+    </div>
+
+    <h3>Multivalued Dependency (MVD)</h3>
+    <div class="callout definition">
+      <span class="label">Definition</span>
+      If one attribute determines multiple independent values: <span class="fd">A ↠ B</span> (A multi-determines B).
+    </div>
+    <div class="callout example">
+      <span class="label">Example</span>
+      <span class="fd">Student(Name, Course, Hobby)</span><br>
+      If courses are independent of hobbies: Name ↠ Course, Name ↠ Hobby.
+    </div>
+
+    <h3>Cartesian Effect</h3>
+    <p>If Rahul → {Math, Science} and Rahul → {Cricket, Music}, the table stores:</p>
+    <ul>
+      <li>Rahul, Math, Cricket</li>
+      <li>Rahul, Math, Music</li>
+      <li>Rahul, Science, Cricket</li>
+      <li>Rahul, Science, Music</li>
+    </ul>
+    <p>This cartesian product causes redundancy.</p>
+
+    <div class="callout important">
+      <span class="label">Key Insight</span>
+      MVD occurs when two independent relationships are stored in one table.
+    </div>
+
+    <h3>Relationship: FD vs MVD</h3>
+    <p><strong>Golden Rule:</strong> If Y→Z, then Y↠Z. Reverse is not true: Y↠Z ≠ Y→Z. MVD does not imply FD.</p>
+
+    <h3>MVD Rules &amp; Triviality</h3>
+    <p><strong>Important Rules:</strong></p>
+    <ol>
+      <li><strong>Complementation:</strong> If X↠Y, then X↠(R−(X∪Y)).</li>
+      <li><strong>Transitivity:</strong> If X↠Y and Y↠Z, then X↠(Z−Y).</li>
+    </ol>
+    <p><strong>Trivial MVD:</strong> An MVD is trivial if β ⊆ α, or α∪β = R. Similar to trivial FD.</p>
+
+    <h3>Fourth Normal Form (4NF)</h3>
+    <div class="callout definition">
+      <span class="label">Definition</span>
+      A relation is in 4NF if for every non-trivial MVD α↠β, α must be a superkey.
+    </div>
+    <p><strong>Key Point:</strong> 4NF removes multivalued redundancy.</p>
+    <div class="callout important">
+      <span class="label">Example — Violation</span>
+      <span class="fd">Student(Name, Course, Hobby)</span> with Name ↠ Course, Name ↠ Hobby.<br>
+      Here, Name is not a superkey → violates 4NF.
+    </div>
+    <p><strong>Convert to 4NF — split into:</strong></p>
+    <ul>
+      <li><span class="fd">Student_Course(Name, Course)</span></li>
+      <li><span class="fd">Student_Hobby(Name, Hobby)</span></li>
+    </ul>
+    <p>Now: no redundancy, no cartesian product.</p>
+
+    <h3>4NF Decomposition Algorithm</h3>
+    <ol>
+      <li>Find violating MVD: α ↠ β (α not superkey).</li>
+      <li>Decompose: R1 = (α∪β), R2 = (R−β).</li>
+      <li>Repeat until all relations are in 4NF.</li>
+    </ol>
+    <p><strong>Properties:</strong> Lossless Join; may not preserve dependencies.</p>
+
+    <h3>Final Concepts &amp; Higher Forms</h3>
+    <p><strong>Why 4NF?</strong> Removes redundancy caused by multiple independent attributes.</p>
+    <p><strong>Hierarchy:</strong> <span class="fd">1NF → 2NF → 3NF → BCNF → 4NF → 5NF</span> — Note: 4NF ⊂ BCNF.</p>
+    <p><strong>Higher Normal Forms:</strong> 5NF handles join dependencies; rarely used in practice.</p>
+
+    <h3>Final Quick Revision — Key Differences</h3>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Concept</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td>FD</td><td>One value determines another</td></tr>
+          <tr><td>MVD</td><td>One value determines multiple independent values</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="summary-box">
+      <span class="label">Final Summary</span>
+      <ul>
+        <li>MVD handles independent multi-values.</li>
+        <li>Causes cartesian redundancy.</li>
+        <li>4NF removes this by splitting tables.</li>
+        <li>Ensures clean structure and no duplication.</li>
+      </ul>
+      <p style="margin-top:0.8rem;"><strong>4NF Rule:</strong> "No multi-valued dependency unless key."<br>
+      <strong>Memory Trick:</strong> "If combinations explode → use 4NF."</p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- LECTURE 5 -->
+  <section class="lecture" id="lecture5">
+    <h2>Lecture 5: Relational Database Design / 9 — MVD &amp; 4NF (continued)</h2>
+
+    <h3>Core Design Goals</h3>
+    <p>Aim to design databases in:</p>
+    <ul>
+      <li><strong>BCNF</strong> (Boyce-Codd Normal Form) or</li>
+      <li><strong>4NF</strong> (Fourth Normal Form)</li>
+    </ul>
+    <p><strong>Ensure:</strong></p>
+    <ul>
+      <li><strong>Lossless Join</strong> → Original table can be reconstructed after decomposition</li>
+      <li><strong>Dependency Preservation</strong> → Functional dependencies (FDs) remain enforceable</li>
+    </ul>
+    <div class="callout example">
+      <span class="label">Example</span>
+      If a table <span class="fd">Student(Course, Teacher)</span> is split into <span class="fd">Student(Course)</span> + <span class="fd">Course(Teacher)</span>, a lossless join ensures no data is lost when joining back.
+    </div>
+
+    <h3>Fallback Strategy (When BCNF/4NF Fails)</h3>
+    <p>Sometimes BCNF/4NF cannot preserve all dependencies. Then we choose 3NF.</p>
+    <p><strong>Two choices:</strong></p>
+    <ol>
+      <li>Accept some redundancy (use 3NF)</li>
+      <li>Keep BCNF but enforce dependencies using joins or application logic</li>
+    </ol>
+    <div class="callout important">
+      <span class="label">Exam Tip</span>
+      3NF = practical compromise between theory &amp; usability.
+    </div>
+
+    <h3>SQL Limitations</h3>
+    <p>SQL mainly enforces Primary Keys / Superkeys. SQL cannot directly enforce general FDs.</p>
+    <p>Assertions exist but are rarely used and expensive.</p>
+    <div class="callout example">
+      <span class="label">Example</span>
+      FD: RollNo → Name. SQL cannot enforce this unless it is a key.
+    </div>
+
+    <h3>Starting Points of Design</h3>
+    <p>Design usually begins from:</p>
+    <ul>
+      <li><strong>ER Diagram</strong> → Convert entities into tables</li>
+      <li><strong>Universal Relation</strong> → Start with one big table, then decompose</li>
+      <li><strong>Ad-hoc Design</strong> → Later normalize</li>
+    </ul>
+
+    <h3>Design Refinement</h3>
+    <p>Identify real-world entities properly.</p>
+    <div class="callout important">
+      <span class="label">Wrong</span>
+      <span class="fd">Employee(Name, DeptName, DeptLocation)</span>
+    </div>
+    <div class="callout definition">
+      <span class="label">Correct</span>
+      <span class="fd">Employee(Name, DeptID)</span><br>
+      <span class="fd">Department(DeptID, DeptName, Location)</span>
+    </div>
+    <p><strong>Reason:</strong> Because DeptName → Location (FD exists), Department should be a separate entity.</p>
+
+    <h3>Trade-off (Normalization vs Performance)</h3>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Normalization</th><th>Denormalization</th></tr></thead>
+        <tbody>
+          <tr><td>Less redundancy</td><td>More redundancy</td></tr>
+          <tr><td>More joins</td><td>Faster queries</td></tr>
+          <tr><td>Clean design</td><td>Complex updates</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Denormalization:</strong> Intentionally adding redundancy for performance.</p>
+    <p>Example: Instead of joining <span class="fd">Orders + Customer</span>, store customer name directly in <span class="fd">Orders</span>.</p>
+
+    <h3>Alternative: Materialized Views</h3>
+    <p>Precomputed results stored as tables.</p>
+    <p><strong>Benefits:</strong> Faster queries; no manual redundancy.</p>
+
+    <h3>Common Design Mistakes</h3>
+    <p><strong>Year-wise Tables (Bad Design):</strong> <span class="fd">Sales_2022</span>, <span class="fd">Sales_2023</span></p>
+    <p><strong>Problem:</strong> Hard to query all years together.</p>
+    <p><strong>Better:</strong> <span class="fd">Sales(Product, Year, Amount)</span></p>
+
+    <p><strong>Crosstabbing (Bad Design):</strong> <span class="fd">Sales(Product, 2022, 2023, 2024)</span></p>
+    <p><strong>Problems:</strong> Many NULL values; hard to extend.</p>
+    <p><strong>Better:</strong> <span class="fd">Sales(Product, Year, Amount)</span></p>
+
+    <h3>Temporal Databases (Time-based Data)</h3>
+    <p><strong>What is Temporal DB?</strong> Stores historical data, not just current state.</p>
+    <p><strong>Examples:</strong> Medical records; stock prices.</p>
+
+    <p><strong>Types of Time:</strong></p>
+    <ol>
+      <li><strong>Valid Time</strong> → When data is true in real world. Example: Salary = ₹50k (Jan–March).</li>
+      <li><strong>Transaction Time</strong> → When data is stored in DB. Example: Salary updated on April 1.</li>
+    </ol>
+
+    <p><strong>Types of Temporal Relations:</strong></p>
+    <ul>
+      <li><strong>Uni-temporal</strong> → Stores one time (valid OR transaction)</li>
+      <li><strong>Bi-temporal</strong> → Stores both</li>
+    </ul>
+    <div class="callout example">
+      <span class="label">Bi-temporal Example</span>
+      <span class="fd">Salary(Employee, Amount, ValidTime, TransactionTime)</span><br>
+      Can answer: past real-world data, and when DB recorded it.
+    </div>
+
+    <h3>Pros &amp; Cons of Temporal DB</h3>
+    <p><strong>Advantages:</strong> Full history tracking; accurate analysis.</p>
+    <p><strong>Disadvantages:</strong> More storage needed; complex queries (time ranges); hard maintenance.</p>
+
+    <div class="summary-box">
+      <span class="label">Final Quick Summary</span>
+      <ul>
+        <li>Goal → BCNF/4NF + lossless + dependency preservation</li>
+        <li>If not possible → Use 3NF</li>
+        <li>SQL cannot enforce all FDs</li>
+        <li>Start from ER / Universal relation</li>
+        <li>Identify entities correctly</li>
+        <li>Denormalization → Faster but complex</li>
+        <li>Avoid year-wise tables &amp; crosstabs</li>
+        <li>Temporal DB → handles historical data</li>
+        <li>Bi-temporal = most powerful but costly</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>Week 6 — Relational Database Design · Short Notes</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 5: Relational Database Design — Short Notes</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1f2430;
+    --muted: #5b6472;
+    --accent: #6d4aff;
+    --accent-soft: #f1ecff;
+    --card-bg: #faf9fc;
+    --border: #e4e1ec;
+    --code-bg: #f4f2fa;
+    --table-header: #ece6ff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #15151c;
+      --text: #eceaf4;
+      --muted: #a8a6b8;
+      --accent: #b19dff;
+      --accent-soft: #262138;
+      --card-bg: #1c1b26;
+      --border: #302e3d;
+      --code-bg: #211f2d;
+      --table-header: #2a2540;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #15151c;
+    --text: #eceaf4;
+    --muted: #a8a6b8;
+    --accent: #b19dff;
+    --accent-soft: #262138;
+    --card-bg: #1c1b26;
+    --border: #302e3d;
+    --code-bg: #211f2d;
+    --table-header: #2a2540;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Georgia", "Iowan Old Style", ui-serif, serif;
+    margin: 0;
+    padding: 2.5rem 1.25rem 5rem;
+    line-height: 1.65;
+  }
+
+  .wrap {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  header.title-block {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 3px solid var(--accent);
+  }
+
+  header.title-block .kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    color: var(--accent);
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-weight: 600;
+  }
+
+  header.title-block h1 {
+    font-size: 2rem;
+    margin: 0.4rem 0 0.3rem;
+    font-family: -apple-system, "Segoe UI", sans-serif;
+  }
+
+  header.title-block p.subtitle {
+    color: var(--muted);
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.95rem;
+  }
+
+  nav.toc {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 2.5rem;
+    font-family: -apple-system, "Segoe UI", sans-serif;
+  }
+
+  nav.toc h2 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 0 0 0.6rem;
+  }
+
+  nav.toc ol {
+    margin: 0;
+    padding-left: 1.2rem;
+    columns: 1;
+  }
+
+  nav.toc a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+  nav.toc a:hover { text-decoration: underline; }
+
+  section.lecture {
+    margin-bottom: 3.5rem;
+    padding-top: 0.5rem;
+  }
+
+  section.lecture > h2 {
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 1.5rem;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: inline-block;
+    padding: 0.35rem 0.9rem;
+    border-radius: 8px;
+    margin-bottom: 1.2rem;
+  }
+
+  h3 {
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 1.15rem;
+    margin: 1.8rem 0 0.6rem;
+    color: var(--text);
+    border-left: 4px solid var(--accent);
+    padding-left: 0.6rem;
+  }
+
+  p { margin: 0.5rem 0 0.9rem; }
+
+  ul, ol { margin: 0.4rem 0 1rem; padding-left: 1.4rem; }
+  li { margin-bottom: 0.35rem; }
+
+  strong { color: var(--text); font-weight: 700; }
+
+  .callout {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin: 1rem 0;
+  }
+
+  .callout.example {
+    border-left-color: #4aa8ff;
+  }
+  .callout.definition {
+    border-left-color: var(--accent);
+  }
+  .callout.important {
+    border-left-color: #ff8a4a;
+  }
+
+  .callout .label {
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  code, .fd {
+    font-family: "SFMono-Regular", Consolas, Menlo, monospace;
+    background: var(--code-bg);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.92em;
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.92rem;
+    min-width: 320px;
+  }
+
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.55rem 0.8rem;
+    text-align: left;
+  }
+
+  th {
+    background: var(--table-header);
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  tr:nth-child(even) td {
+    background: var(--card-bg);
+  }
+
+  .summary-box {
+    background: var(--accent-soft);
+    border-radius: 12px;
+    padding: 1.2rem 1.4rem;
+    margin-top: 1.5rem;
+  }
+
+  .summary-box .label {
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.78rem;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .summary-box ul { margin: 0; padding-left: 1.3rem; }
+
+  hr.divider {
+    border: none;
+    border-top: 1px dashed var(--border);
+    margin: 2.5rem 0;
+  }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.85rem;
+    margin-top: 3rem;
+  }
+
+  @media (max-width: 480px) {
+    header.title-block h1 { font-size: 1.5rem; }
+    body { padding: 1.5rem 1rem 4rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="title-block">
+    <div class="kicker">DBMS &middot; Week 5</div>
+    <h1>Relational Database Design</h1>
+    <p class="subtitle">Short notes covering Lectures 1–5: normalization, functional dependencies, keys, and decomposition.</p>
+  </header>
+
+  <nav class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#lecture1">Lecture 1 — Relational Database Design / 1</a></li>
+      <li><a href="#lecture2">Lecture 2 — Relational Database Design / 2</a></li>
+      <li><a href="#lecture3">Lecture 3 — Relational Database Design / 3</a></li>
+      <li><a href="#lecture4">Lecture 4 — Relational Database Design / 4</a></li>
+      <li><a href="#lecture5">Lecture 5 — Relational Database Design / 5</a></li>
+    </ol>
+  </nav>
+
+  <!-- LECTURE 1 -->
+  <section class="lecture" id="lecture1">
+    <h2>Lecture 1: Relational Database Design / 1</h2>
+
+    <h3>Goals of a Good Database Design</h3>
+    <p>A good database is not just about storing data — it should be accurate, efficient, and future-proof.</p>
+    <p><strong>Key Goals:</strong></p>
+    <ul>
+      <li><strong>Real-World Reflection:</strong> Database should represent real-life entities and relationships correctly. Example: Student–Course–Instructor relationships.</li>
+      <li><strong>Future Compatibility:</strong> Should handle future data easily without redesign.</li>
+      <li><strong>Minimum Redundancy:</strong> Avoid storing the same data multiple times.</li>
+      <li><strong>Efficiency:</strong> Queries should run fast.</li>
+      <li><strong>Data Integrity:</strong> Must maintain correctness using constraints (PK, FK, etc.).</li>
+      <li><strong>Clarity &amp; Simplicity:</strong> Easy to understand and maintain.</li>
+    </ul>
+
+    <div class="callout important">
+      <span class="label">Trade-off</span>
+      More redundancy → faster queries. Less redundancy → better integrity. Designer must balance both.
+    </div>
+
+    <h3>Redundancy &amp; Anomalies</h3>
+    <p><strong>Redundancy:</strong> Same data stored multiple times → leads to inconsistency.</p>
+    <p><strong>Types of Anomalies:</strong></p>
+    <ol>
+      <li><strong>Insertion Anomaly:</strong> Cannot insert data without unrelated info. Example: Cannot add a new department unless an instructor exists.</li>
+      <li><strong>Deletion Anomaly:</strong> Deleting one record removes useful data. Example: Deleting last instructor → department info lost.</li>
+      <li><strong>Update Anomaly:</strong> Same data must be updated in multiple places. Example: Changing department building in many rows → risk of mismatch.</li>
+    </ol>
+
+    <h3>Normalization &amp; Decomposition</h3>
+    <p><strong>Normalization:</strong> Process of organizing data to reduce redundancy and remove anomalies.</p>
+    <p><strong>Decomposition:</strong> Breaking a big table into smaller tables.</p>
+
+    <div class="callout definition">
+      <span class="label">Functional Dependency (FD)</span>
+      If attribute A determines B → written as <span class="fd">A → B</span>.<br>
+      Example: <span class="fd">Department → Building, Budget</span> &mdash; each department has one fixed building &amp; budget.
+    </div>
+
+    <p><strong>Normalization Chain:</strong> Functional Dependency → Decomposition → Less Redundancy → No Anomalies.</p>
+
+    <h3>Quality of Decomposition</h3>
+    <p>Not all decompositions are good.</p>
+
+    <div class="callout definition">
+      <span class="label">Lossless Join (Correct Design)</span>
+      After splitting tables: <span class="fd">Original Table = Join(Smaller Tables)</span><br>
+      No data lost. No extra data generated.
+    </div>
+
+    <div class="callout important">
+      <span class="label">Lossy Join (Bad Design)</span>
+      After join: extra rows appear OR some data is lost → leads to wrong results.
+    </div>
+
+    <h3>First Normal Form (1NF)</h3>
+    <p><strong>Rule:</strong> No complex or multi-valued attributes.</p>
+    <p><strong>Conditions for 1NF:</strong></p>
+    <ul>
+      <li><strong>Atomic Values (Indivisible):</strong> Each field contains a single value. E.g. "Full Name" → "First Name", "Last Name".</li>
+      <li><strong>Single-Valued Attributes:</strong> Multiple phone numbers in one field → store in separate rows/table.</li>
+      <li><strong>Non-Atomic Examples:</strong> Name = "Rahul Sharma"; CourseID = "CS101" (if CS &amp; 101 needed separately).</li>
+    </ul>
+
+    <p><strong>How to Achieve 1NF</strong></p>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th colspan="2">Instead of: Student</th></tr>
+        <tr><th>Student</th><th>Phone1 / Phone2</th></tr></thead>
+        <tbody><tr><td>A</td><td>123, 456</td></tr></tbody>
+      </table>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th colspan="2">Use: Student Table + Phone Table</th></tr>
+        <tr><th>StudentID</th><th>Name</th></tr></thead>
+        <tbody><tr><td>1</td><td>A</td></tr></tbody>
+      </table>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>StudentID</th><th>Phone</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>123</td></tr>
+          <tr><td>1</td><td>456</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Clean. Scalable. No redundancy.</p>
+
+    <div class="summary-box">
+      <span class="label">Final Summary — Quick Revision</span>
+      <ul>
+        <li>Good DB = Accurate + Efficient + Scalable.</li>
+        <li>Redundancy causes Insertion, Deletion, Update anomalies.</li>
+        <li>Use Normalization + Decomposition.</li>
+        <li>Functional Dependency: A→B.</li>
+        <li>Always aim for Lossless Join, avoid Lossy Join.</li>
+        <li>1NF rules: Atomic values, no multi-valued attributes.</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- LECTURE 2 -->
+  <section class="lecture" id="lecture2">
+    <h2>Lecture 2: Relational Database Design / 2</h2>
+
+    <h3>Goal of Good Relational Design</h3>
+    <p><strong>Main Objective:</strong> Design schemas that minimize redundancy and avoid anomalies (insertion, deletion, update).</p>
+    <p><strong>Decomposition:</strong> If a table is not well-structured, split it into smaller tables.</p>
+
+    <div class="callout important">
+      <span class="label">Lossless Join (Very Important)</span>
+      A decomposition is correct only if: <span class="fd">Original Table = Natural Join (Decomposed Tables)</span> — no data loss, no extra tuples.
+    </div>
+
+    <div class="callout example">
+      <span class="label">Example</span>
+      Bad Design: <span class="fd">Student(Student, Dept, Building)</span><br>
+      Decompose into: <span class="fd">Student(Student, Dept)</span>, <span class="fd">Dept(Dept, Building)</span><br>
+      Joining gives original table → Lossless.
+    </div>
+
+    <h3>First Normal Form (1NF)</h3>
+    <p><strong>Rules:</strong> All values must be atomic (indivisible). No multi-valued attributes.</p>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th colspan="2">Not in 1NF</th></tr><tr><th>Student</th><th>Phones</th></tr></thead>
+        <tbody><tr><td>A</td><td>123, 456</td></tr></tbody>
+      </table>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th colspan="2">In 1NF</th></tr><tr><th>Student</th><th>Phone</th></tr></thead>
+        <tbody><tr><td>A</td><td>123</td></tr><tr><td>A</td><td>456</td></tr></tbody>
+      </table>
+    </div>
+
+    <h3>Functional Dependencies (FDs)</h3>
+    <div class="callout definition">
+      <span class="label">Definition</span>
+      A functional dependency is written as <span class="fd">α → β</span>.<br>
+      <strong>Meaning:</strong> If two rows have the same α, they must have the same β.<br>
+      Example: <span class="fd">Department → Building</span> — one department → one building.
+    </div>
+    <p><strong>Important Concept:</strong> FDs are based on business rules, not just observed data.</p>
+    <p><strong>Trivial FD:</strong> <span class="fd">(ID, Name) → ID</span> — always true because RHS ⊆ LHS.</p>
+
+    <h3>Keys (Formal Understanding)</h3>
+    <ul>
+      <li><strong>Superkey:</strong> A set of attributes K such that <span class="fd">K → All attributes in table (R)</span> — uniquely identifies rows.</li>
+      <li><strong>Candidate Key:</strong> Minimal superkey (no extra attributes).</li>
+    </ul>
+    <div class="callout example">
+      <span class="label">Example</span>
+      Table: ID | Name | Email<br>
+      Superkeys: (ID), (ID, Name), (ID, Email).<br>
+      Candidate Key: (ID).
+    </div>
+
+    <h3>Armstrong's Axioms (FD Rules)</h3>
+    <ol>
+      <li><strong>Reflexivity:</strong> If β ⊆ α, then α→β. Example: (ID, Name) → ID.</li>
+      <li><strong>Augmentation:</strong> If α→β, then αγ→βγ. Example: ID → Name ⇒ (ID, Dept) → (Name, Dept).</li>
+      <li><strong>Transitivity:</strong> If α→β and β→γ, then α→γ. Example: Dept → Building, Building → City ⇒ Dept → City.</li>
+    </ol>
+
+    <h3>Closure of Functional Dependencies (F⁺)</h3>
+    <div class="callout definition">
+      <span class="label">Definition</span>
+      Closure = all possible FDs derived from given FDs. <span class="fd">F⁺</span> = set of all inferred dependencies.<br>
+      Example: Given A→B, B→C, then F⁺ = {A→B, B→C, A→C}.
+    </div>
+    <p><strong>Properties:</strong></p>
+    <ul>
+      <li><strong>Soundness:</strong> Only correct dependencies are generated.</li>
+      <li><strong>Completeness:</strong> All possible dependencies are generated.</li>
+    </ul>
+
+    <div class="summary-box">
+      <span class="label">Final Quick Revision</span>
+      <ul>
+        <li>Goal: Reduce redundancy + avoid anomalies.</li>
+        <li>Use: Decomposition. Must ensure: Lossless Join.</li>
+        <li>1NF: Atomic + Single-valued.</li>
+        <li>FD: α→β.</li>
+        <li>Superkey → determines all attributes; Candidate key → minimal superkey.</li>
+        <li>Armstrong Rules: Reflexivity, Augmentation, Transitivity.</li>
+        <li>Closure: F⁺ = all inferred FDs.</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- LECTURE 3 -->
+  <section class="lecture" id="lecture3">
+    <h2>Lecture 3: Relational Database Design / 3</h2>
+
+    <h3>Functional Dependency (FD) Theory</h3>
+    <p>A functional dependency is written as <span class="fd">α→β</span>. If two tuples have the same α, they must have the same β. Example: Dept → Building — one department → one building.</p>
+
+    <h3>Armstrong's Axioms (Basic Rules)</h3>
+    <ol>
+      <li><strong>Reflexivity:</strong> If β ⊆ α, then α→β.</li>
+      <li><strong>Augmentation:</strong> If α→β, then αγ→βγ.</li>
+      <li><strong>Transitivity:</strong> If α→β and β→γ, then α→γ.</li>
+    </ol>
+
+    <h3>Derived Rules (Shortcuts)</h3>
+    <ul>
+      <li><strong>Union:</strong> If α→β and α→γ, then α→βγ.</li>
+      <li><strong>Decomposition:</strong> If α→βγ, then α→β and α→γ.</li>
+      <li><strong>Pseudo-Transitivity:</strong> If α→β and γβ→δ, then αγ→δ. Example: A→B, CB→D ⇒ AC→D.</li>
+    </ul>
+
+    <h3>Closure Sets</h3>
+    <ul>
+      <li><strong>Closure of FD Set (F⁺):</strong> All possible FDs derived from F.</li>
+      <li><strong>Closure of Attributes (α⁺):</strong> All attributes determined by α.</li>
+    </ul>
+
+    <div class="callout definition">
+      <span class="label">Algorithm for α⁺ (very important)</span>
+      <ol>
+        <li>Start with α⁺ = α.</li>
+        <li>For each FD (β→γ): if β ⊆ α⁺, add γ to α⁺.</li>
+        <li>Repeat until no change.</li>
+      </ol>
+    </div>
+
+    <div class="callout example">
+      <span class="label">Example</span>
+      Given: A→B, B→C.<br>
+      Start: A⁺ = {A}. Add B → {A,B}. Add C → {A,B,C}.<br>
+      Final: A⁺ = {A,B,C}.
+    </div>
+
+    <h3>Applications of Attribute Closure</h3>
+    <ol>
+      <li><strong>Testing Superkey:</strong> If α⁺ = all attributes → α is superkey.</li>
+      <li><strong>Testing Candidate Key:</strong> α is superkey and no subset of α is superkey.</li>
+      <li><strong>Testing FD:</strong> To check α→β, compute α⁺. If β ⊆ α⁺, then true.</li>
+    </ol>
+
+    <h3>Boyce-Codd Normal Form (BCNF)</h3>
+    <div class="callout definition">
+      <span class="label">Definition</span>
+      A relation is in BCNF if for every non-trivial FD α→β, α must be a superkey.
+    </div>
+    <div class="callout important">
+      <span class="label">Violation Example</span>
+      Relation: Student, Course, Instructor. FD: Course → Instructor. Course is not a superkey → violates BCNF.
+    </div>
+    <p><strong>BCNF Decomposition Formula:</strong> If α→β violates BCNF: <span class="fd">R1 = (α∪β)</span>, <span class="fd">R2 = (R−(β−α))</span>.</p>
+    <div class="callout example">
+      <span class="label">Example</span>
+      R(Student, Course, Instructor). FD: Course → Instructor.<br>
+      Decompose: R₁(Course, Instructor), R₂(Student, Course).
+    </div>
+
+    <h3>Decomposition Properties</h3>
+    <p><strong>Lossless Join:</strong> <span class="fd">Join(R1,R2) = Original Table</span>. Condition: intersection must be superkey of at least one table.</p>
+    <p><strong>Dependency Preservation:</strong> All FDs can be checked without joining tables.</p>
+    <ul>
+      <li>BCNF → Lossless guaranteed.</li>
+      <li>BCNF → Dependency preservation <strong>not</strong> guaranteed.</li>
+    </ul>
+
+    <h3>Third Normal Form (3NF)</h3>
+    <p>A relation is in 3NF if FD α→β is allowed when it is trivial, or α is a superkey, or each attribute in (β−α) is part of some candidate key.</p>
+    <p><strong>Key Idea:</strong> 3NF is less strict than BCNF and allows some redundancy to preserve dependencies.</p>
+
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Feature</th><th>BCNF</th><th>3NF</th></tr></thead>
+        <tbody>
+          <tr><td>Redundancy</td><td>Minimum</td><td>Slight allowed</td></tr>
+          <tr><td>Dependency Preservation</td><td>Not guaranteed</td><td>Guaranteed</td></tr>
+          <tr><td>Strictness</td><td>High</td><td>Moderate</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Design Goals &amp; Trade-offs</h3>
+    <ul>
+      <li><strong>Goal:</strong> Remove redundancy, avoid anomalies.</li>
+      <li>More normalization → less redundancy.</li>
+      <li>More decomposition → more joins (slower queries).</li>
+    </ul>
+    <p><strong>Higher Normal Forms:</strong> BCNF may still have issues. Use 4NF for multi-valued dependencies.</p>
+
+    <div class="summary-box">
+      <span class="label">Final Quick Revision</span>
+      <ul>
+        <li>FD: α→β. Armstrong Rules: Reflexivity, Augmentation, Transitivity.</li>
+        <li>Derived Rules: Union, Decomposition, Pseudo-transitivity.</li>
+        <li>Closure: α⁺ → attributes, F⁺ → all dependencies.</li>
+        <li>BCNF: α must be superkey. 3NF: allows non-key → key dependency if part of candidate key.</li>
+        <li>Always ensure Lossless join. Dependency preservation: guaranteed in 3NF, not always in BCNF.</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- LECTURE 4 -->
+  <section class="lecture" id="lecture4">
+    <h2>Lecture 4: Relational Database Design / 4</h2>
+
+    <h3>Attribute Closure (α⁺) &amp; Applications</h3>
+    <p><strong>Definition:</strong> α⁺ = set of all attributes determined by α using FDs.</p>
+    <div class="callout definition">
+      <span class="label">Algorithm (very important)</span>
+      <ol>
+        <li>Start: α⁺ = α.</li>
+        <li>For each FD (β→γ): if β ⊆ α⁺, add γ to α⁺.</li>
+        <li>Repeat until no change.</li>
+      </ol>
+    </div>
+    <div class="callout example">
+      <span class="label">Example</span>
+      Given: A→B, B→C. Find A⁺:<br>
+      Start {A} → add B → {A,B} → add C → {A,B,C}.<br>
+      Final: A⁺ = {A,B,C}.
+    </div>
+
+    <p><strong>Applications:</strong></p>
+    <ol>
+      <li><strong>Superkey Test:</strong> If α⁺ = all attributes → α is superkey.</li>
+      <li><strong>Candidate Key Test:</strong> α is superkey and no subset of α is superkey.</li>
+      <li><strong>Check FD:</strong> To verify α→β, compute α⁺. If β ⊆ α⁺, then true.</li>
+      <li><strong>FD Closure (F⁺):</strong> All FDs derived using rules.</li>
+    </ol>
+
+    <h3>Extraneous Attributes</h3>
+    <p><strong>Definition:</strong> An attribute is extraneous if it can be removed without changing meaning.</p>
+    <div class="callout definition">
+      <span class="label">LHS Extraneous</span>
+      In α→β, attribute A∈α is extraneous if (α−A)⁺ contains β.<br>
+      Example: Given AB→C, A→C — B is extraneous → simplified: A→C.
+    </div>
+    <div class="callout definition">
+      <span class="label">RHS Extraneous</span>
+      In α→β, attribute A∈β is extraneous if α⁺ (using modified F′) still contains A.<br>
+      Example: Given A→BC, A→B — C may be extraneous depending on inference.
+    </div>
+
+    <h3>Equivalence of FD Sets</h3>
+    <p><strong>Definition:</strong> Two FD sets F and G are equivalent if F⁺ = G⁺.</p>
+    <ul>
+      <li><strong>Covering:</strong> F covers G → F implies all dependencies in G. G covers F → G implies all dependencies in F.</li>
+      <li><strong>Equivalence Condition:</strong> F covers G AND G covers F.</li>
+      <li><strong>Insight:</strong> If only one covers, that set is stronger.</li>
+    </ul>
+
+    <h3>Canonical Cover (Minimal Set)</h3>
+    <div class="callout definition">
+      <span class="label">Definition</span>
+      A canonical cover (Fc) is a minimal FD set equivalent to F.
+    </div>
+    <p><strong>Properties:</strong> Same meaning (Fc⁺ = F⁺); no extraneous attributes; unique LHS (no duplicates).</p>
+    <p><strong>Rule used:</strong> Union Rule — α→β and α→γ ⇒ α→βγ.</p>
+    <p><strong>Algorithm (Step-by-Step):</strong></p>
+    <ol>
+      <li>Combine FDs (Union Rule).</li>
+      <li>Same LHS → merge.</li>
+      <li>Remove extraneous attributes (LHS and RHS).</li>
+      <li>Repeat until no change.</li>
+    </ol>
+    <div class="callout example">
+      <span class="label">Example</span>
+      Given: A→B, A→C. Step 1 (Union): A→BC. Canonical form.
+    </div>
+    <p><em>Note: Multiple canonical covers may exist depending on order of simplification.</em></p>
+
+    <h3>Prime vs Non-Prime Attributes</h3>
+    <ul>
+      <li><strong>Prime Attribute:</strong> Attribute ∈ any Candidate Key.</li>
+      <li><strong>Non-Prime Attribute:</strong> Attribute ∉ any Candidate Key.</li>
+    </ul>
+    <div class="callout example">
+      <span class="label">Example</span>
+      Relation (A, B, C). Candidate Key = (A, B). Prime → A, B. Non-prime → C.
+    </div>
+
+    <div class="summary-box">
+      <span class="label">Final Quick Revision</span>
+      <ul>
+        <li>Attribute Closure: α⁺ = all attributes derived from α.</li>
+        <li>Superkey: α⁺ = all attributes. Candidate Key: minimal superkey.</li>
+        <li>Extraneous Attributes — LHS: remove if still determines; RHS: remove if still implied.</li>
+        <li>Equivalence: F⁺ = G⁺. Canonical Cover: minimal, no redundancy, unique LHS.</li>
+        <li>Prime = part of candidate key, Non-prime = not part.</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- LECTURE 5 -->
+  <section class="lecture" id="lecture5">
+    <h2>Lecture 5: Relational Database Design / 5</h2>
+
+    <h3>Lossless Join Decomposition</h3>
+    <div class="callout definition">
+      <span class="label">Definition</span>
+      A decomposition is lossless if <span class="fd">R = R1 ⋈ R2</span>. After joining decomposed tables, we get the exact original table — no data loss, no extra tuples.
+    </div>
+    <div class="callout important">
+      <span class="label">Lossy Join (Bad Case)</span>
+      Join creates extra rows (spurious tuples); original relationships are lost.
+    </div>
+    <div class="callout example">
+      <span class="label">Example</span>
+      Original Table: Student, Course, Instructor.<br>
+      Bad Decomposition: R₁(Student, Course), R₂(Course, Instructor).<br>
+      If Course is not unique, join may produce wrong combinations (extra rows).
+    </div>
+
+    <h3>Conditions for Lossless Join</h3>
+    <ol>
+      <li><strong>Union Rule:</strong> R1 ∪ R2 = R — all attributes must be covered.</li>
+      <li><strong>Intersection Rule:</strong> R1 ∩ R2 ≠ ∅ — must have common attributes.</li>
+      <li><strong>Key Condition (most important):</strong> (R1∩R2) → R1 OR (R1∩R2) → R2 — common attributes must be a superkey of at least one table.</li>
+    </ol>
+    <div class="callout example">
+      <span class="label">Example (Lossless)</span>
+      R(Student, Dept, Building). FD: Dept → Building.<br>
+      Decompose: R₁(Dept, Building), R₂(Student, Dept).<br>
+      Common attribute = Dept. Dept is key for R₁ → Lossless join.
+    </div>
+
+    <h3>Dependency Preservation</h3>
+    <div class="callout definition">
+      <span class="label">Definition</span>
+      A decomposition is dependency preserving if all FDs can be checked without joining tables.
+    </div>
+    <p><strong>Why important?</strong> Joins are time-consuming; efficient systems avoid unnecessary joins.</p>
+    <p><strong>Formal Condition:</strong> <span class="fd">(F1∪F2∪…∪Fn)⁺ = F⁺</span> — combined dependencies of decomposed tables equal the original dependencies.</p>
+    <div class="callout example">
+      <span class="label">Example</span>
+      Original FD: A→B, B→C.<br>
+      Decomposition: R₁(A, B), R₂(B, C). Both FDs preserved separately → Dependency preserving.
+    </div>
+    <p><em>Note: Some dependencies may not appear directly but are preserved using transitivity. Example: A→B, B→C ⇒ A→C.</em></p>
+
+    <h3>Checking Dependency Preservation</h3>
+    <p><strong>Naive Method:</strong> Compute full closure F⁺ — very slow (exponential time).</p>
+    <div class="callout definition">
+      <span class="label">Efficient Method — Attribute Closure</span>
+      To check α→β:
+      <ol>
+        <li>Initialize: Result = α.</li>
+        <li>Iterate — for each table Rᵢ: find Result ∩ Rᵢ, compute closure using FDs, intersect with Rᵢ, add new attributes to Result.</li>
+        <li>Verify: if β ⊆ Result → Dependency preserved.</li>
+      </ol>
+      <em>Intuition: Gradually collect attributes using decomposed tables, check if RHS can still be derived.</em>
+    </div>
+
+    <h3>Key Practice Strategies</h3>
+    <p><strong>For Lossless Join:</strong> Check if common attributes = key. If yes → Lossless.</p>
+    <p><strong>For Dependency Preservation:</strong> Use attribute closure and transitivity.</p>
+
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Property</th><th>Importance</th></tr></thead>
+        <tbody>
+          <tr><td>Lossless Join</td><td>MUST (no data loss)</td></tr>
+          <tr><td>Dependency Preservation</td><td>Preferred (for efficiency)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="summary-box">
+      <span class="label">Final Quick Revision</span>
+      <ul>
+        <li>Lossless Join: R = R1 ⋈ R2</li>
+        <li>Conditions: Union = full attributes; Intersection ≠ ∅; Common attribute = superkey.</li>
+        <li>Dependency Preservation: (F1∪F2∪…)⁺ = F⁺ — no need for joins to check FDs.</li>
+        <li>Algorithms: Naive → F⁺ (slow). Attribute Closure → fast.</li>
+        <li><strong>Key Idea:</strong> Always ensure Lossless join (mandatory) and Dependency preservation (preferred).</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>Week 5 — Relational Database Design · Short Notes</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 7: Application Design and Development — Short Notes</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1f2430;
+    --muted: #5b6472;
+    --accent: #6d4aff;
+    --accent-soft: #f1ecff;
+    --card-bg: #faf9fc;
+    --border: #e4e1ec;
+    --code-bg: #f4f2fa;
+    --table-header: #ece6ff;
+    --editor-bg: #1e1e2a;
+    --editor-header: #262635;
+    --editor-text: #e4e2f0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #15151c;
+      --text: #eceaf4;
+      --muted: #a8a6b8;
+      --accent: #b19dff;
+      --accent-soft: #262138;
+      --card-bg: #1c1b26;
+      --border: #302e3d;
+      --code-bg: #211f2d;
+      --table-header: #2a2540;
+      --editor-bg: #101018;
+      --editor-header: #1a1a26;
+      --editor-text: #e4e2f0;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #15151c;
+    --text: #eceaf4;
+    --muted: #a8a6b8;
+    --accent: #b19dff;
+    --accent-soft: #262138;
+    --card-bg: #1c1b26;
+    --border: #302e3d;
+    --code-bg: #211f2d;
+    --table-header: #2a2540;
+    --editor-bg: #101018;
+    --editor-header: #1a1a26;
+    --editor-text: #e4e2f0;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Georgia", "Iowan Old Style", ui-serif, serif;
+    margin: 0;
+    padding: 2.5rem 1.25rem 5rem;
+    line-height: 1.65;
+  }
+
+  .wrap {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  header.title-block {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 3px solid var(--accent);
+  }
+
+  header.title-block .kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    color: var(--accent);
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-weight: 600;
+  }
+
+  header.title-block h1 {
+    font-size: 2rem;
+    margin: 0.4rem 0 0.3rem;
+    font-family: -apple-system, "Segoe UI", sans-serif;
+  }
+
+  header.title-block p.subtitle {
+    color: var(--muted);
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.95rem;
+  }
+
+  nav.toc {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 2.5rem;
+    font-family: -apple-system, "Segoe UI", sans-serif;
+  }
+
+  nav.toc h2 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 0 0 0.6rem;
+  }
+
+  nav.toc ol {
+    margin: 0;
+    padding-left: 1.2rem;
+    columns: 1;
+  }
+
+  nav.toc a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+  nav.toc a:hover { text-decoration: underline; }
+
+  section.lecture {
+    margin-bottom: 3.5rem;
+    padding-top: 0.5rem;
+  }
+
+  section.lecture > h2 {
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 1.5rem;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: inline-block;
+    padding: 0.35rem 0.9rem;
+    border-radius: 8px;
+    margin-bottom: 1.2rem;
+  }
+
+  h3 {
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 1.15rem;
+    margin: 1.8rem 0 0.6rem;
+    color: var(--text);
+    border-left: 4px solid var(--accent);
+    padding-left: 0.6rem;
+  }
+
+  p { margin: 0.5rem 0 0.9rem; }
+
+  ul, ol { margin: 0.4rem 0 1rem; padding-left: 1.4rem; }
+  li { margin-bottom: 0.35rem; }
+
+  strong { color: var(--text); font-weight: 700; }
+
+  .callout {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin: 1rem 0;
+  }
+
+  .callout.example {
+    border-left-color: #4aa8ff;
+  }
+  .callout.definition {
+    border-left-color: var(--accent);
+  }
+  .callout.important {
+    border-left-color: #ff8a4a;
+  }
+
+  .callout .label {
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  code, .fd {
+    font-family: "SFMono-Regular", Consolas, Menlo, monospace;
+    background: var(--code-bg);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.92em;
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.92rem;
+    min-width: 320px;
+  }
+
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.55rem 0.8rem;
+    text-align: left;
+  }
+
+  th {
+    background: var(--table-header);
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  tr:nth-child(even) td {
+    background: var(--card-bg);
+  }
+
+  .summary-box {
+    background: var(--accent-soft);
+    border-radius: 12px;
+    padding: 1.2rem 1.4rem;
+    margin-top: 1.5rem;
+  }
+
+  .summary-box .label {
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.78rem;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .summary-box ul { margin: 0; padding-left: 1.3rem; }
+
+  hr.divider {
+    border: none;
+    border-top: 1px dashed var(--border);
+    margin: 2.5rem 0;
+  }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.85rem;
+    margin-top: 3rem;
+  }
+
+  /* Code editor blocks */
+  .code-block {
+    background: var(--editor-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 1rem 0;
+    font-family: "SFMono-Regular", Consolas, Menlo, monospace;
+    font-size: 0.85rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  }
+  .code-block .code-header {
+    background: var(--editor-header);
+    color: #a8a6c0;
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.45rem 0.9rem;
+    font-weight: 600;
+  }
+  .code-block pre {
+    margin: 0;
+    padding: 0.9rem 1.1rem;
+    overflow-x: auto;
+    color: var(--editor-text);
+    line-height: 1.55;
+  }
+  .code-block code { background: none; padding: 0; color: inherit; }
+  .tok-kw { color: #ff8ac2; }
+  .tok-fn { color: #7ec7ff; }
+  .tok-str { color: #b7f28e; }
+  .tok-com { color: #7a7a90; }
+  .tok-num { color: #ffcb7e; }
+
+  @media (max-width: 480px) {
+    header.title-block h1 { font-size: 1.5rem; }
+    body { padding: 1.5rem 1rem 4rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="title-block">
+    <div class="kicker">DBMS &middot; Week 7</div>
+    <h1>Application Design and Development</h1>
+  </header>
+
+  <nav class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#lecture1">Lecture 1 — Application Design and Development/1</a></li>
+      <li><a href="#lecture2">Lecture 2 — Application Design and Development/2</a></li>
+      <li><a href="#lecture3">Lecture 3 — Application Design and Development/3</a></li>
+      <li><a href="#lecture4">Lecture 4 — Application Design and Development/4</a></li>
+      <li><a href="#lecture5">Lecture 5 — Application Design and Development/5</a></li>
+    </ol>
+  </nav>
+
+  <!-- LECTURE 1 -->
+  <section class="lecture" id="lecture1">
+    <h2>Lecture 1: Application Design and Development / 1</h2>
+
+    <h3>Introduction to Application Design</h3>
+    <p><strong>Goals of application design:</strong></p>
+    <ul>
+      <li>Efficient (fast &amp; low memory)</li>
+      <li>Secure (protect user data)</li>
+      <li>Scalable (handle more users)</li>
+    </ul>
+    <p><strong>Modern applications:</strong> data-intensive; connected to a database.</p>
+
+    <h3>Diversity vs Unity of Applications</h3>
+    <p><strong>Diverse Sectors:</strong></p>
+    <ul>
+      <li>Finance → UPI, Net Banking</li>
+      <li>Travel → Booking apps</li>
+      <li>Communication → Video calling apps</li>
+      <li>Health → Telemedicine</li>
+      <li>Education → Learning platforms</li>
+    </ul>
+    <p><strong>Internal Systems (ERP):</strong> used inside organizations (schools, hospitals); works on intranet. Examples: Student Management System, Hospital ERP.</p>
+    <div class="callout definition">
+      <span class="label">Deep Unity (Common Feature)</span>
+      All use RDBMS (MySQL, PostgreSQL, Oracle) and SQL for data operations.
+    </div>
+
+    <h3>Three-Tier Architecture</h3>
+    <p><strong>1. Frontend (Presentation Layer):</strong> user interacts here (UI). Examples: forms, buttons, login page.</p>
+    <p><strong>MVC Pattern:</strong></p>
+    <ul>
+      <li>Model → Data + validation</li>
+      <li>View → UI (what user sees)</li>
+      <li>Controller → Connects Model &amp; View</li>
+    </ul>
+    <p><strong>2. Business Logic Layer (Middle Layer):</strong> brain of application; handles authentication, business rules, workflows; converts DB data → Objects using ORM.</p>
+    <p><strong>3. Backend (Data Access Layer - DAL):</strong> stores data in database; handles queries (SQL), storage &amp; retrieval.</p>
+
+    <div class="callout example">
+      <span class="label">Example Flow</span>
+      User clicks "Buy" → Frontend sends request → Business logic checks payment &amp; stock → Backend fetches data → Response shown to user.
+    </div>
+
+    <h3>Database Design Strategies</h3>
+    <p><strong>Centralized Database:</strong> simple, not scalable.</p>
+    <p><strong>Distributed Database:</strong> faster &amp; scalable, handles large systems. Example: data stored by region (India, US, Europe).</p>
+
+    <h3>Evolution of Architecture</h3>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Era</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>1970s</td><td>Mainframe (centralized)</td></tr>
+          <tr><td>1980s</td><td>PCs + LAN</td></tr>
+          <tr><td>1990s</td><td>Internet &amp; Web</td></tr>
+          <tr><td>2000s+</td><td>Mobile apps, cloud</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Types of Tier Architectures</h3>
+    <ul>
+      <li><strong>1-Tier:</strong> Everything in one system, not scalable</li>
+      <li><strong>2-Tier (Client-Server):</strong> Client + Database server, limited scalability</li>
+      <li><strong>3-Tier (Most Important):</strong> Frontend + Logic + Database, clean separation, scalable</li>
+      <li><strong>N-Tier:</strong> Multiple servers, used in big apps like Amazon, Google</li>
+    </ul>
+
+    <h3>Example: Web Mail Application</h3>
+    <p><strong>Presentation Layer:</strong> Login page, Inbox view, Compose mail</p>
+    <p><strong>Business Logic:</strong> Authentication, Encryption/Decryption, Mail sending logic</p>
+    <p><strong>Database Layer:</strong> Stores emails, contacts, user data</p>
+
+    <h3>Sample Code (Simple 3-Tier Example)</h3>
+    <p><strong>Backend (Python Flask):</strong></p>
+    <div class="code-block">
+      <div class="code-header">Python</div>
+      <pre><code><span class="tok-kw">from</span> flask <span class="tok-kw">import</span> Flask, jsonify
+
+app = Flask(__name__)
+
+@app.route(<span class="tok-str">'/data'</span>)
+<span class="tok-kw">def</span> <span class="tok-fn">get_data</span>():
+    <span class="tok-kw">return</span> jsonify({<span class="tok-str">"message"</span>: <span class="tok-str">"Hello from backend"</span>})
+
+app.run()</code></pre>
+    </div>
+
+    <p><strong>Frontend (HTML + JS):</strong></p>
+    <div class="code-block">
+      <div class="code-header">Html</div>
+      <pre><code>&lt;button onclick=<span class="tok-str">"loadData()"</span>&gt;Click&lt;/button&gt;
+
+&lt;script&gt;
+<span class="tok-kw">function</span> <span class="tok-fn">loadData</span>() {
+  fetch(<span class="tok-str">'/data'</span>)
+    .then(res =&gt; res.json())
+    .then(data =&gt; alert(data.message));
+}
+&lt;/script&gt;</code></pre>
+    </div>
+
+    <p><strong>Database Query (SQL):</strong></p>
+    <div class="code-block">
+      <div class="code-header">Sql</div>
+      <pre><code><span class="tok-kw">SELECT</span> * <span class="tok-kw">FROM</span> users <span class="tok-kw">WHERE</span> id = <span class="tok-num">1</span>;</code></pre>
+    </div>
+
+    <div class="summary-box">
+      <span class="label">Final Summary — Revision</span>
+      <ul>
+        <li>Applications = Frontend + Logic + Database</li>
+        <li>Most apps use 3-tier architecture</li>
+        <li>RDBMS + SQL are common</li>
+        <li>Key goals: Efficiency, Security, Scalability</li>
+        <li>Modern systems: Distributed databases, N-tier architecture</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- LECTURE 2 -->
+  <section class="lecture" id="lecture2">
+    <h2>Lecture 2: Application Design and Development / 2</h2>
+
+    <h3>Three-Tier Architecture (Most Important)</h3>
+    <p>Modern web apps are divided into 3 layers:</p>
+    <ol>
+      <li><strong>Presentation Layer (Frontend)</strong> — what user sees (UI). Examples: Login page, Forms, Buttons.</li>
+      <li><strong>Business Logic Layer (Backend)</strong> — handles rules (login validation), processing data, calculations.</li>
+      <li><strong>Data Access Layer (Database)</strong> — stores data (users, products, etc.), uses SQL queries.</li>
+    </ol>
+
+    <div class="callout definition">
+      <span class="label">Basic Flow of Web Application</span>
+      User (Browser) → HTTP Request → Web Server → Process (Logic + DB) → Response (HTML/JSON) → User sees result
+    </div>
+
+    <h3>Web Fundamentals &amp; Identification</h3>
+    <p><strong>World Wide Web (WWW):</strong> global system of interconnected web pages; based on hypertext (links).</p>
+    <p><strong>HTML (HyperText Markup Language):</strong> used to create web pages; uses tags.</p>
+    <p><strong>Common Tags:</strong></p>
+    <ul>
+      <li><code>&lt;table&gt;</code> → Table</li>
+      <li><code>&lt;tr&gt;</code> → Row</li>
+      <li><code>&lt;th&gt;</code> → Header</li>
+      <li><code>&lt;form&gt;</code> → User input</li>
+    </ul>
+    <div class="code-block">
+      <div class="code-header">Html</div>
+      <pre><code>&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Name&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;form&gt;
+  &lt;input type=<span class="tok-str">"text"</span> /&gt;
+&lt;/form&gt;</code></pre>
+    </div>
+
+    <h3>Resource Identification</h3>
+    <p><strong>URL (Uniform Resource Locator):</strong> address of a web page.</p>
+    <div class="callout example">
+      <span class="label">Example</span>
+      <span class="fd">https://www.google.com/search?q=chatgpt</span><br>
+      Protocol → https &nbsp;|&nbsp; Host → google.com &nbsp;|&nbsp; Path → /search
+    </div>
+    <ul>
+      <li><strong>URI (Uniform Resource Identifier):</strong> general term for all identifiers</li>
+      <li><strong>URN (Uniform Resource Name):</strong> name, not location (e.g., ISBN of a book)</li>
+    </ul>
+
+    <h3>Communication Protocols &amp; State</h3>
+    <p><strong>HTTP (HyperText Transfer Protocol):</strong> communication between browser &amp; server; stateless (connectionless) → each request is independent.</p>
+    <p><strong>Cookies:</strong> small data stored in browser; used to remember user, track login.</p>
+    <p><strong>Sessions:</strong> temporary connection between client &amp; server; stores user data on server.</p>
+    <p><strong>Timeout:</strong> session expires after inactivity; improves security &amp; performance.</p>
+
+    <h3>System Components</h3>
+    <p><strong>Web Browser:</strong> examples: Chrome, Edge; converts HTML → visual page (process called Rendering).</p>
+    <p><strong>Web Server:</strong> receives HTTP requests; sends back response (HTML/JSON).</p>
+
+    <h3>Scripting Technologies</h3>
+    <p><strong>What is Scripting?</strong> Lightweight code; interpreted (runs directly).</p>
+
+    <p><strong>Client-Side Scripting (Browser):</strong></p>
+    <ul>
+      <li>Runs in browser</li>
+      <li>Example: JavaScript</li>
+      <li>Uses: Form validation, UI updates</li>
+      <li>Security: Cannot access local files</li>
+    </ul>
+    <div class="code-block">
+      <div class="code-header">Html</div>
+      <pre><code>&lt;script&gt;
+<span class="tok-kw">function</span> <span class="tok-fn">check</span>() {
+  <span class="tok-kw">let</span> x = document.getElementById(<span class="tok-str">"num"</span>).value;
+  <span class="tok-kw">if</span> (isNaN(x)) {
+    alert(<span class="tok-str">"Enter a number"</span>);
+  }
+}
+&lt;/script&gt;</code></pre>
+    </div>
+
+    <p><strong>Server-Side Scripting (Server):</strong></p>
+    <ul>
+      <li>Runs on server</li>
+      <li>Examples: Python (Flask/Django), PHP, JSP</li>
+      <li>Uses: Database operations, dynamic content generation</li>
+    </ul>
+    <div class="code-block">
+      <div class="code-header">Python</div>
+      <pre><code><span class="tok-kw">from</span> flask <span class="tok-kw">import</span> Flask
+
+app = Flask(__name__)
+
+@app.route(<span class="tok-str">'/'</span>)
+<span class="tok-kw">def</span> <span class="tok-fn">home</span>():
+    <span class="tok-kw">return</span> <span class="tok-str">"Hello User"</span>
+
+app.run()</code></pre>
+    </div>
+
+    <p><strong>Servlets:</strong> Java-based server programs; handle multiple users using threads.</p>
+    <p><strong>JSP (Java Server Pages):</strong> mix HTML + Java code; easier than Servlets.</p>
+
+    <div class="summary-box">
+      <span class="label">Final Revision</span>
+      <ul>
+        <li>Web apps follow 3-Tier Architecture</li>
+        <li>HTTP is stateless (uses cookies &amp; sessions)</li>
+        <li>Key components: Browser + Server</li>
+        <li>Scripting — Client-side: JavaScript. Server-side: Python, PHP, JSP</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- LECTURE 3 -->
+  <section class="lecture" id="lecture3">
+    <h2>Lecture 3: Application Design and Development / 3</h2>
+
+    <h3>1. Three-Tier Architecture Context</h3>
+    <p><strong>Three Layers Recap:</strong></p>
+    <ul>
+      <li><strong>Presentation Layer</strong> — browser-based UI. Technologies: HTML, CSS, JavaScript</li>
+      <li><strong>Middle Layer (Application Layer)</strong> — written in Python, Java, C++. Handles business logic, data processing</li>
+      <li><strong>Data Layer</strong> — database (MySQL, PostgreSQL, etc.); uses SQL</li>
+    </ul>
+
+    <div class="callout important">
+      <span class="label">Integration Challenge</span>
+      Problem: Programming languages use objects, databases use tables (relations).<br>
+      Solution: need a bridge to execute SQL, get table results, and convert into usable program data.
+    </div>
+
+    <h3>Core Connectivity Workflow</h3>
+    <p><strong>Standard Steps (Same Everywhere):</strong></p>
+    <ol>
+      <li>Establish Connection → Username &amp; password</li>
+      <li>Send SQL Query → SELECT / INSERT / UPDATE</li>
+      <li>Database Processes Query → Returns rows (tuples)</li>
+      <li>Fetch Data → Program reads rows one by one</li>
+      <li>Close Connection → Free resources</li>
+    </ol>
+
+    <h3>Connectionist Approach (API-Based)</h3>
+    <p><strong>Idea:</strong> Use a library/driver as a bridge → Program ↔ Database</p>
+    <p><strong>ODBC (Open Database Connectivity):</strong> works across different OS &amp; databases; portable, standard API.</p>
+
+    <p><strong>Python Example (pyodbc):</strong></p>
+    <div class="code-block">
+      <div class="code-header">Python</div>
+      <pre><code><span class="tok-kw">import</span> pyodbc
+
+conn = pyodbc.connect(
+    <span class="tok-str">"DRIVER={SQL Server};SERVER=localhost;DATABASE=test;UID=user;PWD=pass"</span>
+)
+
+cursor = conn.cursor()
+cursor.execute(<span class="tok-str">"SELECT * FROM students"</span>)
+
+row = cursor.fetchone()
+<span class="tok-kw">while</span> row:
+    print(row)
+    row = cursor.fetchone()
+
+conn.close()</code></pre>
+    </div>
+    <ul>
+      <li><code>cursor</code> → points to rows</li>
+      <li><code>fetchone()</code> → gets one row</li>
+    </ul>
+
+    <p><strong>JDBC (Java Database Connectivity):</strong></p>
+    <div class="code-block">
+      <div class="code-header">Java</div>
+      <pre><code>Connection con = DriverManager.getConnection(
+    <span class="tok-str">"jdbc:mysql://localhost:3306/test"</span>, <span class="tok-str">"user"</span>, <span class="tok-str">"pass"</span>);
+
+Statement stmt = con.createStatement();
+ResultSet rs = stmt.executeQuery(<span class="tok-str">"SELECT * FROM students"</span>);
+
+<span class="tok-kw">while</span>(rs.next()) {
+    System.out.println(rs.getInt(<span class="tok-str">"id"</span>));
+}
+
+con.close();</code></pre>
+    </div>
+    <ul>
+      <li><code>ResultSet</code> → stores query results</li>
+      <li><code>.next()</code> → iterate rows</li>
+    </ul>
+
+    <p><strong>Bridge Drivers:</strong> Connect different systems (e.g., ODBC ↔ JDBC bridge)</p>
+
+    <h3>Embedded SQL Approach</h3>
+    <p><strong>Idea:</strong> Write SQL inside program code.</p>
+    <p><strong>Syntax Indicators:</strong></p>
+    <ul>
+      <li><code>EXEC SQL</code> (C/C++)</li>
+      <li><code>#SQL</code> (Java-like systems)</li>
+    </ul>
+    <p><strong>Host Variables:</strong> used to exchange data. Example: <code>:int student_id;</code></p>
+
+    <p><strong>Cursor Workflow:</strong></p>
+    <ol>
+      <li>Declare cursor</li>
+      <li>Open cursor</li>
+      <li>Fetch rows</li>
+      <li>Close cursor</li>
+    </ol>
+
+    <p><strong>Conceptual Example (C-style):</strong></p>
+    <div class="code-block">
+      <div class="code-header">C</div>
+      <pre><code>EXEC SQL DECLARE c CURSOR FOR
+SELECT id FROM students;
+
+EXEC SQL OPEN c;
+
+<span class="tok-kw">while</span>(<span class="tok-num">1</span>) {
+    EXEC SQL FETCH c INTO :id;
+    <span class="tok-kw">if</span>(no_more_rows) <span class="tok-kw">break</span>;
+    printf(<span class="tok-str">"%d"</span>, id);
+}
+
+EXEC SQL CLOSE c;</code></pre>
+    </div>
+    <p><strong>Update using Cursor:</strong> modify current row → <code>WHERE CURRENT OF c;</code></p>
+
+    <h3>Key Programming Concepts</h3>
+    <p><strong>Cursors / Iterators:</strong> move through rows one-by-one; used in JDBC, Python, Embedded SQL.</p>
+    <p><strong>Exception Handling:</strong> handles errors like wrong password, table not found.</p>
+    <div class="code-block">
+      <div class="code-header">Python</div>
+      <pre><code><span class="tok-kw">try</span>:
+    conn = pyodbc.connect(<span class="tok-str">"wrong_credentials"</span>)
+<span class="tok-kw">except</span> Exception <span class="tok-kw">as</span> e:
+    print(<span class="tok-str">"Error:"</span>, e)</code></pre>
+    </div>
+
+    <p><strong>Data Dictionary:</strong> stores metadata (info about tables)</p>
+    <div class="code-block">
+      <div class="code-header">Sql</div>
+      <pre><code><span class="tok-kw">SELECT</span> * <span class="tok-kw">FROM</span> information_schema.tables;</code></pre>
+    </div>
+    <p>Used to check table existence, avoid errors before CREATE/DROP.</p>
+
+    <div class="summary-box">
+      <span class="label">Final Quick Revision</span>
+      <ul>
+        <li>3-Tier = Frontend + Logic + Database</li>
+        <li>Problem = Object ↔ Table mismatch</li>
+        <li>Solution = API (ODBC, JDBC) or Embedded SQL</li>
+        <li>Workflow = Connect → Query → Fetch → Close</li>
+        <li>Cursor = row iterator; ResultSet = query output; Exception handling = error safety</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- LECTURE 4 -->
+  <section class="lecture" id="lecture4">
+    <h2>Lecture 4: Application Design and Development / 4</h2>
+
+    <h3>Introduction to the Tech Stack</h3>
+    <p><strong>Choice of Tools:</strong></p>
+    <ul>
+      <li>Python → Popular language for development</li>
+      <li>PostgreSQL → Free, open-source database</li>
+    </ul>
+    <p><strong>Focus:</strong> lecture concentrates on frontend (GUI) and backend (data access); skips middle-tier business logic to emphasize connection between extremes.</p>
+    <p><strong>Database Modules:</strong> Python has several PostgreSQL modules. Focus here: <strong>psycopg2</strong>.</p>
+
+    <h3>Psycopg2 Module Concepts</h3>
+    <p>Most popular PostgreSQL adapter for Python.</p>
+    <p><strong>Key Features:</strong></p>
+    <ul>
+      <li>Stable &amp; actively maintained</li>
+      <li>Supports Python 2.x &amp; 3.x</li>
+      <li>Thread-safe → suitable for multi-threaded apps</li>
+    </ul>
+    <p><strong>Installation:</strong></p>
+    <div class="code-block">
+      <div class="code-header">Bash</div>
+      <pre><code>pip install psycopg2</code></pre>
+    </div>
+
+    <h3>Database Connection Workflow</h3>
+    <p><strong>Standard Workflow Steps:</strong></p>
+    <ol>
+      <li><strong>Create a Connection</strong> → <code>connect()</code> establishes link to DB server</li>
+      <li><strong>Create a Cursor</strong> → Iterator for executing commands &amp; retrieving results</li>
+      <li><strong>Execute SQL</strong> → Run Insert, Update, Delete, Select</li>
+      <li><strong>Transaction Management:</strong>
+        <ul>
+          <li><code>commit()</code> → makes changes permanent</li>
+          <li><code>rollback()</code> → reverts changes if error occurs</li>
+        </ul>
+      </li>
+      <li><strong>Close Resources:</strong> Close cursor → then connection</li>
+    </ol>
+
+    <h3>Key Programming Methods and Examples</h3>
+    <p><strong>1. Connecting &amp; Error Handling:</strong> use <code>try-except</code> block for safe connections.</p>
+    <div class="code-block">
+      <div class="code-header">Python</div>
+      <pre><code>conn = psycopg2.connect(
+    database=<span class="tok-str">"name"</span>, user=<span class="tok-str">"user"</span>, password=<span class="tok-str">"pw"</span>, host=<span class="tok-str">"host"</span>, port=<span class="tok-str">"port"</span>
+)</code></pre>
+    </div>
+
+    <p><strong>2. CRUD Operations:</strong></p>
+    <ul>
+      <li><strong>Create Table:</strong> via <code>cursor.execute()</code> with multi-line SQL</li>
+      <li><strong>Insert:</strong> Use placeholders <code>%s</code> to prevent SQL injection</li>
+      <li><strong>Update/Delete:</strong> Similar to Insert; check <code>cursor.rowcount</code> for affected rows</li>
+      <li><strong>Select/Fetch:</strong>
+        <ul>
+          <li><code>cursor.fetchone()</code> → one row</li>
+          <li><code>cursor.fetchmany(size)</code> → specified number of rows</li>
+          <li><code>cursor.fetchall()</code> → all remaining rows</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Web Frameworks and Flask</h3>
+    <p><strong>Frameworks:</strong></p>
+    <ul>
+      <li>Django, Pyramid → large/heavy</li>
+      <li>Flask, Bottle → micro-frameworks</li>
+    </ul>
+    <p><strong>Flask Specifics:</strong></p>
+    <ul>
+      <li>Micro-framework for WSGI</li>
+      <li><strong>Routing:</strong> <code>@app.route()</code> binds URL to Python function</li>
+      <li><strong>Rendering Templates:</strong> <code>render_template()</code> interprets HTML → displays nicely in browser</li>
+    </ul>
+
+    <h3>Integrated Application Example: Candidate Email Database</h3>
+    <p><strong>Frontend (index.html):</strong> Links: "Add Email", "View Email"</p>
+    <p><strong>Adding Data:</strong></p>
+    <ul>
+      <li>HTML form collects data</li>
+      <li>Flask route (<code>save_details</code>) captures form values</li>
+      <li>Opens DB connection → executes INSERT → commits change</li>
+    </ul>
+    <p><strong>Viewing Data:</strong></p>
+    <ul>
+      <li>Flask route (<code>view_all</code>) executes SELECT</li>
+      <li>Uses <code>cursor.fetchall()</code> to retrieve rows</li>
+      <li>Results passed to <code>render_template()</code> → populates HTML table (view.html)</li>
+    </ul>
+
+    <div class="summary-box">
+      <span class="label">Final Quick Revision</span>
+      <ul>
+        <li>Tech stack: Python + PostgreSQL (psycopg2)</li>
+        <li>Workflow: Connect → Cursor → Execute → Commit/Rollback → Close</li>
+        <li>CRUD operations with safe placeholders %s</li>
+        <li>Flask: lightweight framework for routing &amp; templates</li>
+        <li>Integrated example: Candidate Email Database with add/view functionality</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- LECTURE 5 -->
+  <section class="lecture" id="lecture5">
+    <h2>Lecture 5: Application Design and Development / 5</h2>
+
+    <h3>Rapid Application Development (RAD)</h3>
+    <p><strong>Overview:</strong></p>
+    <ul>
+      <li>RAD = Agile, fast, iterative development</li>
+      <li>Focuses on quick prototypes &amp; customer feedback</li>
+      <li>Alternative to Waterfall model (linear, slower)</li>
+    </ul>
+    <p><strong>Key Characteristics:</strong></p>
+    <ul>
+      <li>Customer-in-the-Loop</li>
+      <li>Early prototypes ("sketchy versions") → feedback → improvement</li>
+      <li>Iteration &amp; Integration → short cycles between versions</li>
+      <li>Integrate business, data, and process models from start</li>
+    </ul>
+
+    <h3>Speeding Up Development</h3>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Technique</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>Function Libraries</td><td>Flask (Python) → generates UI quickly</td></tr>
+          <tr><td>IDEs</td><td>Visual Studio → drag &amp; drop UI creation</td></tr>
+          <tr><td>Code Generation</td><td>Auto procedural code from declarative specs (SQL)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Four Phases of RAD</h3>
+    <ol>
+      <li>Business Modelling → Identify goals &amp; requirements</li>
+      <li>Data Modelling → Define entities, attributes, constraints</li>
+      <li>Process Modelling → Map workflows (e.g., e-commerce: search → cart → payment → tracking)</li>
+      <li>Testing &amp; Turnover → Prototype → feedback → finalize</li>
+    </ol>
+
+    <h3>RAD Frameworks &amp; Platforms</h3>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Platform</th><th>Key Feature</th></tr></thead>
+        <tbody>
+          <tr><td>Java Server Faces</td><td>UI components + states + events + accessibility</td></tr>
+          <tr><td>Ruby on Rails</td><td>Auto-generate CRUD interfaces from DB schema</td></tr>
+          <tr><td>Cloud Platforms</td><td>G Suite, Google App Engine, AWS, Azure, ASP.NET</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Performance &amp; Caching</h3>
+    <p><strong>Server-Side Caching:</strong></p>
+    <ul>
+      <li>Connection pooling (e.g., JDBC connections)</li>
+      <li>Cache DB query results</li>
+      <li>Cache full HTML pages</li>
+    </ul>
+    <p><strong>Client-Side Caching:</strong></p>
+    <ul>
+      <li>Web proxies store responses locally</li>
+      <li>Reduces requests to server</li>
+    </ul>
+    <div class="callout important">
+      <span class="label">Challenge</span>
+      Avoid dirty data → must update caches when DB changes.
+    </div>
+
+    <h3>Security Measures</h3>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Threat/Need</th><th>Countermeasure</th></tr></thead>
+        <tbody>
+          <tr><td>SQL Injection</td><td>Validate inputs, use prepared statements</td></tr>
+          <tr><td>Passwords</td><td>Encrypt; never store plaintext</td></tr>
+          <tr><td>Access Control</td><td>Limit DB access to specific server IPs</td></tr>
+          <tr><td>Authentication</td><td>2FA → SMS, OTP, biometrics</td></tr>
+          <tr><td>Authorization</td><td>Table/column-level vs row-level → app layer</td></tr>
+          <tr><td>Audit Trails</td><td>Log all actions for investigation &amp; repair</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Mobile Application Development</h3>
+    <p><strong>Overview:</strong></p>
+    <ul>
+      <li>Mobile apps follow three-tier architecture like web apps</li>
+      <li>Environment is resource-constrained: limited memory, CPU, battery, bandwidth</li>
+    </ul>
+    <p><strong>Unique Mobile Features:</strong></p>
+    <ul>
+      <li>Hardware sensors: Accelerometer → detect speed/motion; Gravity sensor → screen rotation</li>
+      <li>Gesture-based navigation</li>
+    </ul>
+
+    <h3>Types of Mobile Presence</h3>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>Mobile Websites</td><td>HTML designed for touch + small screens</td></tr>
+          <tr><td>Mobile Apps (Native)</td><td>Installed, may work offline using local cache/db</td></tr>
+          <tr><td>Hybrid Apps</td><td>Combine native features + web view</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Mobile Architecture</h3>
+    <p><strong>Split Data Layer:</strong></p>
+    <ul>
+      <li>Local database → fast access</li>
+      <li>Remote database → full data over network</li>
+    </ul>
+    <p><strong>Platform Specificity:</strong></p>
+    <ul>
+      <li>iOS → Objective-C / Swift</li>
+      <li>Android → Java, C, C++</li>
+      <li>Hybrid → Cross-platform options</li>
+    </ul>
+
+    <p><strong>Example: Mobile App Offline Cache (Conceptual):</strong></p>
+    <div class="code-block">
+      <div class="code-header">Python</div>
+      <pre><code>local_db = {}  <span class="tok-com"># small local DB</span>
+
+<span class="tok-kw">def</span> <span class="tok-fn">fetch_data</span>(item_id):
+    <span class="tok-kw">if</span> item_id <span class="tok-kw">in</span> local_db:
+        <span class="tok-kw">return</span> local_db[item_id]  <span class="tok-com"># fast local access</span>
+    <span class="tok-kw">else</span>:
+        data = fetch_from_remote_server(item_id)
+        local_db[item_id] = data  <span class="tok-com"># cache for next time</span>
+        <span class="tok-kw">return</span> data</code></pre>
+    </div>
+
+    <div class="summary-box">
+      <span class="label">Quick Summary</span>
+      <ul>
+        <li>RAD → Agile, iterative, customer feedback, fast prototypes</li>
+        <li>Performance → Caching, connection pooling, prevent dirty data</li>
+        <li>Security → SQL injection, encrypted passwords, 2FA, audit logs</li>
+        <li>Mobile Apps → Resource-constrained, sensors, offline caching, platform-specific or hybrid</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>Week 7 — Application Design and Development · Short Notes</footer>
+
+</div>
+</body>
+</html>

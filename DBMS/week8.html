@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 8: Algorithms, Data Structures &amp; Storage — Short Notes</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1f2430;
+    --muted: #5b6472;
+    --accent: #6d4aff;
+    --accent-soft: #f1ecff;
+    --card-bg: #faf9fc;
+    --border: #e4e1ec;
+    --code-bg: #f4f2fa;
+    --table-header: #ece6ff;
+    --editor-bg: #1e1e2a;
+    --editor-header: #262635;
+    --editor-text: #e4e2f0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #15151c;
+      --text: #eceaf4;
+      --muted: #a8a6b8;
+      --accent: #b19dff;
+      --accent-soft: #262138;
+      --card-bg: #1c1b26;
+      --border: #302e3d;
+      --code-bg: #211f2d;
+      --table-header: #2a2540;
+      --editor-bg: #101018;
+      --editor-header: #1a1a26;
+      --editor-text: #e4e2f0;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #15151c;
+    --text: #eceaf4;
+    --muted: #a8a6b8;
+    --accent: #b19dff;
+    --accent-soft: #262138;
+    --card-bg: #1c1b26;
+    --border: #302e3d;
+    --code-bg: #211f2d;
+    --table-header: #2a2540;
+    --editor-bg: #101018;
+    --editor-header: #1a1a26;
+    --editor-text: #e4e2f0;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Georgia", "Iowan Old Style", ui-serif, serif;
+    margin: 0;
+    padding: 2.5rem 1.25rem 5rem;
+    line-height: 1.65;
+  }
+
+  .wrap {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  header.title-block {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 3px solid var(--accent);
+  }
+
+  header.title-block .kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    color: var(--accent);
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-weight: 600;
+  }
+
+  header.title-block h1 {
+    font-size: 2rem;
+    margin: 0.4rem 0 0.3rem;
+    font-family: -apple-system, "Segoe UI", sans-serif;
+  }
+
+  header.title-block p.subtitle {
+    color: var(--muted);
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.95rem;
+  }
+
+  nav.toc {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 2.5rem;
+    font-family: -apple-system, "Segoe UI", sans-serif;
+  }
+
+  nav.toc h2 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 0 0 0.6rem;
+  }
+
+  nav.toc ol {
+    margin: 0;
+    padding-left: 1.2rem;
+    columns: 1;
+  }
+
+  nav.toc a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+  nav.toc a:hover { text-decoration: underline; }
+
+  section.lecture {
+    margin-bottom: 3.5rem;
+    padding-top: 0.5rem;
+  }
+
+  section.lecture > h2 {
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 1.5rem;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: inline-block;
+    padding: 0.35rem 0.9rem;
+    border-radius: 8px;
+    margin-bottom: 1.2rem;
+  }
+
+  h3 {
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 1.15rem;
+    margin: 1.8rem 0 0.6rem;
+    color: var(--text);
+    border-left: 4px solid var(--accent);
+    padding-left: 0.6rem;
+  }
+
+  p { margin: 0.5rem 0 0.9rem; }
+
+  ul, ol { margin: 0.4rem 0 1rem; padding-left: 1.4rem; }
+  li { margin-bottom: 0.35rem; }
+
+  strong { color: var(--text); font-weight: 700; }
+
+  .callout {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin: 1rem 0;
+  }
+
+  .callout.example {
+    border-left-color: #4aa8ff;
+  }
+  .callout.definition {
+    border-left-color: var(--accent);
+  }
+  .callout.important {
+    border-left-color: #ff8a4a;
+  }
+
+  .callout .label {
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  code, .fd {
+    font-family: "SFMono-Regular", Consolas, Menlo, monospace;
+    background: var(--code-bg);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.92em;
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.92rem;
+    min-width: 320px;
+  }
+
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.55rem 0.8rem;
+    text-align: left;
+  }
+
+  th {
+    background: var(--table-header);
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  tr:nth-child(even) td {
+    background: var(--card-bg);
+  }
+
+  .summary-box {
+    background: var(--accent-soft);
+    border-radius: 12px;
+    padding: 1.2rem 1.4rem;
+    margin-top: 1.5rem;
+  }
+
+  .summary-box .label {
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.78rem;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .summary-box ul { margin: 0; padding-left: 1.3rem; }
+
+  hr.divider {
+    border: none;
+    border-top: 1px dashed var(--border);
+    margin: 2.5rem 0;
+  }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.85rem;
+    margin-top: 3rem;
+  }
+
+  /* Code editor blocks */
+  .code-block {
+    background: var(--editor-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 1rem 0;
+    font-family: "SFMono-Regular", Consolas, Menlo, monospace;
+    font-size: 0.85rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  }
+  .code-block .code-header {
+    background: var(--editor-header);
+    color: #a8a6c0;
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.45rem 0.9rem;
+    font-weight: 600;
+  }
+  .code-block pre {
+    margin: 0;
+    padding: 0.9rem 1.1rem;
+    overflow-x: auto;
+    color: var(--editor-text);
+    line-height: 1.55;
+  }
+  .code-block code { background: none; padding: 0; color: inherit; }
+  .tok-kw { color: #ff8ac2; }
+  .tok-fn { color: #7ec7ff; }
+  .tok-str { color: #b7f28e; }
+  .tok-com { color: #7a7a90; }
+  .tok-num { color: #ffcb7e; }
+
+  @media (max-width: 480px) {
+    header.title-block h1 { font-size: 1.5rem; }
+    body { padding: 1.5rem 1rem 4rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="title-block">
+    <div class="kicker">DBMS &middot; Week 8</div>
+    <h1>Algorithms, Data Structures &amp; Storage</h1>
+    </header>
+
+  <nav class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#lecture1">Lecture 1 — Algorithms &amp; Complexity Analysis</a></li>
+      <li><a href="#lecture2">Lecture 2 — Data Structures</a></li>
+      <li><a href="#lecture3">Lecture 3 — Data Structures (Trees &amp; Advanced)</a></li>
+      <li><a href="#lecture4">Lecture 4 — Physical Storage</a></li>
+      <li><a href="#lecture5">Lecture 5 — File Structure</a></li>
+    </ol>
+  </nav>
+
+  <!-- LECTURE 1 -->
+  <section class="lecture" id="lecture1">
+    <h2>Lecture 1: Algorithms and Data Structures / 1 — Algorithms &amp; Complexity Analysis</h2>
+
+    <h3>DBMS Context</h3>
+    <ul>
+      <li><strong>Logical Design</strong> → Defines what data looks like (tables, relationships, constraints).</li>
+      <li><strong>Physical Design</strong> → Defines how data is stored (files, indexes, storage layout).</li>
+      <li><strong>Goal</strong> → Optimize access time and storage usage.</li>
+    </ul>
+
+    <h3>Algorithm vs Program</h3>
+    <p><strong>Algorithm:</strong> step-by-step procedure to solve a problem; must be finite, well-defined, and always terminate.</p>
+    <p><strong>Program:</strong> code written in a programming language; implements an algorithm; may run indefinitely (e.g., OS, DBMS).</p>
+    <div class="callout definition">
+      <span class="label">Summary</span>
+      Algorithm = Idea. Program = Implementation.
+    </div>
+
+    <h3>Why Analyze Algorithms?</h3>
+    <ul>
+      <li>Limited resources → need efficiency</li>
+      <li>Predict performance before execution</li>
+      <li>Compare algorithms (e.g., QuickSort vs MergeSort)</li>
+      <li>Guarantee performance (e.g., trees, indexing)</li>
+    </ul>
+
+    <h3>What Do We Analyze?</h3>
+    <ul>
+      <li><strong>Input Size (n):</strong> Number of elements / data size</li>
+      <li><strong>Resources:</strong> Time (most important), Space (memory usage), Power (mobile devices), Bandwidth (distributed systems)</li>
+    </ul>
+
+    <h3>Methods of Analysis</h3>
+    <ul>
+      <li><strong>Counting Model:</strong> Count key operations (comparisons, additions)</li>
+      <li><strong>RAM Model:</strong> Assume each operation takes constant time</li>
+      <li><strong>Asymptotic Analysis:</strong> Focus on growth as n increases</li>
+      <li><strong>Recursive Analysis:</strong> Use recurrence relations, Master's Theorem</li>
+    </ul>
+
+    <h3>Big-O Complexity</h3>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Complexity</th><th>Meaning</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>O(1)</td><td>Constant</td><td>Array access</td></tr>
+          <tr><td>O(log n)</td><td>Very fast</td><td>Binary search</td></tr>
+          <tr><td>O(n)</td><td>Linear</td><td>Simple loop</td></tr>
+          <tr><td>O(n log n)</td><td>Efficient</td><td>Merge sort</td></tr>
+          <tr><td>O(n²)</td><td>Slow</td><td>Nested loops</td></tr>
+          <tr><td>O(n³)</td><td>Very slow</td><td>3 nested loops</td></tr>
+          <tr><td>O(2ⁿ)</td><td>Extremely slow</td><td>Brute force recursion</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Rule:</strong> Ignore constants, keep dominant term only.</p>
+
+    <h3>Optimization Examples</h3>
+    <p><strong>Inefficient:</strong></p>
+    <div class="code-block">
+      <div class="code-header">C</div>
+      <pre><code><span class="tok-kw">for</span>(i=<span class="tok-num">0</span>; i&lt;strlen(s); i++)</code></pre>
+    </div>
+    <p><strong>Efficient:</strong></p>
+    <div class="code-block">
+      <div class="code-header">C</div>
+      <pre><code>len = strlen(s);
+<span class="tok-kw">for</span>(i=<span class="tok-num">0</span>; i&lt;len; i++)</code></pre>
+    </div>
+    <p>Reduces O(n²) → O(n)</p>
+
+    <p><strong>Space Optimization</strong></p>
+    <ul>
+      <li>Recursive factorial → O(n) space</li>
+      <li>Iterative factorial → O(1) space</li>
+      <li>Avoid recursion when memory matters</li>
+    </ul>
+
+    <h3>Analysis Scenarios</h3>
+    <ul>
+      <li><strong>Worst Case:</strong> Maximum time taken, guarantees performance</li>
+      <li><strong>Average Case:</strong> Expected performance, depends on input distribution</li>
+    </ul>
+
+    <div class="summary-box">
+      <span class="label">Final Revision</span>
+      Design → Algorithm → Program → Analysis → Optimization
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- LECTURE 2 -->
+  <section class="lecture" id="lecture2">
+    <h2>Lecture 2: Algorithms and Data Structures / 2 — Data Structures</h2>
+
+    <h3>What are Data Structures?</h3>
+    <p>A data structure is a container plus operations. Used to organize data in memory (temporary). Unlike databases → no persistence (only during program execution).</p>
+    <p><strong>Common Operations:</strong> Create, Insert, Delete, Search (Find), Close</p>
+
+    <h3>Foundational Mechanisms</h3>
+    <p>All data structures are based on two core storage ideas:</p>
+    <div class="callout definition">
+      <span class="label">Indexed / Sequential</span>
+      Data stored in continuous memory. Access using: <span class="fd">Address = Base + Index × Size</span>. Fast random access.
+    </div>
+    <div class="callout definition">
+      <span class="label">Referential (Pointers)</span>
+      Elements stored anywhere in memory. Connected using addresses (links). Flexible but slower access.
+    </div>
+
+    <h3>Linear Data Structures</h3>
+    <p>Elements arranged one after another. Each element points to the next.</p>
+
+    <h3>Arrays (Sequential)</h3>
+    <p><strong>Key Points:</strong> Stored in contiguous memory. Access → O(1) (very fast). Fixed size.</p>
+    <p><strong>Drawbacks:</strong> Insert/Delete → O(n) (shifting required). Possible wasted space.</p>
+    <p><strong>Best for:</strong> Fast access; sorted data (binary search).</p>
+
+    <h3>Linked Lists (Referential)</h3>
+    <p><strong>Key Points:</strong> Nodes = Data + Pointer. No need for continuous memory. Dynamic size.</p>
+    <p><strong>Drawbacks:</strong> Access → O(n) (traversal needed).</p>
+    <p><strong>Advantage:</strong> Insert/Delete → O(1) (just change pointers).</p>
+    <p><strong>Best for:</strong> Frequent insertions/deletions.</p>
+
+    <h3>Stacks &amp; Queues (Concept-Based)</h3>
+    <ul>
+      <li><strong>Stack (LIFO – Last In First Out):</strong> Operations: Push, Pop. Time: O(1)</li>
+      <li><strong>Queue (FIFO – First In First Out):</strong> Operations: Enqueue, Dequeue. Time: O(1)</li>
+    </ul>
+
+    <h3>Searching Techniques</h3>
+    <p><strong>Linear Search:</strong> Check elements one by one. Works on Arrays and Linked Lists. Time: O(n).</p>
+    <p><strong>Binary Search:</strong> Divide search space into half. Time: O(log n).</p>
+    <p><strong>Requirements:</strong> Sorted data; Indexed structure (Array). Not suitable for Linked Lists.</p>
+
+    <h3>Summary Table</h3>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Feature</th><th>Arrays</th><th>Linked Lists</th></tr></thead>
+        <tbody>
+          <tr><td>Access</td><td>O(1)</td><td>O(n)</td></tr>
+          <tr><td>Insert/Delete</td><td>O(n)</td><td>O(1)</td></tr>
+          <tr><td>Memory</td><td>Fixed</td><td>Dynamic</td></tr>
+          <tr><td>Search</td><td>Fast (if sorted)</td><td>Slow</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="summary-box">
+      <span class="label">Final Memory Trick — "A-L-S-Q Rule"</span>
+      <ul>
+        <li>Array → Access fast</li>
+        <li>Linked List → Insert/Delete fast</li>
+        <li>Stack → LIFO</li>
+        <li>Queue → FIFO</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- LECTURE 3 -->
+  <section class="lecture" id="lecture3">
+    <h2>Lecture 3: Algorithms and Data Structures / 3 — Data Structures</h2>
+
+    <h3>Overview of Data Structures</h3>
+    <p><strong>Definition:</strong> A data structure is a way to organize and store data in memory for efficient use.</p>
+    <p><strong>Goals:</strong> Faster access; efficient modification.</p>
+    <p><strong>Efficiency Measures:</strong> Time Complexity (most important); Space Complexity.</p>
+    <p><strong>Basic Operations:</strong> Create, Insert, Delete, Find (Search), Access, Close</p>
+
+    <h3>Linear vs Non-Linear Structures</h3>
+    <p><strong>Linear Structures (1D flow):</strong> elements arranged sequentially; Space Complexity → O(n).</p>
+    <ul>
+      <li>Arrays → Fast access (O(1)), slow insert/delete (O(n))</li>
+      <li>Linked Lists → Fast insert/delete (O(1)), slow access/search (O(n))</li>
+    </ul>
+
+    <p><strong>Non-Linear Structures:</strong> data arranged in hierarchy or network; multiple paths possible.</p>
+    <ul>
+      <li><strong>Graph:</strong> collection of vertices (nodes) and edges (connections). Types: Directed/Undirected, Weighted/Unweighted, Cyclic/Acyclic</li>
+      <li><strong>Tree (Special Graph):</strong> connected, no cycles; hierarchical structure</li>
+      <li><strong>Hash Table:</strong> uses hash function to convert key → index; stored in array form; very fast access (average O(1))</li>
+      <li><strong>Skip List:</strong> multi-level linked list; faster search than normal linked list; average time: O(log n)</li>
+    </ul>
+
+    <h3>Tree Terminology &amp; Properties</h3>
+    <p><strong>Basic Terms:</strong></p>
+    <ul>
+      <li><strong>Root</strong> → Top node (no parent)</li>
+      <li><strong>Parent / Child</strong> → Hierarchical relation</li>
+      <li><strong>Leaf Node</strong> → No children</li>
+      <li><strong>Internal Node</strong> → Has children</li>
+      <li><strong>Arity</strong> → Number of children</li>
+    </ul>
+    <p><strong>Structure Concepts:</strong></p>
+    <ul>
+      <li><strong>Path</strong> → Sequence of nodes</li>
+      <li><strong>Subtree</strong> → Tree inside a tree</li>
+      <li><strong>Level</strong> → Distance from root</li>
+      <li><strong>Height (h)</strong> → Longest path root → leaf</li>
+    </ul>
+    <div class="callout important">
+      <span class="label">Important Facts</span>
+      Tree with n nodes → n−1 edges.<br>
+      Maximum nodes at level l = 2ˡ (binary tree).<br>
+      Height: Best case → O(log n); Worst case → O(n)
+    </div>
+
+    <h3>Binary Search Tree (BST)</h3>
+    <p><strong>Concept:</strong> Combines array's search efficiency with linked list's flexibility.</p>
+    <div class="callout definition">
+      <span class="label">BST Rule</span>
+      For node X: Left subtree → values &lt; X. Right subtree → values &gt; X.
+    </div>
+    <p><strong>Operations:</strong> Search → Move left/right → O(h). Insert/Delete → Search + pointer change → O(h).</p>
+    <p><strong>Efficiency:</strong> Balanced Tree → O(log n). Skewed Tree → O(n).</p>
+
+    <h3>Traversals</h3>
+    <ul>
+      <li><strong>Depth First Search (DFS):</strong> In-order, Pre-order, Post-order</li>
+      <li><strong>Breadth First Search (BFS):</strong> Level-wise traversal</li>
+    </ul>
+
+    <h3>Performance Summary</h3>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Structure</th><th>Search</th><th>Insert</th><th>Delete</th></tr></thead>
+        <tbody>
+          <tr><td>Array</td><td>O(1)</td><td>O(n)</td><td>O(n)</td></tr>
+          <tr><td>Linked List</td><td>O(n)</td><td>O(1)</td><td>O(1)</td></tr>
+          <tr><td>BST (avg)</td><td>O(log n)</td><td>O(log n)</td><td>O(log n)</td></tr>
+          <tr><td>BST (worst)</td><td>O(n)</td><td>O(n)</td><td>O(n)</td></tr>
+          <tr><td>Hash Table</td><td>O(1)</td><td>O(1)</td><td>O(1)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Advanced Trees</h3>
+    <ul>
+      <li>Red-Black Tree</li>
+      <li>B-Tree</li>
+    </ul>
+    <p><strong>Both maintain:</strong> Height = O(log n), even in worst case.</p>
+
+    <div class="summary-box">
+      <span class="label">Final Revision Tricks</span>
+      <ul>
+        <li><strong>"L vs NL Rule":</strong> Linear → Simple, sequential. Non-linear → Hierarchical, powerful.</li>
+        <li><strong>BST Rule:</strong> Left &lt; Root &lt; Right</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- LECTURE 4 -->
+  <section class="lecture" id="lecture4">
+    <h2>Lecture 4: Storage and File Structure / 1 — Physical Storage</h2>
+
+    <h3>Overview of Database Storage</h3>
+    <p>Databases require <strong>persistent storage</strong>. Data must survive power failure and system crash.</p>
+    <p><strong>Key Evaluation Factors:</strong></p>
+    <ul>
+      <li><strong>Speed</strong> → Fast access to data</li>
+      <li><strong>Cost</strong> → Low cost per GB</li>
+      <li><strong>Reliability</strong> → Data safety &amp; recovery</li>
+    </ul>
+
+    <h3>Storage Hierarchy</h3>
+    <p>Storage is organized from fastest → slowest and costliest → cheapest.</p>
+    <div class="callout definition">
+      <span class="label">Primary Storage (Volatile)</span>
+      Data lost when power is OFF.<br>
+      Types: Cache → Fastest, most expensive; Main Memory (RAM) → Very fast (nanoseconds), limited size.
+    </div>
+    <div class="callout definition">
+      <span class="label">Secondary Storage (Persistent)</span>
+      Stores actual database data. Non-volatile.<br>
+      Types: Magnetic Disks (HDD) → Most common; Flash Memory (SSD) → Faster than HDD, requires erase before rewrite.
+    </div>
+    <div class="callout definition">
+      <span class="label">Tertiary Storage (Archival)</span>
+      Used for backup &amp; history. Cheap but slow.<br>
+      Types: Optical Disks (CD/DVD) → Write once; Magnetic Tapes → Sequential access.
+    </div>
+
+    <h3>Magnetic Disk Architecture</h3>
+    <p><strong>Components:</strong> Platters (spinning disks); Read/Write Head; Arm Assembly.</p>
+    <p><strong>Disk Geometry:</strong></p>
+    <ul>
+      <li><strong>Tracks</strong> → Circular paths</li>
+      <li><strong>Sectors</strong> → Smallest unit (e.g., 512 bytes)</li>
+      <li><strong>Cylinders</strong> → Same track across platters</li>
+      <li><strong>Blocks/Clusters</strong> → Group of sectors</li>
+    </ul>
+    <p><strong>Disk Controller:</strong> Controls head movement; ensures data correctness (checksums); detects bad sectors.</p>
+
+    <h3>Performance Metrics</h3>
+    <ul>
+      <li><strong>Access Time:</strong> Seek Time → Move head to track; Rotational Latency → Wait for sector</li>
+      <li><strong>Data Transfer Rate:</strong> Speed of reading/writing data (~25–100 MB/s)</li>
+      <li><strong>Reliability:</strong> MTTF (Mean Time To Failure); average lifespan ≈ 3–5 years</li>
+    </ul>
+
+    <h3>Modern &amp; Future Technologies</h3>
+    <ul>
+      <li><strong>Cloud Storage:</strong> Platforms: Google Drive, AWS. Backup &amp; recovery handled. Scalable &amp; cost-effective.</li>
+      <li><strong>SSD (Solid State Drive):</strong> No moving parts; faster than HDD; more expensive.</li>
+      <li><strong>DNA Storage (Future):</strong> Extremely high capacity; very slow &amp; costly (currently).</li>
+      <li><strong>Quantum Memory (Future):</strong> Uses qubits instead of bits; potential for massive efficiency.</li>
+    </ul>
+
+    <h3>Comparison Table</h3>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Storage Type</th><th>Speed</th><th>Cost</th><th>Persistence</th></tr></thead>
+        <tbody>
+          <tr><td>Cache</td><td>Fastest</td><td>High</td><td>No</td></tr>
+          <tr><td>RAM</td><td>Fast</td><td>High</td><td>No</td></tr>
+          <tr><td>HDD</td><td>Medium</td><td>Low</td><td>Yes</td></tr>
+          <tr><td>SSD</td><td>Fast</td><td>Medium/High</td><td>Yes</td></tr>
+          <tr><td>Tape</td><td>Slow</td><td>Very Low</td><td>Yes</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="summary-box">
+      <span class="label">Revision Trick — "P-S-T Rule"</span>
+      <ul>
+        <li>Primary → Fast but temporary</li>
+        <li>Secondary → Main database storage</li>
+        <li>Tertiary → Backup/archive</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- LECTURE 5 -->
+  <section class="lecture" id="lecture5">
+    <h2>Lecture 5: Storage and File Structure / 2 — File Structure</h2>
+
+    <h3>Basic Mental Model</h3>
+    <p><strong>Hierarchy:</strong> Database → Files → Records → Fields</p>
+    <ul>
+      <li><strong>File:</strong> Collection of records</li>
+      <li><strong>Record:</strong> Collection of fields</li>
+      <li><strong>Field:</strong> Smallest unit (attribute)</li>
+    </ul>
+    <p><strong>Storage Units:</strong> Data stored in blocks (pages). Block = group of disk sectors. Block is the basic unit for storage allocation and data transfer.</p>
+
+    <h3>Record Management</h3>
+    <p><strong>Fixed-Length Records:</strong> All records have same size. Easy access using formula: <span class="fd">Address + (i × size)</span></p>
+    <p><strong>Deletion Problems &amp; Solutions:</strong></p>
+    <ul>
+      <li><strong>Compaction</strong> → Shift records to fill gap (expensive)</li>
+      <li><strong>Last Record Movement</strong> → Replace deleted record with last record (faster)</li>
+      <li><strong>Free List (Best)</strong> → Store deleted record addresses, link them like a chain</li>
+    </ul>
+
+    <p><strong>Variable-Length Records:</strong> Used when there are multiple record types, VARCHAR fields, or repeating attributes.</p>
+    <p><strong>Structure:</strong> Fixed part → stores length, offset (pointer). Variable part → actual data.</p>
+    <p><strong>Null Values:</strong> Stored using Null Bitmap. Each bit represents presence/absence.</p>
+
+    <h3>Slotted Page Structure</h3>
+    <div class="callout definition">
+      <span class="label">Key Idea</span>
+      Page contains: Header, Slot directory, Records.
+    </div>
+    <p><strong>Advantages:</strong> Records can move inside page; external references remain valid; efficient space usage.</p>
+
+    <h3>Physical File Organization</h3>
+    <ul>
+      <li><strong>Heap File:</strong> Records stored anywhere; fast insert; slow search.</li>
+      <li><strong>Sequential File:</strong> Records stored in sorted order; good for sequential access; needs reorganization.</li>
+      <li><strong>Multi-table Clustering:</strong> Related records stored together. Example: Department + Instructor.</li>
+    </ul>
+    <p><strong>Pros:</strong> Faster join operations. <strong>Cons:</strong> Inefficient for single-table queries.</p>
+
+    <h3>Data Dictionary (System Catalog)</h3>
+    <p>Stores metadata (data about data).</p>
+    <p><strong>Contains:</strong> Table names; attributes &amp; types; index information; constraints; user permissions.</p>
+    <div class="callout important">
+      <span class="label">Performance Tip</span>
+      Often kept in main memory because it is accessed frequently.
+    </div>
+
+    <h3>Buffer Management</h3>
+    <p><strong>Buffer:</strong> Area in RAM storing disk blocks. Reduces slow disk access.</p>
+    <p><strong>Buffer Manager:</strong> Handles block requests — if block exists → use it; if not → fetch from disk.</p>
+    <p><strong>Replacement Policies:</strong></p>
+    <ul>
+      <li><strong>LRU (Least Recently Used)</strong> → Remove least used block</li>
+      <li><strong>MRU (Most Recently Used)</strong> → Remove recent block (useful in joins)</li>
+    </ul>
+    <p><strong>Special Concepts:</strong></p>
+    <ul>
+      <li><strong>Pinned Block</strong> → Cannot be removed (in use)</li>
+      <li><strong>Toss-Immediate</strong> → Free block immediately after use</li>
+    </ul>
+
+    <div class="summary-box">
+      <span class="label">Final Revision Trick — "F-R-B Rule"</span>
+      <ul>
+        <li>Files → Organized data</li>
+        <li>Records → Data units</li>
+        <li>Buffer → Speeds up access</li>
+      </ul>
+    </div>
+
+    <div class="summary-box" style="margin-top:1.2rem;">
+      <span class="label">Ultra-Short Summary</span>
+      <ul>
+        <li>Data stored as: DB → File → Record → Field</li>
+        <li>Blocks = basic storage unit</li>
+        <li>Fixed records → simple, fast access</li>
+        <li>Variable records → flexible</li>
+        <li>Slotted pages → flexible storage inside block</li>
+        <li>Heap vs Sequential → trade-off</li>
+        <li>Buffer → improves performance</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>Week 8 — Algorithms, Data Structures &amp; Storage · Short Notes</footer>
+
+</div>
+</body>
+</html>
