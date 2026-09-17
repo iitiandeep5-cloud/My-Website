@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Java · Week 2 Notes</title>
+<style>
+  :root {
+    --ink: #1c2b2a;
+    --ink-soft: #3d504e;
+    --paper: #f9faf8;
+    --panel: #eef1ec;
+    --line: #d6dcd3;
+    --accent: #1f6f5c;
+    --accent-soft: #e4efe9;
+    --amber: #b3781f;
+    --code-bg: #16211f;
+    --code-fg: #dbe6de;
+    --code-key: #e8b064;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #e8ede9;
+      --ink-soft: #aebab3;
+      --paper: #101614;
+      --panel: #17201d;
+      --line: #2a352f;
+      --accent: #6fbfa2;
+      --accent-soft: #1c2b26;
+      --amber: #d9a24e;
+      --code-bg: #0b1211;
+      --code-fg: #d7e2db;
+      --code-key: #e8b064;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #e8ede9;
+    --ink-soft: #aebab3;
+    --paper: #101614;
+    --panel: #17201d;
+    --line: #2a352f;
+    --accent: #6fbfa2;
+    --accent-soft: #1c2b26;
+    --amber: #d9a24e;
+    --code-bg: #0b1211;
+    --code-fg: #d7e2db;
+    --code-key: #e8b064;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .layout {
+    display: flex;
+    max-width: 1180px;
+    margin: 0 auto;
+    align-items: flex-start;
+  }
+
+  /* Sidebar */
+  nav.toc {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 250px;
+    flex-shrink: 0;
+    padding: 2.5rem 1.25rem 2rem 1.75rem;
+    border-right: 1px solid var(--line);
+    overflow-y: auto;
+  }
+  nav.toc .course-tag {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    margin: 0 0 0.15rem 0;
+  }
+  nav.toc h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.55rem;
+    font-weight: 600;
+    margin: 0 0 1.75rem 0;
+    line-height: 1.25;
+  }
+  nav.toc ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: lec;
+  }
+  nav.toc li { counter-increment: lec; margin-bottom: 0.15rem; }
+  nav.toc a {
+    display: flex;
+    gap: 0.65rem;
+    align-items: baseline;
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    padding: 0.4rem 0.5rem;
+    border-radius: 6px;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  nav.toc a:hover { background: var(--accent-soft); color: var(--ink); }
+  nav.toc a::before {
+    content: counter(lec);
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    min-width: 1.1em;
+  }
+
+  main {
+    flex: 1;
+    min-width: 0;
+    padding: 3rem 3.5rem 6rem 3.5rem;
+  }
+
+  header.masthead {
+    margin-bottom: 3.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--line);
+  }
+  header.masthead p.kicker {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: var(--accent);
+    margin: 0 0 0.75rem 0;
+  }
+  header.masthead h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 700;
+    font-size: 2.6rem;
+    line-height: 1.15;
+    margin: 0 0 0.9rem 0;
+    max-width: 16ch;
+  }
+  header.masthead p.dek {
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    max-width: 58ch;
+    margin: 0;
+  }
+
+  section.lecture {
+    margin-bottom: 4.5rem;
+    scroll-margin-top: 2rem;
+  }
+  section.lecture > h2 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.7rem;
+    font-weight: 600;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin: 0 0 0.3rem 0;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--accent);
+  }
+  section.lecture > h2 .num {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 1.05rem;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  h3 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin: 2.1rem 0 0.6rem 0;
+    color: var(--ink);
+  }
+  h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 1.3rem 0 0.4rem 0;
+    color: var(--ink-soft);
+  }
+
+  p { margin: 0.5rem 0 0.8rem 0; max-width: 72ch; }
+
+  ul, ol.plain { margin: 0.4rem 0 0.9rem 0; padding-left: 1.3rem; max-width: 68ch; }
+  li { margin-bottom: 0.3rem; }
+  li::marker { color: var(--accent); }
+
+  .callout {
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    padding: 0.85rem 1.1rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1rem 0 1.2rem 0;
+    max-width: 66ch;
+    font-size: 0.95rem;
+  }
+  .callout strong { color: var(--accent); }
+
+  pre {
+    background: var(--code-bg);
+    color: var(--code-fg);
+    padding: 1rem 1.2rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.85rem;
+    line-height: 1.55;
+    margin: 0.8rem 0 1.3rem 0;
+    max-width: 68ch;
+  }
+  code {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.88em;
+    background: var(--panel);
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+  }
+  pre code { background: none; padding: 0; }
+
+  .table-wrap { overflow-x: auto; margin: 0.8rem 0 1.4rem 0; max-width: 72ch; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.92rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.55rem 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  th {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 600;
+    color: var(--accent);
+    border-bottom: 2px solid var(--line);
+  }
+  tr:last-child td { border-bottom: none; }
+
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    max-width: 68ch;
+    margin: 0.8rem 0 1.3rem 0;
+  }
+  .compare .col {
+    background: var(--panel);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+  }
+  .compare .col h5 {
+    margin: 0 0 0.5rem 0;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.78rem;
+    color: var(--amber);
+    text-transform: none;
+  }
+  .compare .col ul { margin: 0; padding-left: 1.1rem; }
+
+  .flow {
+    background: var(--panel);
+    border-radius: 8px;
+    padding: 1rem 1.3rem;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.85rem;
+    max-width: 40ch;
+    margin: 0.8rem 0 1.3rem 0;
+    line-height: 2;
+  }
+  .flow .arrow { color: var(--accent); text-align: center; display: block; }
+
+  .takeaways {
+    background: var(--panel);
+    border-radius: 10px;
+    padding: 1.1rem 1.4rem;
+    margin-top: 1.6rem;
+    max-width: 68ch;
+  }
+  .takeaways h4 {
+    margin-top: 0;
+    color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1rem;
+  }
+  .takeaways ul { margin-bottom: 0; }
+
+  footer {
+    max-width: 68ch;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+
+  @media (max-width: 900px) {
+    .layout { flex-direction: column; }
+    nav.toc {
+      position: relative;
+      width: 100%;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid var(--line);
+      padding: 1.5rem;
+    }
+    main { padding: 2rem 1.25rem 4rem 1.25rem; }
+    header.masthead h1 { font-size: 2rem; }
+    .compare { grid-template-columns: 1fr; }
+  }
+
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <nav class="toc" aria-label="Lecture contents">
+    <p class="course-tag">Week 2</p>
+    <h1>Java: Getting Hands-On</h1>
+    <ol>
+      <li><a href="#l1">A First Taste of Java</a></li>
+      <li><a href="#l2">Basic Datatypes</a></li>
+      <li><a href="#l3">Control Flow</a></li>
+      <li><a href="#l4">Classes &amp; Objects</a></li>
+      <li><a href="#l5">Input &amp; Output</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <header class="masthead">
+      <p class="kicker">SE / Programming Languages</p>
+      <h1>Hello World to I/O</h1>
+      </header>
+
+    <!-- LECTURE 1 -->
+    <section class="lecture" id="l1">
+      <h2><span class="num">01</span> A First Taste of Java</h2>
+
+      <h3>Why "Hello World" exists</h3>
+      <p>Popularized by Brian Kernighan and Dennis Ritchie, it helps beginners get past the first hurdles of a language — writing, compiling, and running a program.</p>
+      <p>Python:</p>
+      <pre><code>print("Hello World")</code></pre>
+      <p>Java:</p>
+      <pre><code>public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello World");
+    }
+}</code></pre>
+
+      <h3>Core philosophy of Java</h3>
+      <p>Java is fully object-oriented — everything revolves around classes and objects, and functions cannot exist independently. This encourages modularity, organization, data protection, and reusable code.</p>
+      <div class="callout"><strong>Key idea —</strong> a public interface for user access, and a private implementation for internal working.</div>
+
+      <h3>Understanding the main function</h3>
+      <pre><code>public static void main(String[] args)</code></pre>
+      <ul>
+        <li><code>public</code> — accessible everywhere; the JVM must be able to call it</li>
+        <li><code>static</code> — runs without an object, avoiding a "catch-22" problem</li>
+        <li><code>void</code> — returns nothing (Python equivalent: <code>None</code>)</li>
+        <li><code>String[] args</code> — stores command-line arguments</li>
+      </ul>
+      <pre><code>java HelloWorld Hi
+→ args[0] = "Hi"</code></pre>
+
+      <h3>Java syntax rules</h3>
+      <ul>
+        <li>Braces <code>{ }</code> define blocks — classes, methods, loops</li>
+        <li>Semicolon <code>;</code> terminates statements</li>
+        <li>Indentation is for readability only — the compiler ignores it</li>
+      </ul>
+      <p>This differs from Python, which uses indentation itself to define blocks.</p>
+
+      <h3>System.out.println()</h3>
+      <pre><code>System.out.println("Hello World");</code></pre>
+      <ul>
+        <li><code>System</code> — a built-in class</li>
+        <li><code>out</code> — the static output stream</li>
+        <li><code>println()</code> — prints and adds a new line</li>
+        <li><code>print()</code> — prints on the same line</li>
+      </ul>
+
+      <h3>Java compilation process</h3>
+      <p>Java's motto is <strong>"Write Once, Run Anywhere."</strong> The <strong>JVM</strong> — an abstract machine that runs Java programs — converts bytecode into machine instructions, so the same code runs unchanged on Windows, Linux, and macOS.</p>
+
+      <div class="flow">
+        Source Code (.java)<span class="arrow">↓</span>Compile using javac<span class="arrow">↓</span>Bytecode (.class)<span class="arrow">↓</span>JVM Executes<span class="arrow">↓</span>Output on Screen
+      </div>
+
+      <h4>Compilation steps</h4>
+      <ol class="plain">
+        <li>Write source code → <code>HelloWorld.java</code></li>
+        <li>Compile → <code>javac HelloWorld.java</code> → produces <code>HelloWorld.class</code></li>
+        <li>The <code>.class</code> file contains bytecode</li>
+        <li>Run → <code>java HelloWorld</code> → the JVM executes the bytecode</li>
+      </ol>
+
+      <p><strong>File naming rule</strong> — the filename must match the class name: <code>public class HelloWorld</code> must live in <code>HelloWorld.java</code>.</p>
+      <p><strong>Automatic dependency management</strong> — the compiler auto-compiles dependent classes, so compiling <code>A.java</code> may also compile <code>B.java</code> if it's used.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Concept</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td>Object-Oriented</td><td>Everything inside classes</td></tr>
+            <tr><td><code>public</code></td><td>Accessible everywhere</td></tr>
+            <tr><td><code>static</code></td><td>Runs without an object</td></tr>
+            <tr><td><code>void</code></td><td>Returns nothing</td></tr>
+            <tr><td><code>String[] args</code></td><td>Command-line arguments</td></tr>
+            <tr><td><code>{}</code></td><td>Code blocks</td></tr>
+            <tr><td><code>;</code></td><td>Statement terminator</td></tr>
+            <tr><td><code>System.out</code></td><td>Standard output stream</td></tr>
+            <tr><td><code>println()</code></td><td>Print + new line</td></tr>
+            <tr><td>JVM</td><td>Runs Java bytecode</td></tr>
+            <tr><td><code>javac</code></td><td>Java compiler</td></tr>
+            <tr><td><code>.class</code></td><td>Bytecode file</td></tr>
+            <tr><td><code>java</code></td><td>Executes program</td></tr>
+            <tr><td>File rule</td><td>Filename = class name</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="takeaways">
+        <h4>One-line summary</h4>
+        <ul>
+          <li>Java's "Hello World" looks lengthy because Java strictly follows object-oriented design, explicit syntax rules, and platform-independent execution through the JVM.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- LECTURE 2 -->
+    <section class="lecture" id="l2">
+      <h2><span class="num">02</span> Basic Datatypes in Java</h2>
+
+      <h3>Java's design philosophy</h3>
+      <p>Java is designed mainly as an OOP language, but includes primitive types for simplicity and performance — easier for programmers coming from C/C++, faster memory operations, simpler arithmetic.</p>
+      <p><strong>Platform independence</strong> — data type sizes are fixed by the JVM, so behavior is identical on every system. <code>int</code> is always 4 bytes in Java, unlike C/C++ where size can depend on hardware or compiler.</p>
+
+      <h3>Primitive scalar types</h3>
+      <p>Java has 8 primitive data types.</p>
+
+      <h4>Integer types</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Type</th><th>Size</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>byte</code></td><td>1 byte</td><td>Small integers</td></tr>
+            <tr><td><code>short</code></td><td>2 bytes</td><td>Medium integers</td></tr>
+            <tr><td><code>int</code></td><td>4 bytes</td><td>Standard integer</td></tr>
+            <tr><td><code>long</code></td><td>8 bytes</td><td>Very large integers</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <pre><code>int age = 20;
+long population = 8000000000L;   // use L suffix</code></pre>
+
+      <h4>Floating-point types</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Type</th><th>Size</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>float</code></td><td>4 bytes</td><td>Decimal numbers</td></tr>
+            <tr><td><code>double</code></td><td>8 bytes</td><td>More precision</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Decimal literals default to <code>double</code>:</p>
+      <pre><code>float x = 3.14f;   // use f suffix</code></pre>
+
+      <h4>Character and boolean types</h4>
+      <p><code>char</code> is 2 bytes (Unicode) and supports global languages:</p>
+      <pre><code>char c = 'A';
+String s = "Hello";
+char pi = '\u03C0';   // π</code></pre>
+      <p><code>boolean</code> is 1 byte, with values <code>true</code> and <code>false</code> (lowercase only).</p>
+
+      <h3>Variables, declarations &amp; constants</h3>
+      <p>Declaration syntax: <code>type variableName;</code>. Multiple variables can share a line:</p>
+      <pre><code>int x, y, z;</code></pre>
+      <p>Constants use <code>final</code> — reassigning one is a compilation error:</p>
+      <pre><code>final float PI = 3.14f;</code></pre>
+
+      <h3>Operators &amp; arithmetic</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Operator</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td><code>+</code></td><td>Addition</td></tr>
+            <tr><td><code>-</code></td><td>Subtraction</td></tr>
+            <tr><td><code>*</code></td><td>Multiplication</td></tr>
+            <tr><td><code>/</code></td><td>Division</td></tr>
+            <tr><td><code>%</code></td><td>Modulus</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Integer division truncates decimals; <code>10 % 3</code> gives <code>1</code>.</p>
+      <p>Shortcut operators — <code>++</code>, <code>--</code>, <code>+=</code>, <code>-=</code>, <code>*=</code>:</p>
+      <pre><code>x++;
+x += 5;</code></pre>
+      <p>There's no exponent operator — use <code>Math.pow(a, n)</code>:</p>
+      <pre><code>Math.pow(2, 3);   // 8.0</code></pre>
+      <p>Type conversion widens automatically:</p>
+      <pre><code>int x = 5;
+float y = x;   // int → float</code></pre>
+
+      <h3>Strings in Java</h3>
+      <p>Strings are objects, not primitives, and are <strong>immutable</strong> — modifying one creates a new string:</p>
+      <pre><code>String s = "cat";
+s = "b" + s.substring(1);   // "bat"</code></pre>
+      <p>Unused strings are removed automatically by garbage collection. Length: <code>s.length()</code>.</p>
+
+      <h3>Arrays in Java</h3>
+      <p>Arrays store multiple values of the same type, at a fixed size.</p>
+      <pre><code>int[] a;                 // declaration
+a = new int[5];           // allocation
+int[] a = new int[5];     // combined
+
+int n = 10;
+int[] a = new int[n];     // dynamic size at runtime
+
+int[] a = {2, 3, 5, 7};   // initialization</code></pre>
+      <p>Size is fixed once created. Indexing starts at 0, last index is <code>length - 1</code>. Length is a field, not a method: <code>a.length</code> (no parentheses).</p>
+
+      <div class="callout"><strong>Documentation —</strong> Java evolves continuously; Java 11 is stable and widely used in teaching and industry, with official docs maintained by Oracle.</div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Concept</th><th>Key point</th></tr></thead>
+          <tbody>
+            <tr><td>Primitive types</td><td>8 built-in types</td></tr>
+            <tr><td><code>int</code></td><td>Standard integer</td></tr>
+            <tr><td><code>double</code></td><td>High-precision decimal</td></tr>
+            <tr><td><code>char</code></td><td>Unicode character</td></tr>
+            <tr><td><code>boolean</code></td><td><code>true</code>/<code>false</code></td></tr>
+            <tr><td><code>final</code></td><td>Constant variable</td></tr>
+            <tr><td><code>%</code></td><td>Remainder operator</td></tr>
+            <tr><td><code>Math.pow()</code></td><td>Exponentiation</td></tr>
+            <tr><td>Strings</td><td>Immutable objects</td></tr>
+            <tr><td>Arrays</td><td>Fixed-size collections</td></tr>
+            <tr><td><code>.length()</code></td><td>String size</td></tr>
+            <tr><td><code>.length</code></td><td>Array size</td></tr>
+            <tr><td>JVM</td><td>Platform independence</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="takeaways">
+        <h4>One-line summary</h4>
+        <ul>
+          <li>Java combines object-oriented design with primitive data types, fixed memory rules, immutable strings, and array-based storage to create a secure, portable, and structured programming language.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- LECTURE 3 -->
+    <section class="lecture" id="l3">
+      <h2><span class="num">03</span> Control Flow in Java</h2>
+
+      <h3>General structure &amp; syntax</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Python</th><th>Java</th></tr></thead>
+          <tbody>
+            <tr><td>Indentation defines blocks</td><td>Braces <code>{}</code> define blocks</td></tr>
+            <tr><td>No semicolons</td><td>Semicolons end statements</td></tr>
+            <tr><td>Uses <code>def</code> for functions</td><td>Functions are methods inside classes</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Every statement must end with <code>;</code>, and braces define blocks — optional for a single statement, but best practice is to always use them.</p>
+      <p>Functions in Java are called <strong>methods</strong>:</p>
+      <pre><code>public static int add(int a, int b) {
+    return a + b;
+}</code></pre>
+      <p><code>public</code> — accessible everywhere · <code>static</code> — runs without an object · <code>int</code> — return type · <code>void</code> — no return value.</p>
+
+      <h3>Conditional execution</h3>
+      <pre><code>if (x > 0) {
+    System.out.println("Positive");
+} else {
+    System.out.println("Negative");
+}</code></pre>
+      <p>Multi-way branching uses <code>else if</code>, not <code>elif</code>:</p>
+      <pre><code>if (x > 0) {
+    System.out.println("Positive");
+} else if (x < 0) {
+    System.out.println("Negative");
+} else {
+    System.out.println("Zero");
+}</code></pre>
+      <p>Conditions must always sit inside parentheses.</p>
+
+      <h3>Conditional loops</h3>
+      <div class="compare">
+        <div class="col">
+          <h5>while</h5>
+          <ul>
+            <li>Checks the condition before running</li>
+            <li>May never execute if false initially</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h5>do-while</h5>
+          <ul>
+            <li>Executes at least once</li>
+            <li>Common for input prompts, menus</li>
+          </ul>
+        </div>
+      </div>
+      <pre><code>int i = 0;
+while (i < 5) {
+    System.out.println(i);
+    i++;
+}</code></pre>
+      <pre><code>int i = 0;
+do {
+    System.out.println(i);
+    i++;
+} while (i < 5);</code></pre>
+
+      <h3>Iteration (for loops)</h3>
+      <p><strong>Basic (C-style) for loop</strong> — initialization, condition, update:</p>
+      <pre><code>for (int i = 0; i < 5; i++) {
+    System.out.println(i);
+}</code></pre>
+      <p><strong>For-each loop</strong> — traverses arrays/collections, taking each value in turn:</p>
+      <pre><code>int[] arr = {1, 2, 3};
+for (int v : arr) {
+    System.out.println(v);
+}</code></pre>
+
+      <h3>Local scoping</h3>
+      <p>Variables exist only inside their declared block — <code>i</code> in a <code>for</code> loop exists only inside that loop, preventing accidental interference. A for-each loop's variable declaration is mandatory and local.</p>
+
+      <h3>The switch statement</h3>
+      <pre><code>switch (value) {
+    case option1:
+        // code
+        break;
+    case option2:
+        // code
+        break;
+    default:
+        // code
+}</code></pre>
+      <pre><code>int day = 2;
+switch (day) {
+    case 1: System.out.println("Monday"); break;
+    case 2: System.out.println("Tuesday"); break;
+    default: System.out.println("Invalid");
+}</code></pre>
+      <p><strong>Fall-through</strong> — without <code>break</code>, execution continues into the next case:</p>
+      <pre><code>case 1: System.out.println("One");
+case 2: System.out.println("Two");
+// case 1 matching prints:
+// One
+// Two</code></pre>
+
+      <h3>break in loops</h3>
+      <p><code>break</code> exits a loop immediately, and supports labeled breaks for nested loops:</p>
+      <pre><code>outer:
+for (...) {
+    for (...) {
+        break outer;
+    }
+}</code></pre>
+
+      <h3>Strict return rules</h3>
+      <p>Non-void functions must return the correct type — a missing return is a compiler error:</p>
+      <pre><code>public static int add(int a, int b) {
+    return a + b;
+}</code></pre>
+      <p>Void functions return nothing:</p>
+      <pre><code>public static void hello() {
+    System.out.println("Hello");
+}</code></pre>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Concept</th><th>Key point</th></tr></thead>
+          <tbody>
+            <tr><td><code>{}</code></td><td>Define code blocks</td></tr>
+            <tr><td><code>;</code></td><td>Ends statement</td></tr>
+            <tr><td><code>if-else</code></td><td>Conditional execution</td></tr>
+            <tr><td><code>else if</code></td><td>Multi-way branching</td></tr>
+            <tr><td><code>while</code></td><td>Checks condition first</td></tr>
+            <tr><td><code>do-while</code></td><td>Executes at least once</td></tr>
+            <tr><td><code>for</code></td><td>Iteration loop</td></tr>
+            <tr><td><code>for-each</code></td><td>Traverses sequences</td></tr>
+            <tr><td>Scope</td><td>Variable visibility</td></tr>
+            <tr><td><code>switch</code></td><td>Multi-option branching</td></tr>
+            <tr><td><code>break</code></td><td>Exit loop/switch</td></tr>
+            <tr><td><code>return</code></td><td>Sends value back</td></tr>
+            <tr><td><code>void</code></td><td>No return value</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="takeaways">
+        <h4>One-line summary</h4>
+        <ul>
+          <li>Java uses structured syntax, strict typing, block-based control flow, and powerful looping mechanisms to create organized, readable, and reliable programs.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- LECTURE 4 -->
+    <section class="lecture" id="l4">
+      <h2><span class="num">04</span> Defining Classes &amp; Objects in Java</h2>
+
+      <h3>What is a class?</h3>
+      <p>A blueprint/template that defines data (variables) and behavior (methods):</p>
+      <pre><code>public class Car {
+    String color;
+    void drive() {
+        System.out.println("Car is moving");
+    }
+}</code></pre>
+      <p><code>color</code> is data; <code>drive()</code> is behavior.</p>
+
+      <h3>What is an object?</h3>
+      <p>A real instance of a class:</p>
+      <pre><code>Car c = new Car();</code></pre>
+      <p>Class = blueprint, object = actual instance — each object holds its own separate data:</p>
+      <pre><code>Car c1 = new Car();
+Car c2 = new Car();   // c1 and c2 store separate values</code></pre>
+      <p><strong>File naming rule</strong> — the public class name must match the file name exactly (<code>public class Date</code> → <code>Date.java</code>); Java is case-sensitive.</p>
+
+      <h3>Instance variables &amp; visibility</h3>
+      <p>Instance variables are declared inside a class but outside any method:</p>
+      <pre><code>class Student {
+    int age;
+}</code></pre>
+      <ul>
+        <li><code>private</code> — accessible only inside the same class</li>
+        <li><code>public</code> — accessible everywhere</li>
+        <li><code>default</code> (package-private) — accessible inside the same package</li>
+      </ul>
+      <div class="callout"><strong>Encapsulation —</strong> keep variables private, and use methods to access them.</div>
+
+      <h3>Interacting with objects</h3>
+      <p>Declaring a variable does not create an object:</p>
+      <pre><code>Date d;              // only a reference
+Date d = new Date(); // actual object</code></pre>
+      <p><strong>Getter</strong> (accessor) returns a value; <strong>setter</strong> (mutator) updates one:</p>
+      <pre><code>public int getAge() { return age; }
+public void setAge(int a) { age = a; }</code></pre>
+
+      <h3>The this keyword</h3>
+      <p><code>this</code> refers to the current object — useful when a parameter shares a name with an instance variable:</p>
+      <pre><code>public void setAge(int age) {
+    this.age = age;   // this.age is the field, age is the parameter
+}</code></pre>
+
+      <h3>Constructors</h3>
+      <p>A constructor is a special method that initializes an object — same name as the class, no return type, and runs automatically with <code>new</code>:</p>
+      <pre><code>class Student {
+    int age;
+    Student() { age = 18; }
+}
+Student s = new Student();</code></pre>
+
+      <h4>Constructor overloading</h4>
+      <pre><code>class Student {
+    Student() {}
+    Student(int age) {}
+}</code></pre>
+
+      <h4>Constructor chaining</h4>
+      <pre><code>class Student {
+    int age;
+    Student() { this(18); }
+    Student(int age) { this.age = age; }
+}</code></pre>
+
+      <h4>Default constructor</h4>
+      <p>Auto-created if none is written, giving defaults — <code>int</code> → 0, <code>float</code> → 0.0, <code>boolean</code> → false, object → null. Defining any constructor removes Java's automatic default.</p>
+
+      <h3>Object copying</h3>
+      <p>Simple assignment makes both references point to the same object:</p>
+      <pre><code>d2 = d1;</code></pre>
+      <p>A copy constructor creates a genuinely separate object with the same values:</p>
+      <pre><code>class Student {
+    int age;
+    Student(Student s) { this.age = s.age; }
+}
+Student s2 = new Student(s1);</code></pre>
+      <div class="callout"><strong>Private access nuance —</strong> objects of the same class can access each other's private variables.</div>
+
+      <h4>Shallow vs. deep copy</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Feature</th><th>Shallow copy</th><th>Deep copy</th></tr></thead>
+          <tbody>
+            <tr><td>Copies references</td><td>Yes</td><td>No</td></tr>
+            <tr><td>Independent objects</td><td>No</td><td>Yes</td></tr>
+            <tr><td>Memory usage</td><td>Less</td><td>More</td></tr>
+            <tr><td>Safer</td><td>No</td><td>Yes</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Concept</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td>Class</td><td>Blueprint/template</td></tr>
+            <tr><td>Object</td><td>Instance of a class</td></tr>
+            <tr><td>Instance variable</td><td>Object data</td></tr>
+            <tr><td><code>private</code></td><td>Accessible inside class only</td></tr>
+            <tr><td><code>public</code></td><td>Accessible everywhere</td></tr>
+            <tr><td>Encapsulation</td><td>Hiding internal data</td></tr>
+            <tr><td><code>new</code></td><td>Creates an object</td></tr>
+            <tr><td>Getter</td><td>Reads a value</td></tr>
+            <tr><td>Setter</td><td>Updates a value</td></tr>
+            <tr><td><code>this</code></td><td>Refers to the current object</td></tr>
+            <tr><td>Constructor</td><td>Initializes an object</td></tr>
+            <tr><td>Overloading</td><td>Multiple constructors</td></tr>
+            <tr><td>Default constructor</td><td>Auto-created constructor</td></tr>
+            <tr><td>Copy constructor</td><td>Creates an object copy</td></tr>
+            <tr><td>Shallow copy</td><td>Copies references</td></tr>
+            <tr><td>Deep copy</td><td>Copies actual objects</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="takeaways">
+        <h4>One-line summary</h4>
+        <ul>
+          <li>Java classes act as blueprints for objects, while encapsulation, constructors, getters/setters, and object copying provide a structured and secure way to manage data and behavior in object-oriented programming.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- LECTURE 5 -->
+    <section class="lecture" id="l5">
+      <h2><span class="num">05</span> Basic Input &amp; Output in Java</h2>
+
+      <h3>Introduction to Java I/O</h3>
+      <p>I/O covers input (data into the program) and output (data out of it). The <code>System</code> class is Java's built-in class for I/O operations. <code>System.out</code> displays output — think of it as a pipe to the monitor. <code>System.in</code> receives input — a pipe from the keyboard.</p>
+
+      <h3>Input mechanisms</h3>
+      <p>Java provides two main input classes: <strong>Console</strong> and <strong>Scanner</strong>.</p>
+
+      <h4>A. Console class</h4>
+      <p>Similar to Python's <code>input()</code>:</p>
+      <pre><code>Console c = System.console();</code></pre>
+      <pre><code>String name = c.readLine("Enter name: ");
+char[] pass = c.readPassword("Enter password: ");</code></pre>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Method</th><th>Returns</th></tr></thead>
+          <tbody>
+            <tr><td><code>readLine()</code></td><td>String</td></tr>
+            <tr><td><code>readPassword()</code></td><td><code>char[]</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><code>readPassword()</code> returns a <code>char[]</code> rather than a String because it's more secure — its contents can be erased manually. Good for simple text and password input; limited for parsing integers.</p>
+
+      <h4>B. Scanner class</h4>
+      <p>More flexible input handling:</p>
+      <pre><code>import java.util.Scanner;
+Scanner sc = new Scanner(System.in);</code></pre>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Method</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>nextInt()</code></td><td>Integer</td></tr>
+            <tr><td><code>nextDouble()</code></td><td>Decimal</td></tr>
+            <tr><td><code>next()</code></td><td>Single word</td></tr>
+            <tr><td><code>nextLine()</code></td><td>Full line</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <pre><code>System.out.print("Enter age: ");
+int age = sc.nextInt();
+System.out.println(age);</code></pre>
+      <p>Advantage — parses integers, doubles, strings, and booleans directly. Limitation — cannot hide passwords.</p>
+
+      <h3>Output mechanisms</h3>
+      <h4>A. System.out.println()</h4>
+      <p>Prints and moves to the next line:</p>
+      <pre><code>System.out.println("Hello");
+System.out.println("Java");
+// Hello
+// Java</code></pre>
+
+      <h4>B. System.out.print()</h4>
+      <p>Prints on the same line:</p>
+      <pre><code>System.out.print("Hello ");
+System.out.print("Java");
+// Hello Java</code></pre>
+
+      <h4>C. System.out.printf()</h4>
+      <p>Formatted printing, borrowed from C — controls spacing, decimal places, style:</p>
+      <pre><code>double pi = 3.14159;
+System.out.printf("%.2f", pi);   // 3.14</code></pre>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Specifier</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td><code>%d</code></td><td>Integer</td></tr>
+            <tr><td><code>%f</code></td><td>Floating point</td></tr>
+            <tr><td><code>%s</code></td><td>String</td></tr>
+            <tr><td><code>%c</code></td><td>Character</td></tr>
+            <tr><td><code>%b</code></td><td>Boolean</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <pre><code>System.out.printf("%5d", 25);     // reserves 5 spaces
+System.out.printf("%.3f", 3.14159); // 3.142</code></pre>
+      <p>Similar in spirit to Python's <code>%</code> formatting style.</p>
+
+      <h3>Console vs. Scanner</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Feature</th><th>Console</th><th>Scanner</th></tr></thead>
+          <tbody>
+            <tr><td>Read full line</td><td>Yes</td><td>Yes</td></tr>
+            <tr><td>Read integers directly</td><td>No</td><td>Yes</td></tr>
+            <tr><td>Password hiding</td><td>Yes</td><td>No</td></tr>
+            <tr><td>Parsing support</td><td>Limited</td><td>Strong</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Concept</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td><code>System.out</code></td><td>Output stream</td></tr>
+            <tr><td><code>System.in</code></td><td>Input stream</td></tr>
+            <tr><td>Console</td><td>Simple input handling</td></tr>
+            <tr><td>Scanner</td><td>Parsed input handling</td></tr>
+            <tr><td><code>readLine()</code></td><td>Reads full line</td></tr>
+            <tr><td><code>readPassword()</code></td><td>Hidden password input</td></tr>
+            <tr><td><code>nextInt()</code></td><td>Reads integer</td></tr>
+            <tr><td><code>println()</code></td><td>Print + new line</td></tr>
+            <tr><td><code>print()</code></td><td>Print same line</td></tr>
+            <tr><td><code>printf()</code></td><td>Formatted output</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="takeaways">
+        <h4>One-line summary</h4>
+        <ul>
+          <li>Java I/O uses <code>System.in</code> and <code>System.out</code> along with classes like Console and Scanner to provide flexible input handling and multiple ways to display formatted output to users.</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>Week 2 short notes — A First Taste of Java, Basic Datatypes, Control Flow, Classes &amp; Objects, Input &amp; Output.</footer>
+  </main>
+</div>
+</body>
+</html>

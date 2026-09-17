@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Java · Week 1 Notes</title>
+<style>
+  :root {
+    --ink: #1c2b2a;
+    --ink-soft: #3d504e;
+    --paper: #f9faf8;
+    --panel: #eef1ec;
+    --line: #d6dcd3;
+    --accent: #1f6f5c;
+    --accent-soft: #e4efe9;
+    --amber: #b3781f;
+    --code-bg: #16211f;
+    --code-fg: #dbe6de;
+    --code-key: #e8b064;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #e8ede9;
+      --ink-soft: #aebab3;
+      --paper: #101614;
+      --panel: #17201d;
+      --line: #2a352f;
+      --accent: #6fbfa2;
+      --accent-soft: #1c2b26;
+      --amber: #d9a24e;
+      --code-bg: #0b1211;
+      --code-fg: #d7e2db;
+      --code-key: #e8b064;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #e8ede9;
+    --ink-soft: #aebab3;
+    --paper: #101614;
+    --panel: #17201d;
+    --line: #2a352f;
+    --accent: #6fbfa2;
+    --accent-soft: #1c2b26;
+    --amber: #d9a24e;
+    --code-bg: #0b1211;
+    --code-fg: #d7e2db;
+    --code-key: #e8b064;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .layout {
+    display: flex;
+    max-width: 1180px;
+    margin: 0 auto;
+    align-items: flex-start;
+  }
+
+  /* Sidebar */
+  nav.toc {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 250px;
+    flex-shrink: 0;
+    padding: 2.5rem 1.25rem 2rem 1.75rem;
+    border-right: 1px solid var(--line);
+    overflow-y: auto;
+  }
+  nav.toc .course-tag {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    margin: 0 0 0.15rem 0;
+  }
+  nav.toc h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.55rem;
+    font-weight: 600;
+    margin: 0 0 1.75rem 0;
+    line-height: 1.25;
+  }
+  nav.toc ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: lec;
+  }
+  nav.toc li { counter-increment: lec; margin-bottom: 0.15rem; }
+  nav.toc a {
+    display: flex;
+    gap: 0.65rem;
+    align-items: baseline;
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    padding: 0.4rem 0.5rem;
+    border-radius: 6px;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  nav.toc a:hover { background: var(--accent-soft); color: var(--ink); }
+  nav.toc a::before {
+    content: counter(lec);
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    min-width: 1.1em;
+  }
+
+  main {
+    flex: 1;
+    min-width: 0;
+    padding: 3rem 3.5rem 6rem 3.5rem;
+  }
+
+  header.masthead {
+    margin-bottom: 3.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--line);
+  }
+  header.masthead p.kicker {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: var(--accent);
+    margin: 0 0 0.75rem 0;
+  }
+  header.masthead h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 700;
+    font-size: 2.6rem;
+    line-height: 1.15;
+    margin: 0 0 0.9rem 0;
+    max-width: 16ch;
+  }
+  header.masthead p.dek {
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    max-width: 58ch;
+    margin: 0;
+  }
+
+  section.lecture {
+    margin-bottom: 4.5rem;
+    scroll-margin-top: 2rem;
+  }
+  section.lecture > h2 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.7rem;
+    font-weight: 600;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin: 0 0 0.3rem 0;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--accent);
+  }
+  section.lecture > h2 .num {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 1.05rem;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  h3 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin: 2.1rem 0 0.6rem 0;
+    color: var(--ink);
+  }
+  h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 1.3rem 0 0.4rem 0;
+    color: var(--ink-soft);
+  }
+
+  p { margin: 0.5rem 0 0.8rem 0; max-width: 72ch; }
+
+  ul, ol.plain { margin: 0.4rem 0 0.9rem 0; padding-left: 1.3rem; max-width: 68ch; }
+  li { margin-bottom: 0.3rem; }
+  li::marker { color: var(--accent); }
+
+  .callout {
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    padding: 0.85rem 1.1rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1rem 0 1.2rem 0;
+    max-width: 66ch;
+    font-size: 0.95rem;
+  }
+  .callout strong { color: var(--accent); }
+
+  pre {
+    background: var(--code-bg);
+    color: var(--code-fg);
+    padding: 1rem 1.2rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.85rem;
+    line-height: 1.55;
+    margin: 0.8rem 0 1.3rem 0;
+    max-width: 68ch;
+  }
+  code {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.88em;
+    background: var(--panel);
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+  }
+  pre code { background: none; padding: 0; }
+
+  .table-wrap { overflow-x: auto; margin: 0.8rem 0 1.4rem 0; max-width: 72ch; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.92rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.55rem 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  th {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 600;
+    color: var(--accent);
+    border-bottom: 2px solid var(--line);
+  }
+  tr:last-child td { border-bottom: none; }
+
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    max-width: 68ch;
+    margin: 0.8rem 0 1.3rem 0;
+  }
+  .compare .col {
+    background: var(--panel);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+  }
+  .compare .col h5 {
+    margin: 0 0 0.5rem 0;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.78rem;
+    color: var(--amber);
+    text-transform: none;
+  }
+  .compare .col ul { margin: 0; padding-left: 1.1rem; }
+
+  .takeaways {
+    background: var(--panel);
+    border-radius: 10px;
+    padding: 1.1rem 1.4rem;
+    margin-top: 1.6rem;
+    max-width: 68ch;
+  }
+  .takeaways h4 {
+    margin-top: 0;
+    color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1rem;
+  }
+  .takeaways ul { margin-bottom: 0; }
+
+  footer {
+    max-width: 68ch;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+
+  @media (max-width: 900px) {
+    .layout { flex-direction: column; }
+    nav.toc {
+      position: relative;
+      width: 100%;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid var(--line);
+      padding: 1.5rem;
+    }
+    main { padding: 2rem 1.25rem 4rem 1.25rem; }
+    header.masthead h1 { font-size: 2rem; }
+    .compare { grid-template-columns: 1fr; }
+  }
+
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <nav class="toc" aria-label="Lecture contents">
+    <p class="course-tag">Week 1</p>
+    <h1>Java: Foundations</h1>
+    <ol>
+      <li><a href="#l1">Introduction</a></li>
+      <li><a href="#l2">Types</a></li>
+      <li><a href="#l3">Memory Management</a></li>
+      <li><a href="#l4">Abstraction &amp; Modularity</a></li>
+      <li><a href="#l5">Object-Oriented Programming</a></li>
+      <li><a href="#l6">Classes &amp; Objects</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <header class="masthead">
+      <p class="kicker">SE / Programming Languages</p>
+      <h1>Nature, Types, Memory &amp; Objects</h1>
+      </header>
+
+    <!-- LECTURE 1 -->
+    <section class="lecture" id="l1">
+      <h2><span class="num">01</span> Introduction</h2>
+      <p><strong>A programming language</strong> is a tool used to communicate computational ideas to a machine so it can execute them.</p>
+
+      <h3>Hardware architecture</h3>
+      <ul>
+        <li><strong>CPU / ALU</strong> — performs operations</li>
+        <li><strong>Memory</strong> — stores data, cannot process it</li>
+        <li><strong>Registers</strong> — small, high-speed storage inside the CPU</li>
+      </ul>
+
+      <h3>Low-level vs. high-level</h3>
+      <div class="compare">
+        <div class="col">
+          <h5>low-level</h5>
+          <ul>
+            <li>Manual data movement between memory and registers</li>
+            <li>Workflow: load → operate → store</li>
+            <li>Tedious, error-prone, too many instructions</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h5>high-level</h5>
+          <ul>
+            <li>Abstraction closer to human thinking</li>
+            <li>Focus on logic/design, not hardware</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Core abstractions</h3>
+      <p>Variables are names associated with values.</p>
+      <pre><code>x = 5
+x = 10   # assignment</code></pre>
+
+      <h4>Conditional execution</h4>
+      <pre><code>if x > 0:
+    print("Positive")
+else:
+    print("Negative")</code></pre>
+
+      <h4>Loops</h4>
+      <pre><code>for i in range(5):
+    print(i)</code></pre>
+
+      <p>Functions and procedures are reusable blocks of code that support recursion. Common data structures include lists, arrays, and dictionaries.</p>
+
+      <h3>Language translation</h3>
+      <div class="compare">
+        <div class="col">
+          <h5>compiler</h5>
+          <ul>
+            <li>Translates the entire program at once</li>
+            <li>Faster execution after compilation</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h5>interpreter</h5>
+          <ul>
+            <li>Executes line by line</li>
+            <li>Easier debugging, slower execution</li>
+          </ul>
+        </div>
+      </div>
+      <p>High-level languages trade hardware control and micro-optimizations for ease of use and fewer errors.</p>
+
+      <h3>Programming paradigms</h3>
+      <p><strong>Imperative</strong> — step-by-step instructions:</p>
+      <pre><code>sum = 0
+for i in numbers:
+    sum += i</code></pre>
+      <p><strong>Declarative</strong> — focus on what result is needed:</p>
+      <pre><code>sum(filter(lambda x: x > 0, numbers))</code></pre>
+
+      <h3>Type discipline</h3>
+      <p>All data is stored as binary. Types interpret that data — <code>int</code>, <code>float</code>, <code>bool</code>, <code>char</code> — and prevent incompatible operations, e.g. <code>5 + [1,2]</code> is an error.</p>
+
+      <h3>Abstract Data Types &amp; OOP</h3>
+      <p><strong>ADTs</strong> are defined by their operations, not their implementation — a Stack is defined by <code>push</code>/<code>pop</code>, whatever sits underneath. This is <strong>separation of concerns</strong>: a priority queue can be backed by a list or a binary heap without changing how it's used.</p>
+      <p><strong>OOP</strong> focuses on data and operations together — classes encapsulate both.</p>
+
+      <div class="callout"><strong>Course context —</strong> Java is imperative, statically typed, and object-oriented. Advanced topics ahead: exception handling, concurrency, event-driven programming.</div>
+
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li>Understand design decisions, trade-offs, and the diversity of languages.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- LECTURE 2 -->
+    <section class="lecture" id="l2">
+      <h2><span class="num">02</span> Types</h2>
+
+      <h3>Why types are necessary</h3>
+      <p>Memory stores everything as bits. Types give those bits meaning — <code>01000001</code> reads as the integer 65 or the character <code>'A'</code> depending on its declared type.</p>
+      <p>Types also reflect real-world ideas — a <code>Point</code> in geometry, a <code>BankAccount</code> in finance — for readability and organization, and act as sanity checks in the same way dimensional analysis does in physics:</p>
+      <pre><code>5 + "hello"  # invalid</code></pre>
+
+      <h3>Dynamic vs. static typing</h3>
+      <div class="compare">
+        <div class="col">
+          <h5>dynamic (python)</h5>
+          <ul>
+            <li>Type bound to the value, not the variable</li>
+            <li>Runtime checking, flexible</li>
+            <li>Less syntax, faster to write</li>
+            <li>Typos silently create new variables</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h5>static (java, c, c++)</h5>
+          <ul>
+            <li>Types declared explicitly, fixed at compile time</li>
+            <li>Compile-time checking</li>
+            <li>Early error detection, optimization, reliability</li>
+          </ul>
+        </div>
+      </div>
+      <pre><code>x = 5
+x = "Hello"          # dynamic — fine in Python
+
+count = 10
+coutn = count + 1    # typo → creates a new variable</code></pre>
+      <pre><code>int x = 5;
+x = "Hello";          // static — invalid in Java</code></pre>
+
+      <h3>Error detection and static analysis</h3>
+      <p>Catching errors earlier, at design or compile time, is cheaper than catching them later. Static analysis handles compile-time checking, though the <strong>Halting Problem</strong> (Turing) means full correctness can never be checked automatically — type systems just catch many common mistakes.</p>
+
+      <h3>Performance</h3>
+      <p>Static typing runs faster with less runtime overhead; dynamic typing is slower due to runtime type checks.</p>
+
+      <h3>Type inference</h3>
+      <p>The compiler deduces a type automatically, reducing syntax while keeping static-checking safety:</p>
+      <pre><code>x = 7   # inferred as integer</code></pre>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Feature</th><th>Dynamic typing</th><th>Static typing</th></tr></thead>
+          <tbody>
+            <tr><td>Type associated with</td><td>Value</td><td>Variable</td></tr>
+            <tr><td>Type checking</td><td>Runtime</td><td>Compile time</td></tr>
+            <tr><td>Flexibility</td><td>High</td><td>Lower</td></tr>
+            <tr><td>Error detection</td><td>Later</td><td>Earlier</td></tr>
+            <tr><td>Performance</td><td>Slower</td><td>Faster</td></tr>
+            <tr><td>Syntax</td><td>Simpler</td><td>More explicit</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li>Types give meaning to binary data and improve readability and correctness.</li>
+          <li>Dynamic typing favors flexibility; static typing favors safety and efficiency.</li>
+          <li>Type inference combines convenience with static-checking safety.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- LECTURE 3 -->
+    <section class="lecture" id="l3">
+      <h2><span class="num">03</span> Memory Management</h2>
+
+      <h3>Categories of variables</h3>
+      <p><strong>Local variables</strong> are declared inside a function, exist only while it runs, and are accessible only inside it:</p>
+      <pre><code>def add():
+    x = 5   # local variable</code></pre>
+      <p><strong>Global variables</strong> are declared outside functions, accessible by multiple functions, and live for the entire program:</p>
+      <pre><code>count = 10
+def show():
+    print(count)</code></pre>
+      <p><strong>Dynamically created data</strong> is created during execution and accessed via pointers/references — common in linked lists, trees, and graphs.</p>
+
+      <h3>Scope vs. lifetime</h3>
+      <p><strong>Scope</strong> defines where a variable can be accessed. A <strong>hole in scope</strong> happens when a variable exists but is hidden by another with the same name:</p>
+      <pre><code>x = 10
+def fun():
+    x = 5   # hides global x</code></pre>
+      <p><strong>Lifetime</strong> is the duration from allocation to destruction — a variable can exist even when it's inaccessible, and its lifetime can outlast its scope across nested calls (persistence).</p>
+
+      <h3>Stack and activation records</h3>
+      <p>The stack is a LIFO structure for local variables. Each function call creates an <strong>activation record</strong> holding local variables, parameters, and return info, linked by a <strong>control link</strong> (previous record) and a <strong>return value link</strong>.</p>
+      <p>Each recursive call gets its own activation record:</p>
+      <pre><code>fact(5)
+  fact(4)
+    fact(3)</code></pre>
+      <p>Variable access is resolved by checking the current record, then control links, then global scope.</p>
+
+      <h3>Parameter passing</h3>
+      <div class="compare">
+        <div class="col">
+          <h5>call by value</h5>
+          <ul>
+            <li>A copy of the value is passed</li>
+            <li>Changes inside the function don't affect the original</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h5>call by reference</h5>
+          <ul>
+            <li>Parameter refers to the same memory location</li>
+            <li>Changes affect the original object</li>
+          </ul>
+        </div>
+      </div>
+      <pre><code>x = 5
+def change(a):
+    a = 10        # x is unchanged</code></pre>
+      <pre><code>lst = [1, 2]
+def modify(x):
+    x.append(3)   # lst becomes [1, 2, 3]</code></pre>
+      <p>Caution — reassignment breaks the reference: <code>x = [10, 20]</code> creates a new object rather than mutating the old one.</p>
+
+      <h3>The heap</h3>
+      <p>The heap stores dynamic data that survives after the function that created it returns. It is not LIFO, and is accessed via pointers/references — e.g. linked-list nodes. In memory layout, the stack and heap grow from opposite ends to avoid colliding.</p>
+
+      <h3>Memory management strategies</h3>
+      <p><strong>Manual (C)</strong> — the programmer allocates and frees memory, risking a <strong>memory leak</strong> (unused memory never freed) or a <strong>dangling pointer</strong> (freed memory still accessed).</p>
+      <p><strong>Automatic / garbage collection (Java, Python)</strong> — uses <strong>mark and sweep</strong>: mark reachable objects, then sweep the unmarked ones as garbage. Easier and fewer errors, at the cost of pauses and unpredictable performance.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Feature</th><th>Stack</th><th>Heap</th></tr></thead>
+          <tbody>
+            <tr><td>Storage type</td><td>Local variables</td><td>Dynamic data</td></tr>
+            <tr><td>Structure</td><td>LIFO</td><td>No fixed structure</td></tr>
+            <tr><td>Speed</td><td>Faster</td><td>Slower</td></tr>
+            <tr><td>Memory management</td><td>Automatic</td><td>Manual / garbage collected</td></tr>
+            <tr><td>Lifetime</td><td>Function scope</td><td>Flexible</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li>Variables come in three flavors: local, global, dynamic.</li>
+          <li>Scope ≠ lifetime.</li>
+          <li>Stack handles activation records and recursion; heap handles persistent dynamic data.</li>
+          <li>Call by value vs. call by reference; manual vs. automatic memory management.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- LECTURE 4 -->
+    <section class="lecture" id="l4">
+      <h2><span class="num">04</span> Abstraction &amp; Modularity</h2>
+
+      <h3>Core principles</h3>
+      <p><strong>Abstraction</strong> hides unnecessary detail and shows only essential functionality — a driver uses the steering wheel, not the engine internals — reducing complexity and easing maintenance.</p>
+      <p><strong>Modularity</strong> divides a system into independent modules (e.g. a website's login, database, and payments modules), enabling parallel teamwork and easier debugging.</p>
+
+      <h3>Program and data refinement</h3>
+      <p><strong>Program refinement</strong> breaks a large task into smaller sub-tasks — e.g. printing 1000 primes splits into storage, fill, and print — so teams can work independently.</p>
+      <p><strong>Data refinement</strong> modifies data structures as requirements evolve — e.g. <code>BankAccount</code> growing from just a balance to balance + transaction history. It's more sensitive than program refinement since many modules can depend on shared data.</p>
+
+      <h3>Modular design</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Interface</th><th>Specification</th></tr></thead>
+          <tbody>
+            <tr><td>How to interact</td><td>What it should do</td></tr>
+            <tr><td>Structure</td><td>Behavior</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <pre><code>withdraw(amount)</code></pre>
+      <p>An <strong>interface</strong> defines function names, parameters, and return types; a <strong>specification</strong> defines what the component should do — here, that <code>withdraw()</code> decreases the balance by the given amount. <strong>Prototyping</strong> builds an early version to verify design and surface missing requirements.</p>
+      <p><strong>Separation of concerns:</strong> if the interface and specification stay the same, the internal implementation can change freely — swapping Bubble Sort for Quick Sort, for instance.</p>
+
+      <h3>Challenges in formal specification</h3>
+      <ul>
+        <li>Specifications can be long and hard to understand</li>
+        <li>The verification problem — full correctness can't be proven (Halting Problem)</li>
+        <li>In practice, teams rely on testing and informal requirements</li>
+      </ul>
+
+      <h3>Types of abstraction</h3>
+      <p><strong>Control abstraction</strong> — functions and procedures hide implementation detail (<code>print()</code>, <code>sort()</code>).</p>
+      <p><strong>Data abstraction</strong> — ADTs define values and operations while hiding implementation, e.g. a Stack's <code>push()</code>/<code>pop()</code>.</p>
+      <p><strong>Encapsulation</strong> — internal data stays private, accessed only through public interfaces, for security, reduced complexity, and easier modification.</p>
+
+      <h3>Foundations of OOP</h3>
+      <p>OOP is built on ADTs plus encapsulation: combine data and functions inside objects and classes. <strong>Inheritance</strong> lets classes inherit features from others — e.g. <code>Vehicle → Car</code> — for code reuse, organization, and hierarchy.</p>
+
+      <h3>Top-down vs. bottom-up</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Top-down</th><th>Bottom-up</th></tr></thead>
+          <tbody>
+            <tr><td>Starts with the big problem</td><td>Starts with small components</td></tr>
+            <tr><td>Breaks tasks down</td><td>Combines modules upward</td></tr>
+            <tr><td>Focus on design</td><td>Focus on reusable parts</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Top-down example: a banking system splits into login, transactions, database, reports. Bottom-up example: building a larger system out of existing libraries and modules.</p>
+
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li>Abstraction hides complexity; modularity divides systems into manageable parts.</li>
+          <li>Interfaces define structure; specifications define behavior.</li>
+          <li>ADTs + encapsulation form the foundation of OOP.</li>
+          <li>Program refinement breaks tasks apart; data refinement affects shared structures.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- LECTURE 5 -->
+    <section class="lecture" id="l5">
+      <h2><span class="num">05</span> Object-Oriented Programming</h2>
+
+      <h3>What is an object?</h3>
+      <p>An object is an ADT with hidden internal data and public operations (methods). A bank account object keeps <code>balance</code> private, and exposes <code>deposit()</code>, <code>withdraw()</code>, <code>checkBalance()</code>. Objects scale from simple counters up to databases and OS components.</p>
+
+      <h3>Historical context: Simula</h3>
+      <p>OOP originated in the 1960s with Simula, built for simulations. Traditional <code>if-else</code>/<code>switch-case</code> solutions were complex and hard to maintain; Simula's innovation was that each object stores its own data and behavior — an object knows how to simulate itself.</p>
+
+      <h3>The data-centric paradigm shift</h3>
+      <div class="compare">
+        <div class="col">
+          <h5>traditional</h5>
+          <ul>
+            <li>Focus: control flow, sequence of operations</li>
+            <li>Data supports computation</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h5>object-oriented</h5>
+          <ul>
+            <li>Focus: data and objects first</li>
+            <li>Operations are defined on that data</li>
+          </ul>
+        </div>
+      </div>
+      <p>OOP identifies objects first — <code>Customer</code>, <code>Account</code>, <code>Transaction</code> — then defines methods like <code>deposit()</code> and <code>transfer()</code> on them, which makes it easier to maintain when internal data changes.</p>
+
+      <h3>Four distinguishing features of OOP</h3>
+      <h4>Abstraction</h4>
+      <p>Separates the public interface from the private implementation; encapsulation hides internal data.</p>
+      <pre><code>account.deposit(100)   # caller doesn't know how balance is stored</code></pre>
+      <p>Refinement allows internal changes without affecting users of the interface.</p>
+
+      <h4>Subtyping</h4>
+      <p>A specialized type relationship — e.g. <code>Vehicle → Car</code>. The <strong>substitutability principle</strong> says a subtype can replace its parent type; the <strong>capability rule</strong> says a subtype must support all of the parent's operations.</p>
+
+      <h4>Dynamic lookup</h4>
+      <p>The method actually run is chosen at runtime, based on the object's real type — calling <code>draw()</code> on a <code>Shape</code> reference executes <code>Circle</code>'s version if that's the real object. This differs from overloading, which is resolved at compile time.</p>
+
+      <h4>Inheritance</h4>
+      <p>Reuses code from a parent class — e.g. <code>Employee → Manager</code> — for code reuse and reduced duplication.</p>
+
+      <h3>Subtyping vs. inheritance</h3>
+      <p><strong>Subtyping</strong> is about interface and substitutability; <strong>inheritance</strong> is about implementation and code reuse. A <code>Stack</code> can reuse a <code>Deque</code>'s implementation (inheritance) without being a true subtype of <code>Deque</code>, since it shouldn't allow <code>deleteRear()</code>. So inheritance ≠ subtyping — though languages like Python and Java combine both into a single hierarchy for simplicity.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Concept</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td>Object</td><td>ADT with data + operations</td></tr>
+            <tr><td>Encapsulation</td><td>Hide internal data</td></tr>
+            <tr><td>Abstraction</td><td>Focus on essential features</td></tr>
+            <tr><td>Subtyping</td><td>Specialized type relationship</td></tr>
+            <tr><td>Dynamic lookup</td><td>Method selected at runtime</td></tr>
+            <tr><td>Inheritance</td><td>Reuse existing implementation</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li>Objects combine data and behavior; OOP originated with Simula.</li>
+          <li>Abstraction and encapsulation hide complexity; subtyping ensures substitutability.</li>
+          <li>Dynamic lookup enables runtime polymorphism; inheritance promotes code reuse.</li>
+          <li>Subtyping and inheritance are related but distinct.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- LECTURE 6 -->
+    <section class="lecture" id="l6">
+      <h2><span class="num">06</span> Classes &amp; Objects</h2>
+
+      <h3>Class vs. object</h3>
+      <p>A <strong>class</strong> is a blueprint that defines data and functions:</p>
+      <pre><code>class Student:
+    pass</code></pre>
+      <p>An <strong>object</strong> is a real instance created from that class:</p>
+      <pre><code>s1 = Student()</code></pre>
+      <p><strong>Encapsulation</strong> hides data from direct access; <strong>message passing</strong> calls methods on objects, e.g. <code>account.deposit(100)</code>.</p>
+
+      <h3>Object mechanics and state</h3>
+      <p><strong>Instance variables</strong> store an object's data — each object holds its own copy. <code>self</code> in Python refers to the current object and is used to access its instance variables and methods:</p>
+      <pre><code>self.x = x</code></pre>
+      <p>The <strong>constructor</strong> is automatically called at object creation — in Python, <code>__init__()</code>:</p>
+      <pre><code>def __init__(self, x, y):
+    self.x = x
+    self.y = y</code></pre>
+      <p>An object's <strong>state</strong> is the set of values held in its instance variables. Methods split into <strong>state-changing methods</strong> (modify data) and <strong>reporting methods</strong> (return values without changing state).</p>
+
+      <h3>Data refinement and abstraction</h3>
+      <p><strong>Implementation transparency</strong> hides internal representation — a <code>Point</code> can be stored as Cartesian <code>(x, y)</code> or polar <code>(r, θ)</code> while the interface stays the same. Internal functions change with representation; external users are unaffected (<strong>code refinement</strong>).</p>
+
+      <h3>Subtyping and inheritance</h3>
+      <p>One class acquires properties and methods from another — e.g. <code>Rectangle → Square</code> — for code reuse, less duplication, and easier maintenance. The subtype must correctly initialize inherited variables.</p>
+
+      <h3>Python's limitations, and why Java is more structured</h3>
+      <ul>
+        <li><strong>Privacy limitations</strong> — Python cannot fully enforce private variables: <code>p.x = 4</code> breaks encapsulation</li>
+        <li><strong>Inconsistent subtypes</strong> — child classes may omit parent variables, causing runtime errors</li>
+        <li><strong>Lack of type declarations</strong> — no explicit <code>int</code>, <code>float</code>, <code>String</code></li>
+        <li><strong>Weak visibility control</strong> — public/private enforcement is weak</li>
+      </ul>
+      <div class="callout"><strong>Why Java —</strong> static type checking, strict visibility, and better subtype enforcement let the compiler catch errors early, giving stronger reliability, fewer runtime errors, and safer inheritance.</div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Concept</th><th>Definition</th></tr></thead>
+          <tbody>
+            <tr><td>Class</td><td>Blueprint/template for objects</td></tr>
+            <tr><td>Object</td><td>Instance of a class</td></tr>
+            <tr><td>Constructor</td><td>Special method used for initialization</td></tr>
+            <tr><td>Instance variables</td><td>Private data unique to each object</td></tr>
+            <tr><td>Inheritance</td><td>Reusing features from a parent class</td></tr>
+            <tr><td>Abstraction</td><td>Hiding implementation details</td></tr>
+            <tr><td>Encapsulation</td><td>Restricting direct access to internal data</td></tr>
+            <tr><td><code>self</code></td><td>Refers to the current object</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li>Classes define structure and behavior; objects are real instances.</li>
+          <li>Constructors initialize state; encapsulation hides implementation.</li>
+          <li>Inheritance supports reuse; abstraction allows internal changes without affecting users.</li>
+          <li>Python is flexible but less strict; Java enforces stronger type safety and visibility.</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>Week 1 short notes — Introduction, Types, Memory Management, Abstraction &amp; Modularity, Object-Oriented Programming, Classes &amp; Objects.</footer>
+  </main>
+</div>
+</body>
+</html>
