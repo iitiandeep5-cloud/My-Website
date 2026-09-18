@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 6: Short Notes — Java</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1c1f24;
+    --muted: #5b6472;
+    --accent: #2f6fed;
+    --accent-soft: #eaf1ff;
+    --border: #e2e6ec;
+    --code-bg: #0f172a;
+    --code-text: #e2e8f0;
+    --table-head: #f1f5fb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #f6f8fb;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+  header.doc-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  header.doc-header h1 {
+    font-size: 2rem;
+    margin: 0 0 6px;
+  }
+  header.doc-header p {
+    color: var(--muted);
+    margin: 0;
+  }
+  nav.toc {
+    background: var(--accent-soft);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 40px;
+  }
+  nav.toc h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    color: var(--accent);
+  }
+  nav.toc ol {
+    margin: 0;
+    padding-left: 20px;
+  }
+  nav.toc a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  nav.toc a:hover {
+    text-decoration: underline;
+    color: var(--accent);
+  }
+  section.lecture {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px;
+    margin-bottom: 32px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  section.lecture > h2 {
+    font-size: 1.5rem;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent-soft);
+    padding-bottom: 10px;
+    margin-top: 0;
+  }
+  h3.topic {
+    font-size: 1.15rem;
+    margin-top: 28px;
+    margin-bottom: 10px;
+    color: #1c1f24;
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+  }
+  h4.subtopic {
+    font-size: 1rem;
+    margin-top: 18px;
+    margin-bottom: 6px;
+    color: #33404f;
+  }
+  ul, ol {
+    margin: 6px 0 6px 0;
+    padding-left: 22px;
+  }
+  li {
+    margin-bottom: 4px;
+  }
+  p {
+    margin: 6px 0;
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 14px 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.88rem;
+    margin: 10px 0 16px;
+  }
+  code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+  p code, li code {
+    background: #eef1f6;
+    color: #b83280;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 20px;
+    font-size: 0.92rem;
+    overflow-x: auto;
+    display: block;
+  }
+  table thead, table tbody { display: table; width: 100%; table-layout: fixed; }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--table-head);
+    font-weight: 600;
+  }
+  tr:nth-child(even) td {
+    background: #fafbfd;
+  }
+  .diagram {
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 14px 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.85rem;
+    margin: 10px 0 16px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    white-space: pre;
+  }
+  .quote {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    padding: 12px 18px;
+    margin: 14px 0;
+    border-radius: 6px;
+    font-style: italic;
+  }
+  .revision {
+    background: #fff8e6;
+    border: 1px solid #f2dca0;
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-top: 24px;
+  }
+  .revision h4 {
+    margin-top: 0;
+    color: #8a6300;
+  }
+  .keywords {
+    background: #eef8f0;
+    border: 1px solid #bfe6c9;
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-top: 24px;
+  }
+  .keywords h4 {
+    margin-top: 0;
+    color: #1c7a3c;
+  }
+  .keywords li strong {
+    color: #1c7a3c;
+  }
+  .back-to-top {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 0.85rem;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .back-to-top:hover {
+    text-decoration: underline;
+  }
+  @media (prefers-color-scheme: dark) {
+    body { background: #14161a; color: #e6e9ee; }
+    section.lecture { background: #1b1e24; border-color: #2a2e36; }
+    nav.toc { background: #202634; border-color: #2a2e36; }
+    th { background: #232833; }
+    tr:nth-child(even) td { background: #1e222a; }
+    p code, li code { background: #262b35; color: #ff9ecb; }
+    .revision { background: #2a2410; border-color: #4a3f16; }
+    .keywords { background: #16261c; border-color: #275c39; }
+    .quote { background: #202634; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <header class="doc-header">
+    <h1>Week 6: Short Notes</h1>
+    <p>Java — Indirection, Collections, Concrete Collections &amp; Maps</p>
+  </header>
+
+  <nav class="toc" id="top">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#lecture1">Lecture 1: The Benefits of Indirection</a></li>
+      <li><a href="#lecture2">Lecture 2: Collection</a></li>
+      <li><a href="#lecture3">Lecture 3: Concrete Collections</a></li>
+      <li><a href="#lecture4">Lecture 4: Maps</a></li>
+    </ol>
+  </nav>
+
+  <!-- ===================== LECTURE 1 ===================== -->
+  <section class="lecture" id="lecture1">
+    <h2>Lecture 1: The Benefits of Indirection</h2>
+
+    <h3 class="topic">Core Concept</h3>
+    <ul>
+      <li><strong>Abstraction</strong> → What a data structure does</li>
+      <li><strong>Implementation</strong> → How it does it</li>
+      <li>Program to an interface, not to an implementation.</li>
+      <li><strong>Abstract Data Type (ADT)</strong> → Defines operations, not internal details.</li>
+    </ul>
+
+    <h3 class="topic">Example: Queue ADT</h3>
+    <ul>
+      <li>Follows FIFO (First In First Out).</li>
+      <li>Public operations:
+        <ul>
+          <li><code>add()</code> → Insert at rear</li>
+          <li><code>remove()</code> → Remove from front</li>
+          <li><code>size()</code> → Return number of elements</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3 class="topic">Queue Implementations</h3>
+    <h4 class="subtopic">A. Circular Array Queue</h4>
+    <ul>
+      <li>Uses fixed-size array, wraps around with modulo.</li>
+      <li>Size = (tail - head) % capacity</li>
+      <li><strong>Advantages:</strong> Fast, memory efficient, contiguous memory, predictable usage</li>
+      <li><strong>Disadvantages:</strong> Fixed size, queue can become full, overflow possible</li>
+    </ul>
+    <h4 class="subtopic">B. Linked List Queue</h4>
+    <ul>
+      <li>Each element stored in a node (data + next reference).</li>
+      <li><strong>Advantages:</strong> Dynamic size, no fixed capacity, grows as needed, no overflow until heap full</li>
+      <li><strong>Disadvantages:</strong> Extra memory for pointers, node creation overhead, slightly slower</li>
+    </ul>
+
+    <h4 class="subtopic">Comparison Table</h4>
+    <table>
+      <thead><tr><th>Feature</th><th>Circular Array</th><th>Linked List</th></tr></thead>
+      <tbody>
+        <tr><td>Storage</td><td>Array</td><td>Nodes</td></tr>
+        <tr><td>Size</td><td>Fixed</td><td>Dynamic</td></tr>
+        <tr><td>Pointers</td><td>Head &amp; Tail Index</td><td>Head &amp; Tail Pointer</td></tr>
+        <tr><td>Speed</td><td>Fast</td><td>Flexible</td></tr>
+        <tr><td>Memory</td><td>Less overhead</td><td>More overhead</td></tr>
+        <tr><td>Overflow</td><td>Possible</td><td>Grows automatically</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="topic">Problem of Using Concrete Classes</h3>
+    <pre><code>CircularArrayQueue q = new CircularArrayQueue();</code></pre>
+    <ul>
+      <li>Creates <strong>Tight Coupling</strong> → dependent on one class.</li>
+      <li>Problems: Difficult maintenance, difficult upgrades, error-prone, creates technical debt.</li>
+    </ul>
+
+    <h3 class="topic">Java Interfaces</h3>
+    <ul>
+      <li>Interface = capability, not implementation.</li>
+      <li>Example hierarchy:</li>
+    </ul>
+    <div class="diagram">     Queue (Interface)
+        /        \
+CircularArrayQueue  LinkedListQueue</div>
+    <p><strong>Correct way:</strong></p>
+    <pre><code>Queue q = new CircularArrayQueue();</code></pre>
+    <p><strong>Later:</strong></p>
+    <pre><code>Queue q = new LinkedListQueue();</code></pre>
+    <ul>
+      <li>Only one line changes → <strong>Loose Coupling</strong>.</li>
+      <li>Runtime decides actual method → <strong>Dynamic Dispatch</strong>.</li>
+    </ul>
+
+    <h3 class="topic">Indirection</h3>
+    <ul><li><strong>Definition:</strong> Intermediate layer between program and implementation.</li></ul>
+    <p><strong>Famous quote (Butler Lampson):</strong></p>
+    <div class="quote">"All problems in computer science can be solved by adding another level of indirection."</div>
+    <ul><li><strong>Real-life analogy:</strong> Office cars (pool, taxi service, reimbursement).</li></ul>
+
+    <div class="keywords">
+      <h4>Key Definitions</h4>
+      <ul>
+        <li><strong>ADT</strong> → Defines operations, not implementation.</li>
+        <li><strong>Interface</strong> → Contract of methods, no code.</li>
+        <li><strong>Implementation</strong> → Actual code.</li>
+        <li><strong>Tight Coupling</strong> → Code depends on specific class.</li>
+        <li><strong>Loose Coupling</strong> → Code depends on interface.</li>
+        <li><strong>Dynamic Dispatch</strong> → Runtime decides actual method.</li>
+        <li><strong>Indirection</strong> → Add intermediate layer for flexibility.</li>
+        <li><strong>Technical Debt</strong> → Extra work caused by poor design.</li>
+      </ul>
+    </div>
+
+    <div class="revision">
+      <h4>Quick Revision</h4>
+      <ul>
+        <li>ADT = What, Implementation = How</li>
+        <li>Queue → add(), remove(), size()</li>
+        <li>Implementations → Circular Array (fast, fixed) vs Linked List (dynamic, overhead)</li>
+        <li>Concrete class → Tight Coupling</li>
+        <li>Interface → Loose Coupling</li>
+        <li>Runtime → Dynamic Dispatch</li>
+        <li>Indirection → Interface layer adds flexibility</li>
+        <li>Butler Lampson → Indirection solves problems</li>
+      </ul>
+    </div>
+    <a class="back-to-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- ===================== LECTURE 2 ===================== -->
+  <section class="lecture" id="lecture2">
+    <h2>Lecture 2: Collection</h2>
+
+    <h3 class="topic">The Problem: Why Do We Need Indirection?</h3>
+    <ul>
+      <li>Early commitment to a specific data structure (e.g., ArrayList, Vector, Stack) creates Tight Coupling.</li>
+    </ul>
+    <pre><code>ArrayList&lt;String&gt; list = new ArrayList&lt;&gt;();</code></pre>
+    <p>Entire program depends on ArrayList. Switching to LinkedList requires changes everywhere.</p>
+
+    <h4 class="subtopic">Problems of Tight Coupling</h4>
+    <ul>
+      <li>Many files need modification</li>
+      <li>Different data structures have different methods</li>
+      <li>High maintenance cost</li>
+      <li>Difficult to improve performance later</li>
+      <li>Less scalable</li>
+    </ul>
+
+    <h3 class="topic">Solution → Indirection</h3>
+    <ul><li>Program to an interface, not a class.</li></ul>
+    <pre><code>List&lt;String&gt; list = new ArrayList&lt;&gt;();</code></pre>
+    <p><strong>Later:</strong></p>
+    <pre><code>List&lt;String&gt; list = new LinkedList&lt;&gt;();</code></pre>
+    <ul><li>Only one line changes, rest of the program remains intact.</li></ul>
+
+    <h3 class="topic">Java Before Collections Framework</h3>
+    <ul>
+      <li>Classes like <code>Vector</code>, <code>Stack</code>, <code>Hashtable</code> were siloed, each with unique methods.</li>
+      <li>Switching between them was difficult.</li>
+    </ul>
+
+    <h3 class="topic">Modern Java</h3>
+    <ul>
+      <li>Introduced hierarchy of interfaces.</li>
+      <li>Benefits: Easy switching, code reuse, loose coupling, better maintenance.</li>
+    </ul>
+
+    <h3 class="topic">Collection Interface</h3>
+    <ul>
+      <li>Root interface for storing groups of objects.</li>
+      <li>Examples: ArrayList, LinkedList, HashSet, TreeSet, Queue.</li>
+    </ul>
+    <p><strong>Collection Stores:</strong> Group of values (e.g., 10, 20, 30, 40).</p>
+    <p><strong>Collection Does Not Store:</strong> Key–Value pairs → handled by Map (HashMap, TreeMap).</p>
+
+    <h4 class="subtopic">Collection vs Map</h4>
+    <table>
+      <thead><tr><th>Feature</th><th>Collection</th><th>Map</th></tr></thead>
+      <tbody>
+        <tr><td>Stores</td><td>Group of values</td><td>Key–Value pairs</td></tr>
+        <tr><td>Access</td><td>Iteration</td><td>Key lookup</td></tr>
+        <tr><td>Examples</td><td>List, Set, Queue</td><td>HashMap, TreeMap</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="topic">Generics in Collections</h3>
+    <ul><li>Syntax: <code>Collection&lt;E&gt;</code> → E = element type.</li></ul>
+    <pre><code>Collection&lt;String&gt; names;
+names.add("Rahul");
+names.add("Priya");</code></pre>
+    <ul><li>Benefits: Type safety, prevents wrong data, compile-time errors, no unnecessary casting.</li></ul>
+
+    <h3 class="topic">Iterator</h3>
+    <ul>
+      <li>Traverses collections uniformly.</li>
+      <li>Methods:
+        <ul>
+          <li><code>hasNext()</code> → checks if another element exists</li>
+          <li><code>next()</code> → returns next element, moves forward</li>
+          <li><code>remove()</code> → deletes last element returned by next()</li>
+        </ul>
+      </li>
+    </ul>
+    <h4 class="subtopic">Iterator Flow</h4>
+    <div class="diagram">Start → hasNext() → next() → Current Element → remove() (optional) → repeat</div>
+    <p><strong>Important Rule:</strong> remove() only works after next().</p>
+
+    <h3 class="topic">For-Each Loop</h3>
+    <pre><code>for (String name : names) { ... }</code></pre>
+    <ul>
+      <li>Internally uses an Iterator.</li>
+      <li><strong>Limitation:</strong> Cannot call remove() inside for-each.</li>
+    </ul>
+
+    <h4 class="subtopic">Common Collection Methods</h4>
+    <table>
+      <thead><tr><th>Method</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>add()</td><td>Insert one element</td></tr>
+        <tr><td>addAll()</td><td>Insert another collection (Union)</td></tr>
+        <tr><td>contains()</td><td>Check one element</td></tr>
+        <tr><td>containsAll()</td><td>Check all elements (Superset)</td></tr>
+        <tr><td>remove()</td><td>Remove one object</td></tr>
+        <tr><td>removeAll()</td><td>Remove another collection (Set Difference)</td></tr>
+        <tr><td>iterator()</td><td>Traverse collection</td></tr>
+        <tr><td>size()</td><td>Number of elements</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Note:</strong> contains() depends on proper equals() implementation.</p>
+
+    <h3 class="topic">Problem While Implementing Collection</h3>
+    <ul><li>Custom class implementing Collection must define all methods → tedious.</li></ul>
+
+    <h3 class="topic">Solution → AbstractCollection</h3>
+    <ul>
+      <li>Provides ready-made implementations for many methods (contains(), addAll(), removeAll(), etc.).</li>
+      <li>Still abstract: <code>iterator()</code> and <code>size()</code> → must be implemented by each collection.</li>
+    </ul>
+    <p><strong>Reason:</strong> Traversal and size depend on internal storage (array, nodes, hashing).</p>
+
+    <h4 class="subtopic">Java Collection Hierarchy</h4>
+    <div class="diagram">Collection (Interface)
+        │
+AbstractCollection (Abstract Class)
+        │
+   ┌────┼─────┐
+   │    │     │
+ArrayList LinkedList HashSet</div>
+
+    <h3 class="topic">Advantages of Collection Framework</h3>
+    <ul>
+      <li>Loose coupling</li>
+      <li>Reusable code</li>
+      <li>Type safety (Generics)</li>
+      <li>Standard API</li>
+      <li>Easy traversal (Iterator)</li>
+      <li>Easy switching of implementations</li>
+      <li>Better scalability</li>
+      <li>Better maintainability</li>
+    </ul>
+
+    <div class="keywords">
+      <h4>Key Definitions</h4>
+      <ul>
+        <li><strong>Collection</strong> → Root interface for groups of objects.</li>
+        <li><strong>Map</strong> → Stores key–value pairs.</li>
+        <li><strong>Generic (E)</strong> → Element type in a collection.</li>
+        <li><strong>Iterator</strong> → Object for traversing collections.</li>
+        <li><strong>For-Each Loop</strong> → Simplified syntax using Iterator internally.</li>
+        <li><strong>AbstractCollection</strong> → Abstract class with common implementations.</li>
+        <li><strong>Indirection</strong> → Interface between program and implementation.</li>
+      </ul>
+    </div>
+
+    <div class="revision">
+      <h4>Quick Revision</h4>
+      <ul>
+        <li>Directly using ArrayList or LinkedList → Tight Coupling</li>
+        <li>Use List or Collection interface → Loose Coupling</li>
+        <li>Collection = group of values; Map = key–value pairs</li>
+        <li>Generics ensure type safety</li>
+        <li>Iterator → hasNext(), next(), remove()</li>
+        <li>For-Each loop uses Iterator internally, cannot remove elements</li>
+        <li>contains() depends on equals()</li>
+        <li>addAll() = Union, removeAll() = Set Difference, containsAll() = Superset check</li>
+        <li>AbstractCollection reduces work, but iterator() and size() must be implemented</li>
+        <li>Hierarchy: Collection → AbstractCollection → Concrete Classes</li>
+      </ul>
+    </div>
+    <a class="back-to-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- ===================== LECTURE 3 ===================== -->
+  <section class="lecture" id="lecture3">
+    <h2>Lecture 3: Concrete Collections</h2>
+
+    <h3 class="topic">Introduction</h3>
+    <ul>
+      <li><strong>Interface</strong> → Defines what to do (abstract, cannot store data).</li>
+      <li><strong>Concrete Class</strong> → Defines how to do it (actual implementation, stores data).</li>
+      <li><strong>Importance:</strong> Different applications need different features (fast search, fast insertion, ordered data, unique data, low memory usage).</li>
+      <li>Java provides multiple implementations to suit different needs.</li>
+    </ul>
+    <p><strong>Collection Framework Stores:</strong> Groups of values → List, Set, Queue.</p>
+    <p><strong>Collection Framework Does Not Store:</strong> Key–Value pairs → handled by Map (HashMap, TreeMap).</p>
+
+    <h3 class="topic">List Interface</h3>
+    <ul><li>Stores elements in ordered sequence with indexes.</li></ul>
+    <h4 class="subtopic">Access Methods</h4>
+    <ul>
+      <li>Sequential Traversal → via Iterator.</li>
+      <li>Random Access → direct index access (list.get(i)).</li>
+    </ul>
+    <h4 class="subtopic">Extra Methods</h4>
+    <ul>
+      <li><code>add(index, element)</code> → insert at position.</li>
+      <li><code>remove(index)</code> → remove element at position.</li>
+      <li><code>get(index)</code> → return element at index.</li>
+      <li><code>set(index, value)</code> → replace element.</li>
+    </ul>
+
+    <h3 class="topic">ListIterator</h3>
+    <ul>
+      <li>More powerful than Iterator.</li>
+      <li>Methods: <code>next()</code>, <code>previous()</code>, <code>hasPrevious()</code>, <code>add()</code>.</li>
+    </ul>
+
+    <h3 class="topic">ArrayList vs LinkedList</h3>
+    <ul><li>Both implement List, but differ internally.</li></ul>
+    <h4 class="subtopic">ArrayList</h4>
+    <ul>
+      <li>Uses dynamic array.</li>
+      <li><strong>Advantages:</strong> Fast random access, efficient indexing, less memory, better cache performance.</li>
+      <li>Time complexity: Random access → O(1).</li>
+    </ul>
+    <h4 class="subtopic">LinkedList</h4>
+    <ul>
+      <li>Uses nodes + references.</li>
+      <li><strong>Advantages:</strong> Fast insertion/deletion, good for frequent modifications.</li>
+      <li><strong>Weakness:</strong> Random access → O(n).</li>
+    </ul>
+    <p><strong>Exam Concept:</strong></p>
+    <ul>
+      <li>Loop with get(i) on LinkedList → O(n²).</li>
+      <li>On ArrayList → O(n).</li>
+    </ul>
+
+    <h3 class="topic">RandomAccess Interface</h3>
+    <ul>
+      <li>Marker interface (no methods).</li>
+      <li>Indicates fast random access support.</li>
+      <li>Example: ArrayList implements it, LinkedList does not.</li>
+    </ul>
+
+    <h3 class="topic">Set Interface</h3>
+    <ul>
+      <li>Stores unique elements only.</li>
+      <li>Main purpose: Membership checking.</li>
+    </ul>
+    <h4 class="subtopic">HashSet</h4>
+    <ul>
+      <li>Uses hashing (hashCode() → index).</li>
+      <li>Very fast search, insert, delete (average O(1)).</li>
+      <li><strong>Limitation:</strong> Unpredictable iteration order.</li>
+    </ul>
+    <h4 class="subtopic">TreeSet</h4>
+    <ul>
+      <li>Stores elements in sorted order using search trees.</li>
+      <li><strong>Requirement:</strong> Elements must be comparable.</li>
+      <li>Time complexity: Insert/Delete/Search → O(log n).</li>
+    </ul>
+
+    <h4 class="subtopic">Comparison</h4>
+    <table>
+      <thead><tr><th>Feature</th><th>HashSet</th><th>TreeSet</th></tr></thead>
+      <tbody>
+        <tr><td>Storage</td><td>Hashing</td><td>Search Tree</td></tr>
+        <tr><td>Order</td><td>Unordered</td><td>Sorted</td></tr>
+        <tr><td>Speed</td><td>Faster</td><td>Slower</td></tr>
+        <tr><td>Complexity</td><td>O(1)</td><td>O(log n)</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="topic">Queue Interface</h3>
+    <ul><li>Follows FIFO (First In First Out).</li></ul>
+    <h4 class="subtopic">Queue Operations</h4>
+    <table>
+      <thead><tr><th>Operation</th><th>Hard Method</th><th>Gentle Method</th></tr></thead>
+      <tbody>
+        <tr><td>Insert</td><td>add()</td><td>offer()</td></tr>
+        <tr><td>Remove</td><td>remove()</td><td>poll()</td></tr>
+        <tr><td>View Front</td><td>element()</td><td>peek()</td></tr>
+      </tbody>
+    </table>
+    <ul>
+      <li>Hard methods throw exceptions if operation fails.</li>
+      <li>Gentle methods return special values (false or null).</li>
+    </ul>
+
+    <h3 class="topic">Deque (Double Ended Queue)</h3>
+    <ul>
+      <li>Allows insertion/deletion at both ends.</li>
+      <li>Methods:
+        <ul>
+          <li>Front → <code>offerFirst()</code>, <code>pollFirst()</code>, <code>peekFirst()</code></li>
+          <li>Rear → <code>offerLast()</code>, <code>pollLast()</code>, <code>peekLast()</code></li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3 class="topic">PriorityQueue</h3>
+    <ul>
+      <li>Removes highest priority element first (not FIFO).</li>
+      <li>Example: Hospital emergency queue, airport premium queue.</li>
+    </ul>
+
+    <h4 class="subtopic">Java Collection Hierarchy</h4>
+    <div class="diagram">Collection (Interface)
+        │
+   ┌────┼─────┐
+   │    │     │
+  List  Set  Queue
+   │    │     │
+AbstractList AbstractSet AbstractQueue
+   │
+AbstractSequentialList
+   │
+LinkedList
+
+(ArrayList also extends AbstractList.)</div>
+
+    <h3 class="topic">Key Terms</h3>
+    <ul>
+      <li><strong>ArrayList</strong> → Fast reading, slow middle insert/delete.</li>
+      <li><strong>LinkedList</strong> → Fast insert/delete, slow random access.</li>
+      <li><strong>HashSet</strong> → Fast membership checking, no ordering.</li>
+      <li><strong>TreeSet</strong> → Sorted data, slower operations.</li>
+      <li><strong>Queue</strong> → Arrival-based processing.</li>
+      <li><strong>PriorityQueue</strong> → Priority-based processing.</li>
+    </ul>
+
+    <div class="keywords">
+      <h4>Some Definitions</h4>
+      <ul>
+        <li><strong>List</strong> → Ordered collection, allows duplicates, supports index access.</li>
+        <li><strong>ArrayList</strong> → Dynamic array, fast random access.</li>
+        <li><strong>LinkedList</strong> → Node-based, efficient insert/delete.</li>
+        <li><strong>RandomAccess</strong> → Marker interface for fast indexed access.</li>
+        <li><strong>Set</strong> → Stores unique elements.</li>
+        <li><strong>HashSet</strong> → Hash-based, fast search, unordered.</li>
+        <li><strong>TreeSet</strong> → Tree-based, sorted order.</li>
+        <li><strong>Queue</strong> → FIFO collection.</li>
+        <li><strong>Deque</strong> → Double-ended queue.</li>
+        <li><strong>PriorityQueue</strong> → Removes highest priority element first.</li>
+        <li><strong>AbstractCollection</strong> → Provides default implementations.</li>
+        <li><strong>AbstractList</strong> → Common list functionality.</li>
+        <li><strong>AbstractSequentialList</strong> → For sequential-access lists like LinkedList.</li>
+      </ul>
+    </div>
+
+    <div class="revision">
+      <h4>Quick Revision</h4>
+      <ul>
+        <li>Concrete Collections = actual implementations.</li>
+        <li>Collection = groups of values; Map = key–value pairs.</li>
+        <li>List → ordered, duplicates allowed, indexed access.</li>
+        <li>ArrayList → O(1) random access.</li>
+        <li>LinkedList → O(n) random access, fast insert/delete.</li>
+        <li>RandomAccess → marker interface for fast access.</li>
+        <li>Set → unique elements.</li>
+        <li>HashSet → unordered, O(1).</li>
+        <li>TreeSet → sorted, O(log n).</li>
+        <li>Queue → FIFO.</li>
+        <li>Deque → operations at both ends.</li>
+        <li>PriorityQueue → priority-based removal.</li>
+        <li>AbstractCollection → AbstractList → AbstractSequentialList reduce coding effort.</li>
+      </ul>
+    </div>
+    <a class="back-to-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- ===================== LECTURE 4 ===================== -->
+  <section class="lecture" id="lecture4">
+    <h2>Lecture 4: Maps</h2>
+
+    <h3 class="topic">Introduction to Map</h3>
+    <ul><li>Map stores data as Key → Value pairs.</li></ul>
+    <div class="diagram">Rahul → 95
+Priya → 88
+Aman  → 91</div>
+    <ul><li><strong>Key</strong> = unique identifier, <strong>Value</strong> = associated data.</li></ul>
+
+    <h4 class="subtopic">Map vs Collection</h4>
+    <table>
+      <thead><tr><th>Feature</th><th>Collection</th><th>Map</th></tr></thead>
+      <tbody>
+        <tr><td>Stores</td><td>Group of values</td><td>Key–Value pairs</td></tr>
+        <tr><td>Access</td><td>Index/Iteration</td><td>Keys</td></tr>
+        <tr><td>Entry</td><td>Single value</td><td>Two values (Key &amp; Value)</td></tr>
+        <tr><td>Parent Interface</td><td>Collection</td><td>Map</td></tr>
+        <tr><td>Duplicates</td><td>Depends on implementation</td><td>Keys unique, values can repeat</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="topic">Generics</h3>
+    <ul>
+      <li>Collection → <code>Collection&lt;E&gt;</code> (one type).</li>
+      <li>Map → <code>Map&lt;K,V&gt;</code> (two types).</li>
+    </ul>
+    <pre><code>Map&lt;String,Integer&gt; score;</code></pre>
+
+    <h3 class="topic">Basic Map Methods</h3>
+    <ul>
+      <li><code>put(key,value)</code> → Adds new pair, replaces old value if key exists. Returns old value.</li>
+      <li><code>get(key)</code> → Returns value for key.</li>
+      <li><code>containsKey(key)</code> → Checks if key exists.</li>
+    </ul>
+
+    <h3 class="topic">Type Safety Paradox</h3>
+    <ul>
+      <li><code>put()</code> strictly checks types.</li>
+      <li><code>get(Object key)</code> and <code>containsKey(Object key)</code> accept Object.</li>
+      <li><strong>Reason:</strong> Internally uses <code>equals(Object)</code>.</li>
+    </ul>
+
+    <h3 class="topic">Advanced Update Methods</h3>
+    <ul>
+      <li><code>getOrDefault(key,defaultValue)</code> → Returns default if key absent.</li>
+      <li><code>putIfAbsent(key,value)</code> → Adds only if key not present.</li>
+      <li><code>merge(key,newValue,function)</code> → Atomic update (initialize or update in one step).</li>
+    </ul>
+    <table>
+      <thead><tr><th>Method</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>getOrDefault()</td><td>Return default if key absent</td></tr>
+        <tr><td>putIfAbsent()</td><td>Initialize if absent</td></tr>
+        <tr><td>merge()</td><td>Initialize or update atomically</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="topic">Map Views</h3>
+    <ul>
+      <li>Map itself is not a Collection, but provides views:
+        <ul>
+          <li><code>keySet()</code> → <code>Set&lt;K&gt;</code> (keys are unique).</li>
+          <li><code>values()</code> → <code>Collection&lt;V&gt;</code> (values may repeat).</li>
+          <li><code>entrySet()</code> → <code>Set&lt;Map.Entry&lt;K,V&gt;&gt;</code> (each entry = key + value).</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3 class="topic">Iterating a Map</h3>
+    <ul>
+      <li>Method 1: Using <code>keySet()</code> → requires extra lookup.</li>
+      <li>Method 2 (Best): Using <code>entrySet()</code> → direct access to key and value.</li>
+    </ul>
+
+    <h3 class="topic">HashMap vs TreeMap</h3>
+    <ul>
+      <li><strong>HashMap</strong> → Uses hash table.
+        <ul>
+          <li>Performance: Insert/Search/Delete → O(1) average.</li>
+          <li>Limitation: Unordered iteration.</li>
+        </ul>
+      </li>
+      <li><strong>TreeMap</strong> → Uses balanced search tree (Red-Black Tree).
+        <ul>
+          <li>Keys remain sorted.</li>
+          <li>Performance: Insert/Delete/Search → O(log n).</li>
+        </ul>
+      </li>
+    </ul>
+    <table>
+      <thead><tr><th>Feature</th><th>HashMap</th><th>TreeMap</th></tr></thead>
+      <tbody>
+        <tr><td>Storage</td><td>Hash Table</td><td>Balanced Tree</td></tr>
+        <tr><td>Order</td><td>Unordered</td><td>Sorted</td></tr>
+        <tr><td>Speed</td><td>Faster</td><td>Slower</td></tr>
+        <tr><td>Complexity</td><td>O(1)</td><td>O(log n)</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="topic">LinkedHashMap</h3>
+    <ul>
+      <li>Extends HashMap, combines hash table + doubly linked list.</li>
+      <li>Maintains order:
+        <ul>
+          <li>Insertion Order → elements remain in order inserted.</li>
+          <li>Access Order → recently accessed elements move to end.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3 class="topic">LRU (Least Recently Used)</h3>
+    <ul>
+      <li>Cache replacement policy: removes entry not accessed for longest time.</li>
+      <li>Implemented using <code>LinkedHashMap</code> + <code>removeEldestEntry()</code>.</li>
+    </ul>
+    <p><strong>LinkedHashSet:</strong> Similar to LinkedHashMap, but for unique elements with insertion order.</p>
+
+    <h4 class="subtopic">Java Map Hierarchy</h4>
+    <div class="diagram">Map (Interface)
+        │
+   ┌────┼──────────────┐
+   │    │              │
+HashMap TreeMap  LinkedHashMap</div>
+
+    <h4 class="subtopic">Performance Comparison</h4>
+    <table>
+      <thead><tr><th>Implementation</th><th>Order</th><th>Search</th></tr></thead>
+      <tbody>
+        <tr><td>HashMap</td><td>Unordered</td><td>O(1)</td></tr>
+        <tr><td>TreeMap</td><td>Sorted</td><td>O(log n)</td></tr>
+        <tr><td>LinkedHashMap</td><td>Insertion/Access Order</td><td>O(1)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="keywords">
+      <h4>Important Exam Definitions</h4>
+      <ul>
+        <li><strong>Map</strong> → Interface storing Key–Value pairs.</li>
+        <li><strong>Key</strong> → Unique identifier.</li>
+        <li><strong>Value</strong> → Data associated with key.</li>
+        <li><strong>HashMap</strong> → Fast lookup, unordered.</li>
+        <li><strong>TreeMap</strong> → Sorted keys, slower operations.</li>
+        <li><strong>LinkedHashMap</strong> → Maintains insertion/access order.</li>
+        <li><strong>getOrDefault()</strong> → Returns default if key absent.</li>
+        <li><strong>putIfAbsent()</strong> → Adds only if key not present.</li>
+        <li><strong>merge()</strong> → Atomic update.</li>
+        <li><strong>keySet()</strong> → Set of keys.</li>
+        <li><strong>values()</strong> → Collection of values.</li>
+        <li><strong>entrySet()</strong> → Set of key–value entries.</li>
+        <li><strong>LRU</strong> → Removes least recently used entry.</li>
+      </ul>
+    </div>
+
+    <div class="revision">
+      <h4>Quick Revision</h4>
+      <ul>
+        <li>Map ≠ Collection.</li>
+        <li>Map stores Key–Value pairs.</li>
+        <li>Syntax → Map&lt;K,V&gt;.</li>
+        <li>Keys unique, values can repeat.</li>
+        <li>put() replaces old value, returns old.</li>
+        <li>getOrDefault() prevents null.</li>
+        <li>putIfAbsent() initializes if absent.</li>
+        <li>merge() atomic update.</li>
+        <li>keySet() → keys, values() → values, entrySet() → key+value.</li>
+        <li>HashMap → O(1), unordered.</li>
+        <li>TreeMap → O(log n), sorted.</li>
+        <li>LinkedHashMap → O(1), maintains order.</li>
+        <li>LRU cache → implemented with LinkedHashMap.</li>
+      </ul>
+    </div>
+    <a class="back-to-top" href="#top">↑ Back to top</a>
+  </section>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 7: Short Notes — Java</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1c1f24;
+    --muted: #5b6472;
+    --accent: #2f6fed;
+    --accent-soft: #eaf1ff;
+    --border: #e2e6ec;
+    --code-bg: #0f172a;
+    --code-text: #e2e8f0;
+    --table-head: #f1f5fb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #f6f8fb;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+  header.doc-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  header.doc-header h1 {
+    font-size: 2rem;
+    margin: 0 0 6px;
+  }
+  header.doc-header p {
+    color: var(--muted);
+    margin: 0;
+  }
+  nav.toc {
+    background: var(--accent-soft);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 40px;
+  }
+  nav.toc h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    color: var(--accent);
+  }
+  nav.toc ol {
+    margin: 0;
+    padding-left: 20px;
+  }
+  nav.toc a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  nav.toc a:hover {
+    text-decoration: underline;
+    color: var(--accent);
+  }
+  section.lecture {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px;
+    margin-bottom: 32px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  section.lecture > h2 {
+    font-size: 1.5rem;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent-soft);
+    padding-bottom: 10px;
+    margin-top: 0;
+  }
+  h3.topic {
+    font-size: 1.15rem;
+    margin-top: 28px;
+    margin-bottom: 10px;
+    color: #1c1f24;
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+  }
+  h4.subtopic {
+    font-size: 1rem;
+    margin-top: 18px;
+    margin-bottom: 6px;
+    color: #33404f;
+  }
+  ul, ol {
+    margin: 6px 0 6px 0;
+    padding-left: 22px;
+  }
+  li {
+    margin-bottom: 4px;
+  }
+  p {
+    margin: 6px 0;
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 14px 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.88rem;
+    margin: 10px 0 16px;
+  }
+  code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+  p code, li code {
+    background: #eef1f6;
+    color: #b83280;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 20px;
+    font-size: 0.92rem;
+    overflow-x: auto;
+    display: block;
+  }
+  table thead, table tbody { display: table; width: 100%; table-layout: fixed; }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--table-head);
+    font-weight: 600;
+  }
+  tr:nth-child(even) td {
+    background: #fafbfd;
+  }
+  .diagram {
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 14px 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.85rem;
+    margin: 10px 0 16px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    white-space: pre;
+  }
+  .quote {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    padding: 12px 18px;
+    margin: 14px 0;
+    border-radius: 6px;
+    font-style: italic;
+  }
+  .revision {
+    background: #fff8e6;
+    border: 1px solid #f2dca0;
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-top: 24px;
+  }
+  .revision h4 {
+    margin-top: 0;
+    color: #8a6300;
+  }
+  .keywords {
+    background: #eef8f0;
+    border: 1px solid #bfe6c9;
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-top: 24px;
+  }
+  .keywords h4 {
+    margin-top: 0;
+    color: #1c7a3c;
+  }
+  .keywords li strong {
+    color: #1c7a3c;
+  }
+  .back-to-top {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 0.85rem;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .back-to-top:hover {
+    text-decoration: underline;
+  }
+  @media (prefers-color-scheme: dark) {
+    body { background: #14161a; color: #e6e9ee; }
+    section.lecture { background: #1b1e24; border-color: #2a2e36; }
+    nav.toc { background: #202634; border-color: #2a2e36; }
+    th { background: #232833; }
+    tr:nth-child(even) td { background: #1e222a; }
+    p code, li code { background: #262b35; color: #ff9ecb; }
+    .revision { background: #2a2410; border-color: #4a3f16; }
+    .keywords { background: #16261c; border-color: #275c39; }
+    .quote { background: #202634; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <header class="doc-header">
+    <h1>Week 7: Short Notes</h1>
+    <p>Java — Errors, Exceptions, Packages, Assertions &amp; Logging</p>
+  </header>
+
+  <nav class="toc" id="top">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#lecture1">Lecture 1: Dealing With Errors</a></li>
+      <li><a href="#lecture2">Lecture 2: Exceptions in Java</a></li>
+      <li><a href="#lecture3">Lecture 3: Packages</a></li>
+      <li><a href="#lecture4">Lecture 4: Assertions</a></li>
+      <li><a href="#lecture5">Lecture 5: Logging</a></li>
+    </ol>
+  </nav>
+
+  <!-- ===================== LECTURE 1 ===================== -->
+  <section class="lecture" id="lecture1">
+    <h2>Lecture 1: Dealing With Errors</h2>
+
+    <h3 class="topic">Why Do We Need Exception Handling?</h3>
+    <ul>
+      <li>Prevent program crashes</li>
+      <li>Keep the application running</li>
+      <li>Handle unexpected situations gracefully</li>
+      <li>Help developers identify the exact problem</li>
+    </ul>
+
+    <h3 class="topic">Types of Errors</h3>
+    <ul>
+      <li><strong>User Input Errors</strong> → Wrong filename, invalid URL, incorrect password</li>
+      <li><strong>External Environmental Errors</strong> → Internet lost, printer paper finished, server unavailable</li>
+      <li><strong>Resource Limitation Errors</strong> → Disk full, memory exhausted</li>
+      <li><strong>Internal Coding Errors</strong> → Array index out of bounds, null pointer, divide by zero</li>
+    </ul>
+
+    <h3 class="topic">How Programs Report Errors</h3>
+    <ul>
+      <li><strong>Return Values (old method)</strong> → -1, null, false</li>
+      <li><strong>Exception Handling (modern method)</strong> → Throws an Exception object</li>
+    </ul>
+    <p><strong>Analogy:</strong> Referee raises a flag when a foul occurs → Java throws an Exception when an error occurs.</p>
+
+    <h3 class="topic">Exception Object</h3>
+    <p>Every Exception object stores:</p>
+    <ul>
+      <li><strong>Type</strong> → e.g., ArithmeticException, IOException</li>
+      <li><strong>Message</strong> → e.g., "Divide by zero"</li>
+      <li><strong>State/Data</strong> → e.g., Input = -7</li>
+    </ul>
+
+    <h3 class="topic">Java Throwable Hierarchy</h3>
+    <div class="diagram">        Throwable
+        /       \
+      Error   Exception
+                |
+         RuntimeException</div>
+    <ul>
+      <li><strong>Throwable</strong> → Root class</li>
+      <li><strong>Error</strong> → Serious JVM problems (OutOfMemoryError, StackOverflowError)</li>
+      <li><strong>Exception</strong> → Recoverable problems (File not found, invalid input)</li>
+    </ul>
+
+    <h3 class="topic">Checked vs Unchecked Exceptions</h3>
+    <table>
+      <thead><tr><th>Concept</th><th>Checked Exception</th><th>Unchecked Exception</th></tr></thead>
+      <tbody>
+        <tr><td>Compiler</td><td>Forces handling</td><td>Does not force handling</td></tr>
+        <tr><td>Cause</td><td>Expected situations</td><td>Programmer mistakes</td></tr>
+        <tr><td>Examples</td><td>IOException, SQLException</td><td>NullPointerException, ArithmeticException</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="topic">Runtime Exceptions</h3>
+    <ul>
+      <li>Programmer mistakes → e.g., 10/0, array[10], obj.method() when obj is null.</li>
+      <li><strong>Best solution:</strong> Fix the code.</li>
+    </ul>
+
+    <h3 class="topic">Custom Exceptions</h3>
+    <ul>
+      <li>Create meaningful exceptions for application rules.</li>
+      <li>Example: <code>NegativeIntegerException</code> when Order ID &lt; 0.</li>
+    </ul>
+
+    <h3 class="topic">Exception Propagation</h3>
+    <p>Error in Function C → moves to B → A → main().</p>
+    <p>If unhandled → program crashes.</p>
+
+    <h3 class="topic">throws Keyword</h3>
+    <ul><li>Declares that a method may throw an exception.</li></ul>
+    <pre><code>void readFile() throws IOException</code></pre>
+
+    <h4 class="subtopic">Revision Table</h4>
+    <table>
+      <thead><tr><th>Concept</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>Exception</td><td>Object representing an error</td></tr>
+        <tr><td>Throwable</td><td>Parent of all Errors &amp; Exceptions</td></tr>
+        <tr><td>Error</td><td>Serious JVM problem</td></tr>
+        <tr><td>Checked Exception</td><td>Compiler forces handling</td></tr>
+        <tr><td>Unchecked Exception</td><td>Programmer mistake</td></tr>
+        <tr><td>Runtime Exception</td><td>Happens during execution</td></tr>
+        <tr><td>throw</td><td>Signals an exception</td></tr>
+        <tr><td>throws</td><td>Declares possible exception</td></tr>
+        <tr><td>catch</td><td>Handles exception</td></tr>
+        <tr><td>Exception Propagation</td><td>Exception travels up call stack</td></tr>
+      </tbody>
+    </table>
+
+    <div class="keywords">
+      <h4>Important Keywords</h4>
+      <ul>
+        <li><strong>Exception Handling</strong> → Handling runtime errors without crashing.</li>
+        <li><strong>Exception</strong> → Object representing abnormal situation.</li>
+        <li><strong>Throwable</strong> → Root class of all Errors &amp; Exceptions.</li>
+        <li><strong>Error</strong> → Serious JVM problem; unrecoverable.</li>
+        <li><strong>Checked Exception</strong> → Compiler forces handling.</li>
+        <li><strong>Unchecked Exception</strong> → Programmer mistake.</li>
+        <li><strong>Runtime Exception</strong> → Unchecked coding error.</li>
+        <li><strong>throw</strong> → Used to throw exception object.</li>
+        <li><strong>throws</strong> → Declares method may throw exception.</li>
+        <li><strong>catch</strong> → Handles exception.</li>
+        <li><strong>Exception Propagation</strong> → Exception moves up call stack.</li>
+      </ul>
+    </div>
+    <a class="back-to-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- ===================== LECTURE 2 ===================== -->
+  <section class="lecture" id="lecture2">
+    <h2>Lecture 2: Exceptions in Java</h2>
+
+    <h3 class="topic">Throwable Hierarchy (Architecture of Failure)</h3>
+    <p>Java treats every error as an object. All errors and exceptions come under one parent class called Throwable.</p>
+    <div class="diagram">        Throwable
+        /       \
+      Error   Exception
+                |
+         RuntimeException</div>
+
+    <h3 class="topic">Error vs Exception</h3>
+    <ul>
+      <li><strong>Error</strong> → Serious JVM/system problems (OutOfMemoryError, StackOverflowError). Not programmer's fault, unrecoverable.</li>
+      <li><strong>Exception</strong> → Recoverable problems (File not found, invalid input, database error). Programmers are expected to handle these.</li>
+    </ul>
+
+    <h3 class="topic">Checked vs Unchecked Exceptions</h3>
+    <table>
+      <thead><tr><th>Feature</th><th>Checked Exception</th><th>Unchecked Exception (Runtime)</th></tr></thead>
+      <tbody>
+        <tr><td>Cause</td><td>Business logic, I/O</td><td>Coding mistakes</td></tr>
+        <tr><td>Compiler</td><td>Forces handling</td><td>Does not force handling</td></tr>
+        <tr><td>Solution</td><td>Handle or declare</td><td>Fix the code</td></tr>
+        <tr><td>Examples</td><td>IOException, FileNotFoundException</td><td>NullPointerException, ArrayIndexOutOfBoundsException</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="topic">Defensive Coding</h3>
+    <ul>
+      <li>Validate input before use.</li>
+      <li>Check array index before accessing.</li>
+      <li>Ensure object is not null.</li>
+      <li>Check file existence before reading.</li>
+    </ul>
+    <p><strong>Goal</strong> → Prevent runtime exceptions, build reliable software.</p>
+
+    <h3 class="topic">try-catch Block</h3>
+    <ul>
+      <li><strong>try</strong> → Contains risky code.</li>
+      <li><strong>catch</strong> → Handles exceptions.</li>
+    </ul>
+    <p><strong>Flow:</strong></p>
+    <ul>
+      <li>No exception → continue normally.</li>
+      <li>Exception → catch executes → program continues.</li>
+    </ul>
+
+    <h3 class="topic">Exception Matching</h3>
+    <p>Java checks catch blocks in order.</p>
+    <pre><code>try { /* risky code */ }
+catch(FileNotFoundException e) { }
+catch(IOException e) { }</code></pre>
+    <ul>
+      <li>FileNotFoundException → first catch executes.</li>
+      <li>Other IOExceptions → second catch executes.</li>
+    </ul>
+
+    <h4 class="subtopic">Specific to Generic Rule</h4>
+    <p>Always catch specific exceptions first, then generic ones.</p>
+    <p><strong>Correct order:</strong> FileNotFoundException → UnknownHostException → IOException</p>
+
+    <h3 class="topic">Exception Propagation</h3>
+    <p>If not handled, exception moves upward through method calls (C → B → A → main).</p>
+    <p>If unhandled → program crashes.</p>
+
+    <h4 class="subtopic">Call Stack</h4>
+    <p>Exception follows the call stack: Last called method → previous caller → main().</p>
+    <p>If nobody catches → program terminates.</p>
+
+    <h3 class="topic">throw Keyword</h3>
+    <p>Used to manually throw exceptions.</p>
+    <pre><code>throw new EOFException();</code></pre>
+
+    <h3 class="topic">throws Keyword</h3>
+    <p>Declares possible exceptions in method header.</p>
+    <pre><code>void readFile() throws IOException</code></pre>
+
+    <h4 class="subtopic">Difference Between throw and throws</h4>
+    <table>
+      <thead><tr><th>throw</th><th>throws</th></tr></thead>
+      <tbody>
+        <tr><td>Used inside method body</td><td>Used in method header</td></tr>
+        <tr><td>Actually throws exception</td><td>Declares possible exceptions</td></tr>
+        <tr><td>Action keyword</td><td>Declaration keyword</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="topic">Exception Message</h3>
+    <p>Custom messages can be added:</p>
+    <pre><code>throw new IOException("File is empty");</code></pre>
+    <p>Retrieve with <code>e.getMessage()</code>.</p>
+
+    <h3 class="topic">Compiler Rule</h3>
+    <p>For checked exceptions, compiler enforces handling: Must use try-catch OR throws.</p>
+    <ul><li>Otherwise → compilation error.</li></ul>
+
+    <h3 class="topic">Custom Exception</h3>
+    <p>User-defined exceptions for application-specific rules.</p>
+    <p>Example: <code>NegativeException</code> when only positive numbers are allowed.</p>
+
+    <h4 class="subtopic">Structure of Custom Exception</h4>
+    <ul>
+      <li><strong>Private Data</strong> → stores invalid value.</li>
+      <li><strong>Constructor</strong> → initializes exception, uses <code>super(message)</code>.</li>
+      <li><strong>Methods</strong> → provide extra info (e.g., <code>reportErrorValue()</code>).</li>
+    </ul>
+
+    <h3 class="topic">Exception Chaining</h3>
+    <ul>
+      <li>One exception causes another.</li>
+      <li>Use <code>initCause()</code> and <code>getCause()</code>.</li>
+      <li>Preserves original error for debugging.</li>
+    </ul>
+    <p>Flow: Database error → SQLException → wrapped in ServletException → handler retrieves original cause.</p>
+
+    <h3 class="topic">finally Block</h3>
+    <p>Always executes, regardless of exception.</p>
+    <ul>
+      <li><strong>Case 1:</strong> No exception → try → finally → next statement.</li>
+      <li><strong>Case 2:</strong> Exception handled → try → catch → finally → next statement.</li>
+      <li><strong>Case 3:</strong> Exception re-thrown → try → catch → throw → finally → propagates.</li>
+    </ul>
+
+    <h4 class="subtopic">Why finally is Important</h4>
+    <p>Used for resource cleanup:</p>
+    <ul>
+      <li>Close files</li>
+      <li>Close database connections</li>
+      <li>Release memory/resources</li>
+    </ul>
+    <p>Prevents resource leaks.</p>
+
+    <h3 class="topic">Best Practices</h3>
+    <ol>
+      <li>Catch order → specific first, then generic.</li>
+      <li>Handle or declare rule → checked exceptions must be caught or declared.</li>
+      <li>Don't ignore runtime exceptions → fix logic instead.</li>
+      <li>Use meaningful custom exceptions → NegativeException, InvalidAgeException.</li>
+      <li>Always use finally → close resources safely.</li>
+    </ol>
+
+    <h4 class="subtopic">Revision Table</h4>
+    <table>
+      <thead><tr><th>Concept</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>Throwable</td><td>Parent class of all Errors &amp; Exceptions</td></tr>
+        <tr><td>Error</td><td>Serious JVM/system problem</td></tr>
+        <tr><td>Exception</td><td>Recoverable application problem</td></tr>
+        <tr><td>Runtime Exception</td><td>Programmer mistake (unchecked)</td></tr>
+        <tr><td>Checked Exception</td><td>Compiler forces handling</td></tr>
+        <tr><td>try</td><td>Contains risky code</td></tr>
+        <tr><td>catch</td><td>Handles exceptions</td></tr>
+        <tr><td>throw</td><td>Throws exception object</td></tr>
+        <tr><td>throws</td><td>Declares possible exceptions</td></tr>
+        <tr><td>Exception Matching</td><td>JVM finds matching catch block</td></tr>
+        <tr><td>Exception Propagation</td><td>Exception moves up call stack</td></tr>
+        <tr><td>Call Stack</td><td>Chain of method calls</td></tr>
+        <tr><td>Custom Exception</td><td>User-defined exception</td></tr>
+        <tr><td>Exception Chaining</td><td>Linking exceptions with initCause/getCause</td></tr>
+        <tr><td>getMessage()</td><td>Returns exception message</td></tr>
+        <tr><td>finally</td><td>Always executes; resource cleanup</td></tr>
+        <tr><td>Defensive Coding</td><td>Prevent runtime errors</td></tr>
+      </tbody>
+    </table>
+
+    <div class="keywords">
+      <h4>Important Keywords</h4>
+      <ul>
+        <li><strong>Throwable</strong> → Root class of all Errors &amp; Exceptions.</li>
+        <li><strong>Error</strong> → Serious JVM problem, unrecoverable.</li>
+        <li><strong>Exception</strong> → Recoverable problem.</li>
+        <li><strong>Checked Exception</strong> → Must be handled or declared.</li>
+        <li><strong>Unchecked Exception (RuntimeException)</strong> → Coding mistakes.</li>
+        <li><strong>Defensive Coding</strong> → Prevent runtime errors.</li>
+        <li><strong>try</strong> → Risky code.</li>
+        <li><strong>catch</strong> → Handles exception.</li>
+        <li><strong>throw</strong> → Explicitly throws exception.</li>
+        <li><strong>throws</strong> → Declares possible exceptions.</li>
+        <li><strong>Exception Propagation</strong> → Exception travels up call stack.</li>
+        <li><strong>Custom Exception</strong> → User-defined exception.</li>
+        <li><strong>Exception Chaining</strong> → Preserves original cause.</li>
+        <li><strong>finally</strong> → Always executes, resource cleanup.</li>
+      </ul>
+    </div>
+    <a class="back-to-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- ===================== LECTURE 3 ===================== -->
+  <section class="lecture" id="lecture3">
+    <h2>Lecture 3: Packages</h2>
+
+    <h3 class="topic">What is a Package?</h3>
+    <p>A Package is a collection of related Java classes and interfaces.</p>
+    <p>It is used to:</p>
+    <ul>
+      <li>Organize code</li>
+      <li>Avoid class name conflicts</li>
+      <li>Make projects easier to manage</li>
+      <li>Improve code reusability</li>
+    </ul>
+    <p>Think of a package like a folder that stores related Java files.</p>
+
+    <h3 class="topic">Why Do We Need Packages?</h3>
+    <ul>
+      <li>Prevents class name conflicts in large projects.</li>
+      <li>Example:
+        <ul>
+          <li><code>com.analytics.DataProcessor</code></li>
+          <li><code>com.reporting.DataProcessor</code></li>
+          <li>Both classes have the same name but belong to different packages, so Java treats them as distinct.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3 class="topic">Fully Qualified Name (FQN)</h3>
+    <p>A Fully Qualified Name = Package Name + Class Name.</p>
+    <p>Example: <code>java.math.BigDecimal</code></p>
+    <ul>
+      <li><code>java</code> → Parent package</li>
+      <li><code>math</code> → Sub-package</li>
+      <li><code>BigDecimal</code> → Class</li>
+    </ul>
+
+    <h3 class="topic">Package Hierarchy</h3>
+    <p>Packages are arranged in a hierarchy using dot (.) notation.</p>
+    <p>Example: java → math → BigDecimal</p>
+
+    <h3 class="topic">Import Statement</h3>
+    <p>The <code>import</code> keyword allows use of classes without writing the full package name.</p>
+    <pre><code>import java.util.Scanner;
+Scanner sc;</code></pre>
+
+    <h4 class="subtopic">Wildcard (*) Import</h4>
+    <p>Imports all classes from one package.</p>
+    <pre><code>import java.util.*;</code></pre>
+    <p>Examples: Scanner, ArrayList, HashMap, Random.</p>
+    <p><strong>Limitation:</strong> Does not import sub-packages.</p>
+    <pre><code>import java.*; // Invalid</code></pre>
+
+    <h3 class="topic">Directory-to-Package Mapping</h3>
+    <p>Java package structure matches folder structure.</p>
+    <div class="diagram">Root → java → math → BigDecimal.java</div>
+
+    <h3 class="topic">Creating a Package</h3>
+    <p>Declared using the <code>package</code> keyword (first statement in file).</p>
+    <pre><code>package in.ac.iitm.onlinedegree;
+
+public class StudentRecord { }</code></pre>
+
+    <h4 class="subtopic">Java Package Naming Convention</h4>
+    <p>Uses reverse domain naming.</p>
+    <p>Website: <code>iitm.ac.in</code> → Package: <code>in.ac.iitm</code></p>
+
+    <h3 class="topic">Anonymous Package (Default Package)</h3>
+    <p>If no package statement is written, the class belongs to the Anonymous Package.</p>
+    <ul>
+      <li>Classes in the same folder belong to the same default package.</li>
+      <li>Mainly used for small programs.</li>
+    </ul>
+
+    <h3 class="topic">Access Modifiers</h3>
+    <p>Control visibility of classes, variables, and methods.</p>
+    <ul>
+      <li><strong>Public</strong> → Accessible everywhere</li>
+      <li><strong>Private</strong> → Accessible only inside the same class</li>
+      <li><strong>Default</strong> → Accessible only within the same package</li>
+      <li><strong>Protected</strong> → Accessible within the same package and by subclasses</li>
+    </ul>
+
+    <h4 class="subtopic">Public Modifier</h4>
+    <p>Accessible from any class. Used for APIs, library classes, and widely available methods.</p>
+    <pre><code>public class Student { }</code></pre>
+
+    <h4 class="subtopic">Private Modifier</h4>
+    <p>Accessible only inside the same class. Used for data hiding and encapsulation.</p>
+    <pre><code>private int marks;</code></pre>
+
+    <h4 class="subtopic">Default Access Modifier</h4>
+    <p>If no modifier is written → Default access. Accessible only within the same package.</p>
+    <p><strong>Risk:</strong> Important variables may be unintentionally exposed.</p>
+
+    <h4 class="subtopic">Protected Modifier</h4>
+    <p>Accessible by:</p>
+    <ul>
+      <li>Same package</li>
+      <li>Subclasses (even in different packages)</li>
+    </ul>
+    <p>Example:</p>
+    <pre><code>class Animal {
+    protected void sound() { }
+}
+class Dog extends Animal { }</code></pre>
+
+    <h3 class="topic">Visibility Ranking</h3>
+    <p>Most restrictive → Least restrictive:</p>
+    <p><strong>Private → Default → Protected → Public</strong></p>
+
+    <h4 class="subtopic">Increasing Visibility</h4>
+    <p>Allowed during method overriding.</p>
+    <pre><code>protected void display() { }
+public void display() { } // Allowed</code></pre>
+    <p>Example: <code>Object.clone()</code> — clone() in Object class is protected. A subclass may override it and make it public.</p>
+
+    <h3 class="topic">Best Practices</h3>
+    <ul>
+      <li>Organize large projects into packages.</li>
+      <li>Use reverse domain naming.</li>
+      <li>Use private for data members.</li>
+      <li>Use protected for subclass access.</li>
+      <li>Use public only when necessary.</li>
+      <li>Avoid default access unless package-level sharing is intended.</li>
+      <li>Keep package and folder structure identical.</li>
+    </ul>
+
+    <h4 class="subtopic">Quick Revision</h4>
+    <table>
+      <thead><tr><th>Concept</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>Package</td><td>Collection of related classes &amp; interfaces</td></tr>
+        <tr><td>FQN</td><td>Package name + Class name</td></tr>
+        <tr><td>Package Hierarchy</td><td>Dot-separated organization</td></tr>
+        <tr><td>import</td><td>Allows use of classes from another package</td></tr>
+        <tr><td>Wildcard</td><td>Imports all classes of one package</td></tr>
+        <tr><td>Package Declaration</td><td>First statement in a Java file</td></tr>
+        <tr><td>Reverse Domain Naming</td><td>Standard naming convention</td></tr>
+        <tr><td>Anonymous Package</td><td>Default package with no declaration</td></tr>
+        <tr><td>Public</td><td>Accessible everywhere</td></tr>
+        <tr><td>Private</td><td>Accessible only inside same class</td></tr>
+        <tr><td>Default</td><td>Accessible only within same package</td></tr>
+        <tr><td>Protected</td><td>Accessible within package + subclasses</td></tr>
+        <tr><td>Visibility Ranking</td><td>Private → Default → Protected → Public</td></tr>
+      </tbody>
+    </table>
+
+    <div class="keywords">
+      <h4>Important Keywords</h4>
+      <ul>
+        <li><strong>Package</strong> → Collection of related classes &amp; interfaces.</li>
+        <li><strong>FQN</strong> → Complete class name including package.</li>
+        <li><strong>Package Hierarchy</strong> → Dot-separated structure.</li>
+        <li><strong>Wildcard Import</strong> → Imports all classes in one package, not sub-packages.</li>
+        <li><strong>Package Declaration</strong> → Must be first statement in source file.</li>
+        <li><strong>Reverse Domain Naming</strong> → Standard naming convention.</li>
+        <li><strong>Anonymous Package</strong> → Default package with no declaration.</li>
+        <li><strong>Public</strong> → Accessible everywhere.</li>
+        <li><strong>Private</strong> → Accessible only inside same class.</li>
+        <li><strong>Default</strong> → Accessible only within same package.</li>
+        <li><strong>Protected</strong> → Accessible within package + subclasses.</li>
+        <li><strong>Visibility Order</strong> → Private → Default → Protected → Public.</li>
+        <li><strong>Directory Mapping</strong> → Package structure matches folder structure.</li>
+      </ul>
+    </div>
+    <a class="back-to-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- ===================== LECTURE 4 ===================== -->
+  <section class="lecture" id="lecture4">
+    <h2>Lecture 4: Assertions</h2>
+
+    <h3 class="topic">What is an Assertion?</h3>
+    <p>An Assertion is a debugging tool used to verify that a condition is true while the program is running.</p>
+    <ul>
+      <li>Mainly used during development and testing.</li>
+      <li>If the condition is false → Java throws an <code>AssertionError</code>.</li>
+    </ul>
+
+    <h3 class="topic">Why Do We Need Assertions?</h3>
+    <ul>
+      <li>Programmers used to write assumptions as comments (not checked by Java).</li>
+      <li>Assertions make assumptions executable.</li>
+    </ul>
+    <pre><code>assert x >= 0;</code></pre>
+
+    <h4 class="subtopic">Assertions vs Comments</h4>
+    <table>
+      <thead><tr><th>Feature</th><th>Comments</th><th>Assertions</th></tr></thead>
+      <tbody>
+        <tr><td>Purpose</td><td>Documentation only</td><td>Executable documentation</td></tr>
+        <tr><td>Checked by Java</td><td>No</td><td>Yes (when enabled)</td></tr>
+        <tr><td>Reliability</td><td>Can become outdated</td><td>Always verifies condition</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="topic">Why Not Use Exceptions Everywhere?</h3>
+    <ul>
+      <li>Exceptions → Inform caller of invalid input (public APIs).</li>
+      <li>Assertions → Internal checks, can be disabled in production for performance.</li>
+    </ul>
+
+    <h3 class="topic">Assertion Syntax</h3>
+    <p><strong>Basic:</strong></p>
+    <pre><code>assert condition;</code></pre>
+    <p><strong>With message:</strong></p>
+    <pre><code>assert x >= 0 : "x cannot be negative";</code></pre>
+
+    <h3 class="topic">Predicate</h3>
+    <p>The condition inside an assertion is called a Predicate.</p>
+    <p>Examples: <code>x &gt; 0</code>, <code>age &gt;= 18</code>, <code>name != null</code>.</p>
+
+    <h3 class="topic">AssertionError</h3>
+    <p>If assertion fails → Java throws AssertionError.</p>
+    <p><strong>Hierarchy:</strong></p>
+    <div class="diagram">Throwable
+├── Error
+│    └── AssertionError
+└── Exception</div>
+
+    <h4 class="subtopic">Should We Catch AssertionError?</h4>
+    <ul>
+      <li>No.</li>
+      <li>AssertionError = programming mistake.</li>
+      <li>Correct approach → Fix the code, not catch the error.</li>
+    </ul>
+
+    <h3 class="topic">Assertions vs Exceptions</h3>
+    <table>
+      <thead><tr><th>Feature</th><th>Assertion</th><th>Exception</th></tr></thead>
+      <tbody>
+        <tr><td>Purpose</td><td>Internal assumptions</td><td>Runtime problems</td></tr>
+        <tr><td>Used For</td><td>Developer mistakes</td><td>User/external errors</td></tr>
+        <tr><td>Recovery</td><td>No</td><td>Yes</td></tr>
+        <tr><td>Production</td><td>Usually disabled</td><td>Always active</td></tr>
+        <tr><td>Handling</td><td>Should not be caught</td><td>Usually caught</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="topic">When to Use</h3>
+    <ul>
+      <li><strong>Assertions</strong> → Internal calculations, algorithm validation, debugging logic.</li>
+      <li><strong>Exceptions</strong> → Invalid input, file not found, database/network errors.</li>
+    </ul>
+
+    <h3 class="topic">Assertion Lifecycle</h3>
+    <p>Development → Testing → Disabled in Production.</p>
+
+    <h4 class="subtopic">Assertion Execution Flow</h4>
+    <div class="diagram">Condition → True  → Continue
+Condition → False → AssertionError → Program stops</div>
+    <p><strong>Stack Trace:</strong> When assertion fails → Java prints a Stack Trace showing:</p>
+    <ul>
+      <li>Error location</li>
+      <li>Method calls</li>
+      <li>Line numbers</li>
+    </ul>
+
+    <h3 class="topic">Enabling &amp; Disabling Assertions</h3>
+    <ul>
+      <li><strong>Enable:</strong> <code>java -ea MyProgram</code></li>
+      <li><strong>Disable:</strong> <code>java -da MyProgram</code></li>
+      <li><strong>Enable for one class:</strong> <code>java -ea:com.mycompany.MyClass Main</code></li>
+      <li><strong>Enable for package:</strong> <code>java -ea:com.mycompany...</code></li>
+      <li><strong>Enable system assertions:</strong> <code>java -esa</code></li>
+    </ul>
+
+    <h3 class="topic">Life Jacket Analogy</h3>
+    <ul>
+      <li>Development → Assertions enabled (safety).</li>
+      <li>Production → Assertions disabled (performance).</li>
+    </ul>
+
+    <h3 class="topic">Decision Rules</h3>
+    <ul>
+      <li>Use Exception → Public API, user mistakes, recoverable errors.</li>
+      <li>Use Assertion → Internal conditions, programmer mistakes, expensive checks.</li>
+    </ul>
+
+    <h3 class="topic">Best Practices</h3>
+    <ul>
+      <li>Use assertions only for internal assumptions.</li>
+      <li>Never validate user input with assertions.</li>
+      <li>Never catch AssertionError.</li>
+      <li>Keep assertions enabled during development/testing.</li>
+      <li>Disable in production.</li>
+      <li>Use meaningful messages.</li>
+      <li>Use exceptions for public APIs.</li>
+    </ul>
+
+    <h4 class="subtopic">Revision Table</h4>
+    <table>
+      <thead><tr><th>Concept</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>Assertion</td><td>Debugging tool to verify assumptions</td></tr>
+        <tr><td>Predicate</td><td>Boolean expression inside assertion</td></tr>
+        <tr><td>assert</td><td>Keyword used to write assertions</td></tr>
+        <tr><td>AssertionError</td><td>Error thrown when assertion fails</td></tr>
+        <tr><td>Stack Trace</td><td>Shows error location and method calls</td></tr>
+        <tr><td>-ea</td><td>Enable assertions</td></tr>
+        <tr><td>-da</td><td>Disable assertions</td></tr>
+        <tr><td>-esa</td><td>Enable system assertions</td></tr>
+        <tr><td>Exception</td><td>Recoverable runtime problems</td></tr>
+        <tr><td>Executable Documentation</td><td>Assumptions written as executable code</td></tr>
+        <tr><td>Life Jacket Philosophy</td><td>Enable in development, disable in production</td></tr>
+      </tbody>
+    </table>
+
+    <div class="keywords">
+      <h4>Important Keywords</h4>
+      <ul>
+        <li><strong>Assertion</strong> → Debugging feature to check assumptions.</li>
+        <li><strong>Executable Documentation</strong> → Assertions replace comments with executable checks.</li>
+        <li><strong>Predicate</strong> → Boolean condition inside assertion.</li>
+        <li><strong>AssertionError</strong> → Thrown when assertion fails.</li>
+        <li><strong>Assertions vs Exceptions</strong> → Assertions = programmer mistakes; Exceptions = runtime problems.</li>
+        <li><strong>assert Keyword</strong> → Used to write assertions.</li>
+        <li><strong>-ea / -enableassertions</strong> → Enables assertions.</li>
+        <li><strong>-da / -disableassertions</strong> → Disables assertions.</li>
+        <li><strong>-esa / -enablesystemassertions</strong> → Enables assertions for system classes.</li>
+        <li><strong>Stack Trace</strong> → Shows method calls and line numbers.</li>
+        <li><strong>Life Jacket Philosophy</strong> → Assertions enabled in development, disabled in production.</li>
+      </ul>
+    </div>
+    <a class="back-to-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- ===================== LECTURE 5 ===================== -->
+  <section class="lecture" id="lecture5">
+    <h2>Lecture 5: Logging</h2>
+
+    <h3 class="topic">What is Logging?</h3>
+    <p>Logging is the process of recording important information about a program while it is running.</p>
+    <p>It helps developers:</p>
+    <ul>
+      <li>Find bugs</li>
+      <li>Monitor applications</li>
+      <li>Audit user activities</li>
+      <li>Analyze failures later</li>
+    </ul>
+
+    <h3 class="topic">Why Do We Need Logging?</h3>
+    <p>In real-world systems (banking, reservations, hospitals, e-commerce), logging answers:</p>
+    <ul>
+      <li>What happened?</li>
+      <li>When did it happen?</li>
+      <li>Where did it happen?</li>
+      <li>Why did it happen?</li>
+    </ul>
+
+    <h3 class="topic">Output vs Logging</h3>
+    <ul>
+      <li><code>System.out.println()</code> → Temporary, lost after program ends.</li>
+      <li>Logging → Permanent record with metadata (time, date, method, class, log level).</li>
+    </ul>
+
+    <h4 class="subtopic">Problems with Print Statements</h4>
+    <ul>
+      <li>Manual work (add/remove statements).</li>
+      <li>Code clutter.</li>
+      <li>No metadata (date, time, class).</li>
+      <li>Cannot control easily in production.</li>
+    </ul>
+
+    <h3 class="topic">Advantages of Logging</h3>
+    <ul>
+      <li>Permanent records</li>
+      <li>Better debugging</li>
+      <li>Automatic timestamps</li>
+      <li>Function information</li>
+      <li>Error tracking</li>
+      <li>Performance monitoring</li>
+      <li>Auditing</li>
+    </ul>
+
+    <h3 class="topic">What is a Logger?</h3>
+    <p>A Logger is an object that records log messages.</p>
+    <pre><code>Logger logger = Logger.getGlobal();
+logger.info("Program Started");</code></pre>
+
+    <h4 class="subtopic">Types of Loggers</h4>
+    <ul>
+      <li><strong>Global Logger</strong> → <code>Logger.getGlobal()</code> (small apps).</li>
+      <li><strong>Named Logger</strong> → <code>Logger.getLogger("Bank")</code> (large apps, modular).</li>
+    </ul>
+
+    <h4 class="subtopic">Metadata Advantage</h4>
+    <p>Logs automatically include:</p>
+    <ul>
+      <li>Date</li>
+      <li>Time</li>
+      <li>Class name</li>
+      <li>Method name</li>
+      <li>Message</li>
+    </ul>
+
+    <h3 class="topic">Logger Hierarchy</h3>
+    <p>Loggers follow package hierarchy:</p>
+    <div class="diagram">in → in.ac → in.ac.iitm → in.ac.iitm.onlinedegree</div>
+    <p>Parent loggers control child loggers.</p>
+
+    <h4 class="subtopic">Cascading Property</h4>
+    <p>Settings applied to parent logger are inherited by child loggers.</p>
+
+    <h3 class="topic">Logging Handlers</h3>
+    <p>Handlers process log messages and send them to destinations:</p>
+    <ul>
+      <li>Console</li>
+      <li>File</li>
+      <li>Database</li>
+      <li>Network</li>
+    </ul>
+
+    <h4 class="subtopic">Logging Levels (highest → lowest)</h4>
+    <ul>
+      <li><strong>SEVERE</strong> → Serious errors</li>
+      <li><strong>WARNING</strong> → Possible problems</li>
+      <li><strong>INFO</strong> → General info</li>
+      <li><strong>CONFIG</strong> → Configuration details</li>
+      <li><strong>FINE</strong> → Basic debugging</li>
+      <li><strong>FINER</strong> → Detailed debugging</li>
+      <li><strong>FINEST</strong> → Complete debugging</li>
+    </ul>
+    <p>Special levels: <code>ALL</code> (everything), <code>OFF</code> (nothing).</p>
+
+    <h4 class="subtopic">Default Logging Level</h4>
+    <p>By default → SEVERE, WARNING, INFO.</p>
+
+    <h3 class="topic">setLevel()</h3>
+    <p>Changes logging level.</p>
+    <pre><code>logger.setLevel(Level.FINE);</code></pre>
+    <p>Useful for switching between production (important logs only) and development (detailed logs).</p>
+
+    <p><strong>External Configuration:</strong> Professional projects use configuration files for logging.</p>
+    <p><strong>Advantages:</strong></p>
+    <ul>
+      <li>No code changes</li>
+      <li>No recompilation</li>
+      <li>Easy maintenance</li>
+    </ul>
+
+    <h4 class="subtopic">Logging vs Print Statements</h4>
+    <table>
+      <thead><tr><th>Print Statements</th><th>Logging</th></tr></thead>
+      <tbody>
+        <tr><td>Manual</td><td>Automatic</td></tr>
+        <tr><td>No timestamp</td><td>Timestamp included</td></tr>
+        <tr><td>No method name</td><td>Method name included</td></tr>
+        <tr><td>Temporary</td><td>Permanent</td></tr>
+        <tr><td>Difficult to manage</td><td>Easy to manage</td></tr>
+        <tr><td>Cannot filter</td><td>Supports log levels</td></tr>
+        <tr><td>No hierarchy</td><td>Hierarchical</td></tr>
+        <tr><td>Needs code changes</td><td>Configurable externally</td></tr>
+      </tbody>
+    </table>
+
+    <h4 class="subtopic">Logging vs Assertions</h4>
+    <table>
+      <thead><tr><th>Logging</th><th>Assertions</th></tr></thead>
+      <tbody>
+        <tr><td>Records events</td><td>Checks assumptions</td></tr>
+        <tr><td>Used in production</td><td>Used in testing</td></tr>
+        <tr><td>Helps debugging later</td><td>Stops execution if condition fails</td></tr>
+        <tr><td>Permanent</td><td>Disabled in production</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="topic">Best Practices</h3>
+    <ul>
+      <li>Use logging instead of System.out.println().</li>
+      <li>Write meaningful log messages.</li>
+      <li>Use appropriate log levels.</li>
+      <li>SEVERE → critical failures only.</li>
+      <li>FINE/FINER/FINEST → debugging.</li>
+      <li>Organize loggers by package hierarchy.</li>
+      <li>Use external configuration files.</li>
+      <li>Never remove logging statements → adjust level instead.</li>
+    </ul>
+
+    <h4 class="subtopic">Revision Table</h4>
+    <table>
+      <thead><tr><th>Concept</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>Logging</td><td>Recording program events</td></tr>
+        <tr><td>Logger</td><td>Object generating log messages</td></tr>
+        <tr><td>Global Logger</td><td>Built-in logger</td></tr>
+        <tr><td>Named Logger</td><td>Custom logger</td></tr>
+        <tr><td>Metadata</td><td>Date, time, class, method</td></tr>
+        <tr><td>Handler</td><td>Processes/stores logs</td></tr>
+        <tr><td>Logger Hierarchy</td><td>Parent-child structure</td></tr>
+        <tr><td>Cascading</td><td>Child inherits parent settings</td></tr>
+        <tr><td>setLevel()</td><td>Changes logging level</td></tr>
+        <tr><td>External Configuration</td><td>Manage logs via config files</td></tr>
+        <tr><td>SEVERE</td><td>Critical error</td></tr>
+        <tr><td>WARNING</td><td>Potential problem</td></tr>
+        <tr><td>INFO</td><td>General info</td></tr>
+        <tr><td>CONFIG</td><td>Configuration details</td></tr>
+        <tr><td>FINE</td><td>Basic debugging</td></tr>
+        <tr><td>FINER</td><td>Detailed debugging</td></tr>
+        <tr><td>FINEST</td><td>Most detailed debugging</td></tr>
+        <tr><td>ALL</td><td>Records everything</td></tr>
+        <tr><td>OFF</td><td>Disables logging</td></tr>
+      </tbody>
+    </table>
+
+    <div class="quote">Logging Levels (Trick): Smart Workers In College Find Fast Fixes<br>(SEVERE → WARNING → INFO → CONFIG → FINE → FINER → FINEST)</div>
+
+    <div class="keywords">
+      <h4>Important Keywords</h4>
+      <ul>
+        <li><strong>Logging</strong> → Recording program events for debugging, monitoring, auditing.</li>
+        <li><strong>Logger</strong> → Object that creates log messages.</li>
+        <li><strong>Global Logger</strong> → Built-in logger.</li>
+        <li><strong>Named Logger</strong> → Custom logger.</li>
+        <li><strong>Metadata</strong> → Date, time, class, method.</li>
+        <li><strong>Handler</strong> → Processes/stores logs.</li>
+        <li><strong>Logger Hierarchy</strong> → Parent-child organization.</li>
+        <li><strong>Cascading</strong> → Child inherits parent settings.</li>
+        <li><strong>Logging Levels</strong> → SEVERE → WARNING → INFO → CONFIG → FINE → FINER → FINEST.</li>
+        <li><strong>Default Levels</strong> → SEVERE, WARNING, INFO.</li>
+        <li><strong>setLevel()</strong> → Changes minimum logging level.</li>
+        <li><strong>External Configuration</strong> → Manage logging without code changes.</li>
+        <li><strong>Logging vs Print Statements</strong> → Logging is structured, permanent, configurable.</li>
+      </ul>
+    </div>
+    <a class="back-to-top" href="#top">↑ Back to top</a>
+  </section>
+
+</div>
+</body>
+</html>

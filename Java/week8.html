@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 8: Short Notes — Java</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1c1f24;
+    --muted: #5b6472;
+    --accent: #2f6fed;
+    --accent-soft: #eaf1ff;
+    --border: #e2e6ec;
+    --code-bg: #0f172a;
+    --code-text: #e2e8f0;
+    --table-head: #f1f5fb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #f6f8fb;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+  header.doc-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  header.doc-header h1 {
+    font-size: 2rem;
+    margin: 0 0 6px;
+  }
+  header.doc-header p {
+    color: var(--muted);
+    margin: 0;
+  }
+  nav.toc {
+    background: var(--accent-soft);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 40px;
+  }
+  nav.toc h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    color: var(--accent);
+  }
+  nav.toc ol {
+    margin: 0;
+    padding-left: 20px;
+  }
+  nav.toc a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  nav.toc a:hover {
+    text-decoration: underline;
+    color: var(--accent);
+  }
+  section.lecture {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px;
+    margin-bottom: 32px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  section.lecture > h2 {
+    font-size: 1.5rem;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent-soft);
+    padding-bottom: 10px;
+    margin-top: 0;
+  }
+  h3.topic {
+    font-size: 1.15rem;
+    margin-top: 28px;
+    margin-bottom: 10px;
+    color: #1c1f24;
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+  }
+  h4.subtopic {
+    font-size: 1rem;
+    margin-top: 18px;
+    margin-bottom: 6px;
+    color: #33404f;
+  }
+  ul, ol {
+    margin: 6px 0 6px 0;
+    padding-left: 22px;
+  }
+  li {
+    margin-bottom: 4px;
+  }
+  p {
+    margin: 6px 0;
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 14px 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.88rem;
+    margin: 10px 0 16px;
+  }
+  code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+  p code, li code {
+    background: #eef1f6;
+    color: #b83280;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 20px;
+    font-size: 0.92rem;
+    overflow-x: auto;
+    display: block;
+  }
+  table thead, table tbody { display: table; width: 100%; table-layout: fixed; }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--table-head);
+    font-weight: 600;
+  }
+  tr:nth-child(even) td {
+    background: #fafbfd;
+  }
+  .diagram {
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 14px 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.85rem;
+    margin: 10px 0 16px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    white-space: pre;
+  }
+  .quote {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    padding: 12px 18px;
+    margin: 14px 0;
+    border-radius: 6px;
+    font-style: italic;
+  }
+  .revision {
+    background: #fff8e6;
+    border: 1px solid #f2dca0;
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-top: 24px;
+  }
+  .revision h4 {
+    margin-top: 0;
+    color: #8a6300;
+  }
+  .keywords {
+    background: #eef8f0;
+    border: 1px solid #bfe6c9;
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-top: 24px;
+  }
+  .keywords h4 {
+    margin-top: 0;
+    color: #1c7a3c;
+  }
+  .keywords li strong {
+    color: #1c7a3c;
+  }
+  .back-to-top {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 0.85rem;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .back-to-top:hover {
+    text-decoration: underline;
+  }
+  @media (prefers-color-scheme: dark) {
+    body { background: #14161a; color: #e6e9ee; }
+    section.lecture { background: #1b1e24; border-color: #2a2e36; }
+    nav.toc { background: #202634; border-color: #2a2e36; }
+    th { background: #232833; }
+    tr:nth-child(even) td { background: #1e222a; }
+    p code, li code { background: #262b35; color: #ff9ecb; }
+    .revision { background: #2a2410; border-color: #4a3f16; }
+    .keywords { background: #16261c; border-color: #275c39; }
+    .quote { background: #202634; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <header class="doc-header">
+    <h1>Week 8: Short Notes</h1>
+    <p>Java — Cloning, Type Inference, Higher Order Functions &amp; Streams</p>
+  </header>
+
+  <nav class="toc" id="top">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#lecture1">Lecture 1: Cloning</a></li>
+      <li><a href="#lecture2">Lecture 2: Type Inference</a></li>
+      <li><a href="#lecture3">Lecture 3: Higher Order Functions</a></li>
+      <li><a href="#lecture4">Lecture 4: Streams in Java</a></li>
+    </ol>
+  </nav>
+
+  <!-- ===================== LECTURE 1 ===================== -->
+  <section class="lecture" id="lecture1">
+    <h2>Lecture 1: Cloning</h2>
+
+    <h3 class="topic">Aliasing</h3>
+    <ul>
+      <li><strong>Definition:</strong> When two reference variables point to the same object.</li>
+      <li><strong>Effect:</strong> Any change made through one reference is visible through the other.</li>
+    </ul>
+    <pre><code>Employee e1 = new Employee();
+Employee e2 = e1; // aliasing</code></pre>
+    <p><strong>Example:</strong></p>
+    <pre><code>e2.setName("Alice"); // e1 also sees "Alice"</code></pre>
+    <p><strong>Primitive variables:</strong> Independent copies.</p>
+    <pre><code>int x = 10;
+int y = x; // changing y does not affect x</code></pre>
+    <ul>
+      <li>Object references: Only the reference (memory address) is copied.</li>
+      <li>Problem: Unintended side effects.</li>
+      <li>Solution: Use cloning or copy constructors.</li>
+    </ul>
+
+    <h3 class="topic">Shallow Copy – Object.clone()</h3>
+    <ul>
+      <li><strong>Provided by:</strong> Object class.</li>
+      <li><strong>Mechanism:</strong> Bit-by-bit copy into new memory location.</li>
+    </ul>
+    <h4 class="subtopic">Field behavior</h4>
+    <table>
+      <thead><tr><th>Field Type</th><th>Result in Shallow Copy</th></tr></thead>
+      <tbody>
+        <tr><td>Primitive fields</td><td>Independent copy</td></tr>
+        <tr><td>Immutable objects (String, Double)</td><td>Safe to share</td></tr>
+        <tr><td>Mutable objects (Date, ArrayList)</td><td>Reference is shared</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Example:</strong></p>
+    <pre><code>Employee e2 = (Employee) e1.clone();</code></pre>
+    <p><strong>Limitation:</strong> Nested mutable objects are shared.</p>
+    <pre><code>e2.birthday.setYear(...); // also modifies e1.birthday</code></pre>
+
+    <h3 class="topic">Deep Copy</h3>
+    <ul>
+      <li><strong>Definition:</strong> Independent copies of all mutable nested objects.</li>
+      <li><strong>Goal:</strong> No shared mutable references.</li>
+    </ul>
+    <p><strong>Steps:</strong></p>
+    <ol>
+      <li>Call <code>super.clone()</code> → shallow copy.</li>
+      <li>Clone every mutable field.</li>
+      <li>Assign cloned objects to fields.</li>
+    </ol>
+    <p><strong>Example:</strong></p>
+    <pre><code>public Employee clone() {
+    Employee copy = (Employee) super.clone();
+    copy.birthday = (Date) birthday.clone();
+    return copy;
+}</code></pre>
+    <p><strong>Result:</strong> Modifying clone's birthday does not affect original.</p>
+
+    <h3 class="topic">Covariant Return Type</h3>
+    <p><strong>Normally:</strong></p>
+    <pre><code>Object clone()</code></pre>
+    <p><strong>Allowed:</strong></p>
+    <pre><code>public Employee clone()</code></pre>
+    <ul>
+      <li><strong>Benefit:</strong> Caller gets Employee directly, no cast required.</li>
+      <li><strong>Inside method:</strong> super.clone() still returns Object.</li>
+    </ul>
+
+    <h3 class="topic">Inheritance Paradox</h3>
+    <p><strong>Example hierarchy:</strong> Employee → Manager</p>
+    <ul>
+      <li>Employee deep copies birthday.</li>
+      <li>Manager adds promotionDate.</li>
+      <li>If Manager does not override clone(), promotionDate is shallowly copied.</li>
+      <li><strong>Result:</strong> Partial deep copy → dangerous.</li>
+    </ul>
+    <p><strong>Rule:</strong> Subclasses with mutable fields must override clone().</p>
+
+    <h3 class="topic">Java Cloning Safeguards</h3>
+    <ul>
+      <li><strong>Cloneable interface:</strong> Marker interface, signals cloning allowed.</li>
+      <li>Without it: <code>CloneNotSupportedException</code>.</li>
+    </ul>
+    <p><strong>Protected clone():</strong></p>
+    <pre><code>protected Object clone();</code></pre>
+    <p><strong>To allow external cloning:</strong></p>
+    <pre><code>public Employee clone()</code></pre>
+    <p><strong>Checked exception:</strong></p>
+    <pre><code>try {
+    Employee e2 = e1.clone();
+} catch (CloneNotSupportedException e) {
+    e.printStackTrace();
+}</code></pre>
+
+    <h4 class="subtopic">Shallow vs Deep Copy</h4>
+    <table>
+      <thead><tr><th>Feature</th><th>Shallow Copy</th><th>Deep Copy</th></tr></thead>
+      <tbody>
+        <tr><td>Top-level object</td><td>Copied</td><td>Copied</td></tr>
+        <tr><td>Nested mutable objects</td><td>Shared</td><td>Independently cloned</td></tr>
+        <tr><td>Speed</td><td>Fast</td><td>Slower</td></tr>
+        <tr><td>Side effects</td><td>Possible</td><td>None</td></tr>
+        <tr><td>Default behavior</td><td>Object.clone()</td><td>Manual implementation</td></tr>
+      </tbody>
+    </table>
+
+    <div class="keywords">
+      <h4>Final Architect's Verdict</h4>
+      <ol>
+        <li>e2 = e1 → aliasing</li>
+        <li>Object.clone() → shallow copy</li>
+        <li>Deep copy → clone all mutable fields</li>
+        <li>Subclasses must override clone() if they add mutable fields</li>
+        <li>Cloneable + public clone() + exception handling = safety mechanisms</li>
+      </ol>
+    </div>
+
+    <div class="revision">
+      <h4>Real-World Note &amp; Summary</h4>
+      <p>Many developers prefer copy constructors or other techniques because clone() is fragile and error-prone.</p>
+      <p><strong>One-Line Summary:</strong> Aliasing causes shared references, shallow copy duplicates only top-level objects, deep copy ensures independence of nested mutable fields, and Java's cloning safeguards enforce careful design to avoid corruption.</p>
+    </div>
+    <a class="back-to-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- ===================== LECTURE 2 ===================== -->
+  <section class="lecture" id="lecture2">
+    <h2>Lecture 2: Type Inference</h2>
+
+    <h3 class="topic">Introduction</h3>
+    <ul>
+      <li>Java is strongly and statically typed.</li>
+      <li>Earlier: explicit type declarations.</li>
+    </ul>
+    <pre><code>String name = "Rohit";</code></pre>
+    <p><strong>Modern Java:</strong> type inference with var.</p>
+    <pre><code>var name = "Rohit"; // compiler infers String</code></pre>
+    <p><strong>Main idea:</strong></p>
+    <ul>
+      <li>Less code for programmer</li>
+      <li>Compiler identifies type</li>
+      <li>Type safety remains intact</li>
+    </ul>
+
+    <h4 class="subtopic">Type Declaration vs Type Inference</h4>
+    <table>
+      <thead><tr><th>Type Declaration</th><th>Type Inference</th></tr></thead>
+      <tbody>
+        <tr><td>Programmer writes type</td><td>Compiler finds type</td></tr>
+        <tr><td>Explicit declaration</td><td>Automatic deduction</td></tr>
+        <tr><td>Checked at compile time</td><td>Checked at compile time</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Example:</strong></p>
+    <pre><code>String s = "Hello"; // declaration
+var t = "Hello";     // inference</code></pre>
+    <p>Both are treated as String.</p>
+
+    <h3 class="topic">How Type Inference Works</h3>
+    <ul><li>Compiler acts like a detective.</li></ul>
+    <p>Looks at RHS value → deduces type.</p>
+    <pre><code>var s = "Hello" + "World"; // s is String</code></pre>
+    <p><strong>Type obligation:</strong> Once inferred, type is fixed.</p>
+    <pre><code>var x = 10;    // int
+x = 20;        // OK
+x = "Hello";   // Error</code></pre>
+    <p>No backtracking → conflicts cause compilation failure.</p>
+
+    <h3 class="topic">Type Propagation</h3>
+    <ul><li>Compiler carries type forward.</li></ul>
+    <pre><code>var s = "Hello";
+var t = s + 5; // t is String</code></pre>
+    <p>Type information flows through expressions.</p>
+
+    <h3 class="topic">Why Java Limits Type Inference</h3>
+    <ul>
+      <li>Conservative approach.</li>
+    </ul>
+    <p><strong>Example:</strong></p>
+    <pre><code>x.bonus(); // compiler won't infer Manager</code></pre>
+    <p><strong>Reasons:</strong></p>
+    <ul>
+      <li>Algorithmic complexity</li>
+      <li>Object hierarchy ambiguity</li>
+      <li>Performance predictability</li>
+    </ul>
+
+    <h3 class="topic">The var Keyword</h3>
+    <ul>
+      <li>Not dynamic typing.</li>
+      <li>Python: type can change.</li>
+      <li>Java: type fixed at compile time.</li>
+    </ul>
+    <pre><code>var x = 10; // always int</code></pre>
+
+    <h4 class="subtopic">Rules of var</h4>
+    <ul>
+      <li><strong>Rule 1:</strong> Local variables only.</li>
+    </ul>
+    <pre><code>public void test() { var x = 10; } // allowed
+class Test { var x = 10; }         // error</code></pre>
+    <ul><li><strong>Rule 2:</strong> Initialization mandatory.</li></ul>
+    <pre><code>var x = 10; // OK
+var y;      // Error</code></pre>
+
+    <h4 class="subtopic">Constant Literals and Inference</h4>
+    <table>
+      <thead><tr><th>Code</th><th>Inferred Type</th></tr></thead>
+      <tbody>
+        <tr><td>var d = 2.0;</td><td>double</td></tr>
+        <tr><td>var f = 2.0f;</td><td>float</td></tr>
+        <tr><td>var n = 10L;</td><td>long</td></tr>
+        <tr><td>var flag = true;</td><td>boolean</td></tr>
+      </tbody>
+    </table>
+    <p>Use suffixes (f, L) for specific types.</p>
+
+    <h3 class="topic">var with Inheritance</h3>
+    <pre><code>class Employee {}
+class Manager extends Employee {}
+
+var e = new Manager(); // e is Manager</code></pre>
+    <ul><li>Compiler chooses most specific subtype.</li></ul>
+
+    <h3 class="topic">var and Polymorphism</h3>
+    <p><strong>Using var:</strong></p>
+    <pre><code>var e = new Manager();
+e = new Employee(); // Error</code></pre>
+    <p><strong>Explicit type:</strong></p>
+    <pre><code>Employee e = new Manager();
+e = new Employee(); // OK</code></pre>
+    <p><strong>Best practice:</strong> Use explicit types for polymorphism.</p>
+
+    <h3 class="topic">Best Practices</h3>
+    <ul><li>Use var when type is obvious.</li></ul>
+    <pre><code>var list = new ArrayList&lt;String&gt;();
+var name = "Rohit";</code></pre>
+    <p>Avoid var when type is unclear or polymorphism is needed.</p>
+    <pre><code>Employee emp = new Manager();</code></pre>
+
+    <div class="keywords">
+      <h4>Final Checklist</h4>
+      <ol>
+        <li>var performs compile-time type inference</li>
+        <li>Java remains statically typed</li>
+        <li>Inferred type becomes fixed</li>
+        <li>Compiler does not backtrack</li>
+        <li>var works only for local variables</li>
+        <li>Initialization is mandatory</li>
+        <li>Use suffixes (f, L) for correct inference</li>
+        <li>var chooses most specific subtype</li>
+        <li>Use explicit types for polymorphism</li>
+        <li>Use var mainly to remove redundant declarations</li>
+      </ol>
+    </div>
+    <a class="back-to-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- ===================== LECTURE 3 ===================== -->
+  <section class="lecture" id="lecture3">
+    <h2>Lecture 3: Higher Order Functions</h2>
+
+    <h3 class="topic">Definition of HOF</h3>
+    <ul>
+      <li><strong>Higher Order Function (HOF):</strong> A function that takes another function as an argument.</li>
+      <li><strong>Purpose:</strong>
+        <ul>
+          <li>Callbacks</li>
+          <li>Event handling</li>
+          <li>Asynchronous programming</li>
+          <li>Parallel computation</li>
+          <li>Reusable logic</li>
+        </ul>
+      </li>
+    </ul>
+    <p>Example: A Timer receives a function to run when it finishes → callback.</p>
+
+    <h3 class="topic">Difficulty in Old Java</h3>
+    <ul>
+      <li>Java originally followed strict OOP.</li>
+      <li>Functions could not be passed directly.</li>
+      <li>Developers had to:
+        <ol>
+          <li>Create an interface</li>
+          <li>Implement the interface</li>
+          <li>Create an object</li>
+          <li>Pass the object</li>
+        </ol>
+      </li>
+      <li><strong>Result:</strong> Boilerplate code.</li>
+    </ul>
+
+    <h3 class="topic">Interfaces as Solution</h3>
+    <ul><li>Interfaces used to pass behavior.</li></ul>
+    <pre><code>interface TimerOwner {
+    void timerDone();
+}</code></pre>
+    <ul>
+      <li>Examples: Comparator, Runnable, Callable.</li>
+      <li>Interface = contract → guarantees required method exists.</li>
+    </ul>
+
+    <h4 class="subtopic">Arrays.sort() Example</h4>
+    <table>
+      <thead><tr><th>Sorting Target</th><th>Mechanism</th></tr></thead>
+      <tbody>
+        <tr><td>Primitives</td><td>Method overloading</td></tr>
+        <tr><td>Objects</td><td>Comparator interface</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="topic">Box-in-a-Box Problem</h3>
+    <ul><li>Passing small logic required creating a whole class.</li></ul>
+    <pre><code>class MyComparator implements Comparator&lt;String&gt; {
+    public int compare(String a, String b) {
+        return a.length() - b.length();
+    }
+}
+Arrays.sort(arr, new MyComparator());</code></pre>
+    <p>Verbose and inefficient.</p>
+
+    <h3 class="topic">Python vs Java</h3>
+    <p><strong>Python:</strong> Functions are first-class citizens.</p>
+    <pre><code>map(square, numbers)</code></pre>
+    <ul>
+      <li><strong>Old Java:</strong> Functions must be wrapped in objects.</li>
+      <li><strong>Solution:</strong> Lambda expressions.</li>
+    </ul>
+
+    <h3 class="topic">Lambda Expressions</h3>
+    <ul>
+      <li>Anonymous function.</li>
+      <li>Syntax: <code>(parameters) -&gt; expression</code>.</li>
+    </ul>
+    <pre><code>(s1, s2) -> s1.length() - s2.length();</code></pre>
+    <p><strong>Used in:</strong></p>
+    <pre><code>Arrays.sort(arr, (s1, s2) -> s1.length() - s2.length());</code></pre>
+
+    <h4 class="subtopic">Structure of a Lambda</h4>
+    <ul>
+      <li>Normal function: name, parameters, return type, body.</li>
+      <li>Lambda: removes name.</li>
+    </ul>
+    <pre><code>(String s1, String s2) -> s1.length() - s2.length();</code></pre>
+    <p><strong>Components:</strong> parameters → arrow → body.</p>
+
+    <h3 class="topic">Type Inference in Lambdas</h3>
+    <ul><li>Compiler infers parameter types.</li></ul>
+    <pre><code>(s1, s2) -> s1.length() - s2.length();</code></pre>
+
+    <h4 class="subtopic">Return Rule</h4>
+    <ul><li>Single expression → implicit return.</li></ul>
+    <pre><code>(a, b) -> a + b</code></pre>
+    <ul><li>Multiple statements → explicit return.</li></ul>
+    <pre><code>(a, b) -> {
+    if (a > b) return a;
+    else return b;
+}</code></pre>
+
+    <h3 class="topic">Lambda Calculus History</h3>
+    <ul>
+      <li>Origin: Alonzo Church.</li>
+      <li>Turing model: machine-oriented, execution steps.</li>
+      <li>Lambda calculus: function-oriented, transformations.</li>
+      <li>Java adopted functional style with lambdas.</li>
+    </ul>
+
+    <h3 class="topic">Functional Interfaces</h3>
+    <ul><li>Interface with exactly one abstract method.</li></ul>
+    <pre><code>interface Calculator {
+    int add(int a, int b);
+}
+Calculator c = (x, y) -> x + y;</code></pre>
+    <ul>
+      <li>May contain default/static methods.</li>
+      <li>Only one abstract method allowed.</li>
+    </ul>
+
+    <h3 class="topic">Caller vs Consumer</h3>
+    <ul>
+      <li><strong>Caller:</strong> provides lambda.</li>
+      <li><strong>Consumer:</strong> receives it (e.g., Arrays.sort).</li>
+      <li>Backward compatibility preserved.</li>
+    </ul>
+
+    <h3 class="topic">Method References</h3>
+    <ul><li>Shorthand for lambdas calling existing methods.</li></ul>
+    <table>
+      <thead><tr><th>Lambda</th><th>Method Reference</th></tr></thead>
+      <tbody>
+        <tr><td>(a, b) -&gt; Integer.sum(a, b)</td><td>Integer::sum</td></tr>
+        <tr><td>x -&gt; obj.process(x)</td><td>obj::process</td></tr>
+        <tr><td>s -&gt; s.toLowerCase()</td><td>String::toLowerCase</td></tr>
+        <tr><td>() -&gt; new ArrayList&lt;&gt;()</td><td>ArrayList::new</td></tr>
+      </tbody>
+    </table>
+
+    <h4 class="subtopic">Limitations of Method References</h4>
+    <ul>
+      <li>Only valid when lambda is a single method call.</li>
+      <li>Invalid if extra logic is present → use lambda instead.</li>
+    </ul>
+
+    <div class="keywords">
+      <h4>Final Checklist</h4>
+      <ol>
+        <li>HOF = function that accepts another function</li>
+        <li>Old Java used interfaces for behavior passing</li>
+        <li>Comparator = classic example</li>
+        <li>Lambdas = anonymous functions (params) -&gt; body</li>
+        <li>Parameter types often inferred</li>
+        <li>Braces → explicit return</li>
+        <li>Lambdas require functional interface (one abstract method)</li>
+        <li>Method references use ::</li>
+        <li>Method references only for single method calls</li>
+        <li>Lambdas reduced boilerplate, added functional programming</li>
+      </ol>
+    </div>
+
+    <div class="quote">
+      Shortcut memory: Interface = contract · Lambda = anonymous implementation · Method reference = shortest form of lambda
+    </div>
+    <a class="back-to-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- ===================== LECTURE 4 ===================== -->
+  <section class="lecture" id="lecture4">
+    <h2>Lecture 4: Streams in Java</h2>
+
+    <h3 class="topic">Introduction</h3>
+    <ul><li>Earlier: Iterators required manual loops, counters, and state.</li></ul>
+    <pre><code>Iterator&lt;Integer&gt; it = list.iterator();
+while (it.hasNext()) {
+    System.out.println(it.next());
+}</code></pre>
+    <ul>
+      <li><strong>Stream API:</strong> Declarative, functional way to process data.</li>
+      <li><strong>Concept:</strong> A stream is a flow of data → like a ticker, feed, or conveyor belt.</li>
+    </ul>
+
+    <h4 class="subtopic">Iterator vs Stream</h4>
+    <table>
+      <thead><tr><th>Iterator</th><th>Stream</th></tr></thead>
+      <tbody>
+        <tr><td>Pull model</td><td>Flow/push model</td></tr>
+        <tr><td>Manual iteration</td><td>Automatic pipeline</td></tr>
+        <tr><td>Focus on loop mechanics</td><td>Focus on transformation logic</td></tr>
+        <tr><td>Mutable state</td><td>Functional transformations</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="topic">Imperative vs Declarative</h3>
+    <p><strong>Imperative:</strong> Explicit loops.</p>
+    <pre><code>int count = 0;
+for (String s : list) {
+    if (s.length() > 3) count++;
+}</code></pre>
+    <p><strong>Declarative:</strong> Express desired result.</p>
+    <pre><code>long count = list.stream()
+    .filter(s -> s.length() > 3)
+    .count();</code></pre>
+
+    <h3 class="topic">Advantages of Streams</h3>
+    <ul>
+      <li><strong>Parallel processing:</strong> <code>list.parallelStream()</code> uses multiple cores.</li>
+      <li><strong>Lazy evaluation:</strong> Work only executes at terminal operation.</li>
+      <li><strong>Benefits:</strong> performance, reduced memory, early termination.</li>
+    </ul>
+
+    <h3 class="topic">Stream Lifecycle</h3>
+    <p><strong>Stages:</strong></p>
+    <ol>
+      <li>Source</li>
+      <li>Intermediate operations</li>
+      <li>Terminal operation</li>
+    </ol>
+    <pre><code>list.stream().filter(...).map(...).count();</code></pre>
+
+    <h3 class="topic">Creating Streams</h3>
+    <ul>
+      <li>From collection: <code>list.stream()</code></li>
+      <li>From array: <code>Stream.of(arr)</code></li>
+      <li>Generate infinite: <code>Stream.generate(Math::random)</code></li>
+      <li>Iterate sequence: <code>Stream.iterate(0, n -&gt; n + 1)</code></li>
+      <li>Bounded iterate:</li>
+    </ul>
+    <pre><code>Stream.iterate(0, n -> n < 100, n -> n + 1);</code></pre>
+
+    <h3 class="topic">Non-Destructive Nature</h3>
+    <ul><li>Streams never modify source.</li></ul>
+    <pre><code>List&lt;Integer&gt; result = nums.stream()
+    .map(n -> n * 2)
+    .toList();</code></pre>
+    <p>Original list unchanged.</p>
+
+    <h3 class="topic">Intermediate Operations</h3>
+    <ul>
+      <li>Lazy: return another stream.</li>
+      <li>Examples:
+        <ul>
+          <li><code>filter(x -&gt; x &gt; 10)</code></li>
+          <li><code>takeWhile(condition)</code> → stops permanently when false</li>
+          <li><code>dropWhile(condition)</code> → skips until false, then keeps all</li>
+          <li><code>limit(n)</code> → essential for infinite streams</li>
+          <li><code>skip(n)</code> → ignores first n elements</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3 class="topic">map() Operation</h3>
+    <ul><li>Transforms each element.</li></ul>
+    <pre><code>words.stream().map(String::length);</code></pre>
+    <p>Result: lengths of words.</p>
+
+    <h3 class="topic">flatMap() Operation</h3>
+    <ul><li>Flattens nested streams.</li></ul>
+    <pre><code>Stream&lt;Stream&lt;Character&gt;&gt; → Stream&lt;Character&gt;</code></pre>
+    <p>Example: "cat","dog" → [c,a,t,d,o,g].</p>
+
+    <h3 class="topic">Terminal Operations</h3>
+    <ul>
+      <li>Execute pipeline, stream finished.</li>
+      <li>Examples:
+        <ul>
+          <li><code>count()</code></li>
+          <li><code>max()</code></li>
+          <li><code>min()</code></li>
+          <li><code>findFirst()</code></li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3 class="topic">Empty Streams &amp; Optional</h3>
+    <ul><li>If no element exists → <code>Optional&lt;T&gt;</code> instead of null.</li></ul>
+    <pre><code>Optional&lt;Integer&gt; result = stream.max(Integer::compare);</code></pre>
+    <p>Methods: <code>isPresent()</code>, <code>get()</code>, <code>orElse(default)</code>.</p>
+
+    <h3 class="topic">Lazy Evaluation Example</h3>
+    <pre><code>list.stream().filter(x -> x > 10).map(x -> x * 2);</code></pre>
+    <p>No work yet. Execution only at <code>.count()</code>.</p>
+
+    <h3 class="topic">Memory Efficiency</h3>
+    <ul>
+      <li>Analogy: Passport office → each applicant moves desk-to-desk.</li>
+      <li>Streams process one element at a time → reduced memory usage.</li>
+    </ul>
+
+    <div class="keywords">
+      <h4>Final Checklist</h4>
+      <ol>
+        <li>Stream = flow of data</li>
+        <li>Iterator = pull, Stream = pipeline flow</li>
+        <li>Declarative programming focus</li>
+        <li>Intermediate ops are lazy</li>
+        <li>Terminal ops trigger execution</li>
+        <li>Stream creation: collection.stream(), Stream.of(), generate(), iterate()</li>
+        <li>Streams are non-destructive</li>
+        <li>filter(), takeWhile(), dropWhile(), limit(), skip()</li>
+        <li>map() transforms, flatMap() flattens</li>
+        <li>Terminal ops: count(), max(), min(), findFirst()</li>
+        <li>Optional handles empty safely</li>
+        <li>Streams are memory-efficient and parallelizable</li>
+      </ol>
+    </div>
+
+    <div class="quote">
+      Shortcut memory: Source → Intermediate (lazy) → Terminal (execution)
+    </div>
+    <a class="back-to-top" href="#top">↑ Back to top</a>
+  </section>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 5: Short Notes — Java</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1c1f24;
+    --muted: #5b6472;
+    --accent: #2f6fed;
+    --accent-soft: #eaf1ff;
+    --border: #e2e6ec;
+    --code-bg: #0f172a;
+    --code-text: #e2e8f0;
+    --table-head: #f1f5fb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #f6f8fb;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+  header.doc-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  header.doc-header h1 {
+    font-size: 2rem;
+    margin: 0 0 6px;
+  }
+  header.doc-header p {
+    color: var(--muted);
+    margin: 0;
+  }
+  nav.toc {
+    background: var(--accent-soft);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 40px;
+  }
+  nav.toc h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    color: var(--accent);
+  }
+  nav.toc ol {
+    margin: 0;
+    padding-left: 20px;
+  }
+  nav.toc a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  nav.toc a:hover {
+    text-decoration: underline;
+    color: var(--accent);
+  }
+  section.lecture {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px;
+    margin-bottom: 32px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  section.lecture > h2 {
+    font-size: 1.5rem;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent-soft);
+    padding-bottom: 10px;
+    margin-top: 0;
+  }
+  h3.topic {
+    font-size: 1.15rem;
+    margin-top: 28px;
+    margin-bottom: 10px;
+    color: #1c1f24;
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+  }
+  h4.subtopic {
+    font-size: 1rem;
+    margin-top: 18px;
+    margin-bottom: 6px;
+    color: #33404f;
+  }
+  ul, ol {
+    margin: 6px 0 6px 0;
+    padding-left: 22px;
+  }
+  li {
+    margin-bottom: 4px;
+  }
+  p {
+    margin: 6px 0;
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 14px 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.88rem;
+    margin: 10px 0 16px;
+  }
+  code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+  p code, li code {
+    background: #eef1f6;
+    color: #b83280;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 20px;
+    font-size: 0.92rem;
+    overflow-x: auto;
+    display: block;
+  }
+  table thead, table tbody { display: table; width: 100%; table-layout: fixed; }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--table-head);
+    font-weight: 600;
+  }
+  tr:nth-child(even) td {
+    background: #fafbfd;
+  }
+  .revision {
+    background: #fff8e6;
+    border: 1px solid #f2dca0;
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-top: 24px;
+  }
+  .revision h4 {
+    margin-top: 0;
+    color: #8a6300;
+  }
+  .keywords {
+    background: #eef8f0;
+    border: 1px solid #bfe6c9;
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-top: 24px;
+  }
+  .keywords h4 {
+    margin-top: 0;
+    color: #1c7a3c;
+  }
+  .keywords li strong {
+    color: #1c7a3c;
+  }
+  .back-to-top {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 0.85rem;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .back-to-top:hover {
+    text-decoration: underline;
+  }
+  @media (prefers-color-scheme: dark) {
+    body { background: #14161a; color: #e6e9ee; }
+    section.lecture { background: #1b1e24; border-color: #2a2e36; }
+    nav.toc { background: #202634; border-color: #2a2e36; }
+    th { background: #232833; }
+    tr:nth-child(even) td { background: #1e222a; }
+    p code, li code { background: #262b35; color: #ff9ecb; }
+    .revision { background: #2a2410; border-color: #4a3f16; }
+    .keywords { background: #16261c; border-color: #275c39; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <header class="doc-header">
+    <h1>Week 5: Short Notes</h1>
+    <p>Java — Polymorphism, Generics, Reflection &amp; Type Erasure</p>
+  </header>
+
+  <nav class="toc" id="top">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#lecture1">Lecture 1: Polymorphism Revisited</a></li>
+      <li><a href="#lecture2">Lecture 2: Generic Programming in Java</a></li>
+      <li><a href="#lecture3">Lecture 3: Java Generics and Subtyping</a></li>
+      <li><a href="#lecture4">Lecture 4: Reflection</a></li>
+      <li><a href="#lecture5">Lecture 5: Java Generics at Run Time</a></li>
+    </ol>
+  </nav>
+
+  <!-- ===================== LECTURE 1 ===================== -->
+  <section class="lecture" id="lecture1">
+    <h2>Lecture 1: Polymorphism Revisited</h2>
+
+    <h3 class="topic">Polymorphism</h3>
+    <ul>
+      <li><strong>Definition:</strong> One interface, many forms.</li>
+      <li>Same method call performs different actions depending on the object.</li>
+    </ul>
+    <pre><code>Animal a = new Dog();
+a.sound(); // Output: Bark</code></pre>
+    <ul><li>Achieved through <strong>Dynamic Dispatch</strong>.</li></ul>
+
+    <h3 class="topic">Inheritance-Based Polymorphism</h3>
+    <ul>
+      <li>Works via inheritance.</li>
+      <li><code>Dog</code> is a subclass of <code>Animal</code>.</li>
+      <li><code>Dog</code> IS-A <code>Animal</code>, so:</li>
+    </ul>
+    <pre><code>Animal a = new Dog();</code></pre>
+
+    <h3 class="topic">Dynamic Dispatch</h3>
+    <ul><li><strong>Definition:</strong> Runtime method selection based on actual object.</li></ul>
+    <pre><code>class Animal {
+    void sound() { System.out.println("Animal Sound"); }
+}
+class Dog extends Animal {
+    void sound() { System.out.println("Bark"); }
+}</code></pre>
+    <ul><li><code>Dog</code> overrides <code>Animal.sound()</code>.</li></ul>
+
+    <h3 class="topic">Benefits of Dynamic Dispatch</h3>
+    <ul>
+      <li>Avoids multiple if-else checks.</li>
+      <li>Cleaner, maintainable, and extensible code.</li>
+    </ul>
+
+    <h3 class="topic">Heterogeneous Collection</h3>
+    <ul>
+      <li>Collection can store different subclasses of the same parent.</li>
+      <li>Example: <code>List&lt;Animal&gt;</code> can hold <code>Dog</code>, <code>Cat</code>, <code>Cow</code>.</li>
+    </ul>
+
+    <h3 class="topic">Structural Polymorphism</h3>
+    <ul>
+      <li>Focuses on capabilities, not inheritance.</li>
+      <li>Examples:
+        <ul>
+          <li><strong>Reverse:</strong> Rearrange elements.</li>
+          <li><strong>Search:</strong> Use <code>equals()</code>.</li>
+          <li><strong>Sort:</strong> Use <code>compareTo()</code>.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3 class="topic">Equality in Java</h3>
+    <ul>
+      <li>Default <code>equals()</code> checks object identity.</li>
+      <li>Must override <code>equals()</code> for meaningful equality.</li>
+    </ul>
+
+    <h3 class="topic">Object Class</h3>
+    <ul>
+      <li>Root of all Java classes.</li>
+      <li>Enables collections like <code>Object[]</code> to store mixed types.</li>
+    </ul>
+
+    <h3 class="topic">Problems with Object</h3>
+    <ul>
+      <li>Type information lost.</li>
+      <li>Requires casting.</li>
+      <li>Risk of runtime errors.</li>
+      <li>Allows unrelated mixed data.</li>
+    </ul>
+
+    <h3 class="topic">Generic Programming</h3>
+    <ul>
+      <li>Introduced to solve Object's problems.</li>
+      <li>Uses type parameters <code>&lt;T&gt;</code>.</li>
+    </ul>
+
+    <h4 class="subtopic">Benefits of Generics</h4>
+    <ul>
+      <li>Type safety</li>
+      <li>No casting</li>
+      <li>Compile-time error detection</li>
+      <li>Homogeneous collections</li>
+    </ul>
+
+    <h4 class="subtopic">Type Parameters</h4>
+    <pre><code>class Box&lt;T&gt; { ... }
+Box&lt;String&gt; strBox = new Box&lt;&gt;();</code></pre>
+
+    <h3 class="topic">Generic Compatibility Constraints</h3>
+    <ul>
+      <li><code>S extends T</code> ensures type compatibility.</li>
+      <li>Example: <code>Dog extends Animal</code>.</li>
+    </ul>
+
+    <h4 class="subtopic">Why Constraints are Useful</h4>
+    <ul><li>Prevents runtime crashes by enforcing compile-time checks.</li></ul>
+
+    <div class="keywords">
+      <h4>Keywords</h4>
+      <ul>
+        <li><strong>Polymorphism:</strong> One interface, many forms.</li>
+        <li><strong>Inheritance-based Polymorphism:</strong> Achieved via inheritance.</li>
+        <li><strong>Dynamic Dispatch:</strong> Runtime method selection.</li>
+        <li><strong>Method Overriding:</strong> Child redefines parent method.</li>
+        <li><strong>Heterogeneous Collection:</strong> Different subclasses together.</li>
+        <li><strong>Structural Polymorphism:</strong> Based on capabilities.</li>
+        <li><strong>equals():</strong> Compares equality.</li>
+        <li><strong>Object Identity:</strong> Same memory reference.</li>
+        <li><strong>Object Class:</strong> Root of all classes.</li>
+        <li><strong>Type Casting:</strong> Convert Object back to original type.</li>
+        <li><strong>Generics:</strong> Type-safe, reusable code.</li>
+        <li><strong>Type Parameter &lt;T&gt;:</strong> Placeholder for data type.</li>
+        <li><strong>Type Safety:</strong> Prevents incorrect data types.</li>
+        <li><strong>S extends T:</strong> Compatibility constraint.</li>
+      </ul>
+    </div>
+
+    <div class="revision">
+      <h4>2-Minute Revision</h4>
+      <ul>
+        <li>Polymorphism → Same method, different behavior.</li>
+        <li>Inheritance-based polymorphism → Parent-child relationship.</li>
+        <li>Dynamic dispatch → Runtime method selection.</li>
+        <li>Method overriding → Child redefines parent.</li>
+        <li>Heterogeneous collections → Store different subclasses.</li>
+        <li>Structural polymorphism → Based on capabilities.</li>
+        <li>equals() → Equality check.</li>
+        <li>Object class → Root of all classes.</li>
+        <li>Problems with Object → Type loss, casting, runtime errors.</li>
+        <li>Generics → Type safety, no casting, compile-time checks.</li>
+        <li>Constraints → Prevent runtime crashes.</li>
+      </ul>
+    </div>
+    <a class="back-to-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- ===================== LECTURE 2 ===================== -->
+  <section class="lecture" id="lecture2">
+    <h2>Lecture 2: Generic Programming in Java</h2>
+
+    <h3 class="topic">Introduction to Structural Polymorphism</h3>
+    <ul>
+      <li><strong>Definition:</strong> Structural polymorphism means writing functions based on what an object can do (its capability) instead of which class it belongs to.</li>
+      <li>Focus is on the required operation, not the inheritance hierarchy.</li>
+    </ul>
+    <p>Example: A sorting function doesn't care whether objects are <code>Student</code>, <code>Employee</code>, or <code>Ticket</code>. It only requires one capability: objects must be comparable.</p>
+
+    <h3 class="topic">Why Generics Were Introduced</h3>
+    <p>Before Java Generics, programmers used the <code>Object</code> class for everything:</p>
+    <pre><code>Object obj = new Ticket();</code></pre>
+    <p>Problems with this approach:</p>
+    <ul>
+      <li>No homogeneity (mixed types in collections).</li>
+      <li>Manual type casting required.</li>
+      <li>Loss of type information.</li>
+      <li>Errors detected only at runtime.</li>
+    </ul>
+    <p>Generics were introduced to make Java safer, reusable, easier to write, and error-free. The biggest improvement: <strong>compile-time error detection</strong>.</p>
+
+    <h3 class="topic">Carton Analogy</h3>
+    <p>Think of every object as inside a sealed carton (box). Different operations require different levels of knowledge:</p>
+    <ul>
+      <li><strong>Outside the Carton (Reverse):</strong> Rearranging elements without knowing what's inside.
+        <ul><li>Example: A B C D → D C B A</li></ul>
+      </li>
+      <li><strong>Inside the Carton (Search):</strong> Requires equality check using <code>equals()</code>.
+        <ul><li>Example: Find "Apple" inside Apple Mango Banana.</li></ul>
+      </li>
+      <li><strong>Inside the Carton (Sort):</strong> Requires comparison using <code>compareTo()</code>.
+        <ul><li>Example: 9 3 6 1 → 1 3 6 9</li></ul>
+      </li>
+    </ul>
+
+    <h3 class="topic">Type Variables &lt;T&gt;</h3>
+    <ul>
+      <li>A type variable is a placeholder for any data type.</li>
+      <li>Example: <code>&lt;T&gt;</code> can be <code>Integer</code>, <code>String</code>, <code>Student</code>, <code>Ticket</code>, or <code>Date</code>.</li>
+    </ul>
+    <p><strong>Mathematical Analogy:</strong> Generics work like the universal quantifier (∀). Once T is chosen, it remains fixed throughout the method or class.</p>
+    <p><strong>Type Inference:</strong> Java automatically determines T.</p>
+    <pre><code>Date[] arr;
+reverse(arr); // Compiler infers T = Date</code></pre>
+
+    <h3 class="topic">Generic Methods</h3>
+    <p>Generic methods ensure input, internal variables, and output are of the same type.</p>
+    <ul>
+      <li><strong>Reverse Method:</strong> Needs only swapping.</li>
+      <li><strong>Find Method:</strong> Requires equality. Compiler detects invalid searches at compile time.</li>
+    </ul>
+
+    <h4 class="subtopic">Evolution of Type Safety</h4>
+    <table>
+      <thead>
+        <tr><th>Feature</th><th>Before Generics</th><th>After Generics</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Homogeneity</td><td>Not guaranteed</td><td>Guaranteed</td></tr>
+        <tr><td>Type Checking</td><td>Runtime</td><td>Compile-time</td></tr>
+        <tr><td>Casting</td><td>Manual required</td><td>No casting</td></tr>
+        <tr><td>Logic Verification</td><td>Runtime errors</td><td>Compiler catches</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="topic">Advanced Constraints (extends)</h3>
+    <ul>
+      <li>Sometimes source and target types differ.</li>
+      <li>Example: <code>Dog</code> is a subtype of <code>Animal</code>.</li>
+      <li>Constraint: <code>&lt;S extends T&gt;</code> ensures compatibility.</li>
+    </ul>
+    <pre><code>public &lt;S extends T&gt; void arrayCopy(S[] source, T[] target)</code></pre>
+    <p>This allows safe assignments like <code>Dog[] → Animal[]</code>.</p>
+
+    <h3 class="topic">Parameterized Classes</h3>
+    <p>Generic classes use type variables in the class itself.</p>
+    <pre><code>class LinkedList&lt;T&gt; { ... }
+LinkedList&lt;Ticket&gt; list = new LinkedList&lt;&gt;();</code></pre>
+    <p><strong>Binding:</strong> When T = Ticket, every occurrence of T becomes Ticket. This ensures homogeneity and prevents inserting unrelated types.</p>
+
+    <h3 class="topic">Type Masking (Shadowing)</h3>
+    <p><strong>Correct Code:</strong></p>
+    <pre><code>class LinkedList&lt;T&gt; {
+    public void insert(T data) { ... }
+}</code></pre>
+    <p><strong>Wrong Code:</strong></p>
+    <pre><code>class LinkedList&lt;T&gt; {
+    public &lt;T&gt; void insert(T data) { ... }
+}</code></pre>
+    <p>This redeclares <code>&lt;T&gt;</code> locally, hiding the class-level T.</p>
+    <p><strong>Danger:</strong> allows inserting unrelated types into a homogeneous collection.</p>
+    <p><strong>Rule:</strong></p>
+    <ul>
+      <li>Instance methods → use class T, never redeclare.</li>
+      <li>Static methods → must declare their own <code>&lt;T&gt;</code>.</li>
+    </ul>
+
+    <h3 class="topic">Advantages of Generics</h3>
+    <ul>
+      <li>Compile-time type checking</li>
+      <li>No manual casting</li>
+      <li>Code reuse</li>
+      <li>Safer collections</li>
+      <li>Cleaner code</li>
+      <li>Better readability</li>
+      <li>Homogeneous collections</li>
+      <li>Fewer runtime errors</li>
+    </ul>
+    <p><strong>Limitations:</strong> Due to type erasure (for backward compatibility), some restrictions exist, but generics still greatly improve safety and quality.</p>
+
+    <div class="keywords">
+      <h4>Exam Keywords</h4>
+      <ul>
+        <li><strong>Structural Polymorphism:</strong> Depends on required capabilities, not inheritance.</li>
+        <li><strong>Generics:</strong> Type-safe, reusable code using type parameters.</li>
+        <li><strong>Carton Analogy:</strong> Reverse = no need to look inside; Search = needs equality; Sort = needs comparison.</li>
+        <li><strong>Homogeneity:</strong> Collection contains only one data type.</li>
+        <li><strong>Type Variable &lt;T&gt;:</strong> Placeholder for any data type.</li>
+        <li><strong>Type Inference:</strong> Compiler automatically determines type.</li>
+        <li><strong>Arbitrary but Fixed:</strong> Once T is chosen, it remains fixed.</li>
+        <li><strong>Generic Method:</strong> Method using a type parameter.</li>
+        <li><strong>Parameterized Class:</strong> Generic class like LinkedList&lt;T&gt;.</li>
+        <li><strong>Binding:</strong> Replacing T with a real type.</li>
+        <li><strong>&lt;S extends T&gt;:</strong> Subclass-to-superclass compatibility.</li>
+        <li><strong>Type Masking:</strong> Redeclaring &lt;T&gt; inside a generic class method.</li>
+        <li><strong>Instance Method Rule:</strong> Use class T.</li>
+        <li><strong>Static Method Rule:</strong> Must declare its own &lt;T&gt;.</li>
+      </ul>
+    </div>
+
+    <div class="revision">
+      <h4>2-Minute Revision</h4>
+      <ul>
+        <li>Structural polymorphism → capability-based, not inheritance-based.</li>
+        <li>Reverse → swaps positions; Search → needs equals(); Sort → needs compareTo().</li>
+        <li>Pre-generics → mixed collections, casting, runtime errors.</li>
+        <li>Generics → type variables &lt;T&gt;, compile-time safety.</li>
+        <li>Type inference → compiler auto-detects type.</li>
+        <li>Arbitrary but fixed → once chosen, T stays constant.</li>
+        <li>Generic methods → consistent input/output types.</li>
+        <li>&lt;S extends T&gt; → safe subtype-to-supertype relationships.</li>
+        <li>Parameterized classes → bind T to a real type.</li>
+        <li>Avoid type masking in instance methods; static methods must declare &lt;T&gt;.</li>
+      </ul>
+    </div>
+    <a class="back-to-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- ===================== LECTURE 3 ===================== -->
+  <section class="lecture" id="lecture3">
+    <h2>Lecture 3: Java Generics and Subtyping</h2>
+
+    <h3 class="topic">Introduction to Structural Polymorphism</h3>
+    <ul>
+      <li><strong>Definition:</strong> Structural polymorphism is a feature of Generics that allows writing one piece of code that works with many data types, while keeping programs type-safe.</li>
+      <li>Instead of writing separate code for Student, Ticket, Date, etc., type variables <code>&lt;T&gt;</code> are used so the same code works for all types.</li>
+    </ul>
+    <p><strong>Advantages:</strong></p>
+    <ul>
+      <li>Code reusability</li>
+      <li>Type safety</li>
+      <li>Less duplicate code</li>
+      <li>Works with inheritance (subtyping)</li>
+    </ul>
+
+    <h3 class="topic">Array Covariance</h3>
+    <ul>
+      <li><strong>Covariance:</strong> If <code>ETicket extends Ticket</code>, then <code>ETicket[]</code> is considered a subtype of <code>Ticket[]</code>.</li>
+    </ul>
+    <pre><code>ETicket[] elecArr = new ETicket[10];
+Ticket[] ticketArr = elecArr;</code></pre>
+    <p><strong>Problem:</strong></p>
+    <pre><code>ticketArr[5] = new Ticket(); // Runtime error</code></pre>
+    <ul><li>Causes <code>ArrayStoreException</code> because the actual array is <code>ETicket[]</code>.</li></ul>
+    <p><strong>Limitation:</strong> Compiler cannot detect aliasing problems; errors appear only at runtime. This motivated the introduction of Generics.</p>
+
+    <h3 class="topic">Generics Use Invariance</h3>
+    <ul><li><strong>Invariance:</strong> Generics do not allow subtype-to-supertype assignments.</li></ul>
+    <pre><code>LinkedList&lt;String&gt; list = new LinkedList&lt;&gt;();
+LinkedList&lt;Object&gt; objList = list; // Not allowed</code></pre>
+    <p><strong>Reason:</strong> Prevents unsafe assignments and runtime crashes.</p>
+    <h4 class="subtopic">Advantages of Invariance</h4>
+    <ul>
+      <li>Safer code</li>
+      <li>No aliasing problems</li>
+      <li>Better type checking</li>
+      <li>No ArrayStoreException</li>
+    </ul>
+
+    <h3 class="topic">Generic Functions</h3>
+    <ul><li>Generic functions use type parameters.</li></ul>
+    <pre><code>public &lt;T&gt; void print(T[] arr)</code></pre>
+    <ul><li>Works for Integer, String, Ticket, Student.</li></ul>
+    <p><strong>Type Quantifier &lt;T&gt;:</strong> Means "for every type T."</p>
+    <p><strong>When &lt;T&gt; is not needed:</strong></p>
+    <ul><li>If the function never uses T internally (e.g., printing elements). In such cases, wildcards <code>?</code> are used.</li></ul>
+
+    <h3 class="topic">Wildcards (?)</h3>
+    <ul>
+      <li><strong>Definition:</strong> Represents some unknown type.</li>
+      <li>Example: <code>LinkedList&lt;?&gt;</code></li>
+    </ul>
+    <h4 class="subtopic">Difference Between &lt;T&gt; and ?</h4>
+    <table>
+      <thead><tr><th>Feature</th><th>&lt;T&gt;</th><th>?</th></tr></thead>
+      <tbody>
+        <tr><td>Has a name</td><td>Yes</td><td>No</td></tr>
+        <tr><td>Scope</td><td>Throughout method</td><td>Only where needed</td></tr>
+        <tr><td>Usage</td><td>Arguments, return type, variables</td><td>Mainly parameters</td></tr>
+        <tr><td>Consistency</td><td>Maintains type consistency</td><td>Represents unknown type</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Restriction:</strong> Cannot add elements to <code>LinkedList&lt;?&gt;</code>. Safe only for reading.</p>
+    <p><strong>Rule:</strong> Wildcards → Reading; &lt;T&gt; → Writing and type consistency.</p>
+
+    <h3 class="topic">Bounded Wildcards</h3>
+    <ul>
+      <li><strong>Upper Bound:</strong> <code>? extends T</code> → Unknown subtype of T.
+        <ul><li>Example: <code>List&lt;? extends Shape&gt;</code> includes Shape, Ellipse, Circle. Used for reading.</li></ul>
+      </li>
+      <li><strong>Lower Bound:</strong> <code>? super T</code> → Unknown supertype of T.
+        <ul><li>Example: <code>List&lt;? super Dog&gt;</code> includes Dog, Animal, Object. Used for writing.</li></ul>
+      </li>
+    </ul>
+    <p><strong>Memory Trick:</strong> extends → Read (Producer); super → Write (Consumer)</p>
+
+    <h3 class="topic">Transitivity in Inheritance</h3>
+    <ul>
+      <li>Inheritance is transitive: Circle extends Ellipse, Ellipse extends Shape → Circle is also a subtype of Shape.</li>
+      <li>Wildcards respect transitivity: <code>? extends Shape</code> includes Shape, Ellipse, Circle.</li>
+    </ul>
+
+    <h3 class="topic">Goal of Generics</h3>
+    <ul>
+      <li>Detect errors during compilation instead of runtime.</li>
+      <li>Compiler understands inheritance, wildcards, type variables, and relationships to ensure safer programs.</li>
+    </ul>
+
+    <div class="keywords">
+      <h4>Keywords</h4>
+      <ul>
+        <li><strong>Structural Polymorphism:</strong> Generic code based on capabilities, not classes.</li>
+        <li><strong>Covariance:</strong> S[] is subtype of T[] if S extends T.</li>
+        <li><strong>ArrayStoreException:</strong> Runtime error from wrong type in covariant array.</li>
+        <li><strong>Aliasing:</strong> Two references pointing to the same object.</li>
+        <li><strong>Invariance:</strong> LinkedList&lt;String&gt; ≠ LinkedList&lt;Object&gt;.</li>
+        <li><strong>Generic Function:</strong> Function using &lt;T&gt;.</li>
+        <li><strong>Type Quantifier &lt;T&gt;:</strong> "For every type T."</li>
+        <li><strong>Wildcard ?:</strong> Represents unknown type.</li>
+        <li><strong>Upper Bound ? extends T:</strong> Subtype restriction (read).</li>
+        <li><strong>Lower Bound ? super T:</strong> Supertype restriction (write).</li>
+        <li><strong>Transitivity:</strong> Subclass inherits all superclasses.</li>
+      </ul>
+    </div>
+
+    <h4 class="subtopic">Comparison Table</h4>
+    <table>
+      <thead><tr><th>Feature</th><th>Arrays</th><th>Generics</th></tr></thead>
+      <tbody>
+        <tr><td>Type Relationship</td><td>Covariant</td><td>Invariant</td></tr>
+        <tr><td>Type Checking</td><td>Runtime</td><td>Compile-time</td></tr>
+        <tr><td>Safety</td><td>Less safe</td><td>More safe</td></tr>
+        <tr><td>Common Error</td><td>ArrayStoreException</td><td>Compile-time error</td></tr>
+        <tr><td>Flexibility</td><td>Risky</td><td>Safe</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="topic">PECS Rule (Producer Extends, Consumer Super)</h3>
+    <ul>
+      <li><strong>Producer Extends:</strong> <code>? extends T</code> → Use when collection produces/returns data (read).</li>
+      <li><strong>Consumer Super:</strong> <code>? super T</code> → Use when collection consumes/accepts data (write).</li>
+    </ul>
+
+    <div class="revision">
+      <h4>2-Minute Revision</h4>
+      <ul>
+        <li>Structural polymorphism → capability-based generic code.</li>
+        <li>Arrays are covariant → may cause ArrayStoreException.</li>
+        <li>Generics are invariant → safer, compile-time checks.</li>
+        <li>Generic functions use &lt;T&gt; for type safety.</li>
+        <li>Wildcards ? → unknown type, mainly for reading.</li>
+        <li>? extends T → read/producer.</li>
+        <li>? super T → write/consumer.</li>
+        <li>Inheritance is transitive → wildcards include indirect subclasses.</li>
+        <li>Generics move type errors from runtime to compile time.</li>
+      </ul>
+    </div>
+    <a class="back-to-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- ===================== LECTURE 4 ===================== -->
+  <section class="lecture" id="lecture4">
+    <h2>Lecture 4: Reflection</h2>
+
+    <h3 class="topic">What is Reflection?</h3>
+    <ul>
+      <li><strong>Definition:</strong> Reflection is a special feature in Java that allows a program to inspect and manipulate itself at runtime.</li>
+      <li>Normally, Java programs decide everything at compile time. Reflection enables decisions at runtime.</li>
+      <li>In simple terms: A program can look at itself and work with its own classes, methods, constructors, and fields.</li>
+    </ul>
+    <h4 class="subtopic">Uses of Reflection</h4>
+    <ul>
+      <li>Inspect objects at runtime</li>
+      <li>Call methods dynamically</li>
+      <li>Create objects during execution</li>
+      <li>Build debugging/testing tools</li>
+    </ul>
+
+    <h3 class="topic">Two Pillars of Reflection</h3>
+    <ul>
+      <li><strong>Introspection (Observation):</strong> Examines program structure. Examples: class type, methods, fields, constructors. Only reads information.</li>
+      <li><strong>Intercession (Modification):</strong> Changes program behavior dynamically. Examples: create objects, call methods, modify fields.</li>
+    </ul>
+    <table>
+      <thead><tr><th>Introspection</th><th>Intercession</th></tr></thead>
+      <tbody>
+        <tr><td>Observe</td><td>Modify</td></tr>
+        <tr><td>Read info</td><td>Perform ops</td></tr>
+        <tr><td>Inspection</td><td>Intervention</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="topic">Why instanceof is Not Enough</h3>
+    <ul>
+      <li><code>instanceof</code> works only when the type is known at compile time.</li>
+      <li>Problem: If classes are unknown (Object o1, o2), instanceof cannot help.</li>
+      <li>Another limitation: instanceof does not work properly with generics due to type erasure.</li>
+      <li>Reflection solves these issues.</li>
+    </ul>
+
+    <h3 class="topic">getClass()</h3>
+    <ul><li>Every object has <code>getClass()</code> (inherited from Object).</li></ul>
+    <pre><code>Student s = new Student();
+Class c = s.getClass();</code></pre>
+    <ul><li>Returns a Class object containing metadata (methods, fields, constructors, modifiers).</li></ul>
+    <p><strong>Reification:</strong> Abstract class type becomes a real Class object.</p>
+    <p><strong>Note:</strong> Only one Class object exists per loaded class in JVM.</p>
+    <p><strong>Comparison:</strong></p>
+    <pre><code>o1.getClass() == o2.getClass()</code></pre>
+    <p>True if both belong to the same class.</p>
+
+    <h3 class="topic">Structural Decomposition</h3>
+    <p>Reflection breaks a class into parts:</p>
+    <ul>
+      <li>Constructors → Represented by <code>Constructor</code> class</li>
+      <li>Methods → Represented by <code>Method</code> class</li>
+      <li>Fields → Represented by <code>Field</code> class</li>
+    </ul>
+    <h4 class="subtopic">API Methods</h4>
+    <ul>
+      <li><code>getConstructors()</code> → Returns constructors</li>
+      <li><code>getMethods()</code> → Returns public methods</li>
+      <li><code>getFields()</code> → Returns public fields</li>
+    </ul>
+    <p><strong>Method Signature:</strong> Depends only on parameter types and order, not names.</p>
+
+    <h3 class="topic">Operational Intercession</h3>
+    <p>Reflection performs dynamic operations:</p>
+    <ul>
+      <li><strong>Dynamic Object Creation:</strong></li>
+    </ul>
+    <pre><code>Class c = Class.forName("Student");
+Object obj = c.newInstance();</code></pre>
+    <ul><li><strong>Dynamic Method Invocation:</strong></li></ul>
+    <pre><code>method.invoke(obj, args);</code></pre>
+    <ul><li><strong>Field Manipulation:</strong> Read or change field values dynamically.</li></ul>
+
+    <h3 class="topic">Reflection and Access Control</h3>
+    <ul>
+      <li><strong>Standard Reflection:</strong> getMethods() returns only public methods.</li>
+      <li><strong>Declared Methods:</strong> getDeclaredMethods() and getDeclaredFields() return all members (including private).</li>
+    </ul>
+    <p><strong>Uses:</strong> Debugging, testing, frameworks, IDEs.</p>
+    <p><strong>Security:</strong> JVM security policies can restrict reflective access to private members.</p>
+
+    <h3 class="topic">Real-World Uses</h3>
+    <p>Reflection is widely used in:</p>
+    <ul>
+      <li>IDEs</li>
+      <li>Testing frameworks</li>
+      <li>Dependency injection</li>
+      <li>Serialization</li>
+      <li>Debuggers</li>
+      <li>ORM frameworks</li>
+    </ul>
+    <p>Example: BlueJ IDE uses reflection to let students create objects, call methods, and view variables without writing main().</p>
+    <p><strong>Limitation:</strong> Reflection cannot create brand-new Java classes at runtime (unlike Python or Smalltalk).</p>
+
+    <h3 class="topic">Importance of Reflection</h3>
+    <p>Reflection is essential for:</p>
+    <ul>
+      <li>Dynamic programming</li>
+      <li>Framework development</li>
+      <li>Debugging and testing</li>
+      <li>IDE development</li>
+      <li>Runtime inspection and object creation</li>
+    </ul>
+
+    <div class="keywords">
+      <h4>Keywords</h4>
+      <ul>
+        <li><strong>Reflection:</strong> Inspect and manipulate at runtime.</li>
+        <li><strong>Introspection:</strong> Observation of program structure.</li>
+        <li><strong>Intercession:</strong> Modification of behavior dynamically.</li>
+        <li><strong>Runtime:</strong> Execution phase.</li>
+        <li><strong>instanceof:</strong> Type check when known.</li>
+        <li><strong>getClass():</strong> Returns Class object.</li>
+        <li><strong>Reification:</strong> Abstract type → real Class object.</li>
+        <li><strong>Class Object:</strong> Stores metadata.</li>
+        <li><strong>Method Signature:</strong> Defined by parameter types/order.</li>
+        <li><strong>getConstructors():</strong> Returns constructors.</li>
+        <li><strong>getMethods():</strong> Returns public methods.</li>
+        <li><strong>getFields():</strong> Returns public fields.</li>
+        <li><strong>getDeclaredMethods()/getDeclaredFields():</strong> Return all members.</li>
+        <li><strong>Class.forName():</strong> Load class dynamically.</li>
+        <li><strong>newInstance():</strong> Create object dynamically.</li>
+        <li><strong>Method.invoke():</strong> Call method dynamically.</li>
+        <li><strong>Encapsulation:</strong> Restricts access.</li>
+        <li><strong>JVM Security Policy:</strong> Restricts reflection.</li>
+      </ul>
+    </div>
+
+    <h4 class="subtopic">Reflection API Summary</h4>
+    <table>
+      <thead><tr><th>Feature</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>getClass()</td><td>Get class metadata</td></tr>
+        <tr><td>getConstructors()</td><td>Get constructors</td></tr>
+        <tr><td>getMethods()</td><td>Get public methods</td></tr>
+        <tr><td>getFields()</td><td>Get public fields</td></tr>
+        <tr><td>getDeclaredMethods()</td><td>Get all methods (incl. private)</td></tr>
+        <tr><td>getDeclaredFields()</td><td>Get all fields (incl. private)</td></tr>
+        <tr><td>Class.forName()</td><td>Load class dynamically</td></tr>
+        <tr><td>newInstance()</td><td>Create object dynamically</td></tr>
+        <tr><td>Method.invoke()</td><td>Execute method dynamically</td></tr>
+      </tbody>
+    </table>
+
+    <div class="revision">
+      <h4>2-Minute Revision</h4>
+      <ul>
+        <li>Reflection → inspect and manipulate at runtime.</li>
+        <li>Two pillars: Introspection (observe) and Intercession (modify).</li>
+        <li>instanceof insufficient for unknown types → use Reflection.</li>
+        <li>getClass() returns Class object with metadata.</li>
+        <li>One Class object per loaded class.</li>
+        <li>Reflection inspects constructors, methods, fields.</li>
+        <li>Method signature depends on parameter types/order.</li>
+        <li>Class.forName() loads class, newInstance() creates object.</li>
+        <li>Method.invoke() executes methods dynamically.</li>
+        <li>Declared methods/fields expose private members.</li>
+        <li>Reflection powers IDEs, testing frameworks, debuggers, and dependency injection.</li>
+        <li>Cannot create brand-new classes at runtime.</li>
+      </ul>
+    </div>
+    <a class="back-to-top" href="#top">↑ Back to top</a>
+  </section>
+
+  <!-- ===================== LECTURE 5 ===================== -->
+  <section class="lecture" id="lecture5">
+    <h2>Lecture 5: Java Generics at Run Time</h2>
+
+    <h3 class="topic">Type Erasure</h3>
+    <ul>
+      <li><strong>Definition:</strong> Type Erasure is the technique Java uses to implement Generics.</li>
+      <li>During compilation, the compiler checks type safety. After checking, it removes all generic type information before creating bytecode.</li>
+      <li>Generics exist only at compile time. At runtime, the JVM does not know the actual generic type.</li>
+    </ul>
+    <p><strong>Reason:</strong> Introduced in Java 5 to maintain backward compatibility with millions of existing programs. Allows old code and new generic code to coexist.</p>
+
+    <h4 class="subtopic">Compile Time vs Runtime</h4>
+    <ul>
+      <li><strong>Compile Time:</strong> Compiler distinguishes List&lt;String&gt;, List&lt;Integer&gt;, List&lt;Employee&gt;.</li>
+      <li><strong>Runtime:</strong> All become simply List.</li>
+    </ul>
+
+    <h3 class="topic">How Type Erasure Works</h3>
+    <p><strong>Unbounded Generic:</strong></p>
+    <pre><code>class Box&lt;T&gt;
+// After erasure →
+class Box&lt;Object&gt;</code></pre>
+    <p><strong>Bounded Generic:</strong></p>
+    <pre><code>class Box&lt;T extends Shape&gt;
+// After erasure →
+class Box&lt;Shape&gt;</code></pre>
+    <p><strong>Memory Trick:</strong> &lt;T&gt; → erased to Object; &lt;T extends Shape&gt; → erased to Shape</p>
+    <h4 class="subtopic">Advantages</h4>
+    <ul>
+      <li>Keeps JVM simple</li>
+      <li>Only one class file generated</li>
+      <li>Saves memory</li>
+      <li>Supports old programs</li>
+    </ul>
+    <p><strong>Limitations:</strong> JVM cannot distinguish between List&lt;Integer&gt; and List&lt;String&gt; at runtime.</p>
+
+    <h3 class="topic">Runtime Limitations</h3>
+    <ul><li>Generic information disappears at runtime.</li></ul>
+    <p><strong>instanceof Limitation:</strong></p>
+    <pre><code>if(list instanceof LinkedList&lt;String&gt;) // Illegal</code></pre>
+    <p><strong>Reflection Problem:</strong></p>
+    <ul>
+      <li>LinkedList&lt;Employee&gt; and LinkedList&lt;Date&gt; are different at compile time.</li>
+      <li>At runtime, both appear as LinkedList.class.</li>
+    </ul>
+
+    <h3 class="topic">Method Overloading &amp; Type Erasure</h3>
+    <ul><li>Normal overloading works (print(int), print(String)).</li></ul>
+    <p><strong>Problem with generics:</strong></p>
+    <pre><code>print(List&lt;String&gt;)
+print(List&lt;Date&gt;)
+// After erasure → both become
+print(List&lt;Object&gt;)</code></pre>
+    <p><strong>Signature Collision:</strong> Two methods become identical after erasure → compiler error.</p>
+    <p><strong>Method Signature Depends On:</strong> Method name, parameter types, parameter order (Not parameter names)</p>
+
+    <h3 class="topic">Arrays and Generics</h3>
+    <ul>
+      <li><strong>Arrays:</strong> Covariant → Dog[] can be treated as Animal[].</li>
+      <li><strong>Generics:</strong> Invariant → List&lt;Dog&gt; is not List&lt;Animal&gt;.</li>
+    </ul>
+    <h4 class="subtopic">Generic Arrays Restriction</h4>
+    <ul>
+      <li>Declaration allowed: <code>T[] arr;</code></li>
+      <li>Instantiation not allowed: <code>new T[100]</code> → compiler error.</li>
+    </ul>
+    <p><strong>Workaround:</strong></p>
+    <pre><code>(T[]) new Object[100]</code></pre>
+    <p>Programmer takes responsibility for type safety.</p>
+
+    <h3 class="topic">Primitive Types and Generics</h3>
+    <ul>
+      <li>Generics work only with objects, not primitives.</li>
+      <li>Example: <code>List&lt;int&gt;</code> → illegal.</li>
+    </ul>
+    <h4 class="subtopic">Wrapper Classes</h4>
+    <table>
+      <thead><tr><th>Primitive</th><th>Wrapper</th></tr></thead>
+      <tbody>
+        <tr><td>byte</td><td>Byte</td></tr>
+        <tr><td>short</td><td>Short</td></tr>
+        <tr><td>int</td><td>Integer</td></tr>
+        <tr><td>long</td><td>Long</td></tr>
+        <tr><td>float</td><td>Float</td></tr>
+        <tr><td>double</td><td>Double</td></tr>
+        <tr><td>char</td><td>Character</td></tr>
+        <tr><td>boolean</td><td>Boolean</td></tr>
+      </tbody>
+    </table>
+    <h4 class="subtopic">Boxing/Unboxing</h4>
+    <ul>
+      <li><strong>Boxing:</strong> primitive → wrapper object.</li>
+      <li><strong>Unboxing:</strong> wrapper → primitive.</li>
+      <li>Auto-boxing/unboxing introduced in Java 5.</li>
+    </ul>
+    <p><strong>Wrapper Objects:</strong> Immutable. Changing value creates a new object.</p>
+    <p><strong>Hidden Cost:</strong> Extra objects → more memory → slight performance overhead.</p>
+
+    <h3 class="topic">Advantages of Generics</h3>
+    <ul>
+      <li>Compile-time type safety</li>
+      <li>Reusable code</li>
+      <li>No unnecessary casting</li>
+      <li>Cleaner, more readable code</li>
+      <li>Fewer runtime errors</li>
+    </ul>
+
+    <h3 class="topic">Limitations of Generics</h3>
+    <ul>
+      <li>Uses type erasure</li>
+      <li>JVM cannot remember generic types</li>
+      <li>Cannot overload methods differing only in generic parameters</li>
+      <li>Cannot use generics with instanceof</li>
+      <li>Cannot create generic arrays directly</li>
+      <li>Primitive types cannot be used directly</li>
+    </ul>
+
+    <div class="keywords">
+      <h4>Keywords</h4>
+      <ul>
+        <li><strong>Type Erasure:</strong> Compiler removes generic type info before bytecode.</li>
+        <li><strong>Backward Compatibility:</strong> Old and new code coexist.</li>
+        <li><strong>Compile-time Type Safety:</strong> Checked during compilation.</li>
+        <li><strong>Runtime Illusion:</strong> Generic info erased at runtime.</li>
+        <li><strong>Unbounded Generic &lt;T&gt;:</strong> Erased to Object.</li>
+        <li><strong>Bounded Generic &lt;T extends Shape&gt;:</strong> Erased to Shape.</li>
+        <li><strong>Signature Collision:</strong> Overloaded methods identical after erasure.</li>
+        <li><strong>Covariant Arrays:</strong> Dog[] → Animal[].</li>
+        <li><strong>Invariant Generics:</strong> List&lt;Dog&gt; ≠ List&lt;Animal&gt;.</li>
+        <li><strong>Generic Array Restriction:</strong> new T[] illegal.</li>
+        <li><strong>Wrapper Class:</strong> Object version of primitive.</li>
+        <li><strong>Boxing/Unboxing:</strong> Conversion between primitive and wrapper.</li>
+        <li><strong>Auto-boxing/Auto-unboxing:</strong> Automatic conversion.</li>
+        <li><strong>Immutable Wrapper:</strong> Wrapper objects cannot be modified.</li>
+      </ul>
+    </div>
+
+    <h4 class="subtopic">Type Erasure Summary</h4>
+    <table>
+      <thead><tr><th>Before Compilation</th><th>After Type Erasure</th></tr></thead>
+      <tbody>
+        <tr><td>List&lt;String&gt;</td><td rowspan="2">List</td></tr>
+        <tr><td>List&lt;Integer&gt;</td></tr>
+        <tr><td>List&lt;T&gt;</td><td>Object</td></tr>
+        <tr><td>&lt;T extends Shape&gt;</td><td>Shape</td></tr>
+      </tbody>
+    </table>
+
+    <h4 class="subtopic">Arrays vs Generics</h4>
+    <table>
+      <thead><tr><th>Feature</th><th>Arrays</th><th>Generics</th></tr></thead>
+      <tbody>
+        <tr><td>Relationship</td><td>Covariant</td><td>Invariant</td></tr>
+        <tr><td>Type Info</td><td>Runtime</td><td>Erased</td></tr>
+        <tr><td>Array Creation</td><td>Allowed</td><td>Not allowed</td></tr>
+        <tr><td>Errors</td><td>Runtime (ArrayStoreException)</td><td>Compile-time</td></tr>
+      </tbody>
+    </table>
+
+    <div class="revision">
+      <h4>2-Minute Revision</h4>
+      <ul>
+        <li>Type Erasure removes generic type info after compilation.</li>
+        <li>Ensures backward compatibility.</li>
+        <li>Compile-time type safety; runtime erasure.</li>
+        <li>&lt;T&gt; → Object; &lt;T extends Shape&gt; → Shape.</li>
+        <li>instanceof not allowed with generics.</li>
+        <li>Reflection sees all generics as same class.</li>
+        <li>Method overloading with generics may cause signature collision.</li>
+        <li>Arrays are covariant; generics are invariant.</li>
+        <li>Cannot create generic arrays directly.</li>
+        <li>Generics work only with objects; use wrapper classes for primitives.</li>
+        <li>Auto-boxing/unboxing simplifies conversion.</li>
+        <li>Wrapper classes are immutable.</li>
+      </ul>
+    </div>
+    <a class="back-to-top" href="#top">↑ Back to top</a>
+  </section>
+
+</div>
+</body>
+</html>
