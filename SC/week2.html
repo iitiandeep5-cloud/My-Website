@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>Week 2: Short Notes — Editors &amp; Networking</title>
+<style>
+  :root {
+    --bg: #f7f8fa;
+    --card-bg: #ffffff;
+    --text: #1f2430;
+    --muted: #5b6472;
+    --accent: #3a6df0;
+    --accent-light: #e8eefd;
+    --border: #e1e4ea;
+    --code-bg: #282c34;
+    --code-text: #e6e6e6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14161b;
+      --card-bg: #1c1f26;
+      --text: #e7e9ee;
+      --muted: #9aa2b1;
+      --accent: #6d94ff;
+      --accent-light: #232a42;
+      --border: #2c313c;
+      --code-bg: #0f1115;
+      --code-text: #d7dae0;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 32px 20px 80px;
+  }
+  header.page-header {
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--accent);
+  }
+  header.page-header h1 {
+    margin: 0 0 6px;
+    font-size: 1.9rem;
+  }
+  header.page-header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  nav.toc {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 36px;
+  }
+  nav.toc h2 {
+    font-size: 1rem;
+    margin: 0 0 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  nav.toc ol {
+    margin: 0;
+    padding-left: 20px;
+  }
+  nav.toc a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  nav.toc a:hover { text-decoration: underline; }
+
+  section.lecture {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 28px;
+  }
+  section.lecture h2 {
+    margin-top: 0;
+    font-size: 1.4rem;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+  }
+  h3.topic {
+    font-size: 1.1rem;
+    margin: 24px 0 8px;
+  }
+  h4.subtopic {
+    font-size: 1rem;
+    margin: 16px 0 6px;
+    color: var(--muted);
+  }
+  ul, ol {
+    padding-left: 22px;
+  }
+  li { margin-bottom: 4px; }
+  code {
+    background: var(--accent-light);
+    color: var(--accent);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.92em;
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 12px 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.9rem;
+    margin: 10px 0 18px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 20px;
+    overflow-x: auto;
+    display: block;
+  }
+  table thead { background: var(--accent-light); }
+  table th, table td {
+    text-align: left;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    font-size: 0.92rem;
+  }
+  table th { color: var(--accent); }
+  .note {
+    background: var(--accent-light);
+    border-left: 4px solid var(--accent);
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin: 14px 0;
+    font-size: 0.93rem;
+  }
+  .exam-points {
+    background: var(--accent-light);
+    border-radius: 8px;
+    padding: 14px 20px;
+    margin-top: 20px;
+  }
+  .exam-points h4 {
+    margin: 0 0 8px;
+    color: var(--accent);
+  }
+  .revision {
+    margin-top: 20px;
+  }
+  .revision h4 {
+    margin-bottom: 6px;
+    color: var(--accent);
+  }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="page-header">
+    <h1>Week 2: Short Notes</h1>
+    <p>Command Line Editors &amp; Networking Basics</p>
+  </header>
+
+  <nav class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#lecture1">Lecture 1: Command Line Editors — Part 01</a></li>
+      <li><a href="#lecture2">Lecture 2: Command Line Editors — Part 02</a></li>
+      <li><a href="#lecture3">Lecture 3: Command Line Editors — Part 03</a></li>
+      <li><a href="#lecture4">Lecture 4: Network Basics</a></li>
+    </ol>
+  </nav>
+
+  <!-- LECTURE 1 -->
+  <section class="lecture" id="lecture1">
+    <h2>Lecture 1: Command Line Editors — Part 01</h2>
+
+    <h3 class="topic">Introduction to Command Line Editors</h3>
+    <ul>
+      <li>Definition: tools to edit files directly inside the terminal.</li>
+      <li>Use cases: remote servers, supercomputers, systems with slow/no graphical interface.</li>
+      <li>Advantages: faster than download/upload cycles; lightweight and efficient; work in low-bandwidth environments; available on almost all Unix/Linux systems.</li>
+    </ul>
+
+    <h3 class="topic">Classes of Editors</h3>
+    <h4 class="subtopic">A. Line Editors</h4>
+    <ul>
+      <li>Examples: <code>ed</code>, <code>ex</code>.</li>
+      <li>Edit one line at a time; very lightweight; universally available.</li>
+    </ul>
+    <h4 class="subtopic">B. Terminal (Visual) Editors</h4>
+    <ul>
+      <li><strong>nano</strong> — beginner-friendly, derived from pico; shortcuts displayed on screen.</li>
+      <li><strong>vi</strong> — most popular Linux terminal editor; powerful but complex; extremely efficient once mastered.</li>
+      <li><strong>emacs</strong> — alternative to vi; highly customizable.</li>
+    </ul>
+    <div class="note">Note: <code>vi</code> and <code>nano</code> are usually installed by default in Linux.</div>
+
+    <h4 class="subtopic">C. GUI Editors</h4>
+    <ul>
+      <li>Examples: <code>gedit</code> (GNOME), <code>kwrite</code> (KDE).</li>
+      <li>Similar to Windows Notepad.</li>
+    </ul>
+    <h4 class="subtopic">D. Specialized Programmer Editors</h4>
+    <ul>
+      <li>Examples: Sublime Text, Atom, Brackets (HTML-focused).</li>
+    </ul>
+    <h4 class="subtopic">E. IDEs</h4>
+    <ul>
+      <li>Full development suites with editor, compiler, debugger.</li>
+      <li>Examples: Eclipse, NetBeans, Bluefish.</li>
+    </ul>
+
+    <h3 class="topic">Essential Features of an Editor</h3>
+    <ul>
+      <li>Navigation: scroll, page movement, line numbers.</li>
+      <li>Search: keywords, regex.</li>
+      <li>Editing actions: insert, replace, delete, cut/copy/paste.</li>
+      <li>Code awareness: syntax highlighting.</li>
+      <li>Advanced features: key mapping, init scripts, macros, plugins.</li>
+    </ul>
+
+    <h3 class="topic">Deep Dive: <code>ed</code> Line Editor</h3>
+    <ul>
+      <li>Definition: oldest Unix text editor, line-by-line.</li>
+      <li>Importance: foundation for many <code>vi</code> commands; useful in emergency terminal situations; available almost everywhere.</li>
+    </ul>
+
+    <h4 class="subtopic">Core Characteristics</h4>
+    <ul>
+      <li>Non-visual, no default prompt (enable with <code>P</code>).</li>
+      <li>File opening shows bytes loaded.</li>
+    </ul>
+
+    <h4 class="subtopic">Address Selection</h4>
+    <p>General format: <code>[start],[end][command]</code></p>
+    <table>
+      <thead><tr><th>Symbol</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><code>2</code></td><td>Line 2</td></tr>
+        <tr><td><code>.</code></td><td>Current line</td></tr>
+        <tr><td><code>$</code></td><td>Last line</td></tr>
+        <tr><td><code>%</code></td><td>Entire file</td></tr>
+        <tr><td><code>+</code></td><td>Next line</td></tr>
+        <tr><td><code>-</code></td><td>Previous line</td></tr>
+        <tr><td><code>,</code></td><td>Whole buffer</td></tr>
+        <tr><td><code>;</code></td><td>Current line → end</td></tr>
+        <tr><td><code>/pattern/</code></td><td>Search</td></tr>
+      </tbody>
+    </table>
+
+    <h4 class="subtopic">Common Commands</h4>
+    <ul>
+      <li><code>p</code> — Print: display lines.</li>
+      <li><code>a</code> — Append: add text after current line.</li>
+      <li><code>d</code> — Delete: remove lines.</li>
+      <li><code>s</code> — Substitute: regex replacement, e.g. <code>s/old/new/</code>; backreference: <code>s/(word)/&lt;\1&gt;/</code>.</li>
+      <li><code>j</code> — Join: merge lines.</li>
+      <li><code>m</code> — Move: relocate lines.</li>
+      <li><code>u</code> — Undo: revert last action.</li>
+      <li><code>w</code> — Write: save file.</li>
+      <li><code>q</code> — Quit: exit editor.</li>
+      <li><code>f</code> — File Name: show filename.</li>
+      <li><code>r</code> — Read: insert another file/shell output.</li>
+      <li><code>!</code> — Shell Escape: run shell commands.</li>
+    </ul>
+
+    <div class="revision">
+      <h4>Summary</h4>
+      <table>
+        <thead><tr><th>Topic</th><th>Key Idea</th></tr></thead>
+        <tbody>
+          <tr><td>Command Line Editors</td><td>Terminal-based file editing</td></tr>
+          <tr><td>Line Editors</td><td>Edit line-by-line</td></tr>
+          <tr><td>Visual Editors</td><td>Interactive screen editing</td></tr>
+          <tr><td>nano</td><td>Simple editor</td></tr>
+          <tr><td>vi</td><td>Powerful &amp; popular</td></tr>
+          <tr><td>emacs</td><td>Highly customizable</td></tr>
+          <tr><td>GUI Editors</td><td>Window-based editors</td></tr>
+          <tr><td>IDEs</td><td>Full programming environments</td></tr>
+          <tr><td>ed</td><td>Classic Unix line editor</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="exam-points">
+      <h4>Important Exam Points</h4>
+      <ul>
+        <li><code>ed</code> is the base for many <code>vi</code> commands.</li>
+        <li><code>nano</code> is easiest for beginners.</li>
+        <li><code>vi</code> is most widely used.</li>
+        <li>Editors are crucial for remote Linux administration.</li>
+        <li><code>s</code> command in <code>ed</code> performs substitution using regex.</li>
+        <li><code>.</code> = current line, <code>$</code> = last line in <code>ed</code>.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- LECTURE 2 -->
+  <section class="lecture" id="lecture2">
+    <h2>Lecture 2: Command Line Editors — Part 02</h2>
+
+    <h3 class="topic">Nano and Pico Editors</h3>
+    <h4 class="subtopic">Relationship Between Pico and Nano</h4>
+    <ul>
+      <li>In many Linux systems, <code>pico</code> is linked to <code>nano</code>.</li>
+      <li><code>nano</code> = improved, modern version of <code>pico</code>.</li>
+      <li>Check actual file: <code>readlink -f /usr/bin/pico</code></li>
+      <li>Purpose of <code>readlink</code>: resolves symbolic links, shows actual executable path.</li>
+    </ul>
+
+    <h4 class="subtopic">Features of Nano Editor</h4>
+    <ul>
+      <li><strong>Visual Interface</strong> — easy-to-use, cursor-based editor; syntax highlighting with colors for comments, loops, keywords, active lines.</li>
+      <li><strong>Beginner Friendly</strong> — similar to Windows Notepad; arrow keys for navigation; direct typing for text entry.</li>
+    </ul>
+
+    <h4 class="subtopic">Important Nano Commands</h4>
+    <table>
+      <thead><tr><th>Shortcut</th><th>Function</th></tr></thead>
+      <tbody>
+        <tr><td><code>Ctrl + O</code></td><td>Save file</td></tr>
+        <tr><td><code>Ctrl + X</code></td><td>Exit editor</td></tr>
+        <tr><td><code>Ctrl + S</code></td><td>Save file</td></tr>
+        <tr><td><code>Ctrl + R</code></td><td>Insert another file</td></tr>
+        <tr><td><code>Ctrl + Q</code> / <code>Alt + Q</code></td><td>Search &amp; replace</td></tr>
+        <tr><td><code>Alt + N</code></td><td>Toggle line numbers</td></tr>
+      </tbody>
+    </table>
+
+    <ul>
+      <li>Save file: <code>Ctrl + O</code>; exit nano: <code>Ctrl + X</code> (prompts to save if changes are unsaved).</li>
+      <li>Read another file — insert file content: <code>Ctrl + R</code> (adds another file's contents at cursor position).</li>
+      <li>Search text: <code>Ctrl + Q</code> or <code>Alt + Q</code>; navigation is character-wise, word-wise, line-wise, page-wise.</li>
+      <li>Line numbers: toggle with <code>Alt + N</code> — useful for coding, debugging, error tracking.</li>
+    </ul>
+
+    <h3 class="topic">Vi (Visual) Editor</h3>
+    <ul>
+      <li>Powerful terminal editor, standard in Unix/Linux.</li>
+      <li>Improved version: Vim.</li>
+      <li>Available on almost all operating systems.</li>
+    </ul>
+
+    <h4 class="subtopic">A. Three Major Modes of Vi</h4>
+    <ul>
+      <li><strong>Command Mode</strong> — default mode when file opens; used for navigation, commands, copy/delete/search; return with <code>Esc</code>.</li>
+      <li><strong>Insert Mode</strong> — used to type/edit text; enter with <code>i</code> (insert at cursor), <code>a</code> (append after cursor), <code>o</code> (open new line); screen shows <code>-- INSERT --</code>.</li>
+      <li><strong>Ex Mode (Colon Mode)</strong> — access with <code>:</code>; used for save, quit, search, replace.</li>
+    </ul>
+
+    <h4 class="subtopic">B. Navigation in Vi (Command Mode)</h4>
+    <p>Basic cursor movement:</p>
+    <table>
+      <thead><tr><th>Key</th><th>Movement</th></tr></thead>
+      <tbody>
+        <tr><td><code>h</code></td><td>Left</td></tr>
+        <tr><td><code>j</code></td><td>Down</td></tr>
+        <tr><td><code>k</code></td><td>Up</td></tr>
+        <tr><td><code>l</code></td><td>Right</td></tr>
+      </tbody>
+    </table>
+    <p>Line navigation:</p>
+    <table>
+      <thead><tr><th>Command</th><th>Function</th></tr></thead>
+      <tbody>
+        <tr><td><code>0</code></td><td>Start of line</td></tr>
+        <tr><td><code>$</code></td><td>End of line</td></tr>
+      </tbody>
+    </table>
+    <p>Word navigation:</p>
+    <table>
+      <thead><tr><th>Command</th><th>Function</th></tr></thead>
+      <tbody>
+        <tr><td><code>w</code></td><td>Next word</td></tr>
+        <tr><td><code>b</code></td><td>Previous word</td></tr>
+      </tbody>
+    </table>
+    <p>Screen navigation:</p>
+    <table>
+      <thead><tr><th>Command</th><th>Function</th></tr></thead>
+      <tbody>
+        <tr><td><code>Ctrl + F</code></td><td>Forward page</td></tr>
+        <tr><td><code>Ctrl + B</code></td><td>Backward page</td></tr>
+        <tr><td><code>Ctrl + D</code></td><td>Half-page down</td></tr>
+        <tr><td><code>Ctrl + U</code></td><td>Half-page up</td></tr>
+      </tbody>
+    </table>
+    <p>Jumping to lines: <code>:n</code> or <code>nG</code> → go to line n (e.g., <code>25G</code> moves to line 25); <code>G</code> → go to end of file.</p>
+
+    <h4 class="subtopic">C. Editing and Deleting in Vi</h4>
+    <p>Deleting commands:</p>
+    <table>
+      <thead><tr><th>Command</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td><code>x</code></td><td>Delete character</td></tr>
+        <tr><td><code>dw</code></td><td>Delete word</td></tr>
+        <tr><td><code>dd</code></td><td>Delete current line</td></tr>
+        <tr><td><code>D</code></td><td>Delete till end of line</td></tr>
+      </tbody>
+    </table>
+    <p>Repeat count: prefix a number before the command — e.g. <code>5x</code> deletes 5 characters, <code>10dd</code> deletes 10 lines.</p>
+    <p>Changing text:</p>
+    <table>
+      <thead><tr><th>Command</th><th>Function</th></tr></thead>
+      <tbody>
+        <tr><td><code>cw</code></td><td>Change word</td></tr>
+        <tr><td><code>cc</code></td><td>Change line</td></tr>
+        <tr><td><code>R</code></td><td>Continuous replace mode</td></tr>
+      </tbody>
+    </table>
+    <p>Undo: <code>u</code> → undo last action.</p>
+
+    <h4 class="subtopic">D. Copy, Paste &amp; Search</h4>
+    <p>Copying (yanking):</p>
+    <table>
+      <thead><tr><th>Command</th><th>Function</th></tr></thead>
+      <tbody>
+        <tr><td><code>yy</code></td><td>Copy current line</td></tr>
+        <tr><td><code>nyy</code></td><td>Copy n lines</td></tr>
+      </tbody>
+    </table>
+    <p>Example: <code>5yy</code> → copies 5 lines. Pasting: <code>p</code> → paste below cursor.</p>
+    <p>Searching:</p>
+    <table>
+      <thead><tr><th>Command</th><th>Function</th></tr></thead>
+      <tbody>
+        <tr><td><code>/pattern</code></td><td>Forward search</td></tr>
+        <tr><td><code>?pattern</code></td><td>Backward search</td></tr>
+        <tr><td><code>n</code></td><td>Next match</td></tr>
+        <tr><td><code>N</code></td><td>Previous match</td></tr>
+      </tbody>
+    </table>
+
+    <h4 class="subtopic">E. Ex Mode Commands</h4>
+    <p>File commands:</p>
+    <table>
+      <thead><tr><th>Command</th><th>Function</th></tr></thead>
+      <tbody>
+        <tr><td><code>:w</code></td><td>Save</td></tr>
+        <tr><td><code>:wq</code></td><td>Save &amp; quit</td></tr>
+        <tr><td><code>:q</code></td><td>Quit</td></tr>
+        <tr><td><code>:q!</code></td><td>Quit without saving</td></tr>
+      </tbody>
+    </table>
+    <p>Line numbers: show <code>:set number</code>, hide <code>:set nonumber</code>.</p>
+    <p>Search and replace — general syntax: <code>:[range]s/old/new/g</code></p>
+    <ul>
+      <li>Example: <code>:1,5s/line/LINE/g</code> → replace in lines 1–5.</li>
+      <li>Example: <code>:%s/hello/hola/g</code> → replace in entire file.</li>
+    </ul>
+
+    <div class="revision">
+      <h4>Revision Table</h4>
+      <table>
+        <thead><tr><th>Editor</th><th>Best Feature</th></tr></thead>
+        <tbody>
+          <tr><td>Nano</td><td>Easy for beginners</td></tr>
+          <tr><td>Pico</td><td>Older simple editor</td></tr>
+          <tr><td>Vi/Vim</td><td>Powerful and fast</td></tr>
+          <tr><td>Vim</td><td>Improved Vi editor</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="exam-points">
+      <h4>Important Exam Points</h4>
+      <ul>
+        <li><code>nano</code> is beginner-friendly and visual.</li>
+        <li><code>vi</code> works using different modes.</li>
+        <li><code>Esc</code> returns to Command Mode in <code>vi</code>.</li>
+        <li><code>:wq</code> saves and exits in <code>vi</code>.</li>
+        <li><code>yy</code> copies lines, <code>p</code> pastes them.</li>
+        <li><code>:%s/old/new/g</code> performs global replacement.</li>
+        <li><code>Alt + N</code> toggles line numbers in nano.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- LECTURE 3 -->
+  <section class="lecture" id="lecture3">
+    <h2>Lecture 3: Command Line Editors — Part 03</h2>
+
+    <h3 class="topic">Environment Setup &amp; File Management</h3>
+    <h4 class="subtopic">Secure Copy (<code>scp</code>)</h4>
+    <ul>
+      <li>Purpose: transfer files securely between remote and local systems.</li>
+    </ul>
+    <pre>scp username@IP:/path/file .</pre>
+    <ul>
+      <li>Requirements: remote IP, file path, username, password.</li>
+      <li>Use case: copy files from remote Linux servers, supercomputers, cloud systems.</li>
+    </ul>
+
+    <h4 class="subtopic">Archive Management (<code>tar</code>)</h4>
+    <p>Extract tar files:</p>
+    <pre>tar -xvf filename.tar</pre>
+    <ul>
+      <li>Purpose: unpack archived directories/files.</li>
+    </ul>
+
+    <h4 class="subtopic">DOS vs Linux File Format</h4>
+    <ul>
+      <li>Problem: Windows files may contain <code>^M</code> at line ends.</li>
+      <li>Cause: Windows → Carriage Return + Line Feed; Linux → Line Feed only.</li>
+      <li>Symbol: <code>^M</code> = Control-M = Carriage Return.</li>
+    </ul>
+
+    <h3 class="topic">Nano (Pico) Editor</h3>
+    <ul>
+      <li>Simple terminal text editor.</li>
+      <li>Beginner-friendly, similar to Windows Notepad.</li>
+    </ul>
+    <h4 class="subtopic">Features</h4>
+    <ul>
+      <li>Arrow key navigation.</li>
+      <li>Syntax highlighting.</li>
+      <li>Easy editing directly in terminal.</li>
+    </ul>
+    <h4 class="subtopic">Important Nano Commands</h4>
+    <table>
+      <thead><tr><th>Shortcut</th><th>Function</th></tr></thead>
+      <tbody>
+        <tr><td><code>Ctrl + O</code></td><td>Save file</td></tr>
+        <tr><td><code>Ctrl + X</code></td><td>Exit Nano</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="topic">Vi Editor — Advanced Navigation &amp; Editing</h3>
+    <ul>
+      <li>Powerful Linux editor.</li>
+      <li>Modes: Command, Insert, Ex.</li>
+      <li>Best for large files, fast editing, source code, log files.</li>
+    </ul>
+
+    <h4 class="subtopic">Navigation Commands</h4>
+    <p>Page navigation:</p>
+    <table>
+      <thead><tr><th>Command</th><th>Function</th></tr></thead>
+      <tbody>
+        <tr><td><code>Ctrl + F</code></td><td>Scroll one full page down</td></tr>
+        <tr><td><code>Ctrl + D</code></td><td>Half-page down</td></tr>
+        <tr><td><code>Ctrl + U</code></td><td>Half-page up</td></tr>
+      </tbody>
+    </table>
+    <p>Jump to specific line: <code>:128</code> → moves cursor to line 128.</p>
+    <p>Line navigation:</p>
+    <table>
+      <thead><tr><th>Command</th><th>Function</th></tr></thead>
+      <tbody>
+        <tr><td><code>0</code></td><td>Beginning of line</td></tr>
+        <tr><td><code>$</code></td><td>End of line</td></tr>
+        <tr><td><code>1G</code></td><td>First line</td></tr>
+        <tr><td><code>G</code></td><td>Last line</td></tr>
+      </tbody>
+    </table>
+
+    <h4 class="subtopic">Editing Commands</h4>
+    <table>
+      <thead><tr><th>Command</th><th>Function</th></tr></thead>
+      <tbody>
+        <tr><td><code>r</code></td><td>Replace one character</td></tr>
+        <tr><td><code>R</code></td><td>Continuous replace mode</td></tr>
+        <tr><td><code>cw</code></td><td>Change word</td></tr>
+        <tr><td><code>A</code></td><td>Append at end of line</td></tr>
+        <tr><td><code>u</code></td><td>Undo last action</td></tr>
+        <tr><td><code>dd</code></td><td>Delete current line</td></tr>
+        <tr><td><code>100dd</code></td><td>Delete 100 lines</td></tr>
+      </tbody>
+    </table>
+
+    <h4 class="subtopic">File Information</h4>
+    <table>
+      <thead><tr><th>Command</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code>Ctrl + G</code></td><td>Show line/file status</td></tr>
+        <tr><td><code>:f</code></td><td>Show filename</td></tr>
+      </tbody>
+    </table>
+
+    <h4 class="subtopic">Search, Replace &amp; Regex in Vi</h4>
+    <ul>
+      <li>Forward search: <code>/word</code>; next match: <code>n</code>.</li>
+      <li>Global replacement: <code>:%s/old/new/g</code></li>
+    </ul>
+
+    <h4 class="subtopic">Removing <code>^M</code> Characters</h4>
+    <ul>
+      <li>Capture control characters: press <code>Ctrl + V</code> then <code>Ctrl + M</code>.</li>
+      <li>Use in replacement commands to remove DOS formatting.</li>
+    </ul>
+
+    <h4 class="subtopic">Regular Expressions (Regex)</h4>
+    <ul>
+      <li>Purpose: advanced searching, massive editing, pattern matching.</li>
+      <li>Escaping special characters: e.g. <code>\[</code> treats <code>[</code> as normal text.</li>
+    </ul>
+
+    <h3 class="topic">Emacs Editor</h3>
+    <ul>
+      <li>Professional, powerful editor.</li>
+      <li>Unlike Vi, uses only one mode; normal typing inserts text directly.</li>
+      <li>Commands use <code>C-</code> = Ctrl key, <code>M-</code> = Meta/Alt key.</li>
+    </ul>
+
+    <h4 class="subtopic">Launch Emacs in Terminal</h4>
+    <pre>emacs -nw</pre>
+    <ul>
+      <li><code>-nw</code> = no window mode (runs inside terminal).</li>
+    </ul>
+
+    <h4 class="subtopic">Navigation Commands</h4>
+    <table>
+      <thead><tr><th>Shortcut</th><th>Function</th></tr></thead>
+      <tbody>
+        <tr><td><code>Ctrl + P</code></td><td>Move up</td></tr>
+        <tr><td><code>Ctrl + B</code></td><td>Move left</td></tr>
+        <tr><td><code>Ctrl + F</code></td><td>Move right</td></tr>
+        <tr><td><code>Ctrl + A</code></td><td>Beginning of line</td></tr>
+        <tr><td><code>Ctrl + E</code></td><td>End of line</td></tr>
+        <tr><td><code>Meta + F</code></td><td>Forward one word</td></tr>
+        <tr><td><code>Meta + B</code></td><td>Backward one word</td></tr>
+        <tr><td><code>Ctrl + V</code></td><td>Scroll forward</td></tr>
+        <tr><td><code>Meta + V</code></td><td>Scroll backward</td></tr>
+      </tbody>
+    </table>
+
+    <h4 class="subtopic">File Management</h4>
+    <table>
+      <thead><tr><th>Shortcut</th><th>Function</th></tr></thead>
+      <tbody>
+        <tr><td><code>Ctrl + X Ctrl + S</code></td><td>Save file</td></tr>
+        <tr><td><code>Ctrl + X Ctrl + C</code></td><td>Exit Emacs</td></tr>
+        <tr><td><code>Ctrl + Z</code></td><td>Suspend editor temporarily</td></tr>
+      </tbody>
+    </table>
+    <div class="note">Suspend Emacs: <code>Ctrl + Z</code> → returns to shell, editor remains active in background.</div>
+
+    <div class="revision">
+      <h4>Comparison Table</h4>
+      <table>
+        <thead><tr><th>Editor</th><th>Difficulty</th><th>Best Feature</th></tr></thead>
+        <tbody>
+          <tr><td>Nano</td><td>Easy</td><td>Beginner friendly</td></tr>
+          <tr><td>Vi/Vim</td><td>Medium-Hard</td><td>Powerful &amp; fast</td></tr>
+          <tr><td>Emacs</td><td>Advanced</td><td>Highly customizable</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="exam-points">
+      <h4>Important Exam Points</h4>
+      <ul>
+        <li><code>scp</code> transfers files securely between systems.</li>
+        <li><code>tar -xvf</code> extracts archive files.</li>
+        <li><code>^M</code> indicates DOS/Windows line endings.</li>
+        <li><code>vi</code> works using multiple modes.</li>
+        <li><code>:%s/old/new/g</code> performs global replacement.</li>
+        <li><code>r</code> replaces one character, <code>R</code> replaces continuously.</li>
+        <li><code>emacs -nw</code> opens Emacs in terminal mode.</li>
+        <li><code>Ctrl + X Ctrl + S</code> saves files in Emacs.</li>
+        <li>Mastering Vi/Vim or Emacs is essential for professional Linux work.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- LECTURE 4 -->
+  <section class="lecture" id="lecture4">
+    <h2>Lecture 4: Network Basics</h2>
+
+    <h3 class="topic">Network Basics</h3>
+    <ul>
+      <li>Structure: Private Network → ISP → Internet.</li>
+      <li>Examples: Home Wi-Fi, College LAN → ISP → Public Internet.</li>
+    </ul>
+
+    <h4 class="subtopic">Types of Networks</h4>
+    <ul>
+      <li><strong>Private Network</strong>: internal use, secure, not internet-visible.</li>
+      <li><strong>Public Network</strong>: internet-facing, globally accessible.</li>
+    </ul>
+
+    <h3 class="topic">IP Addressing (IPv4)</h3>
+    <h4 class="subtopic">What is an IP Address?</h4>
+    <ul>
+      <li>Unique identifier for devices on a network.</li>
+      <li>Enables communication.</li>
+    </ul>
+    <h4 class="subtopic">Localhost Address</h4>
+    <ul>
+      <li><code>127.0.0.1</code> → loopback, system talks to itself.</li>
+      <li>Used for testing/local services.</li>
+    </ul>
+    <h4 class="subtopic">Private IP Addresses</h4>
+    <ul>
+      <li>Not visible on public internet.</li>
+      <li>Ignored by routers.</li>
+      <li>Used inside local networks.</li>
+    </ul>
+
+    <h4 class="subtopic">Classes of Private IPs</h4>
+    <table>
+      <thead><tr><th>Class</th><th>Range</th><th>Features</th><th>Example Use</th></tr></thead>
+      <tbody>
+        <tr><td>A</td><td><code>10.x.x.x</code></td><td>~16 million addresses</td><td>Large universities/orgs</td></tr>
+        <tr><td>B</td><td><code>172.16.x.x</code> → <code>172.31.x.x</code></td><td>~1 million addresses</td><td>Medium orgs</td></tr>
+        <tr><td>C</td><td><code>192.168.x.x</code></td><td>Small/home networks</td><td>Most common</td></tr>
+      </tbody>
+    </table>
+
+    <h4 class="subtopic">Public IP Addresses</h4>
+    <ul>
+      <li>Any IP outside private ranges.</li>
+      <li>Used for websites, public servers, online services.</li>
+    </ul>
+
+    <h4 class="subtopic">Network Hierarchy</h4>
+    <ul>
+      <li>Nested private networks for extra security.</li>
+      <li>Examples: HPC clusters, storage servers, research labs.</li>
+    </ul>
+
+    <h3 class="topic">Network Ports &amp; Services</h3>
+    <h4 class="subtopic">What is a Port?</h4>
+    <ul>
+      <li>Service counter for network communication.</li>
+      <li>Each port = specific service.</li>
+    </ul>
+
+    <h4 class="subtopic">Important Port Numbers</h4>
+    <table>
+      <thead><tr><th>Port</th><th>Service</th></tr></thead>
+      <tbody>
+        <tr><td>21</td><td>FTP</td></tr>
+        <tr><td>22</td><td>SSH</td></tr>
+        <tr><td>25</td><td>SMTP Mail</td></tr>
+        <tr><td>80</td><td>HTTP</td></tr>
+        <tr><td>443</td><td>HTTPS</td></tr>
+        <tr><td>631</td><td>Linux Printing (CUPS)</td></tr>
+        <tr><td>3306</td><td>MySQL</td></tr>
+      </tbody>
+    </table>
+    <ul>
+      <li>FTP (21): file transfer.</li>
+      <li>SSH (22): secure remote login, command execution.</li>
+      <li>HTTP (80): unsecured web traffic.</li>
+      <li>HTTPS (443): secure encrypted traffic.</li>
+    </ul>
+
+    <h3 class="topic">Remote Access Methods</h3>
+    <ul>
+      <li><strong>VPN</strong>: connect remotely to private networks.</li>
+      <li><strong>SSH Tunneling</strong>: secure encrypted communication, multiple hops, port forwarding.</li>
+      <li><strong>Remote Desktop Tools</strong>: GUI-based access — examples: X2Go, RDP, Apache Guacamole.</li>
+      <li><strong>Commercial Tools</strong>: TeamViewer, AnyDesk, Zoho Assist.</li>
+    </ul>
+
+    <h3 class="topic">Network Security &amp; Firewalls</h3>
+    <h4 class="subtopic">Firewalls</h4>
+    <ul>
+      <li>Block unauthorized access.</li>
+      <li>Functions: filter traffic, control ports, prevent attacks.</li>
+    </ul>
+    <h4 class="subtopic">Types</h4>
+    <ul>
+      <li>Machine-level firewall → protects individual systems.</li>
+      <li>Network firewall → protects entire networks.</li>
+      <li>Web Application Firewall (WAF) → protects websites (blocks SQL injection, malicious HTTP).</li>
+    </ul>
+
+    <h4 class="subtopic">SELinux</h4>
+    <ul>
+      <li>Advanced Linux security layer.</li>
+      <li>Features: Role-Based Access Control (RBAC); sandboxing (restricts processes).</li>
+    </ul>
+    <h4 class="subtopic">Check SELinux Status</h4>
+    <ul>
+      <li>File context: <code>ls -lZ</code></li>
+      <li>Process context: <code>ps -eZ</code></li>
+    </ul>
+
+    <h3 class="topic">Essential Networking Commands</h3>
+    <ul>
+      <li><code>ifconfig</code> → shows interfaces, local IPs.</li>
+      <li><code>ping</code> → check connectivity.</li>
+      <li><code>traceroute</code> → show packet hops.</li>
+      <li><code>nslookup</code> / <code>dig</code> → hostname ↔ IP conversion.</li>
+      <li><code>netstat</code> → active connections, open ports.</li>
+    </ul>
+    <h4 class="subtopic">Advanced Tools</h4>
+    <ul>
+      <li><code>nmap</code> → port scanning.</li>
+      <li><code>wireshark</code> → packet analysis/sniffing (with permission).</li>
+    </ul>
+
+    <h3 class="topic">High-Performance Computing (HPC) &amp; Linux</h3>
+    <h4 class="subtopic">Linux in Supercomputers</h4>
+    <ul>
+      <li>All Top 500 supercomputers run Linux.</li>
+    </ul>
+    <h4 class="subtopic">Remote Processing Workflow</h4>
+    <ul>
+      <li>SSH into supercomputer.</li>
+      <li>Process data remotely.</li>
+      <li>Download only results (datasets too large to transfer).</li>
+    </ul>
+    <h4 class="subtopic">Job Schedulers</h4>
+    <ul>
+      <li>Users submit jobs instead of direct execution.</li>
+      <li>Example: <code>qstat</code>.</li>
+      <li>Scheduler handles queues, resources, policies.</li>
+    </ul>
+
+    <div class="revision">
+      <h4>Revision Table</h4>
+      <table>
+        <thead><tr><th>Topic</th><th>Key Point</th></tr></thead>
+        <tbody>
+          <tr><td>Localhost</td><td>127.0.0.1</td></tr>
+          <tr><td>Private IP</td><td>Internal addresses</td></tr>
+          <tr><td>Public IP</td><td>Internet-visible</td></tr>
+          <tr><td>SSH</td><td>Secure remote login</td></tr>
+          <tr><td>VPN</td><td>Remote private access</td></tr>
+          <tr><td>Firewall</td><td>Blocks unauthorized traffic</td></tr>
+          <tr><td>SELinux</td><td>RBAC + sandboxing</td></tr>
+          <tr><td>ping</td><td>Connectivity check</td></tr>
+          <tr><td>traceroute</td><td>Shows packet path</td></tr>
+          <tr><td>netstat</td><td>Active connections</td></tr>
+          <tr><td>HPC</td><td>Linux powers supercomputers</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="exam-points">
+      <h4>Important Exam Points</h4>
+      <ul>
+        <li><code>127.0.0.1</code> = localhost.</li>
+        <li>Private IPs not routable publicly.</li>
+        <li>Port 22 → SSH.</li>
+        <li>Port 443 → HTTPS.</li>
+        <li>Firewalls filter traffic.</li>
+        <li>SELinux provides RBAC + sandboxing.</li>
+        <li><code>ping</code> checks connectivity.</li>
+        <li><code>traceroute</code> shows packet path.</li>
+        <li>Linux powers all top supercomputers.</li>
+        <li>HPC jobs submitted via schedulers.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>Week 2: Short Notes — Editors &amp; Networking</footer>
+
+</div>
+</body>
+</html>

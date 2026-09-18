@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+
+<meta charset="UTF-8">
+<title>Week 3: Short Notes — Redirection, Package &amp; Process Management</title>
+<style>
+  :root {
+    --bg: #f7f8fa;
+    --card-bg: #ffffff;
+    --text: #1f2430;
+    --muted: #5b6472;
+    --accent: #3a6df0;
+    --accent-light: #e8eefd;
+    --border: #e1e4ea;
+    --code-bg: #282c34;
+    --code-text: #e6e6e6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14161b;
+      --card-bg: #1c1f26;
+      --text: #e7e9ee;
+      --muted: #9aa2b1;
+      --accent: #6d94ff;
+      --accent-light: #232a42;
+      --border: #2c313c;
+      --code-bg: #0f1115;
+      --code-text: #d7dae0;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 32px 20px 80px;
+  }
+  header.page-header {
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--accent);
+  }
+  header.page-header h1 {
+    margin: 0 0 6px;
+    font-size: 1.9rem;
+  }
+  header.page-header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  nav.toc {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 36px;
+  }
+  nav.toc h2 {
+    font-size: 1rem;
+    margin: 0 0 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  nav.toc ol {
+    margin: 0;
+    padding-left: 20px;
+  }
+  nav.toc a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  nav.toc a:hover { text-decoration: underline; }
+
+  section.lecture {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 28px;
+  }
+  section.lecture h2 {
+    margin-top: 0;
+    font-size: 1.4rem;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+  }
+  h3.topic {
+    font-size: 1.1rem;
+    margin: 24px 0 8px;
+  }
+  h4.subtopic {
+    font-size: 1rem;
+    margin: 16px 0 6px;
+    color: var(--muted);
+  }
+  ul, ol {
+    padding-left: 22px;
+  }
+  li { margin-bottom: 4px; }
+  code {
+    background: var(--accent-light);
+    color: var(--accent);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.92em;
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 12px 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.9rem;
+    margin: 10px 0 18px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 20px;
+    overflow-x: auto;
+    display: block;
+  }
+  table thead { background: var(--accent-light); }
+  table th, table td {
+    text-align: left;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    font-size: 0.92rem;
+  }
+  table th { color: var(--accent); }
+  .note {
+    background: var(--accent-light);
+    border-left: 4px solid var(--accent);
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin: 14px 0;
+    font-size: 0.93rem;
+  }
+  .exam-points {
+    background: var(--accent-light);
+    border-radius: 8px;
+    padding: 14px 20px;
+    margin-top: 20px;
+  }
+  .exam-points h4 {
+    margin: 0 0 8px;
+    color: var(--accent);
+  }
+  .revision {
+    margin-top: 20px;
+  }
+  .revision h4 {
+    margin-bottom: 6px;
+    color: var(--accent);
+  }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="page-header">
+    <h1>Week 3: Short Notes</h1>
+    <p>Combining Commands, Redirections, Software &amp; Process Management</p>
+  </header>
+
+  <nav class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#lecture1">Lecture 1: Combining Commands and Files</a></li>
+      <li><a href="#lecture2">Lecture 2: Redirections</a></li>
+      <li><a href="#lecture3">Lecture 3: Software Management — Part 01</a></li>
+      <li><a href="#lecture4">Lecture 4: Software Management — Part 02</a></li>
+      <li><a href="#lecture5">Lecture 5: Linux Process Management</a></li>
+    </ol>
+  </nav>
+
+  <!-- LECTURE 1 -->
+  <section class="lecture" id="lecture1">
+    <h2>Lecture 1: Combining Commands and Files</h2>
+
+    <h3 class="topic">Combining Multiple Commands</h3>
+    <ul>
+      <li><strong>Semicolon (<code>;</code>)</strong> — runs commands sequentially, regardless of success or failure.</li>
+    </ul>
+    <pre>pwd ; date</pre>
+    <p>Both commands execute independently.</p>
+    <ul>
+      <li><strong>Logical AND (<code>&amp;&amp;</code>)</strong> — executes the second command only if the first succeeds.</li>
+    </ul>
+    <pre>mkdir test && cd test</pre>
+    <ul>
+      <li><strong>Logical OR (<code>||</code>)</strong> — executes the second command only if the first fails.</li>
+    </ul>
+    <pre>cd project || echo "Directory not found"</pre>
+
+    <h3 class="topic">Execution in Subshells</h3>
+    <ul>
+      <li>Commands inside parentheses <code>( )</code> run in a subshell.</li>
+    </ul>
+    <pre>var=10
+(var=20)
+echo $var  # Output: 10</pre>
+    <ul>
+      <li><code>BASH_SUBSHELL</code> variable shows nesting level:</li>
+    </ul>
+    <pre>echo $BASH_SUBSHELL</pre>
+    <ul>
+      <li><code>0</code> → Main shell</li>
+      <li><code>1+</code> → Subshell depth</li>
+      <li>Limitation: too many subshells increase system overhead.</li>
+    </ul>
+
+    <h3 class="topic">File Descriptors</h3>
+    <p>Linux uses three standard streams:</p>
+    <table>
+      <thead><tr><th>Descriptor</th><th>Name</th><th>Number</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code>stdin</code></td><td>Standard Input</td><td>0</td><td>Input from keyboard</td></tr>
+        <tr><td><code>stdout</code></td><td>Standard Output</td><td>1</td><td>Normal command output</td></tr>
+        <tr><td><code>stderr</code></td><td>Standard Error</td><td>2</td><td>Error messages</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="topic">Output Redirection</h3>
+    <h4 class="subtopic">Overwrite <code>&gt;</code></h4>
+    <pre>ls > files.txt</pre>
+    <ul>
+      <li>Creates file if missing.</li>
+      <li>Overwrites existing content.</li>
+      <li>Redirects only stdout.</li>
+    </ul>
+    <h4 class="subtopic">Append <code>&gt;&gt;</code></h4>
+    <pre>date >> log.txt</pre>
+    <ul>
+      <li>Adds new output at the end.</li>
+      <li>Preserves old content.</li>
+      <li>Safer than <code>&gt;</code>.</li>
+    </ul>
+
+    <h3 class="topic">Practical Applications &amp; Limitations</h3>
+    <h4 class="subtopic">Creating Files with <code>cat</code></h4>
+    <pre>cat > notes.txt</pre>
+    <p>Type content, press <code>Ctrl + D</code> to save.</p>
+    <h4 class="subtopic">Permissions</h4>
+    <pre>touch /usr/test.txt</pre>
+    <p>May fail for normal users (system directories protected).</p>
+    <h4 class="subtopic">Handling Large Output</h4>
+    <pre>hwinfo > hardware.txt
+less hardware.txt</pre>
+
+    <div class="revision">
+      <h4>Quick Revision Table</h4>
+      <table>
+        <thead><tr><th>Symbol</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td><code>;</code></td><td>Run commands sequentially</td></tr>
+          <tr><td><code>&amp;&amp;</code></td><td>Run next only if previous succeeds</td></tr>
+          <tr><td><code>||</code></td><td>Run next only if previous fails</td></tr>
+          <tr><td><code>( )</code></td><td>Execute in subshell</td></tr>
+          <tr><td><code>&gt;</code></td><td>Redirect and overwrite output</td></tr>
+          <tr><td><code>&gt;&gt;</code></td><td>Redirect and append output</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- LECTURE 2 -->
+  <section class="lecture" id="lecture2">
+    <h2>Lecture 2: Redirections</h2>
+
+    <h3 class="topic">Standard Error Redirection (<code>2&gt;</code>)</h3>
+    <ul>
+      <li>Redirects stderr to a file.</li>
+    </ul>
+    <pre>command 2> error.txt</pre>
+    <p>Rules: no space between <code>2</code> and <code>&gt;</code>; only error messages are redirected; normal output still appears on screen.</p>
+    <pre>ls /wrongpath 2> errors.txt</pre>
+    <p>Error saved in <code>errors.txt</code>.</p>
+    <p>Uses: clean output (hide errors); debugging (store errors for troubleshooting).</p>
+    <div class="note">Warning: existing file → overwritten. Missing file → created.</div>
+
+    <h3 class="topic">Combined Redirection (<code>&gt;</code> and <code>2&gt;</code>)</h3>
+    <p>Redirect stdout and stderr separately:</p>
+    <pre>ls $HOME /blah > output.txt 2> error.txt</pre>
+    <table>
+      <thead><tr><th>Stream</th><th>Destination</th></tr></thead>
+      <tbody>
+        <tr><td>stdout</td><td>output.txt</td></tr>
+        <tr><td>stderr</td><td>error.txt</td></tr>
+      </tbody>
+    </table>
+    <p>Practical use:</p>
+    <pre>ls -R /etc > files.txt 2> permission_errors.txt</pre>
+
+    <h3 class="topic">Standard Input Redirection (<code>&lt;</code>)</h3>
+    <p>Sends file content as input:</p>
+    <pre>command < file</pre>
+    <ul>
+      <li><code>cat &lt; error.txt</code> → displays file.</li>
+      <li><code>wc &lt; error.txt</code> → counts words, lines, characters.</li>
+    </ul>
+
+    <h3 class="topic">Redirecting Error to Output (<code>2&gt;&amp;1</code>)</h3>
+    <p>Problem:</p>
+    <pre>command > file1 2> file1</pre>
+    <p>Both streams conflict.</p>
+    <p>Solution:</p>
+    <pre>command > file1 2>&1</pre>
+    <ul>
+      <li><code>&gt;</code> → stdout → file1</li>
+      <li><code>2&gt;&amp;1</code> → stderr → same destination as stdout</li>
+    </ul>
+    <pre>ls $HOME /blah > all_output.txt 2>&1</pre>
+
+    <h3 class="topic">Command Piping (<code>|</code>)</h3>
+    <p>Sends output of one command as input to another:</p>
+    <pre>command1 | command2</pre>
+    <ul>
+      <li><code>ls /usr/bin | wc -l</code> → counts files.</li>
+      <li><code>ls /usr/bin | less</code> → scroll interactively.</li>
+    </ul>
+
+    <h3 class="topic"><code>/dev/null</code> — The Black Hole</h3>
+    <p>Special file discards everything written.</p>
+    <pre>ls -R /etc > output.txt 2> /dev/null</pre>
+    <ul>
+      <li>Output → output.txt</li>
+      <li>Errors → ignored</li>
+    </ul>
+
+    <h3 class="topic">The <code>tee</code> Command</h3>
+    <p>Splits output into screen + files.</p>
+    <pre>command | tee file1</pre>
+    <pre>ls $HOME | tee file1 file2</pre>
+    <p>Uses: logging while viewing live; multiple copies simultaneously.</p>
+
+    <h3 class="topic">Complex Chaining of Operators</h3>
+    <p>Combine pipes, redirections, and tee:</p>
+    <pre>ls $HOME /blah 2> /dev/null | tee file1 file2 | wc -l</pre>
+    <p>Flow:</p>
+    <ol>
+      <li><code>2&gt; /dev/null</code> → ignore errors.</li>
+      <li><code>tee file1 file2</code> → save + display.</li>
+      <li><code>wc -l</code> → count lines.</li>
+    </ol>
+
+    <div class="revision">
+      <h4>Quick Revision Table</h4>
+      <table>
+        <thead><tr><th>Operator</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><code>2&gt;</code></td><td>Redirect errors (stderr)</td></tr>
+          <tr><td><code>&gt;</code></td><td>Redirect output (stdout)</td></tr>
+          <tr><td><code>&lt;</code></td><td>Redirect input</td></tr>
+          <tr><td><code>2&gt;&amp;1</code></td><td>Combine stderr with stdout</td></tr>
+          <tr><td><code>|</code></td><td>Pipe output to another command</td></tr>
+          <tr><td><code>/dev/null</code></td><td>Discard unwanted output</td></tr>
+          <tr><td><code>tee</code></td><td>Save + display output</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- LECTURE 3 -->
+  <section class="lecture" id="lecture3">
+    <h2>Lecture 3: Software Management — Part 01</h2>
+
+    <h3 class="topic">Introduction to Software Management</h3>
+    <p>Earlier Linux installations required:</p>
+    <ul>
+      <li>Manual source code download.</li>
+      <li>Compilation of programs.</li>
+      <li>Placement of binaries/libraries in correct locations.</li>
+      <li>Manual dependency resolution.</li>
+    </ul>
+    <p>Modern package managers automate these tasks.</p>
+
+    <h3 class="topic">Why Use a Package Manager?</h3>
+    <ul>
+      <li>Convenience: manage thousands of packages easily.</li>
+      <li>Network installation: install/update directly from the internet.</li>
+      <li>Querying packages: search, list files, identify executables.</li>
+      <li>Dependency management: handle libraries, versions, upgrades.</li>
+      <li>Software authenticity: verify trusted sources.</li>
+      <li>Source code handling: manage source packages (e.g., kernel modules).</li>
+    </ul>
+
+    <h3 class="topic">Major Linux Package Types</h3>
+    <h4 class="subtopic">RPM (Red Hat Package Manager)</h4>
+    <ul>
+      <li>Original: Red Hat Linux.</li>
+      <li>Popular distros: CentOS, Fedora, Oracle Linux, SUSE, OpenSUSE.</li>
+      <li>Common usage: server environments.</li>
+    </ul>
+    <h4 class="subtopic">DEB (Debian Package)</h4>
+    <ul>
+      <li>Original: Debian Linux.</li>
+      <li>Popular distros: Ubuntu, Linux Mint, Tails.</li>
+      <li>Common usage: desktop systems.</li>
+    </ul>
+
+    <h3 class="topic">System Identification &amp; Architecture</h3>
+    <ul>
+      <li><code>lsb_release -a</code> → distribution, version, codename (e.g., Ubuntu 20.04 → codename: focal).</li>
+      <li><code>uname -a</code> → kernel version, architecture.</li>
+    </ul>
+    <h4 class="subtopic">Common Architectures</h4>
+    <table>
+      <thead><tr><th>Architecture</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><code>i386</code> / <code>x86</code></td><td>32-bit</td></tr>
+        <tr><td><code>amd64</code> / <code>x86_64</code></td><td>64-bit</td></tr>
+        <tr><td>ARM</td><td>Mobile/embedded</td></tr>
+        <tr><td>PowerPC</td><td>Alternative processor</td></tr>
+        <tr><td>RISC-V</td><td>Open-source processor</td></tr>
+      </tbody>
+    </table>
+    <h4 class="subtopic">Architecture-Independent Packages</h4>
+    <table>
+      <thead><tr><th>Label</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><code>noarch</code></td><td>No specific architecture</td></tr>
+        <tr><td><code>all</code></td><td>Works on all systems</td></tr>
+        <tr><td><code>src</code></td><td>Source code package</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="topic">Package Management Tools</h3>
+    <table>
+      <thead><tr><th>Package Type</th><th>High-Level Tool</th><th>Backend Tool</th></tr></thead>
+      <tbody>
+        <tr><td>RPM</td><td>YUM / DNF</td><td>RPM</td></tr>
+        <tr><td>DEB</td><td>APT</td><td>dpkg</td></tr>
+      </tbody>
+    </table>
+    <ul>
+      <li><code>DNF</code> → modern replacement for YUM.</li>
+      <li><code>APT</code> → calls <code>dpkg</code> internally.</li>
+    </ul>
+    <h4 class="subtopic">Debian Interfaces</h4>
+    <table>
+      <thead><tr><th>Tool</th><th>Type</th></tr></thead>
+      <tbody>
+        <tr><td>Synaptic</td><td>GUI</td></tr>
+        <tr><td>Aptitude</td><td>CLI</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="topic">Using <code>apt-cache</code></h3>
+    <p>Search packages:</p>
+    <pre>apt-cache search nmap</pre>
+    <p>List package names:</p>
+    <pre>apt-cache pkgnames</pre>
+    <p>Filter example:</p>
+    <pre>apt-cache pkgnames nm</pre>
+    <p>Show package details:</p>
+    <pre>apt-cache show nmap</pre>
+
+    <h3 class="topic">Debian Package Naming Convention</h3>
+    <p>Format:</p>
+    <pre>Name_Version-Revision_Architecture.deb</pre>
+    <p>Example:</p>
+    <pre>nmap_7.80+dfsg1-2build1_amd64.deb</pre>
+    <ul>
+      <li><code>nmap</code> → package name</li>
+      <li><code>7.80+dfsg1</code> → version</li>
+      <li><code>2build1</code> → revision</li>
+      <li><code>amd64</code> → architecture</li>
+    </ul>
+
+    <h3 class="topic">Package Priorities</h3>
+    <table>
+      <thead><tr><th>Priority</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>Required</td><td>Essential for system operation</td></tr>
+        <tr><td>Important</td><td>Needed for stable functioning</td></tr>
+        <tr><td>Standard</td><td>Installed by default</td></tr>
+        <tr><td>Optional</td><td>Removable if needed</td></tr>
+        <tr><td>Extra</td><td>Specialized, may conflict</td></tr>
+      </tbody>
+    </table>
+    <p>Package sections: games, net, web, mathematics, etc.</p>
+
+    <h3 class="topic">Software Authenticity &amp; Checksums</h3>
+    <ul>
+      <li>Verify file integrity &amp; authenticity.</li>
+      <li>Even tiny changes → different checksum.</li>
+    </ul>
+    <table>
+      <thead><tr><th>Type</th><th>Size</th></tr></thead>
+      <tbody>
+        <tr><td>MD5sum</td><td>128-bit</td></tr>
+        <tr><td>SHA1sum</td><td>160-bit</td></tr>
+        <tr><td>SHA256sum</td><td>256-bit</td></tr>
+      </tbody>
+    </table>
+    <p>Most common today: SHA256sum.</p>
+    <p>Example verification:</p>
+    <pre>sha256sum ubuntu.iso</pre>
+    <p>Compare with official checksum.</p>
+
+    <div class="revision">
+      <h4>Quick Revision Table</h4>
+      <table>
+        <thead><tr><th>Command/Concept</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><code>lsb_release -a</code></td><td>Show OS version</td></tr>
+          <tr><td><code>uname -a</code></td><td>Show kernel &amp; architecture</td></tr>
+          <tr><td><code>apt-cache search</code></td><td>Search packages</td></tr>
+          <tr><td><code>apt-cache show</code></td><td>Show package details</td></tr>
+          <tr><td>RPM</td><td>Red Hat package format</td></tr>
+          <tr><td>DEB</td><td>Debian package format</td></tr>
+          <tr><td>YUM / DNF</td><td>RPM package managers</td></tr>
+          <tr><td>APT</td><td>Debian package manager</td></tr>
+          <tr><td>SHA256sum</td><td>Verify file integrity</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- LECTURE 4 -->
+  <section class="lecture" id="lecture4">
+    <h2>Lecture 4: Software Management — Part 02</h2>
+
+    <h3 class="topic">User Privileges &amp; Administrator Access</h3>
+    <h4 class="subtopic">Sudo (Superuser Do)</h4>
+    <p>Allows authorized users to execute commands as root.</p>
+    <pre>sudo apt-get install nmap</pre>
+    <h4 class="subtopic">Sudoers File</h4>
+    <p>Location: <code>/etc/sudoers</code> — contains list of users with administrator privileges.</p>
+    <h4 class="subtopic">Authentication Logs</h4>
+    <p>Location: <code>/var/log/auth.log</code> — tracks successful/failed attempts, unauthorized access. Purpose: monitor suspicious activity.</p>
+
+    <h3 class="topic">Package Repositories &amp; Configuration</h3>
+    <ul>
+      <li>Main sources file: <code>/etc/apt/sources.list</code> — contains repository URLs and download locations.</li>
+      <li>Mirrors: faster downloads via regional servers (e.g., <code>in.archive.ubuntu.com</code> — India mirror).</li>
+      <li>Third-party repositories: location <code>/etc/apt/sources.list.d/</code> (examples: Google Chrome, Zoom) — purpose: enable automatic updates via APT.</li>
+    </ul>
+
+    <h3 class="topic">Using APT (Advanced Package Tool)</h3>
+    <h4 class="subtopic">Update Package Information</h4>
+    <pre>sudo apt-get update</pre>
+    <p>Synchronizes package index, checks for updates.</p>
+    <h4 class="subtopic">Upgrade Packages</h4>
+    <pre>sudo apt-get upgrade</pre>
+    <p>Installs latest versions.</p>
+    <h4 class="subtopic">Install Packages</h4>
+    <pre>sudo apt-get install package_name</pre>
+    <h4 class="subtopic">Remove Packages</h4>
+    <pre>sudo apt-get remove package_name</pre>
+    <h4 class="subtopic">Reinstall Packages</h4>
+    <pre>sudo apt-get reinstall package_name</pre>
+    <h4 class="subtopic">Remove Unused Dependencies</h4>
+    <pre>sudo apt-get autoremove</pre>
+    <h4 class="subtopic">Clean Repository Cache</h4>
+    <pre>sudo apt-get clean</pre>
+    <h4 class="subtopic">Purge Package (remove + config files)</h4>
+    <pre>sudo apt-get purge package_name</pre>
+
+    <h3 class="topic">Using DPKG (Debian Package)</h3>
+    <p>Difference:</p>
+    <table>
+      <thead><tr><th>APT</th><th>DPKG</th></tr></thead>
+      <tbody>
+        <tr><td>Downloads packages</td><td>Works with local .deb files</td></tr>
+        <tr><td>Handles dependencies</td><td>Does not auto-manage dependencies</td></tr>
+      </tbody>
+    </table>
+    <p>Package information directory: <code>/var/lib/dpkg</code> — stores status, architecture, checksums.</p>
+    <h4 class="subtopic">Common Commands</h4>
+    <p>List installed packages:</p>
+    <pre>dpkg -l python</pre>
+    <p>List package files:</p>
+    <pre>dpkg -L package</pre>
+    <p>Show package info:</p>
+    <pre>dpkg -s package</pre>
+    <p>Find package owner:</p>
+    <pre>dpkg -S /usr/bin/perl</pre>
+    <p>Install local .deb:</p>
+    <pre>dpkg -i chrome.deb</pre>
+
+    <h3 class="topic">Querying &amp; Filtering Packages</h3>
+    <p><code>dpkg-query</code>: advanced searches.</p>
+    <pre>dpkg-query -f='${Package}\n'</pre>
+    <p>Using pipes:</p>
+    <ul>
+      <li>Alphabetical sort: <code>dpkg -l | sort</code></li>
+      <li>Page view: <code>dpkg -l | less</code></li>
+      <li>Search category: <code>dpkg -l | grep shell</code></li>
+    </ul>
+
+    <h3 class="topic">Best Practices for System Stability</h3>
+    <ul>
+      <li>Avoid manual .deb installs → risk of conflicts/security issues.</li>
+      <li>Prefer APT → handles dependencies, checks compatibility.</li>
+      <li>Update regularly:</li>
+    </ul>
+    <pre>sudo apt-get update
+sudo apt-get upgrade</pre>
+    <ul>
+      <li>Alternatives if conflicts occur: Snap, Docker.</li>
+    </ul>
+
+    <div class="revision">
+      <h4>Quick Revision Table</h4>
+      <table>
+        <thead><tr><th>Command</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><code>sudo</code></td><td>Run commands as administrator</td></tr>
+          <tr><td><code>sudo apt-get update</code></td><td>Update package information</td></tr>
+          <tr><td><code>sudo apt-get upgrade</code></td><td>Upgrade installed packages</td></tr>
+          <tr><td><code>sudo apt-get install</code></td><td>Install package</td></tr>
+          <tr><td><code>sudo apt-get remove</code></td><td>Remove package</td></tr>
+          <tr><td><code>sudo apt-get autoremove</code></td><td>Remove unused dependencies</td></tr>
+          <tr><td><code>sudo apt-get clean</code></td><td>Clear package cache</td></tr>
+          <tr><td><code>sudo apt-get purge</code></td><td>Remove package + config files</td></tr>
+          <tr><td><code>dpkg -l</code></td><td>List packages</td></tr>
+          <tr><td><code>dpkg -L</code></td><td>Show package files</td></tr>
+          <tr><td><code>dpkg -s</code></td><td>Package information</td></tr>
+          <tr><td><code>dpkg -S</code></td><td>Find package owner</td></tr>
+          <tr><td><code>dpkg -i</code></td><td>Install local .deb file</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- LECTURE 5 -->
+  <section class="lecture" id="lecture5">
+    <h2>Lecture 5: Linux Process Management</h2>
+
+    <h3 class="topic">Introduction to Processes &amp; <code>sleep</code> Command</h3>
+    <ul>
+      <li>A process is a running program in Linux.</li>
+      <li><code>sleep</code> command: pauses execution for specified seconds.</li>
+    </ul>
+    <pre>sleep 10</pre>
+    <p>Foreground execution: terminal locked until completion. Example: <code>sleep 10</code> → prompt unavailable for 10 seconds.</p>
+
+    <h3 class="topic">Running Processes in the Background</h3>
+    <ul>
+      <li><code>coproc</code>: creates asynchronous coprocess.</li>
+    </ul>
+    <pre>coproc sleep 20</pre>
+    <ul>
+      <li><code>&amp;</code> (ampersand): sends command to background.</li>
+    </ul>
+    <pre>sleep 30 &</pre>
+    <p>Prompt remains available while process runs.</p>
+
+    <h3 class="topic">Monitoring Processes</h3>
+    <ul>
+      <li><code>ps</code>: shows active processes.</li>
+    </ul>
+    <pre>ps</pre>
+    <ul>
+      <li><code>ps --forest</code>: displays process tree (parent/child hierarchy).</li>
+      <li><code>jobs</code>: lists active jobs in current shell.</li>
+      <li><code>top</code>: real-time system monitor (CPU/memory usage, resource-heavy processes).</li>
+    </ul>
+
+    <h3 class="topic">Job Control &amp; Interruptions</h3>
+    <ul>
+      <li><code>fg</code>: bring background/suspended job to foreground.</li>
+      <li><code>Ctrl + C</code>: terminate foreground process immediately.</li>
+      <li><code>Ctrl + Z</code>: suspend foreground process (kept in memory, can resume with <code>fg</code>).</li>
+      <li><code>kill PID</code>: terminate process by ID.</li>
+    </ul>
+    <pre>kill 1234</pre>
+    <ul>
+      <li><code>kill -9 PID</code>: force kill.</li>
+    </ul>
+    <pre>kill -9 1234</pre>
+
+    <h3 class="topic">Shell Environment &amp; Features</h3>
+    <ul>
+      <li><code>$-</code>: shows shell flags.</li>
+    </ul>
+    <pre>echo $-</pre>
+    <ul>
+      <li><code>i</code> → interactive shell</li>
+      <li><code>H</code> → history expansion</li>
+      <li><code>B</code> → brace expansion</li>
+      <li><code>$$</code>: shows current shell PID.</li>
+    </ul>
+    <pre>echo $$</pre>
+    <ul>
+      <li>Command history: <code>!25</code> → runs command number 25.</li>
+    </ul>
+    <h4 class="subtopic">Expansion Features</h4>
+    <p>Brace expansion:</p>
+    <pre>echo {a..z}</pre>
+    <p>Wildcard expansion:</p>
+    <pre>ls *</pre>
+
+    <h3 class="topic">Executing Multiple Commands</h3>
+    <p>Sequential execution (<code>;</code>):</p>
+    <pre>date ; pwd ; whoami</pre>
+    <p>Commands run left to right, independent of success/failure.</p>
+
+    <h3 class="topic">Exit Codes &amp; Return Status</h3>
+    <ul>
+      <li>Every command returns an exit code (0–255).</li>
+      <li>Check with:</li>
+    </ul>
+    <pre>echo $?</pre>
+    <h4 class="subtopic">Common Exit Codes</h4>
+    <table>
+      <thead><tr><th>Exit Code</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Success</td></tr>
+        <tr><td>1</td><td>General error / permission issue</td></tr>
+        <tr><td>2</td><td>File/path not found</td></tr>
+        <tr><td>126</td><td>Command found but not executable</td></tr>
+        <tr><td>127</td><td>Command not found</td></tr>
+        <tr><td>130</td><td>Stopped using Ctrl+C</td></tr>
+        <tr><td>137</td><td>Killed using kill -9</td></tr>
+      </tbody>
+    </table>
+    <ul>
+      <li>Custom codes: values &gt;255 → modulo 256. Example: 300 % 256 = 44.</li>
+      <li>Importance: used in conditional execution, scripting, automation.</li>
+    </ul>
+    <pre>command1 && command2</pre>
+
+    <div class="revision">
+      <h4>Quick Revision Table</h4>
+      <table>
+        <thead><tr><th>Command/Symbol</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><code>sleep</code></td><td>Pause execution</td></tr>
+          <tr><td><code>&amp;</code></td><td>Run process in background</td></tr>
+          <tr><td><code>ps</code></td><td>Show active processes</td></tr>
+          <tr><td><code>jobs</code></td><td>Show shell jobs</td></tr>
+          <tr><td><code>top</code></td><td>Real-time process monitor</td></tr>
+          <tr><td><code>fg</code></td><td>Bring job to foreground</td></tr>
+          <tr><td><code>Ctrl + C</code></td><td>Kill foreground process</td></tr>
+          <tr><td><code>Ctrl + Z</code></td><td>Suspend process</td></tr>
+          <tr><td><code>kill</code></td><td>Terminate process</td></tr>
+          <tr><td><code>kill -9</code></td><td>Force kill process</td></tr>
+          <tr><td><code>$-</code></td><td>Show shell flags</td></tr>
+          <tr><td><code>$$</code></td><td>Show shell PID</td></tr>
+          <tr><td><code>!number</code></td><td>Repeat command from history</td></tr>
+          <tr><td><code>{}</code></td><td>Brace expansion</td></tr>
+          <tr><td><code>*</code></td><td>Wildcard expansion</td></tr>
+          <tr><td><code>;</code></td><td>Run multiple commands</td></tr>
+          <tr><td><code>$?</code></td><td>Show exit code</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>Week 3: Short Notes — Redirection, Package &amp; Process Management</footer>
+
+</div>
+</body>
+</html>

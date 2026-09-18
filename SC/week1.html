@@ -1,0 +1,754 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>Week 1: Short Notes — Linux Basics</title>
+<style>
+  :root {
+    --bg: #f7f8fa;
+    --card-bg: #ffffff;
+    --text: #1f2430;
+    --muted: #5b6472;
+    --accent: #3a6df0;
+    --accent-light: #e8eefd;
+    --border: #e1e4ea;
+    --code-bg: #282c34;
+    --code-text: #e6e6e6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14161b;
+      --card-bg: #1c1f26;
+      --text: #e7e9ee;
+      --muted: #9aa2b1;
+      --accent: #6d94ff;
+      --accent-light: #232a42;
+      --border: #2c313c;
+      --code-bg: #0f1115;
+      --code-text: #d7dae0;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 32px 20px 80px;
+  }
+  header.page-header {
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--accent);
+  }
+  header.page-header h1 {
+    margin: 0 0 6px;
+    font-size: 1.9rem;
+  }
+  header.page-header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  nav.toc {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 36px;
+  }
+  nav.toc h2 {
+    font-size: 1rem;
+    margin: 0 0 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  nav.toc ol {
+    margin: 0;
+    padding-left: 20px;
+  }
+  nav.toc a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  nav.toc a:hover { text-decoration: underline; }
+
+  section.lecture {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 28px;
+  }
+  section.lecture h2 {
+    margin-top: 0;
+    font-size: 1.4rem;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+  }
+  h3.topic {
+    font-size: 1.1rem;
+    margin: 24px 0 8px;
+  }
+  h4.subtopic {
+    font-size: 1rem;
+    margin: 16px 0 6px;
+    color: var(--muted);
+  }
+  ul, ol {
+    padding-left: 22px;
+  }
+  li { margin-bottom: 4px; }
+  code {
+    background: var(--accent-light);
+    color: var(--accent);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.92em;
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 12px 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.9rem;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 20px;
+    overflow-x: auto;
+    display: block;
+  }
+  table thead { background: var(--accent-light); }
+  table th, table td {
+    text-align: left;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    font-size: 0.92rem;
+  }
+  table th { color: var(--accent); }
+  .note {
+    background: var(--accent-light);
+    border-left: 4px solid var(--accent);
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin: 14px 0;
+    font-size: 0.93rem;
+  }
+  .revision {
+    margin-top: 20px;
+  }
+  .revision h4 {
+    margin-bottom: 6px;
+    color: var(--accent);
+  }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="page-header">
+    <h1>Week 1: Short Notes</h1>
+    <p>Linux Basics — Virtual Machines, CLI, and Essential Commands</p>
+  </header>
+
+  <nav class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#lecture1">Lecture 1: Launching a Linux Virtual Machine</a></li>
+      <li><a href="#lecture2">Lecture 2: Command Line Environment</a></li>
+      <li><a href="#lecture3">Lecture 3: Simple Commands in Linux — Part 1</a></li>
+      <li><a href="#lecture4">Lecture 4: Simple Commands in Linux — Part 2</a></li>
+    </ol>
+  </nav>
+
+  <!-- LECTURE 1 -->
+  <section class="lecture" id="lecture1">
+    <h2>Lecture 1: Launching a Linux Virtual Machine</h2>
+
+    <h3 class="topic">Why Use Virtual Machines (VMs)?</h3>
+    <ul>
+      <li>Run Linux safely without altering Windows.</li>
+      <li>Keep Windows safe: no need to remove the pre-installed OS.</li>
+      <li>Avoid BIOS/UEFI issues: OEM restrictions may block dual boot.</li>
+      <li>Linux experience: provides near-native Linux usage inside Windows.</li>
+    </ul>
+
+    <h3 class="topic">Requirements for Virtualization</h3>
+    <h4 class="subtopic">A. Linux ISO File</h4>
+    <ul>
+      <li>Download a Linux OS image.</li>
+      <li>Recommended: Ubuntu 20.04 LTS (x86_64, Intel/AMD).</li>
+    </ul>
+    <h4 class="subtopic">B. Hypervisor Software</h4>
+    <ul>
+      <li>Hypervisor: software to run VMs.</li>
+      <li>Common options: Oracle VirtualBox, VMware Workstation Player.</li>
+    </ul>
+    <h4 class="subtopic">C. Hardware Requirements</h4>
+    <ul>
+      <li>Disk space: ~20 GB.</li>
+      <li>RAM: 4 GB minimum, 8 GB+ recommended.</li>
+      <li>VM allocation: ~2 GB (2048 MB).</li>
+    </ul>
+
+    <h3 class="topic">Setting Up Linux Using Hypervisors</h3>
+    <h4 class="subtopic">A. Oracle VirtualBox</h4>
+    <ol>
+      <li>Download Windows Host version.</li>
+      <li>Install as Administrator.</li>
+      <li>Click New → name VM.</li>
+      <li>Allocate RAM.</li>
+      <li>Create 20 GB virtual disk.</li>
+      <li>Attach Ubuntu ISO in settings.</li>
+      <li>Start VM → Install Ubuntu.</li>
+      <li>Follow installation instructions.</li>
+    </ol>
+    <div class="note">Note: "Erase Disk" erases only the virtual disk, not Windows.</div>
+
+    <h4 class="subtopic">B. VMware Workstation Player</h4>
+    <ol>
+      <li>Download for non-commercial use.</li>
+      <li>Install with default settings.</li>
+      <li>Create New VM → select Ubuntu ISO.</li>
+      <li>Enter username &amp; password.</li>
+      <li>VMware auto-configures settings.</li>
+      <li>System reboots after installation.</li>
+    </ol>
+
+    <h3 class="topic">Windows Subsystem for Linux (WSL)</h3>
+    <ul>
+      <li>Runs Linux directly inside Windows.</li>
+      <li>Installation: Open PowerShell (Admin) → Run <code>wsl --install</code> → Restart PC → Create Linux username &amp; password.</li>
+    </ul>
+    <h4 class="subtopic">Advantages</h4>
+    <ul>
+      <li>Official Microsoft support.</li>
+      <li>Lightweight, fast.</li>
+      <li>Can run alongside VMware/VirtualBox.</li>
+    </ul>
+
+    <h3 class="topic">Cloud-Based Linux Environments</h3>
+    <h4 class="subtopic">A. Replit.com</h4>
+    <ul>
+      <li>Create Bash project.</li>
+      <li>Kernel 5.11.</li>
+      <li>Home directory: <code>/home/runner</code>.</li>
+    </ul>
+    <h4 class="subtopic">B. CoCalc.com</h4>
+    <ul>
+      <li>Create/start project.</li>
+      <li>Terminal environment.</li>
+      <li>Files stored in <code>/home/user</code>.</li>
+      <li>Project must be stopped manually.</li>
+    </ul>
+
+    <h3 class="topic">Mobile Linux Environment: Termux</h3>
+    <ul>
+      <li>App: Termux (Fredrik Fornwall).</li>
+      <li>Lightweight terminal app.</li>
+      <li>Uses phone storage.</li>
+      <li>Runs on Linux kernel (e.g., v4.14).</li>
+    </ul>
+
+    <div class="revision">
+      <h4>Revision Table</h4>
+      <table>
+        <thead><tr><th>Topic</th><th>Key Information</th></tr></thead>
+        <tbody>
+          <tr><td>Recommended Linux</td><td>Ubuntu 20.04 LTS</td></tr>
+          <tr><td>Hypervisors</td><td>VirtualBox, VMware</td></tr>
+          <tr><td>Required Storage</td><td>20 GB</td></tr>
+          <tr><td>Recommended RAM</td><td>8 GB+</td></tr>
+          <tr><td>VM RAM Allocation</td><td>2 GB</td></tr>
+          <tr><td>WSL Command</td><td><code>wsl --install</code></td></tr>
+          <tr><td>Cloud Platforms</td><td>Replit, CoCalc</td></tr>
+          <tr><td>Mobile App</td><td>Termux</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- LECTURE 2 -->
+  <section class="lecture" id="lecture2">
+    <h2>Lecture 2: Command Line Environment</h2>
+
+    <h3 class="topic">Introduction to CLI</h3>
+    <ul>
+      <li>Definition: CLI allows interaction with Linux by typing commands instead of using a graphical interface.</li>
+      <li>Why use CLI? Automation (commands can be scripted/scheduled) and better control (more flexibility, faster execution for advanced tasks).</li>
+    </ul>
+
+    <h3 class="topic">Terminal Emulators</h3>
+    <ul>
+      <li><strong>Terminal</strong> (Ubuntu/GNOME): tabs, fonts, colors.</li>
+      <li><strong>xterm</strong>: lightweight, minimal customization.</li>
+      <li><strong>Guake</strong>: drop-down terminal (F12 toggle).</li>
+      <li><strong>Konsole</strong>: KDE desktop terminal.</li>
+    </ul>
+
+    <h3 class="topic">Essential Linux Commands</h3>
+    <ul>
+      <li><code>pwd</code> — show current directory (e.g., <code>/home/user</code>).</li>
+      <li><code>ls</code> — list files/folders.</li>
+      <li><code>ps</code> — show running processes.</li>
+      <li><code>uname</code> — display OS info.</li>
+      <li><code>clear</code> — clear screen (Ctrl+L).</li>
+      <li><code>exit</code> — close session (Ctrl+D).</li>
+    </ul>
+
+    <h3 class="topic">Command Anatomy &amp; Help</h3>
+    <ul>
+      <li>Command prompt: shows username, computer name, current directory, ends with <code>$</code>.</li>
+      <li>Options: modify behavior (e.g., <code>ls -a</code>).</li>
+      <li>Arguments: target of the command (e.g., a filename).</li>
+    </ul>
+
+    <h3 class="topic">Important <code>ls</code> Variations</h3>
+    <ul>
+      <li><code>ls -a</code> — show all files, including hidden (<code>.</code> prefix).</li>
+      <li><code>ls -l</code> — detailed info (permissions, size, owner, type).</li>
+    </ul>
+
+    <h3 class="topic">Getting Help with <code>man</code></h3>
+    <ul>
+      <li><code>man ls</code> → manual page for <code>ls</code>.</li>
+      <li><code>man</code> = manual.</li>
+      <li>Section 1 contains shell commands.</li>
+    </ul>
+
+    <h3 class="topic">Linux File System Hierarchy (FHS)</h3>
+    <ul>
+      <li>Root directory <code>/</code>: top-most directory.</li>
+      <li>Path separator <code>/</code>: used in paths (e.g., <code>/home/user/Documents</code>).</li>
+    </ul>
+
+    <h3 class="topic">Special Directory Symbols</h3>
+    <ul>
+      <li><code>.</code> (dot) — current directory.</li>
+      <li><code>..</code> (double dot) — parent directory.</li>
+    </ul>
+
+    <h3 class="topic"><code>cd</code> Command (Change Directory)</h3>
+    <ul>
+      <li>Move up one level: <code>cd ..</code></li>
+      <li>Return to home: <code>cd</code></li>
+    </ul>
+
+    <h3 class="topic">Important Linux Directories</h3>
+    <table>
+      <thead><tr><th>Directory</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code>/bin</code></td><td>Essential commands for all users</td></tr>
+        <tr><td><code>/boot</code></td><td>Startup files</td></tr>
+        <tr><td><code>/dev</code></td><td>Device files</td></tr>
+        <tr><td><code>/etc</code></td><td>System configuration</td></tr>
+        <tr><td><code>/lib</code></td><td>Libraries &amp; kernel modules</td></tr>
+        <tr><td><code>/media</code></td><td>Mount point for USB/CD</td></tr>
+        <tr><td><code>/mnt</code></td><td>Temporary mount point</td></tr>
+        <tr><td><code>/opt</code></td><td>Optional/add-on software</td></tr>
+        <tr><td><code>/sbin</code></td><td>System administration commands</td></tr>
+        <tr><td><code>/tmp</code></td><td>Temporary files</td></tr>
+        <tr><td><code>/usr</code></td><td>User programs &amp; shared data</td></tr>
+        <tr><td><code>/usr/bin</code></td><td>User commands</td></tr>
+        <tr><td><code>/usr/include</code></td><td>C header files</td></tr>
+        <tr><td><code>/usr/lib</code></td><td>Libraries for programs</td></tr>
+        <tr><td><code>/usr/src</code></td><td>Source code</td></tr>
+        <tr><td><code>/var</code></td><td>Variable data (logs, emails, temp)</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="topic">Understanding File Types</h3>
+    <p><code>ls -l</code> → first character shows type.</p>
+    <table>
+      <thead><tr><th>Symbol</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><code>d</code></td><td>Directory</td></tr>
+        <tr><td><code>l</code></td><td>Symbolic Link</td></tr>
+        <tr><td><code>c</code></td><td>Character Device</td></tr>
+        <tr><td><code>b</code></td><td>Block Device</td></tr>
+      </tbody>
+    </table>
+    <ul>
+      <li>Character Device: reads data character by character (e.g., keyboard).</li>
+      <li>Block Device: reads data in blocks (e.g., hard disk).</li>
+    </ul>
+
+    <h3 class="topic">Logic Behind Linux Hierarchy</h3>
+    <ul>
+      <li>Shareable vs Non-Shareable: Shareable → <code>/usr</code>, Non-Shareable → <code>/etc</code>.</li>
+      <li>Static vs Variable: Static → program files; Variable → logs, emails, temp data.</li>
+    </ul>
+
+    <div class="revision">
+      <h4>Revision Table</h4>
+      <table>
+        <thead><tr><th>Command</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><code>pwd</code></td><td>Show current directory</td></tr>
+          <tr><td><code>ls</code></td><td>List files/folders</td></tr>
+          <tr><td><code>ps</code></td><td>Show running processes</td></tr>
+          <tr><td><code>uname</code></td><td>Show OS name</td></tr>
+          <tr><td><code>clear</code></td><td>Clear terminal</td></tr>
+          <tr><td><code>exit</code></td><td>Close terminal</td></tr>
+          <tr><td><code>cd</code></td><td>Change directory</td></tr>
+          <tr><td><code>man</code></td><td>Open help manual</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- LECTURE 3 -->
+  <section class="lecture" id="lecture3">
+    <h2>Lecture 3: Simple Commands in Linux — Part 1</h2>
+
+    <h3 class="topic">Command Line Environment</h3>
+    <ul>
+      <li>Terminal Emulator: application where commands are typed.</li>
+      <li>Shell: program that interprets and executes commands. Common shell in Ubuntu: <code>bash</code>.</li>
+    </ul>
+
+    <h3 class="topic">Unix Philosophy</h3>
+    <ul>
+      <li>"No News is Good News" → successful commands often produce no output.</li>
+      <li>No error message = command worked.</li>
+    </ul>
+    <div class="note">Safety for beginners: most beginner commands are read-only (display info, no damage).</div>
+
+    <h3 class="topic">Directory Navigation &amp; Shortcuts</h3>
+    <table>
+      <thead><tr><th>Symbol</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><code>.</code></td><td>Current directory</td></tr>
+        <tr><td><code>..</code></td><td>Parent directory</td></tr>
+        <tr><td><code>~</code></td><td>Home directory</td></tr>
+        <tr><td><code>-</code></td><td>Previous directory</td></tr>
+      </tbody>
+    </table>
+    <ul>
+      <li><code>cd ..</code> → parent directory.</li>
+      <li><code>cd ~</code> → home directory.</li>
+      <li><code>cd -</code> → previous directory.</li>
+    </ul>
+
+    <h3 class="topic">System Information Commands</h3>
+    <ul>
+      <li><code>date</code> — show current date/time.</li>
+      <li><code>date -R</code> — RFC 5322 format (emails).</li>
+      <li><code>cal</code> — display calendar (e.g., <code>cal august 1947</code>).</li>
+      <li><code>ncal</code> — alternative calendar style.</li>
+      <li><code>free</code> — show memory usage.</li>
+      <li><code>free -h</code> — human-readable memory info.</li>
+    </ul>
+    <h4 class="subtopic">Memory Terms</h4>
+    <ul>
+      <li>Total → total RAM.</li>
+      <li>Used → RAM in use.</li>
+      <li>Free → available RAM.</li>
+      <li>Swap → disk space used when RAM is full.</li>
+    </ul>
+    <ul>
+      <li><code>groups</code> — show user groups. Important: <code>sudo</code> group → admin privileges.</li>
+      <li><code>man</code> — open help manual (e.g., <code>man ls</code>).</li>
+      <li><code>clear</code> — clear screen (Ctrl+L).</li>
+    </ul>
+
+    <h3 class="topic">File Listing &amp; File Types</h3>
+    <p><code>ls -l</code> — detailed file info.</p>
+    <table>
+      <thead><tr><th>Symbol</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><code>-</code></td><td>Regular file</td></tr>
+        <tr><td><code>d</code></td><td>Directory</td></tr>
+        <tr><td><code>l</code></td><td>Symbolic link</td></tr>
+        <tr><td><code>c</code></td><td>Character device</td></tr>
+        <tr><td><code>b</code></td><td>Block device</td></tr>
+        <tr><td><code>s</code></td><td>Socket</td></tr>
+        <tr><td><code>p</code></td><td>Named pipe</td></tr>
+      </tbody>
+    </table>
+    <ul>
+      <li><code>ls -a</code> → show hidden files.</li>
+      <li><code>ls -i</code> → show inode numbers.</li>
+    </ul>
+
+    <h3 class="topic">File Permissions &amp; Ownership</h3>
+    <p>Example: <code>rwxr-xr-x</code></p>
+    <table>
+      <thead><tr><th>Group</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>Owner</td><td>File owner permissions</td></tr>
+        <tr><td>Group</td><td>Group member permissions</td></tr>
+        <tr><td>Others</td><td>Permissions for everyone else</td></tr>
+      </tbody>
+    </table>
+    <ul>
+      <li><code>r</code> → Read</li>
+      <li><code>w</code> → Write</li>
+      <li><code>x</code> → Execute</li>
+    </ul>
+    <p>Directory permissions: <code>x</code> lets a user enter the directory with <code>cd</code>.</p>
+
+    <h3 class="topic">Numerical (Octal) Permissions</h3>
+    <ul>
+      <li>Values: r = 4, w = 2, x = 1.</li>
+      <li>Examples: 7 = <code>rwx</code>, 5 = <code>r-x</code>.</li>
+      <li>Common permission: <code>755</code> → Owner: <code>rwx</code>, Group: <code>r-x</code>, Others: <code>r-x</code>.</li>
+    </ul>
+
+    <h3 class="topic"><code>chmod</code> Command</h3>
+    <ul>
+      <li>Remove group write: <code>chmod g-w filename</code></li>
+      <li>Set numeric permission: <code>chmod 700 filename</code></li>
+    </ul>
+
+    <h3 class="topic">File Management Commands</h3>
+    <ul>
+      <li><code>mkdir</code> — create directory (<code>mkdir myfolder</code>).</li>
+      <li><code>touch</code> — create empty file or update timestamp (<code>touch file.txt</code>).</li>
+      <li><code>cp</code> — copy files (<code>cp file1.txt file2.txt</code>).</li>
+      <li><code>mv</code> — move/rename files (<code>mv old.txt new.txt</code>). If filename has spaces: <code>mv "my file.txt" newfile.txt</code>.</li>
+      <li><code>rm</code> — delete files (<code>rm file.txt</code>). Safe alias: <code>alias rm='rm -i'</code> → asks for confirmation.</li>
+    </ul>
+
+    <h3 class="topic"><code>file</code> Command</h3>
+    <ul>
+      <li>Identify file type: <code>file filename</code>.</li>
+      <li>Example outputs: ASCII text, ELF binary, Directory.</li>
+    </ul>
+
+    <h3 class="topic"><code>less</code> Command</h3>
+    <ul>
+      <li>Read large text files page by page: <code>less filename.txt</code>.</li>
+      <li>Keys: Space → next page, <code>q</code> → quit.</li>
+    </ul>
+
+    <h3 class="topic">Advanced Concepts</h3>
+    <ul>
+      <li>Inodes: store file metadata, point to disk location. View: <code>ls -i</code>.</li>
+      <li>Hard Links: files with the same inode number. Hard link count shown in <code>ls -l</code>.</li>
+    </ul>
+
+    <h3 class="topic">Linux System Security</h3>
+    <ul>
+      <li>Root user owns system files; regular users cannot modify them.</li>
+      <li>Restricted folders: <code>/root</code>, <code>/var/log</code>.</li>
+      <li>Rule: only the file owner can change permissions.</li>
+    </ul>
+
+    <div class="revision">
+      <h4>Revision Table</h4>
+      <table>
+        <thead><tr><th>Command</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><code>cd</code></td><td>Change directory</td></tr>
+          <tr><td><code>date</code></td><td>Show date &amp; time</td></tr>
+          <tr><td><code>cal</code></td><td>Show calendar</td></tr>
+          <tr><td><code>free -h</code></td><td>Show memory usage</td></tr>
+          <tr><td><code>groups</code></td><td>Show user groups</td></tr>
+          <tr><td><code>ls -l</code></td><td>Detailed file listing</td></tr>
+          <tr><td><code>chmod</code></td><td>Change permissions</td></tr>
+          <tr><td><code>mkdir</code></td><td>Create directory</td></tr>
+          <tr><td><code>touch</code></td><td>Create file</td></tr>
+          <tr><td><code>cp</code></td><td>Copy file</td></tr>
+          <tr><td><code>mv</code></td><td>Move/Rename file</td></tr>
+          <tr><td><code>rm</code></td><td>Delete file</td></tr>
+          <tr><td><code>file</code></td><td>Identify file type</td></tr>
+          <tr><td><code>less</code></td><td>Read text files</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- LECTURE 4 -->
+  <section class="lecture" id="lecture4">
+    <h2>Lecture 4: Simple Commands in Linux — Part 2</h2>
+
+    <h3 class="topic">Root Directory (<code>/</code>)</h3>
+    <ul>
+      <li>Definition: starting point of the Linux file system.</li>
+      <li>Path separator <code>/</code> separates directories (e.g., <code>/home/user/Documents</code>).</li>
+      <li>Multiple slashes are treated as one (e.g., <code>///home///user</code> = <code>/home/user</code>).</li>
+      <li>Parent of root: <code>/</code> is its own parent — <code>cd ..</code> in <code>/</code> keeps you in <code>/</code>.</li>
+    </ul>
+
+    <h3 class="topic">Memory-Based File Systems</h3>
+    <h4 class="subtopic"><code>/proc</code> Directory</h4>
+    <ul>
+      <li>Contains process info, CPU details, memory, kernel version.</li>
+      <li>Files may show size 0 but still contain readable info.</li>
+    </ul>
+    <h4 class="subtopic"><code>/sys</code> Directory</h4>
+    <ul>
+      <li>Organized system info.</li>
+      <li>Contains hardware, device, USB details.</li>
+    </ul>
+
+    <h3 class="topic">File &amp; Directory Listing (<code>ls</code>)</h3>
+    <table>
+      <thead><tr><th>Option</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code>-l</code></td><td>Long listing format</td></tr>
+        <tr><td><code>-d</code></td><td>Directory info only</td></tr>
+        <tr><td><code>-i</code></td><td>Show inode number</td></tr>
+        <tr><td><code>-R</code></td><td>Recursive listing</td></tr>
+      </tbody>
+    </table>
+    <ul>
+      <li><code>ls -l</code> → long listing.</li>
+      <li><code>ls -d</code> → directory info.</li>
+      <li><code>ls -i</code> → inodes.</li>
+      <li><code>ls -R</code> → recursive.</li>
+    </ul>
+
+    <h3 class="topic">Combining Options</h3>
+    <p>Options can be in any order — e.g., <code>ls -ldi</code> = <code>ls -idl</code>.</p>
+
+    <h3 class="topic">Short &amp; Long Options</h3>
+    <ul>
+      <li>Short: <code>ls -i</code></li>
+      <li>Long: <code>ls --inode</code></li>
+      <li>Long options are easier to read.</li>
+    </ul>
+
+    <h3 class="topic">Viewing File Contents</h3>
+    <ul>
+      <li><code>less</code> — page by page (<code>less file.txt</code>, quit with <code>q</code>).</li>
+      <li><code>more</code> — older version of <code>less</code>.</li>
+      <li><code>cat</code> — show entire file (<code>cat file.txt</code>); not suitable for very large files.</li>
+    </ul>
+
+    <h4 class="subtopic"><code>head</code> Command</h4>
+    <ul>
+      <li>Show first 10 lines: <code>head file.txt</code>.</li>
+      <li>Specify lines: <code>head -n 5 file.txt</code>.</li>
+    </ul>
+
+    <h4 class="subtopic"><code>tail</code> Command</h4>
+    <ul>
+      <li>Show last 10 lines: <code>tail file.txt</code>.</li>
+      <li>Specify lines: <code>tail -n 5 file.txt</code>.</li>
+    </ul>
+
+    <h4 class="subtopic"><code>wc</code> (Word Count)</h4>
+    <ul>
+      <li>Show lines, words, bytes: <code>wc file.txt</code>.</li>
+      <li>Count lines only: <code>wc -l file.txt</code>.</li>
+    </ul>
+
+    <h3 class="topic">Command &amp; System Discovery</h3>
+    <ul>
+      <li><code>which</code> — locate command (<code>which ls</code>).</li>
+      <li><code>whatis</code> — short description (<code>whatis ls</code>).</li>
+      <li><code>man</code> — manual page (<code>man ls</code>).</li>
+      <li><code>apropos</code> — search by keyword (<code>apropos copy</code> = <code>man -k copy</code>).</li>
+      <li><code>info</code> — detailed documentation (<code>info ls</code>).</li>
+      <li><code>type</code> — show if alias, built-in, or executable (<code>type cd</code>).</li>
+    </ul>
+
+    <h3 class="topic">Arguments vs Options</h3>
+    <ul>
+      <li>Options: modify behavior (e.g., <code>-r</code>).</li>
+      <li>Arguments: files/folders acted upon.</li>
+    </ul>
+    <p>Example: <code>cp -r folder1 folder2</code></p>
+
+    <h3 class="topic">Copying &amp; Moving Files</h3>
+    <ul>
+      <li><code>cp</code> — copy files (<code>cp file1.txt file2.txt</code>); recursive: <code>cp -r folder1 folder2</code>.</li>
+      <li><code>mv</code> — move/rename files (<code>mv old.txt new.txt</code>).</li>
+    </ul>
+
+    <h3 class="topic">Deleting Files</h3>
+    <ul>
+      <li><code>rm</code> — delete files (<code>rm file.txt</code>).</li>
+      <li>Recursive: <code>rm -r foldername</code>.</li>
+      <li>Interactive: <code>rm -i file.txt</code>.</li>
+    </ul>
+
+    <h3 class="topic">Aliases</h3>
+    <ul>
+      <li>Create: <code>alias ll='ls -l'</code></li>
+      <li>Remove: <code>unalias ll</code></li>
+      <li>List all: <code>alias</code></li>
+    </ul>
+
+    <h3 class="topic">Links in Linux</h3>
+    <ul>
+      <li>Hard Links: same inode, same data. Create: <code>ln file1 file2</code>.</li>
+      <li>Symbolic Links: shortcut, own inode. Create: <code>ln -s original shortcut</code>.</li>
+    </ul>
+
+    <h3 class="topic">Disk Usage &amp; File Size</h3>
+    <ul>
+      <li><code>stat</code> — detailed file info (<code>stat file.txt</code>).</li>
+      <li><code>du -h</code> — disk usage (human-readable).</li>
+      <li><code>df -h</code> — free disk space (partitions).</li>
+    </ul>
+
+    <h4 class="subtopic">Block Size Concept</h4>
+    <ul>
+      <li>Files stored in blocks (usually 4 KB).</li>
+      <li>Example: a file &gt;4 KB uses 8 KB (2 blocks).</li>
+    </ul>
+
+    <div class="revision">
+      <h4>Revision Table</h4>
+      <table>
+        <thead><tr><th>Command</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><code>ls -l</code></td><td>Detailed file listing</td></tr>
+          <tr><td><code>ls -R</code></td><td>Recursive listing</td></tr>
+          <tr><td><code>less</code></td><td>Read file page by page</td></tr>
+          <tr><td><code>cat</code></td><td>Show full file</td></tr>
+          <tr><td><code>head</code></td><td>First lines of file</td></tr>
+          <tr><td><code>tail</code></td><td>Last lines of file</td></tr>
+          <tr><td><code>wc</code></td><td>Count lines/words</td></tr>
+          <tr><td><code>which</code></td><td>Locate command</td></tr>
+          <tr><td><code>whatis</code></td><td>Short command description</td></tr>
+          <tr><td><code>man</code></td><td>Open manual</td></tr>
+          <tr><td><code>cp</code></td><td>Copy files</td></tr>
+          <tr><td><code>mv</code></td><td>Move/Rename files</td></tr>
+          <tr><td><code>rm</code></td><td>Delete files</td></tr>
+          <tr><td><code>alias</code></td><td>Create shortcut command</td></tr>
+          <tr><td><code>ln</code></td><td>Create hard link</td></tr>
+          <tr><td><code>ln -s</code></td><td>Create soft link</td></tr>
+          <tr><td><code>du -h</code></td><td>Disk usage</td></tr>
+          <tr><td><code>df -h</code></td><td>Free disk space</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>Week 1: Short Notes — Linux Basics</footer>
+
+</div>
+</body>
+</html>
