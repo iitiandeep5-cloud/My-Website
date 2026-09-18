@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>Week 4: Short Notes — Pattern Matching &amp; find</title>
+<style>
+  :root {
+    --bg: #f7f8fa;
+    --card-bg: #ffffff;
+    --text: #1f2430;
+    --muted: #5b6472;
+    --accent: #3a6df0;
+    --accent-light: #e8eefd;
+    --border: #e1e4ea;
+    --code-bg: #282c34;
+    --code-text: #e6e6e6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14161b;
+      --card-bg: #1c1f26;
+      --text: #e7e9ee;
+      --muted: #9aa2b1;
+      --accent: #6d94ff;
+      --accent-light: #232a42;
+      --border: #2c313c;
+      --code-bg: #0f1115;
+      --code-text: #d7dae0;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 32px 20px 80px;
+  }
+  header.page-header {
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--accent);
+  }
+  header.page-header h1 {
+    margin: 0 0 6px;
+    font-size: 1.9rem;
+  }
+  header.page-header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  nav.toc {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 36px;
+  }
+  nav.toc h2 {
+    font-size: 1rem;
+    margin: 0 0 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  nav.toc ol {
+    margin: 0;
+    padding-left: 20px;
+  }
+  nav.toc a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  nav.toc a:hover { text-decoration: underline; }
+
+  section.lecture {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 28px;
+  }
+  section.lecture h2 {
+    margin-top: 0;
+    font-size: 1.4rem;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+  }
+  h3.topic {
+    font-size: 1.1rem;
+    margin: 24px 0 8px;
+  }
+  h4.subtopic {
+    font-size: 1rem;
+    margin: 16px 0 6px;
+    color: var(--muted);
+  }
+  ul, ol {
+    padding-left: 22px;
+  }
+  li { margin-bottom: 4px; }
+  code {
+    background: var(--accent-light);
+    color: var(--accent);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.92em;
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 12px 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.9rem;
+    margin: 10px 0 18px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 20px;
+    overflow-x: auto;
+    display: block;
+  }
+  table thead { background: var(--accent-light); }
+  table th, table td {
+    text-align: left;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    font-size: 0.92rem;
+  }
+  table th { color: var(--accent); }
+  .note {
+    background: var(--accent-light);
+    border-left: 4px solid var(--accent);
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin: 14px 0;
+    font-size: 0.93rem;
+  }
+  .exam-points {
+    background: var(--accent-light);
+    border-radius: 8px;
+    padding: 14px 20px;
+    margin-top: 20px;
+  }
+  .exam-points h4 {
+    margin: 0 0 8px;
+    color: var(--accent);
+  }
+  .revision {
+    margin-top: 20px;
+  }
+  .revision h4 {
+    margin-bottom: 6px;
+    color: var(--accent);
+  }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="page-header">
+    <h1>Week 4: Short Notes</h1>
+    <p>Pattern Matching (grep/regex) &amp; the find Command</p>
+  </header>
+
+  <nav class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#lecture1">Lecture 1: Pattern Matching — Part 01</a></li>
+      <li><a href="#lecture2">Lecture 2: Pattern Matching — Part 02</a></li>
+      <li><a href="#lecture3">Lecture 3: What is find?</a></li>
+    </ol>
+  </nav>
+
+  <!-- LECTURE 1 -->
+  <section class="lecture" id="lecture1">
+    <h2>Lecture 1: Pattern Matching — Part 01</h2>
+
+    <h3 class="topic">POSIX Standard</h3>
+    <ul>
+      <li><strong>BRE (Basic Regular Expression)</strong>: default engine in <code>grep</code>, requires escaping for some symbols.</li>
+      <li><strong>ERE (Extended Regular Expression)</strong>: used with <code>egrep</code> or <code>grep -E</code>, simpler and more powerful syntax.</li>
+    </ul>
+
+    <h3 class="topic">Grep Command Basics</h3>
+    <ul>
+      <li>Search in file: <code>grep [pattern] [filename]</code></li>
+      <li>Pipe search: <code>[command] | grep [pattern]</code></li>
+      <li>Case-insensitive: <code>grep -i [pattern] [filename]</code></li>
+      <li>Best practice: use single quotes <code>' '</code> around regex.</li>
+    </ul>
+
+    <h3 class="topic">Regex Meta-characters</h3>
+    <ul>
+      <li>Dot (<code>.</code>) → any single character.</li>
+      <li>Star (<code>*</code>) → zero or more occurrences.</li>
+      <li>Square brackets <code>[ ]</code> → any one character inside.</li>
+      <li>Hyphen (<code>-</code>) → range inside brackets.</li>
+      <li>Negation <code>[^ ]</code> → NOT inside brackets.</li>
+      <li>Backslash (<code>\</code>) → escape special characters.</li>
+    </ul>
+
+    <h3 class="topic">Anchors &amp; Boundaries</h3>
+    <ul>
+      <li><code>^</code> → beginning of line.</li>
+      <li><code>$</code> → end of line.</li>
+      <li><code>\b</code> → word boundary.</li>
+    </ul>
+
+    <h3 class="topic">Repetition &amp; Grouping</h3>
+    <ul>
+      <li>Braces <code>{n,m}</code>: define repetition count. BRE requires escaping: <code>a\{2,4\}</code></li>
+      <li>Parentheses <code>()</code>: grouping. BRE requires escaping: <code>\(ab\)</code></li>
+      <li>Back references: <code>\1 \2 ... \9</code></li>
+    </ul>
+
+    <h3 class="topic">Extended Regular Expression (ERE) Features</h3>
+    <ul>
+      <li><code>+</code> → one or more occurrences.</li>
+      <li><code>?</code> → zero or one occurrence.</li>
+      <li><code>|</code> → OR operator.</li>
+      <li>Simplified syntax: no escaping for <code>()</code> <code>{}</code>.</li>
+    </ul>
+
+    <h3 class="topic">POSIX Character Classes</h3>
+    <ul>
+      <li><code>[[:alnum:]]</code> → letters + digits</li>
+      <li><code>[[:alpha:]]</code> → alphabet letters</li>
+      <li><code>[[:digit:]]</code> → digits (0–9)</li>
+      <li><code>[[:space:]]</code> → whitespace</li>
+      <li><code>[[:punct:]]</code> → punctuation</li>
+      <li><code>[[:print:]]</code> → printable characters</li>
+      <li><code>[[:lower:]]</code> → lower case</li>
+      <li><code>[[:upper:]]</code> → upper case</li>
+      <li><code>[[:blank:]]</code> → space/tab</li>
+      <li><code>[[:xdigit:]]</code> → hexadecimal</li>
+      <li><code>[[:graph:]]</code> → non-space</li>
+      <li><code>[[:cntrl:]]</code> → control characters</li>
+    </ul>
+
+    <h3 class="topic">BRE Operator Precedence (High → Low)</h3>
+    <ol>
+      <li>Character collation <code>[..] [==] [::]</code></li>
+      <li>Escaped (<code>\</code>) meta-characters</li>
+      <li><code>[]</code> bracket expressions</li>
+      <li><code>\(\)</code> <code>\n</code> subexpressions and backreferences</li>
+      <li><code>*</code> <code>\{ \}</code> repetition of preceding single char regex</li>
+      <li>Concatenation</li>
+      <li>Anchors (<code>^</code> <code>$</code>)</li>
+    </ol>
+
+    <h3 class="topic">ERE Operator Precedence (High → Low)</h3>
+    <ol>
+      <li>Character collation <code>[..] [==] [::]</code></li>
+      <li><code>\</code> metachar</li>
+      <li><code>[]</code> bracket expressions</li>
+      <li><code>()</code> grouping</li>
+      <li><code>* + ? { }</code> repetition of preceding regex</li>
+      <li>Concatenation</li>
+      <li>Anchors (<code>^</code> <code>$</code>)</li>
+      <li>Alternation (<code>|</code>)</li>
+    </ol>
+
+    <h3 class="topic">Quick Difference: BRE vs ERE</h3>
+    <table>
+      <thead><tr><th>Feature</th><th>BRE</th><th>ERE</th></tr></thead>
+      <tbody>
+        <tr><td>Default grep</td><td>Yes</td><td>No</td></tr>
+        <tr><td><code>+ ?</code></td><td>Escaped</td><td>Direct</td></tr>
+        <tr><td>Parentheses</td><td><code>\(\)</code></td><td><code>()</code></td></tr>
+        <tr><td>Braces</td><td><code>\{\}</code></td><td><code>{}</code></td></tr>
+        <tr><td>Command</td><td><code>grep</code></td><td><code>grep -E</code> / <code>egrep</code></td></tr>
+      </tbody>
+    </table>
+
+    <div class="exam-points">
+      <h4>Important Tips</h4>
+      <ul>
+        <li>Always use single quotes around regex.</li>
+        <li>BRE requires more escaping.</li>
+        <li>ERE is easier and more readable.</li>
+        <li><code>grep -E</code> is preferred for advanced regex.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- LECTURE 2 -->
+  <section class="lecture" id="lecture2">
+    <h2>Lecture 2: Pattern Matching — Part 02</h2>
+
+    <h3 class="topic">Advanced Pattern Matching with Grep</h3>
+    <ul>
+      <li>Use Extended Regular Expressions (ERE) with <code>egrep</code> or <code>grep -E</code>.</li>
+      <li>Useful for filtering outputs from commands like <code>dpkg-query</code>.</li>
+    </ul>
+
+    <h4 class="subtopic">Fixed Length Matching</h4>
+    <pre>grep -E '^....$'</pre>
+    <p>Matches lines with exactly 4 characters.</p>
+
+    <h4 class="subtopic">Line Anchors</h4>
+    <ul>
+      <li>End of Line (<code>$</code>): <code>grep 'math$'</code> → matches <code>math</code> but not <code>mathematics</code>.</li>
+      <li>Start of Line (<code>^</code>): <code>grep '^math'</code> → matches lines starting with <code>math</code>.</li>
+    </ul>
+
+    <h4 class="subtopic">Field Targeting</h4>
+    <pre>grep ' package'</pre>
+    <p>Targets specific fields by including a space.</p>
+
+    <h4 class="subtopic">Repetition Ranges</h4>
+    <pre>a{1,5}</pre>
+    <p>Matches between 1 and 5 occurrences.</p>
+
+    <h4 class="subtopic">Character Classes (POSIX Style)</h4>
+    <p>Syntax: <code>[[:class:]]</code></p>
+    <table>
+      <thead><tr><th>Class</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><code>[[:alpha:]]</code></td><td>Alphabet letters</td></tr>
+        <tr><td><code>[[:alnum:]]</code></td><td>Letters + digits</td></tr>
+        <tr><td><code>[[:digit:]]</code></td><td>Numeric digits</td></tr>
+        <tr><td><code>[[:cntrl:]]</code></td><td>Control characters</td></tr>
+        <tr><td><code>[[:punct:]]</code></td><td>Punctuation marks</td></tr>
+        <tr><td><code>[[:lower:]]</code></td><td>Lowercase letters</td></tr>
+        <tr><td><code>[[:upper:]]</code></td><td>Uppercase letters</td></tr>
+        <tr><td><code>[[:print:]]</code></td><td>Printable characters</td></tr>
+        <tr><td><code>[[:blank:]]</code></td><td>Spaces/tabs</td></tr>
+        <tr><td><code>[[:graph:]]</code></td><td>Visible non-space characters</td></tr>
+      </tbody>
+    </table>
+
+    <h4 class="subtopic">Inversion Matching</h4>
+    <ul>
+      <li><code>grep -v '^$'</code> → removes empty lines.</li>
+      <li><code>grep -v '[[:cntrl:]]'</code> → removes lines with control characters.</li>
+    </ul>
+
+    <h3 class="topic">Extracting Complex Patterns</h3>
+    <h4 class="subtopic">Aadhar Number</h4>
+    <pre>[[:digit:]]{12}</pre>
+    <h4 class="subtopic">PIN Code</h4>
+    <pre>\b[[:digit:]]{6}\b</pre>
+    <h4 class="subtopic">Roll Number</h4>
+    <pre>[[:alpha:]]{2}[[:digit:]]{2}[[:alpha:]]{1}[[:digit:]]{3}</pre>
+    <p>Example: <code>CS21A123</code></p>
+    <h4 class="subtopic">URL Matching</h4>
+    <pre>[a-zA-Z0-9]+\.[a-zA-Z]+</pre>
+    <p>Matches <code>google.com</code>, <code>abc.org</code>.</p>
+
+    <h3 class="topic">Horizontal Trimming with <code>cut</code> Command</h3>
+    <ul>
+      <li>Vertical trimming: <code>head</code>, <code>tail</code></li>
+      <li>Horizontal trimming: <code>cut</code></li>
+    </ul>
+    <h4 class="subtopic">By Character (<code>-c</code>)</h4>
+    <ul>
+      <li><code>cut -c 1-4</code> → first 4 characters</li>
+      <li><code>cut -c 5-</code> → from 5th character to end</li>
+    </ul>
+    <h4 class="subtopic">By Field (<code>-f</code>) with Delimiter (<code>-d</code>)</h4>
+    <pre>cut -d ';' -f 1</pre>
+    <p>Extracts first field before semicolon.</p>
+
+    <h3 class="topic">Combining Commands with Pipes</h3>
+    <ul>
+      <li>Pipes (<code>|</code>) connect commands for powerful workflows.</li>
+    </ul>
+    <h4 class="subtopic">Multiple <code>cut</code> Commands</h4>
+    <pre>cut -d ';' -f 2 | cut -d ',' -f 1</pre>
+    <h4 class="subtopic">Integrated Pipeline</h4>
+    <pre>cat file.txt | grep 'error' | cut -d ':' -f 2 | head -1</pre>
+    <p>Workflow: read file → filter → extract field → print first match.</p>
+
+    <div class="exam-points">
+      <h4>Important Tips</h4>
+      <ul>
+        <li>Use <code>grep -E</code> for advanced regex.</li>
+        <li>Anchors (<code>^</code>, <code>$</code>) ensure precise matching.</li>
+        <li>Character classes simplify complex patterns.</li>
+        <li><code>cut</code> extracts structured fields.</li>
+        <li>Pipes combine commands effectively.</li>
+        <li><code>grep -v</code> removes unwanted lines.</li>
+      </ul>
+    </div>
+
+    <div class="revision">
+      <h4>Revision Table</h4>
+      <table>
+        <thead><tr><th>Symbol / Option</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td><code>.</code></td><td>Any character</td></tr>
+          <tr><td><code>*</code></td><td>0 or more</td></tr>
+          <tr><td><code>+</code></td><td>1 or more</td></tr>
+          <tr><td><code>?</code></td><td>0 or 1</td></tr>
+          <tr><td><code>^</code></td><td>Start of line</td></tr>
+          <tr><td><code>$</code></td><td>End of line</td></tr>
+          <tr><td><code>[]</code></td><td>Character list</td></tr>
+          <tr><td><code>{n,m}</code></td><td>Repetition range</td></tr>
+          <tr><td><code>\b</code></td><td>Word boundary</td></tr>
+          <tr><td><code>-v</code></td><td>Invert match</td></tr>
+          <tr><td><code>-E</code></td><td>Enable ERE</td></tr>
+          <tr><td><code>cut -c</code></td><td>Character trimming</td></tr>
+          <tr><td><code>cut -f</code></td><td>Field trimming</td></tr>
+          <tr><td><code>-d</code></td><td>Delimiter</td></tr>
+          <tr><td><code>|</code></td><td>Pipe output</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- LECTURE 3 -->
+  <section class="lecture" id="lecture3">
+    <h2>Lecture 3: What is find?</h2>
+
+    <h3 class="topic">Introduction</h3>
+    <p>The <code>find</code> command is used to:</p>
+    <ul>
+      <li>Search files and directories.</li>
+      <li>Filter results using conditions.</li>
+      <li>Perform actions on matched files.</li>
+      <li>Recursively search subfolders by default.</li>
+    </ul>
+
+    <h3 class="topic">Basic Syntax</h3>
+    <p>Search current directory:</p>
+    <pre>find .</pre>
+    <p>Search specific directory:</p>
+    <pre>find website_demo</pre>
+    <p>Manual help:</p>
+    <pre>man find</pre>
+
+    <h3 class="topic">Filtering by Type</h3>
+    <p>Directories only:</p>
+    <pre>find . -type d</pre>
+    <p>Files only:</p>
+    <pre>find . -type f</pre>
+
+    <h3 class="topic">Filtering by Name</h3>
+    <p>Exact filename:</p>
+    <pre>find . -type f -name "test1.txt"</pre>
+    <p>Case-insensitive:</p>
+    <pre>find . -iname "test1.txt"</pre>
+    <p>Wildcard examples — files starting with "test":</p>
+    <pre>find . -name "test*"</pre>
+    <p>All Python files:</p>
+    <pre>find . -name "*.py"</pre>
+
+    <h3 class="topic">Filtering by Metadata</h3>
+    <h4 class="subtopic">Time-Based Searches</h4>
+    <p>Modified &lt; 10 minutes:</p>
+    <pre>find . -mmin -10</pre>
+    <p>Modified &gt; 10 minutes:</p>
+    <pre>find . -mmin +10</pre>
+    <p>Modified &lt; 20 days:</p>
+    <pre>find . -mtime -20</pre>
+    <p>Other options:</p>
+    <table>
+      <thead><tr><th>Option</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><code>-amin</code></td><td>Accessed minutes ago</td></tr>
+        <tr><td><code>-atime</code></td><td>Accessed days ago</td></tr>
+        <tr><td><code>-cmin</code></td><td>Changed minutes ago</td></tr>
+        <tr><td><code>-ctime</code></td><td>Changed days ago</td></tr>
+      </tbody>
+    </table>
+    <p>Combine ranges:</p>
+    <pre>find . -mmin +1 -mmin -5</pre>
+
+    <h4 class="subtopic">Size-Based Searches</h4>
+    <ul>
+      <li>Units: k (KB), M (MB), G (GB)</li>
+    </ul>
+    <pre>find . -size +5M</pre>
+
+    <h4 class="subtopic">Permissions &amp; File State</h4>
+    <p>Empty files/dirs:</p>
+    <pre>find . -empty</pre>
+    <p>By permissions:</p>
+    <pre>find . -perm 777</pre>
+
+    <h3 class="topic">Limiting Search Depth</h3>
+    <p>Restrict to current directory:</p>
+    <pre>find . -maxdepth 1</pre>
+    <p>Example:</p>
+    <pre>find . -maxdepth 1 -type f</pre>
+
+    <h3 class="topic">Executing Actions</h3>
+    <p>Syntax:</p>
+    <pre>find [path] [conditions] -exec [command] {} +</pre>
+    <p>or</p>
+    <pre>find [path] [conditions] -exec [command] {} \;</pre>
+    <table>
+      <thead><tr><th>Symbol</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><code>{}</code></td><td>Current matched file</td></tr>
+        <tr><td><code>+</code></td><td>Batch execution</td></tr>
+        <tr><td><code>\;</code></td><td>Execute per file</td></tr>
+      </tbody>
+    </table>
+    <p>Examples — change ownership:</p>
+    <pre>find website_demo -exec chown corey:www-data {} +</pre>
+    <p>Change permissions:</p>
+    <pre>find . -type d -exec chmod 775 {} +</pre>
+    <p>Delete JPEG files:</p>
+    <pre>find . -type f -name "*.jpeg" -maxdepth 1 -exec rm {} +</pre>
+
+    <h3 class="topic">Best Practices</h3>
+    <p>Always perform dry runs before destructive actions:</p>
+    <pre>find . -type f -name "*.jpeg"</pre>
+    <p>Then add <code>-exec rm {} +</code> only after verifying results.</p>
+    <div class="note">
+      Why dry runs matter: prevent accidental deletion, avoid permission mistakes, reduce risk of data loss.
+    </div>
+
+    <div class="revision">
+      <h4>Revision Table</h4>
+      <table>
+        <thead><tr><th>Command/Option</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><code>find .</code></td><td>Search current directory</td></tr>
+          <tr><td><code>-type f</code></td><td>Files only</td></tr>
+          <tr><td><code>-type d</code></td><td>Directories only</td></tr>
+          <tr><td><code>-name</code></td><td>Exact filename</td></tr>
+          <tr><td><code>-iname</code></td><td>Case-insensitive search</td></tr>
+          <tr><td><code>*</code></td><td>Wildcard</td></tr>
+          <tr><td><code>-mmin</code></td><td>Modified minutes</td></tr>
+          <tr><td><code>-mtime</code></td><td>Modified days</td></tr>
+          <tr><td><code>-size</code></td><td>File size filter</td></tr>
+          <tr><td><code>-empty</code></td><td>Empty files/dirs</td></tr>
+          <tr><td><code>-perm</code></td><td>Permission filter</td></tr>
+          <tr><td><code>-maxdepth</code></td><td>Limit recursion</td></tr>
+          <tr><td><code>-exec</code></td><td>Execute commands</td></tr>
+          <tr><td><code>{}</code></td><td>Current result</td></tr>
+          <tr><td><code>rm</code></td><td>Delete files</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="exam-points">
+      <h4>Important Tips</h4>
+      <ul>
+        <li><code>find</code> searches recursively by default.</li>
+        <li>Use <code>-maxdepth</code> to control recursion.</li>
+        <li>Combine filters for precision.</li>
+        <li>Always test before using <code>-exec rm</code>.</li>
+        <li>Wildcards (<code>*</code>) make searching flexible.</li>
+        <li><code>find</code> is powerful when combined with other Linux commands.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>Week 4: Short Notes — Pattern Matching &amp; find</footer>
+
+</div>
+</body>
+</html>
