@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 12: Java Short Notes</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1a1a1a;
+    --muted: #5a5a5a;
+    --card-bg: #f7f7f9;
+    --border: #e0e0e5;
+    --accent: #4f46e5;
+    --accent-soft: #eef0ff;
+    --code-bg: #1e1e2e;
+    --code-text: #e5e5f0;
+    --table-header: #ede9fe;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121218;
+      --text: #eaeaf0;
+      --muted: #a5a5b5;
+      --card-bg: #1c1c26;
+      --border: #2e2e3a;
+      --accent: #a5b4fc;
+      --accent-soft: #26263a;
+      --code-bg: #0d0d14;
+      --code-text: #d8d8ea;
+      --table-header: #26264a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121218;
+    --text: #eaeaf0;
+    --muted: #a5a5b5;
+    --card-bg: #1c1c26;
+    --border: #2e2e3a;
+    --accent: #a5b4fc;
+    --accent-soft: #26263a;
+    --code-bg: #0d0d14;
+    --code-text: #d8d8ea;
+    --table-header: #26264a;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+  }
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 5rem;
+  }
+  header.page-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border);
+  }
+  header.page-header h1 {
+    font-size: 2rem;
+    margin: 0 0 0.3rem;
+    color: var(--text);
+  }
+  header.page-header p {
+    color: var(--muted);
+    margin: 0;
+    font-size: 0.95rem;
+  }
+  nav.toc {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  nav.toc h2 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin: 0 0 0.6rem;
+  }
+  nav.toc ol {
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+  nav.toc a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  nav.toc a:hover { text-decoration: underline; }
+
+  section.lecture {
+    margin-bottom: 3rem;
+    scroll-margin-top: 1rem;
+  }
+  section.lecture > h2 {
+    font-size: 1.5rem;
+    padding: 0.5rem 0.9rem;
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    margin-bottom: 1.2rem;
+  }
+  h3 {
+    font-size: 1.15rem;
+    margin-top: 1.8rem;
+    margin-bottom: 0.6rem;
+    color: var(--text);
+  }
+  ul, ol { padding-left: 1.4rem; }
+  li { margin-bottom: 0.35rem; }
+  p { margin: 0.6rem 0; }
+
+  .callout {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin: 1rem 0;
+    font-size: 0.95rem;
+  }
+  .callout strong { color: var(--accent); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0 1.5rem;
+    font-size: 0.92rem;
+  }
+  .table-scroll {
+    overflow-x: auto;
+    margin: 1rem 0 1.5rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.55rem 0.8rem;
+    text-align: left;
+  }
+  th {
+    background: var(--table-header);
+    font-weight: 600;
+  }
+  tr:nth-child(even) td {
+    background: color-mix(in srgb, var(--card-bg) 60%, transparent);
+  }
+
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 1rem 1.2rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    margin: 1rem 0;
+  }
+  code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+  p code, li code {
+    background: var(--accent-soft);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.88em;
+  }
+
+  .exam-line {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin-top: 1.2rem;
+    font-style: italic;
+  }
+  .exam-line strong {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="page-header">
+    <h1>Week 12: Short Notes — Java</h1>
+  </header>
+
+  <nav class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#lecture1">Lecture 1: Graphical Interfaces and Event-Driven Programming</a></li>
+      <li><a href="#lecture2">Lecture 2: The Swing Toolkit</a></li>
+      <li><a href="#lecture3">Lecture 3: More Swing Examples</a></li>
+    </ol>
+  </nav>
+
+  <!-- LECTURE 1 -->
+  <section class="lecture" id="lecture1">
+    <h2>Lecture 1: Graphical Interfaces and Event-Driven Programming</h2>
+
+    <h3>Evolution of User-Computer Interaction</h3>
+    <ul>
+      <li>CLI (Command-Line Interface) → Sequential, syntax-based, powerful but less user-friendly.</li>
+      <li>GUI (Graphical User Interface) → Windows, icons, buttons, touchscreens; system must detect which component is interacted with.</li>
+    </ul>
+
+    <h3>Challenges in GUI Interaction</h3>
+    <ul>
+      <li>Must track: mouse (x,y), window positions, keyboard focus, Z-order.</li>
+      <li>Example: Overlapping windows → system decides which component was clicked.</li>
+      <li>Manual handling = tedious, error-prone, hard to scale.</li>
+    </ul>
+
+    <h3>Event-Driven Programming (EDP)</h3>
+    <ul>
+      <li>Program waits for events instead of polling.</li>
+      <li>Examples: button click, mouse move, key press, window close, timer completion.</li>
+      <li>Event sent to appropriate code automatically.</li>
+    </ul>
+
+    <h3>Low-Level vs High-Level Events</h3>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Type</th><th>Example</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>Low-Level Event</td><td>Mouse click at (x,y)</td><td>Raw hardware/OS input</td></tr>
+        <tr><td>High-Level Event</td><td>"OK Button Clicked"</td><td>Logical UI event</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>Java runtime converts raw input → meaningful events.</p>
+
+    <h3>Abstraction in EDP</h3>
+    <ul>
+      <li>Hides low-level details (pixels, coordinates, Z-order).</li>
+      <li>Programmer works with buttons, checkboxes, windows instead.</li>
+      <li>Benefit: simpler, flexible, maintainable GUI programming.</li>
+    </ul>
+
+    <h3>Listener Pattern</h3>
+    <div class="callout">Flow: Component → Event → Listener → Response</div>
+    <ul>
+      <li>Component: Button, Window, Checkbox</li>
+      <li>Event: Click, Close, Timer done</li>
+      <li>Listener: Object/class that responds</li>
+    </ul>
+
+    <h3>Window Event Example</h3>
+    <p>Steps when clicking Minimize/Maximize/Close:</p>
+    <ol>
+      <li>OS detects click</li>
+      <li>GUI identifies component</li>
+      <li>Event generated</li>
+      <li>Listener notified</li>
+      <li>Action performed</li>
+    </ol>
+
+    <h3>Connecting a Listener</h3>
+    <ol>
+      <li>Create Component (e.g., Button)</li>
+      <li>Define Listener (e.g., buttonPush())</li>
+      <li>Associate Listener (Add Listener operation)</li>
+    </ol>
+    <div class="callout">Flow: User Action → Event → Listener → Response</div>
+
+    <h3>Callback Pattern</h3>
+    <ul>
+      <li>One object says: "When this happens, call this function."</li>
+      <li>Function executes later when event occurs.</li>
+    </ul>
+
+    <h3>Explicit vs Implicit Callbacks</h3>
+    <ul>
+      <li><strong>Explicit:</strong> Programmer directly calls function (<code>timerDone()</code>).</li>
+      <li><strong>Implicit (GUI):</strong> Runtime auto-calls listener when event occurs.</li>
+    </ul>
+
+    <h3>Inversion of Control (IoC)</h3>
+    <ul>
+      <li>Normal: Program → Function</li>
+      <li>Event-driven: Event → Runtime → Listener Function</li>
+      <li>Definition: Runtime controls when event-handling function executes.</li>
+    </ul>
+
+    <h3>Flexible Delegation</h3>
+    <ul>
+      <li>Event creator ≠ Event handler.</li>
+      <li>Example: Timer created by Class A, handled by Class B.</li>
+      <li>Benefit: Separation of concerns → modular programs.</li>
+    </ul>
+
+    <h3>Why EDP is Useful</h3>
+    <ul>
+      <li>Users act unpredictably (click, type, move mouse).</li>
+      <li>Benefits: responsive apps, reduced complexity, modularity, flexible delegation, easier maintenance.</li>
+    </ul>
+
+    <h3>Overall Flow</h3>
+    <div class="callout">User Action → OS detects → Runtime identifies component → High-level event → Listener receives → Listener executes → App responds</div>
+    <p><strong>Example:</strong> Click OK → OS detects → Java identifies button → Event generated → Listener executes buttonPush() → App responds.</p>
+
+    <h3>Key Terms</h3>
+    <ul>
+      <li>Event: Action (e.g., button click)</li>
+      <li>Event Source/Component: Object generating event</li>
+      <li>Listener: Responds to event</li>
+      <li>Callback: Function executed on event</li>
+      <li>EDP: Execution triggered by events</li>
+      <li>Abstraction: Hide low-level details</li>
+      <li>IoC: Runtime decides when to call function</li>
+      <li>Z-Order: Stacking order of overlapping windows</li>
+    </ul>
+
+    <h3>Revision</h3>
+    <ul>
+      <li>GUI problem: Overlapping components → complex tracking</li>
+      <li>EDP solution: Convert raw input → high-level events</li>
+      <li>Listener Pattern: Component → Event → Listener → Response</li>
+      <li>Callback: Function triggered by event</li>
+      <li>IoC: Runtime controls execution</li>
+      <li>Advantage: Focus on logic, not hardware details</li>
+    </ul>
+  </section>
+
+  <!-- LECTURE 2 -->
+  <section class="lecture" id="lecture2">
+    <h2>Lecture 2: The Swing ToolKit</h2>
+
+    <h3>Introduction</h3>
+    <ul>
+      <li>Event-Driven Programming (EDP) → Program responds to events (mouse clicks, key presses, timers, window actions).</li>
+      <li>AWT (Abstract Window Toolkit) → Low-level foundation.</li>
+      <li>Swing → High-level toolkit built on AWT, provides advanced GUI components.</li>
+    </ul>
+
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>AWT</th><th>Swing</th></tr></thead>
+      <tbody>
+        <tr><td>Low-level framework</td><td>High-level toolkit</td></tr>
+        <tr><td>Basic event support</td><td>Advanced GUI components</td></tr>
+        <tr><td>Foundation</td><td>Built on AWT</td></tr>
+        <tr><td>Custom events</td><td>Event-listener mechanisms</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Event Generators &amp; Listeners</h3>
+    <ul>
+      <li>Event Generator → JButton, Timer, JFrame.</li>
+      <li>Listener → Waits for event, executes response.</li>
+      <li>Example: Timer → Listener → Response (loose coupling).</li>
+    </ul>
+
+    <h3>Relationships</h3>
+    <ul>
+      <li>Many-to-One → Multiple buttons → One listener.</li>
+      <li>One-to-Many → One button → Multiple listeners (e.g., Logout triggers several actions).</li>
+    </ul>
+
+    <h3>Registering a Listener</h3>
+    <p>Must explicitly register:</p>
+    <pre><code>button.addActionListener(this);</code></pre>
+    <p>If not registered → event generated but no response.</p>
+
+    <h3>Swing Naming Convention</h3>
+    <ul>
+      <li>JButton → Button</li>
+      <li>JPanel → Container</li>
+      <li>JFrame → Window</li>
+    </ul>
+
+    <h3>JButton &amp; ActionListener</h3>
+    <ul>
+      <li>JButton generates <code>ActionEvent</code>.</li>
+      <li>ActionListener receives event → executes <code>actionPerformed()</code>.</li>
+    </ul>
+    <div class="callout">Flow: JButton → ActionEvent → ActionListener → actionPerformed()</div>
+
+    <h3>Swing UI Hierarchy</h3>
+    <pre><code>JFrame
+  ↓
+ContentPane
+  ↓
+JPanel
+  ↓
+JButton</code></pre>
+
+    <h3>ActionListener vs WindowListener</h3>
+    <ul>
+      <li>ActionListener → Button/menu actions (<code>actionPerformed()</code>).</li>
+      <li>WindowListener → Window events (open, close, minimize, activate).</li>
+    </ul>
+
+    <h3>WindowListener Methods</h3>
+    <p>Seven methods:</p>
+    <ul>
+      <li><code>windowActivated()</code></li>
+      <li><code>windowDeactivated()</code></li>
+      <li><code>windowIconified()</code></li>
+      <li><code>windowDeiconified()</code></li>
+      <li><code>windowOpened()</code></li>
+      <li><code>windowClosed()</code></li>
+      <li><code>windowClosing()</code> → often used with <code>System.exit(0)</code>.</li>
+    </ul>
+
+    <h3>Event Dispatch Thread (EDT)</h3>
+    <ul>
+      <li>Handles GUI events.</li>
+      <li>Heavy tasks must run in background threads.</li>
+      <li>Use:</li>
+    </ul>
+    <pre><code>EventQueue.invokeLater(() -&gt; { /* GUI code */ });</code></pre>
+
+    <h3>Processing</h3>
+    <ul>
+      <li>Interleaved → GUI checked only between chunks → unresponsive.</li>
+      <li>Parallel → EDT handles GUI, background thread handles heavy work → responsive.</li>
+    </ul>
+
+    <h3>Example: Color-Changing Panel</h3>
+    <ul>
+      <li>JButton "Red" → JPanel background changes to red.</li>
+    </ul>
+    <pre><code>setBackground(Color.RED);
+repaint();</code></pre>
+    <p>Panel changes, not JFrame title bar.</p>
+
+    <h3>Complete Flow</h3>
+    <div class="callout">User clicks JButton → ActionEvent → ActionListener → actionPerformed() → GUI updated</div>
+
+    <h3>Swing Structure</h3>
+    <p><code>JFrame → ContentPane → JPanel → JButton</code></p>
+
+    <h3>Key Methods</h3>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Method</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>addActionListener()</td><td>Register listener</td></tr>
+        <tr><td>actionPerformed()</td><td>Handle event</td></tr>
+        <tr><td>setBackground()</td><td>Change background</td></tr>
+        <tr><td>repaint()</td><td>Refresh GUI</td></tr>
+        <tr><td>setVisible(true)</td><td>Show frame</td></tr>
+        <tr><td>System.exit(0)</td><td>End program</td></tr>
+        <tr><td>EventQueue.invokeLater()</td><td>Run GUI code on EDT</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Revision</h3>
+    <ul>
+      <li>Swing = GUI toolkit</li>
+      <li>AWT = Foundation</li>
+      <li>JFrame = Window</li>
+      <li>JPanel = Container</li>
+      <li>JButton = Button</li>
+      <li>ActionEvent = Event</li>
+      <li>ActionListener = Event handler</li>
+      <li>actionPerformed() = Handles action</li>
+      <li>addActionListener() = Registers listener</li>
+      <li>WindowListener = Window events</li>
+      <li>EDT = GUI thread</li>
+      <li>invokeLater() = Schedule GUI code</li>
+      <li>System.exit(0) = End program</li>
+    </ul>
+  </section>
+
+  <!-- LECTURE 3 -->
+  <section class="lecture" id="lecture3">
+    <h2>Lecture 3: More Swing Examples</h2>
+
+    <h3>Multi-Source Event Handling</h3>
+    <ul>
+      <li>One listener can handle multiple buttons.</li>
+      <li>Use <code>getSource()</code> to identify which button triggered the event.</li>
+    </ul>
+    <pre><code>if (e.getSource() == redButton) { /* action */ }</code></pre>
+
+    <h3>getBackground() and State Restoration</h3>
+    <ul>
+      <li><code>getBackground()</code> → returns current panel background.</li>
+      <li>Helps preserve or restore state when no condition matches.</li>
+    </ul>
+
+    <h3>Multicasting</h3>
+    <ul>
+      <li>One event → multiple listeners.</li>
+      <li>Example: Color selection updates several panels simultaneously.</li>
+    </ul>
+    <div class="callout"><strong>Benefit:</strong> Loose coupling, multiple independent updates.</div>
+
+    <h3>Event Identification</h3>
+    <ul>
+      <li><code>getSource()</code> → identifies actual object.</li>
+      <li><code>getActionCommand()</code> → identifies event using command string.</li>
+    </ul>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>getSource()</th><th>getActionCommand()</th></tr></thead>
+      <tbody>
+        <tr><td>Object identity</td><td>Command string</td></tr>
+        <tr><td>Local components</td><td>Distributed communication</td></tr>
+        <tr><td>Example: redButton</td><td>Example: "Red"</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Role of JFrame in Multicasting</h3>
+    <ul>
+      <li>Acts as mediator between panels.</li>
+      <li>Connects event generators and listeners.</li>
+      <li>Handles wiring and communication.</li>
+    </ul>
+
+    <h3>BorderLayout</h3>
+    <ul>
+      <li>Organizes GUI into NORTH, SOUTH, EAST, WEST, CENTER.</li>
+    </ul>
+    <pre><code>add(controlPanel, BorderLayout.NORTH);
+add(statusPanel, BorderLayout.SOUTH);</code></pre>
+
+    <h3>Visual Boundaries &amp; Empty Areas</h3>
+    <ul>
+      <li>Each JPanel has its own area.</li>
+      <li>Empty regions show JFrame background.</li>
+      <li>Useful for debugging layout.</li>
+    </ul>
+
+    <h3>JCheckBox – State-Based Component</h3>
+    <ul>
+      <li>JButton → momentary action.</li>
+      <li>JCheckBox → persistent state.</li>
+      <li>Use <code>isSelected()</code> to check state.</li>
+    </ul>
+    <pre><code>if (redCheckBox.isSelected()) { /* Red selected */ }</code></pre>
+
+    <h3>Compound State</h3>
+    <ul>
+      <li>Multiple checkboxes can be selected simultaneously.</li>
+      <li>Example: Red + Blue → Green background.</li>
+    </ul>
+
+    <h3>Observer Pattern</h3>
+    <div class="callout">Source → Event → Listener → Response</div>
+    <p>Provides loose coupling and separation of concerns.</p>
+
+    <h3>Explicit Listener Registration</h3>
+    <ul>
+      <li>Must call <code>addActionListener()</code>.</li>
+      <li>Without registration → event lost, no response.</li>
+    </ul>
+
+    <h3>Developer Checklist</h3>
+    <ol>
+      <li>Explicit registration → addActionListener()</li>
+      <li>Observer pattern → Source → Listener → Response</li>
+      <li>State management → isSelected()</li>
+      <li>Source identification → getSource()</li>
+      <li>Command identification → getActionCommand()</li>
+      <li>Layout management → BorderLayout</li>
+      <li>State preservation → getBackground()</li>
+    </ol>
+
+    <h3>Important Methods</h3>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Method</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>addActionListener()</td><td>Register listener</td></tr>
+        <tr><td>getSource()</td><td>Identify object</td></tr>
+        <tr><td>getActionCommand()</td><td>Identify command string</td></tr>
+        <tr><td>getBackground()</td><td>Get current background</td></tr>
+        <tr><td>isSelected()</td><td>Check checkbox state</td></tr>
+        <tr><td>setBackground()</td><td>Change background</td></tr>
+        <tr><td>repaint()</td><td>Refresh GUI</td></tr>
+        <tr><td>BorderLayout</td><td>Organize components</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Differences: JButton vs JCheckBox</h3>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>JButton</th><th>JCheckBox</th></tr></thead>
+      <tbody>
+        <tr><td>Action</td><td>State</td></tr>
+        <tr><td>Responds to click</td><td>Maintains selected/unselected</td></tr>
+        <tr><td>Use ActionListener</td><td>Use ActionListener + state check</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="callout"><strong>Memory Trick:</strong> JButton → Action, JCheckBox → State.</div>
+
+    <h3>getSource vs getActionCommand</h3>
+    <ul>
+      <li><code>getSource()</code> → Which object?</li>
+      <li><code>getActionCommand()</code> → Which command/string?</li>
+    </ul>
+
+    <h3>Complete Event Architecture</h3>
+    <div class="callout">User Action → Event Generator → ActionEvent → Listener → actionPerformed() → Identify (getSource/getActionCommand) → Apply Logic → Update GUI → repaint()</div>
+
+    <h3>Revision</h3>
+    <ul>
+      <li>Multi-source handling → getSource()</li>
+      <li>Distributed/multicast → getActionCommand()</li>
+      <li>Checkbox state → isSelected()</li>
+      <li>Background state → getBackground()</li>
+      <li>Register listener → addActionListener()</li>
+      <li>Layout → BorderLayout</li>
+    </ul>
+    <div class="exam-line"><strong>Final Flow:</strong> Source → Event → Listener → Logic → GUI Update</div>
+  </section>
+
+  <footer>Week 12 — Java Short Notes</footer>
+
+</div>
+</body>
+</html>

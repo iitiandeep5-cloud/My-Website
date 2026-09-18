@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 9: Java Short Notes</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1a1a1a;
+    --muted: #5a5a5a;
+    --card-bg: #f7f7f9;
+    --border: #e0e0e5;
+    --accent: #4f46e5;
+    --accent-soft: #eef0ff;
+    --code-bg: #1e1e2e;
+    --code-text: #e5e5f0;
+    --table-header: #ede9fe;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121218;
+      --text: #eaeaf0;
+      --muted: #a5a5b5;
+      --card-bg: #1c1c26;
+      --border: #2e2e3a;
+      --accent: #a5b4fc;
+      --accent-soft: #26263a;
+      --code-bg: #0d0d14;
+      --code-text: #d8d8ea;
+      --table-header: #26264a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121218;
+    --text: #eaeaf0;
+    --muted: #a5a5b5;
+    --card-bg: #1c1c26;
+    --border: #2e2e3a;
+    --accent: #a5b4fc;
+    --accent-soft: #26263a;
+    --code-bg: #0d0d14;
+    --code-text: #d8d8ea;
+    --table-header: #26264a;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+  }
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 5rem;
+  }
+  header.page-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border);
+  }
+  header.page-header h1 {
+    font-size: 2rem;
+    margin: 0 0 0.3rem;
+    color: var(--text);
+  }
+  header.page-header p {
+    color: var(--muted);
+    margin: 0;
+    font-size: 0.95rem;
+  }
+  nav.toc {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  nav.toc h2 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin: 0 0 0.6rem;
+  }
+  nav.toc ol {
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+  nav.toc a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  nav.toc a:hover { text-decoration: underline; }
+
+  section.lecture {
+    margin-bottom: 3rem;
+    scroll-margin-top: 1rem;
+  }
+  section.lecture > h2 {
+    font-size: 1.5rem;
+    padding: 0.5rem 0.9rem;
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    margin-bottom: 1.2rem;
+  }
+  h3 {
+    font-size: 1.15rem;
+    margin-top: 1.8rem;
+    margin-bottom: 0.6rem;
+    color: var(--text);
+  }
+  ul, ol { padding-left: 1.4rem; }
+  li { margin-bottom: 0.35rem; }
+  p { margin: 0.6rem 0; }
+
+  .callout {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin: 1rem 0;
+    font-size: 0.95rem;
+  }
+  .callout strong { color: var(--accent); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0 1.5rem;
+    font-size: 0.92rem;
+  }
+  .table-scroll {
+    overflow-x: auto;
+    margin: 1rem 0 1.5rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.55rem 0.8rem;
+    text-align: left;
+  }
+  th {
+    background: var(--table-header);
+    font-weight: 600;
+  }
+  tr:nth-child(even) td {
+    background: color-mix(in srgb, var(--card-bg) 60%, transparent);
+  }
+
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 1rem 1.2rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    margin: 1rem 0;
+  }
+  code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+  p code, li code {
+    background: var(--accent-soft);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.88em;
+  }
+
+  .exam-line {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin-top: 1.2rem;
+    font-style: italic;
+  }
+  .exam-line strong {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="page-header">
+    <h1>Week 9: Short Notes — Java</h1>
+    </header>
+
+  <nav class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#lecture1">Lecture 1: Optional Types</a></li>
+      <li><a href="#lecture2">Lecture 2: Collecting Results From Streams</a></li>
+      <li><a href="#lecture3">Lecture 3: Input/Output Streams</a></li>
+      <li><a href="#lecture4">Lecture 4: Serialization</a></li>
+    </ol>
+  </nav>
+
+  <!-- LECTURE 1 -->
+  <section class="lecture" id="lecture1">
+    <h2>Lecture 1: Optional Types</h2>
+
+    <h3>Problem Optional Solves</h3>
+    <ul>
+      <li>Null handling was error-prone.</li>
+      <li>Using <code>null</code> caused <code>NullPointerException</code> (NPE) if checks were missed.</li>
+      <li><code>Optional</code> makes absence explicit, shifting error handling from runtime to compile-time.</li>
+    </ul>
+
+    <h3>Why Streams Return Optional</h3>
+    <ul>
+      <li>Operations like <code>max()</code> or <code>min()</code> may not yield results.</li>
+      <li>Example: Empty list → no maximum.</li>
+      <li>Returning 0 would be misleading.</li>
+      <li>Instead, Java returns <code>Optional.empty()</code> to represent absence safely.</li>
+    </ul>
+
+    <h3>Traditional vs Optional</h3>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Traditional (null)</th><th>Optional</th></tr></thead>
+      <tbody>
+        <tr><td>Returns null</td><td>Returns Optional.empty()</td></tr>
+        <tr><td>Manual null checks</td><td>Built-in handling methods</td></tr>
+        <tr><td>Runtime NPE risk</td><td>Safer functional handling</td></tr>
+        <tr><td>Hidden absence</td><td>Explicit absence</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Optional as a Box</h3>
+    <ul>
+      <li>Present state → <code>Optional.of(10)</code></li>
+      <li>Empty state → <code>Optional.empty()</code></li>
+      <li>Difference:
+        <ul>
+          <li><code>null</code> → no object exists</li>
+          <li><code>Optional.empty()</code> → object exists, but no value</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Optional Types for Primitives</h3>
+    <ul>
+      <li>Specialized versions: <code>OptionalInt</code>, <code>OptionalLong</code>, <code>OptionalDouble</code></li>
+      <li>Example: <code>DoubleStream.max()</code> → returns <code>OptionalDouble</code></li>
+      <li>Avoids boxing/unboxing → better performance.</li>
+    </ul>
+
+    <h3>Creating Optional Objects</h3>
+    <ul>
+      <li><code>Optional.empty()</code> → empty box</li>
+      <li><code>Optional.of(value)</code> → non-null value only</li>
+      <li><code>Optional.ofNullable(value)</code> → safest, handles both null &amp; non-null</li>
+    </ul>
+
+    <h3>Extracting Values</h3>
+    <ul>
+      <li><code>orElse()</code> → default replacement</li>
+      <li><code>orElseGet()</code> → lazy default computation</li>
+      <li><code>orElseThrow()</code> → throws exception if empty</li>
+    </ul>
+
+    <h3>Conditional Execution</h3>
+    <ul>
+      <li><code>ifPresent()</code> → run code only if value exists</li>
+      <li><code>ifPresentOrElse()</code> → handle both present &amp; absent cases</li>
+    </ul>
+
+    <h3>Producer-Side Design</h3>
+    <ul>
+      <li>Methods returning Optional create type-level contracts.</li>
+      <li>Example: Safe inverse function returns <code>Optional.empty()</code> when undefined.</li>
+    </ul>
+
+    <h3>Transforming Optional Values</h3>
+    <ul>
+      <li><code>map()</code> → transforms value if present</li>
+      <li><code>flatMap()</code> → flattens nested Optional, enables chaining</li>
+    </ul>
+
+    <h3>Cascading Pipelines</h3>
+    <pre><code>Optional&lt;Double&gt; result =
+    safeInverse(x)
+        .flatMap(MyClass::safeSquareRoot)
+        .map(v -&gt; v * 2);</code></pre>
+    <ul>
+      <li>Failures propagate automatically.</li>
+      <li>No manual null checks needed.</li>
+    </ul>
+
+    <h3>Stream.ofNullable()</h3>
+    <ul>
+      <li>Bridges legacy APIs returning null.</li>
+      <li>Converts null → empty stream.</li>
+      <li>Useful for modern stream pipelines.</li>
+    </ul>
+
+    <h3>map vs flatMap</h3>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>map()</th><th>flatMap()</th></tr></thead>
+      <tbody>
+        <tr><td>Returns Optional</td><td>Returns Optional</td></tr>
+        <tr><td>Function returns normal value</td><td>Function returns Optional</td></tr>
+        <tr><td>Can create nested Optional</td><td>Flattens nested Optional</td></tr>
+        <tr><td>Simple transformation</td><td>Chaining Optional-returning methods</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Best Practices</h3>
+    <ul>
+      <li>Use Optional for return types, not fields/parameters.</li>
+      <li>Prefer <code>Optional.ofNullable()</code> for uncertain inputs.</li>
+      <li>Avoid <code>get()</code> → use safer methods (orElse, map, flatMap).</li>
+      <li>Use <code>flatMap()</code> when chaining Optional-returning methods.</li>
+    </ul>
+
+    <h3>Conclusion</h3>
+    <ul>
+      <li>Optional = explicit presence/absence contract.</li>
+      <li>Eliminates unsafe null handling.</li>
+      <li>Improves safety, readability, modularity, functional programming, and API design.</li>
+    </ul>
+    <div class="exam-line"><strong>Exam key idea:</strong> Optional replaces null with a safe, functional, and composable abstraction.</div>
+  </section>
+
+  <!-- LECTURE 2 -->
+  <section class="lecture" id="lecture2">
+    <h2>Lecture 2: Collecting Results From Streams</h2>
+
+    <h3>Lifecycle Overview</h3>
+    <ul>
+      <li>Collection → stores data permanently.</li>
+      <li>Stream → processes data temporarily.</li>
+    </ul>
+    <div class="callout"><strong>Typical flow:</strong> Collection → Stream → Intermediate operations → Terminal operation → Result</div>
+
+    <h3>Example</h3>
+    <pre><code>List&lt;String&gt; names = List.of("A", "B", "C");
+List&lt;String&gt; result =
+    names.stream()
+         .filter(s -&gt; s.length() == 1)
+         .collect(Collectors.toList());</code></pre>
+    <p>Terminal operation converts temporary stream back into a stable structure.</p>
+
+    <h3>Immediate Access Methods</h3>
+    <ul>
+      <li><code>iterator()</code> → manual traversal, legacy style.</li>
+      <li><code>forEach()</code> → modern, cleaner syntax, functional style.</li>
+    </ul>
+
+    <h3>Converting Stream to Array</h3>
+    <ul>
+      <li>Default <code>toArray()</code> → returns <code>Object[]</code>, type info lost.</li>
+      <li>Typed <code>toArray()</code> → <code>String[] arr = stream.toArray(String[]::new);</code> → Always prefer typed version.</li>
+    </ul>
+
+    <h3>collect() Terminal Operation</h3>
+    <ul>
+      <li>Opposite of <code>stream()</code>.</li>
+      <li>Converts stream into collection or other result.</li>
+      <li>Syntax: <code>stream.collect(collector);</code></li>
+    </ul>
+
+    <h3>Common Collectors</h3>
+    <ul>
+      <li><code>toList()</code> → List</li>
+      <li><code>toSet()</code> → Set (removes duplicates)</li>
+      <li><code>toCollection()</code> → specific collection type (e.g., TreeSet)</li>
+    </ul>
+
+    <h3>Summary Statistics</h3>
+    <ul>
+      <li><code>summarizingInt()</code> → computes count, sum, min, max, average in one pass.</li>
+    </ul>
+    <pre><code>IntSummaryStatistics stats =
+    names.stream()
+         .collect(Collectors.summarizingInt(String::length));</code></pre>
+
+    <h3>Methods in IntSummaryStatistics</h3>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Method</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>getCount()</td><td>number of elements</td></tr>
+        <tr><td>getSum()</td><td>total sum</td></tr>
+        <tr><td>getMin()</td><td>smallest value</td></tr>
+        <tr><td>getMax()</td><td>largest value</td></tr>
+        <tr><td>getAverage()</td><td>average value</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p><em>Similar: <code>summarizingLong()</code>, <code>summarizingDouble()</code></em></p>
+
+    <h3>Empty Stream Behavior</h3>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Method</th><th>Returns</th></tr></thead>
+      <tbody>
+        <tr><td>getCount()</td><td>0</td></tr>
+        <tr><td>getSum()</td><td>0</td></tr>
+        <tr><td>getAverage()</td><td>0.0</td></tr>
+        <tr><td>getMax()</td><td>Integer.MIN_VALUE</td></tr>
+        <tr><td>getMin()</td><td>Integer.MAX_VALUE</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Collecting into a Map</h3>
+    <p><strong>Basic toMap()</strong></p>
+    <pre><code>Map&lt;Integer, String&gt; map =
+    people.stream()
+          .collect(Collectors.toMap(
+              Person::getId,
+              Person::getName
+          ));</code></pre>
+
+    <p><strong>Identity Mapping</strong></p>
+    <pre><code>Map&lt;Integer, Person&gt; map =
+    people.stream()
+          .collect(Collectors.toMap(
+              Person::getId,
+              Function.identity()
+          ));</code></pre>
+
+    <p><strong>Duplicate Key Problem</strong></p>
+    <ul>
+      <li>Throws <code>IllegalStateException</code> if duplicate keys exist.</li>
+      <li>Solve with merge function: <code>(oldValue, newValue) -&gt; oldValue</code></li>
+    </ul>
+
+    <h3>groupingBy()</h3>
+    <ul>
+      <li>Groups elements into multiple buckets.</li>
+    </ul>
+    <pre><code>Map&lt;String, List&lt;Person&gt;&gt; grouped =
+    people.stream()
+          .collect(Collectors.groupingBy(Person::getName));</code></pre>
+
+    <h3>partitioningBy()</h3>
+    <ul>
+      <li>Special case of grouping → exactly two groups.</li>
+      <li>Uses <code>Predicate</code>.</li>
+    </ul>
+    <pre><code>Map&lt;Boolean, List&lt;Person&gt;&gt; partition =
+    people.stream()
+          .collect(Collectors.partitioningBy(
+              p -&gt; p.getName().startsWith("A")
+          ));</code></pre>
+
+    <h3>groupingBy vs partitioningBy</h3>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>groupingBy()</th><th>partitioningBy()</th></tr></thead>
+      <tbody>
+        <tr><td>Many groups</td><td>Exactly two groups</td></tr>
+        <tr><td>Classifier function</td><td>Predicate</td></tr>
+        <tr><td>Keys can be any type</td><td>Keys are Boolean</td></tr>
+        <tr><td>Map&lt;K, List&lt;V&gt;&gt;</td><td>Map&lt;Boolean, List&lt;V&gt;&gt;</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Revision Table</h3>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Operation</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>forEach()</td><td>consume elements</td></tr>
+        <tr><td>iterator()</td><td>manual traversal</td></tr>
+        <tr><td>toArray()</td><td>convert to array</td></tr>
+        <tr><td>collect(toList())</td><td>collect into List</td></tr>
+        <tr><td>collect(toSet())</td><td>collect into Set</td></tr>
+        <tr><td>toCollection()</td><td>specific collection</td></tr>
+        <tr><td>summarizingInt()</td><td>count, sum, min, max, avg</td></tr>
+        <tr><td>toMap()</td><td>create a Map</td></tr>
+        <tr><td>groupingBy()</td><td>multiple groups</td></tr>
+        <tr><td>partitioningBy()</td><td>two groups</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Conclusion</h3>
+    <ul>
+      <li>Flow: Collection → Stream → Processing → collect()</li>
+      <li>Key collectors: toList(), toSet(), toCollection(), toMap(), groupingBy(), partitioningBy(), summarizingInt()</li>
+    </ul>
+    <div class="exam-line"><strong>Core concept:</strong> collect() transforms the temporary stream back into a stable result structure, while collectors define how elements are accumulated, grouped, mapped, partitioned, or summarized.</div>
+  </section>
+
+  <!-- LECTURE 3 -->
+  <section class="lecture" id="lecture3">
+    <h2>Lecture 3: Input/Output Streams</h2>
+
+    <h3>What is Java I/O?</h3>
+    <ul>
+      <li>I/O = mechanism for communication between a Java program and the outside world.</li>
+      <li>Examples: files, keyboard input, console output, network connections, memory.</li>
+      <li>Without I/O, a program remains isolated.</li>
+    </ul>
+
+    <h3>What is a Stream?</h3>
+    <ul>
+      <li>A stream = continuous flow of data.</li>
+      <li><code>InputStream</code> → source → program</li>
+      <li><code>OutputStream</code> → program → destination</li>
+    </ul>
+
+    <h3>Important Distinction</h3>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Java I/O Streams</th><th>Java Stream API</th></tr></thead>
+      <tbody>
+        <tr><td>java.io</td><td>java.util.stream</td></tr>
+        <tr><td>Moves data</td><td>Processes collections</td></tr>
+        <tr><td>Reads/writes bytes</td><td>Functional programming</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Why Interpretation is Needed</h3>
+    <ul>
+      <li>External data stored as bytes (0s and 1s).</li>
+      <li>Same bytes can represent text, integers, floats, images, executables.</li>
+      <li>Java provides layers to interpret raw bytes into meaningful types.</li>
+    </ul>
+
+    <h3>Base Classes</h3>
+    <ul>
+      <li><code>InputStream</code> → reads bytes
+        <ul><li><code>int read()</code> → returns 0–255 (valid byte), -1 (EOF)</li></ul>
+      </li>
+      <li><code>OutputStream</code> → writes bytes
+        <ul>
+          <li><code>write(int b)</code></li>
+          <li><code>write(byte[] arr)</code></li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Blocking &amp; Resource Management</h3>
+    <ul>
+      <li>Reading may block if data unavailable (e.g., slow network).</li>
+      <li><code>available()</code> → checks how many bytes are ready.</li>
+      <li>Always <code>close()</code> streams to release resources.</li>
+      <li><code>flush()</code> → forces buffered data to be written.</li>
+    </ul>
+
+    <h3>File Streams</h3>
+    <ul>
+      <li><code>FileInputStream</code> → read from file</li>
+      <li><code>FileOutputStream</code> → write to file
+        <ul>
+          <li>Default: overwrite</li>
+          <li>Append mode: <code>new FileOutputStream("data.txt", true)</code></li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Scanner</h3>
+    <ul>
+      <li>High-level wrapper for reading text.</li>
+      <li>Example: <code>Scanner sc = new Scanner(System.in);</code></li>
+    </ul>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Method</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>next()</td><td>next token</td></tr>
+        <tr><td>nextLine()</td><td>entire line</td></tr>
+        <tr><td>nextInt()</td><td>integer</td></tr>
+        <tr><td>hasNext()</td><td>check input</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>PrintWriter</h3>
+    <ul><li>For formatted text output.</li></ul>
+    <pre><code>PrintWriter pw = new PrintWriter("output.txt");
+pw.println("Hello");
+pw.close();</code></pre>
+
+    <h3>Exception Handling</h3>
+    <ul>
+      <li>I/O can fail → <code>FileNotFoundException</code>, <code>IOException</code>.</li>
+      <li>Always use try-catch.</li>
+    </ul>
+
+    <h3>Binary I/O</h3>
+    <ul>
+      <li>Text is inefficient for numbers.</li>
+      <li><code>DataInputStream</code> → read primitives (readInt(), readDouble(), readUTF())</li>
+      <li><code>DataOutputStream</code> → write primitives (writeInt(), writeDouble(), writeUTF())</li>
+    </ul>
+
+    <h3>Decorator Design Pattern</h3>
+    <ul>
+      <li>Java I/O uses Decorator Pattern.</li>
+      <li>Example pipeline:</li>
+    </ul>
+    <pre><code>DataInputStream dis =
+    new DataInputStream(
+        new BufferedInputStream(
+            new FileInputStream("data.bin")
+        )
+    );</code></pre>
+    <p>Layers: File → Buffer → Interpreter.</p>
+
+    <h3>Buffered Streams</h3>
+    <ul>
+      <li><code>BufferedInputStream</code> → reads in chunks, improves performance.</li>
+      <li><code>PushbackInputStream</code> → allows <code>unread()</code>.</li>
+      <li><code>ZipInputStream</code> → reads compressed ZIP data.</li>
+    </ul>
+
+    <h3>RandomAccessFile</h3>
+    <ul><li>Supports random access.</li></ul>
+    <pre><code>RandomAccessFile raf =
+    new RandomAccessFile("data.bin", "rw");
+raf.seek(1000);</code></pre>
+    <p>Useful for databases, binary formats, large files.</p>
+
+    <h3>Sequential vs Random Access</h3>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Sequential Streams</th><th>RandomAccessFile</th></tr></thead>
+      <tbody>
+        <tr><td>Read from beginning</td><td>Jump anywhere</td></tr>
+        <tr><td>Forward only</td><td>seek(position)</td></tr>
+        <tr><td>Continuous flow</td><td>Non-linear access</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Revision Table</h3>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Class</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>InputStream</td><td>read bytes</td></tr>
+        <tr><td>OutputStream</td><td>write bytes</td></tr>
+        <tr><td>FileInputStream</td><td>read from file</td></tr>
+        <tr><td>FileOutputStream</td><td>write to file</td></tr>
+        <tr><td>Scanner</td><td>read text/tokens</td></tr>
+        <tr><td>PrintWriter</td><td>write formatted text</td></tr>
+        <tr><td>BufferedInputStream</td><td>faster reading</td></tr>
+        <tr><td>DataInputStream</td><td>read primitives</td></tr>
+        <tr><td>DataOutputStream</td><td>write primitives</td></tr>
+        <tr><td>PushbackInputStream</td><td>unread bytes</td></tr>
+        <tr><td>ZipInputStream</td><td>read ZIP files</td></tr>
+        <tr><td>RandomAccessFile</td><td>jump to any position</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Conclusion</h3>
+    <ul>
+      <li>Architecture: Source → Stream → Buffer → Interpreter → Program</li>
+      <li>Key concept: Decorator Pattern builds efficient pipelines.</li>
+    </ul>
+    <div class="exam-line"><strong>Exam line:</strong> Java I/O streams move raw bytes between a program and external sources, while layered wrappers (buffering, parsing, binary interpretation, compression) provide modular, efficient, and flexible data processing.</div>
+  </section>
+
+  <!-- LECTURE 4 -->
+  <section class="lecture" id="lecture4">
+    <h2>Lecture 4: Serialization</h2>
+
+    <h3>Definition</h3>
+    <ul>
+      <li>Serialization → converting a Java object into a stream of bytes.</li>
+      <li>Deserialization → reconstructing the object from bytes.</li>
+    </ul>
+    <div class="callout">
+      <strong>Easy definition:</strong>
+      <ul>
+        <li>Serialization: object → bytes</li>
+        <li>Deserialization: bytes → object</li>
+      </ul>
+    </div>
+
+    <h3>Why Serialization is Needed</h3>
+    <ul>
+      <li>Without serialization → must manually write each field.</li>
+      <li>Tedious and error-prone.</li>
+      <li>Serialization automatically writes the entire object.</li>
+    </ul>
+
+    <h3>Main Use Cases</h3>
+    <ul>
+      <li>Program state persistence → save/restore game progress, settings, sessions.</li>
+      <li>Distributed applications → transmit objects between JVMs over a network.</li>
+    </ul>
+
+    <h3>Object Streams</h3>
+    <ul>
+      <li><code>ObjectOutputStream</code> → write objects.</li>
+      <li><code>ObjectInputStream</code> → read objects.</li>
+    </ul>
+
+    <p><strong>Writing</strong></p>
+    <pre><code>ObjectOutputStream oos =
+    new ObjectOutputStream(new FileOutputStream("emp.dat"));
+oos.writeObject(emp);
+oos.close();</code></pre>
+
+    <p><strong>Reading</strong></p>
+    <pre><code>ObjectInputStream ois =
+    new ObjectInputStream(new FileInputStream("emp.dat"));
+Employee emp = (Employee) ois.readObject();
+ois.close();</code></pre>
+
+    <h3>Serializable Interface</h3>
+    <ul>
+      <li>Class must implement <code>Serializable</code>.</li>
+      <li>Marker interface → no methods.</li>
+      <li>Without it → <code>NotSerializableException</code>.</li>
+    </ul>
+
+    <h3>Object Graph &amp; Identity</h3>
+    <ul>
+      <li>Serialization preserves shared references.</li>
+      <li>Uses serial number mechanism:
+        <ul>
+          <li>First occurrence → full object written.</li>
+          <li>Later occurrences → reference reused.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Transient Fields</h3>
+    <ul>
+      <li>Exclude fields from serialization.</li>
+      <li>Example: <code>transient Socket socket;</code></li>
+      <li>During deserialization → primitives → default values, objects → null.</li>
+    </ul>
+
+    <h3>Custom Serialization</h3>
+    <ul>
+      <li>Override <code>writeObject()</code> and <code>readObject()</code>.</li>
+      <li>Use <code>defaultWriteObject()</code> and <code>defaultReadObject()</code> for normal fields.</li>
+      <li>Manually handle transient fields.</li>
+    </ul>
+
+    <h3>Serialization Process Summary</h3>
+    <ul>
+      <li>Normal fields → automatic.</li>
+      <li>Transient fields → ignored.</li>
+      <li>Custom handling → manual.</li>
+    </ul>
+
+    <h3>Risks of Serialization</h3>
+    <ul>
+      <li>Versioning problems → class changes break old data.</li>
+      <li>Encapsulation problem → exposes internal structure.</li>
+      <li>Security risk → deserializing untrusted data can be exploited.</li>
+    </ul>
+    <div class="callout">
+      <strong>Safe:</strong> local backups, trusted data.<br>
+      <strong>Unsafe:</strong> network data, external files.
+    </div>
+
+    <h3>Important Methods</h3>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Method</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>writeObject()</td><td>serialize object</td></tr>
+        <tr><td>readObject()</td><td>deserialize object</td></tr>
+        <tr><td>defaultWriteObject()</td><td>serialize normal fields</td></tr>
+        <tr><td>defaultReadObject()</td><td>restore normal fields</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Revision Table</h3>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Concept</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>Serialization</td><td>object → bytes</td></tr>
+        <tr><td>Deserialization</td><td>bytes → object</td></tr>
+        <tr><td>ObjectOutputStream</td><td>writes objects</td></tr>
+        <tr><td>ObjectInputStream</td><td>reads objects</td></tr>
+        <tr><td>Serializable</td><td>marks class serializable</td></tr>
+        <tr><td>transient</td><td>excludes field</td></tr>
+        <tr><td>defaultWriteObject()</td><td>writes normal fields</td></tr>
+        <tr><td>defaultReadObject()</td><td>restores normal fields</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Conclusion</h3>
+    <div class="callout">
+      <strong>Flow:</strong> Object → ObjectOutputStream → Byte Stream → Storage/Network → ObjectInputStream → Reconstructed Object
+    </div>
+    <p><strong>Key concepts:</strong></p>
+    <ul>
+      <li>Serializable interface</li>
+      <li>Object identity preservation</li>
+      <li>Transient fields</li>
+      <li>Custom writeObject() and readObject()</li>
+      <li>Versioning &amp; security risks</li>
+    </ul>
+    <div class="exam-line"><strong>Exam line:</strong> Java serialization converts complete objects into byte streams while preserving identity and state. Deserialization reconstructs the object graph automatically, but requires Serializable permission and careful handling of transient fields, version compatibility, and untrusted input.</div>
+  </section>
+
+  <footer>Week 9 — Java Short Notes</footer>
+
+</div>
+</body>
+</html>

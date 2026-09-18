@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 10: Java Short Notes</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1a1a1a;
+    --muted: #5a5a5a;
+    --card-bg: #f7f7f9;
+    --border: #e0e0e5;
+    --accent: #4f46e5;
+    --accent-soft: #eef0ff;
+    --code-bg: #1e1e2e;
+    --code-text: #e5e5f0;
+    --table-header: #ede9fe;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121218;
+      --text: #eaeaf0;
+      --muted: #a5a5b5;
+      --card-bg: #1c1c26;
+      --border: #2e2e3a;
+      --accent: #a5b4fc;
+      --accent-soft: #26263a;
+      --code-bg: #0d0d14;
+      --code-text: #d8d8ea;
+      --table-header: #26264a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121218;
+    --text: #eaeaf0;
+    --muted: #a5a5b5;
+    --card-bg: #1c1c26;
+    --border: #2e2e3a;
+    --accent: #a5b4fc;
+    --accent-soft: #26263a;
+    --code-bg: #0d0d14;
+    --code-text: #d8d8ea;
+    --table-header: #26264a;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+  }
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 5rem;
+  }
+  header.page-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border);
+  }
+  header.page-header h1 {
+    font-size: 2rem;
+    margin: 0 0 0.3rem;
+    color: var(--text);
+  }
+  header.page-header p {
+    color: var(--muted);
+    margin: 0;
+    font-size: 0.95rem;
+  }
+  nav.toc {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  nav.toc h2 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin: 0 0 0.6rem;
+  }
+  nav.toc ol {
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+  nav.toc a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  nav.toc a:hover { text-decoration: underline; }
+
+  section.lecture {
+    margin-bottom: 3rem;
+    scroll-margin-top: 1rem;
+  }
+  section.lecture > h2 {
+    font-size: 1.5rem;
+    padding: 0.5rem 0.9rem;
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    margin-bottom: 1.2rem;
+  }
+  h3 {
+    font-size: 1.15rem;
+    margin-top: 1.8rem;
+    margin-bottom: 0.6rem;
+    color: var(--text);
+  }
+  ul, ol { padding-left: 1.4rem; }
+  li { margin-bottom: 0.35rem; }
+  p { margin: 0.6rem 0; }
+
+  .callout {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin: 1rem 0;
+    font-size: 0.95rem;
+  }
+  .callout strong { color: var(--accent); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0 1.5rem;
+    font-size: 0.92rem;
+  }
+  .table-scroll {
+    overflow-x: auto;
+    margin: 1rem 0 1.5rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.55rem 0.8rem;
+    text-align: left;
+  }
+  th {
+    background: var(--table-header);
+    font-weight: 600;
+  }
+  tr:nth-child(even) td {
+    background: color-mix(in srgb, var(--card-bg) 60%, transparent);
+  }
+
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 1rem 1.2rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    margin: 1rem 0;
+  }
+  code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+  p code, li code {
+    background: var(--accent-soft);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.88em;
+  }
+
+  .exam-line {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin-top: 1.2rem;
+    font-style: italic;
+  }
+  .exam-line strong {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="page-header">
+    <h1>Week 10: Short Notes — Java</h1>
+  </header>
+
+  <nav class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#lecture1">Lecture 1: Concurrency: Threads and Processes</a></li>
+      <li><a href="#lecture2">Lecture 2: Race Conditions</a></li>
+      <li><a href="#lecture3">Lecture 3: Mutual Exclusion</a></li>
+      <li><a href="#lecture4">Lecture 4: Test and Set</a></li>
+      <li><a href="#lecture5">Lecture 5: Monitors</a></li>
+    </ol>
+  </nav>
+
+  <!-- LECTURE 1 -->
+  <section class="lecture" id="lecture1">
+    <h2>Lecture 1: Concurrency: Threads and Processes</h2>
+
+    <h3>What is Concurrency?</h3>
+    <ul>
+      <li>Concurrency = multiple tasks making progress at the same time.</li>
+      <li>Needed for responsiveness and multitasking.</li>
+      <li>Example: Browser downloading a file while opening another tab.</li>
+      <li>Illusion of parallelism on single-core CPUs via time slicing.</li>
+      <li>On multi-core CPUs, tasks can actually run in parallel.</li>
+    </ul>
+
+    <h3>Concurrency Levels</h3>
+    <ul>
+      <li><strong>Between Applications:</strong> OS manages Chrome, VS Code, Email, Music Player.</li>
+      <li><strong>Inside One Application:</strong> Browser downloads, loads pages, responds to clicks concurrently.</li>
+    </ul>
+
+    <h3>Process vs Thread</h3>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Feature</th><th>Process</th><th>Thread</th></tr></thead>
+      <tbody>
+        <tr><td>Memory</td><td>Separate space</td><td>Shared process memory</td></tr>
+        <tr><td>Isolation</td><td>High</td><td>Lower</td></tr>
+        <tr><td>Communication</td><td>Expensive</td><td>Easier</td></tr>
+        <tr><td>Context switching</td><td>Heavier</td><td>Lighter</td></tr>
+        <tr><td>Resource usage</td><td>Higher</td><td>Lower</td></tr>
+        <tr><td>Relationship</td><td>Independent</td><td>Exists inside process</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="callout"><strong>Easy analogy:</strong> Process = separate house, Thread = people inside the same house.</div>
+
+    <h3>Shared State</h3>
+    <ul>
+      <li>Threads communicate via shared variables.</li>
+      <li>Example: <code>terminate = true</code> → UI thread cancels download.</li>
+    </ul>
+
+    <h3>Race Condition</h3>
+    <ul>
+      <li>Occurs when multiple threads update shared data simultaneously.</li>
+      <li>Example: Two users booking the last seat → incorrect result.</li>
+    </ul>
+
+    <h3>Synchronization</h3>
+    <ul>
+      <li>Needed to maintain consistency in shared data.</li>
+      <li>Java provides synchronization &amp; locks.</li>
+    </ul>
+
+    <h3>Creating Threads in Java</h3>
+    <p><strong>Method 1: Extending Thread</strong></p>
+    <pre><code>class MyThread extends Thread {
+    public void run() {
+        System.out.println("Thread is running");
+    }
+}
+
+MyThread t = new MyThread();
+t.start();</code></pre>
+    <ul>
+      <li><code>run()</code> = normal method call.</li>
+      <li><code>start()</code> = creates new thread.</li>
+    </ul>
+
+    <p><strong>Method 2: Implementing Runnable</strong></p>
+    <pre><code>class MyTask implements Runnable {
+    public void run() {
+        System.out.println("Task is running");
+    }
+}
+
+Thread t = new Thread(new MyTask());
+t.start();</code></pre>
+    <ul><li>Useful with single inheritance.</li></ul>
+
+    <h3>Thread.sleep()</h3>
+    <ul>
+      <li>Pauses current thread.</li>
+      <li>Example: <code>Thread.sleep(1000);</code> → 1 second.</li>
+      <li>Requires handling <code>InterruptedException</code>.</li>
+    </ul>
+
+    <h3>Non-Determinism</h3>
+    <ul>
+      <li>Thread execution order is unpredictable.</li>
+      <li>Scheduler decides execution order.</li>
+    </ul>
+
+    <h3>Thread Interleaving</h3>
+    <ul>
+      <li>Threads can interleave steps in different orders.</li>
+      <li>Output may vary across runs.</li>
+    </ul>
+
+    <h3>Logical vs Actual Concurrency</h3>
+    <ul>
+      <li><strong>Logical:</strong> Programmer designs concurrent tasks.</li>
+      <li><strong>Actual:</strong> OS/JVM scheduler decides execution order.</li>
+    </ul>
+
+    <h3>Revision (Important Points)</h3>
+    <ul>
+      <li>Concurrency → overlapping progress of tasks.</li>
+      <li>Time slicing → illusion of parallelism.</li>
+      <li>Process → independent, heavier.</li>
+      <li>Thread → lightweight, shares memory.</li>
+      <li>Shared state → easy communication, risk of race condition.</li>
+      <li>Race condition → incorrect results due to uncontrolled access.</li>
+      <li>run() vs start() → normal call vs new thread.</li>
+      <li>Runnable → alternative to Thread inheritance.</li>
+      <li>Thread.sleep() → pauses thread, needs exception handling.</li>
+      <li>Non-determinism → unpredictable execution order.</li>
+    </ul>
+  </section>
+
+  <!-- LECTURE 2 -->
+  <section class="lecture" id="lecture2">
+    <h2>Lecture 2: Race Conditions</h2>
+
+    <h3>Shared State</h3>
+    <ul>
+      <li>Shared state = data accessible by multiple threads.</li>
+      <li>Threads share same memory space.</li>
+      <li>Useful for communication between threads.</li>
+      <li>Example: Browser download with terminate flag.</li>
+      <li>Polling = repeatedly checking a variable's value.</li>
+    </ul>
+
+    <h3>Race Condition</h3>
+    <ul>
+      <li>Occurs when multiple threads access/update shared data concurrently.</li>
+      <li>Result depends on unpredictable execution order.</li>
+      <li>Characteristics:
+        <ul>
+          <li>Concurrent updates.</li>
+          <li>Reading changing data.</li>
+          <li>Non-deterministic interleaving.</li>
+        </ul>
+      </li>
+      <li>Not always reproducible → timing dependent.</li>
+    </ul>
+
+    <h3>Case Study: Bank Account Example</h3>
+    <ul>
+      <li>100 accounts, total balance must remain constant (Invariant).</li>
+      <li>Transfer Thread: subtract + add.</li>
+      <li>Audit Thread: checks total.</li>
+      <li>Without synchronization:
+        <ul>
+          <li>Audit may see ₹500 less (intermediate state).</li>
+          <li>Audit may see ₹500 more (double counting).</li>
+        </ul>
+      </li>
+    </ul>
+    <div class="callout"><strong>Lesson:</strong> A logically single operation may consist of multiple steps → needs synchronization.</div>
+
+    <h3>Case Study: Shared Integer n++</h3>
+    <ul>
+      <li><code>n++</code> is not atomic.</li>
+      <li>Steps: Read → Modify → Write.</li>
+      <li>Two threads incrementing can cause Lost Update.</li>
+      <li>Example:
+        <ul>
+          <li>Expected: 7 → 8 → 9.</li>
+          <li>Actual: 7 → 8 (update lost).</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Critical Section</h3>
+    <ul>
+      <li>Code accessing shared state.</li>
+      <li>Needs protection from conflicting concurrent access.</li>
+      <li>Includes:
+        <ul>
+          <li>Reading shared data.</li>
+          <li>Updating shared data.</li>
+          <li>Complex operations (Read → Calculate → Update).</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Mutual Exclusion</h3>
+    <ul>
+      <li>Only one thread at a time enters critical section.</li>
+      <li>Prevents inconsistent state.</li>
+    </ul>
+    <div class="callout"><strong>Analogy:</strong> bathroom with one key → one thread at a time.</div>
+
+    <h3>Identifying Critical Sections</h3>
+    <p>Ask three questions:</p>
+    <ol>
+      <li>Is the data shared?</li>
+      <li>Is the data being modified?</li>
+      <li>Is the data being read while modified?</li>
+    </ol>
+    <p>If YES → synchronization needed.</p>
+
+    <h3>Critical Section vs Mutual Exclusion</h3>
+    <ul>
+      <li><strong>Critical Section</strong> = dangerous region of code accessing shared data.</li>
+      <li><strong>Mutual Exclusion</strong> = mechanism ensuring only one thread enters at a time.</li>
+    </ul>
+
+    <h3>Complete Concept Flow</h3>
+    <div class="callout">Multiple Threads → Shared Memory → Shared Variables → Concurrent Access → Race Condition → Incorrect State → Identify Critical Section → Apply Mutual Exclusion → Consistent Result.</div>
+
+    <h3>Revision</h3>
+    <ul>
+      <li>Shared State → data accessible by multiple threads.</li>
+      <li>Polling → repeatedly checking variable.</li>
+      <li>Race Condition → unpredictable result due to concurrent access.</li>
+      <li>Bank Example → audit may show less/more balance.</li>
+      <li>n++ → not atomic, can cause lost update.</li>
+      <li>Critical Section → code accessing shared data.</li>
+      <li>Mutual Exclusion → only one thread at a time.</li>
+    </ul>
+  </section>
+
+  <!-- LECTURE 3 -->
+  <section class="lecture" id="lecture3">
+    <h2>Lecture 3: Mutual Exclusion</h2>
+
+    <h3>Race Condition</h3>
+    <ul>
+      <li>Happens when multiple threads access/update shared data simultaneously.</li>
+      <li>Final result depends on execution order.</li>
+      <li>Example: <code>count = 10</code>, Thread 1 adds 5, Thread 2 adds 10 → inconsistent result.</li>
+      <li>Main problem: uncontrolled concurrent access → inconsistent result.</li>
+    </ul>
+
+    <h3>Critical Section</h3>
+    <ul>
+      <li>Code region where shared data is accessed/modified.</li>
+      <li>Needs mutual exclusion to ensure sequential appearance.</li>
+      <li>Requirements of good solution:
+        <ul>
+          <li>Mutual Exclusion</li>
+          <li>Sequential Appearance</li>
+          <li>Progress</li>
+          <li>Hardware Independence</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Synchronization &amp; Busy Waiting</h3>
+    <ul>
+      <li>Synchronization = coordinating threads for safe access.</li>
+      <li>Waiting methods:
+        <ul>
+          <li>Busy Waiting → repeatedly checking condition.</li>
+          <li>Blocking → stop running, CPU given to another thread.</li>
+        </ul>
+      </li>
+      <li>Busy Waiting disadvantages: wastes CPU cycles, reduces efficiency.</li>
+    </ul>
+
+    <h3>Problems with Simple Mutual Exclusion Protocols</h3>
+    <ul>
+      <li>Turn-Based Protocol → starvation (depends on cooperation).</li>
+      <li>Request-Based Protocol → deadlock (both wait forever).</li>
+    </ul>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Protocol</th><th>Main Problem</th><th>Why?</th></tr></thead>
+      <tbody>
+        <tr><td>Turn-Based</td><td>Starvation</td><td>Depends on other thread giving turn</td></tr>
+        <tr><td>Request-Based</td><td>Deadlock</td><td>Both request simultaneously</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Peterson's Algorithm</h3>
+    <ul>
+      <li>Combines request + turn.</li>
+      <li>Solves starvation &amp; deadlock.</li>
+      <li>Uses ordinary shared variables.</li>
+      <li>Works for 2 processes.</li>
+    </ul>
+    <p><strong>Core Logic:</strong></p>
+    <pre><code>request[i] = true;
+turn = other;
+while (request[other] == true && turn == other)
+    wait;
+// critical section
+request[i] = false;</code></pre>
+
+    <h3>Limitation of Peterson's Algorithm</h3>
+    <ul>
+      <li>Designed for 2 processes only.</li>
+      <li>Not scalable for N processes.</li>
+      <li>Leads to Lamport's Bakery Algorithm.</li>
+    </ul>
+
+    <h3>Lamport's Bakery Algorithm</h3>
+    <ul>
+      <li>Provides mutual exclusion for N processes.</li>
+      <li>Analogy: bakery queue system.</li>
+      <li>Steps:
+        <ol>
+          <li>Request token → max(existing tickets) + 1.</li>
+          <li>Compare tickets → smaller ticket enters first.</li>
+          <li>Tie-breaking → process ID.</li>
+          <li>Exit → set ticket = 0.</li>
+        </ol>
+      </li>
+    </ul>
+
+    <h3>Peterson vs Bakery Algorithm</h3>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Feature</th><th>Peterson's Algorithm</th><th>Lamport's Bakery Algorithm</th></tr></thead>
+      <tbody>
+        <tr><td>Processes</td><td>2</td><td>N processes</td></tr>
+        <tr><td>Variables</td><td>Request + Turn</td><td>Ticket numbers</td></tr>
+        <tr><td>Idea</td><td>Priority between two threads</td><td>Queue/token system</td></tr>
+        <tr><td>Tie-breaking</td><td>Turn</td><td>Process ID</td></tr>
+        <tr><td>Scalability</td><td>Limited</td><td>Better</td></tr>
+        <tr><td>Hardware atomicity</td><td>Not required</td><td>Not required</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Modern Synchronization</h3>
+    <ul>
+      <li>Languages provide higher-level mechanisms:
+        <ul>
+          <li>Synchronized blocks</li>
+          <li>Monitors</li>
+          <li>Locks</li>
+        </ul>
+      </li>
+      <li>Safer, easier, more maintainable.</li>
+    </ul>
+
+    <h3>Complete Concept Flow</h3>
+    <div class="callout">Concurrent Threads → Shared Data → Race Condition → Critical Section → Mutual Exclusion → Turn-Based (Starvation) → Request-Based (Deadlock) → Peterson (2 processes) → Bakery (N processes) → Modern Synchronization (Locks/Monitors).</div>
+
+    <h3>One-Line Definitions</h3>
+    <ul>
+      <li>Race Condition → result depends on timing/order.</li>
+      <li>Critical Section → code accessing shared data.</li>
+      <li>Mutual Exclusion → only one thread at a time.</li>
+      <li>Busy Waiting → repeatedly checking condition, wasting CPU.</li>
+      <li>Starvation → process keeps waiting, denied resource.</li>
+      <li>Deadlock → processes wait indefinitely.</li>
+      <li>Peterson's Algorithm → request + turn, 2 processes.</li>
+      <li>Bakery Algorithm → tickets + process ID, N processes.</li>
+      <li>Synchronization → coordination for safe access.</li>
+      <li>Monitor → high-level synchronization abstraction.</li>
+      <li>Synchronized Block → language-level mechanism for mutual exclusion.</li>
+    </ul>
+
+    <h3>Revision</h3>
+    <ul>
+      <li>Race Condition → inconsistent shared data.</li>
+      <li>Critical Section → code accessing shared data.</li>
+      <li>Mutual Exclusion → only one enters.</li>
+      <li>Busy Waiting → waste CPU.</li>
+      <li>Turn-Based → starvation.</li>
+      <li>Request-Based → deadlock.</li>
+      <li>Peterson → 2 processes.</li>
+      <li>Bakery → N processes.</li>
+      <li>Modern → Locks/Monitors/Synchronized blocks.</li>
+    </ul>
+  </section>
+
+  <!-- LECTURE 4 -->
+  <section class="lecture" id="lecture4">
+    <h2>Lecture 4: Test and Set</h2>
+
+    <h3>Synchronization</h3>
+    <ul>
+      <li>Synchronization = controlling multiple threads to safely access shared resources.</li>
+      <li>Prevents incorrect results caused by concurrent execution.</li>
+    </ul>
+
+    <h3>Race Condition</h3>
+    <ul>
+      <li>Occurs when threads access/modify shared data concurrently.</li>
+      <li>Final result depends on timing/order.</li>
+      <li>Example: <code>counter = 10</code>, two threads increment → expected 12, actual 11.</li>
+    </ul>
+
+    <h3>Critical Section</h3>
+    <ul>
+      <li>Portion of code accessing shared resources.</li>
+      <li>Examples: global variables, counters, DB records, files, memory.</li>
+      <li>Rule: Only one thread should execute critical section at a time.</li>
+    </ul>
+
+    <h3>Lost Update Problem</h3>
+    <ul>
+      <li>Common result of race condition.</li>
+      <li>Example: Two threads increment counter → one update overwritten.</li>
+      <li>Expected: 12, Actual: 11.</li>
+    </ul>
+
+    <h3>Atomicity</h3>
+    <ul>
+      <li>Atomic operation = indivisible unit.</li>
+      <li>Prevents race conditions and lost updates.</li>
+      <li>Example: Read → Modify → Write must be atomic.</li>
+    </ul>
+
+    <h3>Test-and-Set Primitive</h3>
+    <ul>
+      <li>Combines Test (check value) + Set (change value).</li>
+      <li>Must be atomic.</li>
+      <li>Software alone cannot guarantee atomicity → hardware/system primitive needed.</li>
+    </ul>
+
+    <h3>Semaphore (Dijkstra's Concept)</h3>
+    <ul>
+      <li>Protected integer used for synchronization.</li>
+      <li>Two atomic operations:
+        <ul>
+          <li>P (Wait/Passeren) → acquire resource.</li>
+          <li>V (Signal/Vrygeven) → release resource.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Semaphore Value</h3>
+    <ul>
+      <li>For mutual exclusion: S = 1.</li>
+      <li>S = 1 → resource available.</li>
+      <li>S = 0 → resource unavailable.</li>
+    </ul>
+
+    <h3>P Operation</h3>
+    <ul>
+      <li>If S &gt; 0 → decrement and enter.</li>
+      <li>If S = 0 → block/wait.</li>
+    </ul>
+
+    <h3>V Operation</h3>
+    <ul>
+      <li>Increments semaphore value.</li>
+      <li>Wakes waiting thread if any.</li>
+    </ul>
+
+    <h3>Busy Waiting vs Semaphore</h3>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Feature</th><th>Busy Waiting</th><th>Semaphore</th></tr></thead>
+      <tbody>
+        <tr><td>Condition check</td><td>Repeatedly checks</td><td>Can block</td></tr>
+        <tr><td>CPU usage</td><td>Wastes cycles</td><td>Better utilization</td></tr>
+        <tr><td>Thread state</td><td>Active</td><td>Sleeping until signaled</td></tr>
+        <tr><td>Management</td><td>Programmer polling</td><td>OS/runtime managed</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Using Semaphores</h3>
+    <p><strong>Structure:</strong></p>
+    <pre><code>P(S)
+// Critical Section
+V(S)</code></pre>
+    <ul>
+      <li>P = request entry.</li>
+      <li>Critical Section = shared data access.</li>
+      <li>V = release resource.</li>
+    </ul>
+
+    <h3>Guarantees of Semaphore</h3>
+    <ul>
+      <li>Mutual Exclusion.</li>
+      <li>Reduced starvation risk (depends on scheduling).</li>
+      <li>Deadlock avoidance (if used correctly).</li>
+    </ul>
+
+    <h3>Risks with Semaphores</h3>
+    <ul>
+      <li>Programmer discipline required.</li>
+      <li>Problems:
+        <ul>
+          <li>Forgetting V → deadlock.</li>
+          <li>Incorrect placement → lock never released.</li>
+          <li>Extra V → breaks mutual exclusion.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Advantages</h3>
+    <ul>
+      <li>Synchronization between threads.</li>
+      <li>Supports mutual exclusion.</li>
+      <li>Blocks waiting threads → efficient.</li>
+      <li>More structured than manual protocols.</li>
+    </ul>
+
+    <h3>Limitations</h3>
+    <ul>
+      <li>Programmer must correctly match P and V.</li>
+      <li>Incorrect use can cause deadlock.</li>
+      <li>Still low-level compared to modern abstractions.</li>
+    </ul>
+
+    <h3>Evolution of Synchronization</h3>
+    <div class="callout">Race Condition → Critical Section → Manual Protocols → Peterson's Algorithm → Atomic Test-and-Set → Semaphores → Higher-Level Support (Locks/Monitors/Synchronized Blocks).</div>
+
+    <h3>Important Comparisons: Peterson vs Semaphore</h3>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Feature</th><th>Peterson</th><th>Semaphore</th></tr></thead>
+      <tbody>
+        <tr><td>Processes</td><td>2</td><td>Multiple</td></tr>
+        <tr><td>Variables</td><td>Shared variables</td><td>Atomic primitives</td></tr>
+        <tr><td>Level</td><td>Software algorithm</td><td>OS/language primitive</td></tr>
+        <tr><td>Waiting</td><td>Busy waiting</td><td>Blocking</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Definitions</h3>
+    <ul>
+      <li>Synchronization → safe coordination of threads.</li>
+      <li>Race Condition → result depends on timing.</li>
+      <li>Critical Section → code accessing shared data.</li>
+      <li>Lost Update → one update overwritten.</li>
+      <li>Atomicity → indivisible operation.</li>
+      <li>Test-and-Set → atomic check + set.</li>
+      <li>Semaphore → synchronization variable with P/V.</li>
+      <li>P (Wait) → acquire resource.</li>
+      <li>V (Signal) → release resource.</li>
+      <li>Busy Waiting → wastes CPU.</li>
+      <li>Programmer Discipline → correct placement of P/V.</li>
+    </ul>
+
+    <h3>Revision</h3>
+    <ul>
+      <li>Race Condition → unpredictable result.</li>
+      <li>Critical Section → shared data access.</li>
+      <li>Lost Update → overwritten update.</li>
+      <li>Atomicity → indivisible operation.</li>
+      <li>Test-and-Set → atomic primitive.</li>
+      <li>Semaphore → synchronization variable.</li>
+      <li>P → acquire, V → release.</li>
+      <li>Busy Waiting → wasteful.</li>
+      <li>Semaphore Waiting → efficient.</li>
+      <li>Missing V → deadlock.</li>
+      <li>Extra V → breaks exclusion.</li>
+    </ul>
+  </section>
+
+  <!-- LECTURE 5 -->
+  <section class="lecture" id="lecture5">
+    <h2>Lecture 5: Monitors</h2>
+
+    <h3>Evolution Path</h3>
+    <ul>
+      <li>Elementary Protocols → Peterson's Algorithm, Lamport's Bakery Algorithm.</li>
+      <li>Semaphores → atomic P/V operations.</li>
+      <li>Monitors → language-level synchronization.</li>
+      <li>Condition Variables → multiple focused waiting queues.</li>
+    </ul>
+
+    <h3>Elementary Protocols</h3>
+    <ul>
+      <li>Use shared variables for synchronization.</li>
+      <li>Examples: Peterson's Algorithm, Bakery Algorithm.</li>
+      <li>Limitation: manual, error-prone, programmer must design logic.</li>
+    </ul>
+
+    <h3>Semaphores</h3>
+    <ul>
+      <li>Provide atomic operations:
+        <ul>
+          <li>P() → Wait</li>
+          <li>V() → Signal</li>
+        </ul>
+      </li>
+      <li>Safer than manual protocols.</li>
+      <li>Weakness: programmer must correctly match P and V.</li>
+    </ul>
+
+    <h3>Monitors</h3>
+    <ul>
+      <li>Language-level structure combining:
+        <ul>
+          <li>Shared data</li>
+          <li>Functions operating on data</li>
+          <li>Mutual exclusion</li>
+        </ul>
+      </li>
+      <li>Encapsulation ensures all access goes through synchronized methods.</li>
+      <li>Example: Bank monitor with <code>transfer()</code>, <code>deposit()</code>, <code>withdraw()</code>, <code>audit()</code>.</li>
+    </ul>
+
+    <h3>Synchronization Hierarchy</h3>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Level</th><th>Mechanism</th><th>Limitation</th></tr></thead>
+      <tbody>
+        <tr><td>Elementary Protocols</td><td>Shared variables</td><td>Manual, error-prone</td></tr>
+        <tr><td>Semaphores</td><td>Atomic P/V</td><td>Programmer discipline</td></tr>
+        <tr><td>Monitors</td><td>Language-level</td><td>Structured, safer</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>External vs Internal Queue</h3>
+    <ul>
+      <li><strong>External Queue</strong> → waiting outside monitor.</li>
+      <li><strong>Internal Queue</strong> → inside monitor but waiting for condition.</li>
+    </ul>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Feature</th><th>External Queue</th><th>Internal Queue</th></tr></thead>
+      <tbody>
+        <tr><td>When</td><td>Before entering</td><td>After entering</td></tr>
+        <tr><td>State</td><td>Not started</td><td>Already started</td></tr>
+        <tr><td>Reason</td><td>Monitor occupied</td><td>Condition false</td></tr>
+        <tr><td>Proceed</td><td>Monitor free</td><td>Condition satisfied</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>wait() and notify()</h3>
+    <ul>
+      <li><code>wait()</code> → suspends thread, releases monitor, moves to internal queue.</li>
+      <li><code>notify()</code> → signals waiting thread, but notifier continues until exit.</li>
+    </ul>
+    <div class="callout"><strong>Golden Rule:</strong> always use <code>while(condition) { wait(); }</code> → recheck condition after waking.</div>
+
+    <h3>Condition Variables</h3>
+    <ul>
+      <li>Provide multiple internal queues for different conditions.</li>
+      <li>Allow focused notification → wake only relevant threads.</li>
+      <li>Prevent Thundering Herd Problem → avoid waking many irrelevant threads.</li>
+    </ul>
+
+    <h3>Example: Bank Transfer</h3>
+    <ul>
+      <li>Thread A waits if insufficient funds in Account J.</li>
+      <li>Thread B deposits into J → calls <code>notify(J)</code>.</li>
+      <li>Thread A wakes, rechecks condition, proceeds if satisfied.</li>
+    </ul>
+
+    <h3>Important Concepts</h3>
+    <ul>
+      <li>Monitor → data + synchronized methods + mutual exclusion.</li>
+      <li>External Queue → waiting to enter.</li>
+      <li>Internal Queue → waiting for condition.</li>
+      <li>wait() → sleep + release monitor.</li>
+      <li>notify() → signal condition change.</li>
+      <li>Condition Variable → separate queues per condition.</li>
+      <li>Focused Notification → efficient wake-up.</li>
+      <li>Thundering Herd → many threads wake unnecessarily.</li>
+    </ul>
+
+    <h3>Complete Evolution Chain</h3>
+    <div class="callout">Elementary Protocols → Semaphores → Monitors → wait()/notify() → Condition Variables → Efficient Concurrency.</div>
+
+    <h3>Important Points</h3>
+    <ul>
+      <li>Monitor = encapsulated structure with mutual exclusion.</li>
+      <li>External Queue = waiting outside monitor.</li>
+      <li>Internal Queue = waiting inside monitor for condition.</li>
+      <li>wait() = suspends + releases monitor.</li>
+      <li>notify() = signals waiting thread.</li>
+      <li>Signal and Continue = notifier continues until exit.</li>
+      <li>while loop = recheck condition after waking.</li>
+      <li>Condition Variables = multiple queues for efficiency.</li>
+      <li>Thundering Herd = unnecessary wake-ups.</li>
+    </ul>
+
+    <h3>Revision</h3>
+    <ul>
+      <li>Monitor = Data + Methods + Mutual Exclusion.</li>
+      <li>External Queue = waiting to enter.</li>
+      <li>Internal Queue = waiting for condition.</li>
+      <li>wait() = sleep + release.</li>
+      <li>notify() = signal change.</li>
+      <li>while = recheck condition.</li>
+      <li>Condition Variables = focused queues.</li>
+      <li>Thundering Herd = avoid inefficiency.</li>
+    </ul>
+  </section>
+
+  <footer>Week 10 — Java Short Notes</footer>
+
+</div>
+</body>
+</html>

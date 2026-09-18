@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 11: Java Short Notes</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1a1a1a;
+    --muted: #5a5a5a;
+    --card-bg: #f7f7f9;
+    --border: #e0e0e5;
+    --accent: #4f46e5;
+    --accent-soft: #eef0ff;
+    --code-bg: #1e1e2e;
+    --code-text: #e5e5f0;
+    --table-header: #ede9fe;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121218;
+      --text: #eaeaf0;
+      --muted: #a5a5b5;
+      --card-bg: #1c1c26;
+      --border: #2e2e3a;
+      --accent: #a5b4fc;
+      --accent-soft: #26263a;
+      --code-bg: #0d0d14;
+      --code-text: #d8d8ea;
+      --table-header: #26264a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121218;
+    --text: #eaeaf0;
+    --muted: #a5a5b5;
+    --card-bg: #1c1c26;
+    --border: #2e2e3a;
+    --accent: #a5b4fc;
+    --accent-soft: #26263a;
+    --code-bg: #0d0d14;
+    --code-text: #d8d8ea;
+    --table-header: #26264a;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+  }
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 5rem;
+  }
+  header.page-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border);
+  }
+  header.page-header h1 {
+    font-size: 2rem;
+    margin: 0 0 0.3rem;
+    color: var(--text);
+  }
+  header.page-header p {
+    color: var(--muted);
+    margin: 0;
+    font-size: 0.95rem;
+  }
+  nav.toc {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  nav.toc h2 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin: 0 0 0.6rem;
+  }
+  nav.toc ol {
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+  nav.toc a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  nav.toc a:hover { text-decoration: underline; }
+
+  section.lecture {
+    margin-bottom: 3rem;
+    scroll-margin-top: 1rem;
+  }
+  section.lecture > h2 {
+    font-size: 1.5rem;
+    padding: 0.5rem 0.9rem;
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    margin-bottom: 1.2rem;
+  }
+  h3 {
+    font-size: 1.15rem;
+    margin-top: 1.8rem;
+    margin-bottom: 0.6rem;
+    color: var(--text);
+  }
+  ul, ol { padding-left: 1.4rem; }
+  li { margin-bottom: 0.35rem; }
+  p { margin: 0.6rem 0; }
+
+  .callout {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin: 1rem 0;
+    font-size: 0.95rem;
+  }
+  .callout strong { color: var(--accent); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0 1.5rem;
+    font-size: 0.92rem;
+  }
+  .table-scroll {
+    overflow-x: auto;
+    margin: 1rem 0 1.5rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.55rem 0.8rem;
+    text-align: left;
+  }
+  th {
+    background: var(--table-header);
+    font-weight: 600;
+  }
+  tr:nth-child(even) td {
+    background: color-mix(in srgb, var(--card-bg) 60%, transparent);
+  }
+
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 1rem 1.2rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    margin: 1rem 0;
+  }
+  code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+  p code, li code {
+    background: var(--accent-soft);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.88em;
+  }
+
+  .exam-line {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin-top: 1.2rem;
+    font-style: italic;
+  }
+  .exam-line strong {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="page-header">
+    <h1>Week 11: Short Notes — Java</h1>
+  </header>
+
+  <nav class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#lecture1">Lecture 1: Monitors in Java</a></li>
+      <li><a href="#lecture2">Lecture 2: Thread in Java</a></li>
+      <li><a href="#lecture3">Lecture 3: Concurrent Programming: An Example</a></li>
+      <li><a href="#lecture4">Lecture 4: Thread Safe Collection</a></li>
+    </ol>
+  </nav>
+
+  <!-- LECTURE 1 -->
+  <section class="lecture" id="lecture1">
+    <h2>Lecture 1: Monitors in Java</h2>
+
+    <h3>Definition</h3>
+    <ul>
+      <li>Monitor = Shared data + functions + mutual exclusion</li>
+      <li>Purpose → Protect shared data from race conditions.</li>
+      <li>Only one thread executes inside monitor at a time.</li>
+    </ul>
+
+    <h3>Thread Queues</h3>
+    <ul>
+      <li>External Queue → Waiting for lock.</li>
+      <li>Internal Queue → Already inside monitor, waiting for condition.</li>
+    </ul>
+    <div class="callout"><strong>Easy Trick:</strong> External = Lock wait, Internal = Condition wait.</div>
+
+    <h3>Java &amp; Monitors</h3>
+    <ul>
+      <li>No separate keyword → uses <code>synchronized</code>.</li>
+      <li>Lock belongs to object instance, not class.</li>
+      <li>Lifecycle: Entry → Execution → Exit.</li>
+    </ul>
+
+    <h3>Thread Communication</h3>
+    <ul>
+      <li><code>wait()</code> → Releases lock, moves to Internal Queue.</li>
+      <li><code>notify()</code> → Wakes one waiting thread.</li>
+      <li><code>notifyAll()</code> → Wakes all waiting threads.</li>
+      <li>Signal &amp; Continue model → Not immediate transfer of lock.</li>
+    </ul>
+
+    <h3>Synchronization Styles</h3>
+    <ul>
+      <li>Method-level → Entire method locked.</li>
+      <li>Block-level → Only critical section locked → better performance.</li>
+      <li>Arbitrary Lock Objects → <code>synchronized(o)</code> or dedicated lock object.</li>
+      <li>Multiple locks → Greater concurrency.</li>
+    </ul>
+
+    <h3>Waiting &amp; Interruption</h3>
+    <ul>
+      <li>Busy Waiting → CPU waste.</li>
+      <li>Monitor Waiting → Efficient, thread sleeps until notified.</li>
+      <li><code>InterruptedException</code> → Must handle when using <code>wait()</code>.</li>
+      <li><code>IllegalMonitorStateException</code> → wait/notify must be inside synchronized block.</li>
+    </ul>
+
+    <h3>Advanced Locks</h3>
+    <ul>
+      <li><code>ReentrantLock</code> → Explicit lock/unlock, supports reentrancy.</li>
+      <li>Must use <code>finally</code> to ensure unlock.</li>
+      <li>Semaphore vs ReentrantLock → Semaphore uses permits, less ownership semantics.</li>
+    </ul>
+
+    <h3>Comparison Table</h3>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Feature</th><th>synchronized</th><th>ReentrantLock</th></tr></thead>
+      <tbody>
+        <tr><td>Built-in</td><td>Language keyword</td><td>Class in java.util.concurrent.locks</td></tr>
+        <tr><td>Lock mgmt</td><td>Automatic</td><td>Manual</td></tr>
+        <tr><td>Unlock</td><td>Auto on exit</td><td>Must call unlock()</td></tr>
+        <tr><td>Flexibility</td><td>Less</td><td>More</td></tr>
+        <tr><td>Reentrancy</td><td>Yes</td><td>Yes (explicit count)</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Important Points</h3>
+    <ul>
+      <li>Monitor → Mutual exclusion, protects shared data.</li>
+      <li>External Queue → Waiting for lock.</li>
+      <li>Internal Queue → Waiting for condition.</li>
+      <li>wait() → Releases lock, moves to Internal Queue.</li>
+      <li>notify/notifyAll → Wakes threads, not immediate lock transfer.</li>
+      <li>Busy vs Monitor Waiting → CPU waste vs efficient sleep.</li>
+      <li>ReentrantLock → Manual, flexible, must unlock in finally.</li>
+    </ul>
+  </section>
+
+  <!-- LECTURE 2 -->
+  <section class="lecture" id="lecture2">
+    <h2>Lecture 2: Thread in Java</h2>
+
+    <h3>Multithreading Basics</h3>
+    <ul>
+      <li>Multithreading → Running multiple threads concurrently.</li>
+      <li>Benefits: Better CPU utilization, responsiveness, background tasks, multi-core efficiency.</li>
+      <li>Example:
+        <ul>
+          <li>Main Thread → UI</li>
+          <li>Thread 1 → Download</li>
+          <li>Thread 2 → File Processing</li>
+          <li>Thread 3 → Database Work</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Ways to Create a Thread</h3>
+    <p><strong>Extending Thread</strong></p>
+    <pre><code>class MyThread extends Thread {
+    public void run() {
+        System.out.println("Thread is running");
+    }
+}
+
+MyThread t = new MyThread();
+t.start();</code></pre>
+    <p>Limitation → Single inheritance.</p>
+
+    <p><strong>Implementing Runnable</strong></p>
+    <pre><code>class MyTask implements Runnable {
+    public void run() {
+        System.out.println("Task is running");
+    }
+}
+
+Thread t = new Thread(new MyTask());
+t.start();</code></pre>
+    <p>Runnable = Task logic, Thread = Execution mechanism. Preferred approach.</p>
+
+    <h3>Thread vs Runnable</h3>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Feature</th><th>Extending Thread</th><th>Implementing Runnable</th></tr></thead>
+      <tbody>
+        <tr><td>Inheritance</td><td>Uses single extends</td><td>Preserves inheritance</td></tr>
+        <tr><td>Flexibility</td><td>Lower</td><td>Higher</td></tr>
+        <tr><td>Task &amp; Thread</td><td>Coupled</td><td>Separated</td></tr>
+        <tr><td>Reusability</td><td>Lower</td><td>Better</td></tr>
+        <tr><td>Production Use</td><td>Less preferred</td><td>Preferred</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>start() vs run()</h3>
+    <ul>
+      <li><code>run()</code> → Normal method call, sequential execution.</li>
+      <li><code>start()</code> → Creates new thread, executes run() concurrently.</li>
+    </ul>
+    <div class="callout"><strong>Golden Rule:</strong> run() = normal call, start() = new thread.</div>
+
+    <h3>Thread Lifecycle</h3>
+    <p>Six states in <code>Thread.State</code>:</p>
+    <ul>
+      <li>NEW → Created, not started.</li>
+      <li>RUNNABLE → Eligible to run.</li>
+      <li>BLOCKED → Waiting for lock.</li>
+      <li>WAITING → Waiting indefinitely.</li>
+      <li>TIMED_WAITING → Waiting with timeout.</li>
+      <li>TERMINATED → Finished execution.</li>
+    </ul>
+
+    <h3>Interrupts</h3>
+    <ul>
+      <li><code>interrupt()</code> → Requests interruption.</li>
+      <li><code>interrupted()</code> → Static, checks current thread, clears flag.</li>
+      <li><code>isInterrupted()</code> → Instance, checks specific thread, does not clear flag.</li>
+    </ul>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Method</th><th>Type</th><th>Clears Flag?</th></tr></thead>
+      <tbody>
+        <tr><td>interrupt()</td><td>Instance</td><td>Sets status</td></tr>
+        <tr><td>interrupted()</td><td>Static</td><td>Yes</td></tr>
+        <tr><td>isInterrupted()</td><td>Instance</td><td>No</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Scheduling &amp; Control</h3>
+    <ul>
+      <li><code>yield()</code> → Hint to scheduler, thread remains RUNNABLE.</li>
+      <li><code>join()</code> → Current thread waits for another to finish.</li>
+    </ul>
+    <div class="callout">
+      <strong>Memory Trick:</strong>
+      <ul>
+        <li>yield() = "Give chance"</li>
+        <li>join() = "Wait for completion"</li>
+      </ul>
+    </div>
+
+    <h3>Revision</h3>
+    <ul>
+      <li>Thread creation → Extend Thread / Implement Runnable.</li>
+      <li>Runnable preferred for flexibility.</li>
+      <li>start() vs run() → start() creates new thread.</li>
+      <li>States → NEW, RUNNABLE, BLOCKED, WAITING, TIMED_WAITING, TERMINATED.</li>
+      <li>Interrupt methods → interrupt(), interrupted(), isInterrupted().</li>
+      <li>yield() → Scheduling hint.</li>
+      <li>join() → Synchronization, wait for another thread.</li>
+    </ul>
+  </section>
+
+  <!-- LECTURE 3 -->
+  <section class="lecture" id="lecture3">
+    <h2>Lecture 3: Concurrent Programming: An Example</h2>
+
+    <h3>Introduction</h3>
+    <ul>
+      <li>Bridge Problem → Example for concurrency, synchronization, shared resources, and thread coordination.</li>
+      <li>Cars = Threads, Bridge = Shared Resource, Direction = Shared State.</li>
+      <li>Goal → Allow maximum concurrency while preventing opposite-direction cars from entering together.</li>
+    </ul>
+
+    <h3>Bridge Rules</h3>
+    <ul>
+      <li>Rule 1: Same direction → Allowed.</li>
+      <li>Rule 2: Opposite direction → Must wait.</li>
+      <li>Rule 3: Empty bridge → Direction can change.</li>
+      <li>Rule 4: Multiple same-direction cars allowed simultaneously.</li>
+    </ul>
+
+    <h3>Key Problems</h3>
+    <ul>
+      <li>No FIFO Guarantee → Java's wait()/notifyAll() does not ensure strict order.</li>
+      <li>Unlucky Timing → A waiting car may be delayed if another same-direction car enters before it acquires the lock.</li>
+    </ul>
+
+    <h3>Shared State</h3>
+    <ul>
+      <li><code>bcount</code> (int) → Number of cars on bridge.</li>
+      <li><code>direction</code> (boolean) → Current direction (true = North, false = South).</li>
+      <li>Synchronization required to avoid race conditions.</li>
+    </ul>
+
+    <h3>Crossing Phases</h3>
+    <ul>
+      <li>ENTER → Synchronized, checks direction &amp; updates state.</li>
+      <li>TRAVEL → Not synchronized, simulates crossing with sleep().</li>
+      <li>LEAVE → Synchronized, decreases bcount, notifies when empty.</li>
+    </ul>
+
+    <h3>enter() Method</h3>
+    <p><strong>Guard condition:</strong></p>
+    <pre><code>if (carDirection != direction && bcount > 0) wait();</code></pre>
+    <ul>
+      <li>If bridge empty → <code>direction = carDirection</code>.</li>
+      <li>Update: <code>bcount++</code>.</li>
+    </ul>
+
+    <h3>wait() Usage</h3>
+    <ul>
+      <li>Releases lock, moves thread to waiting state.</li>
+      <li>Must be inside synchronized block.</li>
+      <li>Always recheck condition after waking → use while loop, not if.</li>
+    </ul>
+
+    <h3>Travel Phase</h3>
+    <ul>
+      <li>Use <code>Thread.sleep()</code> outside synchronized block.</li>
+      <li>Prevents blocking other same-direction cars.</li>
+      <li>Handle <code>InterruptedException</code>.</li>
+    </ul>
+
+    <h3>leave() Method</h3>
+    <pre><code>synchronized void leave() {
+    bcount--;
+    if (bcount == 0) notifyAll();
+}</code></pre>
+    <ul>
+      <li>Decreases bcount.</li>
+      <li>NotifyAll only when bridge becomes empty → avoids unnecessary wakeups.</li>
+    </ul>
+
+    <h3>Synchronization Principle</h3>
+    <ul>
+      <li>Protect shared state (bcount, direction).</li>
+      <li>Do not lock entire journey.</li>
+      <li>Synchronize only critical sections.</li>
+    </ul>
+
+    <h3>Coarse vs Fine-Grained Locking</h3>
+    <ul>
+      <li>Coarse-Grained → One lock for entire operation, simple but low concurrency.</li>
+      <li>Fine-Grained → Lock only critical sections, better throughput and concurrency.</li>
+    </ul>
+
+    <h3>General Concurrency Lessons</h3>
+    <ul>
+      <li>Shared resources (databases, files, queues, memory structures) follow same principle.</li>
+      <li>Synchronize state transitions, allow independent work concurrently.</li>
+      <li>Notify only on meaningful state changes.</li>
+    </ul>
+
+    <h3>Linked List Analogy</h3>
+    <ul>
+      <li>One lock for entire list → limits concurrency.</li>
+      <li>Fine-grained (hand-over-hand locking) → individual node locks allow disjoint updates concurrently.</li>
+    </ul>
+
+    <h3>Important Points</h3>
+    <ul>
+      <li>Bridge = shared resource, cars = threads.</li>
+      <li>Only one direction at a time.</li>
+      <li>bcount tracks cars, direction tracks orientation.</li>
+      <li>Enter condition → wait if opposite direction &amp; bcount &gt; 0.</li>
+      <li>Travel → sleep outside synchronized block.</li>
+      <li>Leave → bcount--, notifyAll when empty.</li>
+      <li>Synchronize shared state only.</li>
+      <li>Fine-grained locking improves concurrency.</li>
+    </ul>
+
+    <h3>Revision Sheet</h3>
+    <ul>
+      <li>Cars = Threads, Bridge = Shared Resource.</li>
+      <li>One direction at a time, multiple same-direction cars allowed.</li>
+      <li>ENTER → check condition, update bcount.</li>
+      <li>TRAVEL → sleep outside lock.</li>
+      <li>LEAVE → bcount--, notifyAll if empty.</li>
+    </ul>
+    <div class="exam-line"><strong>Key principle:</strong> Protect shared state + allow independent work = good concurrency design.</div>
+  </section>
+
+  <!-- LECTURE 4 -->
+  <section class="lecture" id="lecture4">
+    <h2>Lecture 4: Thread Safe Collection</h2>
+
+    <h3>Concurrency &amp; Collections</h3>
+    <ul>
+      <li>Multiple threads may access the same collection simultaneously.</li>
+      <li>Standard collections (arrays, lists, maps) are not thread-safe.</li>
+      <li>Problems without synchronization:
+        <ul>
+          <li>Race conditions</li>
+          <li>Lost updates</li>
+          <li>Inconsistent data</li>
+          <li>Incorrect results</li>
+        </ul>
+      </li>
+    </ul>
+    <p>Example: Bank accounts → transfers + audit thread → inconsistent totals if read occurs mid-transaction.</p>
+
+    <h3>Lost Update Problem</h3>
+    <ul>
+      <li>Classic issue: two threads overwrite each other's updates.</li>
+      <li>Expected result: 9 → Actual result: 8.</li>
+      <li>Key idea: Read → Modify → Write must be synchronized.</li>
+    </ul>
+
+    <h3>Locking Approaches</h3>
+    <ul>
+      <li>Global Locking → One lock for entire collection.
+        <ul><li>Simple, safe, but poor scalability.</li></ul>
+      </li>
+      <li>Fine-Grained Locking → Separate locks for independent portions.
+        <ul><li>More complex, but higher concurrency and throughput.</li></ul>
+      </li>
+    </ul>
+
+    <h3>Comparison Table</h3>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Feature</th><th>Global Locking</th><th>Fine-Grained Locking</th></tr></thead>
+      <tbody>
+        <tr><td>Simplicity</td><td>High</td><td>Lower</td></tr>
+        <tr><td>Concurrency</td><td>Low</td><td>High</td></tr>
+        <tr><td>Contention</td><td>High</td><td>Lower</td></tr>
+        <tr><td>Throughput</td><td>Lower</td><td>Higher</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Correctness Concepts</h3>
+    <ul>
+      <li>Linearizability → Atomicity of individual operations.</li>
+      <li>Serializability → Correctness of entire transaction sequence.</li>
+      <li>Important: Thread-safe ≠ Transaction-safe.</li>
+    </ul>
+
+    <h3>Concurrent Data Structures</h3>
+    <ul>
+      <li>Techniques: localized locks, atomic operations, specialized algorithms.</li>
+      <li>Arrays → lock individual indices.</li>
+      <li>Linked Lists → hand-over-hand locking (lock coupling).</li>
+      <li>Trees → complex, may require multi-node locks during rotations.</li>
+    </ul>
+
+    <h3>Standard Java Concurrent Collections</h3>
+    <ul>
+      <li><code>ConcurrentHashMap</code> → Thread-safe map, fine-grained synchronization.</li>
+      <li><code>BlockingQueue</code> → Producer-Consumer communication.</li>
+      <li><code>ConcurrentSkipListMap</code> → Thread-safe sorted map.</li>
+    </ul>
+
+    <h3>Producer-Consumer Pattern</h3>
+    <ul>
+      <li>Producers generate work → BlockingQueue → Consumer processes work.</li>
+      <li>Benefits:
+        <ul>
+          <li>Decoupling producers &amp; consumers.</li>
+          <li>Simplified synchronization.</li>
+          <li>Backpressure (bounded queue prevents overload).</li>
+          <li>Efficient resource utilization.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Backpressure &amp; Empty Queue</h3>
+    <ul>
+      <li>Queue full → Producers wait.</li>
+      <li>Queue empty → Consumers wait.</li>
+      <li>Prevents busy waiting and uncontrolled memory growth.</li>
+    </ul>
+
+    <h3>Architectural Principles</h3>
+    <ul>
+      <li>Goal = Maximum safe concurrency + Minimum unnecessary blocking.</li>
+      <li>Synchronize only what must be synchronized.</li>
+      <li>Allow independent operations to run concurrently.</li>
+    </ul>
+
+    <h3>Important Points</h3>
+    <ul>
+      <li>Collections are not thread-safe by default.</li>
+      <li>Global lock → simple but low concurrency.</li>
+      <li>Fine-grained lock → complex but high concurrency.</li>
+      <li>Linearizability → single operation correctness.</li>
+      <li>Serializability → transaction correctness.</li>
+      <li>Thread-safe ≠ transaction-safe.</li>
+      <li>Prefer java.util.concurrent classes.</li>
+      <li>Producer-Consumer → clean architecture with BlockingQueue.</li>
+    </ul>
+
+    <h3>Revision Sheet</h3>
+    <ul>
+      <li>Race conditions / Lost updates → Need synchronization.</li>
+      <li>Global Lock → Simple, low concurrency.</li>
+      <li>Fine-Grained Lock → Complex, high concurrency.</li>
+      <li>Linearizability → One operation.</li>
+      <li>Serializability → Whole transaction.</li>
+      <li>ConcurrentHashMap / BlockingQueue / ConcurrentSkipListMap → Key Java classes.</li>
+      <li>Producer-Consumer → Decoupling + backpressure.</li>
+    </ul>
+    <div class="exam-line"><strong>Main Idea:</strong> Protect shared state + allow independent work = high-performance concurrency.</div>
+  </section>
+
+  <footer>Week 11 — Java Short Notes</footer>
+
+</div>
+</body>
+</html>
