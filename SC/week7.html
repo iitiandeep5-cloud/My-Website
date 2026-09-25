@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 7: Bash Scripts Part 2 & 3 - Short Notes</title>
+<style>
+  :root {
+    --bg: #f7f8fa;
+    --card-bg: #ffffff;
+    --text: #1f2430;
+    --muted: #5b6472;
+    --accent: #2f6fed;
+    --accent-light: #e8f0ff;
+    --code-bg: #1e2430;
+    --code-text: #e6e9f0;
+    --border: #e2e5ea;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  header {
+    background: linear-gradient(135deg, #2f6fed, #6a5bf0);
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  header h1 { margin: 0 0 8px; font-size: 1.8rem; }
+  header p { margin: 0; opacity: 0.9; font-size: 0.95rem; }
+  .container {
+    max-width: 900px;
+    margin: -30px auto 60px;
+    padding: 0 20px;
+  }
+  .lecture {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  }
+  .lecture h2 {
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent-light);
+    padding-bottom: 8px;
+    margin-top: 0;
+  }
+  h3 {
+    margin-top: 28px;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+    color: var(--text);
+  }
+  h3::before {
+    content: "▸ ";
+    color: var(--accent);
+  }
+  ul {
+    margin: 8px 0 16px;
+    padding-left: 22px;
+  }
+  li { margin-bottom: 4px; }
+  code {
+    background: var(--accent-light);
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.9em;
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 14px 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.88rem;
+    margin: 10px 0 16px;
+  }
+  pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 20px;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    text-align: left;
+  }
+  th {
+    background: var(--accent-light);
+    color: var(--accent);
+    font-weight: 600;
+  }
+  tr:nth-child(even) td { background: #fafbfc; }
+  .revision {
+    background: #fffaf0;
+    border: 1px solid #f0e0b8;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-top: 20px;
+  }
+  .revision h3 {
+    margin-top: 0;
+    color: #b8860b;
+  }
+  .revision h3::before { content: "★ "; color: #d4a017; }
+  .memory-trick {
+    background: var(--accent-light);
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-top: 14px;
+    font-style: italic;
+    color: var(--accent);
+  }
+  .warning {
+    background: #fff0f0;
+    border: 1px solid #f0c0c0;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 12px 0;
+    color: #a33;
+  }
+  .warning strong { color: #c0392b; }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    padding: 20px;
+  }
+  @media (max-width: 600px) {
+    .lecture { padding: 18px; }
+    header { padding: 30px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Week 7: Bash Scripts — Part 2 &amp; 3</h1>
+  <p>Lecture 1, 2 &amp; 3 · Debugging, Control Flow &amp; Advanced Scripting</p>
+</header>
+
+<div class="container">
+
+  <!-- LECTURE 1 -->
+  <section class="lecture">
+    <h2>Lecture 1: Bash Scripts — Part 2A</h2>
+
+    <h3>Script Debugging (Execution Transparency)</h3>
+    <p><strong>Why Debugging?</strong> Helps find errors while the script is running. Shows how Bash executes each command. Useful for debugging loops, conditions, and variables.</p>
+    <ul>
+      <li>Enable Debugging: <code>set -x</code></li>
+      <li>Disable Debugging: <code>set +x</code></li>
+    </ul>
+    <pre><code>set -x
+echo "Debugging starts"
+set +x</code></pre>
+    <ul>
+      <li><strong>Output Indicator:</strong> Commands prefixed with <code>+</code> when debugging is ON.<br>Example: <code>+ echo Hello</code> → Hello</li>
+      <li><strong>Note:</strong> <code>+</code> comes from the <code>PS4</code> environment variable. Use <code>set -x</code> only around the code you want to debug.</li>
+    </ul>
+
+    <h3>Advanced Control Flow</h3>
+    <ul>
+      <li><strong>Logical Operators:</strong>
+        <ul>
+          <li><code>&amp;&amp;</code> → AND (both conditions true)<br>Example: <code>if [[ $x -gt 3 &amp;&amp; $x -lt 7 ]]</code></li>
+          <li><code>||</code> → OR (at least one condition true)<br>Example: <code>if [[ $x -le 3 || $x -ge 7 ]]</code></li>
+        </ul>
+      </li>
+      <li><strong>Nested Structures:</strong> Control structures can be inside one another (e.g., for → while → if).</li>
+      <li><strong>Best Practice:</strong> Use proper indentation.</li>
+    </ul>
+
+    <h3>Arithmetic in Bash</h3>
+    <p><strong>Method 1: let</strong></p>
+    <pre><code>let "c=a+b"</code></pre>
+    <p>Quotes required if spaces are used.</p>
+    <p><strong>Method 2: Square Brackets (Deprecated)</strong></p>
+    <pre><code>echo $[5+6]</code></pre>
+    <p><strong>Method 3: expr</strong></p>
+    <pre><code>c=$(expr $a + $b)</code></pre>
+    <p><strong>Method 4: Double Parentheses (Recommended)</strong></p>
+    <pre><code>((sum=a+b))
+((count++))</code></pre>
+
+    <h3>Comparison Table</h3>
+    <table>
+      <tr><th>Method</th><th>Syntax</th><th>Notes</th></tr>
+      <tr><td><code>let</code></td><td><code>let "a=b+c"</code></td><td>Wrapper command</td></tr>
+      <tr><td><code>$[]</code></td><td><code>$[a+b]</code></td><td>Old/Deprecated</td></tr>
+      <tr><td><code>expr</code></td><td><code>expr $a + $b</code></td><td>Standalone command</td></tr>
+      <tr><td><code>(( ))</code></td><td><code>((a+b))</code></td><td>Best &amp; modern</td></tr>
+    </table>
+
+    <h3>expr Command</h3>
+    <ul>
+      <li><strong>Capabilities:</strong> Arithmetic, Comparisons, Logical operations, String operations.</li>
+      <li><strong>Operators:</strong>
+        <ul>
+          <li>Arithmetic: <code>+ - * / %</code></li>
+          <li>Comparison: <code>&gt; &gt;= &lt; &lt;= == !=</code></li>
+          <li>Logical: <code>|</code> (OR), <code>&amp;</code> (AND)</li>
+        </ul>
+      </li>
+      <li><strong>Escape Characters:</strong> Must escape <code>* &gt; &lt; | &amp;</code><br>Example: <code>expr 5 \* 4</code></li>
+    </ul>
+
+    <h3>String Manipulation with expr</h3>
+    <ul>
+      <li><strong>Regex Match:</strong> <code>expr string : regex</code> → Anchored matching (BRE).</li>
+      <li><strong>Substring:</strong> <code>expr substr Linux 2 3</code> → Output: <code>inu</code></li>
+      <li><strong>Index:</strong> <code>expr index version0.1s js</code> → Output: <code>12</code></li>
+      <li><strong>Length:</strong> <code>expr length Linux</code> → Output: <code>5</code></li>
+    </ul>
+    <p>Limitation: BRE does not support <code>+</code> quantifier.</p>
+
+    <h3>Floating Point Calculations with bc</h3>
+    <ul>
+      <li><strong>Bash Limitation:</strong> No decimal calculations.</li>
+      <li>Use <code>bc</code>:</li>
+    </ul>
+    <pre><code>result=$(bc -l &lt;&lt;EOF
+scale=4
+(12+6)^2
+EOF
+)
+echo $result</code></pre>
+    <ul>
+      <li>Output: <code>324.0000</code></li>
+      <li><code>scale</code>: Controls decimal precision. Example: <code>scale=3</code> → 3 decimal digits.</li>
+      <li><strong>Here Document:</strong> <code>&lt;&lt;EOF ... EOF</code> (marker can vary). <code>&lt;&lt;-EOF</code> ignores leading tabs.</li>
+    </ul>
+
+    <h3>PATH Variable Parsing using IFS</h3>
+    <p><strong>IFS (Internal Field Separator):</strong> Default → Space, Tab, Newline.</p>
+    <p><strong>Parsing PATH:</strong></p>
+    <pre><code>OLDIFS=$IFS
+IFS=':'
+count=0
+for dir in $PATH
+do
+    echo "Directory $count : $dir"
+    ((count++))
+done
+IFS=$OLDIFS</code></pre>
+    <ul>
+      <li><strong>Why Save IFS?</strong> To restore original environment later.</li>
+      <li><strong>Example PATH:</strong> <code>/bin:/usr/bin:/usr/local/bin</code> → Split into directories.</li>
+    </ul>
+
+    <div class="revision">
+      <h3>Quick Revision</h3>
+      <ul>
+        <li>Debugging: <code>set -x</code> / <code>set +x</code>, PS4 prefix.</li>
+        <li>Logical Operators: <code>&amp;&amp;</code> (AND), <code>||</code> (OR).</li>
+        <li>Arithmetic: <code>let</code>, <code>$[]</code> (deprecated), <code>expr</code>, <code>(( ))</code> (best).</li>
+        <li><code>expr</code>: Arithmetic, Comparison, Logical, String ops. Escape special chars.</li>
+        <li>String Functions: Regex match, substr, index, length.</li>
+        <li><code>bc</code>: Decimal calculations, scale for precision, Here Document.</li>
+        <li>IFS: Save/restore, change to <code>:</code> for PATH parsing.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- LECTURE 2 -->
+  <section class="lecture">
+    <h2>Lecture 2: Bash Scripts — Part 2B</h2>
+
+    <h3>Multi-Level Conditional Branching (if – elif – else)</h3>
+    <p><strong>Why Use It?</strong> Used when there are multiple possible conditions, not just True/False. Bash checks conditions from top to bottom. As soon as one condition becomes true, it executes that block and skips the rest.</p>
+    <pre><code>if [ condition ]; then
+    commands
+elif [ condition ]; then
+    commands
+elif [ condition ]; then
+    commands
+else
+    commands
+fi</code></pre>
+    <ul>
+      <li><strong>Execution Flow:</strong> if → elif → elif → else → fi. Only one block is executed.</li>
+      <li><strong>Condition Order Rule:</strong> Always write conditions from Most Specific ➜ Most General.</li>
+    </ul>
+
+    <h3>Example (Argument Count)</h3>
+    <pre><code>if [ $# -gt 2 ]; then
+    echo "More than sufficient"
+elif [ $# -gt 1 ]; then
+    echo "Sufficient"
+elif [ $# -gt 0 ]; then
+    echo "Not sufficient"
+else
+    echo "No arguments"
+fi</code></pre>
+    <p><strong>Special Variable:</strong> <code>$#</code> → Returns number of command-line arguments.</p>
+
+    <h3>Case Statement</h3>
+    <p><strong>Why Use case?</strong> Cleaner alternative to multiple if – elif. Best for string/pattern matching.</p>
+    <pre><code>case $variable in
+    pattern1)
+        commands ;;
+    pattern2)
+        commands ;;
+    *)
+        commands ;;
+esac</code></pre>
+
+    <h3>Important Keywords</h3>
+    <table>
+      <tr><th>Keyword</th><th>Purpose</th></tr>
+      <tr><td><code>case</code></td><td>Start</td></tr>
+      <tr><td><code>in</code></td><td>Begin patterns</td></tr>
+      <tr><td><code>)</code></td><td>Ends pattern</td></tr>
+      <tr><td><code>;;</code></td><td>Ends command block</td></tr>
+      <tr><td><code>esac</code></td><td>Ends case</td></tr>
+    </table>
+
+    <ul>
+      <li><strong>Multiple Patterns:</strong> <code>gimp | inkscape)</code> → Matches either.</li>
+      <li><strong>Wildcard:</strong> <code>*</code> → Default case.</li>
+      <li><strong>Character Matching:</strong> <code>[Aa]dobe*</code> → Matches Adobe/adobe variations.</li>
+    </ul>
+
+    <pre><code>case $INPUT in
+    gimp | inkscape)
+        echo "Open-source editor" ;;
+    [Aa]dobe*)
+        echo "Commercial software" ;;
+    "image j")
+        echo "Matrix tool" ;;
+    *)
+        echo "Unknown Program" ;;
+esac</code></pre>
+
+    <h3>C-Style For Loop</h3>
+    <p><strong>Definition:</strong> Bash extension similar to C language. Works only in <code>#!/bin/bash</code>.</p>
+    <pre><code>for ((initialization; condition; increment))
+do
+    commands
+done</code></pre>
+    <p>Example:</p>
+    <pre><code>for ((i=1;i<=5;i++))
+do
+    echo $i
+done</code></pre>
+    <p><strong>Multiple Variables:</strong></p>
+    <pre><code>for ((a=1,b=20; a<20; a++,b--))
+do
+    echo $a $b
+done</code></pre>
+    <p><strong>Exponentiation:</strong> <code>echo $((5**2))</code> → Output: <code>25</code></p>
+
+    <h3>Redirect Entire Loop Output</h3>
+    <pre><code>for ((i=1;i<=5;i++))
+do
+    echo $i
+done > output.txt</code></pre>
+    <p><strong>Prevent File Overwrite:</strong></p>
+    <pre><code>if [ -f "$FILE" ]
+then
+    echo "File exists"
+    exit 1
+fi</code></pre>
+    <ul>
+      <li><strong>File Test Operator:</strong> <code>-f</code> → Checks if file exists.</li>
+      <li><strong>exit:</strong> <code>exit 1</code> → Terminates script with error.</li>
+      <li><strong>Process ID:</strong> <code>$$</code> → Current script PID. Useful for unique temp files.</li>
+    </ul>
+
+    <h3>Large File Example</h3>
+    <pre><code>for ((i=1;i<=10000;i++))
+do
+    echo "$i $((i+1))"
+done > data.txt</code></pre>
+
+    <h3>Break and Continue</h3>
+    <p><strong>break:</strong> Stops loop immediately.</p>
+    <pre><code>for ((i=1;i<=10;i++))
+do
+    if [ $i -eq 5 ]; then
+        break
+    fi
+    echo $i
+done</code></pre>
+    <ul>
+      <li><strong>break Levels:</strong> <code>break</code> → Current loop. <code>break 2</code> → Stops two nested loops.</li>
+    </ul>
+    <p><strong>continue:</strong> Skips current iteration.</p>
+    <pre><code>for ((i=1;i<=10;i++))
+do
+    if [ $i -ge 3 ] && [ $i -le 7 ]; then
+        continue
+    fi
+    echo $i
+done</code></pre>
+
+    <h3>Difference Table</h3>
+    <table>
+      <tr><th>break</th><th>continue</th></tr>
+      <tr><td>Stops loop</td><td>Skips current iteration</td></tr>
+      <tr><td>Loop ends</td><td>Loop continues</td></tr>
+    </table>
+
+    <h3>Shift Command</h3>
+    <ul>
+      <li><strong>Purpose:</strong> Processes command-line arguments one by one.</li>
+      <li><strong>Effect:</strong> Moves arguments left. <code>$1</code> discarded, <code>$2</code> becomes <code>$1</code>, etc.</li>
+      <li><strong>Argument Count:</strong> <code>$#</code> decreases after each shift.</li>
+    </ul>
+    <pre><code>while [ $# -gt 0 ]
+do
+    echo $1
+    shift
+done</code></pre>
+
+    <h3>exec Command</h3>
+    <ul>
+      <li><strong>Purpose:</strong> Replaces current shell process with another program. No child process created.</li>
+      <li><strong>Normal Command:</strong> Returns to script after execution.</li>
+      <li><strong>exec Command:</strong> Script disappears if exec succeeds.</li>
+      <li><strong>PID:</strong> New program keeps same PID.</li>
+    </ul>
+    <p><strong>Error Handling Example:</strong></p>
+    <pre><code>echo "Launching..."
+exec xterm
+echo "Launch Failed"</code></pre>
+
+    <div class="revision">
+      <h3>Quick Revision</h3>
+      <ul>
+        <li>If-Elif-Else: Multi-condition branching, order matters, ends with <code>fi</code>.</li>
+        <li>Case: Cleaner than multiple elif, ends with <code>esac</code>, supports patterns.</li>
+        <li>C-Style For Loop: Bash-only, supports multiple variables, <code>**</code> for power.</li>
+        <li>File Redirection: Redirect whole loop with <code>done &gt; file.txt</code>.</li>
+        <li>File Test: <code>-f</code> checks file existence.</li>
+        <li>exit: Stops script.</li>
+        <li><code>$$</code>: Current PID.</li>
+        <li>break/continue: Stop loop vs skip iteration.</li>
+        <li>shift: Processes arguments sequentially, destructive.</li>
+        <li>exec: Replaces process, script ends unless exec fails.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- LECTURE 3 -->
+  <section class="lecture">
+    <h2>Lecture 3: Bash Scripts — Part 3</h2>
+
+    <h3>eval Command (Dynamic Command Execution)</h3>
+    <ul>
+      <li><strong>Definition:</strong> <code>eval</code> is used to create and execute commands dynamically. It combines strings into a complete command and executes them as if typed directly in the terminal.</li>
+      <li><strong>Syntax:</strong> <code>eval command</code></li>
+    </ul>
+    <p><strong>How eval Works:</strong></p>
+    <pre><code>cmd="date"
+fmt="+%Y-%m-%d"
+eval $cmd $fmt</code></pre>
+    <p>Step 1: Variables → <code>cmd=date</code>, <code>fmt=+%Y-%m-%d</code><br>
+    Step 2: Combined → <code>date +%Y-%m-%d</code><br>
+    Step 3: Executed → Output: <code>2026-07-27</code></p>
+    <ul>
+      <li><strong>Why Use eval?</strong> Builds commands at runtime, useful for dynamic scripts.</li>
+      <li><strong>Process ID (PID):</strong> Runs in the same shell, no subshell created. PID remains unchanged.</li>
+    </ul>
+
+    <div class="warning">
+      <strong>Security Warning:</strong> Never use raw user input with <code>eval</code>. Example: <code>eval "$cmd"</code> with user input <code>rm -rf /</code> → Dangerous. Safe practice: Use only internally created commands.
+    </div>
+
+    <h3>Functions (Modular Programming)</h3>
+    <p><strong>Purpose:</strong> Functions allow code reuse, reduce repetition, and improve readability.</p>
+    <p><strong>Syntax:</strong></p>
+    <pre><code>function_name() {
+    commands
+}</code></pre>
+    <p>or</p>
+    <pre><code>function function_name {
+    commands
+}</code></pre>
+    <p>Example:</p>
+    <pre><code>swap() {
+    echo "$2 $1"
+}
+swap Hello World
+# Output: World Hello</code></pre>
+
+    <h3>Function Arguments</h3>
+    <ul>
+      <li><code>$1</code>, <code>$2</code>, <code>$3</code> → Arguments passed to function.<br>Example: <code>swap Apple Mango</code> → Output: <code>Mango Apple</code>.</li>
+    </ul>
+
+    <h3>Usage Function Example</h3>
+    <pre><code>usage() {
+    echo "Usage: $1 string1 string2"
+}
+
+if [ $# -lt 2 ]; then
+    usage $0
+    exit 1
+fi</code></pre>
+    <p><code>$0</code> → Script name. Automatically updates usage message if renamed.</p>
+
+    <h3>External Function Libraries</h3>
+    <ul>
+      <li>Store functions in <code>mylib.sh</code>.</li>
+      <li>Import with: <code>source mylib.sh</code> or <code>. mylib.sh</code></li>
+    </ul>
+
+    <h3>getopts (Command-Line Option Processing)</h3>
+    <ul>
+      <li><strong>Purpose:</strong> Enables professional command-line options (<code>ls -l</code>, <code>cp -r</code>, etc.).</li>
+    </ul>
+    <pre><code>while getopts "abc:" opt
+do
+    case $opt in
+    ...
+    esac
+done</code></pre>
+    <ul>
+      <li><strong>Option String Example:</strong> <code>"abc:"</code> → a and b are flags, c: requires argument.</li>
+      <li><strong>OPTARG:</strong> Stores value supplied to an option.<br>Example: <code>./script.sh -c file.txt</code> → <code>OPTARG=file.txt</code>.</li>
+    </ul>
+
+    <p>Example:</p>
+    <pre><code>while getopts "abc:" opt
+do
+    case $opt in
+    a) echo "Option A" ;;
+    b) echo "Option B" ;;
+    c) echo "$OPTARG" ;;
+    *) usage $0 ;;
+    esac
+done</code></pre>
+    <ul>
+      <li><strong>Benefits:</strong> Options can appear in any order. Automatic error handling for invalid/missing options.</li>
+    </ul>
+
+    <h3>select Loop (Menu-Driven Programs)</h3>
+    <ul>
+      <li><strong>Purpose:</strong> Creates numbered menus for interactive scripts.</li>
+    </ul>
+    <pre><code>select variable in item1 item2 item3
+do
+    commands
+done</code></pre>
+    <p>Example:</p>
+    <pre><code>select i in {1..10}
+do
+    case $i in
+    4|5|6|7) echo "Accepted"; break ;;
+    *) echo "Choose 4,5,6 or 7" ;;
+    esac
+done</code></pre>
+    <ul>
+      <li><strong>Features:</strong> Displays numbered menu automatically. Accepts only menu selections. Invalid selections ignored. Repeats until break.</li>
+    </ul>
+
+    <h3>Professional Bash Scripting Standards</h3>
+    <ul>
+      <li><strong>Rule 1:</strong> Never give setuid permission to scripts → Security risk.</li>
+      <li><strong>Rule 2:</strong> Never execute raw user input with <code>eval</code>.</li>
+      <li><strong>Rule 3:</strong> Validate every input (numbers, filenames, options, empty values).</li>
+      <li><strong>Rule 4:</strong> Use functions for reusable code.</li>
+      <li><strong>Rule 5:</strong> Use external libraries (<code>mylib.sh</code>) for common functions.</li>
+    </ul>
+
+    <h3>Why Modular Programming?</h3>
+    <ul>
+      <li>Easier debugging.</li>
+      <li>Easy updates.</li>
+      <li>Code reuse.</li>
+      <li>Better organization.</li>
+    </ul>
+
+    <div class="revision">
+      <h3>Quick Revision</h3>
+      <ul>
+        <li><code>eval</code>: Executes dynamic commands, same PID, unsafe with user input.</li>
+        <li>Functions: Reusable blocks, <code>$1 $2 $3</code> for arguments, <code>$0</code> for script name, external libraries via <code>source</code>.</li>
+        <li><code>getopts</code>: Standard option processing, <code>:</code> means argument required, <code>OPTARG</code> stores value, automatic error handling.</li>
+        <li><code>select</code>: Creates interactive menus, loops until break.</li>
+        <li>Professional Standards: Avoid setuid, validate input, modular design, external libraries.</li>
+      </ul>
+    </div>
+
+    <h3>One-Line Summary</h3>
+    <ul>
+      <li><code>eval</code>: Executes dynamically built commands.</li>
+      <li>Functions: Make code reusable and modular.</li>
+      <li><code>source</code>: Imports external function libraries.</li>
+      <li><code>getopts</code>: Standard way to process command-line options.</li>
+      <li><code>select</code>: Creates interactive terminal menus.</li>
+      <li>Professional Bash Scripts: Secure, modular, validated, maintainable.</li>
+    </ul>
+  </section>
+
+</div>
+
+<footer>Week 7 · Bash Scripts Part 2 &amp; 3 · Short Notes</footer>
+
+</body>
+</html>

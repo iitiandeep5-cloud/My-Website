@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 6: Command Line Utilities & Bash Scripts - Short Notes</title>
+<style>
+  :root {
+    --bg: #f7f8fa;
+    --card-bg: #ffffff;
+    --text: #1f2430;
+    --muted: #5b6472;
+    --accent: #2f6fed;
+    --accent-light: #e8f0ff;
+    --code-bg: #1e2430;
+    --code-text: #e6e9f0;
+    --border: #e2e5ea;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  header {
+    background: linear-gradient(135deg, #2f6fed, #6a5bf0);
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  header h1 { margin: 0 0 8px; font-size: 1.8rem; }
+  header p { margin: 0; opacity: 0.9; font-size: 0.95rem; }
+  .container {
+    max-width: 900px;
+    margin: -30px auto 60px;
+    padding: 0 20px;
+  }
+  .lecture {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  }
+  .lecture h2 {
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent-light);
+    padding-bottom: 8px;
+    margin-top: 0;
+  }
+  h3 {
+    margin-top: 28px;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+    color: var(--text);
+  }
+  h3::before {
+    content: "▸ ";
+    color: var(--accent);
+  }
+  ul {
+    margin: 8px 0 16px;
+    padding-left: 22px;
+  }
+  li { margin-bottom: 4px; }
+  code {
+    background: var(--accent-light);
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.9em;
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 14px 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.88rem;
+    margin: 10px 0 16px;
+  }
+  pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 20px;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    text-align: left;
+  }
+  th {
+    background: var(--accent-light);
+    color: var(--accent);
+    font-weight: 600;
+  }
+  tr:nth-child(even) td { background: #fafbfc; }
+  .revision {
+    background: #fffaf0;
+    border: 1px solid #f0e0b8;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-top: 20px;
+  }
+  .revision h3 {
+    margin-top: 0;
+    color: #b8860b;
+  }
+  .revision h3::before { content: "★ "; color: #d4a017; }
+  .memory-trick {
+    background: var(--accent-light);
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-top: 14px;
+    font-style: italic;
+    color: var(--accent);
+  }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    padding: 20px;
+  }
+  @media (max-width: 600px) {
+    .lecture { padding: 18px; }
+    header { padding: 30px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Week 6: Command Line Utilities &amp; Bash Scripts</h1>
+  <p>Lecture 1, 2 &amp; 3 · Linux/Unix Automation Fundamentals</p>
+</header>
+
+<div class="container">
+
+  <!-- LECTURE 1 -->
+  <section class="lecture">
+    <h2>Lecture 1: Some Command Line Utilities</h2>
+    <p>These commands help automate file management and are widely used by Linux/Unix administrators.</p>
+
+    <table>
+      <tr><th>Command</th><th>Purpose</th></tr>
+      <tr><td><code>find</code></td><td>Search files/directories based on conditions</td></tr>
+      <tr><td><code>tar</code></td><td>Bundle multiple files/directories into one archive</td></tr>
+      <tr><td><code>gzip</code></td><td>Compress files to save storage</td></tr>
+      <tr><td><code>make</code></td><td>Run commands only when required (conditional automation)</td></tr>
+    </table>
+    <p>These tools are often combined in scripts for backup, cleanup, and maintenance.</p>
+
+    <h3>find Command</h3>
+    <p><strong>Purpose:</strong> Search files/directories based on conditions.</p>
+    <p><strong>Syntax:</strong> <code>find [path] [conditions]</code></p>
+    <pre><code>find . -name "*.txt"   # Search all .txt files in current directory and subdirectories</code></pre>
+
+    <h3>Common Conditions</h3>
+    <ul>
+      <li><code>-name</code> → Search by filename<br>Example: <code>find . -name "*.c"</code></li>
+      <li><code>-type</code> → Search by file type (f = file, d = directory, l = link, c = character device)<br>Example: <code>find . -type d</code></li>
+      <li><code>-atime</code> → Search by last access time<br>Example: <code>find . -atime +30</code> (accessed more than 30 days ago)</li>
+      <li><code>-ctime</code> → Search by last modification/change time<br>Example: <code>find . -ctime -7</code> (modified within last 7 days)</li>
+      <li><code>-size</code> → Search by file size<br>Example: <code>find . -size +100M</code></li>
+      <li><code>-regex</code> → Search using regex<br>Example: <code>find . -regex ".*\.txt"</code></li>
+      <li><code>-print</code> → Print matching filenames<br>Example: <code>find . -name "*.txt" -print</code></li>
+    </ul>
+
+    <h3>-exec (Most Important)</h3>
+    <p>Run a command on each matched file.</p>
+    <p><strong>Syntax:</strong> <code>find . [condition] -exec command {} \;</code></p>
+    <pre><code>find . -name "*.log" -exec rm {} \;   # Deletes all .log files</code></pre>
+    <p><strong>Best Practice:</strong> Test with <code>-print</code> before using <code>-exec</code>.</p>
+
+    <h3>tar Command (Archiving)</h3>
+    <p><strong>Purpose:</strong> Bundle files/directories into one archive (no compression).</p>
+    <p><strong>Syntax:</strong> <code>tar -cvf archive.tar directory</code></p>
+    <ul>
+      <li><code>c</code> → Create archive</li>
+      <li><code>v</code> → Verbose (show files)</li>
+      <li><code>f</code> → Archive filename</li>
+    </ul>
+    <pre><code>tar -cvf backup.tar project/</code></pre>
+    <p>Note: <code>tar</code> only archives, does not compress.<br>Example: Folder size = 450 MB → backup.tar ≈ 460 MB (metadata overhead).</p>
+
+    <h3>Compression Utilities</h3>
+    <p>Compression saves disk space. Effectiveness depends on data repetition.</p>
+    <table>
+      <tr><th>Utility</th><th>Compression</th><th>Speed</th><th>CPU/RAM</th></tr>
+      <tr><td><code>compress</code></td><td>Low</td><td>Fastest</td><td>Very Low</td></tr>
+      <tr><td><code>gzip</code></td><td>Medium</td><td>Fast</td><td>Moderate</td></tr>
+      <tr><td><code>bzip2</code></td><td>High</td><td>Slow</td><td>High</td></tr>
+    </table>
+
+    <h3>Ratios</h3>
+    <ul>
+      <li>ASCII text: 100 MB → 10 MB (≈1:10)</li>
+      <li>Repetitive logs: 100 MB → 5 MB (≈1:20)</li>
+    </ul>
+
+    <h3>Usage</h3>
+    <ul>
+      <li><code>compress</code> → Fastest, lowest compression</li>
+      <li><code>gzip</code> → Best balance, standard choice</li>
+      <li><code>bzip2</code> → Highest compression, slower, more RAM</li>
+    </ul>
+    <p>Portable formats: <code>gzip</code>, <code>bzip2</code>, <code>xz</code>, <code>7z</code></p>
+
+    <h3>make Utility</h3>
+    <p><strong>Purpose:</strong> Automates tasks only when needed (compilation, backups, automation).</p>
+
+    <h3>Makefile Structure</h3>
+    <pre><code>Target : Prerequisites
+	Recipe</code></pre>
+    <p>Example:</p>
+    <pre><code>backup.tar: project
+	tar -cvf backup.tar project</code></pre>
+    <ul>
+      <li><strong>Target:</strong> File/action to create (e.g., <code>backup.tar</code>)</li>
+      <li><strong>Prerequisites:</strong> Dependencies (e.g., <code>project</code>)</li>
+      <li><strong>Recipe:</strong> Command to execute (must start with TAB)</li>
+    </ul>
+
+    <h3>Variables</h3>
+    <ul>
+      <li><code>:=</code> → One-time substitution</li>
+      <li><code>=</code> → Recalculated every use</li>
+    </ul>
+    <pre><code>DATE := $(shell date)   # fixed once
+DATE = $(shell date)    # recalculated each time</code></pre>
+
+    <h3>Intelligent Behavior</h3>
+    <ul>
+      <li>Compares timestamps before running commands.</li>
+      <li>Skips if source unchanged → saves CPU time.</li>
+    </ul>
+
+    <h3>Professional Workflows</h3>
+    <ul>
+      <li><strong>Automated Cleanup:</strong> <code>find</code> to delete old temp files.</li>
+      <li><strong>Timestamped Backup:</strong> <code>make</code> + <code>tar</code> → backup only if files changed.</li>
+      <li><strong>Disk Optimization:</strong> <code>gzip</code>/<code>bzip2</code> → reduce log size by 90%.</li>
+      <li><strong>System Migration:</strong> <code>tar</code> + <code>gzip</code> → <code>.tar.gz</code> archives for transfer.</li>
+    </ul>
+
+    <div class="revision">
+      <h3>Quick Revision</h3>
+      <ul>
+        <li><code>find</code> → Search files/directories
+          <ul><li><code>-name</code>, <code>-type</code>, <code>-atime</code>, <code>-ctime</code>, <code>-size</code>, <code>-regex</code>, <code>-print</code>, <code>-exec</code></li></ul>
+        </li>
+        <li><code>tar</code> → Archive only (no compression)
+          <ul>
+            <li><code>tar -cvf archive.tar folder</code></li>
+            <li>Options: c, v, f</li>
+          </ul>
+        </li>
+        <li><code>gzip</code> / <code>bzip2</code> → Compression utilities
+          <ul>
+            <li><code>gzip</code> → Balanced, fast</li>
+            <li><code>bzip2</code> → Highest compression, slower</li>
+            <li>Ratios: Text ≈1:10, Logs ≈1:20</li>
+          </ul>
+        </li>
+        <li><code>make</code> → Conditional automation
+          <ul>
+            <li>Structure: Target, Prerequisites, Recipe (TAB required)</li>
+            <li>Variables: <code>:=</code> (once), <code>=</code> (every time)</li>
+            <li>Intelligent timestamp comparison</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- LECTURE 2 -->
+  <section class="lecture">
+    <h2>Lecture 2: Overview of Shell Scripts</h2>
+
+    <h3>Unix Philosophy</h3>
+    <p>Linux follows the principle: <em>"Small tools + Shell = Powerful Automation"</em></p>
+
+    <h3>Core Principles</h3>
+    <ul>
+      <li><strong>Do One Thing Well</strong> — Each command has a single job.<br>Example: <code>grep</code> (search), <code>sort</code> (sort), <code>wc</code> (count).</li>
+      <li><strong>Everything is Text</strong> — Data treated as text streams.<br>Example: <code>cat file.txt | grep "Linux"</code></li>
+      <li><strong>Standard Input &amp; Output</strong> — stdin → input, stdout → output.<br>Example: <code>ls | sort</code></li>
+      <li><strong>User Combines Commands</strong> — Tools are simple; user decides combinations.</li>
+      <li><strong>Don't Be Chatty</strong> — Commands should produce minimal output for clean piping.</li>
+    </ul>
+
+    <h3>Interpreted Languages in Linux</h3>
+    <ul>
+      <li>Common: Bash, awk, sed, Python, Perl, Ruby.</li>
+      <li><code>awk</code> &amp; <code>sed</code>: Installed by default, portable, no extra setup.</li>
+    </ul>
+
+    <h3>Script Anatomy</h3>
+    <ul>
+      <li>Shell Script: Text file containing commands.</li>
+      <li>Shebang (<code>#!</code>): Defines interpreter.</li>
+    </ul>
+    <pre><code>#!/bin/bash</code></pre>
+
+    <h3>PATH Environment Variable</h3>
+    <ul>
+      <li>Defines where Linux searches commands.</li>
+      <li>Example: <code>/bin:/usr/bin:/home/user/bin</code></li>
+      <li>Best practice: Place scripts in leftmost PATH directory.</li>
+    </ul>
+
+    <h3>Symbolic &amp; Hard Links</h3>
+    <ul><li>Scripts can be executed via links pointing to original file.</li></ul>
+
+    <h3>Login vs Non-Login Shell</h3>
+    <table>
+      <tr><th>Login Shell</th><th>Non-Login Shell</th></tr>
+      <tr><td>Starts after login/SSH</td><td>Opens inside GUI terminal</td></tr>
+      <tr><td>Reads login files</td><td>Inherits parent environment</td></tr>
+      <tr><td>Fresh environment</td><td>Uses existing environment</td></tr>
+    </table>
+    <p>Files like <code>.bash_profile</code> and <code>.bashrc</code> control shell behavior.</p>
+
+    <h3>Running a Script</h3>
+    <p><strong>1. Source Script</strong></p>
+    <ul>
+      <li>Syntax: <code>source script.sh</code> or <code>. script.sh</code></li>
+      <li>Runs in current shell, same PID, variables persist.</li>
+      <li>Used for environment setup.</li>
+    </ul>
+    <p><strong>2. Execute Script</strong></p>
+    <ul>
+      <li>Syntax: <code>./script.sh</code></li>
+      <li>Runs in child shell, new PID, variables disappear.</li>
+      <li>Preferred for normal programs.</li>
+    </ul>
+    <p><strong>Difference:</strong> Source → Same shell, variables remain. Execute → Child shell, variables vanish.</p>
+
+    <h3>Input &amp; Output</h3>
+    <ul>
+      <li><code>echo</code> → Simple output.</li>
+      <li><code>printf</code> → Formatted output (preferred).</li>
+    </ul>
+    <pre><code>printf "Name: %s\n" "Rahul"</code></pre>
+
+    <h3>Command Substitution</h3>
+    <pre><code>DATE=`date`      # old
+DATE=$(date)     # new (preferred)</code></pre>
+
+    <h3>Variables &amp; Command-Line Arguments</h3>
+    <ul>
+      <li><code>$0</code> → Script name.</li>
+      <li><code>$#</code> → Number of arguments.</li>
+      <li><code>$1</code>, <code>$2</code>… → Arguments.</li>
+      <li><code>${11}</code> → 11th argument.</li>
+      <li><code>"$*"</code> → All arguments as one string.</li>
+      <li><code>"$@"</code> → Each argument separately (preferred).</li>
+    </ul>
+    <p><strong>Best Practice:</strong> Always use braces → <code>${name}</code></p>
+
+    <h3>Flow Control</h3>
+    <p><strong>if Statement</strong></p>
+    <pre><code>if [ condition ]; then
+    commands
+fi</code></pre>
+    <p><strong>case Statement</strong></p>
+    <pre><code>case variable in
+    pattern1) commands ;;
+    pattern2) commands ;;
+esac</code></pre>
+
+    <h3>Loops</h3>
+    <ul>
+      <li><code>for</code> → Iterates list.</li>
+      <li><code>while</code> → Runs while condition true.</li>
+      <li><code>until</code> → Runs until condition true.</li>
+    </ul>
+
+    <h3>Test Command (Conditions)</h3>
+    <ul>
+      <li><code>test condition</code> or <code>[ condition ]</code></li>
+      <li>Enhanced: <code>[[ condition ]]</code> → regex, advanced comparisons.</li>
+      <li>Arithmetic: <code>(( expression ))</code></li>
+    </ul>
+
+    <h3>File Tests</h3>
+    <ul>
+      <li><code>-e</code> → Exists</li>
+      <li><code>-d</code> → Directory</li>
+      <li><code>-s</code> → Not empty</li>
+      <li><code>-x</code> → Executable</li>
+    </ul>
+
+    <h3>String Tests</h3>
+    <ul>
+      <li><code>=</code> → Equal</li>
+      <li><code>!=</code> → Not equal</li>
+      <li><code>-z</code> → Empty string</li>
+    </ul>
+
+    <h3>Numeric Tests</h3>
+    <ul>
+      <li><code>-eq</code> → Equal</li>
+      <li><code>-gt</code> → Greater than</li>
+      <li><code>-lt</code> → Less than</li>
+    </ul>
+
+    <h3>File Timestamp Tests</h3>
+    <ul>
+      <li><code>-nt</code> → Newer than</li>
+      <li><code>-ot</code> → Older than</li>
+    </ul>
+
+    <h3>Functions</h3>
+    <pre><code>function_name() {
+    commands
+}</code></pre>
+    <p>Example:</p>
+    <pre><code>hello() {
+    echo "Welcome"
+}</code></pre>
+    <p><strong>Rule:</strong> Function must be defined before calling. Otherwise, Bash may execute a program with the same name.</p>
+
+    <h3>Running a Shell Script – Steps</h3>
+    <ul>
+      <li>Write the script.</li>
+      <li>Save the file.</li>
+      <li>Give execute permission: <code>chmod +x script.sh</code></li>
+      <li>Run: <code>./script.sh</code></li>
+    </ul>
+
+    <div class="revision">
+      <h3>Quick Revision</h3>
+      <ul>
+        <li>Unix Philosophy → Do one thing well, text streams, stdin/stdout, pipes, minimal output.</li>
+        <li>Script Basics → Shebang, PATH, login vs non-login shell.</li>
+        <li>Running Scripts → <code>source</code> (same shell), <code>./script.sh</code> (child shell).</li>
+        <li>Output → <code>echo</code> (simple), <code>printf</code> (formatted).</li>
+        <li>Command Substitution → <code>$(command)</code> preferred.</li>
+        <li>Special Variables → <code>$0</code>, <code>$#</code>, <code>$1</code>…, <code>${11}</code>, <code>"$@"</code>.</li>
+        <li>Flow Control → <code>if</code>, <code>case</code>, <code>for</code>, <code>while</code>, <code>until</code>.</li>
+        <li>Tests → <code>[ ]</code>, <code>[[ ]]</code>, <code>(( ))</code>, file/string/numeric/timestamp tests.</li>
+        <li>Functions → Must be defined before calling.</li>
+        <li>Execution Steps → Write → Save → chmod → Run.</li>
+      </ul>
+      <div class="memory-trick">
+        Memory Trick: "Shebang → PATH → Source/Execute → Variables → Conditions → Loops → Functions"
+      </div>
+    </div>
+  </section>
+
+  <!-- LECTURE 3 -->
+  <section class="lecture">
+    <h2>Lecture 3: Bash Scripts - Part 01</h2>
+
+    <h3>Introduction</h3>
+    <ul>
+      <li>Shell scripting automates repetitive tasks in Linux, making work faster and consistent.</li>
+      <li>Scripts usually use the <code>.sh</code> extension (e.g., <code>backup.sh</code>, <code>install.sh</code>, <code>hello.sh</code>).</li>
+    </ul>
+    <p>Note: <code>.sh</code> is a convention, not a strict requirement.</p>
+
+    <h3>Creating a Script with vi</h3>
+    <ul>
+      <li>Command: <code>vi script.sh</code></li>
+      <li>Enter Insert Mode → <code>i</code></li>
+      <li>Save &amp; Exit → <code>Esc</code> → <code>:wq</code></li>
+    </ul>
+
+    <h3>Shebang (#!)</h3>
+    <ul>
+      <li>First line: <code>#!/bin/bash</code></li>
+      <li>Purpose: Ensures Bash interpreter runs the script, even if user's shell differs.</li>
+    </ul>
+
+    <h3>Comments</h3>
+    <p>Begin with <code>#</code></p>
+    <pre><code># This script creates a backup
+echo "Backup Started"</code></pre>
+    <p>Benefits: Explain code, improve readability, teamwork, easier updates.</p>
+
+    <h3>File Permissions &amp; Execution</h3>
+    <ul>
+      <li>New files are not executable → "Permission denied" error.</li>
+      <li>Grant permission: <code>chmod 755 script.sh</code></li>
+    </ul>
+
+    <h3>Meaning of 755</h3>
+    <table>
+      <tr><th>User</th><th>Permission</th><th>Value</th></tr>
+      <tr><td>Owner</td><td>Read + Write + Execute</td><td>7</td></tr>
+      <tr><td>Group</td><td>Read + Execute</td><td>5</td></tr>
+      <tr><td>Others</td><td>Read + Execute</td><td>5</td></tr>
+    </table>
+
+    <h3>Running a Script</h3>
+    <ul>
+      <li>Relative path: <code>./script.sh</code></li>
+      <li>Absolute path: <code>/home/user/script.sh</code></li>
+      <li>Reason for <code>./</code>: Current directory not in PATH for security.</li>
+    </ul>
+
+    <h3>Sourcing vs Direct Execution</h3>
+    <table>
+      <tr><th>Feature</th><th>Sourcing</th><th>Direct Execution</th></tr>
+      <tr><td>Command</td><td><code>. script.sh</code> / <code>source script.sh</code></td><td><code>./script.sh</code></td></tr>
+      <tr><td>PID</td><td>Same as parent shell</td><td>New child PID</td></tr>
+      <tr><td>Child Process</td><td>No</td><td>Yes</td></tr>
+      <tr><td>Variable Persistence</td><td>Yes</td><td>No</td></tr>
+    </table>
+
+    <h3>Sourcing</h3>
+    <ul>
+      <li>Syntax: <code>source script.sh</code> or <code>. script.sh</code></li>
+      <li>Runs in current shell, same PID, variables persist.</li>
+      <li>Useful for environment setup, SDK configuration.</li>
+    </ul>
+
+    <h3>Direct Execution</h3>
+    <ul>
+      <li>Syntax: <code>./script.sh</code></li>
+      <li>Creates child shell, new PID, variables disappear after exit.</li>
+      <li>Preferred for normal scripts.</li>
+    </ul>
+
+    <h3>$$ Variable</h3>
+    <ul>
+      <li>Stores current PID.</li>
+      <li>Example: <code>echo $$</code></li>
+    </ul>
+
+    <h3>Variable Persistence Example</h3>
+    <ul>
+      <li>Script: <code>export myvar="IITM"</code></li>
+      <li>Direct execution → variable disappears after script ends.</li>
+      <li>Sourcing → variable persists in current shell.</li>
+    </ul>
+
+    <h3>Positional Parameters</h3>
+    <ul>
+      <li><code>$0</code> → Script name/path.</li>
+      <li><code>$1</code>, <code>$2</code>, <code>$3</code>… → Arguments.</li>
+      <li><code>$#</code> → Number of arguments.</li>
+    </ul>
+
+    <h3>Examples</h3>
+    <ul>
+      <li><code>./script.sh</code> → <code>$0</code> = <code>./script.sh</code></li>
+      <li><code>./sum.sh 10 20</code> → <code>$1</code> = 10, <code>$2</code> = 20, <code>$#</code> = 2</li>
+    </ul>
+
+    <h3>Spaces &amp; Quotes</h3>
+    <ul>
+      <li><code>./script one two</code> → <code>$1</code> = one, <code>$2</code> = two</li>
+      <li><code>./script "one two"</code> → <code>$1</code> = "one two"</li>
+    </ul>
+
+    <h3>Conditional Statements</h3>
+    <p><strong>Basic if</strong></p>
+    <pre><code>if [ condition ]; then
+    commands
+fi</code></pre>
+
+    <h3>test Command</h3>
+    <ul>
+      <li><code>[ ]</code> is shorthand for <code>test</code>.</li>
+      <li>Example: <code>if [ -f file.txt ]</code></li>
+    </ul>
+
+    <h3>Comparison Operator</h3>
+    <ul>
+      <li><code>-ge</code> → Greater than or equal to.</li>
+      <li>Example: <code>if [ $# -ge 2 ]</code></li>
+    </ul>
+
+    <h3>Nested if</h3>
+    <pre><code>if [ $# -ge 2 ]; then
+    if [ "$1" = "$2" ]; then
+        echo "Arguments Match"
+    fi
+else
+    echo "Please pass 2 or more arguments."
+fi</code></pre>
+
+    <h3>Loops &amp; Expansion</h3>
+    <p><strong>For Loop</strong></p>
+    <pre><code>for i in list
+do
+    commands
+done</code></pre>
+
+    <h3>Brace Expansion</h3>
+    <ul>
+      <li><code>{a..d}</code> → a b c d</li>
+      <li><code>{1..5}</code> → 1 2 3 4 5</li>
+      <li><code>{a..d}{1..9}</code> → 36 combinations</li>
+    </ul>
+
+    <h3>Command Substitution</h3>
+    <ul>
+      <li>Modern: <code>$(command)</code></li>
+      <li>Old: <code>`command`</code> (not recommended).</li>
+    </ul>
+    <pre><code>for i in $(ls)
+do
+    echo $i
+done</code></pre>
+
+    <h3>Practical System Scripts</h3>
+    <p>Identify system scripts:</p>
+    <pre><code>file /bin/* | grep "shell script"</code></pre>
+
+    <h3>.bashrc File</h3>
+    <ul>
+      <li>Location: <code>~/.bashrc</code></li>
+      <li>Loaded automatically for interactive non-login shells.</li>
+      <li>Common uses: aliases, environment variables, functions, customization.</li>
+    </ul>
+    <p>Alias Example: <code>alias ll="ls -l"</code> → <code>ll</code> acts as <code>ls -l</code></p>
+
+    <h3>Safe Practice</h3>
+    <ul>
+      <li>Do not modify system files directly.</li>
+      <li>Copy and experiment separately.</li>
+    </ul>
+
+    <div class="revision">
+      <h3>Quick Revision</h3>
+      <ul>
+        <li>Script Creation → <code>vi script.sh</code>, <code>#!/bin/bash</code>, comments with <code>#</code></li>
+        <li>Permissions → <code>chmod 755 script.sh</code> (Owner rwx, Group r-x, Others r-x)</li>
+        <li>Running Scripts → <code>./script.sh</code> (relative), <code>/home/user/script.sh</code> (absolute)</li>
+        <li>Sourcing vs Execution → <code>source</code> (same shell, variables persist), <code>./</code> (child shell, variables vanish)</li>
+        <li>Positional Parameters → <code>$0</code> (script name), <code>$1</code>…<code>$n</code> (arguments), <code>$#</code> (argument count)</li>
+        <li>Conditionals → <code>if…fi</code>, <code>[ ]</code> = test, <code>-ge</code> operator, nested if for safe checks</li>
+        <li>Loops &amp; Expansion → <code>for</code>, <code>{1..5}</code>, <code>{a..d}{1..9}</code>, command substitution <code>$(command)</code></li>
+        <li>System Scripts → <code>file /bin/* | grep "shell script"</code></li>
+        <li><code>.bashrc</code> → aliases, variables, functions, customization</li>
+      </ul>
+      <div class="memory-trick">
+        Memory Trick: "Create → Shebang → chmod → Run → Source/Execute → Arguments → if → for → .bashrc"
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>Week 6 · Command Line Utilities &amp; Bash Scripts · Short Notes</footer>
+
+</body>
+</html>

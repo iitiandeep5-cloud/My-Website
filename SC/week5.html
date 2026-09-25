@@ -1,4 +1,7 @@
-<!-- Google Analytics -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -8,3 +11,656 @@
 </script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
      crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 5: Shell Variables - Short Notes</title>
+<style>
+  :root {
+    --bg: #f7f8fa;
+    --card-bg: #ffffff;
+    --text: #1f2430;
+    --muted: #5b6472;
+    --accent: #2f6fed;
+    --accent-light: #e8f0ff;
+    --code-bg: #1e2430;
+    --code-text: #e6e9f0;
+    --border: #e2e5ea;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  header {
+    background: linear-gradient(135deg, #2f6fed, #6a5bf0);
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  header h1 { margin: 0 0 8px; font-size: 1.8rem; }
+  header p { margin: 0; opacity: 0.9; font-size: 0.95rem; }
+  .container {
+    max-width: 900px;
+    margin: -30px auto 60px;
+    padding: 0 20px;
+  }
+  .lecture {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  }
+  .lecture h2 {
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent-light);
+    padding-bottom: 8px;
+    margin-top: 0;
+  }
+  h3 {
+    margin-top: 28px;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+    color: var(--text);
+  }
+  h3::before {
+    content: "▸ ";
+    color: var(--accent);
+  }
+  ul {
+    margin: 8px 0 16px;
+    padding-left: 22px;
+  }
+  li { margin-bottom: 4px; }
+  code {
+    background: var(--accent-light);
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.9em;
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 14px 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.88rem;
+    margin: 10px 0 16px;
+  }
+  pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 20px;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    text-align: left;
+  }
+  th {
+    background: var(--accent-light);
+    color: var(--accent);
+    font-weight: 600;
+  }
+  tr:nth-child(even) td { background: #fafbfc; }
+  .revision {
+    background: #fffaf0;
+    border: 1px solid #f0e0b8;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-top: 20px;
+  }
+  .revision h3 {
+    margin-top: 0;
+    color: #b8860b;
+  }
+  .revision h3::before { content: "★ "; color: #d4a017; }
+  .revision ul { columns: 1; }
+  code.tag {
+    display: inline-block;
+  }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    padding: 20px;
+  }
+  @media (max-width: 600px) {
+    .lecture { padding: 18px; }
+    header { padding: 30px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Week 5: Shell Variables — Short Notes</h1>
+  <p>Lecture 1, 2 &amp; 3 · Bash Shell Fundamentals</p>
+</header>
+
+<div class="container">
+
+  <!-- LECTURE 1 -->
+  <section class="lecture">
+    <h2>Lecture 1: $hell Variables</h2>
+
+    <h3>Shell Variables (Basic Idea)</h3>
+    <ul>
+      <li>Temporary memory locations used to store data.</li>
+      <li>Faster than file storage (no disk I/O).</li>
+      <li>More secure (stay inside shell and child processes).</li>
+      <li>Usage: Store configuration values, usernames, paths, ports.</li>
+      <li>Exist only during the shell session unless permanently configured.</li>
+    </ul>
+
+    <h3>Displaying Variables</h3>
+    <pre><code>echo $VARIABLE_NAME</code></pre>
+    <pre><code>echo $USER
+echo $HOME
+echo $PWD</code></pre>
+    <ul><li><code>$</code> tells the shell to replace with stored value.</li></ul>
+
+    <h3>Common Shell Variables</h3>
+    <table>
+      <tr><th>Variable</th><th>Meaning</th></tr>
+      <tr><td><code>$USER</code></td><td>Current logged-in user</td></tr>
+      <tr><td><code>$HOME</code></td><td>User's home directory</td></tr>
+      <tr><td><code>$HOSTNAME</code></td><td>Computer/Server name</td></tr>
+      <tr><td><code>$PWD</code></td><td>Present Working Directory</td></tr>
+    </table>
+
+    <h3>echo Command</h3>
+    <p>Prints text or variable values.</p>
+    <pre><code>echo Hello
+echo "Hello World"</code></pre>
+    <ul>
+      <li>Without quotes → multiple spaces collapse.</li>
+      <li>With quotes → spaces preserved.</li>
+    </ul>
+
+    <h3>pwd vs $PWD</h3>
+    <table>
+      <tr><th>Aspect</th><th>pwd (Command)</th><th>$PWD (Variable)</th></tr>
+      <tr><td>Execution</td><td>Runs program</td><td>Reads stored value</td></tr>
+      <tr><td>Speed</td><td>Slightly slower</td><td>Faster</td></tr>
+      <tr><td>Output</td><td>Prints directory</td><td>Stores string value</td></tr>
+    </table>
+
+    <h3>Quotation Marks</h3>
+    <ul>
+      <li>Double Quotes <code>" "</code> → Expand variables.<br>Example: <code>echo "User is $USER"</code> → <code>User is student</code></li>
+      <li>Single Quotes <code>' '</code> → Literal text.<br>Example: <code>echo 'User is $USER'</code> → <code>User is $USER</code></li>
+    </ul>
+
+    <h3>Multi-line Input</h3>
+    <ul>
+      <li>If quotes aren't closed, shell shows <code>&gt;</code> prompt.</li>
+      <li>Waits for closing quote before execution.</li>
+    </ul>
+
+    <h3>Escape Character</h3>
+    <ul><li>Backslash <code>\</code> removes special meaning.</li></ul>
+    <pre><code>echo \$USER   # Output: $USER</code></pre>
+
+    <h3>Environment Discovery Commands</h3>
+    <table>
+      <tr><th>Command</th><th>Shows</th></tr>
+      <tr><td><code>printenv</code></td><td>Exported variables</td></tr>
+      <tr><td><code>env</code></td><td>Exported variables</td></tr>
+      <tr><td><code>set</code></td><td>Variables + Functions (long output)</td></tr>
+    </table>
+
+    <h3>PATH Variable</h3>
+    <ul>
+      <li>Stores directories where shell searches for commands.</li>
+      <li>Example: <code>/usr/bin:/bin:/usr/local/bin</code></li>
+      <li>Search order: left → right.</li>
+      <li>Security: Malicious executables earlier in PATH override safe ones.</li>
+    </ul>
+
+    <h3>Aliases</h3>
+    <p>Shortcut for commands.</p>
+    <ul>
+      <li>Example: <code>alias ll='ls -l'</code></li>
+      <li>Bypass alias:
+        <ol>
+          <li><code>\command</code></li>
+          <li><code>/usr/bin/command</code></li>
+          <li><code>./command</code></li>
+        </ol>
+      </li>
+    </ul>
+
+    <h3>Special Shell Variables</h3>
+    <ul>
+      <li><code>$0</code> → Current shell name.</li>
+      <li><code>$$</code> → Current shell PID.</li>
+      <li><code>$?</code> → Exit status of previous command.</li>
+      <li><code>$-</code> → Active shell options.</li>
+    </ul>
+
+    <h3>Exit Codes</h3>
+    <ul>
+      <li>Range: 0–255</li>
+      <li>Important Codes:
+        <ul>
+          <li>0 → Success</li>
+          <li>1 → General Error</li>
+          <li>126 → Command not executable</li>
+          <li>127 → Command not found</li>
+          <li>130 → Interrupted (Ctrl+C)</li>
+          <li>137 → Killed (kill -9)</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Modulo 256 Rule</h3>
+    <ul>
+      <li>Exit codes are 1 byte.</li>
+      <li>Larger values reduced by <code>% 256</code>.</li>
+      <li>Example: 256 → 0 (appears as success).</li>
+    </ul>
+
+    <h3>Shell Flags ($-)</h3>
+    <ul>
+      <li>View with <code>echo $-</code></li>
+      <li>Common flags: h (hashing), B (brace expansion), i (interactive), m (job control), H (history enabled)</li>
+    </ul>
+
+    <h3>Flag Details</h3>
+    <ul>
+      <li><strong>h:</strong> Remembers command locations → faster execution.</li>
+      <li><strong>B:</strong> Brace expansion. Example: <code>{a,b}{1,2}</code> → a1 a2 b1 b2</li>
+      <li><strong>i:</strong> Interactive mode.</li>
+      <li><strong>m:</strong> Job control (background/foreground jobs).</li>
+      <li><strong>H:</strong> History shortcuts (e.g., <code>!!</code>).</li>
+    </ul>
+
+    <h3>Process Monitoring Commands</h3>
+    <ul>
+      <li><code>ps</code> → Snapshot of processes.</li>
+      <li><code>top</code> → Live monitoring (CPU, RAM).</li>
+      <li><code>jobs</code> → Background jobs.</li>
+      <li><code>kill PID</code> → Terminate process.</li>
+    </ul>
+    <p>Process Tree: <code>ps --forest</code> → Shows parent-child relationship.</p>
+
+    <h3>PID and PPID</h3>
+    <ul>
+      <li>PID: Unique process ID.</li>
+      <li>PPID: Parent process ID (who created it).</li>
+    </ul>
+
+    <h3>Root Process</h3>
+    <ul><li>Ancestor of all processes: <code>init</code> or <code>systemd</code>. Always PID = 1.</li></ul>
+
+    <div class="revision">
+      <h3>Revision</h3>
+      <ul>
+        <li>Shell variables → Temporary memory storage.</li>
+        <li><code>echo $VAR</code> → Display variable.</li>
+        <li><code>$USER</code>, <code>$HOME</code>, <code>$PWD</code> → Common variables.</li>
+        <li><code>pwd</code> vs <code>$PWD</code> → Command vs variable.</li>
+        <li>Quotes: <code>" "</code> expand, <code>' '</code> literal.</li>
+        <li><code>\</code> → Escape character.</li>
+        <li><code>printenv</code>, <code>env</code>, <code>set</code> → Environment discovery.</li>
+        <li><code>$0</code>, <code>$$</code>, <code>$?</code>, <code>$-</code> → Special variables.</li>
+        <li>Exit codes: 0 success, non-zero error.</li>
+        <li><code>PATH</code> → Command search directories.</li>
+        <li>Aliases → Shortcuts.</li>
+        <li>Process monitoring: <code>ps</code>, <code>top</code>, <code>jobs</code>, <code>kill</code>.</li>
+        <li>Process tree: <code>ps --forest</code>.</li>
+        <li>PID, PPID, Root process (PID=1).</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- LECTURE 2 -->
+  <section class="lecture">
+    <h2>Lecture 2: Shell Variables — Part 1</h2>
+
+    <h3>Variable Initialization</h3>
+    <pre><code>variable=value</code></pre>
+    <pre><code>name=Deepika
+age=20
+student_name=Rahul
+marks1=95
+total_marks=500</code></pre>
+    <ul>
+      <li>Allowed: Letters, numbers, underscore (_).</li>
+      <li>Cannot start with a number (<code>10name=Rahul</code> → error).</li>
+      <li>No spaces around <code>=</code> (<code>name = Rahul</code> → error).</li>
+      <li>Use underscore instead of space (<code>Student_Name=Rahul</code>).</li>
+    </ul>
+
+    <h3>Assigning Values</h3>
+    <ul>
+      <li>Numbers: <code>age=20</code> (no quotes needed).</li>
+      <li>Strings: <code>name=Rahul</code> (works for one word).</li>
+      <li>Strings with spaces: Must use quotes.</li>
+    </ul>
+    <pre><code>city="New Delhi"</code></pre>
+
+    <h3>Clearing Variables</h3>
+    <ul>
+      <li><strong>Method 1 (unset):</strong> Removes variable completely. <code>unset name</code></li>
+      <li><strong>Method 2 (null assignment):</strong> Keeps variable but empties value. <code>name=</code></li>
+      <li>Difference: <code>unset</code> → deletes variable; <code>var=</code> → variable exists but empty.</li>
+    </ul>
+
+    <h3>Command Substitution</h3>
+    <pre><code>today=`date`     # old syntax
+today=$(date)    # modern syntax</code></pre>
+
+    <h3>Variable Scope</h3>
+    <pre><code>myvar=100</code></pre>
+    <p><strong>Export Variables:</strong> Make variable available to child processes.</p>
+    <pre><code>export myvar
+export myvar=100</code></pre>
+
+    <h3>Parent and Child Shell</h3>
+    <ul>
+      <li>Parent exports variable → child can access.</li>
+      <li>Child changes never affect parent.</li>
+      <li>Rule: Parent ➜ Child ✅ | Child ➜ Parent ❌</li>
+    </ul>
+
+    <h3>Testing Variables</h3>
+    <pre><code>test -v myvar
+[ -v myvar ]</code></pre>
+    <ul>
+      <li>Return status: <code>echo $?</code> → 0 if exists, 1 if not.</li>
+      <li>Check empty string: <code>[ -z "$name" ]</code></li>
+    </ul>
+
+    <h3>Return Status ($?)</h3>
+    <ul>
+      <li>Every command updates <code>$?</code>.</li>
+      <li>0 → Success / True | 1 → Failure / False</li>
+    </ul>
+
+    <h3>Parameter Expansion</h3>
+    <table>
+      <tr><th>Syntax</th><th>Meaning</th></tr>
+      <tr><td><code>${city:-Delhi}</code></td><td>Default Value (use if unset, don't assign)</td></tr>
+      <tr><td><code>${city:=Delhi}</code></td><td>Set Default (assign if unset)</td></tr>
+      <tr><td><code>${var:?Variable Missing}</code></td><td>Error Message if unset</td></tr>
+      <tr><td><code>${var:+YES}</code></td><td>Alternative Value if set</td></tr>
+    </table>
+
+    <h3>Variable Discovery</h3>
+    <pre><code>echo ${!H*}
+# Example output: HOME HOSTNAME HISTFILE</code></pre>
+
+    <h3>String Operations</h3>
+    <ul>
+      <li><strong>Length:</strong> <code>echo ${#name}</code></li>
+      <li><strong>Substring:</strong> <code>echo ${name:0:4}</code> → Deep, <code>echo ${name: -2}</code> → ha</li>
+      <li><strong>Remove Prefix:</strong> <code>${var#pattern}</code> (shortest), <code>${var##pattern}</code> (longest)</li>
+      <li><strong>Remove Suffix:</strong> <code>${var%pattern}</code> (shortest), <code>${var%%pattern}</code> (longest)</li>
+      <li><strong>Search &amp; Replace:</strong>
+        <ul>
+          <li><code>${var/old/new}</code> — first occurrence</li>
+          <li><code>${var//old/new}</code> — all occurrences</li>
+          <li><code>${var/#old/new}</code> — beginning</li>
+          <li><code>${var/%old/new}</code> — end</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Case Conversion</h3>
+    <ul>
+      <li>Lowercase: first letter <code>${var,}</code>, entire string <code>${var,,}</code></li>
+      <li>Uppercase: first letter <code>${var^}</code>, entire string <code>${var^^}</code></li>
+    </ul>
+
+    <h3>Variable Attributes (declare)</h3>
+    <ul>
+      <li>Integer: <code>declare -i age</code></li>
+      <li>Lowercase: <code>declare -l city</code></li>
+      <li>Uppercase: <code>declare -u country</code></li>
+      <li>Read-only: <code>declare -r PI=3.14</code></li>
+    </ul>
+
+    <h3>Remove Attributes</h3>
+    <pre><code>declare +i age</code></pre>
+    <ul><li>Exception: Read-only (<code>-r</code>) cannot be removed. Restart shell required.</li></ul>
+
+    <h3>Arrays</h3>
+    <p><strong>Indexed Arrays:</strong></p>
+    <pre><code>fruits=(Apple Mango Banana)
+echo ${fruits[1]}   # Mango</code></pre>
+    <p>Non-continuous indices allowed.</p>
+    <p><strong>Associative Arrays:</strong></p>
+    <pre><code>declare -A student
+student[name]=Rahul
+student[age]=20
+echo ${student[name]}   # Rahul</code></pre>
+
+    <h3>Array Operations</h3>
+    <ul>
+      <li>Access element → <code>${arr[index]}</code></li>
+      <li>All elements → <code>${arr[@]}</code></li>
+      <li>Number of elements → <code>${#arr[@]}</code></li>
+      <li>List all indices/keys → <code>${!arr[@]}</code></li>
+      <li>Delete element → <code>unset arr[2]</code></li>
+      <li>Append (indexed only) → <code>arr+=("Orange")</code></li>
+    </ul>
+
+    <div class="revision">
+      <h3>Revision</h3>
+      <ul>
+        <li><code>name=value</code> → Variable syntax (no spaces).</li>
+        <li>Variable names → Letters, numbers, _; cannot start with number.</li>
+        <li>Strings with spaces → Use quotes.</li>
+        <li><code>unset var</code> → Delete variable.</li>
+        <li><code>var=</code> → Empty value but exists.</li>
+        <li><code>$(command)</code> → Command substitution.</li>
+        <li>Variables local by default.</li>
+        <li><code>export var</code> → Child processes can use.</li>
+        <li>Parent ➜ Child ✅ | Child ➜ Parent ❌.</li>
+        <li><code>test -v var</code> → Exists check.</li>
+        <li><code>-z</code> → Empty string check.</li>
+        <li><code>$?</code> → Return status (0 success, 1 failure).</li>
+        <li><code>${var:-x}</code> → Use default only.</li>
+        <li><code>${var:=x}</code> → Set and use default.</li>
+        <li><code>${var:?msg}</code> → Error if unset.</li>
+        <li><code>${var:+x}</code> → Alternate if exists.</li>
+        <li><code>${!H*}</code> → Variables starting with H.</li>
+        <li><code>${#var}</code> → String length.</li>
+        <li><code>${var:offset:length}</code> → Substring.</li>
+        <li><code>${var#pattern}</code> / <code>${var%pattern}</code> → Remove prefix/suffix.</li>
+        <li><code>${var/old/new}</code> → Replace.</li>
+        <li><code>${var,,}</code> / <code>${var^^}</code> → Case conversion.</li>
+        <li><code>declare -i/-l/-u/-r</code> → Attributes.</li>
+        <li>Arrays: <code>${arr[@]}</code>, <code>${#arr[@]}</code>, <code>${!arr[@]}</code>.</li>
+        <li><code>+=</code> works only for indexed arrays.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- LECTURE 3 -->
+  <section class="lecture">
+    <h2>Lecture 3: Shell Variables — Part 2</h2>
+
+    <h3>Shell Environment Inspection</h3>
+    <ul>
+      <li>Always check existing variables before scripting.</li>
+      <li>Helps avoid conflicts, verify required variables, and debug scripts.</li>
+    </ul>
+
+    <h3>Commands to View Environment Variables</h3>
+    <pre><code>printenv
+printenv HOME</code></pre>
+    <table>
+      <tr><th>Command</th><th>Purpose</th></tr>
+      <tr><td><code>printenv</code></td><td>Show exported environment vars</td></tr>
+      <tr><td><code>env</code></td><td>Show exported environment vars</td></tr>
+    </table>
+
+    <h3>Variable Name Discovery</h3>
+    <pre><code>echo ${!prefix*}</code></pre>
+    <pre><code>echo ${!H*}    # HOME HOSTNAME HISTSIZE
+echo ${!HI*}   # HISTSIZE</code></pre>
+    <ul>
+      <li><code>$HOME</code> → Variable value</li>
+      <li><code>${!H*}</code> → Variable names starting with H</li>
+    </ul>
+
+    <h3>String Length</h3>
+    <pre><code>name=abcdef
+echo ${#name}   # 6</code></pre>
+
+    <h3>String Slicing (Substring)</h3>
+    <pre><code>${var:offset:length}</code></pre>
+    <pre><code>text=abcdefgh12345678
+echo ${text:3:3}   # def</code></pre>
+
+    <h3>Negative Offset</h3>
+    <pre><code>${var: -3:3}</code></pre>
+    <pre><code>text=abcdefgh12345678
+echo ${text: -3:3}   # 678</code></pre>
+
+    <h3>Date Example</h3>
+    <pre><code>mydate=$(date)
+echo ${mydate:0:3}   # Sun</code></pre>
+    <p>Alternative:</p>
+    <pre><code>date "+%d %B %Y"   # 22 January 2023</code></pre>
+
+    <h3>Prefix Removal (#)</h3>
+    <ul>
+      <li>Shortest: <code>${var#pattern}</code></li>
+      <li>Longest: <code>${var##pattern}</code></li>
+    </ul>
+    <pre><code>file=file.txt.jpg
+echo ${file##*.}   # jpg</code></pre>
+
+    <h3>Suffix Removal (%)</h3>
+    <ul>
+      <li>Shortest: <code>${var%pattern}</code></li>
+      <li>Longest: <code>${var%%pattern}</code></li>
+    </ul>
+    <pre><code>file=file.txt.jpg
+echo ${file%%.*}   # file</code></pre>
+
+    <h3>Filename Reconstruction</h3>
+    <pre><code>file=myfilename.somethingelse.jpg
+echo ${file%%.*}.${file##*.}   # myfilename.jpg</code></pre>
+
+    <h3>Search and Replace</h3>
+    <ul>
+      <li>First match: <code>${var/old/new}</code></li>
+      <li>All matches: <code>${var//old/new}</code></li>
+      <li>Beginning only: <code>${var/#old/new}</code></li>
+      <li>End only: <code>${var/%old/new}</code></li>
+    </ul>
+
+    <h3>Case Conversion</h3>
+    <ul>
+      <li>Lowercase first letter: <code>${var,}</code></li>
+      <li>Lowercase all: <code>${var,,}</code></li>
+      <li>Uppercase first letter: <code>${var^}</code></li>
+      <li>Uppercase all: <code>${var^^}</code></li>
+    </ul>
+
+    <h3>declare Command</h3>
+    <ul>
+      <li>Assign attributes to variables.</li>
+      <li>Syntax: <code>declare option variable</code></li>
+      <li><code>-</code> adds attribute, <code>+</code> removes attribute.</li>
+    </ul>
+
+    <h3>Variable Attributes</h3>
+    <ul>
+      <li>Integer: <code>declare -i age</code></li>
+      <li>Lowercase: <code>declare -l city</code></li>
+      <li>Uppercase: <code>declare -u country</code></li>
+      <li>Read-only: <code>declare -r PI=3.14</code></li>
+    </ul>
+
+    <h3>Remove Attributes</h3>
+    <pre><code>declare +i age</code></pre>
+    <ul><li>Exception: Read-only (<code>-r</code>) cannot be removed. Only restarting shell clears it.</li></ul>
+
+    <h3>Arrays</h3>
+    <p>Store multiple values in one variable.</p>
+    <p><strong>Indexed Arrays (-a):</strong></p>
+    <pre><code>declare -a fruits
+fruits[0]=Apple
+fruits[1]=Mango
+fruits[2]=Orange</code></pre>
+    <p>Sparse arrays allowed: <code>arr[100]=C</code></p>
+
+    <p><strong>Associative Arrays (-A):</strong></p>
+    <pre><code>declare -A student
+student["id"]="Amal"
+student["new student"]="Bimal"</code></pre>
+
+    <h3>Array Assignment</h3>
+    <ul>
+      <li>Single element: <code>arr[0]="Apple"</code></li>
+      <li>Multiple elements: <code>arr=("Apple" "Mango" "Orange")</code></li>
+      <li>Append (indexed only): <code>arr+=("Banana")</code></li>
+    </ul>
+
+    <h3>Array Access &amp; Metadata</h3>
+    <ul>
+      <li>Specific element: <code>${arr[1]}</code></li>
+      <li>All elements: <code>${arr[@]}</code></li>
+      <li>Number of elements: <code>${#arr[@]}</code></li>
+      <li>All indices/keys: <code>${!arr[@]}</code></li>
+      <li>Delete element: <code>unset arr[2]</code></li>
+    </ul>
+
+    <h3>Store Command Output in Array</h3>
+    <pre><code>myfiles=($(ls))
+echo ${myfiles[0]}</code></pre>
+
+    <div class="revision">
+      <h3>Revision Cheat Sheet</h3>
+      <ul>
+        <li><code>printenv</code> / <code>env</code> → Show exported variables.</li>
+        <li><code>${!H*}</code> → Variable names starting with H.</li>
+        <li><code>$HOME</code> → Variable value.</li>
+        <li><code>${#var}</code> → String length.</li>
+        <li><code>${var:offset:length}</code> → Substring.</li>
+        <li>Negative offset requires space.</li>
+        <li><code>${var#pattern}</code> / <code>${var##pattern}</code> → Remove prefix.</li>
+        <li><code>${var%pattern}</code> / <code>${var%%pattern}</code> → Remove suffix.</li>
+        <li><code>${var/old/new}</code> → Replace first match.</li>
+        <li><code>${var//old/new}</code> → Replace all matches.</li>
+        <li><code>${var/#old/new}</code> → Replace beginning.</li>
+        <li><code>${var/%old/new}</code> → Replace end.</li>
+        <li><code>${var,}</code>, <code>${var,,}</code> → Lowercase.</li>
+        <li><code>${var^}</code>, <code>${var^^}</code> → Uppercase.</li>
+        <li><code>declare -i/-l/-u/-r</code> → Attributes.</li>
+        <li>Indexed arrays (-a) → numeric indices.</li>
+        <li>Associative arrays (-A) → string keys.</li>
+        <li><code>${arr[@]}</code> → All elements.</li>
+        <li><code>${#arr[@]}</code> → Count.</li>
+        <li><code>${!arr[@]}</code> → Indices/keys.</li>
+        <li><code>unset arr[index]</code> → Delete element.</li>
+        <li><code>myfiles=($(ls))</code> → Store command output in array.</li>
+      </ul>
+    </div>
+  </section>
+
+</div>
+
+<footer>Week 5 · Shell Variables · Short Notes</footer>
+
+</body>
+</html>
