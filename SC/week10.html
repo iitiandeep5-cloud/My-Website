@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 10: Version Control, Hardware & Storage - Short Notes</title>
+<style>
+  :root {
+    --bg: #f7f8fa;
+    --card-bg: #ffffff;
+    --text: #1f2430;
+    --muted: #5b6472;
+    --accent: #2f6fed;
+    --accent-light: #e8f0ff;
+    --code-bg: #1e2430;
+    --code-text: #e6e9f0;
+    --border: #e2e5ea;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  header {
+    background: linear-gradient(135deg, #2f6fed, #6a5bf0);
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  header h1 { margin: 0 0 8px; font-size: 1.8rem; }
+  header p { margin: 0; opacity: 0.9; font-size: 0.95rem; }
+  .container {
+    max-width: 900px;
+    margin: -30px auto 60px;
+    padding: 0 20px;
+  }
+  .lecture {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  }
+  .lecture h2 {
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent-light);
+    padding-bottom: 8px;
+    margin-top: 0;
+  }
+  h3 {
+    margin-top: 28px;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+    color: var(--text);
+  }
+  h3::before {
+    content: "▸ ";
+    color: var(--accent);
+  }
+  ul {
+    margin: 8px 0 16px;
+    padding-left: 22px;
+  }
+  li { margin-bottom: 4px; }
+  code {
+    background: var(--accent-light);
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.9em;
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 14px 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.88rem;
+    margin: 10px 0 16px;
+  }
+  pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 20px;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    text-align: left;
+  }
+  th {
+    background: var(--accent-light);
+    color: var(--accent);
+    font-weight: 600;
+  }
+  tr:nth-child(even) td { background: #fafbfc; }
+  .revision {
+    background: #fffaf0;
+    border: 1px solid #f0e0b8;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-top: 20px;
+  }
+  .revision h3 {
+    margin-top: 0;
+    color: #b8860b;
+  }
+  .revision h3::before { content: "★ "; color: #d4a017; }
+  .memory-trick {
+    background: var(--accent-light);
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-top: 14px;
+    font-style: italic;
+    color: var(--accent);
+  }
+  .warning {
+    background: #fff0f0;
+    border: 1px solid #f0c0c0;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 12px 0;
+    color: #a33;
+  }
+  .warning strong { color: #c0392b; }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    padding: 20px;
+  }
+  @media (max-width: 600px) {
+    .lecture { padding: 18px; }
+    header { padding: 30px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Week 10: Version Control, Hardware &amp; Storage</h1>
+  <p>Lecture 1–5 · Git, Hardware Discovery, Prompt Strings &amp; Storage Architecture</p>
+</header>
+
+<div class="container">
+
+  <!-- LECTURE 1 -->
+  <section class="lecture">
+    <h2>Lecture 1: Version Control — Part 01</h2>
+
+    <h3>Version Control Basics</h3>
+    <ul>
+      <li><strong>Definition:</strong> Tracks changes in code and maintains different versions.</li>
+      <li><strong>Save Point Analogy:</strong> Like checkpoints in a game.</li>
+      <li><strong>Importance:</strong> Backup/Safety, History, Revert, Collaboration, Traceability.</li>
+    </ul>
+
+    <h3>Modular Programming</h3>
+    <ul>
+      <li>One file → one function/class/module</li>
+      <li><strong>Advantages:</strong> Conflict Minimization, Clear Division of Work, Easy Maintenance</li>
+    </ul>
+
+    <h3>Build Automation — make</h3>
+    <ul>
+      <li><code>make</code> recompiles only changed files.</li>
+      <li>Benefit: Saves time, avoids unnecessary compilation.</li>
+    </ul>
+
+    <h3>Centralized vs Distributed Version Control</h3>
+    <table>
+      <tr><th>Feature</th><th>SVN</th><th>Git</th></tr>
+      <tr><td>Architecture</td><td>Centralized</td><td>Distributed</td></tr>
+      <tr><td>Offline work</td><td>Limited</td><td>Strong support</td></tr>
+      <tr><td>Redundancy</td><td>Backups</td><td>Built-in</td></tr>
+      <tr><td>Branching</td><td>Supported</td><td>Very powerful</td></tr>
+    </table>
+
+    <h3>RAID — Hardware Redundancy</h3>
+    <ul>
+      <li>RAID = Redundant Array of Independent Disks</li>
+      <li>Goals: Fault Tolerance, Performance, Capacity</li>
+    </ul>
+
+    <h3>RAID Levels</h3>
+    <ul>
+      <li><strong>RAID 0:</strong> Striping, speed, no redundancy</li>
+      <li><strong>RAID 1:</strong> Mirroring, safety, half usable capacity</li>
+      <li><strong>RAID 5:</strong> Striping + parity, tolerates 1 disk failure</li>
+      <li><strong>RAID 6:</strong> Extra parity, tolerates 2 disk failures</li>
+    </ul>
+
+    <h3>Other Concepts</h3>
+    <ul>
+      <li><strong>RAID Controller</strong> — manages striping/mirroring/parity</li>
+      <li><strong>Hot Spare</strong> — standby disk for auto-replacement</li>
+      <li><strong>Capacity Overhead</strong> — redundancy reduces usable space</li>
+    </ul>
+
+    <h3>GitHub &amp; Security</h3>
+    <ul>
+      <li>GitHub = Remote hosting + collaboration</li>
+      <li>Features: Pull Requests, Issue Tracking, Access Control</li>
+    </ul>
+
+    <h3>Security</h3>
+    <ul>
+      <li><strong>2FA</strong> — password + second factor</li>
+      <li><strong>PAT</strong> — token-based authentication
+        <ul>
+          <li>Granular permissions</li>
+          <li>Revocable</li>
+          <li>Safer than passwords</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Git CLI Workflow</h3>
+    <p><strong>Clone → Change → Add → Commit → Push</strong></p>
+    <ul>
+      <li><code>git clone</code> — copy remote repo</li>
+      <li><code>git init</code> — create repo in directory</li>
+      <li><code>git remote add origin</code> — connect local to remote</li>
+      <li><code>git add</code> — stage changes</li>
+      <li><code>git commit</code> — record changes locally</li>
+      <li><code>git push</code> — send commits to remote</li>
+    </ul>
+
+    <div class="revision">
+      <h3>Revision</h3>
+      <ul>
+        <li>Version Control → Tracks versions, revert anytime</li>
+        <li>Git vs SVN → Distributed vs centralized</li>
+        <li>RAID → 0 = Speed, 1 = Mirror, 5 = 1 failure, 6 = 2 failures</li>
+        <li>GitHub Security → 2FA + PAT</li>
+        <li>Workflow → Clone → Add → Commit → Push</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- LECTURE 2 -->
+  <section class="lecture">
+    <h2>Lecture 2: Version Control — Part 02</h2>
+
+    <h3>Why Security Matters</h3>
+    <ul>
+      <li><strong>Source Code Protection:</strong> Contains project logic, IP, credentials, private company info.</li>
+      <li><strong>Password Alone Not Enough</strong> → Modern authentication uses MFA/2FA.</li>
+    </ul>
+
+    <h3>GitHub Password Authentication Change</h3>
+    <ul>
+      <li>Since Aug 13, 2021, GitHub stopped accepting passwords for Git over HTTPS.</li>
+      <li>Use Personal Access Tokens (PATs) or other supported methods.</li>
+    </ul>
+
+    <h3>Two-Factor Authentication (2FA)</h3>
+    <ul>
+      <li>2FA = Password + Second Factor.</li>
+      <li>Protects accounts even if password leaks.</li>
+    </ul>
+
+    <h3>Methods</h3>
+    <ul>
+      <li><strong>Authenticator App</strong> → Strong choice, local codes, reliable.</li>
+      <li><strong>SMS</strong> → Possible delays, requires correct country code (India = +91).</li>
+    </ul>
+
+    <h3>Recovery Codes</h3>
+    <ul>
+      <li>Backup access if phone/authenticator unavailable.</li>
+      <li><strong>Best Practice:</strong> Save securely, never commit/share.</li>
+    </ul>
+
+    <h3>Repository Architecture</h3>
+    <ul>
+      <li><strong>Public Repository</strong> → Anyone can view/clone, only authorized users push.</li>
+      <li><strong>Private Repository</strong> → Restricted access.</li>
+    </ul>
+
+    <h3>Personal Access Token (PAT)</h3>
+    <ul>
+      <li>Credential for GitHub operations.</li>
+      <li>Advantages: Limited permissions, revocable, replaceable, purpose-specific.</li>
+    </ul>
+
+    <h3>Creating PAT</h3>
+    <ul>
+      <li>GitHub → Settings → Developer Settings → Personal Access Tokens → Create Token.</li>
+      <li>Name tokens meaningfully (e.g., <code>July-13-Repo</code>).</li>
+    </ul>
+
+    <div class="warning">
+      <strong>Protecting PAT:</strong> Never commit/share/upload PATs. Example danger: <code>git add .</code> accidentally stages <code>PAT.txt</code>. Safer storage: Credential managers, helpers, environment variables.
+    </div>
+
+    <h3>Git Identity</h3>
+    <pre><code>git config --global user.name "Your Name"
+git config --global user.email "your@email.com"</code></pre>
+    <p>Creates audit trail of commits.</p>
+
+    <h3>Git Workflow: Check → Add → Commit → Push</h3>
+    <ul>
+      <li><code>git init</code> → Create repo (<code>.git</code> directory).</li>
+      <li><code>git status</code> → Diagnostic, check before staging.</li>
+      <li><code>git add</code> → Stage changes (specific file preferred).</li>
+      <li><code>git commit</code> → Local snapshot.</li>
+      <li><code>git push</code> → Send commits to remote.</li>
+    </ul>
+
+    <h3>Branching &amp; Pull Requests</h3>
+    <ul>
+      <li>Branch = Separate line of development.</li>
+      <li>Example: <code>main</code> → <code>panda</code> (feature branch).</li>
+      <li>First Push: <code>git push --set-upstream origin panda</code>.</li>
+      <li>Pull Request → Review, merge into <code>main</code>.</li>
+      <li>Merge Conflicts → Manual resolution required.</li>
+      <li>Delete Feature Branch → Avoid branch bloat.</li>
+    </ul>
+
+    <h3>Security Practices</h3>
+    <ul>
+      <li><code>git rm --cached</code> → Stop tracking sensitive files.</li>
+      <li><code>.gitignore</code> → Prevent staging of secrets/logs/temp files.</li>
+      <li><code>mv PAT.txt ..</code> → Move secrets outside repo.</li>
+      <li>If exposed → Revoke/rotate immediately.</li>
+    </ul>
+
+    <h3>Common Errors</h3>
+    <ul>
+      <li><strong>Authentication Failure</strong> → Expired/revoked PAT, wrong permissions, cached credentials.</li>
+      <li><strong>Upstream Error</strong> → Fix with <code>git push --set-upstream origin branch</code>.</li>
+    </ul>
+
+    <h3>Complete Git Workflow</h3>
+    <ul>
+      <li><strong>Setup:</strong> <code>git init</code>, config identity, connect remote.</li>
+      <li><strong>Daily Dev:</strong> <code>git status</code> → <code>git add</code> → <code>git commit</code> → <code>git push</code>.</li>
+      <li><strong>Feature Work:</strong> Create branch, push, PR, merge, cleanup.</li>
+    </ul>
+
+    <h3>Cheat Sheet</h3>
+    <table>
+      <tr><th>Command</th><th>Meaning</th><th>Memory Trick</th></tr>
+      <tr><td><code>git init</code></td><td>Initialize repo</td><td>Creates .git</td></tr>
+      <tr><td><code>git clone</code></td><td>Copy remote repo</td><td>Local clone</td></tr>
+      <tr><td><code>git status</code></td><td>Show repo state</td><td>"What's happening?"</td></tr>
+      <tr><td><code>git add</code></td><td>Stage file</td><td>Select changes</td></tr>
+      <tr><td><code>git commit</code></td><td>Local snapshot</td><td>Records history</td></tr>
+      <tr><td><code>git push</code></td><td>Send commits</td><td>Updates remote</td></tr>
+      <tr><td><code>git branch</code></td><td>Create branch</td><td>Doesn't switch</td></tr>
+      <tr><td><code>git checkout</code></td><td>Switch branch</td><td>Changes current branch</td></tr>
+      <tr><td><code>git rm</code></td><td>Remove file</td><td>Stages deletion</td></tr>
+      <tr><td><code>git rm --cached</code></td><td>Stop tracking</td><td>Keep file locally</td></tr>
+    </table>
+
+    <div class="revision">
+      <h3>Essentials Points</h3>
+      <ul>
+        <li>Authentication: 2FA, PAT, Recovery Codes.</li>
+        <li>Workflow: Working Dir → Staging → Local Repo → Remote Repo.</li>
+        <li>Branching: Isolate features, PR for merge.</li>
+        <li>Security: Never commit PATs, use <code>.gitignore</code>, revoke exposed tokens.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- LECTURE 3 -->
+  <section class="lecture">
+    <h2>Lecture 3: Knowing Your Hardware</h2>
+
+    <h3>Hardware Discovery — Why?</h3>
+    <ul>
+      <li><strong>Definition:</strong> Identify and analyze system hardware.</li>
+      <li><strong>Why important:</strong> Troubleshooting, performance optimization, upgrades, virtualization, server planning.</li>
+      <li><strong>Easy idea:</strong> Hardware discovery = knowing CPU, RAM, disks, GPU, PCI devices, battery, network.</li>
+    </ul>
+
+    <h3>Installing Tools</h3>
+    <ul>
+      <li><code>hwinfo</code> / <code>lshw</code> → General hardware inventory.</li>
+      <li><code>pciutils</code> / <code>dmidecode</code> → PCI + RAM info.</li>
+      <li><code>hdparm</code> / <code>sysstat</code> → Disk + I/O monitoring.</li>
+      <li><code>clinfo</code> → GPU/OpenCL info.</li>
+      <li><code>upower</code> → Battery/power info.</li>
+      <li><code>net-tools</code> → Legacy networking (<code>ifconfig</code>).</li>
+    </ul>
+
+    <h3>Recording Hardware Info</h3>
+    <ul>
+      <li>Save outputs: <code>hwinfo --short &gt; hardware_baseline.txt</code>.</li>
+      <li>Benefits: Compare machines, keep baseline, share diagnostics.</li>
+      <li>GUI vs CLI: GUI (<code>hardinfo</code>) = overview; CLI = scriptable, remote-friendly.</li>
+    </ul>
+
+    <h3>Key Tools</h3>
+    <ul>
+      <li><code>hwinfo</code> → Broad probing.</li>
+      <li><code>lshw</code> → Hierarchical view.</li>
+      <li>Memory trick: <code>hwinfo</code> = lots of info, <code>lshw</code> = organized hierarchy.</li>
+    </ul>
+
+    <h3>CPU &amp; Memory</h3>
+    <ul>
+      <li><code>cat /proc/cpuinfo</code> → CPU details + flags.</li>
+      <li>CPU flags → Show supported features (virtualization, crypto).</li>
+      <li>Cache → Fast memory near CPU; reduces RAM fetches.</li>
+      <li><code>free -h</code> → RAM + swap usage.</li>
+      <li>Swap → Disk as memory extension (slower). Not always 2× RAM.</li>
+      <li><code>dmidecode</code> → RAM modules, BIOS, motherboard info.</li>
+      <li>DIMM vs SODIMM → DIMM = desktop/server, SODIMM = laptop/compact.</li>
+    </ul>
+
+    <h3>Storage</h3>
+    <ul>
+      <li><code>lsblk</code> → Block devices tree.</li>
+      <li><code>/proc/partitions</code> → Kernel partition info.</li>
+      <li><code>hdparm</code> → Disk benchmark.</li>
+      <li>SATA HDD vs SSD → HDD slower (~127 MB/s), SSD faster.</li>
+      <li>RAID → Striping improves throughput.</li>
+      <li>Cached vs actual read → Don't confuse cache speed with real disk speed.</li>
+      <li>Units: MB/s vs Mb/s (bytes vs bits).</li>
+      <li><code>iostat</code> → CPU + I/O monitoring, detect I/O-bound workloads.</li>
+    </ul>
+
+    <h3>PCI &amp; GPU</h3>
+    <ul>
+      <li><code>lspci</code> → List PCI/PCIe devices.</li>
+      <li>GPU types: Integrated (basic graphics), Dedicated (high-performance compute).</li>
+      <li><code>clinfo</code> → OpenCL device info.</li>
+    </ul>
+
+    <h3>Power &amp; Battery</h3>
+    <ul>
+      <li><code>upower -e</code> → List devices.</li>
+      <li><code>upower -i</code> → Detailed battery info.</li>
+      <li>Battery health = Full Charge ÷ Design Capacity × 100.</li>
+      <li>Replacement threshold ~30–40% design capacity (lecture example).</li>
+      <li>Time to empty → Dynamic, workload dependent.</li>
+    </ul>
+
+    <h3>Networking</h3>
+    <ul>
+      <li><code>ifconfig</code> → Legacy interface info.</li>
+      <li><code>ip addr</code> → Modern alternative.</li>
+      <li>Loopback → <code>127.0.0.1</code> = this computer itself.</li>
+      <li>Troubleshooting flow: Hardware → Interface → IP → Gateway → Network → Internet.</li>
+    </ul>
+
+    <h3>Revision Table</h3>
+    <table>
+      <tr><th>Topic</th><th>Tool/Concept</th><th>Memory Trick</th></tr>
+      <tr><td>General</td><td><code>hwinfo</code> / <code>lshw</code></td><td>Info vs hierarchy</td></tr>
+      <tr><td>CPU</td><td><code>/proc/cpuinfo</code></td><td>Flags = features</td></tr>
+      <tr><td>RAM</td><td><code>free -h</code> / <code>dmidecode</code></td><td>DIMM vs SODIMM</td></tr>
+      <tr><td>Storage</td><td><code>lsblk</code> / <code>hdparm</code></td><td>HDD vs SSD</td></tr>
+      <tr><td>I/O</td><td><code>iostat</code></td><td>Detect bottlenecks</td></tr>
+      <tr><td>PCI</td><td><code>lspci</code></td><td>List devices</td></tr>
+      <tr><td>GPU</td><td><code>clinfo</code></td><td>OpenCL info</td></tr>
+      <tr><td>Battery</td><td><code>upower</code></td><td>Health %</td></tr>
+      <tr><td>Network</td><td><code>ifconfig</code> / <code>ip addr</code></td><td>Loopback = 127.0.0.1</td></tr>
+    </table>
+
+    <h3>Memory Map</h3>
+    <ul>
+      <li>System → <code>hwinfo</code> / <code>lshw</code></li>
+      <li>CPU → <code>/proc/cpuinfo</code></li>
+      <li>RAM → <code>free</code> / <code>dmidecode</code></li>
+      <li>Storage → <code>lsblk</code> / <code>hdparm</code> / <code>iostat</code></li>
+      <li>PCI → <code>lspci</code></li>
+      <li>GPU → <code>clinfo</code></li>
+      <li>Battery → <code>upower</code></li>
+      <li>Network → <code>ifconfig</code> / <code>ip</code></li>
+    </ul>
+
+    <div class="revision">
+      <h3>1-Minute Revision</h3>
+      <ul>
+        <li><code>hwinfo</code> = broad probing, <code>lshw</code> = hierarchy.</li>
+        <li><code>/proc/cpuinfo</code> = CPU details, flags = features.</li>
+        <li><code>free -h</code> = RAM/swap, <code>dmidecode</code> = module info.</li>
+        <li><code>lsblk</code> = block devices, <code>hdparm</code> = disk speed.</li>
+        <li><code>iostat</code> = I/O bottlenecks.</li>
+        <li><code>lspci</code> = PCI devices, <code>clinfo</code> = GPU compute.</li>
+        <li><code>upower</code> = battery info, <code>127.0.0.1</code> = loopback.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- LECTURE 4 -->
+  <section class="lecture">
+    <h2>Lecture 4: Prompt String</h2>
+
+    <h3>Command-Line Prompt</h3>
+    <ul>
+      <li>CLI prompt = text/symbol shown when shell is ready for input.</li>
+      <li>Provides environment info: Username, Hostname, Current directory, Privilege (normal/root)</li>
+      <li>A changed prompt may indicate shell configuration changes or special environments.</li>
+    </ul>
+    <p>Common Linux Shells: Bash, Dash, Zsh, Ksh, Csh</p>
+
+    <h3>Bash Prompt Variables</h3>
+    <table>
+      <tr><th>Variable</th><th>Meaning</th><th>When it Appears</th><th>Default</th></tr>
+      <tr><td><code>PS1</code></td><td>Primary Prompt</td><td>Normal command input</td><td><code>$</code> / <code>#</code></td></tr>
+      <tr><td><code>PS2</code></td><td>Secondary Prompt</td><td>More input required</td><td><code>&gt;</code></td></tr>
+      <tr><td><code>PS3</code></td><td>Selection Prompt</td><td>Inside select loop</td><td><code>#?</code></td></tr>
+      <tr><td><code>PS4</code></td><td>Trace Prompt</td><td>Debugging with <code>set -x</code></td><td><code>+</code></td></tr>
+    </table>
+    <ul>
+      <li><code>PS1</code> → Normal prompt (<code>user@computer:~$</code>)</li>
+      <li><code>PS2</code> → Appears when command incomplete (<code>&gt;</code>).</li>
+      <li><code>PS3</code> → Used in select loops.</li>
+      <li><code>PS4</code> → Used for debugging (<code>set -x</code>).</li>
+    </ul>
+
+    <h3>Bash Prompt Escape Sequences</h3>
+    <p><strong>User &amp; Machine</strong></p>
+    <ul>
+      <li><code>\u</code> → Username</li>
+      <li><code>\h</code> → Hostname (short)</li>
+      <li><code>\H</code> → Full hostname</li>
+    </ul>
+    <p><strong>Date &amp; Time</strong></p>
+    <ul>
+      <li><code>\t</code> → 24-hour time</li>
+      <li><code>\T</code> → 12-hour time</li>
+      <li><code>\d</code> → Date</li>
+    </ul>
+    <p><strong>Directory &amp; History</strong></p>
+    <ul>
+      <li><code>\w</code> → Full path</li>
+      <li><code>\W</code> → Current directory name</li>
+      <li><code>\#</code> → Command number</li>
+    </ul>
+    <p>Example: <code>PS1="\u@\h:\w\$ "</code> → <code>user@computer:/home/user$</code></p>
+
+    <h3>Default Ubuntu Prompt</h3>
+    <ul>
+      <li>Format: <code>\u@\h:\w\$</code></li>
+      <li>Example: <code>student@ubuntu:/home/student$</code></li>
+      <li><code>$</code> → normal user, <code>#</code> → root user</li>
+    </ul>
+
+    <h3>ANSI Color Codes</h3>
+    <ul>
+      <li>Example: <code>\033[01;32m</code> → color formatting.</li>
+      <li>Difference:
+        <ul>
+          <li>Functional sequences (<code>\u</code>, <code>\h</code>, <code>\w</code>) → system info.</li>
+          <li>ANSI sequences → visual formatting.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Why Use \#</h3>
+    <ul>
+      <li>Shows command number in session.</li>
+      <li>Useful for debugging, tracking, and history.</li>
+    </ul>
+
+    <h3>Making Prompt Changes Permanent</h3>
+    <ul>
+      <li>Temporary change: <code>PS1="..."</code></li>
+      <li>Permanent change: edit <code>~/.bashrc</code></li>
+    </ul>
+    <p><strong>Best Practice:</strong> Comment out old config instead of deleting.</p>
+
+    <h3>Apply .bashrc Changes Immediately</h3>
+    <ul><li>Use: <code>source ~/.bashrc</code></li></ul>
+
+    <h3>Prompts in Other Environments</h3>
+    <table>
+      <tr><th>Environment</th><th>Prompt</th></tr>
+      <tr><td>Bash</td><td><code>$</code> / <code>#</code></td></tr>
+      <tr><td>Python</td><td><code>&gt;&gt;&gt;</code></td></tr>
+      <tr><td>Octave</td><td><code>octave:#</code></td></tr>
+      <tr><td>Gnuplot</td><td><code>gnuplot&gt;</code></td></tr>
+      <tr><td>SageMath</td><td><code>sage:</code></td></tr>
+    </table>
+
+    <h3>Bash vs Other Environments</h3>
+    <ul>
+      <li>Bash → prompt variables + escape sequences.</li>
+      <li>Python → programmatically customizable.</li>
+      <li>Octave → includes command sequence number.</li>
+      <li>Gnuplot → <code>gnuplot&gt;</code></li>
+      <li>SageMath → <code>sage:</code></li>
+    </ul>
+
+    <h3>Best Practices for Designing a Prompt</h3>
+    <ul>
+      <li>Show user (<code>\u</code>)</li>
+      <li>Show host (<code>\h</code>)</li>
+      <li>Show directory (<code>\w</code>)</li>
+      <li>Use <code>PS4</code> for debugging (<code>set -x</code>)</li>
+      <li>Save changes in <code>.bashrc</code></li>
+    </ul>
+
+    <div class="revision">
+      <h3>Revision Sheet</h3>
+      <ul>
+        <li>Prompt Variables:
+          <ul>
+            <li><code>PS1</code> → Normal</li>
+            <li><code>PS2</code> → Pending input</li>
+            <li><code>PS3</code> → Select loop</li>
+            <li><code>PS4</code> → Debug/Trace</li>
+          </ul>
+        </li>
+        <li>Escape Sequences:
+          <ul>
+            <li><code>\u</code> → Username</li>
+            <li><code>\h</code> → Hostname</li>
+            <li><code>\w</code> → Full directory</li>
+            <li><code>\W</code> → Current directory name</li>
+            <li><code>\#</code> → Command number</li>
+            <li><code>\t</code> → Time</li>
+            <li><code>\d</code> → Date</li>
+            <li><code>\$</code> → User/root</li>
+          </ul>
+        </li>
+        <li>Important Commands:
+          <ul>
+            <li><code>echo $PS1</code> → View prompt</li>
+            <li><code>set -x</code> → Enable tracing</li>
+            <li><code>source ~/.bashrc</code> → Reload config</li>
+          </ul>
+        </li>
+      </ul>
+      <h3>Important Points</h3>
+      <ul>
+        <li>PS1 = primary prompt</li>
+        <li>PS2 = incomplete input</li>
+        <li>PS3 = select loop</li>
+        <li>PS4 = debugging trace</li>
+        <li><code>.bashrc</code> → permanent customization</li>
+        <li>ANSI codes → colors only</li>
+        <li>Prompt = environment awareness tool</li>
+      </ul>
+      <div class="memory-trick">
+        Memory Trick: PS1 = Prompt, PS2 = Pending input, PS3 = Select, PS4 = Debug/Trace
+      </div>
+    </div>
+  </section>
+
+  <!-- LECTURE 5 -->
+  <section class="lecture">
+    <h2>Lecture 5: Managing Storage</h2>
+    <h3>Storage Architecture — Basic Idea</h3>
+    <ul>
+      <li>Modern storage = multiple disks managed as one system.</li>
+      <li>RAID → speed + redundancy + fault tolerance.</li>
+      <li>LVM → flexibility + logical storage management.</li>
+      <li>Flow: Physical Disks → RAID → Storage Pool → LVM → Logical Volume → File System → User.</li>
+    </ul>
+
+    <h3>LVM (Logical Volume Management)</h3>
+    <ul>
+      <li>Combines multiple physical disks into one logical volume.</li>
+      <li>Hides physical complexity.</li>
+      <li>Benefits: flexible, large logical volumes, easier management.</li>
+      <li>Implemented via <code>lvm2</code> package in Linux.</li>
+    </ul>
+
+    <h3>RAID (Redundant Array of Independent Disks)</h3>
+    <ul>
+      <li>Combines disks for performance, redundancy, fault tolerance.</li>
+      <li>Disk failure is inevitable → RAID reduces impact.</li>
+      <li>Types: Hardware RAID (controller) vs Software RAID (OS).</li>
+      <li>Supports hot swapping (replace failed disk while system runs).</li>
+    </ul>
+
+    <h3>RAID Levels</h3>
+    <table>
+      <tr><th>RAID</th><th>Purpose</th><th>Min Disks</th><th>Fault Tolerance</th></tr>
+      <tr><td>RAID 0</td><td>Speed, capacity</td><td>2</td><td>0</td></tr>
+      <tr><td>RAID 1</td><td>Mirroring</td><td>2</td><td>1 disk</td></tr>
+      <tr><td>RAID 5</td><td>Single parity</td><td>3</td><td>1 disk</td></tr>
+      <tr><td>RAID 6</td><td>Double parity</td><td>4</td><td>2 disks</td></tr>
+    </table>
+    <p>Memory Trick: RAID 0 → 0 protection, RAID 1 → 1 disk, RAID 5 → 1 disk, RAID 6 → 2 disks.</p>
+
+    <h3>RAID 0</h3>
+    <ul>
+      <li>Striping → max speed &amp; capacity.</li>
+      <li>No fault tolerance.</li>
+      <li>If one disk fails → all data lost.</li>
+    </ul>
+
+    <h3>RAID 1</h3>
+    <ul>
+      <li>Mirroring → redundancy.</li>
+      <li>Survives 1 disk failure.</li>
+      <li>Storage efficiency = 50%.</li>
+    </ul>
+
+    <h3>RAID 5</h3>
+    <ul>
+      <li>Distributed parity.</li>
+      <li>Survives 1 disk failure.</li>
+      <li>Good balance of speed + protection.</li>
+    </ul>
+
+    <h3>RAID 6</h3>
+    <ul>
+      <li>Double parity.</li>
+      <li>Survives 2 disk failures.</li>
+      <li>Better for large arrays.</li>
+    </ul>
+
+    <h3>LVM vs RAID</h3>
+    <ul>
+      <li>LVM → logical storage flexibility.</li>
+      <li>RAID → redundancy + performance.</li>
+      <li>Together: RAID protects, LVM organizes.</li>
+    </ul>
+
+    <h3>Enterprise Storage Examples</h3>
+    <ul>
+      <li>Intel Dev Cloud → ~1 PB storage.</li>
+      <li>IIT Madras Supercomputer → ~1 PB with <code>/lfs</code> mount points.</li>
+      <li>Synology NAS → tens of TB via RAID.</li>
+    </ul>
+
+    <h3>Parallel File Systems</h3>
+    <ul>
+      <li>Many devices → huge storage → single mount point.</li>
+      <li>Example: <code>/lfs</code> directory hides complexity.</li>
+    </ul>
+
+    <h3>Mount Point</h3>
+    <ul>
+      <li>Logical directory to access storage.</li>
+      <li>User sees <code>/lfs</code> but behind it → RAID + LVM + disks.</li>
+    </ul>
+
+    <h3>Advantages of LVM + RAID</h3>
+    <ul>
+      <li>Cost-effective → combine smaller drives.</li>
+      <li>Resilient → survive disk failures.</li>
+      <li>Convenient → users see one mount point.</li>
+    </ul>
+
+    <h3>Key Terms</h3>
+    <ul>
+      <li>LVM → Logical Volume Management.</li>
+      <li>RAID → Redundant Array of Independent Disks.</li>
+      <li>Striping → RAID 0.</li>
+      <li>Mirroring → RAID 1.</li>
+      <li>Parity → RAID 5/6.</li>
+      <li>Hot Swap → replace disk live.</li>
+      <li>Logical Volume → unit created by LVM.</li>
+      <li>Mount Point → directory for storage.</li>
+      <li>Fault Tolerance → survive failures.</li>
+    </ul>
+
+    <div class="revision">
+      <h3>Revision</h3>
+      <ul>
+        <li>LVM → flexibility, logical volumes, <code>lvm2</code> package.</li>
+        <li>RAID → redundancy, performance, fault tolerance.</li>
+        <li>RAID 0 → fast, no protection.</li>
+        <li>RAID 1 → mirror, 1 disk failure.</li>
+        <li>RAID 5 → single parity, 1 disk failure.</li>
+        <li>RAID 6 → double parity, 2 disk failures.</li>
+        <li>Flow: Physical Disks → RAID → LVM → File System → Mount Point → User.</li>
+      </ul>
+      <div class="memory-trick">
+        Final Memory Trick: RAID = speed + protection. LVM = logical flexibility. File system = usable files &amp; directories.
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>Week 10 · Version Control, Hardware &amp; Storage · Short Notes</footer>
+
+</body>
+</html>

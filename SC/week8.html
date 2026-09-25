@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YK7MCM42M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8YK7MCM42M');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3404947395417141"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 8: Automating Scripts & sed - Short Notes</title>
+<style>
+  :root {
+    --bg: #f7f8fa;
+    --card-bg: #ffffff;
+    --text: #1f2430;
+    --muted: #5b6472;
+    --accent: #2f6fed;
+    --accent-light: #e8f0ff;
+    --code-bg: #1e2430;
+    --code-text: #e6e9f0;
+    --border: #e2e5ea;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  header {
+    background: linear-gradient(135deg, #2f6fed, #6a5bf0);
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  header h1 { margin: 0 0 8px; font-size: 1.8rem; }
+  header p { margin: 0; opacity: 0.9; font-size: 0.95rem; }
+  .container {
+    max-width: 900px;
+    margin: -30px auto 60px;
+    padding: 0 20px;
+  }
+  .lecture {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  }
+  .lecture h2 {
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent-light);
+    padding-bottom: 8px;
+    margin-top: 0;
+  }
+  h3 {
+    margin-top: 28px;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+    color: var(--text);
+  }
+  h3::before {
+    content: "▸ ";
+    color: var(--accent);
+  }
+  ul {
+    margin: 8px 0 16px;
+    padding-left: 22px;
+  }
+  li { margin-bottom: 4px; }
+  code {
+    background: var(--accent-light);
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.9em;
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 14px 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.88rem;
+    margin: 10px 0 16px;
+  }
+  pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 20px;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    text-align: left;
+  }
+  th {
+    background: var(--accent-light);
+    color: var(--accent);
+    font-weight: 600;
+  }
+  tr:nth-child(even) td { background: #fafbfc; }
+  .revision {
+    background: #fffaf0;
+    border: 1px solid #f0e0b8;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-top: 20px;
+  }
+  .revision h3 {
+    margin-top: 0;
+    color: #b8860b;
+  }
+  .revision h3::before { content: "★ "; color: #d4a017; }
+  .memory-trick {
+    background: var(--accent-light);
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-top: 14px;
+    font-style: italic;
+    color: var(--accent);
+  }
+  .warning {
+    background: #fff0f0;
+    border: 1px solid #f0c0c0;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 12px 0;
+    color: #a33;
+  }
+  .warning strong { color: #c0392b; }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    padding: 20px;
+  }
+  @media (max-width: 600px) {
+    .lecture { padding: 18px; }
+    header { padding: 30px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Week 8: Automating Scripts &amp; Stream Editor (sed)</h1>
+  <p>Lecture 1 &amp; 2 · Cron Scheduling and Text Processing</p>
+</header>
+
+<div class="container">
+
+  <!-- LECTURE 1 -->
+  <section class="lecture">
+    <h2>Lecture 1: Automating Scripts</h2>
+
+    <h3>What is Linux Automation?</h3>
+    <ul>
+      <li>Running tasks automatically without human intervention.</li>
+      <li>Instead of manually executing scripts, Linux can schedule them.</li>
+      <li>Helps in system maintenance, backups, log management, monitoring.</li>
+    </ul>
+
+    <h3>Why Automation is Important</h3>
+    <ul>
+      <li>Saves time for administrators.</li>
+      <li>Reduces errors.</li>
+      <li>Ensures tasks run regularly.</li>
+      <li>Improves system reliability.</li>
+      <li>Supports 24/7 server operation.</li>
+    </ul>
+
+    <h3>The crond Daemon</h3>
+    <ul>
+      <li>Background service that runs continuously.</li>
+      <li>Checks system clock, monitors scheduled tasks, executes scripts.</li>
+      <li>Acts as the scheduler of Linux.</li>
+    </ul>
+
+    <h3>Common Uses of Cron</h3>
+    <ul>
+      <li><strong>Log rotation</strong> → archives old logs, prevents disk full.</li>
+      <li><strong>System backups</strong> → automatic redundancy.</li>
+      <li><strong>Resource cleanup</strong> → deletes temp files.</li>
+      <li><strong>Monitoring &amp; alerts</strong> → sends health notifications.</li>
+    </ul>
+
+    <h3>Crontab (Cron Table)</h3>
+    <ul>
+      <li>File where scheduled tasks are defined.</li>
+      <li>Edit with: <code>crontab -e</code></li>
+      <li>Types:
+        <ul>
+          <li>System crontab (<code>/etc/crontab</code>) → requires user field.</li>
+          <li>User crontab (<code>crontab -e</code>) → no user field.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Format</h3>
+    <pre><code>Minute Hour Day_of_Month Month Day_of_Week Command</code></pre>
+    <p>Example: <code>30 2 * * * /home/user/backup.sh</code> → runs daily at 2:30 AM.</p>
+
+    <h3>Field Ranges</h3>
+    <table>
+      <tr><th>Field</th><th>Range</th></tr>
+      <tr><td>Minute</td><td>0–59</td></tr>
+      <tr><td>Hour</td><td>0–23</td></tr>
+      <tr><td>Day</td><td>1–31</td></tr>
+      <tr><td>Month</td><td>1–12</td></tr>
+      <tr><td>Weekday</td><td>0–6 (Sunday=0)</td></tr>
+    </table>
+
+    <h3>Useful Scheduling Symbols</h3>
+    <ul>
+      <li>Every day → <code>* * * * *</code></li>
+      <li>Every hour → <code>0 * * * *</code></li>
+      <li>Every 10 minutes → <code>*/10 * * * *</code></li>
+      <li>Weekdays → <code>0 9 * * 1-5</code></li>
+      <li>Sunday → <code>0 3 * * 0</code></li>
+    </ul>
+
+    <h3>Defensive Automation</h3>
+    <pre><code>27 * * * * cd /home/scripts/backup && ./mkbackup.sh</code></pre>
+    <p><code>&amp;&amp;</code> ensures script runs only if <code>cd</code> succeeds.</p>
+
+    <h3>Run Levels (System States)</h3>
+    <table>
+      <tr><th>Run Level</th><th>Purpose</th></tr>
+      <tr><td>0</td><td>Shutdown</td></tr>
+      <tr><td>1</td><td>Single-user mode</td></tr>
+      <tr><td>2–4</td><td>Multi-user modes</td></tr>
+      <tr><td>5</td><td>Multi-user with GUI</td></tr>
+      <tr><td>6</td><td>Reboot</td></tr>
+    </table>
+    <p>Scripts stored in: <code>/etc/init</code>, <code>/etc/init.d</code>, <code>/etc/rcN.d</code>.</p>
+
+    <h3>Creating a Cron Job</h3>
+    <ul>
+      <li>Create script → <code>mkbackup.sh</code></li>
+      <li>Make executable → <code>chmod +x mkbackup.sh</code></li>
+      <li>Schedule → <code>crontab -e</code></li>
+      <li>Verify execution → <code>cat mkbackup.log</code></li>
+    </ul>
+
+    <h3>Logging Best Practice</h3>
+    <ul>
+      <li>Append (<code>&gt;&gt;</code>) → preserves history.</li>
+      <li>Overwrite (<code>&gt;</code>) → erases old logs.</li>
+    </ul>
+
+    <h3>System-wide Cron Directories</h3>
+    <table>
+      <tr><th>Directory</th><th>Execution Time</th></tr>
+      <tr><td><code>/etc/cron.hourly</code></td><td>17th minute of every hour</td></tr>
+      <tr><td><code>/etc/cron.daily</code></td><td>6:25 AM daily</td></tr>
+      <tr><td><code>/etc/cron.weekly</code></td><td>6:47 AM Sunday</td></tr>
+      <tr><td><code>/etc/cron.monthly</code></td><td>6:52 AM first day</td></tr>
+    </table>
+    <p>Managed by <code>anacron</code>. Times staggered to avoid CPU spikes.</p>
+
+    <h3>Important Commands</h3>
+    <ul>
+      <li>Edit crontab → <code>crontab -e</code></li>
+      <li>View crontab → <code>crontab -l</code></li>
+      <li>Make script executable → <code>chmod +x script.sh</code></li>
+      <li>View logs → <code>cat logfile</code></li>
+    </ul>
+
+    <div class="revision">
+      <h3>Quick Revision</h3>
+      <ul>
+        <li><code>crond</code> = background daemon.</li>
+        <li><code>crontab</code> = scheduling file.</li>
+        <li>User crontab → 5 fields.</li>
+        <li>System crontab → 6 fields.</li>
+        <li><code>*</code> = every value.</li>
+        <li><code>*/10</code> = every 10 minutes.</li>
+        <li><code>&amp;&amp;</code> = safe execution.</li>
+        <li><code>&gt;&gt;</code> = append logs.</li>
+        <li>Run level 5 = GUI.</li>
+        <li>Run level 6 = reboot.</li>
+        <li><code>/etc/cron.daily</code> → 6:25 AM.</li>
+        <li>Staggered timings reduce load.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- LECTURE 2 -->
+  <section class="lecture">
+    <h2>Lecture 2: Stream Editor (sed)</h2>
+
+    <h3>What is sed?</h3>
+    <ul>
+      <li>Command-line text processing tool.</li>
+      <li>Used to search, replace, delete, insert, and modify text automatically.</li>
+      <li>Processes text line by line (does not load entire file).</li>
+      <li>Common uses: text replacement, data cleaning, log processing, automation scripts, preprocessing before <code>awk</code>.</li>
+    </ul>
+
+    <h3>Why sed is Important</h3>
+    <ul>
+      <li>Very fast.</li>
+      <li>Works well with pipelines.</li>
+      <li>Automates text editing.</li>
+      <li>Available on almost all Unix/Linux systems.</li>
+      <li>POSIX compatible.</li>
+      <li>GNU sed adds features like <code>sed -E</code> (Extended Regex).</li>
+    </ul>
+
+    <h3>sed Working Model</h3>
+    <ul>
+      <li>Processes one line at a time.</li>
+      <li>Two memory areas:
+        <ul>
+          <li><strong>Pattern space</strong> → current line, commands applied here.</li>
+          <li><strong>Hold space</strong> → temporary storage for multi-line processing.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Execution Cycle</h3>
+    <ul>
+      <li>Read line into pattern space.</li>
+      <li>Execute commands.</li>
+      <li>Print pattern space (default).</li>
+      <li>Read next line.</li>
+      <li>Repeat until EOF.</li>
+    </ul>
+
+    <h3>Basic Syntax</h3>
+    <ul>
+      <li>One command: <code>sed 'command' file.txt</code></li>
+      <li>Multiple commands: <code>sed -e 'cmd1' -e 'cmd2' file.txt</code></li>
+      <li>External script: <code>sed -f script.sed file.txt</code></li>
+    </ul>
+    <p>Tip: Always use single quotes <code>' '</code> around commands.</p>
+    <pre><code>sed 's/apple/orange/' file.txt</code></pre>
+
+    <h3>Addressing in sed</h3>
+    <table>
+      <tr><th>Type</th><th>Example</th></tr>
+      <tr><td>Specific line</td><td><code>5</code></td></tr>
+      <tr><td>Last line</td><td><code>$</code></td></tr>
+      <tr><td>All lines</td><td><code>%</code> (some versions)</td></tr>
+      <tr><td>Every nth line</td><td><code>1~3</code></td></tr>
+      <tr><td>Regex match</td><td><code>/error/</code></td></tr>
+      <tr><td>Negation</td><td><code>5!</code></td></tr>
+      <tr><td>Regex range</td><td><code>/start/, +4</code></td></tr>
+      <tr><td>Step range</td><td><code>/start/, ~2</code></td></tr>
+      <tr><td>Mixed range</td><td><code>5,/end/</code></td></tr>
+    </table>
+
+    <h3>Common Action Commands</h3>
+    <ul>
+      <li><strong>Print (p):</strong> <code>sed -n '5p' file.txt</code></li>
+      <li><strong>Delete (d):</strong> <code>sed '/error/d' log.txt</code></li>
+      <li><strong>Substitute (s):</strong> <code>sed 's/cat/dog/' file.txt</code>
+        <ul>
+          <li>Global: <code>sed 's/cat/dog/g' file.txt</code></li>
+          <li>Extended regex: <code>sed -E 's/(cat|dog)/animal/' file.txt</code></li>
+        </ul>
+      </li>
+      <li><strong>Line number (=):</strong> <code>sed '=' file.txt</code></li>
+      <li><strong>Comments (#):</strong> Used in sed scripts.</li>
+    </ul>
+
+    <h3>Structural Modification Commands</h3>
+    <ul>
+      <li><strong>Insert (i):</strong> <code>sed '3i\New Header' file.txt</code></li>
+      <li><strong>Append (a):</strong> <code>sed '3a\New Footer' file.txt</code></li>
+      <li><strong>Change (c):</strong> <code>sed '3c\Updated Line' file.txt</code></li>
+    </ul>
+
+    <h3>Data Cleaning Example</h3>
+    <ul>
+      <li>Remove unwanted lines: <code>/Roll[0-9]+/!d</code></li>
+      <li>Normalize spaces: <code>s/ */ /g</code></li>
+      <li>Remove leading noise: <code>s/^.*(Roll[0-9]+)/\1/</code></li>
+    </ul>
+    <p>Result → clean structured data.</p>
+
+    <h3>sed as a Programming Language</h3>
+    <ul>
+      <li>Supports labels and branching.</li>
+      <li>Labels: <code>:start</code></li>
+      <li>Branch (b): <code>b start</code></li>
+      <li>Conditional branch (t): executes if substitution succeeded.</li>
+      <li>Failed branch (T): executes if substitution failed.</li>
+    </ul>
+
+    <h3>Multi-line Processing</h3>
+    <ul>
+      <li><code>N</code>: appends next line to pattern space.</li>
+      <li>Example: joining lines ending with <code>\</code>.</li>
+    </ul>
+    <p>Script:</p>
+    <pre><code>:top
+/\\$/ {
+N
+s/\\\n//
+b top
+}</code></pre>
+
+    <h3>Hold Space Operations</h3>
+    <ul>
+      <li>Store previous lines.</li>
+      <li>Swap data.</li>
+      <li>Reverse order.</li>
+      <li>Multi-line comparisons.</li>
+      <li>Command: <code>x</code> (exchange pattern &amp; hold space).</li>
+    </ul>
+
+    <h3>Important Flags</h3>
+    <table>
+      <tr><th>Flag</th><th>Purpose</th></tr>
+      <tr><td><code>-n</code></td><td>Suppress automatic printing</td></tr>
+      <tr><td><code>-E</code></td><td>Extended regex</td></tr>
+      <tr><td><code>-e</code></td><td>Add command expression</td></tr>
+      <tr><td><code>-f</code></td><td>Read commands from file</td></tr>
+      <tr><td><code>--debug</code></td><td>Debug complex scripts</td></tr>
+    </table>
+
+    <h3>Best Practices</h3>
+    <ul>
+      <li>Use single quotes.</li>
+      <li>Use <code>-E</code> for cleaner regex.</li>
+      <li>Use <code>-n</code> with <code>p</code>.</li>
+      <li>Test with <code>--debug</code>.</li>
+      <li>Avoid infinite loops with branches.</li>
+    </ul>
+
+    <h3>sed vs awk</h3>
+    <table>
+      <tr><th>sed</th><th>awk</th></tr>
+      <tr><td>Best for text editing</td><td>Best for data processing</td></tr>
+      <tr><td>Line-oriented</td><td>Field-oriented</td></tr>
+      <tr><td>Fast replacements</td><td>Calculations &amp; reports</td></tr>
+      <tr><td>Insert/delete/modify</td><td>Analyze structured data</td></tr>
+    </table>
+
+    <div class="revision">
+      <h3>Quick Revision</h3>
+      <ul>
+        <li><code>sed</code> = stream editor.</li>
+        <li>Processes line by line.</li>
+        <li>Pattern space &amp; hold space.</li>
+        <li>Default = print every line.</li>
+        <li><code>-n</code> suppresses printing.</li>
+        <li><code>p</code> = print, <code>d</code> = delete.</li>
+        <li><code>s///</code> = substitute, <code>g</code> = global.</li>
+        <li><code>i</code> = insert, <code>a</code> = append, <code>c</code> = change.</li>
+        <li><code>N</code> = append next line.</li>
+        <li><code>:label</code> + <code>b</code> = loop.</li>
+        <li><code>t</code> = branch after success.</li>
+        <li><code>-E</code> = extended regex.</li>
+        <li><code>--debug</code> = trace scripts.</li>
+      </ul>
+    </div>
+  </section>
+
+</div>
+
+<footer>Week 8 · Automating Scripts &amp; sed · Short Notes</footer>
+
+</body>
+</html>
